@@ -104,7 +104,7 @@
                 </Grid.RowDefinitions>
 
                 <CheckBox x:Name="cbGolden" Content="Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
-                <CheckBox x:Name="cbGoldenOnly" Content="Golden Cards Only" Grid.Row="1" VerticalAlignment="Center" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
+                <CheckBox x:Name="cbGoldenOnly" Content="Golden C. Only" Grid.Row="1" VerticalAlignment="Center" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
                 <CheckBox x:Name="cbUnusedOnly" Content="Unused Only" Grid.Row="2" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
