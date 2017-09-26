@@ -33,6 +33,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             if (Parameters != null)
             {
                 cbGolden.IsChecked = Parameters.IncludeGoldenCards;
+                cbGoldenOnly.IsChecked = Parameters.GoldenCardsOnly;
                 cbUnusedOnly.IsChecked = Parameters.UnusedCardsOnly;
 
                 LoadRarities();
@@ -52,6 +53,12 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             {
                 Parameters.IncludeGoldenCards = cbGolden.IsChecked.Value;
                 Parameters.UnusedCardsOnly = cbUnusedOnly.IsChecked.Value;
+
+                if (Parameters.IncludeGoldenCards)
+                {
+                    Parameters.GoldenCardsOnly = cbGoldenOnly.IsChecked.Value;
+                }
+                else { }
 
                 SetRarities();
 

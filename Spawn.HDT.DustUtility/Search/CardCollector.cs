@@ -125,7 +125,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             for (int i = 0; i < parameters.Rarities.Count && !blnDone; i++)
             {
-                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters.IncludeGoldenCards);
+                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
 
                 lstChunk = FilterForClasses(lstChunk, parameters.Classes);
 
@@ -215,7 +215,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             for (int i = 0; i < parameters.Rarities.Count && !blnDone; i++)
             {
-                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters.IncludeGoldenCards);
+                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
 
                 lstChunk = FilterForClasses(lstChunk, parameters.Classes);
 
@@ -347,17 +347,24 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region GetCardsForRarity
-        private List<CardWrapper> GetCardsForRarity(Rarity rarity, bool blnIncludeGoldenCards = false)
+        private List<CardWrapper> GetCardsForRarity(Rarity rarity, Parameters parameters)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
-            if (blnIncludeGoldenCards)
+            if (parameters.IncludeGoldenCards)
             {
-                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity);
+                if (parameters.GoldenCardsOnly)
+                {
+                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.Card.Premium);
+                }
+                else
+                {
+                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity);
+                }
             }
             else
             {
-                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.Card.Premium == false);
+                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.Card.Premium);
             }
 
             return lstRet;
