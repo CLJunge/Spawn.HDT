@@ -14,8 +14,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="340"/>
-            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">
@@ -25,7 +25,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -55,7 +54,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
 
                 <CheckBox Name="cbCommon" Content="Common" Grid.Row="0" VerticalAlignment="Center"/>
@@ -72,7 +70,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -100,12 +97,11 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
 
-                <CheckBox x:Name="cbGolden" Content="Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
-                <CheckBox x:Name="cbGoldenOnly" Content="Golden C. Only" Grid.Row="1" VerticalAlignment="Center" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
-                <CheckBox x:Name="cbUnusedOnly" Content="Unused Only" Grid.Row="2" VerticalAlignment="Center"/>
+                <CheckBox x:Name="cbGolden" Content="Incl. Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="cbGoldenOnly" Content="Golden Cards Only" Grid.Row="1" VerticalAlignment="Center" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
+                <CheckBox x:Name="cbUnusedOnly" Content="Unused Cards Only" Grid.Row="2" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
 
