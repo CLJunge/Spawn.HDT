@@ -113,45 +113,42 @@ namespace Spawn.HDT.DustUtility.UI.Components
             {
                 image.Margin = new Thickness(-10, -35, 0, 25);
             }
-            else
-            {
-                if (!CardWrapper.Card.Premium &&
+            else if (!CardWrapper.Card.Premium &&
                     (CardWrapper.DbCard.Id.Equals("CFM_321")
                     || CardWrapper.DbCard.Id.Equals("CFM_619")
                     || CardWrapper.DbCard.Id.Equals("CFM_621")
                     || CardWrapper.DbCard.Id.Equals("CFM_649")
                     || CardWrapper.DbCard.Id.Equals("CFM_685")
                     || CardWrapper.DbCard.Id.Equals("CFM_902")))
+            {
+                image.Margin = new Thickness(0, 0, 0, -25);
+            }
+            else if (CardWrapper.Card.Premium)
+            {
+                if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.ABILITY && CardWrapper.DbCard.Rarity == HearthDb.Enums.Rarity.LEGENDARY)
                 {
-                    image.Margin = new Thickness(0, 0, 0, -25);
+                    image.Margin = new Thickness(-15, -30, 0, 0);
                 }
-                else if (CardWrapper.Card.Premium)
+                else if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.ABILITY || CardWrapper.DbCard.Type == HearthDb.Enums.CardType.WEAPON)
                 {
-                    if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.ABILITY && CardWrapper.DbCard.Rarity == HearthDb.Enums.Rarity.LEGENDARY)
-                    {
-                        image.Margin = new Thickness(-15, -30, 0, 0);
-                    }
-                    else if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.ABILITY || CardWrapper.DbCard.Type == HearthDb.Enums.CardType.WEAPON)
-                    {
-                        image.Margin = new Thickness(0, -30, 0, 0);
-                    }
-                    else if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.MINION && CardWrapper.DbCard.Rarity != HearthDb.Enums.Rarity.LEGENDARY)
-                    {
-                        image.Margin = new Thickness(0, -20, -10, 0);
-                    }
-                    else
-                    {
-                        image.Margin = new Thickness();
-                    }
+                    image.Margin = new Thickness(0, -30, 0, 0);
                 }
-                else if (!CardWrapper.Card.Premium)
+                else if (CardWrapper.DbCard.Type == HearthDb.Enums.CardType.MINION && CardWrapper.DbCard.Rarity != HearthDb.Enums.Rarity.LEGENDARY)
                 {
-                    image.Margin = new Thickness(0, -25, 0, 0);
+                    image.Margin = new Thickness(0, -20, -10, 0);
                 }
                 else
                 {
                     image.Margin = new Thickness();
                 }
+            }
+            else if (!CardWrapper.Card.Premium)
+            {
+                image.Margin = new Thickness(0, -25, 0, 0);
+            }
+            else
+            {
+                image.Margin = new Thickness();
             }
         }
         #endregion
