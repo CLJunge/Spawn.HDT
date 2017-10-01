@@ -26,6 +26,8 @@ namespace Spawn.HDT.DustUtility.Update
         #region Properties
         public static Version NewVersion => s_newVersion;
         public static string ReleaseNotes => s_strReleaseNotes;
+
+        private static Version NewVersionFormat => new Version(1, 6, 1);
         #endregion
 
         #region Custom Events
@@ -113,7 +115,15 @@ namespace Spawn.HDT.DustUtility.Update
         #region Download
         public static void Download(Version version)
         {
-            string strAddress = $"{BaseUrl}/download/{version.ToString(3)}/Spawn.HDT.DustUtility.zip";
+            string strVersionString = version.ToString(3);
+
+            if (version < NewVersionFormat)
+            {
+                strVersionString = version.ToString(2);
+            }
+            else { }
+
+            string strAddress = $"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip";
 
             using (m_webClient = new WebClient())
             {
