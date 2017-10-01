@@ -38,5 +38,14 @@
 ## v1.7
 - Filters are being saved persistently
 - Added advanced search
+
+## v2.0
+- Added support for multiple accounts/regions
+- Card image tooltips
+- Cards selection window
+
+## v2.0.1
+- Fixed wrong checkbox alignment in the selection window
+- Using correct card count for the info panel in the selection window
 -----------------------------
 
