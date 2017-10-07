@@ -80,7 +80,7 @@
       <Link>CardSets.cs</Link>
     </Compile>
     <Compile Include="Account.cs" />
-    <Compile Include="Offline\History\DisenchantedCardsHistory.cs" />
+    <Compile Include="Offline\History\CardsHistoryManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="Converters\DisplayLabelConverter.cs" />
     <Compile Include="Search\CardCollector.cs" />
@@ -105,8 +105,8 @@
     <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
       <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\DisenchantedCardsHistoryDialog.xaml.cs">
-      <DependentUpon>DisenchantedCardsHistoryDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\CardsHistoryDialog.xaml.cs">
+      <DependentUpon>CardsHistoryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\DownloadProgressDialog.xaml.cs">
       <DependentUpon>DownloadProgressDialog.xaml</DependentUpon>
@@ -165,7 +165,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\DisenchantedCardsHistoryDialog.xaml">
+    <Page Include="UI\Dialogs\CardsHistoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

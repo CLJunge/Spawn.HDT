@@ -5,20 +5,20 @@ using System.Collections.Generic;
 
 namespace Spawn.HDT.DustUtility.UI.Dialogs
 {
-    public partial class DisenchantedCardsHistoryDialog
+    public partial class CardsHistoryDialog
     {
         #region Ctor
-        public DisenchantedCardsHistoryDialog()
+        public CardsHistoryDialog()
         {
             InitializeComponent();
         }
 
-        public DisenchantedCardsHistoryDialog(Account account)
+        public CardsHistoryDialog(Account account)
             : this()
         {
             grid.GridItems.Clear();
 
-            List<Card> lstHistory = DisenchantedCardsHistory.GetHistory(account);
+            List<Card> lstHistory = CardsHistoryManager.GetHistory(account);
 
             for (int i = 0; i < lstHistory.Count; i++)
             {

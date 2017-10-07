@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace Spawn.HDT.DustUtility.Offline.History
 {
-    public static class DisenchantedCardsHistory
+    public static class CardsHistoryManager
     {
         #region Constants
-        private const string DisenchantedString = "disenchanted";
+        private const string HistoryString = "history";
         #endregion
 
         #region Static Variables
@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.Offline.History
 
                 List<Card> lstOldCollection = Cache.LoadCollection(account);
 
-                List<Card> lstDisenchantedCardsHistory = Cache.LoadCollection(account, DisenchantedString);
+                List<Card> lstCardsHistory = Cache.LoadCollection(account, HistoryString);
 
                 if (lstOldCollection != null && lstOldCollection.Count > 0)
                 {
@@ -45,10 +45,10 @@ namespace Spawn.HDT.DustUtility.Offline.History
                         }
                         else { }
 
-                        lstDisenchantedCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+                        lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
                     }
 
-                    Cache.SaveCollection(account, lstDisenchantedCardsHistory, DisenchantedString);
+                    Cache.SaveCollection(account, lstCardsHistory, HistoryString);
                 }
                 else { }
 
@@ -61,7 +61,7 @@ namespace Spawn.HDT.DustUtility.Offline.History
         #region GetHistory
         public static List<Card> GetHistory(Account account)
         {
-            List<Card> lstHistory = Cache.LoadCollection(account, DisenchantedString);
+            List<Card> lstHistory = Cache.LoadCollection(account, HistoryString);
 
             List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
