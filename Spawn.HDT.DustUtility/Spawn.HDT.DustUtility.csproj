@@ -144,7 +144,7 @@
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Update\GitHubUpdateManager.cs" />
+    <Compile Include="Net\GitHubUpdateManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="UI\CardListWindow.xaml">

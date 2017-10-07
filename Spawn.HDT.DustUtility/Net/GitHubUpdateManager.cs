@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Spawn.HDT.DustUtility.Update
+namespace Spawn.HDT.DustUtility.Net
 {
     public static class GitHubUpdateManager
     {

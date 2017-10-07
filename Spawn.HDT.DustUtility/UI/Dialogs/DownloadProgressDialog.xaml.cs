@@ -1,5 +1,4 @@
-﻿using Spawn.HDT.DustUtility.Update;
-using System;
+﻿using Spawn.HDT.DustUtility.Net;
 using System.IO;
 using System.IO.Compression;
 using System.Threading.Tasks;
