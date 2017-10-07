@@ -73,6 +73,12 @@ namespace Spawn.HDT.DustUtility
             };
 
             m_menuItem.Click += OnClick;
+
+            if (Settings.OfflineMode)
+            {
+                Cache.StartTimer();
+            }
+            else { }
         }
         #endregion
 
@@ -89,6 +95,10 @@ namespace Spawn.HDT.DustUtility
             if (Settings.OfflineMode && Core.Game.IsRunning && !Cache.TimerEnabled && m_window != null)
             {
                 Cache.StartTimer();
+            }
+            else if (!Settings.OfflineMode && Cache.TimerEnabled)
+            {
+                Cache.StopTimer();
             }
             else { }
         }
@@ -108,11 +118,6 @@ namespace Spawn.HDT.DustUtility
         #region OnUpdate
         public void OnUpdate()
         {
-            if (!Core.Game.IsRunning && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
-            else { }
         }
         #endregion
 
@@ -146,12 +151,6 @@ namespace Spawn.HDT.DustUtility
         {
             if (m_window == null)
             {
-                if (Settings.OfflineMode && Core.Game.IsRunning && !Cache.TimerEnabled)
-                {
-                    Cache.StartTimer();
-                }
-                else { }
-
                 Log.WriteLine($"Opening main window for {m_account.AccountString}", LogType.Info);
 
                 m_window = new MainWindow(this, m_account, !Core.Game.IsRunning && Settings.OfflineMode);

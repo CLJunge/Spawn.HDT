@@ -1,5 +1,6 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,8 @@ namespace Spawn.HDT.DustUtility.Offline
                     List<Card> lstCurrent = lstCurrentCollection.Except(lstOldCollection, s_cardComparer).ToList();
                     List<Card> lstOld = lstOldCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
 
+                    int nChanges = 0;
+
                     //new cards
                     for (int i = 0; i < lstCurrent.Count; i++)
                     {
@@ -54,6 +57,8 @@ namespace Spawn.HDT.DustUtility.Offline
                             else { }
 
                             lstCardsHistory.Add(new Card(cardA.Id, nCount, cardA.Premium));
+
+                            nChanges += 1;
                         }
                         else { }
                     }
@@ -78,7 +83,11 @@ namespace Spawn.HDT.DustUtility.Offline
                         nCount *= -1;
 
                         lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+
+                        nChanges += 1;
                     }
+
+                    Log.WriteLine($"Found {nChanges} changes", LogType.Debug);
 
                     SaveHistory(account, lstCardsHistory);
                 }

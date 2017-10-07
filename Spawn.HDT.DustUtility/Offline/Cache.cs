@@ -148,7 +148,7 @@ namespace Spawn.HDT.DustUtility.Offline
             }
             else { }
 
-            s_timer = new Timer(OnTick, null, 0, 1000 * 10); //every 10s, if successful then every 5 min
+            s_timer = new Timer(OnTick, null, 0, 1000 * 60 * 2); //every 2 min
 
             Log.WriteLine("Started cache timer", LogType.Debug);
         }
@@ -169,43 +169,34 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             Log.WriteLine("Cache OnTick", LogType.Debug);
 
-            bool blnSuccess = true;
-
             Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
 
-            Log.WriteLine("Checking for changes...", LogType.Info);
-
-            CardsHistoryManager.CheckCollection(account);
-
-            Log.WriteLine("Saving collection", LogType.Debug);
-
-            blnSuccess &= SaveCollection(account);
-
-            if (blnSuccess)
+            if (!account.IsEmpty && account.IsValid)
             {
-                Log.WriteLine("Saved collection successfuly", LogType.Info);
+                Log.WriteLine("Checking for changes...", LogType.Debug);
+
+                CardsHistoryManager.CheckCollection(account);
+
+                Log.WriteLine("Saving collection", LogType.Debug);
+
+                if (SaveCollection(account))
+                {
+                    Log.WriteLine("Saved collection successfuly", LogType.Info);
+                }
+                else { }
+
+                Log.WriteLine("Saving decks", LogType.Debug);
+
+                if (SaveDecks(account))
+                {
+                    Log.WriteLine("Saved decks successfuly", LogType.Info);
+                }
+                else { }
             }
-            else { }
-
-            Log.WriteLine("Saving decks", LogType.Debug);
-
-            blnSuccess &= SaveDecks(account);
-
-            if (blnSuccess)
+            else
             {
-                Log.WriteLine("Saved decks successfuly", LogType.Info);
+                Log.WriteLine("Couldn't retrieve account", LogType.Warning);
             }
-            else { }
-
-            if (blnSuccess)
-            {
-                int nTime = 1000 * 60;
-
-                s_timer.Change(nTime, nTime);
-
-                Log.WriteLine("Changed interval to 1 min.", LogType.Debug);
-            }
-            else { }
         }
         #endregion
     }
