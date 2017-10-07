@@ -139,13 +139,6 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
-        #region ForceSaveCollection
-        internal static bool ForceSaveCollection(Account account)
-        {
-            return SaveCollection(account);
-        }
-        #endregion
-
         #region StartTimer
         public static void StartTimer()
         {
@@ -179,6 +172,10 @@ namespace Spawn.HDT.DustUtility.Offline
             bool blnSuccess = true;
 
             Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
+
+            Log.WriteLine("Checking for changes...", LogType.Info);
+
+            CardsHistoryManager.CheckCollection(account);
 
             Log.WriteLine("Saving collection", LogType.Debug);
 

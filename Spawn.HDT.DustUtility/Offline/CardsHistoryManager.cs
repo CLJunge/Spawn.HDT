@@ -1,10 +1,7 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 
 namespace Spawn.HDT.DustUtility.Offline
 {
@@ -17,7 +14,6 @@ namespace Spawn.HDT.DustUtility.Offline
         #region Static Variables
         private static CardComparer s_cardComparer = new CardComparer();
         private static bool s_blnCheckInProgress;
-        private static Timer s_timer;
         #endregion
 
         #region CheckCollection
@@ -85,8 +81,6 @@ namespace Spawn.HDT.DustUtility.Offline
                     }
 
                     SaveHistory(account, lstCardsHistory);
-
-                    Cache.ForceSaveCollection(account);
                 }
                 else { }
 
@@ -138,46 +132,6 @@ namespace Spawn.HDT.DustUtility.Offline
             }
 
             return lstHistory;
-        }
-        #endregion
-
-        #region StartTimer
-        public static void StartTimer()
-        {
-            if (s_timer != null)
-            {
-                StopTimer();
-            }
-            else { }
-
-            s_timer = new Timer(OnTick, null, 0, 1000 * 60 * 2); //check every 2 min
-
-            Log.WriteLine("Started history timer", LogType.Debug);
-        }
-        #endregion
-
-        #region StopTimer
-        public static void StopTimer()
-        {
-            s_timer.Dispose();
-            s_timer = null;
-
-            Log.WriteLine("Stopped history timer", LogType.Debug);
-        }
-        #endregion
-
-        #region OnTick
-        private static void OnTick(object state)
-        {
-            Log.WriteLine("History OnTick", LogType.Debug);
-
-            Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
-
-            if (!account.IsEmpty && account.IsValid)
-            {
-                CheckCollection(account);
-            }
-            else { }
         }
         #endregion
 

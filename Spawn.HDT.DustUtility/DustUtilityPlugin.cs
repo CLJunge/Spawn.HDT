@@ -73,8 +73,6 @@ namespace Spawn.HDT.DustUtility
             };
 
             m_menuItem.Click += OnClick;
-
-            CardsHistoryManager.StartTimer();
         }
         #endregion
 
@@ -104,8 +102,6 @@ namespace Spawn.HDT.DustUtility
                 Cache.StopTimer();
             }
             else { }
-
-            CardsHistoryManager.StopTimer();
         }
         #endregion
 
