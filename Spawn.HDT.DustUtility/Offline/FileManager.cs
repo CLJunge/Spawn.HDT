@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace Spawn.HDT.DustUtility
+namespace Spawn.HDT.DustUtility.Offline
 {
     public static class FileManager
     {

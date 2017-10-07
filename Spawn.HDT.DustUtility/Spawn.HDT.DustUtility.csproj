@@ -81,7 +81,7 @@
     </Compile>
     <Compile Include="Account.cs" />
     <Compile Include="Converters\CountToColorConverter.cs" />
-    <Compile Include="FileManager.cs" />
+    <Compile Include="Offline\FileManager.cs" />
     <Compile Include="Offline\CardsHistoryManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="Converters\DisplayLabelConverter.cs" />
