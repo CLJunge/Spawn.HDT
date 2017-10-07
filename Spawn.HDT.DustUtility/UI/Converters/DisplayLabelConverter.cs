@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Spawn.HDT.DustUtility.Converters
+namespace Spawn.HDT.DustUtility.UI.Converters
 {
     public class DisplayLabelConverter : IValueConverter
     {

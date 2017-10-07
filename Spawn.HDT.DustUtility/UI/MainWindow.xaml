@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
-        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.Converters"
+        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip" GlowBrush="Black" Title="Dust Utility"
         Height="450" Width="850" MinHeight="400" MinWidth="700" Loaded="OnWindowLoaded" WindowStartupLocation="CenterScreen">
