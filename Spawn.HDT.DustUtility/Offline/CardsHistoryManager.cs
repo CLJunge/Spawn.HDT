@@ -21,7 +21,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region CheckCollection
-        private static void CheckCollection(Account account)
+        public static void CheckCollection(Account account)
         {
             List<Card> lstCurrentCollection = Reflection.GetCollection();
 
@@ -31,32 +31,62 @@ namespace Spawn.HDT.DustUtility.Offline
 
                 List<Card> lstOldCollection = Cache.LoadCollection(account);
 
-                List<Card> lstCardsHistory = LoadHistoryFile(account);
+                List<Card> lstCardsHistory = LoadHistory(account);
 
                 if (lstOldCollection != null && lstOldCollection.Count > 0)
                 {
-                    List<Card> a = lstCurrentCollection.Except(lstOldCollection, s_cardComparer).ToList();
+                    List<Card> lstCurrent = lstCurrentCollection.Except(lstOldCollection, s_cardComparer).ToList();
+                    List<Card> lstOld = lstOldCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
 
-                    List<Card> b = lstOldCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
-
-                    for (int i = 0; i < b.Count; i++)
+                    //new cards
+                    for (int i = 0; i < lstCurrent.Count; i++)
                     {
-                        Card cardB = b[i];
+                        HearthDb.Card tmp = HearthDb.Cards.All[lstCurrent[i].Id];
 
-                        Card cardA = a.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+                        Card cardA = lstCurrent[i];
 
-                        //int nCount = cardB.Count;
+                        if (lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
+                        {
+                            Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
 
-                        //if (cardA != null)
-                        //{
-                        //    nCount = cardB.Count - cardA.Count;
-                        //}
-                        //else { }
+                            int nCount = cardA.Count;
 
-                        //lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+                            if (cardB != null)
+                            {
+                                nCount = cardA.Count - cardB.Count;
+                            }
+                            else { }
+
+                            lstCardsHistory.Add(new Card(cardA.Id, nCount, cardA.Premium));
+                        }
+                        else { }
                     }
 
-                    //SaveHistoryFile(account, lstCardsHistory);
+                    //disenchanted cards
+                    for (int i = 0; i < lstOld.Count; i++)
+                    {
+                        HearthDb.Card tmp = HearthDb.Cards.All[lstOld[i].Id];
+
+                        Card cardB = lstOld[i];
+
+                        Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+
+                        int nCount = cardB.Count;
+
+                        if (cardA != null)
+                        {
+                            nCount = cardB.Count - cardA.Count;
+                        }
+                        else { }
+
+                        nCount *= -1;
+
+                        lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+                    }
+
+                    SaveHistory(account, lstCardsHistory);
+
+                    Cache.ForceSaveCollection(account);
                 }
                 else { }
 
@@ -66,8 +96,8 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
-        #region LoadHistoryFile
-        private static List<Card> LoadHistoryFile(Account account)
+        #region LoadHistory
+        private static List<Card> LoadHistory(Account account)
         {
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
@@ -77,8 +107,8 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
-        #region SaveHistoryFile
-        private static void SaveHistoryFile(Account account, List<Card> lstCardsHistory)
+        #region SaveHistory
+        private static void SaveHistory(Account account, List<Card> lstCardsHistory)
         {
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
@@ -89,7 +119,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #region GetHistory
         public static List<Card> GetHistory(Account account)
         {
-            List<Card> lstHistory = LoadHistoryFile(account);
+            List<Card> lstHistory = LoadHistory(account);
 
             List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
@@ -120,7 +150,7 @@ namespace Spawn.HDT.DustUtility.Offline
             }
             else { }
 
-            s_timer = new Timer(OnTick, null, 0, 1000 * 60);
+            s_timer = new Timer(OnTick, null, 0, 1000 * 60 * 2); //check every 2 min
 
             Log.WriteLine("Started history timer", LogType.Debug);
         }
@@ -143,7 +173,11 @@ namespace Spawn.HDT.DustUtility.Offline
 
             Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
 
-            CheckCollection(account);
+            if (!account.IsEmpty && account.IsValid)
+            {
+                CheckCollection(account);
+            }
+            else { }
         }
         #endregion
 

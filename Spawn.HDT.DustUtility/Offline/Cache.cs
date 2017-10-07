@@ -139,6 +139,13 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
+        #region ForceSaveCollection
+        internal static bool ForceSaveCollection(Account account)
+        {
+            return SaveCollection(account);
+        }
+        #endregion
+
         #region StartTimer
         public static void StartTimer()
         {

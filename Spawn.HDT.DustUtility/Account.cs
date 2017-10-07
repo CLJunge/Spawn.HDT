@@ -14,6 +14,7 @@ namespace Spawn.HDT.DustUtility
         public static Account Empty => new Account(null, Region.UNKNOWN);
 
         public bool IsEmpty => BattleTag == null && Region == Region.UNKNOWN;
+        public bool IsValid => !string.IsNullOrEmpty(AccountString);
         #endregion
 
         #region Ctor

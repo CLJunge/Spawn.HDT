@@ -43,6 +43,18 @@ namespace Spawn.HDT.DustUtility.UI.Components
         public static readonly DependencyProperty ContextMenuEnabledProperty =
             DependencyProperty.Register("ContextMenuEnabled", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(true));
         #endregion
+
+        #region ColoredCountColumn
+        public bool ColoredCountColumn
+        {
+            get { return (bool)GetValue(ColoredCountColumnProperty); }
+            set { SetValue(ColoredCountColumnProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ColoredCountColumn.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ColoredCountColumnProperty =
+            DependencyProperty.Register("ColoredCountColumn", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(false));
+        #endregion
         #endregion
 
         #region Member Variables

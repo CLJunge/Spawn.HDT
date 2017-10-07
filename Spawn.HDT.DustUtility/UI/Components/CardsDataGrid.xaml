@@ -19,6 +19,7 @@
             <!--RowBackground="#ECE3CA" AlternatingRowBackground="#E1D7BD"-->
             <DataGrid.Resources>
                 <converters:CountLabelConverter x:Key="countLabelConverter"/>
+                <converters:CountToColorConverter x:Key="countToColorConverter"/>
                 <util:CardRarityToColorConverter x:Key="rarityConverter"/>
                 <Style TargetType="DataGridCell">
                     <Setter Property="TextBlock.TextAlignment" Value="Center"/>
@@ -30,7 +31,20 @@
                 </ContextMenu>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Count" Binding="{Binding Path=Count, Converter={StaticResource countLabelConverter}}"/>
+                <DataGridTextColumn Header="Count" Binding="{Binding Path=Count, Converter={StaticResource countLabelConverter}}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground">
+                                <Setter.Value>
+                                    <MultiBinding Converter="{StaticResource countToColorConverter}">
+                                        <Binding Path="Count"/>
+                                        <Binding ElementName="cardsGrid" Path="ColoredCountColumn"/>
+                                    </MultiBinding>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}">
                     <!--<DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">

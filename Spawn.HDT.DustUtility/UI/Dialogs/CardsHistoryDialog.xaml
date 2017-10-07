@@ -8,6 +8,6 @@
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" GlowBrush="Black"
         Title="Dust Utility - History" Height="450" Width="700">
     <Grid>
-        <components:CardsDataGrid x:Name="grid"/>
+        <components:CardsDataGrid x:Name="grid" ColoredCountColumn="True"/>
     </Grid>
 </controls:MetroWindow>

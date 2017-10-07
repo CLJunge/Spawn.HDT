@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
 using System.IO;
@@ -26,91 +27,61 @@ namespace Spawn.HDT.DustUtility.Net
 
             if (!string.IsNullOrEmpty(strCardId))
             {
-                string strPath = GetLocalCachePath(strCardId, blnPremium);
-
-                //if (File.Exists(strPath))
-                //{
-                //    try
-                //    {
-                //        retVal = File.Open(strPath, FileMode.Open);
-                //    }
-                //    catch (System.Exception ex)
-                //    {
-                //        System.Diagnostics.Debug.WriteLine(ex.ToString());
-                //    }
-                //}
-                //else { }
-
-                if (retVal == null)
+                try
                 {
-                    try
+                    HttpWebRequest request = CreateCardDataRequest(strCardId);
+
+                    HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
+
+                    if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        HttpWebRequest request = CreateCardDataRequest(strCardId);
+                        string strJson;
 
-                        HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
-
-                        if (response.StatusCode == HttpStatusCode.OK)
+                        using (Stream responseStream = response.GetResponseStream())
                         {
-                            string strJson;
-
-                            using (Stream responseStream = response.GetResponseStream())
+                            using (StreamReader reader = new StreamReader(responseStream))
                             {
-                                using (StreamReader reader = new StreamReader(responseStream))
-                                {
-                                    strJson = await reader.ReadToEndAsync();
-                                }
+                                strJson = await reader.ReadToEndAsync();
                             }
+                        }
 
-                            if (!string.IsNullOrEmpty(strJson))
+                        if (!string.IsNullOrEmpty(strJson))
+                        {
+                            var cardData = JsonConvert.DeserializeObject<JArray>(strJson)[0];
+
+                            string strUrl = cardData.Value<string>("img");
+
+                            if (blnPremium)
                             {
-                                var cardData = JsonConvert.DeserializeObject<JArray>(strJson)[0];
+                                strUrl = cardData.Value<string>("imgGold");
+                            }
+                            else { }
 
-                                string strUrl = cardData.Value<string>("img");
+                            HttpWebRequest imageRequest = CreateImageRequest(strUrl);
 
-                                if (blnPremium)
+                            HttpWebResponse imageResponse = await imageRequest.GetResponseAsync() as HttpWebResponse;
+
+                            if (response.StatusCode == HttpStatusCode.OK)
+                            {
+                                using (Stream responseStream = imageResponse.GetResponseStream())
                                 {
-                                    strUrl = cardData.Value<string>("imgGold");
+                                    retVal = new MemoryStream();
+
+                                    await responseStream.CopyToAsync(retVal);
                                 }
-                                else { }
 
-                                HttpWebRequest imageRequest = CreateImageRequest(strUrl);
-
-                                HttpWebResponse imageResponse = await imageRequest.GetResponseAsync() as HttpWebResponse;
-
-                                if (response.StatusCode == HttpStatusCode.OK)
-                                {
-                                    using (Stream responseStream = imageResponse.GetResponseStream())
-                                    {
-                                        retVal = new MemoryStream();
-
-                                        await responseStream.CopyToAsync(retVal);
-                                    }
-
-                                    retVal.Position = 0;
-
-                                    //if (Settings.LocalImageCache)
-                                    //{
-                                    //using (FileStream fs = File.Open(strPath, FileMode.Create))
-                                    //{
-                                    //    await retVal.CopyToAsync(fs);
-                                    //}
-
-                                    //retVal.Position = 0;
-                                    //}
-                                    //else { }
-                                }
-                                else { }
+                                retVal.Position = 0;
                             }
                             else { }
                         }
                         else { }
                     }
-                    catch
-                    {
-                        //No internet connection
-                    }
+                    else { }
                 }
-                else { }
+                catch
+                {
+                    Log.WriteLine("Couldn't load card image! Probably no internet connection...", LogType.Warning);
+                }
             }
             else { }
 
@@ -169,52 +140,6 @@ namespace Spawn.HDT.DustUtility.Net
             return retVal;
         }
         #endregion
-        #endregion
-
-        #region ClearLocalCache
-        public static void ClearLocalCache()
-        {
-            string strPath = Path.Combine(DustUtilityPlugin.DataDirectory, CacheFolderName);
-
-            if (Directory.Exists(strPath))
-            {
-                Directory.Delete(strPath, true);
-            }
-            else { }
-        }
-        #endregion
-
-        #region GetLocalCachePath
-        private static string GetLocalCachePath(string strCardId, bool blnPremium)
-        {
-            string strRet = Path.Combine(DustUtilityPlugin.DataDirectory, CacheFolderName);
-
-            if (blnPremium)
-            {
-                strRet = Path.Combine(strRet, "premium");
-            }
-            else
-            {
-                strRet = Path.Combine(strRet, "default");
-            }
-
-            if (!Directory.Exists(strRet))
-            {
-                Directory.CreateDirectory(strRet);
-            }
-            else { }
-
-            if (blnPremium)
-            {
-                strRet = Path.Combine(strRet, $"{strCardId}.gif");
-            }
-            else
-            {
-                strRet = Path.Combine(strRet, $"{strCardId}.png");
-            }
-
-            return strRet;
-        }
         #endregion
     }
 }

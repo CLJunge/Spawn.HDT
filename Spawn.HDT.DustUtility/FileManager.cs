@@ -24,16 +24,26 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Load
-        public static T Load<T>(string strPath)
+        public static T Load<T>(string strPath) where T : class, new()
         {
             T retVal = default(T);
 
-            using (StreamReader reader = new StreamReader(strPath))
+            if (File.Exists(strPath))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
+                using (StreamReader reader = new StreamReader(strPath))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
 
-                retVal = (T)(object)serializer.Deserialize(reader);
+                    retVal = (T)serializer.Deserialize(reader);
+                }
             }
+            else { }
+
+            if (retVal == null)
+            {
+                retVal = new T();
+            }
+            else { }
 
             return retVal;
         }
