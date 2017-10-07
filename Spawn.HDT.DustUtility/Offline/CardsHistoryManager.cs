@@ -1,8 +1,12 @@
-﻿using HearthMirror.Objects;
+﻿using HearthMirror;
+using HearthMirror.Objects;
+using Hearthstone_Deck_Tracker;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
-namespace Spawn.HDT.DustUtility.Offline.History
+namespace Spawn.HDT.DustUtility.Offline
 {
     public static class CardsHistoryManager
     {
@@ -13,22 +17,26 @@ namespace Spawn.HDT.DustUtility.Offline.History
         #region Static Variables
         private static CardComparer s_cardComparer = new CardComparer();
         private static bool s_blnCheckInProgress;
+        private static Timer s_timer;
         #endregion
 
         #region CheckCollection
-        public static void CheckCollection(Account account, List<Card> lstCurrentCollection)
+        private static void CheckCollection(Account account)
         {
+            List<Card> lstCurrentCollection = Reflection.GetCollection();
+
             if (!s_blnCheckInProgress && account != null && (lstCurrentCollection != null && lstCurrentCollection.Count > 0))
             {
                 s_blnCheckInProgress = true;
 
                 List<Card> lstOldCollection = Cache.LoadCollection(account);
 
-                List<Card> lstCardsHistory = Cache.LoadCollection(account, HistoryString);
+                List<Card> lstCardsHistory = LoadHistoryFile(account);
 
                 if (lstOldCollection != null && lstOldCollection.Count > 0)
                 {
                     List<Card> a = lstCurrentCollection.Except(lstOldCollection, s_cardComparer).ToList();
+
                     List<Card> b = lstOldCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
 
                     for (int i = 0; i < b.Count; i++)
@@ -37,18 +45,18 @@ namespace Spawn.HDT.DustUtility.Offline.History
 
                         Card cardA = a.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
 
-                        int nCount = cardB.Count;
+                        //int nCount = cardB.Count;
 
-                        if (cardA != null)
-                        {
-                            nCount = cardB.Count - cardA.Count;
-                        }
-                        else { }
+                        //if (cardA != null)
+                        //{
+                        //    nCount = cardB.Count - cardA.Count;
+                        //}
+                        //else { }
 
-                        lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+                        //lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
                     }
 
-                    Cache.SaveCollection(account, lstCardsHistory, HistoryString);
+                    //SaveHistoryFile(account, lstCardsHistory);
                 }
                 else { }
 
@@ -58,10 +66,30 @@ namespace Spawn.HDT.DustUtility.Offline.History
         }
         #endregion
 
+        #region LoadHistoryFile
+        private static List<Card> LoadHistoryFile(Account account)
+        {
+            string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
+
+            List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
+
+            return lstCachedCards.ToCards();
+        }
+        #endregion
+
+        #region SaveHistoryFile
+        private static void SaveHistoryFile(Account account, List<Card> lstCardsHistory)
+        {
+            string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
+
+            FileManager.Write(strPath, lstCardsHistory.ToCachedCards());
+        }
+        #endregion
+
         #region GetHistory
         public static List<Card> GetHistory(Account account)
         {
-            List<Card> lstHistory = Cache.LoadCollection(account, HistoryString);
+            List<Card> lstHistory = LoadHistoryFile(account);
 
             List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
@@ -80,6 +108,42 @@ namespace Spawn.HDT.DustUtility.Offline.History
             }
 
             return lstHistory;
+        }
+        #endregion
+
+        #region StartTimer
+        public static void StartTimer()
+        {
+            if (s_timer != null)
+            {
+                StopTimer();
+            }
+            else { }
+
+            s_timer = new Timer(OnTick, null, 0, 1000 * 60);
+
+            Log.WriteLine("Started history timer", LogType.Debug);
+        }
+        #endregion
+
+        #region StopTimer
+        public static void StopTimer()
+        {
+            s_timer.Dispose();
+            s_timer = null;
+
+            Log.WriteLine("Stopped history timer", LogType.Debug);
+        }
+        #endregion
+
+        #region OnTick
+        private static void OnTick(object state)
+        {
+            Log.WriteLine("History OnTick", LogType.Debug);
+
+            Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
+
+            CheckCollection(account);
         }
         #endregion
 

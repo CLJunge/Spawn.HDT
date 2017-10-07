@@ -86,6 +86,35 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region ToCachedDecks
+        public static List<CachedDeck> ToCachedDecks(this List<HearthMirror.Objects.Deck> lstDecks)
+        {
+            List<CachedDeck> lstRet = new List<CachedDeck>();
+
+            for (int i = 0; i < lstDecks.Count; i++)
+            {
+                HearthMirror.Objects.Deck deck = lstDecks[i];
+
+                CachedDeck cachedDeck = new CachedDeck()
+                {
+                    Id = deck.Id,
+                    Name = deck.Name,
+                    Hero = deck.Hero,
+                    IsWild = deck.IsWild,
+                    Type = deck.Type,
+                    SeasonId = deck.SeasonId,
+                    CardBackId = deck.CardBackId,
+                    HeroPremium = deck.HeroPremium,
+                    Cards = deck.Cards.ToCachedCards()
+                };
+
+                lstRet.Add(cachedDeck);
+            }
+
+            return lstRet;
+        }
+        #endregion
+
         #region ToCards
         public static List<HearthMirror.Objects.Card> ToCards(this List<CachedCard> lstCachedCards)
         {

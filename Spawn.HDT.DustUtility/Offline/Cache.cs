@@ -5,7 +5,6 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using System.Xml.Serialization;
 
 namespace Spawn.HDT.DustUtility.Offline
 {
@@ -30,36 +29,19 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region SaveCollection
-        public static bool SaveCollection(Account account, List<Card> lstCollection = null, string strType = CollectionString)
+        private static bool SaveCollection(Account account)
         {
             bool blnRet = false;
 
-            if (lstCollection == null)
-            {
-                lstCollection = Reflection.GetCollection();
-            }
-            else { }
+            List<Card> lstCollection = Reflection.GetCollection();
 
             if (lstCollection != null && lstCollection.Count > 0 && !s_blnSaveCollectionInProgress)
             {
                 s_blnSaveCollectionInProgress = true;
 
-                string strPath = DustUtilityPlugin.GetFullFileName(account, strType);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
 
-                List<CachedCard> lstCachedCards = lstCollection.ToCachedCards();
-
-                if (File.Exists(strPath))
-                {
-                    File.Delete(strPath);
-                }
-                else { }
-
-                using (StreamWriter writer = new StreamWriter(strPath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<CachedCard>));
-
-                    serializer.Serialize(writer, lstCachedCards);
-                }
+                FileManager.Write(strPath, lstCollection.ToCachedCards());
 
                 blnRet = true;
 
@@ -72,7 +54,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region SaveDecks
-        public static bool SaveDecks(Account account)
+        private static bool SaveDecks(Account account)
         {
             bool blnRet = false;
 
@@ -82,42 +64,9 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 s_blnSaveDecksInProgress = true;
 
-                List<CachedDeck> lstCachedDecks = new List<CachedDeck>();
-
-                for (int i = 0; i < lstDecks.Count; i++)
-                {
-                    Deck deck = lstDecks[i];
-
-                    CachedDeck cachedDeck = new CachedDeck()
-                    {
-                        Id = deck.Id,
-                        Name = deck.Name,
-                        Hero = deck.Hero,
-                        IsWild = deck.IsWild,
-                        Type = deck.Type,
-                        SeasonId = deck.SeasonId,
-                        CardBackId = deck.CardBackId,
-                        HeroPremium = deck.HeroPremium,
-                        Cards = deck.Cards.ToCachedCards()
-                    };
-
-                    lstCachedDecks.Add(cachedDeck);
-                }
-
                 string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
 
-                if (File.Exists(strPath))
-                {
-                    File.Delete(strPath);
-                }
-                else { }
-
-                using (StreamWriter writer = new StreamWriter(strPath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<CachedDeck>));
-
-                    serializer.Serialize(writer, lstCachedDecks);
-                }
+                FileManager.Write(strPath, lstDecks.ToCachedDecks());
 
                 blnRet = true;
 
@@ -130,22 +79,15 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region LoadCollection
-        public static List<Card> LoadCollection(Account account, string strType = CollectionString)
+        public static List<Card> LoadCollection(Account account)
         {
             List<Card> lstRet = new List<Card>();
 
-            string strPath = DustUtilityPlugin.GetFullFileName(account, strType);
+            string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
 
             if (File.Exists(strPath))
             {
-                List<CachedCard> lstCachedCards = new List<CachedCard>();
-
-                using (StreamReader reader = new StreamReader(strPath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<CachedCard>));
-
-                    lstCachedCards = (List<CachedCard>)serializer.Deserialize(reader);
-                }
+                List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
 
                 for (int i = 0; i < lstCachedCards.Count; i++)
                 {
@@ -169,14 +111,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             if (File.Exists(strPath))
             {
-                List<CachedDeck> lstCachedDecks = new List<CachedDeck>();
-
-                using (StreamReader reader = new StreamReader(strPath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<CachedDeck>));
-
-                    lstCachedDecks = (List<CachedDeck>)serializer.Deserialize(reader);
-                }
+                List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
 
                 for (int i = 0; i < lstCachedDecks.Count; i++)
                 {
@@ -237,8 +172,6 @@ namespace Spawn.HDT.DustUtility.Offline
             bool blnSuccess = true;
 
             Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
-
-            //DisenchantedCardsHistory.CheckCollection(account, Reflection.GetCollection());
 
             Log.WriteLine("Saving collection", LogType.Debug);
 

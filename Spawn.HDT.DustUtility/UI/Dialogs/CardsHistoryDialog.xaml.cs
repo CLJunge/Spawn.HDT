@@ -1,6 +1,6 @@
 ﻿using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Spawn.HDT.DustUtility.Offline.History;
+using Spawn.HDT.DustUtility.Offline;
 using System.Collections.Generic;
 
 namespace Spawn.HDT.DustUtility.UI.Dialogs
