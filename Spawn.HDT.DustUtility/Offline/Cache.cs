@@ -195,7 +195,7 @@ namespace Spawn.HDT.DustUtility.Offline
             }
             else
             {
-                Log.WriteLine("Couldn't retrieve account", LogType.Warning);
+                Log.WriteLine("Couldn't retrieve account", LogType.Debug);
             }
         }
         #endregion
