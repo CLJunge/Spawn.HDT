@@ -28,6 +28,6 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 
 ## Settings
-* Offline Mode: While HDT is running the plugin is going to store collection and decks locally every 2 min. (if Hearthstone is running, Decks can only be saved after visiting the "Play" menu once).
+* Offline Mode: While HDT is running the plugin is going to store collection and decks locally every 2 min. (Hearthstone must be running, Decks can only be saved after visiting the "Play" menu once).
 * Check For Updates: Checks if there is new release available on the GitHub page after opening the main window.
 ![Overlay](https://i.imgur.com/FWou7M5.png)
