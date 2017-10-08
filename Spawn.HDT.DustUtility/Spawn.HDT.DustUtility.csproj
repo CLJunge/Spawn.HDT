@@ -74,7 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Spawn.HearthPwnScraper\Spawn.HearthPwnScraper\Utilities\CardRarityToColorConverter.cs">
-      <Link>Converters\CardRarityToColorConverter.cs</Link>
+      <Link>UI\Converters\CardRarityToColorConverter.cs</Link>
     </Compile>
     <Compile Include="..\..\Spawn.HearthstonePackHistory\Spawn.HearthstonePackHistory\Hearthstone\CardSets.cs">
       <Link>CardSets.cs</Link>

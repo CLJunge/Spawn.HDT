@@ -31,7 +31,13 @@
                 </ContextMenu>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Count" Binding="{Binding Path=Count, Converter={StaticResource countLabelConverter}}">
+                <DataGridTextColumn Header="Count">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding Converter="{StaticResource countLabelConverter}">
+                            <Binding Path="Count"/>
+                            <Binding ElementName="cardsGrid" Path="ColoredCountColumn"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="Foreground">

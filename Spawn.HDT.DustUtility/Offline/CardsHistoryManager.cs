@@ -1,6 +1,7 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HearthstonePackHistory.Hearthstone;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,11 +41,11 @@ namespace Spawn.HDT.DustUtility.Offline
                     //new cards
                     for (int i = 0; i < lstCurrent.Count; i++)
                     {
-                        HearthDb.Card tmp = HearthDb.Cards.All[lstCurrent[i].Id];
-
                         Card cardA = lstCurrent[i];
 
-                        if (lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
+                        HearthDb.Card dbCardA = HearthDb.Cards.All[cardA.Id];
+
+                        if (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
                         {
                             Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
 
@@ -66,25 +67,29 @@ namespace Spawn.HDT.DustUtility.Offline
                     //disenchanted cards
                     for (int i = 0; i < lstOld.Count; i++)
                     {
-                        HearthDb.Card tmp = HearthDb.Cards.All[lstOld[i].Id];
-
                         Card cardB = lstOld[i];
 
-                        Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+                        HearthDb.Card dbCardB = HearthDb.Cards.All[cardB.Id];
 
-                        int nCount = cardB.Count;
-
-                        if (cardA != null)
+                        if (CardSets.All.ContainsKey(dbCardB.Set))
                         {
-                            nCount = cardB.Count - cardA.Count;
+                            Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+
+                            int nCount = cardB.Count;
+
+                            if (cardA != null)
+                            {
+                                nCount = cardB.Count - cardA.Count;
+                            }
+                            else { }
+
+                            nCount *= -1;
+
+                            lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+
+                            nChanges += 1;
                         }
                         else { }
-
-                        nCount *= -1;
-
-                        lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
-
-                        nChanges += 1;
                     }
 
                     Log.WriteLine($"Found {nChanges} changes", LogType.Debug);
@@ -124,21 +129,21 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             List<Card> lstHistory = LoadHistory(account);
 
-            List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
+            //List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
-            lstHistory.Clear();
+            //lstHistory.Clear();
 
-            for (int i = 0; i < lstGroupedById.Count; i++)
-            {
-                List<IGrouping<bool, Card>> lstGroupedByPremium = lstGroupedById[i].GroupBy(c => c.Premium).ToList();
+            //for (int i = 0; i < lstGroupedById.Count; i++)
+            //{
+            //    List<IGrouping<bool, Card>> lstGroupedByPremium = lstGroupedById[i].GroupBy(c => c.Premium).ToList();
 
-                for (int j = 0; j < lstGroupedByPremium.Count; j++)
-                {
-                    IGrouping<bool, Card> grouping = lstGroupedByPremium[j];
+            //    for (int j = 0; j < lstGroupedByPremium.Count; j++)
+            //    {
+            //        IGrouping<bool, Card> grouping = lstGroupedByPremium[j];
 
-                    lstHistory.Add(grouping.Aggregate((a, b) => new Card(a.Id, a.Count + b.Count, a.Premium)));
-                }
-            }
+            //        lstHistory.Add(grouping.Aggregate((a, b) => new Card(a.Id, a.Count + b.Count, a.Premium)));
+            //    }
+            //}
 
             return lstHistory;
         }
