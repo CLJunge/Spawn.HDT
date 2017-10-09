@@ -47,5 +47,11 @@
 ## v2.0.1
 - Fixed wrong checkbox alignment in the selection window
 - Using correct card count for the info panel in the selection window
+
+## v2.1
+- Added golden-cards-only parameter
+- Autoselect account if only one available
+- Added card history
+- Added download functionality for new releases
 -----------------------------
 
