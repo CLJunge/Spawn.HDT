@@ -12,7 +12,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 #### Advanced Search
 - Advanced search allows you to search for specific cards. (Click the help button next to the "Filters" button for more information)
-![Overlay](https://i.imgur.com/ZhVga8b.png)
+![Overlay](https://i.imgur.com/K4xECbA.png)
 
 #### Card Images
 - Double-click a row to display the actual card image (Golden cards are animated, requires internet connection).
