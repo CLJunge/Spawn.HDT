@@ -48,7 +48,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
             if (progressBar.Value == 100)
             {
-                await Task.Delay(750);
+                await Task.Delay(1000);
 
                 UpdateUI();
             }
@@ -86,6 +86,8 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         {
             downloadPanel.Visibility = Visibility.Hidden;
             finishedPanel.Visibility = Visibility.Visible;
+
+            Title = "Finished";
 
             button.Content = "_Ok";
         }
