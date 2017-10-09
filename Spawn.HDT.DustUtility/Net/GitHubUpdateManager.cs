@@ -112,8 +112,8 @@ namespace Spawn.HDT.DustUtility.Net
         }
         #endregion
 
-        #region Download
-        public static void Download(Version version)
+        #region DownloadAsync
+        public static void DownloadAsync(Version version)
         {
             string strVersionString = version.ToString(3);
 
