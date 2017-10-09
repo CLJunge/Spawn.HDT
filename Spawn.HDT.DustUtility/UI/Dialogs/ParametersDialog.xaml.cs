@@ -46,6 +46,13 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         }
         #endregion
 
+        #region OnGoldenCheckBoxUnchecked
+        private void OnGoldenCheckBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            cbGoldenOnly.IsChecked = false;
+        }
+        #endregion
+
         #region OnOkClick
         private void OnOkClick(object sender, RoutedEventArgs e)
         {

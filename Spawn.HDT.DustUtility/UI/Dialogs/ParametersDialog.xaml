@@ -99,7 +99,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <CheckBox x:Name="cbGolden" Content="Incl. Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
+                <CheckBox x:Name="cbGolden" Content="Incl. Golden Cards" Grid.Row="0" VerticalAlignment="Center" Unchecked="OnGoldenCheckBoxUnchecked"/>
                 <CheckBox x:Name="cbGoldenOnly" Content="Golden Cards Only" Grid.Row="1" VerticalAlignment="Center" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
                 <CheckBox x:Name="cbUnusedOnly" Content="Unused Cards Only" Grid.Row="2" VerticalAlignment="Center"/>
             </Grid>
