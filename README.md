@@ -27,7 +27,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 ![Overlay](https://i.imgur.com/5Jf42JL.png)
 
 #### Card History
-- Whenever the plugin stores collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted.
+- Whenever the plugin stores collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted. (newest to oldest)
 ![Overlay](https://i.imgur.com/55Ucd4m.png)
 
 ## Settings
