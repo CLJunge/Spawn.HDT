@@ -145,6 +145,8 @@ namespace Spawn.HDT.DustUtility.Offline
             //    }
             //}
 
+            lstHistory.Reverse();
+
             return lstHistory;
         }
         #endregion
