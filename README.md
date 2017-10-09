@@ -3,7 +3,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 ## Features
 #### Offline Mode
-- The plugin detects the current account and saves it collection and decks locally, so you are still able to use the plugin while Hearthstone isn't running. (Decks are only being saved when you are in the "Play" menu)
+- The plugin detects the current account and saves it collection and decks locally, so you are still able to use the plugin while Hearthstone isn't running.
 ![Overlay](https://i.imgur.com/O8LwlTT.png)
 
 #### Support for multiple accounts and regions
@@ -28,6 +28,6 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 
 ## Settings
-* Offline Mode: While HDT is running the plugin is going to store collection and decks locally every 2 min. (Hearthstone must be running, Decks can only be saved after visiting the "Play" menu once).
+* Offline Mode: While the plugin is enabled, it checks if HS is running and stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally. (every 2 min.)
 * Check For Updates: Checks if there is new release available on the GitHub page after opening the main window.
 ![Overlay](https://i.imgur.com/FWou7M5.png)
