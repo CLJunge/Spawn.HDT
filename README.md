@@ -26,6 +26,8 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 - Drag cards into the selection window to create a list of cards that you want to disenchant (Selection is temporarily storable)
 ![Overlay](https://i.imgur.com/fr2cZzm.png)
 
+#### Card History
+- Whenever the plugin stores collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted.
 
 ## Settings
 * Offline Mode: While the plugin is enabled, it checks if HS is running and stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally. (every 2 min.)
