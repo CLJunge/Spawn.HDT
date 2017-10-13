@@ -61,7 +61,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                             HttpWebResponse imageResponse = await imageRequest.GetResponseAsync() as HttpWebResponse;
 
-                            if (response.StatusCode == HttpStatusCode.OK)
+                            if (imageResponse.StatusCode == HttpStatusCode.OK)
                             {
                                 using (Stream responseStream = imageResponse.GetResponseStream())
                                 {
