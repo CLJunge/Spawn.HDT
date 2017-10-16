@@ -13,7 +13,6 @@ namespace Spawn.HDT.DustUtility.Net
         #region Constants
         private const string BaseUrl = "https://omgvamp-hearthstone-v1.p.mashape.com";
         private const string ApiKey = "T63EJR1RqumshjNsE8mLzycYVpVIp1PIHqLjsnTaibC4T4grpP";
-        public const string CacheFolderName = "image_cache";
         #endregion
 
         #region Static Properties
