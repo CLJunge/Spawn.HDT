@@ -14,10 +14,6 @@ namespace Spawn.HDT.DustUtility.UI
 {
     public partial class MainWindow
     {
-        #region Constants
-        private const string SearchResultKey = "searchResult";
-        #endregion
-
         #region Static
         private static string s_strSearchHelpText;
 

@@ -8,6 +8,10 @@ namespace Spawn.HDT.DustUtility.UI
 {
     public partial class MainWindow
     {
+        #region Constants
+        private const string SearchResultKey = "searchResult";
+        #endregion
+
         #region SearchAsync
         private async Task SearchAsync()
         {
