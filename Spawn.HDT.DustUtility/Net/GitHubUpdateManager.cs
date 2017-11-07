@@ -79,9 +79,10 @@ namespace Spawn.HDT.DustUtility.Net
                             using (WebClient webClient = new WebClient())
                             {
                                 strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
-
-                                strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
                             }
+
+                            //prepare for regex check
+                            strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
 
                             Match updateTextMatch = s_updateTextRegex.Match(strResult);
 
@@ -135,7 +136,10 @@ namespace Spawn.HDT.DustUtility.Net
                     {
                         DownloadCompleted?.Invoke(s, e);
                     }
-                    else { }
+                    else
+                    {
+                        Log.WriteLine("Download canceled", LogType.Debug);
+                    }
                 });
 
                 m_webClient.DownloadDataAsync(new Uri(strAddress));

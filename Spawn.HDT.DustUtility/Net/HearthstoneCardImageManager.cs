@@ -15,10 +15,6 @@ namespace Spawn.HDT.DustUtility.Net
         private const string ApiKey = "T63EJR1RqumshjNsE8mLzycYVpVIp1PIHqLjsnTaibC4T4grpP";
         #endregion
 
-        #region Static Properties
-        public static int MaxCacheCount = 30;
-        #endregion
-
         #region GetStreamAsync
         public static async Task<Stream> GetStreamAsync(string strCardId, bool blnPremium)
         {
