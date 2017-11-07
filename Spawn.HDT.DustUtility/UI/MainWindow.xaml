@@ -17,7 +17,7 @@
         <controls:WindowCommands>
             <StackPanel Orientation="Horizontal">
                 <Button Name="switchAccountButton" Content="SWITCH ACCOUNT..." Click="OnSwitchAccountClick"/>
-                <Button Name="historyButton" Content="HISTORY..." Click="OnHistoryClick" Visibility="Hidden"/>
+                <Button Name="historyButton" Content="HISTORY..." Click="OnHistoryClick" Visibility="Collapsed"/>
                 <Button Content="COLLECTION VALUE" Click="OnTotalDustClick"/>
             </StackPanel>
         </controls:WindowCommands>
