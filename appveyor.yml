@@ -1,0 +1,26 @@
+version: "2.1.0.{build}-{branch}"
+
+configuration: Release
+
+before_build:
+  - nuget restore
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+build:
+  verbosity: minimal
+
+image: Visual Studio 2017
+
+artifacts:
+  - path: Spawn.HDT.DustUtility\bin\$(configuration)
+    name: Spawn.HDT.DustUtility
+
+branches:
+  only:
+    - master
