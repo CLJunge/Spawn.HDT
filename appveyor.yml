@@ -24,3 +24,6 @@ artifacts:
 branches:
   only:
     - master
+    
+after_build:
+  - dir
