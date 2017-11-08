@@ -18,12 +18,9 @@ build:
 image: Visual Studio 2017
 
 artifacts:
-  - path: Spawn.HDT.DustUtility\Releases
+  - path: Releases
     name: Spawn.HDT.DustUtility
 
 branches:
   only:
     - master
-    
-after_build:
-  - dir
