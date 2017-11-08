@@ -18,7 +18,7 @@ build:
 image: Visual Studio 2017
 
 artifacts:
-  - path: Spawn.HDT.DustUtility\bin\$(configuration)
+  - path: Spawn.HDT.DustUtility\Releases
     name: Spawn.HDT.DustUtility
 
 branches:

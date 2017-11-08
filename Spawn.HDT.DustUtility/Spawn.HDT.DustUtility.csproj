@@ -212,6 +212,6 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --source "$(TargetPath)" --target "$(ProjectName)" --launch
-REM if $(ConfigurationName) == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputfile Spawn.HDT.DustUtility.dll --zipoutput --zipname "$(ProjectName).zip"</PostBuildEvent>
+if $(ConfigurationName) == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputfile Spawn.HDT.DustUtility.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>
