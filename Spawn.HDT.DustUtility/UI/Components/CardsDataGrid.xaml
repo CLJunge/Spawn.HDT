@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
-             xmlns:util="clr-namespace:Spawn.HearthPwnScraper.Utilities"
              xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
              mc:Ignorable="d" x:Name="cardsGrid"
              d:DesignHeight="300" d:DesignWidth="300">
@@ -20,7 +19,7 @@
             <DataGrid.Resources>
                 <converters:CountLabelConverter x:Key="countLabelConverter"/>
                 <converters:CountToColorConverter x:Key="countToColorConverter"/>
-                <util:CardRarityToColorConverter x:Key="rarityConverter"/>
+                <converters:CardRarityToColorConverter x:Key="rarityConverter"/>
                 <Style TargetType="DataGridCell">
                     <Setter Property="TextBlock.TextAlignment" Value="Center"/>
                 </Style>

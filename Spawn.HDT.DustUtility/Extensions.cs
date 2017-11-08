@@ -1,7 +1,6 @@
 ﻿using HearthDb;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Offline;
-using Spawn.HearthstonePackHistory.Hearthstone;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;

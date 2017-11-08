@@ -5,7 +5,6 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.Offline;
-using Spawn.HearthstonePackHistory.Hearthstone;
 using System;
 using System.Collections.Generic;
 using System.Linq;

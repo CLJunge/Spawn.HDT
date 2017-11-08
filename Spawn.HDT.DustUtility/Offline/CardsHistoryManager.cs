@@ -1,7 +1,6 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Spawn.HearthstonePackHistory.Hearthstone;
 using System.Collections.Generic;
 using System.Linq;
 
