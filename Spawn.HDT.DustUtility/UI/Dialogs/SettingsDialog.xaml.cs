@@ -1,4 +1,5 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Windows;
 
 namespace Spawn.HDT.DustUtility.UI.Dialogs
@@ -10,12 +11,6 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         {
             InitializeComponent();
         }
-
-        public SettingsDialog(bool cacheDirectoryExists)
-            : this()
-        {
-            //clearCacheButton.IsEnabled = cacheDirectoryExists;
-        }
         #endregion
 
         #region Events
@@ -23,30 +18,55 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
             cbOfflineMode.IsChecked = Settings.OfflineMode;
+            tbSaveInterval.Text = Settings.SaveInterval.ToString();
             cbCheckForUpdates.IsChecked = Settings.CheckForUpdate;
-            //cbCardImageTooltip.IsChecked = Settings.CardImageTooltip;
-            //cbLocalImageCache.IsChecked = Settings.LocalImageCache;
         }
         #endregion
 
         #region OnOkClick
         private void OnOkClick(object sender, RoutedEventArgs e)
         {
-            Settings.OfflineMode = cbOfflineMode.IsChecked.Value;
-            Settings.CheckForUpdate = cbCheckForUpdates.IsChecked.Value;
-            //Settings.CardImageTooltip = cbCardImageTooltip.IsChecked.Value;
-            //Settings.LocalImageCache = cbLocalImageCache.IsChecked.Value;
+            try
+            {
+                if (cbOfflineMode.IsChecked.Value)
+                {
+                    Settings.SaveInterval = Math.Abs(Convert.ToInt32(tbSaveInterval.Text));
+                }
+                else { }
 
-            Log.WriteLine("Saved settings", LogType.Info);
+                Settings.OfflineMode = cbOfflineMode.IsChecked.Value;
+                Settings.CheckForUpdate = cbCheckForUpdates.IsChecked.Value;
 
-            Close();
+                Log.WriteLine($"OfflineMode={Settings.OfflineMode}", LogType.Debug);
+                Log.WriteLine($"SaveInterval={Settings.SaveInterval}", LogType.Debug);
+                Log.WriteLine($"CheckForUpdate={Settings.CheckForUpdate}", LogType.Debug);
+
+                Log.WriteLine("Saved settings", LogType.Info);
+
+                Close();
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLine($"Exception occured while saving settings: {ex}", LogType.Error);
+
+                MessageBox.Show("Error occured while saving settings! Check log for more information.", "Dust Utility - Settings");
+            }
         }
         #endregion
 
         #region OnCancelClick
         private void OnCancelClick(object sender, RoutedEventArgs e)
         {
+            Log.WriteLine("No settings saved", LogType.Debug);
+
             Close();
+        }
+        #endregion
+
+        #region OnSaveIntervalPreviewTextInput
+        private void OnSaveIntervalPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !Search.CardCollector.NumericRegex.IsMatch(e.Text);
         }
         #endregion
         #endregion

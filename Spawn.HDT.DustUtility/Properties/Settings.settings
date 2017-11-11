@@ -17,11 +17,8 @@
     <Setting Name="Version" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LocalImageCache" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="CardImageTooltip" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="SaveInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
     </Setting>
   </Settings>
 </SettingsFile>

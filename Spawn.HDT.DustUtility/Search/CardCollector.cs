@@ -17,7 +17,7 @@ namespace Spawn.HDT.DustUtility.Search
     public class CardCollector
     {
         #region Static Variables
-        private Regex s_numericRegex = new Regex("[0-9]+");
+        public static Regex NumericRegex = new Regex("[0-9]+");
         #endregion
 
         #region Member Variables
@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility.Search
         #region GetCardsAsync
         public async Task<CardWrapper[]> GetCardsAsync(Parameters parameters)
         {
-            bool blnDustMode = s_numericRegex.IsMatch(parameters.QueryString);
+            bool blnDustMode = NumericRegex.IsMatch(parameters.QueryString);
 
             StringBuilder sb = new StringBuilder();
 

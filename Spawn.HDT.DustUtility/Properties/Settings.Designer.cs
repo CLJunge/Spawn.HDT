@@ -8,10 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Spawn.HDT.DustUtility.Properties
-{
-
-
+namespace Spawn.HDT.DustUtility.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
@@ -85,25 +84,13 @@ namespace Spawn.HDT.DustUtility.Properties
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LocalImageCache {
+        [global::System.Configuration.DefaultSettingValueAttribute("120")]
+        public int SaveInterval {
             get {
-                return ((bool)(this["LocalImageCache"]));
+                return ((int)(this["SaveInterval"]));
             }
             set {
-                this["LocalImageCache"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool CardImageTooltip {
-            get {
-                return ((bool)(this["CardImageTooltip"]));
-            }
-            set {
-                this["CardImageTooltip"] = value;
+                this["SaveInterval"] = value;
             }
         }
     }

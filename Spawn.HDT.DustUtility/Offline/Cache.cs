@@ -148,7 +148,7 @@ namespace Spawn.HDT.DustUtility.Offline
             }
             else { }
 
-            s_timer = new Timer(OnTick, null, 0, 1000 * 60 * 2); //every 2 min
+            s_timer = new Timer(OnTick, null, 0, 1000 * Settings.SaveInterval);
 
             Log.WriteLine("Started cache timer", LogType.Debug);
         }
