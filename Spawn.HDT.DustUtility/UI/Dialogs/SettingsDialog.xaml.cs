@@ -43,6 +43,8 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
                 Log.WriteLine("Saved settings", LogType.Info);
 
+                DialogResult = true;
+
                 Close();
             }
             catch (Exception ex)

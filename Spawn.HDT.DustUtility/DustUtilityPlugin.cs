@@ -74,7 +74,7 @@ namespace Spawn.HDT.DustUtility
 
             m_menuItem.Click += OnClick;
 
-            if (Settings.OfflineMode)
+            if (Settings.OfflineMode && Core.Game.IsRunning)
             {
                 Cache.StartTimer();
             }
@@ -90,15 +90,27 @@ namespace Spawn.HDT.DustUtility
             //SettingsDialog dialog = new SettingsDialog(Directory.Exists(Path.Combine(DataDirectory, HearthstoneCardImageManager.CacheFolderName)));
             SettingsDialog dialog = new SettingsDialog();
 
-            dialog.ShowDialog();
+            if (dialog.ShowDialog().Value)
+            {
+                if (Settings.OfflineMode && Core.Game.IsRunning)
+                {
+                    if (!Cache.TimerEnabled)
+                    {
+                        Cache.StartTimer();
+                    }
+                    else
+                    {
+                        //Reinitialize timer with new interval
+                        Cache.StopTimer();
 
-            if (Settings.OfflineMode && Core.Game.IsRunning && !Cache.TimerEnabled)
-            {
-                Cache.StartTimer();
-            }
-            else if (!Settings.OfflineMode && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
+                        Cache.StartTimer();
+                    }
+                }
+                else if (!Settings.OfflineMode && Cache.TimerEnabled)
+                {
+                    Cache.StopTimer();
+                }
+                else { }
             }
             else { }
         }
@@ -118,6 +130,15 @@ namespace Spawn.HDT.DustUtility
         #region OnUpdate
         public void OnUpdate()
         {
+            if (Core.Game.IsRunning && !Cache.TimerEnabled)
+            {
+                Cache.StartTimer();
+            }
+            else if (!Core.Game.IsRunning && Cache.TimerEnabled)
+            {
+                Cache.StopTimer();
+            }
+            else { }
         }
         #endregion
 
