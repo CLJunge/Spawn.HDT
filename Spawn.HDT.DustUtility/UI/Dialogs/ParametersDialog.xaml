@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="480"/>
             <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
 
@@ -30,6 +30,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox Name="cbExpert" Content="Classic" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
@@ -39,11 +40,12 @@
                 <CheckBox Name="cbGadgetzan" Content="MSG" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
                 <CheckBox Name="cbUngoro" Content="Un'Goro" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
                 <CheckBox Name="cbFrozenThrone" Content="Frozen Throne" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbNaxx" Content="Naxx" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbMountain" Content="BRM" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbLeague" Content="LOE" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbKarazhan" Content="Karazhan" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbHall" Content="Hall of Fame" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbKobolds" Content="Kobolds" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
+                <CheckBox Name="cbNaxx" Content="Naxxramas" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbMountain" Content="BRM" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbLeague" Content="LOE" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbKarazhan" Content="Karazhan" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbHall" Content="Hall of Fame" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
 
@@ -72,6 +74,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

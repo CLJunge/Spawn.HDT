@@ -32,9 +32,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         {
             if (Parameters != null)
             {
-                cbGolden.IsChecked = Parameters.IncludeGoldenCards;
-                cbGoldenOnly.IsChecked = Parameters.GoldenCardsOnly;
-                cbUnusedOnly.IsChecked = Parameters.UnusedCardsOnly;
+                LoadMisc();
 
                 LoadRarities();
 
@@ -58,14 +56,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         {
             if (Parameters != null)
             {
-                Parameters.IncludeGoldenCards = cbGolden.IsChecked.Value;
-                Parameters.UnusedCardsOnly = cbUnusedOnly.IsChecked.Value;
-
-                if (Parameters.IncludeGoldenCards)
-                {
-                    Parameters.GoldenCardsOnly = cbGoldenOnly.IsChecked.Value;
-                }
-                else { }
+                SetMisc();
 
                 SetRarities();
 
@@ -87,6 +78,20 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             Close();
         }
         #endregion
+        #endregion
+
+        #region SetMisc
+        private void SetMisc()
+        {
+            Parameters.IncludeGoldenCards = cbGolden.IsChecked.Value;
+            Parameters.UnusedCardsOnly = cbUnusedOnly.IsChecked.Value;
+
+            if (Parameters.IncludeGoldenCards)
+            {
+                Parameters.GoldenCardsOnly = cbGoldenOnly.IsChecked.Value;
+            }
+            else { }
+        }
         #endregion
 
         #region SetRarities
@@ -234,6 +239,12 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             }
             else { }
 
+            if (cbKobolds.IsChecked.Value)
+            {
+                Parameters.Sets.Add(CardSet.LOOTAPALOOZA);
+            }
+            else { }
+
             if (cbNaxx.IsChecked.Value)
             {
                 Parameters.Sets.Add(CardSet.NAXX);
@@ -264,6 +275,15 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
                 Parameters.Sets.Add(CardSet.HOF);
             }
             else { }
+        }
+        #endregion
+
+        #region LoadMisc
+        private void LoadMisc()
+        {
+            cbGolden.IsChecked = Parameters.IncludeGoldenCards;
+            cbGoldenOnly.IsChecked = Parameters.GoldenCardsOnly;
+            cbUnusedOnly.IsChecked = Parameters.UnusedCardsOnly;
         }
         #endregion
 
@@ -360,6 +380,9 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
                         break;
                     case CardSet.ICECROWN:
                         cbFrozenThrone.IsChecked = true;
+                        break;
+                    case CardSet.LOOTAPALOOZA:
+                        cbKobolds.IsChecked = true;
                         break;
                     case CardSet.NAXX:
                         cbNaxx.IsChecked = true;
