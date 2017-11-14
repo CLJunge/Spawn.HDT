@@ -150,7 +150,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             s_timer = new Timer(OnTick, null, 0, 1000 * Settings.SaveInterval);
 
-            Log.WriteLine("Started cache timer", LogType.Debug);
+            Log.WriteLine($"Started cache timer (Interval={Settings.SaveInterval}s)", LogType.Debug);
         }
         #endregion
 
