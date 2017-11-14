@@ -31,6 +31,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 ![Overlay](https://i.imgur.com/55Ucd4m.png)
 
 ## Settings
-* Offline Mode: While the plugin is enabled, it checks if HS is running and stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally. (every 2 min.)
-* Check For Updates: Checks if there is new release available on the GitHub page after opening the main window.
+* Offline Mode: While Hearthstone is running, the plugin stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally.
+* Save Interval: The interval for when the plugin is going to store collection and decks.
+* Check For Updates: Checks if there is new release available on GitHub after opening the main window.
 ![Overlay](https://i.imgur.com/FWou7M5.png)
