@@ -92,7 +92,7 @@ namespace Spawn.HDT.DustUtility
 
             dialog.ShowDialog();
 
-            if (Settings.OfflineMode && Core.Game.IsRunning && !Cache.TimerEnabled && m_window != null)
+            if (Settings.OfflineMode && Core.Game.IsRunning && !Cache.TimerEnabled)
             {
                 Cache.StartTimer();
             }
