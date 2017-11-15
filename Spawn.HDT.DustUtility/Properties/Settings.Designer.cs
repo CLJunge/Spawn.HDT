@@ -93,5 +93,17 @@ namespace Spawn.HDT.DustUtility.Properties {
                 this["SaveInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastSelectedAccount {
+            get {
+                return ((string)(this["LastSelectedAccount"]));
+            }
+            set {
+                this["LastSelectedAccount"] = value;
+            }
+        }
     }
 }

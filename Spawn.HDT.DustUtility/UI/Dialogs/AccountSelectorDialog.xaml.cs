@@ -29,7 +29,14 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
             if (accounts.Count > 0)
             {
-                cbAccounts.SelectedIndex = 0;
+                if (string.IsNullOrEmpty(Settings.LastSelectedAccount))
+                {
+                    cbAccounts.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbAccounts.SelectedValue = Settings.LastSelectedAccount;
+                }
             }
             else { }
         }

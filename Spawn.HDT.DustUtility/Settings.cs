@@ -66,6 +66,18 @@ namespace Spawn.HDT.DustUtility
             }
         }
         #endregion
+
+        #region LastSelectedAccount
+        public static string LastSelectedAccount
+        {
+            get => Properties.Settings.Default.LastSelectedAccount;
+            set
+            {
+                Properties.Settings.Default.LastSelectedAccount = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+        #endregion
         #endregion
 
         #region Ctor

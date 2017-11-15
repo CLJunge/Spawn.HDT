@@ -206,6 +206,8 @@ namespace Spawn.HDT.DustUtility
                     if (accSelectorDialog.ShowDialog().Value)
                     {
                         m_account = Account.Parse(accSelectorDialog.SelectedAccount);
+
+                        Settings.LastSelectedAccount = m_account.AccountString;
                     }
                     else { }
                 }
@@ -236,7 +238,9 @@ namespace Spawn.HDT.DustUtility
 
                     if (File.Exists(strDecksFileName))
                     {
-                        lstRet.Add(Path.GetFileNameWithoutExtension(strCollectionFileName));
+                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace("_collection", string.Empty);
+
+                        lstRet.Add(strAccountString);
                     }
                     else { }
                 }
