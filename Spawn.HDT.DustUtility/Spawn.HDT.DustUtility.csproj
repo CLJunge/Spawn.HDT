@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="CardSets.cs" />
+    <Compile Include="Offline\BackupManager.cs" />
     <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
     <Compile Include="UI\Converters\CountToColorConverter.cs" />
     <Compile Include="Offline\FileManager.cs" />

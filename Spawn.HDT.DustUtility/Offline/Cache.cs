@@ -1,6 +1,5 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.IO;
@@ -169,7 +168,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             Log.WriteLine("Cache OnTick", LogType.Debug);
 
-            Account account = new Account(Reflection.GetBattleTag(), Helper.GetCurrentRegion().Result);
+            Account account = Account.Current;
 
             if (!account.IsEmpty && account.IsValid)
             {
