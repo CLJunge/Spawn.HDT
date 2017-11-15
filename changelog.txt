@@ -53,5 +53,9 @@
 - Autoselect account if only one available
 - Added card history
 - Added download functionality for new releases
------------------------------
 
+## v2.2
+- Added backup manager for creating daily backups
+- Added filter option for Kobolds and Catacombs
+- Fixed checking wrong response while loading card images
+-----------------------------
