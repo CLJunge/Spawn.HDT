@@ -1,5 +1,4 @@
-﻿using HearthMirror;
-using Hearthstone_Deck_Tracker.API;
+﻿using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Offline;
@@ -189,7 +188,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (Core.Game.IsRunning && !blnIsSwitching)
             {
-                m_account = new Account(Reflection.GetBattleTag(), Hearthstone_Deck_Tracker.Helper.GetCurrentRegion().Result);
+                m_account = Account.Current;
             }
             else
             {
@@ -274,7 +273,7 @@ namespace Spawn.HDT.DustUtility
 
                 OpenMainWindow();
 
-                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={m_account.AccountString}", LogType.Info);
+                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={m_account.AccountString}", LogType.Debug);
             }
             else { }
         }

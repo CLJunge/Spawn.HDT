@@ -1,9 +1,11 @@
 ﻿using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
 using System;
+using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility
 {
+    [DebuggerDisplay("{AccountString}")]
     public class Account
     {
         #region Properties
@@ -12,13 +14,14 @@ namespace Spawn.HDT.DustUtility
         public string AccountString { get; }
 
         public static Account Empty => new Account(null, Region.UNKNOWN);
+        public static Account Current => GetCurrentAccount();
 
         public bool IsEmpty => BattleTag == null && Region == Region.UNKNOWN;
         public bool IsValid => !string.IsNullOrEmpty(AccountString);
         #endregion
 
         #region Ctor
-        public Account(BattleTag battleTag, Region region)
+        private Account(BattleTag battleTag, Region region)
         {
             BattleTag = battleTag;
             Region = region;
@@ -71,7 +74,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region [STATIC] Parse
+        #region Static Methods
+        #region Parse
         public static Account Parse(string strAccountString)
         {
             string[] vTemp = strAccountString.Split('_');
@@ -84,6 +88,22 @@ namespace Spawn.HDT.DustUtility
 
             return new Account(battleTag, (Region)Enum.Parse(typeof(Region), vTemp[2]));
         }
+        #endregion
+
+        #region GetCurrentAccount
+        private static Account GetCurrentAccount()
+        {
+            Account retVal = Empty;
+
+            if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning)
+            {
+                retVal = new Account(HearthMirror.Reflection.GetBattleTag(), Hearthstone_Deck_Tracker.Helper.GetCurrentRegion().Result);
+            }
+            else { }
+
+            return retVal;
+        }
+        #endregion
         #endregion
     }
 }
