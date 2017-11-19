@@ -71,7 +71,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -83,20 +82,19 @@
                 <CheckBox Name="cbDruid" Content="Druid" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
                 <CheckBox Name="cbHunter" Content="Hunter" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
                 <CheckBox Name="cbMage" Content="Mage" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbPaladin" Content="Paladin" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbPriest" Content="Priest" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbRogue" Content="Rogue" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbShaman" Content="Shaman" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbWarlock" Content="Warlock" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbWarrior" Content="Warrior" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbNeutral" Content="Neutral" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbPaladin" Content="Paladin" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
+                <CheckBox Name="cbPriest" Content="Priest" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                <CheckBox Name="cbRogue" Content="Rogue" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
+                <CheckBox Name="cbShaman" Content="Shaman" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbWarlock" Content="Warlock" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbWarrior" Content="Warrior" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+                <CheckBox Name="cbNeutral" Content="Neutral" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
             </Grid>
         </GroupBox>
 
         <GroupBox Header="Misc." Grid.Row="1" Grid.Column="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
