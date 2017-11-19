@@ -23,7 +23,7 @@
         <Label Content="Check For Updates" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
 
         <CheckBox Name="cbOfflineMode" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        <TextBox Name="tbSaveInterval" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,5,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}" PreviewTextInput="OnSaveIntervalPreviewTextInput"/>
+        <TextBox Name="tbSaveInterval" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,11,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}" PreviewTextInput="OnSaveIntervalPreviewTextInput"/>
         <CheckBox Name="cbCheckForUpdates" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
 
         <WrapPanel Grid.Row="12" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,20,5,5">
