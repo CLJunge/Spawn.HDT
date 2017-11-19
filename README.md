@@ -34,4 +34,4 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 * Offline Mode: While Hearthstone is running, the plugin stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally.
 * Save Interval: The interval for storing collection and decks.
 * Check For Updates: Checks if there is new release available on GitHub after opening the main window.
-![Overlay](https://i.imgur.com/r31lcLT.png)
+![Overlay](https://i.imgur.com/EWoSnqr.png)
