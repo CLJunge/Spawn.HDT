@@ -10,6 +10,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace Spawn.HDT.DustUtility
 {
@@ -68,7 +69,11 @@ namespace Spawn.HDT.DustUtility
         {
             m_menuItem = new MenuItem()
             {
-                Header = Name
+                Header = Name,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
+                }
             };
 
             m_menuItem.Click += OnClick;

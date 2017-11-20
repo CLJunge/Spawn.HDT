@@ -223,6 +223,9 @@
     <Resource Include="Resources\legendary_gem.png" />
     <Resource Include="Resources\rare_gem.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>
