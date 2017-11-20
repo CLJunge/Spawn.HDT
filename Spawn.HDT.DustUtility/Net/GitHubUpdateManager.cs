@@ -1,7 +1,6 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Net;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -40,7 +39,7 @@ namespace Spawn.HDT.DustUtility.Net
         static GitHubUpdateManager()
         {
             s_versionRegex = new Regex("[0-9]\\.[0-9]{1,2}\\.?[0-9]{0,2}");
-            s_updateTextRegex = new Regex("<div class=\"markdown-body\">          <p>(?<Content>.*)</p>        </div>");
+            s_updateTextRegex = new Regex("<div class=\"markdown-body\">\\s*?<p>(?<Content>.*)</p>\\s*?</div>");
         }
         #endregion
 
@@ -53,9 +52,7 @@ namespace Spawn.HDT.DustUtility.Net
             {
                 Log.WriteLine("Checking for updates...", LogType.Info);
 
-                string strAddress = $"{BaseUrl}/latest";
-
-                HttpWebRequest request = WebRequest.CreateHttp(strAddress);
+                HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
                 HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
 
@@ -67,8 +64,11 @@ namespace Spawn.HDT.DustUtility.Net
                     {
                         Version newVersion = new Version(versionMatch.Value);
 
+#if DEBUG
+                        blnRet = newVersion > new Version(0, 0);
+#else
                         blnRet = newVersion > Assembly.GetExecutingAssembly().GetName().Version;
-                        //blnRet = newVersion > new Version(0, 0);
+#endif
 
                         if (blnRet)
                         {
@@ -124,8 +124,6 @@ namespace Spawn.HDT.DustUtility.Net
             }
             else { }
 
-            string strAddress = $"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip";
-
             using (m_webClient = new WebClient())
             {
                 m_webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler((s, e) => DownloadProgressChanged?.Invoke(s, e));
@@ -142,7 +140,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                 });
 
-                m_webClient.DownloadDataAsync(new Uri(strAddress));
+                m_webClient.DownloadDataAsync(new Uri($"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
             }
         }
         #endregion
