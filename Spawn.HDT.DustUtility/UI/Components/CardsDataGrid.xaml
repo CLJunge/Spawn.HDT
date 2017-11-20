@@ -25,7 +25,7 @@
                 </Style>
                 <ContextMenu x:Key="rowContextMenu">
                     <ContextMenu.Items>
-                        <MenuItem Header="Delete" Click="OnDeleteRowClick"/>
+                        <MenuItem Header="Remove" Click="OnDeleteRowClick"/>
                     </ContextMenu.Items>
                 </ContextMenu>
             </DataGrid.Resources>
