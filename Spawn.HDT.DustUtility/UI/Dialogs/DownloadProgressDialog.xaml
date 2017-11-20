@@ -29,8 +29,7 @@
             <Label Name="downloadHeaderLabel" Content="{Binding ElementName=dialog, Path=DisplayText}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
 
             <ProgressBar Name="progressBar" Minimum="0" Maximum="100" Grid.Row="2" Margin="5,0,5,0"/>
-
-            <!--<TextBlock Text="{Binding ElementName=progressBar, Path=Value, StringFormat={}{0:0}%}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+            <TextBlock Text="{Binding ElementName=progressBar, Path=Value, StringFormat={}{0:0}%}" FontSize="9" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Name="finishedPanel" Visibility="Hidden" Grid.Row="0">
