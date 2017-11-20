@@ -1,25 +1,30 @@
-﻿<Controls:MetroWindow x:Class="Spawn.HDT.DustUtility.UI.Dialogs.ParametersDialog"
+﻿<controls:MetroWindow x:Class="Spawn.HDT.DustUtility.UI.Dialogs.ParametersDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         mc:Ignorable="d" ResizeMode="NoResize" Loaded="OnWindowInitialized"
         WindowStartupLocation="CenterOwner" GlowBrush="Black"
         Title="Filters" SizeToContent="WidthAndHeight">
-    <Grid Margin="10">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="150"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="480"/>
+            <ColumnDefinition Width="575"/>
             <ColumnDefinition Width="160"/>
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">
             <Grid>
+                <Grid.Resources>
+                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/SetIcons.xaml"/>
+                </Grid.Resources>
+
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -33,19 +38,19 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Name="cbExpert" Content="Classic" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbGoblins" Content="GvG" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbTournament" Content="TGT" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbOldGods" Content="Old Gods" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbGadgetzan" Content="MSG" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbUngoro" Content="Un'Goro" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbFrozenThrone" Content="Frozen Throne" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbKobolds" Content="Kobolds" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbNaxx" Content="Naxxramas" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbMountain" Content="BRM" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbLeague" Content="LOE" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbKarazhan" Content="Karazhan" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbHall" Content="Hall of Fame" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
+                <components:CheckBoxWithImage x:Name="cbExpert" Text="Classic" ImageSource="{StaticResource ExpertIcon}" Grid.Row="0" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbGoblins" Text="GvG" ImageSource="{StaticResource GoblinsIcon}" Grid.Row="1" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbTournament" Text="TGT" ImageSource="{StaticResource TournamentIcon}" Grid.Row="2" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbOldGods" Text="Old Gods" ImageSource="{StaticResource OldGodsIcon}" Grid.Row="3" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbGadgetzan" Text="MSG" ImageSource="{StaticResource GadgetzanIcon}" Grid.Row="0" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbUngoro" Text="Un'Goro" ImageSource="{StaticResource UngoroIcon}" Grid.Row="1" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbFrozenThrone" Text="Frozen Throne" ImageSource="{StaticResource FrozenThroneIcon}" Grid.Row="2" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbKobolds" Text="Kobolds" ImageSource="{StaticResource KoboldsIcon}" Grid.Row="3" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbNaxx" Text="Naxxramas" ImageSource="{StaticResource NaxxIcon}" Grid.Row="0" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbMountain" Text="BRM" ImageSource="{StaticResource MountainIcon}" Grid.Row="1" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbLeague" Text="LOE" ImageSource="{StaticResource LeagueIcon}" Grid.Row="2" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbKarazhan" Text="Karazhan" ImageSource="{StaticResource KarazhanIcon}" Grid.Row="4" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbHall" Text="Hall of Fame" ImageSource="{StaticResource HallIcon}" Grid.Row="0" Grid.Column="3"/>
             </Grid>
         </GroupBox>
 
@@ -67,6 +72,10 @@
 
         <GroupBox Header="Classes" Grid.Row="1" Grid.Column="0">
             <Grid>
+                <Grid.Resources>
+                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/ClassIcons.xaml"/>
+                </Grid.Resources>
+
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -79,16 +88,16 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Name="cbDruid" Content="Druid" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbHunter" Content="Hunter" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbMage" Content="Mage" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbPaladin" Content="Paladin" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbPriest" Content="Priest" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbRogue" Content="Rogue" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbShaman" Content="Shaman" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbWarlock" Content="Warlock" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbWarrior" Content="Warrior" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbNeutral" Content="Neutral" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center"/>
+                <components:CheckBoxWithImage x:Name="cbDruid" Text="Druid" ImageSource="{StaticResource DruidClassIcon}" Grid.Row="0" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbHunter" Text="Hunter" ImageSource="{StaticResource HunterClassIcon}" Grid.Row="1" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbMage" Text="Mage" ImageSource="{StaticResource MageClassIcon}" Grid.Row="2" Grid.Column="0"/>
+                <components:CheckBoxWithImage x:Name="cbPaladin" Text="Paladin" ImageSource="{StaticResource PaladinClassIcon}" Grid.Row="0" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbPriest" Text="Priest" ImageSource="{StaticResource PriestClassIcon}" Grid.Row="1" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbRogue" Text="Rogue" ImageSource="{StaticResource RogueClassIcon}" Grid.Row="2" Grid.Column="1"/>
+                <components:CheckBoxWithImage x:Name="cbShaman" Text="Shaman" ImageSource="{StaticResource ShamanClassIcon}" Grid.Row="0" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbWarlock" Text="Warlock" ImageSource="{StaticResource WarlockClassIcon}" Grid.Row="1" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbWarrior" Text="Warrior" ImageSource="{StaticResource WarriorClassIcon}" Grid.Row="2" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbNeutral" Text="Neutral" ImageSource="{StaticResource WildIcon}" Grid.Row="0" Grid.Column="3"/>
             </Grid>
         </GroupBox>
 
@@ -111,4 +120,4 @@
             <Button Content="_Cancel" IsCancel="True" Click="OnCancelClick" Width="75"/>
         </WrapPanel>
     </Grid>
-</Controls:MetroWindow>
+</controls:MetroWindow>
