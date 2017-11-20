@@ -1,5 +1,6 @@
 ﻿using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Search;
+using Spawn.HDT.DustUtility.UI.Converters;
 using System;
 using System.Windows;
 
@@ -17,6 +18,11 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         public ParametersDialog()
         {
             InitializeComponent();
+
+            cbCommon.Foreground = CardRarityToColorConverter.Brushes[1];
+            cbRare.Foreground = CardRarityToColorConverter.Brushes[3];
+            cbEpic.Foreground = CardRarityToColorConverter.Brushes[4];
+            cbLegendary.Foreground = CardRarityToColorConverter.Brushes[5];
         }
 
         public ParametersDialog(Parameters parameters)

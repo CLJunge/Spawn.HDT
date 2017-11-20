@@ -217,6 +217,12 @@
   <ItemGroup>
     <Resource Include="Resources\legend_cardback.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\common_gem.png" />
+    <Resource Include="Resources\epic_gem.png" />
+    <Resource Include="Resources\legendary_gem.png" />
+    <Resource Include="Resources\rare_gem.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>

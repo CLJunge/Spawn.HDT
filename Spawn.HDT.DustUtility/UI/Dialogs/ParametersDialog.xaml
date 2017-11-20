@@ -10,8 +10,8 @@
         Title="Filters" SizeToContent="WidthAndHeight">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="155"/>
+            <RowDefinition Height="155"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -63,10 +63,31 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <CheckBox Name="cbCommon" Content="Common" Grid.Row="0" VerticalAlignment="Center"/>
-                <CheckBox Name="cbRare" Content="Rare" Grid.Row="1" VerticalAlignment="Center"/>
-                <CheckBox Name="cbEpic"  Content="Epic" Grid.Row="2" VerticalAlignment="Center"/>
-                <CheckBox Name="cbLegendary" Content="Legendary" Grid.Row="3" VerticalAlignment="Center"/>
+                <!--<CheckBox Name="cbCommon" Content="Common" Grid.Row="0" VerticalAlignment="Center"/>-->
+                <!--<CheckBox Name="cbRare" Content="Rare" Grid.Row="1" VerticalAlignment="Center"/>-->
+                <!--<CheckBox Name="cbEpic"  Content="Epic" Grid.Row="2" VerticalAlignment="Center"/>-->
+                <!--<CheckBox Name="cbLegendary" Content="Legendary" Grid.Row="3" VerticalAlignment="Center"/>-->
+
+                <components:CheckBoxWithImage x:Name="cbCommon" ImageSource="C:\Users\jchri\Documents\visual studio 2017\Projects\Spawn.HDT.DustUtility\Spawn.HDT.DustUtility\Resources\common_gem.png" Text="Common" Grid.Row="0">
+                    <components:CheckBoxWithImage.ImageEffect>
+                        <BlurEffect Radius="1.6"/>
+                    </components:CheckBoxWithImage.ImageEffect>
+                </components:CheckBoxWithImage>
+                <components:CheckBoxWithImage x:Name="cbRare" ImageSource="C:\Users\jchri\Documents\visual studio 2017\Projects\Spawn.HDT.DustUtility\Spawn.HDT.DustUtility\Resources\rare_gem.png" Text="Rare" Grid.Row="1">
+                    <components:CheckBoxWithImage.ImageEffect>
+                        <BlurEffect Radius="1.6"/>
+                    </components:CheckBoxWithImage.ImageEffect>
+                </components:CheckBoxWithImage>
+                <components:CheckBoxWithImage x:Name="cbEpic" ImageSource="C:\Users\jchri\Documents\visual studio 2017\Projects\Spawn.HDT.DustUtility\Spawn.HDT.DustUtility\Resources\epic_gem.png" Text="Epic" Grid.Row="2">
+                    <components:CheckBoxWithImage.ImageEffect>
+                        <BlurEffect Radius="1.6"/>
+                    </components:CheckBoxWithImage.ImageEffect>
+                </components:CheckBoxWithImage>
+                <components:CheckBoxWithImage x:Name="cbLegendary" ImageSource="C:\Users\jchri\Documents\visual studio 2017\Projects\Spawn.HDT.DustUtility\Spawn.HDT.DustUtility\Resources\legendary_gem.png" Text="Legendary" Grid.Row="3">
+                    <components:CheckBoxWithImage.ImageEffect>
+                        <BlurEffect Radius="1.6"/>
+                    </components:CheckBoxWithImage.ImageEffect>
+                </components:CheckBoxWithImage>
             </Grid>
         </GroupBox>
 
