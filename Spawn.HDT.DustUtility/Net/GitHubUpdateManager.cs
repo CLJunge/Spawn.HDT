@@ -67,7 +67,7 @@ namespace Spawn.HDT.DustUtility.Net
 #if DEBUG
                             blnRet = newVersion > new Version(0, 0);
 #else
-                        blnRet = newVersion > Assembly.GetExecutingAssembly().GetName().Version;
+                            blnRet = newVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 #endif
 
                             if (blnRet)
