@@ -24,19 +24,19 @@
                     <converters:DisplayLabelConverter x:Key="totalCountLabelConverter" Prefix="Total:"/>
                 </Grid.Resources>
 
-                <Label Name="lblDust" Content="{Binding ElementName=cardsList, Path=DustAmount, Converter={StaticResource dustLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,5,10,0"/>
+                <Label Name="lblDust" Content="{Binding ElementName=cardSelection, Path=DustAmount, Converter={StaticResource dustLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,5,10,0"/>
 
                 <Separator Background="Gray" HorizontalAlignment="Stretch" Height="10" Margin="10,33,10,0" VerticalAlignment="Top"/>
 
-                <Label Name="lblCommonsCount" Content="{Binding ElementName=cardsList, Path=CommonsCount, Converter={StaticResource commonsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,40,10,0"/>
-                <Label Name="lblRaresCount" Content="{Binding ElementName=cardsList, Path=RaresCount, Converter={StaticResource raresCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,70,10,0"/>
-                <Label Name="lblEpicsCount" Content="{Binding ElementName=cardsList, Path=EpicsCount, Converter={StaticResource epicsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,100,10,0"/>
-                <Label Name="lblLegendariesCount" Content="{Binding ElementName=cardsList, Path=LegendariesCount, Converter={StaticResource legendariesCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,130,10,0"/>
+                <Label Name="lblCommonsCount" Content="{Binding ElementName=cardSelection, Path=CommonsCount, Converter={StaticResource commonsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,40,10,0"/>
+                <Label Name="lblRaresCount" Content="{Binding ElementName=cardSelection, Path=RaresCount, Converter={StaticResource raresCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,70,10,0"/>
+                <Label Name="lblEpicsCount" Content="{Binding ElementName=cardSelection, Path=EpicsCount, Converter={StaticResource epicsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,100,10,0"/>
+                <Label Name="lblLegendariesCount" Content="{Binding ElementName=cardSelection, Path=LegendariesCount, Converter={StaticResource legendariesCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,130,10,0"/>
 
-                <Label Name="lblTotalCount" Content="{Binding ElementName=cardsList, Path=TotalAmount, Converter={StaticResource totalCountLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,160,10,0"/>
+                <Label Name="lblTotalCount" Content="{Binding ElementName=cardSelection, Path=TotalAmount, Converter={StaticResource totalCountLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,160,10,0"/>
             </Grid>
         </GroupBox>
 
-        <CheckBox Name="cbSaveSelection" Content="Save Selection" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsChecked="{Binding ElementName=cardsList, Path=SaveSelection}" Margin="0,255,58,0" Width="100"/>
+        <CheckBox Name="cbSaveSelection" Content="Save Selection" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsChecked="{Binding ElementName=cardSelection, Path=SaveSelection}" Margin="0,255,58,0" Width="100"/>
     </Grid>
 </controls:MetroWindow>
