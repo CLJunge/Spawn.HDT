@@ -7,7 +7,7 @@
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner"
-        Title="Selection" Height="450" Width="700" Name="cardsList">
+        Title="Selection" Height="450" Width="700" Name="cardSelection">
     <Grid>
         <Border BorderBrush="Silver" BorderThickness="1" HorizontalAlignment="Stretch" Margin="0,0,165,0" VerticalAlignment="Stretch">
             <components:CardsDataGrid x:Name="cardsGrid" AllowDrop="True" AllowDrag="False" ItemDropped="OnCardsGridItemDropped" RowDeleted="OnCardsGridRowDeleted"/>

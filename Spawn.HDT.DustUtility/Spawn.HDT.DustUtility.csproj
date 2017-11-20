@@ -89,8 +89,8 @@
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
     <Compile Include="Search\Parameters.cs" />
-    <Compile Include="UI\CardListWindow.xaml.cs">
-      <DependentUpon>CardListWindow.xaml</DependentUpon>
+    <Compile Include="UI\CardSelectionWindow.xaml.cs">
+      <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Components\CardImageContainer.xaml.cs">
       <DependentUpon>CardImageContainer.xaml</DependentUpon>
@@ -152,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\CardListWindow.xaml">
+    <Page Include="UI\CardSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
