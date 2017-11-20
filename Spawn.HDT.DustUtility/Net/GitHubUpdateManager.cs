@@ -54,54 +54,55 @@ namespace Spawn.HDT.DustUtility.Net
 
                 HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
-                HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
-
-                if (response.StatusCode == HttpStatusCode.OK)
+                using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
                 {
-                    Match versionMatch = s_versionRegex.Match(response.ResponseUri.AbsoluteUri);
-
-                    if (versionMatch.Success)
+                    if (response.StatusCode == HttpStatusCode.OK)
                     {
-                        Version newVersion = new Version(versionMatch.Value);
+                        Match versionMatch = s_versionRegex.Match(response.ResponseUri.AbsoluteUri);
+
+                        if (versionMatch.Success)
+                        {
+                            Version newVersion = new Version(versionMatch.Value);
 
 #if DEBUG
-                        blnRet = newVersion > new Version(0, 0);
+                            blnRet = newVersion > new Version(0, 0);
 #else
                         blnRet = newVersion > Assembly.GetExecutingAssembly().GetName().Version;
 #endif
 
-                        if (blnRet)
-                        {
-                            s_newVersion = newVersion;
-
-                            string strResult;
-
-                            using (WebClient webClient = new WebClient())
+                            if (blnRet)
                             {
-                                strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
+                                s_newVersion = newVersion;
+
+                                string strResult;
+
+                                using (WebClient webClient = new WebClient())
+                                {
+                                    strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
+                                }
+
+                                //prepare for regex check
+                                strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
+
+                                Match updateTextMatch = s_updateTextRegex.Match(strResult);
+
+                                if (updateTextMatch.Success)
+                                {
+                                    s_strReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
+                                }
+                                else { }
+
+                                Log.WriteLine("New release available", LogType.Info);
                             }
-
-                            //prepare for regex check
-                            strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
-
-                            Match updateTextMatch = s_updateTextRegex.Match(strResult);
-
-                            if (updateTextMatch.Success)
+                            else
                             {
-                                s_strReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
+                                Log.WriteLine("No update available", LogType.Info);
                             }
-                            else { }
-
-                            Log.WriteLine("New release available", LogType.Info);
                         }
-                        else
-                        {
-                            Log.WriteLine("No update available", LogType.Info);
-                        }
+                        else { }
                     }
                     else { }
                 }
-                else { }
             }
             catch (Exception ex)
             {
