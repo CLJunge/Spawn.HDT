@@ -8,6 +8,20 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 {
     public partial class DownloadProgressDialog
     {
+        #region DP
+        #region DisplayText
+        public string DisplayText
+        {
+            get { return (string)GetValue(DisplayTextProperty); }
+            set { SetValue(DisplayTextProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DisplayText.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DisplayTextProperty =
+            DependencyProperty.Register("DisplayText", typeof(string), typeof(DownloadProgressDialog), new PropertyMetadata("Downloading \"Spawn.HDT.DustUtility.zip\"..."));
+        #endregion
+        #endregion
+
         #region Ctor
         public DownloadProgressDialog()
         {

@@ -101,8 +101,8 @@
     <Compile Include="UI\Components\CardsDataGrid.xaml.cs">
       <DependentUpon>CardsDataGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
-      <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\AccountSelectionDialog.xaml.cs">
+      <DependentUpon>AccountSelectionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\CardsHistoryDialog.xaml.cs">
       <DependentUpon>CardsHistoryDialog.xaml</DependentUpon>
@@ -113,8 +113,8 @@
     <Compile Include="UI\GridItemEventArgs.cs" />
     <Compile Include="UI\SearchResultContainer.cs" />
     <Compile Include="UI\SortOrder.cs" />
-    <Compile Include="UI\Dialogs\AddSortOrderItemDialog.xaml.cs">
-      <DependentUpon>AddSortOrderItemDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml.cs">
+      <DependentUpon>SortOrderItemSelectionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
       <DependentUpon>SortOrderDialog.xaml</DependentUpon>
@@ -168,11 +168,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\AccountSelectorDialog.xaml">
+    <Page Include="UI\Dialogs\AccountSelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\AddSortOrderItemDialog.xaml">
+    <Page Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
