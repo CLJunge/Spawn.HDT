@@ -67,16 +67,7 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            m_menuItem = new MenuItem()
-            {
-                Header = Name,
-                Icon = new Image()
-                {
-                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
-                }
-            };
-
-            m_menuItem.Click += OnClick;
+            CreateMenuItem();
 
             if (Settings.OfflineMode && Core.Game.IsRunning)
             {
@@ -309,6 +300,22 @@ namespace Spawn.HDT.DustUtility
             }
 
             return strRet;
+        }
+        #endregion
+
+        #region CreateMenuItem
+        private void CreateMenuItem()
+        {
+            m_menuItem = new MenuItem()
+            {
+                Header = Name,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
+                }
+            };
+
+            m_menuItem.Click += OnClick;
         }
         #endregion
 
