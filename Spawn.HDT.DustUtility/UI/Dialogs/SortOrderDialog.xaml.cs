@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.Item)).Length;
 
-            addButtom.IsEnabled = lbItems.Items.Count < m_nMaxCount;
+            addButton.IsEnabled = lbItems.Items.Count < m_nMaxCount;
 
             removeButton.IsEnabled = false;
             moveUpButton.IsEnabled = false;
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             {
                 lbItems.Items.Add(dialog.SelectedItem);
 
-                addButtom.IsEnabled = lbItems.Items.Count < m_nMaxCount;
+                addButton.IsEnabled = lbItems.Items.Count < m_nMaxCount;
             }
             else { }
         }
@@ -78,7 +78,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             }
             else { }
 
-            addButtom.IsEnabled = lbItems.Items.Count < m_nMaxCount;
+            addButton.IsEnabled = lbItems.Items.Count < m_nMaxCount;
         }
         #endregion
 
