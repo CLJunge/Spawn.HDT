@@ -112,9 +112,7 @@ namespace Spawn.HDT.DustUtility.UI
         {
             for (int i = 0; i < savedItems.Count; i++)
             {
-                cardsGrid.GridItems.Add(savedItems[i]);
-
-                UpdateCounterLabels(savedItems[i]);
+                AddItem(savedItems[i]);
             }
 
             CurrentItems = savedItems;
@@ -153,43 +151,29 @@ namespace Spawn.HDT.DustUtility.UI
             }
             else { }
 
-            cardsGrid.GridItems.Add(item);
-
             CurrentItems.Add(item);
 
-            UpdateCounterLabels(item);
+            AddItem(item);
         }
         #endregion
 
         #region OnCardsGridRowDeleted
         private void OnCardsGridRowDeleted(object sender, GridItemEventArgs e)
         {
-            TotalAmount -= e.Item.Count;
-            DustAmount -= e.Item.Dust;
+            RemoveItem(e.Item);
+        }
+        #endregion
 
-            switch (e.Item.Rarity)
-            {
-                case HearthDb.Enums.Rarity.COMMON:
-                    CommonsCount -= e.Item.Count;
-                    break;
-                case HearthDb.Enums.Rarity.RARE:
-                    RaresCount -= e.Item.Count;
-                    break;
-                case HearthDb.Enums.Rarity.EPIC:
-                    EpicsCount -= e.Item.Count;
-                    break;
-                case HearthDb.Enums.Rarity.LEGENDARY:
-                    LegendariesCount -= e.Item.Count;
-                    break;
-            }
-
-            CurrentItems.Remove(e.Item);
+        #region OnClearGridClick
+        private void OnClearGridClick(object sender, RoutedEventArgs e)
+        {
+            ClearItems();
         }
         #endregion
         #endregion
 
-        #region UpdateCounterLabels
-        private void UpdateCounterLabels(GridItem item)
+        #region AddItem
+        private void AddItem(GridItem item)
         {
             TotalAmount += item.Count;
             DustAmount += item.Dust;
@@ -209,6 +193,49 @@ namespace Spawn.HDT.DustUtility.UI
                     LegendariesCount += item.Count;
                     break;
             }
+
+            cardsGrid.GridItems.Add(item);
+        }
+        #endregion
+
+        #region RemoveItem
+        private void RemoveItem(GridItem item)
+        {
+            TotalAmount -= item.Count;
+            DustAmount -= item.Dust;
+
+            switch (item.Rarity)
+            {
+                case HearthDb.Enums.Rarity.COMMON:
+                    CommonsCount -= item.Count;
+                    break;
+                case HearthDb.Enums.Rarity.RARE:
+                    RaresCount -= item.Count;
+                    break;
+                case HearthDb.Enums.Rarity.EPIC:
+                    EpicsCount -= item.Count;
+                    break;
+                case HearthDb.Enums.Rarity.LEGENDARY:
+                    LegendariesCount -= item.Count;
+                    break;
+            }
+
+            cardsGrid.GridItems.Remove(item);
+        }
+        #endregion
+
+        #region ClearItems
+        private void ClearItems()
+        {
+            cardsGrid.GridItems.Clear();
+
+            TotalAmount = 0;
+            DustAmount = 0;
+
+            CommonsCount = 0;
+            RaresCount = 0;
+            EpicsCount = 0;
+            LegendariesCount = 0;
         }
         #endregion
     }
