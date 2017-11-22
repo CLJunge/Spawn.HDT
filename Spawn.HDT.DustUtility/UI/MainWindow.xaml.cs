@@ -1,6 +1,7 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.Net;
+using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.Search;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using System;
@@ -37,7 +38,7 @@ namespace Spawn.HDT.DustUtility.UI
         private DustUtilityPlugin m_plugin;
         private Account m_account;
 
-        private CardListWindow m_selectionWindow;
+        private CardSelectionWindow m_selectionWindow;
         private List<GridItem> m_lstSavedSelection;
 
         private CardCollector m_cardCollector;
@@ -203,7 +204,7 @@ namespace Spawn.HDT.DustUtility.UI
         {
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardListWindow(m_lstSavedSelection ?? new List<GridItem>())
+                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<GridItem>())
                 {
                     Owner = this
                 };

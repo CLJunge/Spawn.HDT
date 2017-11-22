@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Spawn.HDT.DustUtility.UI
 {
-    public partial class CardListWindow
+    public partial class CardSelectionWindow
     {
         #region DP
         #region DustAmount
@@ -17,7 +17,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for DustAmount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DustAmountProperty =
-            DependencyProperty.Register("DustAmount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("DustAmount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region CommonsCount
@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for CommonsCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommonsCountProperty =
-            DependencyProperty.Register("CommonsCount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("CommonsCount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region RaresCount
@@ -41,7 +41,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for RaresCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RaresCountProperty =
-            DependencyProperty.Register("RaresCount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("RaresCount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region EpicsCount
@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for EpicsCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty EpicsCountProperty =
-            DependencyProperty.Register("EpicsCount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("EpicsCount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region LegendariesCount
@@ -65,7 +65,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for LegendariesCount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LegendariesCountProperty =
-            DependencyProperty.Register("LegendariesCount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("LegendariesCount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region TotalAmount
@@ -77,7 +77,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for TotalAmount.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TotalAmountProperty =
-            DependencyProperty.Register("TotalAmount", typeof(int), typeof(CardListWindow), new PropertyMetadata(0));
+            DependencyProperty.Register("TotalAmount", typeof(int), typeof(CardSelectionWindow), new PropertyMetadata(0));
         #endregion
 
         #region SaveSelection
@@ -89,7 +89,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         // Using a DependencyProperty as the backing store for SaveSelection.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SaveSelectionProperty =
-            DependencyProperty.Register("SaveSelection", typeof(bool), typeof(CardListWindow), new PropertyMetadata(false));
+            DependencyProperty.Register("SaveSelection", typeof(bool), typeof(CardSelectionWindow), new PropertyMetadata(false));
         #endregion
         #endregion
 
@@ -98,7 +98,7 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region Ctor
-        public CardListWindow()
+        public CardSelectionWindow()
         {
             InitializeComponent();
 
@@ -107,7 +107,7 @@ namespace Spawn.HDT.DustUtility.UI
             cardsGrid.GridItems.Clear();
         }
 
-        public CardListWindow(List<GridItem> savedItems)
+        public CardSelectionWindow(List<GridItem> savedItems)
             : this()
         {
             for (int i = 0; i < savedItems.Count; i++)
