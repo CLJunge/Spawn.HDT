@@ -10,13 +10,13 @@
         Title="Filters" SizeToContent="WidthAndHeight">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="155"/>
-            <RowDefinition Height="155"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="160"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="575"/>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="175"/>
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">

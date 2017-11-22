@@ -16,7 +16,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <Label Content="{Binding ElementName=ctrl, Path=Text}" Foreground="{Binding ElementName=ctrl, Path=Foreground}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="26,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}"/>
+        <Label Content="{Binding ElementName=ctrl, Path=Text}" Foreground="{Binding ElementName=ctrl, Path=Foreground}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}"/>
         <CheckBox Name="checkBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0"/>
     </Grid>
 </UserControl>
