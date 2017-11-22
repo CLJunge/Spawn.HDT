@@ -37,7 +37,11 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region CardSet
-        public string CardSet { get; set; }
+        public CardSet CardSet { get; set; }
+        #endregion
+
+        #region CardSetString
+        public string CardSetString { get; set; }
         #endregion
 
         #region ManaCost
@@ -62,6 +66,7 @@ namespace Spawn.HDT.DustUtility.UI
                 RarityString = RarityString,
                 CardClass = CardClass,
                 CardSet = CardSet,
+                CardSetString = CardSetString,
                 ManaCost = ManaCost,
                 Tag = Tag
             };
@@ -80,7 +85,8 @@ namespace Spawn.HDT.DustUtility.UI
                 Rarity = wrapper.DbCard.Rarity,
                 RarityString = wrapper.DbCard.Rarity.GetString(),
                 CardClass = wrapper.DbCard.Class.GetString(),
-                CardSet = wrapper.DbCard.Set.GetString(),
+                CardSet = wrapper.DbCard.Set,
+                CardSetString = wrapper.DbCard.Set.GetString(),
                 ManaCost = wrapper.DbCard.Cost,
                 Tag = wrapper
             }; ;

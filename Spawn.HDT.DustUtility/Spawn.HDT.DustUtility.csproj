@@ -77,7 +77,10 @@
     <Compile Include="UI\Components\CheckBoxWithImage.xaml.cs">
       <DependentUpon>CheckBoxWithImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Converters\CardClassToImageConverter.cs" />
+    <Compile Include="UI\Converters\CardNameConverter.cs" />
     <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
+    <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
     <Compile Include="UI\Converters\CountToColorConverter.cs" />
     <Compile Include="Offline\FileManager.cs" />
     <Compile Include="Offline\CardsHistoryManager.cs" />
@@ -144,11 +147,11 @@
     <Compile Include="Net\GitHubUpdateManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\ClassIcons.xaml">
+    <Page Include="Resources\CardClassIcons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\SetIcons.xaml">
+    <Page Include="Resources\CardSetIcons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

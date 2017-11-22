@@ -22,7 +22,7 @@
         <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">
             <Grid>
                 <Grid.Resources>
-                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/SetIcons.xaml"/>
+                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardSetIcons.xaml"/>
                 </Grid.Resources>
 
                 <Grid.RowDefinitions>
@@ -94,7 +94,7 @@
         <GroupBox Header="Classes" Grid.Row="1" Grid.Column="0">
             <Grid>
                 <Grid.Resources>
-                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/ClassIcons.xaml"/>
+                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardClassIcons.xaml"/>
                 </Grid.Resources>
 
                 <Grid.RowDefinitions>
@@ -118,7 +118,7 @@
                 <components:CheckBoxWithImage x:Name="cbShaman" Text="Shaman" ImageSource="{StaticResource ShamanClassIcon}" Grid.Row="0" Grid.Column="2"/>
                 <components:CheckBoxWithImage x:Name="cbWarlock" Text="Warlock" ImageSource="{StaticResource WarlockClassIcon}" Grid.Row="1" Grid.Column="2"/>
                 <components:CheckBoxWithImage x:Name="cbWarrior" Text="Warrior" ImageSource="{StaticResource WarriorClassIcon}" Grid.Row="2" Grid.Column="2"/>
-                <components:CheckBoxWithImage x:Name="cbNeutral" Text="Neutral" ImageSource="{StaticResource WildIcon}" Grid.Row="0" Grid.Column="3"/>
+                <components:CheckBoxWithImage x:Name="cbNeutral" Text="Neutral" ImageSource="{StaticResource NeutralClassIcon}" Grid.Row="0" Grid.Column="3"/>
             </Grid>
         </GroupBox>
 
