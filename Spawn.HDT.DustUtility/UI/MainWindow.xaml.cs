@@ -1,7 +1,6 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.Net;
-using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.Search;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using System;
@@ -127,8 +126,8 @@ namespace Spawn.HDT.DustUtility.UI
         }
         #endregion
 
-        #region OnGoClick
-        private async void OnGoClick(object sender, System.Windows.RoutedEventArgs e)
+        #region OnSearchClick
+        private async void OnSearchClick(object sender, System.Windows.RoutedEventArgs e)
         {
             await SearchAsync();
         }
