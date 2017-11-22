@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ButtonText
-        public string ButtonText => "Settings";
+        public string ButtonText => "Settings...";
         #endregion
 
         #region Author

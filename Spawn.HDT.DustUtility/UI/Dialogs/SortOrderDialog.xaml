@@ -24,7 +24,7 @@
             <ListBox Name="lbItems" SelectionChanged="OnItemSelectionChanged" DisplayMemberPath="Name" SelectedValuePath="Value"/>
         </Border>
 
-        <Button Name="addButtom" Content="Add" Grid.Column="1" Grid.Row="0" Margin="5" Click="OnAddItemClick"/>
+        <Button Name="addButtom" Content="Add..." Grid.Column="1" Grid.Row="0" Margin="5" Click="OnAddItemClick"/>
         <Button Name="removeButton" Content="Remove" Grid.Column="1" Grid.Row="1" Margin="5" Click="OnRemoveItemClick"/>
 
         <Separator Grid.Column="1" Grid.Row="2" Margin="5,0,0,0"/>
