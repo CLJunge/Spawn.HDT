@@ -110,6 +110,16 @@ namespace Spawn.HDT.DustUtility.UI
         }
         #endregion
 
+        #region ClearGrid
+        private void ClearGrid()
+        {
+            new SearchResultContainer().CopyTo(GetSearchResultContainerComponent());
+
+            inputBox.Text = string.Empty;
+            inputBox.Focus();
+        }
+        #endregion
+
         #region GetSearchResultContainerComponent
         public SearchResultContainer GetSearchResultContainerComponent()
         {

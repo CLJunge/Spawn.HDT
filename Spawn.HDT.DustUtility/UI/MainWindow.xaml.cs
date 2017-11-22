@@ -38,7 +38,7 @@ namespace Spawn.HDT.DustUtility.UI
         private DustUtilityPlugin m_plugin;
         private Account m_account;
 
-        private CardListWindow m_listWindow;
+        private CardListWindow m_selectionWindow;
         private List<GridItem> m_lstSavedSelection;
 
         private CardCollector m_cardCollector;
@@ -192,35 +192,42 @@ namespace Spawn.HDT.DustUtility.UI
         }
         #endregion
 
-        #region OnOpenListClick
-        private void OnOpenListClick(object sender, System.Windows.RoutedEventArgs e)
+        #region OnClearGridClick
+        private void OnClearGridClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (m_listWindow == null)
+            ClearGrid();
+        }
+        #endregion
+
+        #region OnOpenSelectionClick
+        private void OnOpenSelectionClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (m_selectionWindow == null)
             {
-                m_listWindow = new CardListWindow(m_lstSavedSelection ?? new List<GridItem>())
+                m_selectionWindow = new CardListWindow(m_lstSavedSelection ?? new List<GridItem>())
                 {
                     Owner = this
                 };
 
-                m_listWindow.Closed += new EventHandler((s, args) =>
+                m_selectionWindow.Closed += new EventHandler((s, args) =>
                 {
-                    if (m_listWindow.SaveSelection)
+                    if (m_selectionWindow.SaveSelection)
                     {
-                        m_lstSavedSelection = m_listWindow.CurrentItems;
+                        m_lstSavedSelection = m_selectionWindow.CurrentItems;
                     }
                     else
                     {
                         m_lstSavedSelection = null;
                     }
 
-                    openListButton.IsEnabled = true;
+                    openSelectionButton.IsEnabled = true;
 
-                    m_listWindow = null;
+                    m_selectionWindow = null;
                 });
 
-                m_listWindow.Show();
+                m_selectionWindow.Show();
 
-                openListButton.IsEnabled = false;
+                openSelectionButton.IsEnabled = false;
             }
             else { }
         }
