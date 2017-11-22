@@ -55,8 +55,11 @@
 - Added download functionality for new releases
 
 ## v2.2
+- Added customizable save interval setting for collection and decks
 - Added backup manager for creating daily backups
 - Added filter option for Kobolds and Catacombs
 - Auto-selecting last used account
+- Added clear button
+- Updated UI (Icons for classes and sets)
 - Fixed checking wrong response while loading card images
 -----------------------------
