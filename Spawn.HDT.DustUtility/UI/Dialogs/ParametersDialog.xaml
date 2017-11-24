@@ -7,7 +7,7 @@
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         mc:Ignorable="d" ResizeMode="NoResize" Loaded="OnWindowInitialized"
         WindowStartupLocation="CenterOwner" GlowBrush="Black"
-        Title="Filters" SizeToContent="WidthAndHeight">
+        Title="Dust Utility - Edit filters..." SizeToContent="WidthAndHeight">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="160"/>
@@ -15,7 +15,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="625"/>
             <ColumnDefinition Width="175"/>
         </Grid.ColumnDefinitions>
 

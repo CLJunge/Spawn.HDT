@@ -4,11 +4,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d" GlowBrush="Black" Height="280" MinHeight="280" Width="275" MinWidth="275" MaxWidth="275"
-        Title="Sort Order" WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip">
+        mc:Ignorable="d" GlowBrush="Black" SizeToContent="WidthAndHeight" MinHeight="280" MinWidth="275"
+        Title="Dust Utility - Edit sort order..." WindowStartupLocation="CenterOwner" ResizeMode="CanResizeWithGrip">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -32,6 +32,6 @@
         <Button Name="moveUpButton" Content="Move Up" Grid.Column="1" Grid.Row="3" Margin="5" Click="OnMoveUpClick"/>
         <Button Name="moveDownButton" Content="Move Down" Grid.Column="1" Grid.Row="4" Margin="5" Click="OnMoveDownClick"/>
 
-        <Button Content="Save" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom" Height="25" Margin="5" Click="OnSaveClick"/>
+        <Button Content="Save" IsDefault="True" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom" Height="25" Margin="5" Click="OnSaveClick"/>
     </Grid>
 </controls:MetroWindow>

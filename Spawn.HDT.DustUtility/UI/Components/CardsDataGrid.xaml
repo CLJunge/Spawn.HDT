@@ -96,6 +96,13 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="ContextMenu" Value="{StaticResource rowContextMenu}"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#0099ff"/>
+                            <Setter Property="BorderBrush" Value="#006bb3"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.CellStyle>
@@ -104,6 +111,11 @@
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <!--<Setter Property="TextBlock.TextAlignment" Value="Center"/>-->
                     <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="{x:Null}"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>

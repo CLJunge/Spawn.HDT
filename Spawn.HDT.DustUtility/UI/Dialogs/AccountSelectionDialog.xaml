@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" GlowBrush="Black"
-        Title="Select Account" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
+        Title="Dust Utility - Select account..." SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <ComboBox Name="cbAccounts" Grid.Row="1" Grid.ColumnSpan="2" DisplayMemberPath="DisplayString" SelectedValuePath="ValueString" VerticalAlignment="Center" Margin="5,0,5,0"/>
