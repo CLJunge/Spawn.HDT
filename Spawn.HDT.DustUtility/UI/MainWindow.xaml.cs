@@ -159,7 +159,7 @@ namespace Spawn.HDT.DustUtility.UI
         #region OnTotalDustClick
         private async void OnTotalDustClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            await this.ShowMessageAsync(string.Empty, $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
+            await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
         }
         #endregion
 
