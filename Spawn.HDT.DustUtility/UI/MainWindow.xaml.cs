@@ -166,7 +166,7 @@ namespace Spawn.HDT.DustUtility.UI
         #region OnSearchHelpClick
         private async void OnSearchHelpClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            await this.ShowMessageAsync(string.Empty, s_strSearchHelpText);
+            await this.ShowMessageAsync("Help", s_strSearchHelpText);
         }
         #endregion
 

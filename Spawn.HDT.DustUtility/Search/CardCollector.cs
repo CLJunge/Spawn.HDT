@@ -306,7 +306,7 @@ namespace Spawn.HDT.DustUtility.Search
             }
             else if (!m_blnOfflineMode)
             {
-                await m_mainWindow.ShowMessageAsync(string.Empty, "Navigate to the \"Play\" page first!");
+                await m_mainWindow.ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
                 //MessageBox.Show("Navigate to the \"Play\" page first!", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else { }
