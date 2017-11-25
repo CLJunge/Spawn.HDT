@@ -1,5 +1,6 @@
 # Dust Utility v2.0 [![Build status](https://ci.appveyor.com/api/projects/status/github/cljunge/spawn.hdt.dustutility?branch=master&svg=true)](https://ci.appveyor.com/project/spawndev/spawn-hdt-dustutility)
 Enter the amout of dust you are aiming for and the plugin searches through your whole collection or cards that aren't being used in any deck in order for you to see which can be disenchanted.
+![Overlay](https://i.imgur.com/mvOynCp.png)
 
 ## Features
 #### Offline Mode
