@@ -183,12 +183,15 @@ namespace Spawn.HDT.DustUtility.UI
                 case HearthDb.Enums.Rarity.COMMON:
                     CommonsCount += item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.RARE:
                     RaresCount += item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.EPIC:
                     EpicsCount += item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.LEGENDARY:
                     LegendariesCount += item.Count;
                     break;
@@ -209,12 +212,15 @@ namespace Spawn.HDT.DustUtility.UI
                 case HearthDb.Enums.Rarity.COMMON:
                     CommonsCount -= item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.RARE:
                     RaresCount -= item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.EPIC:
                     EpicsCount -= item.Count;
                     break;
+
                 case HearthDb.Enums.Rarity.LEGENDARY:
                     LegendariesCount -= item.Count;
                     break;

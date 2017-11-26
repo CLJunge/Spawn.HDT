@@ -56,27 +56,35 @@ namespace Spawn.HDT.DustUtility.Search
                 case Item.Count:
                     strRet = "Count";
                     break;
+
                 case Item.Name:
                     strRet = "Name";
                     break;
+
                 case Item.Golden:
                     strRet = "Golden";
                     break;
+
                 case Item.Dust:
                     strRet = "Dust";
                     break;
+
                 case Item.Rarity:
                     strRet = "Rarity";
                     break;
+
                 case Item.CardClass:
                     strRet = "Class";
                     break;
+
                 case Item.CardSet:
                     strRet = "Set";
                     break;
+
                 case Item.ManaCost:
                     strRet = "Mana Cost";
                     break;
+
                 default:
                     break;
             }

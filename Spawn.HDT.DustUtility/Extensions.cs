@@ -43,12 +43,15 @@ namespace Spawn.HDT.DustUtility
                         case Rarity.COMMON:
                             nRet = (card.Premium ? 50 : 5);
                             break;
+
                         case Rarity.RARE:
                             nRet = (card.Premium ? 100 : 20);
                             break;
+
                         case Rarity.EPIC:
                             nRet = (card.Premium ? 400 : 100);
                             break;
+
                         case Rarity.LEGENDARY:
                             nRet = (card.Premium ? 1600 : 400);
                             break;

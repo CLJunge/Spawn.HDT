@@ -303,12 +303,15 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
                     case Rarity.COMMON:
                         cbCommon.IsChecked = true;
                         break;
+
                     case Rarity.RARE:
                         cbRare.IsChecked = true;
                         break;
+
                     case Rarity.EPIC:
                         cbEpic.IsChecked = true;
                         break;
+
                     case Rarity.LEGENDARY:
                         cbLegendary.IsChecked = true;
                         break;
@@ -327,30 +330,39 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
                     case CardClass.DRUID:
                         cbDruid.IsChecked = true;
                         break;
+
                     case CardClass.HUNTER:
                         cbHunter.IsChecked = true;
                         break;
+
                     case CardClass.MAGE:
                         cbMage.IsChecked = true;
                         break;
+
                     case CardClass.PALADIN:
                         cbPaladin.IsChecked = true;
                         break;
+
                     case CardClass.PRIEST:
                         cbPriest.IsChecked = true;
                         break;
+
                     case CardClass.ROGUE:
                         cbRogue.IsChecked = true;
                         break;
+
                     case CardClass.SHAMAN:
                         cbShaman.IsChecked = true;
                         break;
+
                     case CardClass.WARLOCK:
                         cbWarlock.IsChecked = true;
                         break;
+
                     case CardClass.WARRIOR:
                         cbWarrior.IsChecked = true;
                         break;
+
                     case CardClass.NEUTRAL:
                         cbNeutral.IsChecked = true;
                         break;
@@ -369,39 +381,51 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
                     case CardSet.EXPERT1:
                         cbExpert.IsChecked = true;
                         break;
+
                     case CardSet.GVG:
                         cbGoblins.IsChecked = true;
                         break;
+
                     case CardSet.TGT:
                         cbTournament.IsChecked = true;
                         break;
+
                     case CardSet.OG:
                         cbOldGods.IsChecked = true;
                         break;
+
                     case CardSet.GANGS:
                         cbGadgetzan.IsChecked = true;
                         break;
+
                     case CardSet.UNGORO:
                         cbUngoro.IsChecked = true;
                         break;
+
                     case CardSet.ICECROWN:
                         cbFrozenThrone.IsChecked = true;
                         break;
+
                     case CardSet.LOOTAPALOOZA:
                         cbKobolds.IsChecked = true;
                         break;
+
                     case CardSet.NAXX:
                         cbNaxx.IsChecked = true;
                         break;
+
                     case CardSet.BRM:
                         cbMountain.IsChecked = true;
                         break;
+
                     case CardSet.LOE:
                         cbLeague.IsChecked = true;
                         break;
+
                     case CardSet.KARA:
                         cbKarazhan.IsChecked = true;
                         break;
+
                     case CardSet.HOF:
                     case CardSet.PROMO:
                         cbHall.IsChecked = true;

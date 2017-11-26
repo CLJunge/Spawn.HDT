@@ -51,12 +51,15 @@ namespace Spawn.HDT.DustUtility.UI
                     case HearthDb.Enums.Rarity.COMMON:
                         retVal.CommonsCount += wrapper.Count;
                         break;
+
                     case HearthDb.Enums.Rarity.RARE:
                         retVal.RaresCount += wrapper.Count;
                         break;
+
                     case HearthDb.Enums.Rarity.EPIC:
                         retVal.EpicsCount += wrapper.Count;
                         break;
+
                     case HearthDb.Enums.Rarity.LEGENDARY:
                         retVal.LegendariesCount += wrapper.Count;
                         break;
