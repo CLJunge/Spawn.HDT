@@ -10,7 +10,7 @@ namespace Spawn.HDT.DustUtility.Offline
     public static class HistoryManager
     {
         #region Constants
-        private const string HistoryString = "history";
+        public const string HistoryString = "history";
         #endregion
 
         #region Static Variables

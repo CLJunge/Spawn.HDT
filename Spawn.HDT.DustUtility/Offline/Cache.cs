@@ -10,8 +10,8 @@ namespace Spawn.HDT.DustUtility.Offline
     public static class Cache
     {
         #region Constants
-        private const string CollectionString = "collection";
-        private const string DecksString = "decks";
+        public const string CollectionString = "collection";
+        public const string DecksString = "decks";
         #endregion
 
         #region Static Variables

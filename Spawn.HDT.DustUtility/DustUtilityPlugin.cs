@@ -227,17 +227,17 @@ namespace Spawn.HDT.DustUtility
 
             if (Directory.Exists(DataDirectory))
             {
-                string[] vFiles = Directory.GetFiles(DataDirectory, "*_collection.xml");
+                string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{Cache.CollectionString}.xml");
 
                 for (int i = 0; i < vFiles.Length; i++)
                 {
                     string strCollectionFileName = vFiles[i];
 
-                    string strDecksFileName = strCollectionFileName.Replace("_collection", "_decks");
+                    string strDecksFileName = strCollectionFileName.Replace($"_{Cache.CollectionString}", $"_{Cache.DecksString}");
 
                     if (File.Exists(strDecksFileName))
                     {
-                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace("_collection", string.Empty);
+                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Cache.CollectionString}", string.Empty);
 
                         lstRet.Add(Account.Parse(strAccountString));
                     }
@@ -405,7 +405,7 @@ namespace Spawn.HDT.DustUtility
             }
 
             //Modify files
-            string[] vFiles = Directory.GetFiles(DataDirectory, "*_history.xml");
+            string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{HistoryManager.HistoryString}.xml");
 
             for (int i = 0; i < vFiles.Length; i++)
             {
