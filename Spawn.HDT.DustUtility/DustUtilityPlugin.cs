@@ -64,9 +64,12 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region IPlugin Methods
         #region OnLoad
         public void OnLoad()
         {
+            UpdateApp();
+
             CreateMenuItem();
 
             if (Settings.OfflineMode && Core.Game.IsRunning)
@@ -160,6 +163,7 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
         }
+        #endregion
         #endregion
 
         #region OpenMainWindow
@@ -279,6 +283,22 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region CreateMenuItem
+        private void CreateMenuItem()
+        {
+            m_menuItem = new MenuItem()
+            {
+                Header = Name,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
+                }
+            };
+
+            m_menuItem.Click += OnClick;
+        }
+        #endregion
+
         #region GetFullFileName
         public static string GetFullFileName(Account account, string strType)
         {
@@ -300,22 +320,6 @@ namespace Spawn.HDT.DustUtility
             }
 
             return strRet;
-        }
-        #endregion
-
-        #region CreateMenuItem
-        private void CreateMenuItem()
-        {
-            m_menuItem = new MenuItem()
-            {
-                Header = Name,
-                Icon = new Image()
-                {
-                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
-                }
-            };
-
-            m_menuItem.Click += OnClick;
         }
         #endregion
 
@@ -344,6 +348,91 @@ namespace Spawn.HDT.DustUtility
 
             return retVal;
         }
+        #endregion
+
+        #region Update Stuff
+        #region UpdateApp
+        public void UpdateApp()
+        {
+            //Renamed sort order items
+            if (Properties.Settings.Default.Version <= 1)
+            {
+                UpdateSortOrderSetting();
+            }
+            else { }
+
+            //Added timestamp to history
+            if (Properties.Settings.Default.Version <= 2)
+            {
+                UpdateHistoryFiles();
+            }
+            else { }
+        }
+        #endregion
+
+        #region UpdateSortOrderSetting
+        private void UpdateSortOrderSetting()
+        {
+            string strSortOrder = Properties.Settings.Default.SortOrder;
+
+            if (!strSortOrder.Contains("ManaCost"))
+            {
+                strSortOrder = strSortOrder.Replace("Cost", "ManaCost");
+            }
+            else { }
+
+            if (!strSortOrder.Contains("CardClass"))
+            {
+                strSortOrder = strSortOrder.Replace("Class", "CardClass");
+            }
+            else { }
+
+            Properties.Settings.Default.SortOrder = strSortOrder;
+            Properties.Settings.Default.Version = 2;
+            Properties.Settings.Default.Save();
+        }
+        #endregion
+
+        #region UpdateHistoryFiles
+        private void UpdateHistoryFiles()
+        {
+            //Create backup for each account
+            List<Account> lstAccounts = GetAccountList();
+
+            for (int i = 0; i < lstAccounts.Count; i++)
+            {
+                BackupManager.Create(lstAccounts[i]);
+            }
+
+            //Modify files
+            string[] vFiles = Directory.GetFiles(DataDirectory, "*_history.xml");
+
+            for (int i = 0; i < vFiles.Length; i++)
+            {
+                List<CachedCard> lstHistory = FileManager.Load<List<CachedCard>>(vFiles[i]);
+
+                List<CachedCardEx> lstNewHistory = new List<CachedCardEx>(lstHistory.Count);
+
+                for (int j = 0; j < lstHistory.Count; j++)
+                {
+                    CachedCard card = lstHistory[j];
+
+                    lstNewHistory.Add(new CachedCardEx
+                    {
+                        Id = card.Id,
+                        Count = card.Count,
+                        IsGolden = card.IsGolden,
+                        Timestamp = DateTime.Now
+                    });
+                }
+
+                FileManager.Write(vFiles[i], lstNewHistory);
+            }
+
+            Properties.Settings.Default.Version = 3;
+            Properties.Settings.Default.Save();
+        }
+        #endregion
         #endregion
     }
 }

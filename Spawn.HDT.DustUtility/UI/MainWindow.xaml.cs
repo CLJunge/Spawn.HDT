@@ -270,7 +270,7 @@ namespace Spawn.HDT.DustUtility.UI
         {
             Log.WriteLine("Opening history dialog...", LogType.Debug);
 
-            CardsHistoryDialog dialog = new CardsHistoryDialog(m_account)
+            HistoryDialog dialog = new HistoryDialog(m_account)
             {
                 Owner = this
             };

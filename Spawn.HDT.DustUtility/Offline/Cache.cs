@@ -174,7 +174,7 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 Log.WriteLine("Checking for changes...", LogType.Debug);
 
-                CardsHistoryManager.CheckCollection(account);
+                HistoryManager.CheckCollection(account);
 
                 Log.WriteLine("Saving collection", LogType.Debug);
 
