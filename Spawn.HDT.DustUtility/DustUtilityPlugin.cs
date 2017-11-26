@@ -188,11 +188,11 @@ namespace Spawn.HDT.DustUtility
             }
             else
             {
-                List<string> lstAccounts = GetAccountList();
+                List<Account> lstAccounts = GetAccountList();
 
                 if (lstAccounts.Count == 1)
                 {
-                    m_account = Account.Parse(lstAccounts[0]);
+                    m_account = lstAccounts[0];
                 }
                 else if (lstAccounts.Count > 1)
                 {
@@ -217,9 +217,9 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetAccountList
-        private List<string> GetAccountList()
+        private List<Account> GetAccountList()
         {
-            List<string> lstRet = new List<string>();
+            List<Account> lstRet = new List<Account>();
 
             if (Directory.Exists(DataDirectory))
             {
@@ -235,7 +235,7 @@ namespace Spawn.HDT.DustUtility
                     {
                         string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace("_collection", string.Empty);
 
-                        lstRet.Add(strAccountString);
+                        lstRet.Add(Account.Parse(strAccountString));
                     }
                     else { }
                 }

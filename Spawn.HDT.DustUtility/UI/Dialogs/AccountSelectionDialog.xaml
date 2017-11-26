@@ -17,7 +17,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ComboBox Name="cbAccounts" Grid.Row="1" Grid.ColumnSpan="2" DisplayMemberPath="DisplayString" SelectedValuePath="ValueString" VerticalAlignment="Center" Margin="5,0,5,0"/>
+        <ComboBox Name="cbAccounts" Grid.Row="1" Grid.ColumnSpan="2" DisplayMemberPath="DisplayString" SelectedValuePath="AccountString" VerticalAlignment="Center" Margin="5,0,5,0"/>
 
         <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,10,5,5">
             <Button Content="_Ok" IsDefault="True" Click="OnOkClick" Width="75" Margin="0,0,10,0"/>

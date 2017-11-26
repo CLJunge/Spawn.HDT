@@ -8,16 +8,40 @@ namespace Spawn.HDT.DustUtility
     [DebuggerDisplay("{AccountString}")]
     public class Account
     {
-        #region Properties
-        public BattleTag BattleTag { get; }
-        public Region Region { get; }
-        public string AccountString { get; }
-
+        #region Static Properties
+        #region Empty
         public static Account Empty => new Account(null, Region.UNKNOWN);
-        public static Account Current => GetCurrentAccount();
+        #endregion
 
+        #region Current
+        public static Account Current => GetCurrentAccount();
+        #endregion
+        #endregion
+
+        #region Properties
+        #region BattleTag
+        public BattleTag BattleTag { get; }
+        #endregion
+
+        #region Region
+        public Region Region { get; }
+        #endregion
+
+        #region DisplayString
+        public string DisplayString { get; }
+        #endregion
+
+        #region AccountString
+        public string AccountString { get; }
+        #endregion
+
+        #region IsEmpty
         public bool IsEmpty => BattleTag == null && Region == Region.UNKNOWN;
+        #endregion
+
+        #region IsValid
         public bool IsValid => !string.IsNullOrEmpty(AccountString);
+        #endregion
         #endregion
 
         #region Ctor
@@ -29,10 +53,14 @@ namespace Spawn.HDT.DustUtility
             if (BattleTag != null)
             {
                 AccountString = $"{battleTag.Name}_{battleTag.Number}_{region}";
+
+                DisplayString = $"{battleTag.Name}#{battleTag.Number} ({region})";
             }
             else
             {
                 AccountString = string.Empty;
+
+                DisplayString = string.Empty;
             }
         }
         #endregion

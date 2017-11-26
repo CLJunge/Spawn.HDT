@@ -15,16 +15,12 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             InitializeComponent();
         }
 
-        public AccountSelectorDialog(List<string> accounts)
+        public AccountSelectorDialog(List<Account> accounts)
             : this()
         {
             for (int i = 0; i < accounts.Count; i++)
             {
-                string[] vTemp = accounts[i].Split('_');
-
-                string strDisplayString = $"{vTemp[0]}#{vTemp[1]} ({vTemp[2]})";
-
-                cbAccounts.Items.Add(new AccountContainer() { DisplayString = strDisplayString, ValueString = accounts[i] });
+                cbAccounts.Items.Add(accounts[i]);
             }
 
             if (accounts.Count > 0)
@@ -61,11 +57,5 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         }
         #endregion
         #endregion
-
-        private class AccountContainer
-        {
-            public string DisplayString { get; set; }
-            public string ValueString { get; set; }
-        }
     }
 }
