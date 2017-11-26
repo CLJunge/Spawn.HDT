@@ -56,10 +56,13 @@
 
 ## v2.2
 - Added customizable interval setting for storing collection and decks
-- Added backup manager for creating daily backups
 - Added filter option for Kobolds and Catacombs
+- Added backup manager for creating daily backups
 - Auto-selecting last used account
 - Added clear buttons for grids
 - Updated UI (Icons for classes and sets)
 - Various fixes and improvements
+
+## v2.3
+ - Added date column to card history
 -----------------------------
