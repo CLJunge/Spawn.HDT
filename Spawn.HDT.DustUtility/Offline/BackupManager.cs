@@ -112,7 +112,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #region GetFileName
         private static string GetFileName(Account account, DateTime date)
         {
-            string strDirectory = Path.Combine(DustUtilityPlugin.DataDirectory, "backup", account.AccountString);
+            string strDirectory = Path.Combine(DustUtilityPlugin.DataDirectory, "Backup", account.AccountString);
 
             if (!Directory.Exists(strDirectory))
             {
