@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Spawn.HDT.DustUtility.UI.Converters;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Spawn.HDT.DustUtility.UI.Components
@@ -179,6 +182,19 @@ namespace Spawn.HDT.DustUtility.UI.Components
                 cardImageContainer.CardWrapper = null;
             }
             else { }
+        }
+        #endregion
+
+        #region AddDateColumn
+        public void AddDateColumn()
+        {
+            DataGridTextColumn dateColumn = new DataGridTextColumn
+            {
+                Header = "Date",
+                Binding = new Binding("Timestamp") { Converter = new TimestampConverter() }
+            };
+
+            dataGrid.Columns.Add(dateColumn);
         }
         #endregion
     }

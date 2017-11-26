@@ -1,5 +1,6 @@
 ﻿using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Search;
+using System;
 using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility.UI
@@ -56,7 +57,7 @@ namespace Spawn.HDT.DustUtility.UI
         #region CreateCopy
         public GridItem CreateCopy()
         {
-            return new GridItem()
+            return new GridItem
             {
                 Count = Count,
                 Name = Name,
@@ -88,6 +89,56 @@ namespace Spawn.HDT.DustUtility.UI
                 CardSet = wrapper.DbCard.Set,
                 CardSetString = wrapper.DbCard.Set.GetString(),
                 ManaCost = wrapper.DbCard.Cost,
+                Tag = wrapper
+            }; ;
+        }
+        #endregion
+    }
+
+    [DebuggerDisplay("{Name} ({Count})")]
+    public class GridItemEx : GridItem
+    {
+        #region Properties
+        public DateTime Timestamp { get; set; }
+        #endregion
+
+        #region CreateCopy
+        public new GridItemEx CreateCopy()
+        {
+            return new GridItemEx
+            {
+                Count = Count,
+                Name = Name,
+                Golden = Golden,
+                Dust = Dust,
+                Rarity = Rarity,
+                RarityString = RarityString,
+                CardClass = CardClass,
+                CardSet = CardSet,
+                CardSetString = CardSetString,
+                ManaCost = ManaCost,
+                Tag = Tag,
+                Timestamp = Timestamp
+            };
+        }
+        #endregion
+
+        #region [STATIC] FromCardWrapperEx
+        public static GridItemEx FromCardWrapperEx(CardWrapperEx wrapper)
+        {
+            return new GridItemEx()
+            {
+                Count = wrapper.Count,
+                Dust = wrapper.GetDustValue(),
+                Golden = wrapper.Card.Premium,
+                Name = wrapper.DbCard.Name,
+                Rarity = wrapper.DbCard.Rarity,
+                RarityString = wrapper.DbCard.Rarity.GetString(),
+                CardClass = wrapper.DbCard.Class.GetString(),
+                CardSet = wrapper.DbCard.Set,
+                CardSetString = wrapper.DbCard.Set.GetString(),
+                ManaCost = wrapper.DbCard.Cost,
+                Timestamp = wrapper.Timestamp,
                 Tag = wrapper
             }; ;
         }

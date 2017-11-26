@@ -1,28 +1,29 @@
-﻿using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Offline;
 using System.Collections.Generic;
 
 namespace Spawn.HDT.DustUtility.UI.Dialogs
 {
-    public partial class CardsHistoryDialog
+    public partial class HistoryDialog
     {
         #region Ctor
-        public CardsHistoryDialog()
+        public HistoryDialog()
         {
             InitializeComponent();
         }
 
-        public CardsHistoryDialog(Account account)
+        public HistoryDialog(Account account)
             : this()
         {
-            grid.GridItems.Clear();
+            //grid.GridItems.Clear();
 
-            List<Card> lstHistory = CardsHistoryManager.GetHistory(account);
+            grid.AddDateColumn();
+
+            List<CachedCardEx> lstHistory = HistoryManager.GetHistory(account);
 
             for (int i = 0; i < lstHistory.Count; i++)
             {
-                grid.GridItems.Add(GridItem.FromCardWrapper(new Search.CardWrapper(lstHistory[i])));
+                grid.GridItems.Add(GridItemEx.FromCardWrapperEx(new Search.CardWrapperEx(lstHistory[i])));
             }
 
             Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);

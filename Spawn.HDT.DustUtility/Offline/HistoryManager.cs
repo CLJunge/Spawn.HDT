@@ -1,12 +1,13 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Spawn.HDT.DustUtility.Offline
 {
-    public static class CardsHistoryManager
+    public static class HistoryManager
     {
         #region Constants
         private const string HistoryString = "history";
@@ -28,7 +29,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
                 List<Card> lstOldCollection = Cache.LoadCollection(account);
 
-                List<Card> lstCardsHistory = LoadHistory(account);
+                List<CachedCardEx> lstCardsHistory = LoadHistory(account);
 
                 if (lstOldCollection != null && lstOldCollection.Count > 0)
                 {
@@ -56,7 +57,13 @@ namespace Spawn.HDT.DustUtility.Offline
                             }
                             else { }
 
-                            lstCardsHistory.Add(new Card(cardA.Id, nCount, cardA.Premium));
+                            lstCardsHistory.Add(new CachedCardEx
+                            {
+                                Id = cardA.Id,
+                                Count = nCount,
+                                IsGolden = cardA.Premium,
+                                Timestamp = DateTime.Now
+                            });
 
                             nChanges += 1;
                         }
@@ -84,7 +91,13 @@ namespace Spawn.HDT.DustUtility.Offline
 
                             nCount *= -1;
 
-                            lstCardsHistory.Add(new Card(cardB.Id, nCount, cardB.Premium));
+                            lstCardsHistory.Add(new CachedCardEx
+                            {
+                                Id = cardB.Id,
+                                Count = nCount,
+                                IsGolden = cardB.Premium,
+                                Timestamp = DateTime.Now
+                            });
 
                             nChanges += 1;
                         }
@@ -104,29 +117,27 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region LoadHistory
-        private static List<Card> LoadHistory(Account account)
+        private static List<CachedCardEx> LoadHistory(Account account)
         {
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
-            List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
-
-            return lstCachedCards.ToCards();
+            return FileManager.Load<List<CachedCardEx>>(strPath);
         }
         #endregion
 
         #region SaveHistory
-        private static void SaveHistory(Account account, List<Card> lstCardsHistory)
+        private static void SaveHistory(Account account, List<CachedCardEx> lstCardsHistory)
         {
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
-            FileManager.Write(strPath, lstCardsHistory.ToCachedCards());
+            FileManager.Write(strPath, lstCardsHistory);
         }
         #endregion
 
         #region GetHistory
-        public static List<Card> GetHistory(Account account)
+        public static List<CachedCardEx> GetHistory(Account account)
         {
-            List<Card> lstHistory = LoadHistory(account);
+            List<CachedCardEx> lstHistory = LoadHistory(account);
 
             //List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
@@ -152,15 +163,19 @@ namespace Spawn.HDT.DustUtility.Offline
 
         private class CardComparer : IEqualityComparer<Card>
         {
+            #region Equals
             public bool Equals(Card x, Card y)
             {
                 return x.Id.Equals(y.Id) && x.Premium == y.Premium && x.Count == y.Count;
             }
+            #endregion
 
+            #region GetHashCode
             public int GetHashCode(Card obj)
             {
                 return obj.Id.GetHashCode() + obj.Premium.GetHashCode() + obj.Count.GetHashCode();
             }
+            #endregion
         }
     }
 }

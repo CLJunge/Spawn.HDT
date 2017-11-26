@@ -1,4 +1,6 @@
 ﻿using HearthMirror.Objects;
+using Spawn.HDT.DustUtility.Offline;
+using System;
 using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility.Search
@@ -54,6 +56,29 @@ namespace Spawn.HDT.DustUtility.Search
             else { }
 
             return nRet;
+        }
+        #endregion
+    }
+
+    [DebuggerDisplay("{Count}x {DbCard.Name} Golden={Card.Premium}")]
+    public class CardWrapperEx : CardWrapper
+    {
+        #region Properties
+        #region Timestamp
+        public DateTime Timestamp { get; set; }
+        #endregion
+        #endregion
+
+        #region Ctor
+        public CardWrapperEx(Card card)
+            : base(card)
+        {
+        }
+
+        public CardWrapperEx(CachedCardEx card)
+            : base(new Card(card.Id, card.Count, card.IsGolden))
+        {
+            Timestamp = card.Timestamp;
         }
         #endregion
     }

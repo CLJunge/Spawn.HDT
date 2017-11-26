@@ -83,7 +83,7 @@
     <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
     <Compile Include="UI\Converters\CountToColorConverter.cs" />
     <Compile Include="Offline\FileManager.cs" />
-    <Compile Include="Offline\CardsHistoryManager.cs" />
+    <Compile Include="Offline\HistoryManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="UI\Converters\DisplayLabelConverter.cs" />
     <Compile Include="Search\CardCollector.cs" />
@@ -104,11 +104,12 @@
     <Compile Include="UI\Components\CardsDataGrid.xaml.cs">
       <DependentUpon>CardsDataGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Converters\TimestampConverter.cs" />
     <Compile Include="UI\Dialogs\AccountSelectionDialog.xaml.cs">
       <DependentUpon>AccountSelectionDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\CardsHistoryDialog.xaml.cs">
-      <DependentUpon>CardsHistoryDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\HistoryDialog.xaml.cs">
+      <DependentUpon>HistoryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\DownloadProgressDialog.xaml.cs">
       <DependentUpon>DownloadProgressDialog.xaml</DependentUpon>
@@ -179,7 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\CardsHistoryDialog.xaml">
+    <Page Include="UI\Dialogs\HistoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
