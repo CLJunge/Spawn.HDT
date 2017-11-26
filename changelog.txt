@@ -53,5 +53,13 @@
 - Autoselect account if only one available
 - Added card history
 - Added download functionality for new releases
------------------------------
 
+## v2.2
+- Added customizable interval setting for storing collection and decks
+- Added backup manager for creating daily backups
+- Added filter option for Kobolds and Catacombs
+- Auto-selecting last used account
+- Added clear buttons for grids
+- Updated UI (Icons for classes and sets)
+- Various fixes and improvements
+-----------------------------
