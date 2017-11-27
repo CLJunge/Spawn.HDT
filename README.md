@@ -39,25 +39,5 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Credits
 * Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
