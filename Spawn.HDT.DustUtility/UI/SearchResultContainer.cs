@@ -140,9 +140,11 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region SetGridItems
-        public void SetGridItems(List<GridItem> lstItems)
+        public void SetGridItems(IEnumerable<GridItem> items)
         {
             m_lstGridItems.Clear();
+
+            List<GridItem> lstItems = new List<GridItem>(items);
 
             for (int i = 0; i < lstItems.Count; i++)
             {

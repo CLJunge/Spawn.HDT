@@ -6,7 +6,6 @@ using Spawn.HDT.DustUtility.Search;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -184,9 +183,7 @@ namespace Spawn.HDT.DustUtility.UI
 
                 SearchResultContainer container = GetSearchResultContainerComponent();
 
-                IEnumerable<GridItem> orderedItems = OrderItems(container.GridItems);
-
-                container.SetGridItems(orderedItems.ToList());
+                container.SetGridItems(OrderItems(container.GridItems));
             }
             else { }
         }
