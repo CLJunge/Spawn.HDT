@@ -130,7 +130,7 @@ namespace Spawn.HDT.DustUtility.Search
 
                 lstChunk = FilterForSets(lstChunk, parameters.Sets);
 
-                lstChunk = lstChunk.OrderBy(c => c.GetDustValue()).ToList();
+                lstChunk = new List<CardWrapper>(lstChunk.OrderBy(c => c.GetDustValue()));
 
                 for (int j = 0; j < lstChunk.Count && !blnDone; j++)
                 {
