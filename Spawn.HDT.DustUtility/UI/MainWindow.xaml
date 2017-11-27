@@ -16,10 +16,40 @@
 
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            <controls:WindowCommands.Resources>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
+            </controls:WindowCommands.Resources>
             <StackPanel Orientation="Horizontal">
-                <Button Name="switchAccountButton" Content="SWITCH ACCOUNT..." Click="OnSwitchAccountClick"/>
-                <Button Name="historyButton" Content="HISTORY..." Click="OnHistoryClick" Visibility="Collapsed"/>
-                <Button Content="COLLECTION VALUE" Click="OnTotalDustClick"/>
+                <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="20" Height="20">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{StaticResource UserIcon}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="SWITCH ACCOUNTS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Name="historyButton" Click="OnHistoryClick" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="18" Height="18">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{StaticResource ClockIcon}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Click="OnTotalDustClick">
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="18" Height="18">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{StaticResource CoinsIcon}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Text="COLLECTION VALUE" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
