@@ -160,6 +160,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Resources\RarityGems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\CardSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,12 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\legend_cardback.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\common_gem.png" />
-    <Resource Include="Resources\epic_gem.png" />
-    <Resource Include="Resources\legendary_gem.png" />
-    <Resource Include="Resources\rare_gem.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon.png" />

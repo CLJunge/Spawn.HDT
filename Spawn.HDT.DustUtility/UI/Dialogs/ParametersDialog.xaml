@@ -56,6 +56,10 @@
 
         <GroupBox Header="Rarities" Grid.Row="0" Grid.Column="1">
             <Grid>
+                <Grid.Resources>
+                    <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/RarityGems.xaml"/>
+                </Grid.Resources>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -68,26 +72,10 @@
                 <!--<CheckBox Name="cbEpic"  Content="Epic" Grid.Row="2" VerticalAlignment="Center"/>-->
                 <!--<CheckBox Name="cbLegendary" Content="Legendary" Grid.Row="3" VerticalAlignment="Center"/>-->
 
-                <components:CheckBoxWithImage x:Name="cbCommon" ImageSource="/Spawn.HDT.DustUtility;component/Resources/common_gem.png" Text="Common" Grid.Row="0">
-                    <components:CheckBoxWithImage.ImageEffect>
-                        <BlurEffect Radius="1.6"/>
-                    </components:CheckBoxWithImage.ImageEffect>
-                </components:CheckBoxWithImage>
-                <components:CheckBoxWithImage x:Name="cbRare" ImageSource="/Spawn.HDT.DustUtility;component/Resources/rare_gem.png" Text="Rare" Grid.Row="1">
-                    <components:CheckBoxWithImage.ImageEffect>
-                        <BlurEffect Radius="1.6"/>
-                    </components:CheckBoxWithImage.ImageEffect>
-                </components:CheckBoxWithImage>
-                <components:CheckBoxWithImage x:Name="cbEpic" ImageSource="/Spawn.HDT.DustUtility;component/Resources/epic_gem.png" Text="Epic" Grid.Row="2">
-                    <components:CheckBoxWithImage.ImageEffect>
-                        <BlurEffect Radius="1.6"/>
-                    </components:CheckBoxWithImage.ImageEffect>
-                </components:CheckBoxWithImage>
-                <components:CheckBoxWithImage x:Name="cbLegendary" ImageSource="/Spawn.HDT.DustUtility;component/Resources/legendary_gem.png" Text="Legendary" Grid.Row="3">
-                    <components:CheckBoxWithImage.ImageEffect>
-                        <BlurEffect Radius="1.6"/>
-                    </components:CheckBoxWithImage.ImageEffect>
-                </components:CheckBoxWithImage>
+                <components:CheckBoxWithImage x:Name="cbCommon" Text="Common" ImageSource="{StaticResource CommonGem}" Grid.Row="0"/>
+                <components:CheckBoxWithImage x:Name="cbRare" Text="Rare" ImageSource="{StaticResource RareGem}" Grid.Row="1"/>
+                <components:CheckBoxWithImage x:Name="cbEpic" Text="Epic" ImageSource="{StaticResource EpicGem}" Grid.Row="2"/>
+                <components:CheckBoxWithImage x:Name="cbLegendary" Text="Legendary" ImageSource="{StaticResource LegendaryGem}" Grid.Row="3"/>
             </Grid>
         </GroupBox>
 

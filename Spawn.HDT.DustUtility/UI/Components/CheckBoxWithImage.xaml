@@ -5,7 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" d:DesignHeight="50" d:DesignWidth="150" Name="ctrl">
     <Grid>
-        <Image Source="{Binding ElementName=ctrl, Path=ImageSource}" Effect="{Binding ElementName=ctrl, Path=ImageEffect}" Grid.Row="0" Grid.Column="0" Width="24" Height="24" HorizontalAlignment="Left" Margin="2,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}">
+        <Grid.Resources>
+            <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/RarityGems.xaml"/>
+        </Grid.Resources>
+        <Rectangle Width="24" Height="24" HorizontalAlignment="Left" Margin="2,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding ElementName=ctrl, Path=ImageSource}" Stretch="Uniform"/>
+                <!--<ImageBrush ImageSource="{StaticResource CommonGem}" Stretch="Uniform"/>-->
+            </Rectangle.Fill>
+            <Rectangle.Style>
+                <Style TargetType="Rectangle">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.2"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Rectangle.Style>
+        </Rectangle>
+        <!--<Image Source="{StaticResource CommonGem}" Grid.Row="0" Grid.Column="0" Width="24" Height="24" HorizontalAlignment="Left" Margin="2,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}">
             <Image.Style>
                 <Style TargetType="Image">
                     <Style.Triggers>
@@ -15,7 +33,7 @@
                     </Style.Triggers>
                 </Style>
             </Image.Style>
-        </Image>
+        </Image>-->
         <Label Content="{Binding ElementName=ctrl, Path=Text}" Foreground="{Binding ElementName=ctrl, Path=Foreground}" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30,0,0,0" IsEnabled="{Binding ElementName=checkBox, Path=IsChecked}"/>
         <CheckBox Name="checkBox" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0"/>
     </Grid>

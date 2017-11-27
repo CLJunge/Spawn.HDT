@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
 
 namespace Spawn.HDT.DustUtility.UI.Components
 {
@@ -30,18 +29,6 @@ namespace Spawn.HDT.DustUtility.UI.Components
         // Using a DependencyProperty as the backing store for ImageSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSourceProperty =
             DependencyProperty.Register("ImageSource", typeof(ImageSource), typeof(CheckBoxWithImage), new PropertyMetadata(null));
-        #endregion
-
-        #region ImageEffect
-        public Effect ImageEffect
-        {
-            get { return (Effect)GetValue(ImageEffectProperty); }
-            set { SetValue(ImageEffectProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ImageEffect.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ImageEffectProperty =
-            DependencyProperty.Register("ImageEffect", typeof(Effect), typeof(CheckBoxWithImage), new PropertyMetadata());
         #endregion
         #endregion
 
