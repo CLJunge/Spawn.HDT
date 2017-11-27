@@ -47,7 +47,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             if (nCount == -1 && MaxCountInDecks == 0)
             {
-                nRet *= m_card.Count;
+                nRet *= Math.Abs(m_card.Count);
             }
             else if (nCount > -1)
             {
