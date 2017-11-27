@@ -60,7 +60,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Mana Cost" Binding="{Binding Path=ManaCost}"/>
+                <DataGridTextColumn Header="Mana" Binding="{Binding Path=ManaCost}"/>
                 <DataGridCheckBoxColumn Header="Golden" Binding="{Binding Path=Golden}"/>
                 <DataGridTextColumn Header="Dust" Binding="{Binding Path=Dust}"/>
                 <DataGridTextColumn Header="Rarity" Binding="{Binding Path=RarityString}">

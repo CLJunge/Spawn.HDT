@@ -82,7 +82,7 @@ namespace Spawn.HDT.DustUtility.Search
                     break;
 
                 case Item.ManaCost:
-                    strRet = "Mana Cost";
+                    strRet = "Mana";
                     break;
 
                 default:
