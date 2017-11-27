@@ -36,3 +36,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 * Save Interval: The interval for storing collection and decks.
 * Check For Updates: Checks if there is new release available on GitHub after opening the main window.
 ![Overlay](https://i.imgur.com/mfEGktM.png)
+
+
+### Credits
+* Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
