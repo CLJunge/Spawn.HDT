@@ -90,9 +90,15 @@ namespace Spawn.HDT.DustUtility.UI.Components
         {
             IInputElement element = dataGrid.InputHitTest(e.GetPosition(dataGrid));
 
-            if (element is System.Windows.Controls.ScrollViewer)
+            if (element is ScrollViewer)
             {
                 dataGrid.SelectedIndex = -1;
+            }
+            else if (element is Border)
+            {
+                int nIndex = ((element as Border).TemplatedParent as DataGridRow).GetIndex();
+
+                dataGrid.SelectedIndex = nIndex;
             }
             else { }
 
