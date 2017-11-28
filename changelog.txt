@@ -63,6 +63,10 @@
 - Updated UI (Icons for classes and sets)
 - Various fixes and improvements
 
-## v2.3
+## v2.2.1
+ - Fixed using negative card count in history window to calculate dust
  - Added date column to card history
+ - Added icons for window commands
+ - Updated gem icons
+ - Renamed Mana Cost column to Mana
 -----------------------------
