@@ -15,7 +15,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         public HistoryDialog(Account account)
             : this()
         {
-            //grid.GridItems.Clear();
+            grid.GridItems.Clear();
 
             grid.AddDateColumn();
 
