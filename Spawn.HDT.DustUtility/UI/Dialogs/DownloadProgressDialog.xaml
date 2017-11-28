@@ -46,7 +46,7 @@
             <Label Content="Please restart HDT in order to load the new version." Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 
-        <WrapPanel Grid.Row="12" HorizontalAlignment="Right" Margin="0,20,5,5">
+        <WrapPanel Grid.Row="12" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Name="button" Content="_Cancel" Click="OnClick" Width="75"/>
         </WrapPanel>
     </Grid>
