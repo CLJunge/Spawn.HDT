@@ -65,6 +65,7 @@
 
 ## v2.2.1
  - Fixed using negative card count in history window to calculate dust
+ - Fixed issue clicking on a row would not always select it
  - Added date column to card history
  - Added icons for window commands
  - Updated gem icons
