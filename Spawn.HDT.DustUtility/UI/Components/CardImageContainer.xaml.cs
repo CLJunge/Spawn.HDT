@@ -11,7 +11,14 @@ namespace Spawn.HDT.DustUtility.UI.Components
 {
     public partial class CardImageContainer
     {
-        #region CardWrapper DP
+        #region Member Variables
+        private ImageSource m_defaultImageSource;
+        private Thickness m_defaultImageMargin;
+        private Stream m_currentImageStream;
+        #endregion
+
+        #region DP
+        #region CardWrapper
         public CardWrapper CardWrapper
         {
             get { return GetValue(CardWrapperProperty) as CardWrapper; }
@@ -26,11 +33,6 @@ namespace Spawn.HDT.DustUtility.UI.Components
         public static readonly DependencyProperty CardWrapperProperty =
             DependencyProperty.Register("CardWrapper", typeof(CardWrapper), typeof(CardImageContainer), new PropertyMetadata(null));
         #endregion
-
-        #region Member Variables
-        private ImageSource m_defaultImageSource;
-        private Thickness m_defaultImageMargin;
-        private Stream m_currentImageStream;
         #endregion
 
         #region Custom Events

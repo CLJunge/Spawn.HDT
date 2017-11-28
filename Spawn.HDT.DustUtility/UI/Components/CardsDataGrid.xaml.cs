@@ -10,6 +10,10 @@ namespace Spawn.HDT.DustUtility.UI.Components
 {
     public partial class CardsDataGrid
     {
+        #region Member Variables
+        private bool m_blnDblClick;
+        #endregion
+
         #region DP
         #region GridItems DP
         public ObservableCollection<GridItem> GridItems
@@ -58,10 +62,6 @@ namespace Spawn.HDT.DustUtility.UI.Components
         public static readonly DependencyProperty ColoredCountColumnProperty =
             DependencyProperty.Register("ColoredCountColumn", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(false));
         #endregion
-        #endregion
-
-        #region Member Variables
-        private bool m_blnDblClick;
         #endregion
 
         #region Custom Events

@@ -6,6 +6,11 @@ namespace Spawn.HDT.DustUtility.UI.Components
 {
     public partial class CardsDataGrid
     {
+        #region Member Variables
+        private Point? m_startPosition;
+        private GridItem m_draggedItem;
+        #endregion
+
         #region Custom Events
         public event EventHandler<GridItemEventArgs> ItemDropped;
 
@@ -17,11 +22,6 @@ namespace Spawn.HDT.DustUtility.UI.Components
             }
             else { }
         }
-        #endregion
-
-        #region Member Variables
-        private Point? m_startPosition;
-        private GridItem m_draggedItem;
         #endregion
 
         #region Events

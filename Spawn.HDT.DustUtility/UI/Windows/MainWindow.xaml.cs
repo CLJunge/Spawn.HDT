@@ -14,7 +14,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class MainWindow
     {
-        #region Static
+        #region Static Stuff
         private static string s_strSearchHelpText;
 
         static MainWindow()

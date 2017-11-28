@@ -93,6 +93,9 @@
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
     <Compile Include="Search\Parameters.cs" />
+    <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
+      <DependentUpon>CardCountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
       <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\RarityGems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\CardCountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
