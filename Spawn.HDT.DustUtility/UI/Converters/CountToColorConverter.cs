@@ -12,7 +12,7 @@ namespace Spawn.HDT.DustUtility.UI.Converters
         {
             SolidColorBrush retVal = Brushes.Black;
 
-            if (values.Length == 2 && System.Convert.ToBoolean(values[1]))
+            if (values.Length == 2 && (values[1] is bool && System.Convert.ToBoolean(values[1])))
             {
                 try
                 {
