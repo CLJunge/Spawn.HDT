@@ -387,6 +387,8 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
+            Log.WriteLine($"Converted sort order string successfuly", LogType.Debug);
+
             Properties.Settings.Default.SortOrder = strSortOrder;
             Properties.Settings.Default.Version = 2;
             Properties.Settings.Default.Save();
@@ -409,24 +411,43 @@ namespace Spawn.HDT.DustUtility
 
             for (int i = 0; i < vFiles.Length; i++)
             {
-                List<CachedCard> lstHistory = FileManager.Load<List<CachedCard>>(vFiles[i]);
+                bool blnHasNewFormat = false;
 
-                List<CachedCardEx> lstNewHistory = new List<CachedCardEx>(lstHistory.Count);
-
-                for (int j = 0; j < lstHistory.Count; j++)
+                try
                 {
-                    CachedCard card = lstHistory[j];
+                    FileManager.Load<List<CachedCardEx>>(vFiles[i]);
 
-                    lstNewHistory.Add(new CachedCardEx
-                    {
-                        Id = card.Id,
-                        Count = card.Count,
-                        IsGolden = card.IsGolden,
-                        Timestamp = DateTime.Now
-                    });
+                    blnHasNewFormat = true;
+                }
+                catch
+                {
+                    Log.WriteLine($"New format not available, converting history file \"{vFiles[i]}\"", LogType.Debug);
                 }
 
-                FileManager.Write(vFiles[i], lstNewHistory);
+                if (!blnHasNewFormat)
+                {
+                    List<CachedCard> lstHistory = FileManager.Load<List<CachedCard>>(vFiles[i]);
+
+                    List<CachedCardEx> lstNewHistory = new List<CachedCardEx>(lstHistory.Count);
+
+                    for (int j = 0; j < lstHistory.Count; j++)
+                    {
+                        CachedCard card = lstHistory[j];
+
+                        lstNewHistory.Add(new CachedCardEx
+                        {
+                            Id = card.Id,
+                            Count = card.Count,
+                            IsGolden = card.IsGolden,
+                            Timestamp = DateTime.Now
+                        });
+                    }
+
+                    FileManager.Write(vFiles[i], lstNewHistory);
+
+                    Log.WriteLine($"Converted history file \"{vFiles[i]}\" successfuly", LogType.Debug);
+                }
+                else { }
             }
 
             Properties.Settings.Default.Version = 3;
