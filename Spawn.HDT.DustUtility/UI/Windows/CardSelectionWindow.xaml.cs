@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Spawn.HDT.DustUtility.UI
+namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class CardSelectionWindow
     {

@@ -10,7 +10,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Spawn.HDT.DustUtility.UI
+namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class MainWindow
     {
