@@ -9,6 +9,11 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class DecksInfoWindow
     {
+        #region Constants
+        private const string IncludeHeaderText = "Include (Search)";
+        private const string ExcludeHeaderText = "Exclude (Search)";
+        #endregion
+
         #region Member Variables
         private Account m_account;
         #endregion
@@ -83,16 +88,16 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 if ((bool)item.Tag)
                 {
-                    menuItem.Header = "Exclude (Search)";
+                    menuItem.Header = ExcludeHeaderText;
                 }
                 else
                 {
-                    menuItem.Header = "Include (Search)";
+                    menuItem.Header = IncludeHeaderText;
                 }
             }
             else
             {
-                menuItem.Header = "Exclude (Search)";
+                menuItem.Header = ExcludeHeaderText;
             }
         }
         #endregion
