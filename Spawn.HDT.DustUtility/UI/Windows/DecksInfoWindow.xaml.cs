@@ -40,7 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     HeroImage = GetHeroImage(deck),
                     Name = deck.Name,
                     CardCount = $"{deck.GetCardCount()}/30",
-                    Cost = deck.GetCraftingCost().ToString()
+                    Cost = $"{deck.GetCraftingCost().ToString()} Dust"
                 };
 
                 listView.Items.Add(item);

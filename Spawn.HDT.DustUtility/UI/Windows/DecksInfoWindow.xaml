@@ -7,7 +7,7 @@
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
         Title="Dust Utility - Decks" Height="450" Width="700" ResizeMode="CanMinimize">
     <Grid>
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -26,12 +26,12 @@
             <Label Content="Name" FontWeight="Bold" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Content="Card Count" FontWeight="Bold" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Content="Cost" FontWeight="Bold" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        </Grid>
+        </Grid>-->
 
-        <ListView Name="listView" HorizontalContentAlignment="Stretch" Grid.Row="1">
+        <ListView Name="listView" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="-5,0,-5,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -39,17 +39,15 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="{Binding HeroImage}" Width="39" Height="39" Grid.Column="0"/>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="66,0,66,0">
+                            <Image Source="{Binding HeroImage}" Width="39" Height="39" Grid.Column="0"/>
+                        </Border>
                         <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding CardCount}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding Cost}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <!--<ListView.Items>
-                <ui:ListViewDeckItem Name="Control Paladin" Cost="11100" HeroImage="/Spawn.HDT.DustUtility;component/Resources/Anduin.png" CardCount="30/30"/>
-                <ui:ListViewDeckItem Name="Control" Cost="12030" HeroImage="/Spawn.HDT.DustUtility;component/Resources/Thrall.png" CardCount="29/30"/>
-            </ListView.Items>-->
         </ListView>
     </Grid>
 </controls:MetroWindow>
