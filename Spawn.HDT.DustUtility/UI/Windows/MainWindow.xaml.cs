@@ -10,11 +10,11 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Spawn.HDT.DustUtility.UI
+namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class MainWindow
     {
-        #region Static
+        #region Static Stuff
         private static string s_strSearchHelpText;
 
         static MainWindow()

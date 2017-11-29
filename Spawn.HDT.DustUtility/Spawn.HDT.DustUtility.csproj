@@ -93,7 +93,10 @@
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
     <Compile Include="Search\Parameters.cs" />
-    <Compile Include="UI\CardSelectionWindow.xaml.cs">
+    <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
+      <DependentUpon>CardCountDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
       <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Components\CardImageContainer.xaml.cs">
@@ -124,7 +127,7 @@
     <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
       <DependentUpon>SortOrderDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\MainWindow.xaml.cs">
+    <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DustUtilityPlugin.cs" />
@@ -165,7 +168,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\CardSelectionWindow.xaml">
+    <Page Include="UI\Dialogs\CardCountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\CardSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,7 +208,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\MainWindow.xaml">
+    <Page Include="UI\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,7 +230,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="UI\MainWindow.Search.cs">
+    <Compile Include="UI\Windows\MainWindow.Search.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

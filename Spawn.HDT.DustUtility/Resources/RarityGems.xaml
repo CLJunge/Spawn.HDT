@@ -4,7 +4,7 @@
         <DrawingImage.Drawing>
             <DrawingGroup>
                 <DrawingGroup>
-                    <GeometryDrawing Brush="#FFFFFBE3" Geometry="F1 M18,26z M0,0z M9,25C13.87,17.803 17,13.301 17,8.925 17,4.547 13.421,1 9,1 4.579,1 1,4.547 1,8.925 1,13.301 4.13,17.803 9,25z">
+                    <GeometryDrawing Brush="#FFFFFDF2" Geometry="F1 M18,26z M0,0z M9,25C13.87,17.803 17,13.301 17,8.925 17,4.547 13.421,1 9,1 4.579,1 1,4.547 1,8.925 1,13.301 4.13,17.803 9,25z">
                         <GeometryDrawing.Pen>
                             <Pen Brush="#FF747474" Thickness="0.5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" MiterLimit="4" />
                         </GeometryDrawing.Pen>

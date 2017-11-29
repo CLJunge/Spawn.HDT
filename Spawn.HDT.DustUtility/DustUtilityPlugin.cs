@@ -4,6 +4,7 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Dialogs;
+using Spawn.HDT.DustUtility.UI.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;

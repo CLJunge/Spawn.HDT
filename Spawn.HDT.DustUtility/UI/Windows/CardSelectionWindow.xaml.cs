@@ -1,12 +1,19 @@
 ﻿using MahApps.Metro.Controls.Dialogs;
-using System;
+using Spawn.HDT.DustUtility.UI.Dialogs;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace Spawn.HDT.DustUtility.UI
+namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class CardSelectionWindow
     {
+        #region Member Variables
+        private CustomDialog m_dialog;
+        private MetroDialogSettings m_dialogSettings;
+        private CardCountDialog m_cardCountDialog;
+        private GridItem m_currentItem;
+        #endregion
+
         #region DP
         #region DustAmount
         public int DustAmount
@@ -105,6 +112,13 @@ namespace Spawn.HDT.DustUtility.UI
             CurrentItems = new List<GridItem>();
 
             cardsGrid.GridItems.Clear();
+
+            m_dialogSettings = new MetroDialogSettings()
+            {
+                AnimateShow = true,
+                AnimateHide = true,
+                ColorScheme = MetroDialogColorScheme.Accented
+            };
         }
 
         public CardSelectionWindow(List<GridItem> savedItems)
@@ -125,35 +139,28 @@ namespace Spawn.HDT.DustUtility.UI
         #region OnCardsGridItemDropped
         private async void OnCardsGridItemDropped(object sender, GridItemEventArgs e)
         {
-            GridItem item = e.Item;
+            m_currentItem = e.Item;
 
-            if (item.Count > 1)
+            if (m_currentItem.Count > 1)
             {
-                string strResult = await this.ShowInputAsync(string.Empty, $"How many copies? ({item.Count} Max.)");
+                m_cardCountDialog = new CardCountDialog(e.Item.Name, e.Item.Count);
+                m_cardCountDialog.AcceptButton.Click += OnAcceptClick;
+                m_cardCountDialog.CancelButton.Click += OnCancelClick;
 
-                int nNewCount = -1;
+                m_dialog = new CustomDialog(this)
+                {
+                    Content = m_cardCountDialog
+                };
 
-                try
-                {
-                    nNewCount = Convert.ToInt32(strResult);
-                }
-                catch
-                {
-                    //Invalid input
-                }
+                await this.ShowMetroDialogAsync(m_dialog, m_dialogSettings);
+            }
+            else if (e.Item.Count == 1)
+            {
+                CurrentItems.Add(m_currentItem);
 
-                if (nNewCount > 0)
-                {
-                    item.Count = Math.Min(nNewCount, item.Count);
-                    item.Dust = item.Tag.GetDustValue(item.Count);
-                }
-                else { }
+                AddItem(m_currentItem);
             }
             else { }
-
-            CurrentItems.Add(item);
-
-            AddItem(item);
         }
         #endregion
 
@@ -169,6 +176,35 @@ namespace Spawn.HDT.DustUtility.UI
         {
             ClearItems();
         }
+        #endregion
+
+        #region CardCountDialog Events
+        #region OnAcceptClick
+        private void OnAcceptClick(object sender, RoutedEventArgs e)
+        {
+            if (m_cardCountDialog.NumericUpDownCtrl.Value > 0)
+            {
+                int nNewCount = System.Convert.ToInt32(m_cardCountDialog.NumericUpDownCtrl.Value.Value);
+
+                m_currentItem.Count = nNewCount;
+                m_currentItem.Dust = m_currentItem.Tag.GetDustValue(nNewCount);
+
+                CurrentItems.Add(m_currentItem);
+
+                AddItem(m_currentItem);
+            }
+            else { }
+
+            this.HideMetroDialogAsync(m_dialog, m_dialogSettings);
+        }
+        #endregion
+
+        #region OnCancelClick
+        private void OnCancelClick(object sender, RoutedEventArgs e)
+        {
+            this.HideMetroDialogAsync(m_dialog, m_dialogSettings);
+        }
+        #endregion
         #endregion
         #endregion
 
