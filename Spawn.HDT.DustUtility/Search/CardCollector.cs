@@ -271,7 +271,7 @@ namespace Spawn.HDT.DustUtility.Search
 
                     for (int j = 0; j < lstDecks.Count; j++)
                     {
-                        if (lstDecks[j].ContainsCard(card.Id))
+                        if (!m_account.IsDeckExcluded(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
                         {
                             Card c = lstDecks[j].GetCard(card.Id);
 

@@ -29,6 +29,13 @@
         </Grid>-->
 
         <ListView Name="listView" HorizontalContentAlignment="Stretch">
+            <ListView.Resources>
+                <ContextMenu x:Key="contextMenu">
+                    <ContextMenu.Items>
+                        <MenuItem Name="contextMenuItem" Header="Exclude (Search)" Click="OnMenuItemClick"/>
+                    </ContextMenu.Items>
+                </ContextMenu>
+            </ListView.Resources>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="-5,0,-5,0">
@@ -48,6 +55,12 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
+                    <EventSetter Event="ContextMenuOpening" Handler="OnContextMenuOpening"/>
+                </Style>
+            </ListView.ItemContainerStyle>
         </ListView>
     </Grid>
 </controls:MetroWindow>

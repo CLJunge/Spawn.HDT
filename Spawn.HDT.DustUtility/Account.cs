@@ -22,6 +22,10 @@ namespace Spawn.HDT.DustUtility
         #endregion
         #endregion
 
+        #region Member Variables
+        private List<long> m_lstExcludedDecks;
+        #endregion
+
         #region Properties
         #region BattleTag
         public BattleTag BattleTag { get; }
@@ -66,6 +70,8 @@ namespace Spawn.HDT.DustUtility
 
                 DisplayString = string.Empty;
             }
+
+            m_lstExcludedDecks = new List<long>();
         }
         #endregion
 
@@ -118,6 +124,35 @@ namespace Spawn.HDT.DustUtility
             else { }
 
             return lstRet;
+        }
+        #endregion
+
+        #region ExcludeDeck
+        public void ExcludeDeck(long nDeckId)
+        {
+            if (!IsDeckExcluded(nDeckId))
+            {
+                m_lstExcludedDecks.Add(nDeckId);
+            }
+            else { }
+        }
+        #endregion
+
+        #region IncludeDeck
+        public void IncludeDeck(long nDeckId)
+        {
+            if (IsDeckExcluded(nDeckId))
+            {
+                m_lstExcludedDecks.Remove(nDeckId);
+            }
+            else { }
+        }
+        #endregion
+
+        #region IsDeckExcluded
+        public bool IsDeckExcluded(long nDeckId)
+        {
+            return m_lstExcludedDecks.Contains(nDeckId);
         }
         #endregion
 
