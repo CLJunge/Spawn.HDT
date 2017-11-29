@@ -53,22 +53,6 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             Close();
         }
         #endregion
-        #endregion
-
-        #region UpdateProgressBarAsync
-        public async Task UpdateProgressBarAsync(int nValue)
-        {
-            progressBar.Value = nValue;
-
-            if (progressBar.Value == 100)
-            {
-                await Task.Delay(1000);
-
-                UpdateUI();
-            }
-            else { }
-        }
-        #endregion
 
         #region OnDownloadFinished
         private void OnDownloadFinished(object sender, System.Net.DownloadDataCompletedEventArgs e)
@@ -92,6 +76,22 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             ZipFile.ExtractToDirectory(strPath, strPluginDir);
 
             File.Delete(strPath);
+        }
+        #endregion
+        #endregion
+
+        #region UpdateProgressBarAsync
+        public async Task UpdateProgressBarAsync(int nValue)
+        {
+            progressBar.Value = nValue;
+
+            if (progressBar.Value == 100)
+            {
+                await Task.Delay(1000);
+
+                UpdateUI();
+            }
+            else { }
         }
         #endregion
 
