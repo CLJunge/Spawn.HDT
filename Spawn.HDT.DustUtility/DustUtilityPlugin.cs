@@ -131,7 +131,7 @@ namespace Spawn.HDT.DustUtility
         {
             OfflineMode = !Core.Game.IsRunning && Settings.OfflineMode;
 
-            if (Core.Game.IsRunning && !Cache.TimerEnabled)
+            if (Settings.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
             }
