@@ -8,7 +8,7 @@
         xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip" GlowBrush="Black" Title="Dust Utility"
-        Height="450" Width="850" MinHeight="425" MinWidth="700"
+        Height="450" Width="950" MinHeight="425" MinWidth="800"
         Loaded="OnWindowLoaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ui:SearchResultContainer x:Key="searchResult"/>

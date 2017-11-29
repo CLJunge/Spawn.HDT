@@ -1,4 +1,5 @@
 ﻿using HearthMirror.Objects;
+using Spawn.HDT.DustUtility.UI.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
@@ -49,7 +50,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     HeroImage = GetHeroImage(deck),
                     Name = deck.Name,
                     CardCount = $"{deck.GetCardCount()}/30",
-                    Cost = $"{deck.GetCraftingCost().ToString()} Dust"
+                    Cost = $"{deck.GetCraftingCost().ToString()} Dust",
+                    Tag = deck
                 };
 
                 listView.Items.Add(deckItem);
@@ -117,6 +119,26 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     }
                     else { }
                 }
+            }
+            else { }
+        }
+        #endregion
+
+        #region OnListViewItemMouseDoubleClick
+        private void OnListViewItemMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (listView.SelectedItem != null)
+            {
+                if ((listView.SelectedItem as ListViewDeckItem).Tag is Deck deck)
+                {
+                    DeckListDialog dialog = new DeckListDialog(deck)
+                    {
+                        Owner = this
+                    };
+
+                    dialog.Show();
+                }
+                else { }
             }
             else { }
         }

@@ -96,6 +96,9 @@
     <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
       <DependentUpon>CardCountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DeckListDialog.xaml.cs">
+      <DependentUpon>DeckListDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\ListViewDeckItem.cs" />
     <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
       <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
@@ -173,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\CardCountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\DeckListDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -24,6 +24,10 @@ namespace Spawn.HDT.DustUtility.UI
         #region Cost
         public string Cost { get; set; }
         #endregion
+
+        #region Tag
+        public object Tag { get; set; }
+        #endregion
         #endregion
     }
 }

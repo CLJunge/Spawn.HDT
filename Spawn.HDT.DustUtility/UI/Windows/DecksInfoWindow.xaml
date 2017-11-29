@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
-        Title="Dust Utility - Decks" Height="450" Width="700" ResizeMode="CanMinimize">
+        Title="Dust Utility - Decks" Height="450" Width="700" MinHeight="450" MinWidth="700" MaxWidth="700" ResizeMode="CanResize">
     <Grid>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -28,7 +28,7 @@
             <Label Content="Cost" FontWeight="Bold" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>-->
 
-        <ListView Name="listView" HorizontalContentAlignment="Stretch">
+        <ListView Name="listView" SelectionMode="Single" HorizontalContentAlignment="Stretch">
             <ListView.Resources>
                 <ContextMenu x:Key="contextMenu">
                     <ContextMenu.Items>
@@ -59,6 +59,7 @@
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
                     <EventSetter Event="ContextMenuOpening" Handler="OnContextMenuOpening"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="OnListViewItemMouseDoubleClick"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
