@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
-        mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner"
-        Title="Dust Utility - Decks" Height="450" Width="700">
+        mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
+        Title="Dust Utility - Decks" Height="450" Width="700" ResizeMode="CanMinimize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -29,7 +28,7 @@
             <Label Content="Cost" FontWeight="Bold" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 
-        <ListView HorizontalContentAlignment="Stretch" Grid.Row="1">
+        <ListView Name="listView" HorizontalContentAlignment="Stretch" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -47,10 +46,10 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Items>
+            <!--<ListView.Items>
                 <ui:ListViewDeckItem Name="Control Paladin" Cost="11100" HeroImage="/Spawn.HDT.DustUtility;component/Resources/Anduin.png" CardCount="30/30"/>
                 <ui:ListViewDeckItem Name="Control" Cost="12030" HeroImage="/Spawn.HDT.DustUtility;component/Resources/Thrall.png" CardCount="29/30"/>
-            </ListView.Items>
+            </ListView.Items>-->
         </ListView>
     </Grid>
 </controls:MetroWindow>

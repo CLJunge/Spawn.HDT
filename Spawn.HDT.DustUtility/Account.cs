@@ -1,6 +1,10 @@
-﻿using HearthMirror.Objects;
+﻿using HearthMirror;
+using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
+using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Offline;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility
@@ -62,6 +66,58 @@ namespace Spawn.HDT.DustUtility
 
                 DisplayString = string.Empty;
             }
+        }
+        #endregion
+
+        #region LoadCollection
+        public List<Card> LoadCollection()
+        {
+            List<Card> lstRet = null;
+
+            Log.WriteLine("Loading collection...", LogType.Debug);
+
+            if (DustUtilityPlugin.OfflineMode)
+            {
+                lstRet = Cache.LoadCollection(this);
+            }
+            else
+            {
+                lstRet = Reflection.GetCollection();
+            }
+
+            if (lstRet != null)
+            {
+                Log.WriteLine("Loaded collection", LogType.Debug);
+            }
+            else { }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region LoadDecks
+        public List<Deck> LoadDecks()
+        {
+            List<Deck> lstRet = null;
+
+            Log.WriteLine("Loading decks...", LogType.Debug);
+
+            if (DustUtilityPlugin.OfflineMode)
+            {
+                lstRet = Cache.LoadDecks(this);
+            }
+            else
+            {
+                lstRet = Reflection.GetDecks();
+            }
+
+            if (lstRet != null)
+            {
+                Log.WriteLine("Loaded decks", LogType.Debug);
+            }
+            else { }
+
+            return lstRet;
         }
         #endregion
 

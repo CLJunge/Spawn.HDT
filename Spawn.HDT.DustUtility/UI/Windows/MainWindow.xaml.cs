@@ -50,14 +50,14 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             InitializeComponent();
         }
 
-        public MainWindow(DustUtilityPlugin plugin, Account account, bool offlineMode)
+        public MainWindow(DustUtilityPlugin plugin, Account account)
             : this()
         {
             m_plugin = plugin;
 
             m_account = account;
 
-            m_cardCollector = new CardCollector(this, m_account, offlineMode);
+            m_cardCollector = new CardCollector(this, m_account);
 
             if (Settings.SearchParameters == null)
             {
@@ -74,9 +74,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else { }
 
-            if (offlineMode)
+            if (DustUtilityPlugin.OfflineMode)
             {
-                Title = $"{Title} [OFFLINE MODE]";
+                Title = $"{Title} [OFFLINE]";
 
                 switchAccountButton.IsEnabled = m_plugin.HasMultipleAccounts;
             }
@@ -89,7 +89,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             else { }
 
             Log.WriteLine($"Account={m_account.AccountString}", LogType.Debug);
-            Log.WriteLine($"OfflineMode={offlineMode}", LogType.Debug);
+            Log.WriteLine($"OfflineMode={DustUtilityPlugin.OfflineMode}", LogType.Debug);
         }
         #endregion
 
@@ -275,6 +275,18 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             dialog.ShowDialog();
         }
         #endregion
+
+        #region OnDecksClick
+        private void OnDecksClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DecksInfoWindow window = new DecksInfoWindow(m_account)
+            {
+                Owner = this
+            };
+
+            window.Show();
+        }
+        #endregion
         #endregion
 
         #region UpdateUIState
@@ -297,15 +309,5 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             sortOrderButton.IsEnabled = blnIsEnabled;
         }
         #endregion
-
-        private void decksInfoButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            DecksInfoWindow window = new DecksInfoWindow
-            {
-                Owner = this
-            };
-
-            window.Show();
-        }
     }
 }

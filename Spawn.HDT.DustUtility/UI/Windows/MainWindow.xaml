@@ -20,7 +20,7 @@
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </controls:WindowCommands.Resources>
             <StackPanel Orientation="Horizontal">
-                <Button Name="decksInfoButton" Content="DECKS" Click="decksInfoButton_Click"/>
+                <Button Name="decksInfoButton" Content="DECKS..." Click="OnDecksClick"/>
                 <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20">
