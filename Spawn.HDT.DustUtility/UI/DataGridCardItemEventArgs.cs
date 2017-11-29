@@ -2,14 +2,14 @@
 
 namespace Spawn.HDT.DustUtility.UI
 {
-    public class GridItemEventArgs : EventArgs
+    public class DataGridCardItemEventArgs : EventArgs
     {
         #region Properties
-        public GridItem Item { get; }
+        public DataGridCardItem Item { get; }
         #endregion
 
         #region Ctor
-        public GridItemEventArgs(GridItem item)
+        public DataGridCardItemEventArgs(DataGridCardItem item)
         {
             Item = item;
         }

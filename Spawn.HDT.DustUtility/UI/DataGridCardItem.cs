@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace Spawn.HDT.DustUtility.UI
 {
     [DebuggerDisplay("{Name} ({Count})")]
-    public class GridItem
+    public class DataGridCardItem
     {
         #region Properties
         #region Count
@@ -55,9 +55,9 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region CreateCopy
-        public GridItem CreateCopy()
+        public DataGridCardItem CreateCopy()
         {
-            return new GridItem
+            return new DataGridCardItem
             {
                 Count = Count,
                 Name = Name,
@@ -75,9 +75,9 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region [STATIC] FromCardWrapper
-        public static GridItem FromCardWrapper(CardWrapper wrapper)
+        public static DataGridCardItem FromCardWrapper(CardWrapper wrapper)
         {
-            return new GridItem()
+            return new DataGridCardItem()
             {
                 Count = wrapper.Count,
                 Dust = wrapper.GetDustValue(),
@@ -96,16 +96,16 @@ namespace Spawn.HDT.DustUtility.UI
     }
 
     [DebuggerDisplay("{Name} ({Count})")]
-    public class GridItemEx : GridItem
+    public class DataGridCardItemEx : DataGridCardItem
     {
         #region Properties
         public DateTime Timestamp { get; set; }
         #endregion
 
         #region CreateCopy
-        public new GridItemEx CreateCopy()
+        public new DataGridCardItemEx CreateCopy()
         {
-            return new GridItemEx
+            return new DataGridCardItemEx
             {
                 Count = Count,
                 Name = Name,
@@ -124,9 +124,9 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region [STATIC] FromCardWrapperEx
-        public static GridItemEx FromCardWrapperEx(CardWrapperEx wrapper)
+        public static DataGridCardItemEx FromCardWrapperEx(CardWrapperEx wrapper)
         {
-            return new GridItemEx()
+            return new DataGridCardItemEx()
             {
                 Count = wrapper.Count,
                 Dust = wrapper.GetDustValue(),

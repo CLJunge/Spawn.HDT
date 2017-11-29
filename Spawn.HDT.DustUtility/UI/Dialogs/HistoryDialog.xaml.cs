@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
             for (int i = 0; i < lstHistory.Count; i++)
             {
-                grid.GridItems.Add(GridItemEx.FromCardWrapperEx(new Search.CardWrapperEx(lstHistory[i])));
+                grid.GridItems.Add(DataGridCardItemEx.FromCardWrapperEx(new Search.CardWrapperEx(lstHistory[i])));
             }
 
             Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);

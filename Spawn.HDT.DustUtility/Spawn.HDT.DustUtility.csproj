@@ -96,6 +96,7 @@
     <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
       <DependentUpon>CardCountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ListViewDeckItem.cs" />
     <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
       <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
     </Compile>
@@ -118,7 +119,7 @@
     <Compile Include="UI\Dialogs\DownloadProgressDialog.xaml.cs">
       <DependentUpon>DownloadProgressDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\GridItemEventArgs.cs" />
+    <Compile Include="UI\DataGridCardItemEventArgs.cs" />
     <Compile Include="UI\SearchResultContainer.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml.cs">
@@ -127,12 +128,15 @@
     <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
       <DependentUpon>SortOrderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Windows\DecksInfoWindow.xaml.cs">
+      <DependentUpon>DecksInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="UI\GridItem.cs" />
+    <Compile Include="UI\DataGridCardItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -208,6 +212,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Windows\DecksInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +247,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Anduin.png" />
+    <Resource Include="Resources\Garrosh.png" />
+    <Resource Include="Resources\Gul%27dan.png" />
+    <Resource Include="Resources\Jaina.png" />
+    <Resource Include="Resources\Malfurion.png" />
+    <Resource Include="Resources\Rexxar.png" />
+    <Resource Include="Resources\Thrall.png" />
+    <Resource Include="Resources\Uther.png" />
+    <Resource Include="Resources\Valeera.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

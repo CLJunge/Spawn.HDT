@@ -38,7 +38,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private Account m_account;
 
         private CardSelectionWindow m_selectionWindow;
-        private List<GridItem> m_lstSavedSelection;
+        private List<DataGridCardItem> m_lstSavedSelection;
 
         private CardCollector m_cardCollector;
         private Parameters m_parameters;
@@ -201,7 +201,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<GridItem>())
+                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<DataGridCardItem>())
                 {
                     Owner = this
                 };
@@ -297,5 +297,15 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             sortOrderButton.IsEnabled = blnIsEnabled;
         }
         #endregion
+
+        private void decksInfoButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DecksInfoWindow window = new DecksInfoWindow
+            {
+                Owner = this
+            };
+
+            window.Show();
+        }
     }
 }
