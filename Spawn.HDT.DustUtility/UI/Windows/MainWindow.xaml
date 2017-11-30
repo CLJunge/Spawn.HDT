@@ -19,8 +19,7 @@
             <controls:WindowCommands.Resources>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </controls:WindowCommands.Resources>
-            <StackPanel Orientation="Horizontal">
-                <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
+            <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
@@ -50,17 +49,16 @@
                         <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Click="OnTotalDustClick">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Width="18" Height="18">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{StaticResource CoinsIcon}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="COLLECTION VALUE" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+            <Button Click="OnTotalDustClick">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="18" Height="18">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{StaticResource CoinsIcon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="COLLECTION VALUE" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
 
