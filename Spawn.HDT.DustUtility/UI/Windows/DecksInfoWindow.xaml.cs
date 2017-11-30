@@ -11,6 +11,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
     public partial class DecksInfoWindow
     {
         #region Constants
+        private int ToggleMenuItemIndex = 2;
         private const string IncludeHeaderText = "Include (Search)";
         private const string ExcludeHeaderText = "Exclude (Search)";
         #endregion
@@ -59,8 +60,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         }
         #endregion
 
-        #region OnMenuItemClick
-        private void OnMenuItemClick(object sender, System.Windows.RoutedEventArgs e)
+        #region OnToggleDeckMenuItemClick
+        private void OnToggleDeckMenuItemClick(object sender, System.Windows.RoutedEventArgs e)
         {
             ListViewItem item = GetListViewItem();
 
@@ -79,10 +80,17 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         }
         #endregion
 
+        #region OnShowDeckListMenuItemClick
+        private void OnShowDeckListMenuItemClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OpenDeckListDialog();
+        }
+        #endregion
+
         #region OnContextMenuOpening
         private void OnContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-            MenuItem menuItem = GetContextMenuItem();
+            MenuItem menuItem = GetContextMenuItem(ToggleMenuItemIndex);
 
             ListViewItem item = GetListViewItem();
 
@@ -127,20 +135,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnListViewItemMouseDoubleClick
         private void OnListViewItemMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (listView.SelectedItem != null)
-            {
-                if ((listView.SelectedItem as ListViewDeckItem).Tag is Deck deck)
-                {
-                    DeckListDialog dialog = new DeckListDialog(deck)
-                    {
-                        Owner = this
-                    };
-
-                    dialog.Show();
-                }
-                else { }
-            }
-            else { }
+            OpenDeckListDialog();
         }
         #endregion
         #endregion
@@ -207,11 +202,11 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region GetContextMenuItem
-        private MenuItem GetContextMenuItem()
+        private MenuItem GetContextMenuItem(int nIndex)
         {
             ContextMenu contextMenu = listView.Resources["contextMenu"] as ContextMenu;
 
-            return contextMenu.Items.GetItemAt(0) as MenuItem;
+            return contextMenu.Items.GetItemAt(nIndex) as MenuItem;
         }
         #endregion
 
@@ -232,6 +227,26 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                     item.Tag = true;
                 }
+            }
+            else { }
+        }
+        #endregion
+
+        #region OpenDeckListDialog
+        private void OpenDeckListDialog()
+        {
+            if (listView.SelectedItem != null)
+            {
+                if ((listView.SelectedItem as ListViewDeckItem).Tag is Deck deck)
+                {
+                    DeckListDialog dialog = new DeckListDialog(deck)
+                    {
+                        Owner = this
+                    };
+
+                    dialog.Show();
+                }
+                else { }
             }
             else { }
         }
