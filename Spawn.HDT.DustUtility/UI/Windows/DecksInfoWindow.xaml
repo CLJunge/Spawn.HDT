@@ -32,7 +32,9 @@
             <ListView.Resources>
                 <ContextMenu x:Key="contextMenu">
                     <ContextMenu.Items>
-                        <MenuItem Name="contextMenuItem" Header="Exclude (Search)" Click="OnMenuItemClick"/>
+                        <MenuItem Header="Show deck list" Click="OnShowDeckListMenuItemClick"/>
+                        <Separator/>
+                        <MenuItem Name="toggleDeckMenuItem" Header="Exclude (Search)" Click="OnToggleDeckMenuItemClick"/>
                     </ContextMenu.Items>
                 </ContextMenu>
             </ListView.Resources>
