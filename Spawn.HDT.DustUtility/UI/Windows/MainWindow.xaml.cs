@@ -74,7 +74,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else { }
 
-            if (DustUtilityPlugin.OfflineMode)
+            if (DustUtilityPlugin.IsOffline)
             {
                 Title = $"{Title} [OFFLINE]";
 
@@ -89,7 +89,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             else { }
 
             Log.WriteLine($"Account={m_account.AccountString}", LogType.Debug);
-            Log.WriteLine($"OfflineMode={DustUtilityPlugin.OfflineMode}", LogType.Debug);
+            Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
         }
         #endregion
 

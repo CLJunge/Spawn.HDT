@@ -82,7 +82,7 @@ namespace Spawn.HDT.DustUtility
 
             Log.WriteLine("Loading collection...", LogType.Debug);
 
-            if (DustUtilityPlugin.OfflineMode)
+            if (DustUtilityPlugin.IsOffline)
             {
                 lstRet = Cache.LoadCollection(this);
             }
@@ -108,7 +108,7 @@ namespace Spawn.HDT.DustUtility
 
             Log.WriteLine("Loading decks...", LogType.Debug);
 
-            if (DustUtilityPlugin.OfflineMode)
+            if (DustUtilityPlugin.IsOffline)
             {
                 lstRet = Cache.LoadDecks(this);
             }

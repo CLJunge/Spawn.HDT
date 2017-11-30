@@ -18,7 +18,7 @@ namespace Spawn.HDT.DustUtility
     {
         #region Static Variables
         public static string DataDirectory => Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
-        public static bool OfflineMode { get; private set; }
+        public static bool IsOffline { get; private set; }
         #endregion
 
         #region Member Variables
@@ -129,7 +129,7 @@ namespace Spawn.HDT.DustUtility
         #region OnUpdate
         public void OnUpdate()
         {
-            OfflineMode = !Core.Game.IsRunning && Settings.OfflineMode;
+            IsOffline = !Core.Game.IsRunning && Settings.OfflineMode;
 
             if (Settings.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
