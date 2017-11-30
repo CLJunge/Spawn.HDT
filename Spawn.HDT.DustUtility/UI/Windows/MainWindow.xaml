@@ -49,14 +49,14 @@
                         <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-            <Button Click="OnTotalDustClick">
+            <Button Click="OnCollectionInfoClick">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{StaticResource CoinsIcon}" />
+                            <ImageBrush ImageSource="{StaticResource InfoIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock Text="COLLECTION VALUE" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Text="COLLECTION INFO..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
         </controls:WindowCommands>

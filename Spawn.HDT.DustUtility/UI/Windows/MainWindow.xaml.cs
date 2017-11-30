@@ -155,10 +155,17 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         }
         #endregion
 
-        #region OnTotalDustClick
-        private async void OnTotalDustClick(object sender, System.Windows.RoutedEventArgs e)
+        #region OnCollectionInfoClick
+        private void OnCollectionInfoClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
+            //await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
+
+            CollectionInfoWindow window = new CollectionInfoWindow(m_account)
+            {
+                Owner = this
+            };
+
+            window.Show();
         }
         #endregion
 

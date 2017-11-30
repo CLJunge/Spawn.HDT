@@ -131,6 +131,9 @@
     <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
       <DependentUpon>SortOrderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Windows\CollectionInfoWindow.xaml.cs">
+      <DependentUpon>CollectionInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\DecksInfoWindow.xaml.cs">
       <DependentUpon>DecksInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\SortOrderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\CollectionInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
