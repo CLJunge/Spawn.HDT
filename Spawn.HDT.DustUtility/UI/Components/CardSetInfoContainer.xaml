@@ -36,7 +36,7 @@
 
             <Image Source="{Binding Logo}" Stretch="Uniform" Grid.ColumnSpan="2" Height="175" Margin="0,-27,0,0"/>
 
-            <local:OutlinedTextBlock Text="{Binding TotalCount, Converter={StaticResource totalCountConverter}}" Fill="Black" Stroke="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding TotalCount, Converter={StaticResource totalCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
             <local:OutlinedTextBlock Text="{Binding CommonsCount, Converter={StaticResource commonsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <local:OutlinedTextBlock Text="{Binding EpicsCount, Converter={StaticResource epicsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>

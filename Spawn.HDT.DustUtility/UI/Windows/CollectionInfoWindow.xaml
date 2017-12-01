@@ -8,7 +8,7 @@
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
         Title="Dust Utility - Collection" Height="450" Width="525" MinHeight="450" MinWidth="525" MaxWidth="525" ResizeMode="CanResize">
     <Grid>
-        <ListView HorizontalContentAlignment="Stretch">
+        <ListView Name="listView" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <components:CardSetInfoContainer Margin="0,0,0,4"/>

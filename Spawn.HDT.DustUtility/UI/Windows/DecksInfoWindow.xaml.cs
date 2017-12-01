@@ -148,39 +148,39 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             switch (deck.Hero.Substring(0, 7))
             {
                 case "HERO_01": //Warrior
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Garrosh.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_garrosh.png";
                     break;
 
                 case "HERO_02": //Shaman
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Thrall.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_thrall.png";
                     break;
 
                 case "HERO_03": //Rogue
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Valeera.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_valeera.png";
                     break;
 
                 case "HERO_04": //Paladin
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Uther.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_uther.png";
                     break;
 
                 case "HERO_05": //Hunter
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Rexxar.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_rexxar.png";
                     break;
 
                 case "HERO_06": //Druid
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Malfurion.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_malfurion.png";
                     break;
 
                 case "HERO_07": //Warlock
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Gul'dan.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_guldan.png";
                     break;
 
                 case "HERO_08": //Mage
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Jaina.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_jaina.png";
                     break;
 
                 case "HERO_09": //Priest
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Anduin.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hero_anduin.png";
                     break;
             }
 

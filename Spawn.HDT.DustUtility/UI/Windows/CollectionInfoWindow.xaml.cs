@@ -1,4 +1,5 @@
 ﻿using HearthDb.Enums;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -32,7 +33,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             List<CardSet> lstCardSets = new List<CardSet>(CardSets.All.Keys);
 
-            for (int i = 0; i < lstCardSets.Count; i++)
+            for (int i = 0; i < 1; i++)
             {
                 CardSet cardSet = lstCardSets[i];
 
@@ -49,9 +50,15 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region AddCardSet
         private void AddCardSet(CardSet cardSet)
         {
-            ListViewCardSetItem cardSetItem = new ListViewCardSetItem();
-
             InfoItem infoItem = Dictionary[cardSet];
+
+            ListViewCardSetItem cardSetItem = new ListViewCardSetItem
+            {
+                Logo = GetLogo(cardSet),
+                Banner = GetBanner(cardSet)
+            };
+
+            listView.Items.Add(cardSetItem);
         }
         #endregion
 
@@ -73,56 +80,125 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         }
         #endregion
 
-        #region GetBanner
-        public ImageSource GetBanner(CardSet cardSet)
+        #region GetLogo
+        public ImageSource GetLogo(CardSet cardSet)
         {
-            string strPath = string.Empty;
+            string strSource = string.Empty;
 
             switch (cardSet)
             {
                 case CardSet.EXPERT1:
-                    strPath = "";
+                case CardSet.HOF://TODO add own logo or readd card set names
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hearthstone_logo.png";
                     break;
 
                 case CardSet.GVG:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/goblins_logo.png";
                     break;
 
                 case CardSet.TGT:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/tournament_logo.png";
                     break;
 
                 case CardSet.OG:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/oldgods_logo.png";
                     break;
 
                 case CardSet.GANGS:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/gadgetzan_logo.png";
                     break;
 
                 case CardSet.UNGORO:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/ungoro_logo.png";
                     break;
 
                 case CardSet.ICECROWN:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/frozenthrone_logo.png";
                     break;
 
                 case CardSet.LOOTAPALOOZA:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/kobolds_logo.png";
                     break;
 
                 case CardSet.NAXX:
-                    strPath = "/Spawn.HDT.DustUtility;component/Resources/naxx_logo.png";
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/naxx_logo.png";
                     break;
 
                 case CardSet.BRM:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/mountain_logo.png";
                     break;
 
                 case CardSet.LOE:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/league_logo.png";
                     break;
 
                 case CardSet.KARA:
-                    break;
-
-                case CardSet.HOF:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/karazhan_logo.png";
                     break;
             }
 
-            return new BitmapImage(new System.Uri(strPath));
+            return new BitmapImage(new Uri(strSource, UriKind.Relative));
+        }
+        #endregion
+
+        #region GetBanner
+        public ImageSource GetBanner(CardSet cardSet)
+        {
+            string strSource = string.Empty;
+
+            switch (cardSet)
+            {
+                case CardSet.EXPERT1:
+                case CardSet.HOF://TODO add own banner or readd card set names
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hearthstone_banner.jpg";
+                    break;
+
+                case CardSet.GVG:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/goblins_banner.jpg";
+                    break;
+
+                case CardSet.TGT:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/tournament_banner.jpg";
+                    break;
+
+                case CardSet.OG:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/oldgods_banner.jpg";
+                    break;
+
+                case CardSet.GANGS:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/gadgetzan_banner.jpg";
+                    break;
+
+                case CardSet.UNGORO:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/ungoro_banner.jpg";
+                    break;
+
+                case CardSet.ICECROWN:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/frozenthrone_banner.jpg";
+                    break;
+
+                case CardSet.LOOTAPALOOZA:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/kobolds_banner.jpg";
+                    break;
+
+                case CardSet.NAXX:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/naxx_banner.jpg";
+                    break;
+
+                case CardSet.BRM:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/mountain_banner.jpg";
+                    break;
+
+                case CardSet.LOE:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/league_banner.jpg";
+                    break;
+
+                case CardSet.KARA:
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/karazhan_banner.jpg";
+                    break;
+            }
+
+            return new BitmapImage(new Uri(strSource, UriKind.Relative));
         }
         #endregion
     }
