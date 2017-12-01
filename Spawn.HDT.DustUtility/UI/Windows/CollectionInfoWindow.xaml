@@ -4,9 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
-        Title="Dust Utility - Collection" Height="450" Width="700" MinHeight="450" MinWidth="700" MaxWidth="700" ResizeMode="CanResize">
+        Title="Dust Utility - Collection" Height="450" Width="525" MinHeight="450" MinWidth="525" MaxWidth="525" ResizeMode="CanResize">
     <Grid>
-        
+        <ListView HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <components:CardSetInfoContainer Margin="0,0,0,4"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Items>
+                <Button/>
+                <Button/>
+            </ListView.Items>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </controls:MetroWindow>

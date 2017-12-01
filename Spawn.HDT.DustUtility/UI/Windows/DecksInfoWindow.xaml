@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
         Title="Dust Utility - Decks" Height="450" Width="700" MinHeight="450" MinWidth="700" MaxWidth="700" ResizeMode="CanResize">
     <Grid>
+        <Grid.Resources>
+            <converters:DustValueToStringConverter x:Key="dustConverter"/>
+            <converters:CardCountToStringConverter x:Key="cardCountConverter" MaxAmount="30"/>
+        </Grid.Resources>
+        
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
@@ -52,8 +58,8 @@
                             <Image Source="{Binding HeroImage}" Width="39" Height="39" Grid.Column="0"/>
                         </Border>
                         <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding CardCount}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        <TextBlock Text="{Binding Cost}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CardCount, Converter={StaticResource cardCountConverter}}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Cost, Converter={StaticResource dustConverter}}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

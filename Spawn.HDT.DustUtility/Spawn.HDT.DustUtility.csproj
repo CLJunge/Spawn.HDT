@@ -75,10 +75,15 @@
     <Compile Include="Account.cs" />
     <Compile Include="CardSets.cs" />
     <Compile Include="Offline\BackupManager.cs" />
+    <Compile Include="UI\Components\CardSetInfoContainer.xaml.cs">
+      <DependentUpon>CardSetInfoContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Components\CheckBoxWithImage.xaml.cs">
       <DependentUpon>CheckBoxWithImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Components\OutlinedTextBlock.cs" />
     <Compile Include="UI\Converters\CardClassToImageConverter.cs" />
+    <Compile Include="UI\Converters\CardCountToStringConverter.cs" />
     <Compile Include="UI\Converters\CardNameConverter.cs" />
     <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
     <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
     <Compile Include="Search\Parameters.cs" />
+    <Compile Include="UI\Converters\DustValueToStringConverter.cs" />
     <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
       <DependentUpon>CardCountDialog.xaml</DependentUpon>
     </Compile>
@@ -175,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\RarityGems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Components\CardSetInfoContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,6 +282,10 @@
     <Resource Include="Resources\Thrall.png" />
     <Resource Include="Resources\Uther.png" />
     <Resource Include="Resources\Valeera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\naxxramas_banner.jpg" />
+    <Resource Include="Resources\naxxramas_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

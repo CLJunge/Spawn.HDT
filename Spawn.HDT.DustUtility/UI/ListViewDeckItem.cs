@@ -18,11 +18,11 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region CardCount
-        public string CardCount { get; set; }
+        public int CardCount { get; set; }
         #endregion
 
         #region Cost
-        public string Cost { get; set; }
+        public int Cost { get; set; }
         #endregion
 
         #region Tag

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Spawn.HDT.DustUtility.UI.Components.CardSetInfoContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
+             xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
+             mc:Ignorable="d" Height="250" Width="500">
+    <UserControl.Resources>
+        <converters:DustValueToStringConverter x:Key="dustConverter"/>
+    </UserControl.Resources>
+    <Border BorderBrush="Black" BorderThickness="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="115"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/Spawn.HDT.DustUtility;component/Resources/naxxramas_banner.jpg"/>
+            </Grid.Background>
+
+            <Image Source="/Spawn.HDT.DustUtility;component/Resources/naxxramas_logo.png" Stretch="Uniform" Grid.ColumnSpan="2" Height="175" Margin="0,-27,0,0"/>
+
+            <!--<WrapPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Spawn.HDT.DustUtility;component/Resources/naxxramas_logo.png" Stretch="Uniform"/>
+                <local:OutlinedTextBlock Text="Naxxramas" Fill="White" StrokeThickness="2" FontSize="26" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                --><!--<TextBlock Text="Naxxramas" VerticalAlignment="Center" Margin="20,0,0,0"/>--><!--
+            </WrapPanel>-->
+
+            <!--<TextBlock Text="315/600 (53% completed)" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+            <local:OutlinedTextBlock Text="Total: 315/600 (53%)" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <!--<TextBlock Text="Common: 30/60" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Epic: 30/60" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Rare: 30/60" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Legendary: 30/60" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+            <local:OutlinedTextBlock Text="Common: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="Epic: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="Rare: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="Legendary: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <!--<TextBlock Text="{Binding DustValue, Converter={StaticResource dustConverter}}" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+            <local:OutlinedTextBlock Text="12020 Dust" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </Border>
+</UserControl>
