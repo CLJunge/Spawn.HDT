@@ -8,6 +8,13 @@
              mc:Ignorable="d" Height="250" Width="500">
     <UserControl.Resources>
         <converters:DustValueToStringConverter x:Key="dustConverter"/>
+        <converters:CardCountToStringConverter x:Key="totalCountConverter"/>
+        <converters:CardCountToStringConverter x:Key="commonsCountConverter"/>
+        <converters:CardCountToStringConverter x:Key="raresCountConverter"/>
+        <converters:CardCountToStringConverter x:Key="epicsCountConverter"/>
+        <converters:CardCountToStringConverter x:Key="legendariesCountConverter"/>
+        <!--Legendary: 30/60-->
+        <!--Total: 315/600 (53%)-->
     </UserControl.Resources>
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid>
@@ -24,31 +31,19 @@
             </Grid.RowDefinitions>
 
             <Grid.Background>
-                <ImageBrush ImageSource="/Spawn.HDT.DustUtility;component/Resources/naxxramas_banner.jpg"/>
+                <ImageBrush ImageSource="{Binding Banner}"/>
             </Grid.Background>
 
-            <Image Source="/Spawn.HDT.DustUtility;component/Resources/naxxramas_logo.png" Stretch="Uniform" Grid.ColumnSpan="2" Height="175" Margin="0,-27,0,0"/>
+            <Image Source="{Binding Logo}" Stretch="Uniform" Grid.ColumnSpan="2" Height="175" Margin="0,-27,0,0"/>
 
-            <!--<WrapPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Source="/Spawn.HDT.DustUtility;component/Resources/naxxramas_logo.png" Stretch="Uniform"/>
-                <local:OutlinedTextBlock Text="Naxxramas" Fill="White" StrokeThickness="2" FontSize="26" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                --><!--<TextBlock Text="Naxxramas" VerticalAlignment="Center" Margin="20,0,0,0"/>--><!--
-            </WrapPanel>-->
+            <local:OutlinedTextBlock Text="{Binding TotalCount, Converter={StaticResource totalCountConverter}}" Fill="Black" Stroke="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <!--<TextBlock Text="315/600 (53% completed)" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
-            <local:OutlinedTextBlock Text="Total: 315/600 (53%)" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding CommonsCount, Converter={StaticResource commonsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding EpicsCount, Converter={StaticResource epicsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding RaresCount, Converter={StaticResource raresCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding LegendariesCount, Converter={StaticResource legendariesCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <!--<TextBlock Text="Common: 30/60" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock Text="Epic: 30/60" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock Text="Rare: 30/60" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock Text="Legendary: 30/60" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
-            <local:OutlinedTextBlock Text="Common: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="Epic: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="Rare: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="Legendary: 30/60" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-            <!--<TextBlock Text="{Binding DustValue, Converter={StaticResource dustConverter}}" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
-            <local:OutlinedTextBlock Text="12020 Dust" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding DustValue, Converter={StaticResource dustConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
     </Border>
 </UserControl>

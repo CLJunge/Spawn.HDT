@@ -88,5 +88,83 @@ namespace Spawn.HDT.DustUtility
             public string Name { get; set; }
             public CardSet Value { get; set; }
         }
+
+        public static class Info
+        {
+            #region Properties
+            public static InfoItem Expert { get; }
+            public static InfoItem Goblins { get; }
+            public static InfoItem Tournament { get; }
+            public static InfoItem OldGods { get; }
+            public static InfoItem Gadgetzan { get; }
+            public static InfoItem Ungoro { get; }
+            public static InfoItem FrozenThrone { get; }
+            public static InfoItem Kobolds { get; }
+            public static InfoItem Naxx { get; }
+            public static InfoItem Mountain { get; }
+            public static InfoItem League { get; }
+            public static InfoItem Karazhan { get; }
+            public static InfoItem Hall { get; }
+
+            public static Dictionary<CardSet, InfoItem> Dictionary { get; }
+            #endregion
+
+            #region Ctor
+            static Info()
+            {
+                Expert = new InfoItem(182, 160, 74, 32);
+                Goblins = new InfoItem(80, 74, 52, 20);
+                Tournament = new InfoItem(98, 72, 54, 20);
+                OldGods = new InfoItem(100, 72, 54, 21);
+                Gadgetzan = new InfoItem(98, 72, 54, 20);
+                Ungoro = new InfoItem(98, 72, 54, 23);
+                FrozenThrone = new InfoItem(98, 72, 54, 23);
+                Kobolds = new InfoItem(30, 54, 32, 18);
+                Naxx = new InfoItem(36, 8, 4, 6);
+                Mountain = new InfoItem(30, 22, 0, 5);
+                League = new InfoItem(50, 26, 4, 5);
+                Karazhan = new InfoItem(54, 24, 2, 5);
+                Hall = new InfoItem(20, 20, 20, 20);//TODO get info
+
+                Dictionary = new Dictionary<CardSet, InfoItem>
+                {
+                    { CardSet.HOF, Hall },
+                    { CardSet.EXPERT1, Expert },
+                    { CardSet.GVG, Goblins },
+                    { CardSet.TGT, Tournament },
+                    { CardSet.OG, OldGods },
+                    { CardSet.GANGS, Gadgetzan },
+                    { CardSet.UNGORO, Ungoro },
+                    { CardSet.ICECROWN, FrozenThrone },
+                    { CardSet.LOOTAPALOOZA, Kobolds },
+                    { CardSet.NAXX, Naxx },
+                    { CardSet.BRM, Mountain },
+                    { CardSet.LOE, League },
+                    { CardSet.KARA, Karazhan }
+                };
+            }
+            #endregion
+
+            public class InfoItem
+            {
+                #region Properties
+                public int TotalCount => MaxCommonsCount + MaxRaresCount + MaxEpicsCount + MaxLegendariesCount;
+                public int MaxCommonsCount { get; private set; }
+                public int MaxRaresCount { get; private set; }
+                public int MaxEpicsCount { get; private set; }
+                public int MaxLegendariesCount { get; private set; }
+                #endregion
+
+                #region Ctor
+                public InfoItem(int maxCommonsCount, int maxRaresCount, int maxEpicsCount, int maxLegendariesCount)
+                {
+                    MaxCommonsCount = maxCommonsCount;
+                    MaxRaresCount = maxRaresCount;
+                    MaxEpicsCount = maxEpicsCount;
+                    MaxLegendariesCount = maxLegendariesCount;
+                }
+                #endregion
+            }
+        }
     }
 }
