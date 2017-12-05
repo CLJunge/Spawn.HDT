@@ -8,7 +8,7 @@
         xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" ResizeMode="CanResizeWithGrip" GlowBrush="Black" Title="Dust Utility"
-        Height="450" Width="850" MinHeight="425" MinWidth="700"
+        Height="450" Width="950" MinHeight="425" MinWidth="800"
         Loaded="OnWindowLoaded" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ui:SearchResultContainer x:Key="searchResult"/>
@@ -19,8 +19,7 @@
             <controls:WindowCommands.Resources>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </controls:WindowCommands.Resources>
-            <StackPanel Orientation="Horizontal">
-                <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
+            <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
@@ -40,17 +39,26 @@
                         <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-                <Button Click="OnTotalDustClick">
+                <Button Name="decksInfoButton" Click="OnDecksClick">
                     <StackPanel Orientation="Horizontal">
-                        <Rectangle Width="18" Height="18">
+                        <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{StaticResource CoinsIcon}" />
+                                <ImageBrush ImageSource="{StaticResource LayersIcon}" />
                             </Rectangle.Fill>
                         </Rectangle>
-                        <TextBlock Text="COLLECTION VALUE" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                     </StackPanel>
                 </Button>
-            </StackPanel>
+            <Button Click="OnCollectionInfoClick">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="18" Height="18">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{StaticResource InfoIcon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="COLLECTION INFO..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
 

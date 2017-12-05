@@ -75,10 +75,15 @@
     <Compile Include="Account.cs" />
     <Compile Include="CardSets.cs" />
     <Compile Include="Offline\BackupManager.cs" />
+    <Compile Include="UI\Components\CardSetInfoContainer.xaml.cs">
+      <DependentUpon>CardSetInfoContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Components\CheckBoxWithImage.xaml.cs">
       <DependentUpon>CheckBoxWithImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Components\OutlinedTextBlock.cs" />
     <Compile Include="UI\Converters\CardClassToImageConverter.cs" />
+    <Compile Include="UI\Converters\CardCountToStringConverter.cs" />
     <Compile Include="UI\Converters\CardNameConverter.cs" />
     <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
     <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
@@ -93,9 +98,15 @@
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
     <Compile Include="Search\Parameters.cs" />
+    <Compile Include="UI\Converters\DustValueToStringConverter.cs" />
     <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
       <DependentUpon>CardCountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\DeckListDialog.xaml.cs">
+      <DependentUpon>DeckListDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ListViewCardSetItem.cs" />
+    <Compile Include="UI\ListViewDeckItem.cs" />
     <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
       <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
     </Compile>
@@ -118,7 +129,7 @@
     <Compile Include="UI\Dialogs\DownloadProgressDialog.xaml.cs">
       <DependentUpon>DownloadProgressDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\GridItemEventArgs.cs" />
+    <Compile Include="UI\DataGridCardItemEventArgs.cs" />
     <Compile Include="UI\SearchResultContainer.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml.cs">
@@ -127,12 +138,18 @@
     <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
       <DependentUpon>SortOrderDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Windows\CollectionInfoWindow.xaml.cs">
+      <DependentUpon>CollectionInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Windows\DecksInfoWindow.xaml.cs">
+      <DependentUpon>DecksInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="UI\GridItem.cs" />
+    <Compile Include="UI\DataGridCardItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -168,7 +185,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Components\CardSetInfoContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Dialogs\CardCountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\DeckListDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +233,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Windows\CollectionInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\DecksInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +272,51 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hero_anduin.png" />
+    <Resource Include="Resources\hero_garrosh.png" />
+    <Resource Include="Resources\hero_guldan.png" />
+    <Resource Include="Resources\hero_jaina.png" />
+    <Resource Include="Resources\hero_malfurion.png" />
+    <Resource Include="Resources\hero_rexxar.png" />
+    <Resource Include="Resources\hero_thrall.png" />
+    <Resource Include="Resources\hero_uther.png" />
+    <Resource Include="Resources\hero_valeera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\naxx_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\frozenthrone_logo.png" />
+    <Resource Include="Resources\gadgetzan_logo.png" />
+    <Resource Include="Resources\goblins_logo.png" />
+    <Resource Include="Resources\karazhan_logo.png" />
+    <Resource Include="Resources\kobolds_logo.png" />
+    <Resource Include="Resources\league_logo.png" />
+    <Resource Include="Resources\mountain_logo.png" />
+    <Resource Include="Resources\oldgods_logo.png" />
+    <Resource Include="Resources\tournament_logo.png" />
+    <Resource Include="Resources\ungoro_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\frozenthrone_banner.jpg" />
+    <Resource Include="Resources\gadgetzan_banner.jpg" />
+    <Resource Include="Resources\goblins_banner.jpg" />
+    <Resource Include="Resources\hearthstone_logo.png" />
+    <Resource Include="Resources\karazhan_banner.jpg" />
+    <Resource Include="Resources\kobolds_banner.jpg" />
+    <Resource Include="Resources\league_banner.jpg" />
+    <Resource Include="Resources\mountain_banner.jpg" />
+    <Resource Include="Resources\oldgods_banner.jpg" />
+    <Resource Include="Resources\tournament_banner.jpg" />
+    <Resource Include="Resources\ungoro_banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\naxx_banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hearthstone_banner.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

@@ -8,17 +8,17 @@ namespace Spawn.HDT.DustUtility.UI.Components
     {
         #region Member Variables
         private Point? m_startPosition;
-        private GridItem m_draggedItem;
+        private DataGridCardItem m_draggedItem;
         #endregion
 
         #region Custom Events
-        public event EventHandler<GridItemEventArgs> ItemDropped;
+        public event EventHandler<DataGridCardItemEventArgs> ItemDropped;
 
-        private void OnItemDropped(GridItem item)
+        private void OnItemDropped(DataGridCardItem item)
         {
             if (ItemDropped != null)
             {
-                ItemDropped(this, new GridItemEventArgs(item));
+                ItemDropped(this, new DataGridCardItemEventArgs(item));
             }
             else { }
         }
@@ -41,7 +41,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
             {
                 if (m_draggedItem == null && dataGrid.SelectedIndex > -1)
                 {
-                    m_draggedItem = dataGrid.SelectedItem as GridItem;
+                    m_draggedItem = dataGrid.SelectedItem as DataGridCardItem;
                 }
                 else { }
 
@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
             if (e.Data.GetDataPresent("item"))
             {
-                GridItem item = (e.Data.GetData("item") as GridItem).CreateCopy();
+                DataGridCardItem item = (e.Data.GetData("item") as DataGridCardItem).CreateCopy();
 
                 System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
 

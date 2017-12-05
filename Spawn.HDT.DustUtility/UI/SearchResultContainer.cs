@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.UI
         private int m_nEpicsCount;
         private int m_nLegendariesCount;
         private int m_nTotalCount;
-        private ObservableCollection<GridItem> m_lstGridItems;
+        private ObservableCollection<DataGridCardItem> m_lstGridItems;
         #endregion
 
         #region Properties
@@ -90,7 +90,7 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region GridItems
-        public ObservableCollection<GridItem> GridItems
+        public ObservableCollection<DataGridCardItem> GridItems
         {
             get => m_lstGridItems;
             set => m_lstGridItems = value;
@@ -112,7 +112,7 @@ namespace Spawn.HDT.DustUtility.UI
         #region Ctor
         public SearchResultContainer()
         {
-            m_lstGridItems = new ObservableCollection<GridItem>();
+            m_lstGridItems = new ObservableCollection<DataGridCardItem>();
         }
         #endregion
 
@@ -140,11 +140,11 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region SetGridItems
-        public void SetGridItems(IEnumerable<GridItem> items)
+        public void SetGridItems(IEnumerable<DataGridCardItem> items)
         {
             m_lstGridItems.Clear();
 
-            List<GridItem> lstItems = new List<GridItem>(items);
+            List<DataGridCardItem> lstItems = new List<DataGridCardItem>(items);
 
             for (int i = 0; i < lstItems.Count; i++)
             {

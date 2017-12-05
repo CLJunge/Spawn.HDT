@@ -204,5 +204,71 @@ namespace Spawn.HDT.DustUtility
             return retVal;
         }
         #endregion
+
+        #region GetCraftingCost
+        public static int GetCraftingCost(this HearthMirror.Objects.Deck deck)
+        {
+            int nRet = 0;
+
+            for (int i = 0; i < deck.Cards.Count; i++)
+            {
+                int nCost = deck.Cards[i].GetCraftingCost();
+
+                nRet += nCost * deck.Cards[i].Count;
+            }
+
+            return nRet;
+        }
+
+        public static int GetCraftingCost(this HearthMirror.Objects.Card card)
+        {
+            int nRet = 0;
+
+            if (card != null)
+            {
+                Card c = Cards.All[card.Id];
+
+                if (c.Set != CardSet.CORE && !CardSets.NonCraftableCardIds.Contains(c.Id))
+                {
+                    switch (c.Rarity)
+                    {
+                        case Rarity.COMMON:
+                            nRet = (card.Premium ? 400 : 40);
+                            break;
+
+                        case Rarity.RARE:
+                            nRet = (card.Premium ? 800 : 100);
+                            break;
+
+                        case Rarity.EPIC:
+                            nRet = (card.Premium ? 1600 : 400);
+                            break;
+
+                        case Rarity.LEGENDARY:
+                            nRet = (card.Premium ? 3200 : 1600);
+                            break;
+                    }
+                }
+                else { }
+            }
+            else { }
+
+            return nRet;
+        }
+        #endregion
+
+        #region GetCardCount
+        public static int GetCardCount(this HearthMirror.Objects.Deck deck)
+        {
+            int nRet = 0;
+
+            for (int i = 0; i < deck.Cards.Count; i++)
+            {
+                nRet += deck.Cards[i].Count;
+            }
+
+            return nRet;
+        }
+        #endregion
     }
 }

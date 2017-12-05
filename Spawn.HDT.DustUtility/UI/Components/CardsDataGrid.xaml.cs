@@ -16,15 +16,15 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
         #region DP
         #region GridItems DP
-        public ObservableCollection<GridItem> GridItems
+        public ObservableCollection<DataGridCardItem> GridItems
         {
-            get { return GetValue(GridItemsProperty) as ObservableCollection<GridItem>; }
+            get { return GetValue(GridItemsProperty) as ObservableCollection<DataGridCardItem>; }
             set { SetValue(GridItemsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for GridItems.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GridItemsProperty =
-            DependencyProperty.Register("GridItems", typeof(ObservableCollection<GridItem>), typeof(CardsDataGrid), new PropertyMetadata(new ObservableCollection<GridItem>()));
+            DependencyProperty.Register("GridItems", typeof(ObservableCollection<DataGridCardItem>), typeof(CardsDataGrid), new PropertyMetadata(new ObservableCollection<DataGridCardItem>()));
         #endregion
 
         #region AllowDrag DP
@@ -65,7 +65,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
         #endregion
 
         #region Custom Events
-        public event EventHandler<GridItemEventArgs> RowDeleted;
+        public event EventHandler<DataGridCardItemEventArgs> RowDeleted;
         #endregion
 
         #region Ctor
@@ -126,7 +126,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
             System.Diagnostics.Debug.WriteLine($"Deleting row at index \"{nIndex}\"");
 
-            if (dataGrid.SelectedItem is GridItem)
+            if (dataGrid.SelectedItem is DataGridCardItem)
             {
                 //MetroWindow window = Window.GetWindow(this) as MetroWindow;
 
@@ -134,13 +134,13 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
                 //if (result == MessageDialogResult.Affirmative)
                 //{
-                GridItem item = dataGrid.SelectedItem as GridItem;
+                DataGridCardItem item = dataGrid.SelectedItem as DataGridCardItem;
 
                 GridItems.RemoveAt(nIndex);
 
                 if (RowDeleted != null)
                 {
-                    RowDeleted(this, new GridItemEventArgs(item));
+                    RowDeleted(this, new DataGridCardItemEventArgs(item));
                 }
                 else { }
                 //}
@@ -168,11 +168,11 @@ namespace Spawn.HDT.DustUtility.UI.Components
         #region OpenPopup
         private void OpenPopup()
         {
-            if (dataGrid.SelectedItem is GridItem)
+            if (dataGrid.SelectedItem is DataGridCardItem)
             {
                 cardImagePopup.IsOpen = true;
 
-                cardImageContainer.CardWrapper = (dataGrid.SelectedItem as GridItem).Tag;
+                cardImageContainer.CardWrapper = (dataGrid.SelectedItem as DataGridCardItem).Tag;
             }
             else { }
         }

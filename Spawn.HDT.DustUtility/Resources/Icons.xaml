@@ -35,4 +35,11 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    <DrawingImage x:Key="LayersIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M24,24z M0,0z M21.698,10.658L24,12 11.998,19 0,12 2.301,10.658 11.998,16.316 21.698,10.658z M11.998,21.315L2.301,15.657 1.77635683940025E-15,17 11.998,24 24,17 21.698,15.658 11.998,21.315z M24,7L11.998,-1.77635683940025E-15 0,7 11.998,14 24,7z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>
