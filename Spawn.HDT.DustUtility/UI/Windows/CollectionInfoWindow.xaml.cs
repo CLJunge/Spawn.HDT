@@ -58,8 +58,15 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 Logo = GetLogo(cardSet),
                 Banner = GetBanner(cardSet),
-                Name = CardSets.AllFullName[cardSet]
+                Name = CardSets.AllFullName[cardSet],
+                CommonsCount = GetCountForRarity(cardSet, Rarity.COMMON),
+                RaresCount = GetCountForRarity(cardSet, Rarity.RARE),
+                EpicsCount = GetCountForRarity(cardSet, Rarity.EPIC),
+                LegendariesCount = GetCountForRarity(cardSet, Rarity.LEGENDARY),
+                DustValue = GetDustValue(cardSet)
             };
+
+            cardSetItem.TotalCount = cardSetItem.CommonsCount + cardSetItem.RaresCount + cardSetItem.EpicsCount + cardSetItem.LegendariesCount;
 
             listView.Items.Add(cardSetItem);
         }
@@ -203,6 +210,43 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
 
             return new BitmapImage(new Uri(strSource, UriKind.Relative));
+        }
+        #endregion
+
+        #region GetCountForRarity
+        private int GetCountForRarity(CardSet cardSet, Rarity rarity)
+        {
+            int nRet = 0;
+
+            List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c =>
+            {
+                HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+
+                return card.Set == cardSet && card.Rarity == rarity;
+            });
+
+            for (int i = 0; i < lstChunk.Count; i++)
+            {
+                nRet += lstChunk[i].Count;
+            }
+
+            return nRet;
+        }
+        #endregion
+
+        #region GetDustValue
+        private int GetDustValue(CardSet cardSet)
+        {
+            int nRet = 0;
+
+            List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c => HearthDb.Cards.Collectible[c.Id].Set == cardSet);
+
+            for (int i = 0; i < lstChunk.Count; i++)
+            {
+                nRet += lstChunk[i].GetDustValue();
+            }
+
+            return nRet;
         }
         #endregion
     }
