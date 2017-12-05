@@ -6,7 +6,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
-        Title="Dust Utility - Collection" Height="450" Width="625" MinHeight="450" MinWidth="625" MaxWidth="625" ResizeMode="CanResize">
+        Title="Dust Utility - Collection" Height="450" Width="730" MinHeight="450" MinWidth="730" MaxWidth="730" ResizeMode="CanResize">
     <Grid>
         <ListView Name="listView" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>

@@ -243,9 +243,18 @@ namespace Spawn.HDT.DustUtility.Search
         #region GetTotalDustValueForAllCards
         public int GetTotalDustValueForAllCards()
         {
+            int nRet = 0;
+
             List<Card> lstCards = m_account.LoadCollection();
 
-            return lstCards.Sum(c => new CardWrapper(c).GetDustValue());
+            for (int i = 0; i < lstCards.Count; i++)
+            {
+                Card card = lstCards[i];
+
+                nRet += card.GetDustValue() * card.Count;
+            }
+
+            return nRet;
         }
         #endregion
 

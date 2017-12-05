@@ -1,4 +1,5 @@
-﻿using HearthDb.Enums;
+﻿using HearthDb;
+using HearthDb.Enums;
 using Spawn.HDT.DustUtility.UI.Components;
 using Spawn.HDT.DustUtility.UI.Converters;
 using System;
@@ -88,7 +89,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                 RaresCount = GetCountForRarity(cardSet, Rarity.RARE),
                 EpicsCount = GetCountForRarity(cardSet, Rarity.EPIC),
                 LegendariesCount = GetCountForRarity(cardSet, Rarity.LEGENDARY),
-                DustValue = GetDustValue(cardSet),
+                DustValue = GetDustValue(m_lstCollection, cardSet),
                 Tag = cardSet
             };
 
@@ -108,7 +109,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 blnRet = m_lstCollection.Find(c =>
                 {
-                    return HearthDb.Cards.All[c.Id].Set == cardSet;
+                    return Cards.All[c.Id].Set == cardSet;
                 }) != null;
             }
             else { }
@@ -261,15 +262,48 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region GetDustValue
-        private int GetDustValue(CardSet cardSet)
+        private int GetDustValue(List<HearthMirror.Objects.Card> lstCards, CardSet cardSet = CardSet.INVALID, Rarity rarity = Rarity.INVALID)
         {
             int nRet = 0;
 
-            List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c => HearthDb.Cards.Collectible[c.Id].Set == cardSet);
+            List<HearthMirror.Objects.Card> lstChunk = lstCards;
+
+            if (cardSet != CardSet.INVALID || rarity != Rarity.INVALID)
+            {
+                if (cardSet != CardSet.INVALID && rarity != Rarity.INVALID)
+                {
+                    lstChunk = lstCards.FindAll(c =>
+                    {
+                        Card card = Cards.Collectible[c.Id];
+
+                        return card.Set == cardSet && card.Rarity == rarity && !c.Premium;
+                    });
+                }
+                else if (cardSet != CardSet.INVALID)
+                {
+                    lstChunk = lstCards.FindAll(c =>
+                    {
+                        Card card = Cards.Collectible[c.Id];
+
+                        return card.Set == cardSet && !c.Premium;
+                    });
+                }
+                else if (rarity != Rarity.INVALID)
+                {
+                    lstChunk = lstCards.FindAll(c =>
+                    {
+                        Card card = Cards.Collectible[c.Id];
+
+                        return card.Rarity == rarity && !c.Premium;
+                    });
+                }
+                else { }
+            }
+            else { }
 
             for (int i = 0; i < lstChunk.Count; i++)
             {
-                nRet += lstChunk[i].GetDustValue();
+                nRet += lstChunk[i].GetDustValue() * lstChunk[i].Count;
             }
 
             return nRet;
@@ -279,9 +313,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region UpdateContainer
         private void UpdateContainer(CardSetInfoContainer container, ListViewCardSetItem item)
         {
-            CardSets.Info.InfoItem infoItem = CardSets.Info.Dictionary[(CardSet)item.Tag];
-            //Legendary: 30/60
-            //Total: 315/600 (53 %)
+            CardSet cardSet = (CardSet)item.Tag;
+            CardSets.Info.InfoItem infoItem = CardSets.Info.Dictionary[cardSet];
 
             //TotalCount
             CardCountToStringConverter totalCountConverter = GetResource<CardCountToStringConverter>(container, TotalCountConverterKey);
@@ -293,21 +326,25 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             CardCountToStringConverter commonsCountConverter = GetResource<CardCountToStringConverter>(container, CommonsCountConverterKey);
             commonsCountConverter.MaxAmount = infoItem.MaxCommonsCount;
             commonsCountConverter.Prefix = "Common:";
+            commonsCountConverter.Suffix = $"({GetDustValue(m_lstCollection, cardSet, Rarity.COMMON)} Dust)";
 
             //RaresCount
             CardCountToStringConverter raresCountConverter = GetResource<CardCountToStringConverter>(container, RaresCountConverterKey);
             raresCountConverter.MaxAmount = infoItem.MaxRaresCount;
             raresCountConverter.Prefix = "Rare:";
+            raresCountConverter.Suffix = $"({GetDustValue(m_lstCollection, cardSet, Rarity.RARE)} Dust)";
 
             //EpicsCount
             CardCountToStringConverter epicsCountConverter = GetResource<CardCountToStringConverter>(container, EpicsCountConverterKey);
             epicsCountConverter.MaxAmount = infoItem.MaxEpicsCount;
             epicsCountConverter.Prefix = "Epic:";
+            epicsCountConverter.Suffix = $"({GetDustValue(m_lstCollection, cardSet, Rarity.EPIC)} Dust)";
 
             //LegendariesCount
             CardCountToStringConverter legendariesCountConverter = GetResource<CardCountToStringConverter>(container, LegendariesCountConverterKey);
             legendariesCountConverter.MaxAmount = infoItem.MaxLegendariesCount;
             legendariesCountConverter.Prefix = "Legendary:";
+            legendariesCountConverter.Suffix = $"({GetDustValue(m_lstCollection, cardSet, Rarity.LEGENDARY)} Dust)";
         }
         #endregion
 

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
-             mc:Ignorable="d" Height="350" Width="600">
+             mc:Ignorable="d" Height="400" Width="700">
     <UserControl.Resources>
         <converters:DustValueToStringConverter x:Key="dustConverter"/>
         <converters:CardCountToStringConverter x:Key="totalCountConverter"/>
@@ -21,7 +21,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="175"/>
                 <RowDefinition/>
                 <RowDefinition Height="10"/>
                 <RowDefinition/>
@@ -33,7 +33,7 @@
 
             <Image Source="{Binding Banner}" Stretch="UniformToFill" Grid.RowSpan="10" Grid.ColumnSpan="10"/>
 
-            <Image Source="{Binding Logo}" Grid.Row="0" Grid.ColumnSpan="2" Height="150"/>
+            <Image Source="{Binding Logo}" Grid.Row="0" Grid.ColumnSpan="2" Height="175"/>
 
             <local:OutlinedTextBlock Text="{Binding Name}" Fill="White" StrokeThickness="2" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
