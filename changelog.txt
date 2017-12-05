@@ -63,12 +63,16 @@
 - Updated UI (Icons for classes and sets)
 - Various fixes and improvements
 
-## v2.2.1
+## v2.3
  - Fixed using negative card count in history window to calculate dust
  - Fixed issue clicking on a row would not always select it
  - Added date column to card history
  - Added icons for window commands
+ - Added decks info window (Check deck lists, include/exclude from search)
+ - Added collection info window (Check set progress)
  - Updated input dialog for the selection window
  - Updated gem icons
  - Renamed Mana Cost column to Mana
+ - Only storing constructed decks
+ - Cache timer now starting properly
 -----------------------------
