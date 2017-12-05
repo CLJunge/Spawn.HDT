@@ -57,13 +57,24 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            List<Deck> lstDecks = Reflection.GetDecks();
+            List<Deck> lstAllDecks = Reflection.GetDecks();
 
-            if (lstDecks != null && (lstDecks.Count > 0 && lstDecks[0].Cards.Count > 0) && !s_blnSaveDecksInProgress)
+            if (lstAllDecks != null && (lstAllDecks.Count > 0 && lstAllDecks[0].Cards.Count > 0) && !s_blnSaveDecksInProgress)
             {
                 s_blnSaveDecksInProgress = true;
 
                 string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
+
+                List<Deck> lstDecks = new List<Deck>(lstAllDecks.Count);
+
+                for (int i = 0; i < lstAllDecks.Count; i++)
+                {
+                    if (lstAllDecks[i].Type == 1)
+                    {
+                        lstDecks.Add(lstAllDecks[i]);
+                    }
+                    else { }
+                }
 
                 FileManager.Write(strPath, lstDecks.ToCachedDecks());
 
