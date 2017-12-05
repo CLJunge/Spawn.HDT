@@ -1,5 +1,6 @@
 ﻿using HearthDb.Enums;
 using System.Collections.Generic;
+using static HearthDb.CardIds.Collectible;
 
 namespace Spawn.HDT.DustUtility
 {
@@ -11,6 +12,7 @@ namespace Spawn.HDT.DustUtility
         public static Dictionary<CardSet, string> Expansions { get; }
         public static Dictionary<CardSet, string> Adventures { get; }
         public static Dictionary<CardSet, string> Standard { get; }
+        public static List<string> NonCraftableCardIds { get; }
         #endregion
 
         #region Ctor
@@ -79,6 +81,13 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.KARA, "Karazhan" }
+            };
+
+            NonCraftableCardIds = new List<string>
+            {
+                Neutral.Cthun,
+                Neutral.BeckonerOfEvil,
+                Neutral.MarinTheFox
             };
         }
         #endregion

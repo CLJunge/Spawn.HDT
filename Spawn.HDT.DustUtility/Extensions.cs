@@ -228,7 +228,7 @@ namespace Spawn.HDT.DustUtility
             {
                 Card c = Cards.All[card.Id];
 
-                if (c.Set != CardSet.CORE)
+                if (c.Set != CardSet.CORE && !CardSets.NonCraftableCardIds.Contains(c.Id))
                 {
                     switch (c.Rarity)
                     {
