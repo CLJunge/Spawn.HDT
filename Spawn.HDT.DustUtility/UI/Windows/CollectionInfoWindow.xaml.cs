@@ -20,10 +20,12 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             InitializeComponent();
         }
 
-        public CollectionInfoWindow(Account account)
+        public CollectionInfoWindow(Account account, int collectionValue)
             : this()
         {
             m_lstCollection = account.LoadCollection();
+
+            Title = $"{Title} ({collectionValue} Dust)";
         }
         #endregion
 
@@ -33,7 +35,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             List<CardSet> lstCardSets = new List<CardSet>(CardSets.All.Keys);
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < lstCardSets.Count; i++)
             {
                 CardSet cardSet = lstCardSets[i];
 
@@ -55,11 +57,13 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             ListViewCardSetItem cardSetItem = new ListViewCardSetItem
             {
                 Logo = GetLogo(cardSet),
-                Banner = GetBanner(cardSet)
+                Banner = GetBanner(cardSet),
+                Name = CardSets.AllFullName[cardSet]
             };
 
             listView.Items.Add(cardSetItem);
         }
+
         #endregion
 
         #region HasCardSet

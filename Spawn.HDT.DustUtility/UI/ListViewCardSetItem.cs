@@ -13,6 +13,10 @@ namespace Spawn.HDT.DustUtility.UI
         public ImageSource Logo { get; set; }
         #endregion
 
+        #region Name
+        public string Name { get; set; }
+        #endregion
+
         #region TotalCount
         public int TotalCount { get; set; }
         #endregion

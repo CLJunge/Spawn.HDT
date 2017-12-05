@@ -18,7 +18,6 @@ namespace Spawn.HDT.DustUtility
         {
             All = new Dictionary<CardSet, string>
             {
-                { CardSet.HOF, "Hall of Fame" },
                 { CardSet.EXPERT1, "Classic" },
                 { CardSet.GVG, "Goblins vs Gnomes" },
                 { CardSet.TGT, "Grand Tournament" },
@@ -30,12 +29,12 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
-                { CardSet.KARA, "Karazhan" }
+                { CardSet.KARA, "Karazhan" },
+                { CardSet.HOF, "Hall of Fame" }
             };
 
             AllFullName = new Dictionary<CardSet, string>
             {
-                { CardSet.HOF, "Hall of Fame" },
                 { CardSet.EXPERT1, "Classic" },
                 { CardSet.GVG, "Goblins vs Gnomes" },
                 { CardSet.TGT, "The Grand Tournament" },
@@ -47,7 +46,8 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
-                { CardSet.KARA, "One Night in Karazhan" }
+                { CardSet.KARA, "One Night in Karazhan" },
+                { CardSet.HOF, "Hall of Fame" }
             };
 
             Expansions = new Dictionary<CardSet, string>

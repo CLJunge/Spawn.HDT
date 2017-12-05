@@ -160,7 +160,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             //await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
 
-            CollectionInfoWindow window = new CollectionInfoWindow(m_account)
+            int nCollectionValue = m_cardCollector.GetTotalDustValueForAllCards();
+
+            CollectionInfoWindow window = new CollectionInfoWindow(m_account, nCollectionValue)
             {
                 Owner = this
             };

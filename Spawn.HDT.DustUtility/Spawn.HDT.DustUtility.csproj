@@ -285,7 +285,6 @@
     <Resource Include="Resources\hero_valeera.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\naxx_banner.jpg" />
     <Resource Include="Resources\naxx_logo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -304,17 +303,20 @@
     <Resource Include="Resources\frozenthrone_banner.jpg" />
     <Resource Include="Resources\gadgetzan_banner.jpg" />
     <Resource Include="Resources\goblins_banner.jpg" />
-    <Resource Include="Resources\hearthstone_banner.jpg" />
     <Resource Include="Resources\hearthstone_logo.png" />
     <Resource Include="Resources\karazhan_banner.jpg" />
     <Resource Include="Resources\kobolds_banner.jpg" />
     <Resource Include="Resources\league_banner.jpg" />
     <Resource Include="Resources\mountain_banner.jpg" />
-    <Resource Include="Resources\naxxramas_banner.jpg" />
-    <Resource Include="Resources\naxxramas_logo.png" />
     <Resource Include="Resources\oldgods_banner.jpg" />
     <Resource Include="Resources\tournament_banner.jpg" />
     <Resource Include="Resources\ungoro_banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\naxx_banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hearthstone_banner.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
-             mc:Ignorable="d" Height="250" Width="500">
+             mc:Ignorable="d" Height="350" Width="600">
     <UserControl.Resources>
         <converters:DustValueToStringConverter x:Key="dustConverter"/>
         <converters:CardCountToStringConverter x:Key="totalCountConverter"/>
@@ -23,27 +23,30 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="115"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition/>
+                <RowDefinition Height="10"/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <Grid.Background>
-                <ImageBrush ImageSource="{Binding Banner}"/>
-            </Grid.Background>
+            <Image Source="{Binding Banner}" Stretch="UniformToFill" Grid.RowSpan="10" Grid.ColumnSpan="10"/>
 
-            <Image Source="{Binding Logo}" Stretch="Uniform" Grid.ColumnSpan="2" Height="175" Margin="0,-27,0,0"/>
+            <Image Source="{Binding Logo}" Grid.Row="0" Grid.ColumnSpan="2" Height="150"/>
 
-            <local:OutlinedTextBlock Text="{Binding TotalCount, Converter={StaticResource totalCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding Name}" Fill="White" StrokeThickness="2" FontSize="24" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <local:OutlinedTextBlock Text="{Binding CommonsCount, Converter={StaticResource commonsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="{Binding EpicsCount, Converter={StaticResource epicsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="{Binding RaresCount, Converter={StaticResource raresCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <local:OutlinedTextBlock Text="{Binding LegendariesCount, Converter={StaticResource legendariesCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding TotalCount, Converter={StaticResource totalCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <local:OutlinedTextBlock Text="{Binding DustValue, Converter={StaticResource dustConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding CommonsCount, Converter={StaticResource commonsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding EpicsCount, Converter={StaticResource epicsCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding RaresCount, Converter={StaticResource raresCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <local:OutlinedTextBlock Text="{Binding LegendariesCount, Converter={StaticResource legendariesCountConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <local:OutlinedTextBlock Text="{Binding DustValue, Converter={StaticResource dustConverter}}" Fill="White" StrokeThickness="2" FontSize="20" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
     </Border>
 </UserControl>
