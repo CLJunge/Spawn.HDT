@@ -11,7 +11,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private CustomDialog m_dialog;
         private MetroDialogSettings m_dialogSettings;
         private CardCountDialog m_cardCountDialog;
-        private GridItem m_currentItem;
+        private DataGridCardItem m_currentItem;
         #endregion
 
         #region DP
@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region Properties
-        public List<GridItem> CurrentItems { get; private set; }
+        public List<DataGridCardItem> CurrentItems { get; private set; }
         #endregion
 
         #region Ctor
@@ -109,7 +109,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             InitializeComponent();
 
-            CurrentItems = new List<GridItem>();
+            CurrentItems = new List<DataGridCardItem>();
 
             cardsGrid.GridItems.Clear();
 
@@ -121,7 +121,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             };
         }
 
-        public CardSelectionWindow(List<GridItem> savedItems)
+        public CardSelectionWindow(List<DataGridCardItem> savedItems)
             : this()
         {
             for (int i = 0; i < savedItems.Count; i++)
@@ -137,7 +137,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
         #region Events
         #region OnCardsGridItemDropped
-        private async void OnCardsGridItemDropped(object sender, GridItemEventArgs e)
+        private async void OnCardsGridItemDropped(object sender, DataGridCardItemEventArgs e)
         {
             m_currentItem = e.Item;
 
@@ -165,7 +165,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region OnCardsGridRowDeleted
-        private void OnCardsGridRowDeleted(object sender, GridItemEventArgs e)
+        private void OnCardsGridRowDeleted(object sender, DataGridCardItemEventArgs e)
         {
             RemoveItem(e.Item);
         }
@@ -209,7 +209,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region AddItem
-        private void AddItem(GridItem item)
+        private void AddItem(DataGridCardItem item)
         {
             TotalAmount += item.Count;
             DustAmount += item.Dust;
@@ -238,7 +238,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region RemoveItem
-        private void RemoveItem(GridItem item)
+        private void RemoveItem(DataGridCardItem item)
         {
             TotalAmount -= item.Count;
             DustAmount -= item.Dust;

@@ -1,6 +1,10 @@
-﻿using HearthMirror.Objects;
+﻿using HearthMirror;
+using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
+using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Offline;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility
@@ -16,6 +20,10 @@ namespace Spawn.HDT.DustUtility
         #region Current
         public static Account Current => GetCurrentAccount();
         #endregion
+        #endregion
+
+        #region Member Variables
+        private List<long> m_lstExcludedDecks;
         #endregion
 
         #region Properties
@@ -62,6 +70,89 @@ namespace Spawn.HDT.DustUtility
 
                 DisplayString = string.Empty;
             }
+
+            m_lstExcludedDecks = new List<long>();
+        }
+        #endregion
+
+        #region LoadCollection
+        public List<Card> LoadCollection()
+        {
+            List<Card> lstRet = null;
+
+            Log.WriteLine("Loading collection...", LogType.Debug);
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                lstRet = Cache.LoadCollection(this);
+            }
+            else
+            {
+                lstRet = Reflection.GetCollection();
+            }
+
+            if (lstRet != null)
+            {
+                Log.WriteLine("Loaded collection", LogType.Debug);
+            }
+            else { }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region LoadDecks
+        public List<Deck> LoadDecks()
+        {
+            List<Deck> lstRet = null;
+
+            Log.WriteLine("Loading decks...", LogType.Debug);
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                lstRet = Cache.LoadDecks(this);
+            }
+            else
+            {
+                lstRet = Reflection.GetDecks();
+            }
+
+            if (lstRet != null)
+            {
+                Log.WriteLine("Loaded decks", LogType.Debug);
+            }
+            else { }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region ExcludeDeck
+        public void ExcludeDeck(long nDeckId)
+        {
+            if (!IsDeckExcluded(nDeckId))
+            {
+                m_lstExcludedDecks.Add(nDeckId);
+            }
+            else { }
+        }
+        #endregion
+
+        #region IncludeDeck
+        public void IncludeDeck(long nDeckId)
+        {
+            if (IsDeckExcluded(nDeckId))
+            {
+                m_lstExcludedDecks.Remove(nDeckId);
+            }
+            else { }
+        }
+        #endregion
+
+        #region IsDeckExcluded
+        public bool IsDeckExcluded(long nDeckId)
+        {
+            return m_lstExcludedDecks.Contains(nDeckId);
         }
         #endregion
 

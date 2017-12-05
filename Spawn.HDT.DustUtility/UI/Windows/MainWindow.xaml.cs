@@ -38,7 +38,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private Account m_account;
 
         private CardSelectionWindow m_selectionWindow;
-        private List<GridItem> m_lstSavedSelection;
+        private List<DataGridCardItem> m_lstSavedSelection;
 
         private CardCollector m_cardCollector;
         private Parameters m_parameters;
@@ -50,14 +50,14 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             InitializeComponent();
         }
 
-        public MainWindow(DustUtilityPlugin plugin, Account account, bool offlineMode)
+        public MainWindow(DustUtilityPlugin plugin, Account account)
             : this()
         {
             m_plugin = plugin;
 
             m_account = account;
 
-            m_cardCollector = new CardCollector(this, m_account, offlineMode);
+            m_cardCollector = new CardCollector(this, m_account);
 
             if (Settings.SearchParameters == null)
             {
@@ -74,9 +74,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else { }
 
-            if (offlineMode)
+            if (DustUtilityPlugin.IsOffline)
             {
-                Title = $"{Title} [OFFLINE MODE]";
+                Title = $"{Title} [OFFLINE]";
 
                 switchAccountButton.IsEnabled = m_plugin.HasMultipleAccounts;
             }
@@ -89,7 +89,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             else { }
 
             Log.WriteLine($"Account={m_account.AccountString}", LogType.Debug);
-            Log.WriteLine($"OfflineMode={offlineMode}", LogType.Debug);
+            Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
         }
         #endregion
 
@@ -155,10 +155,19 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         }
         #endregion
 
-        #region OnTotalDustClick
-        private async void OnTotalDustClick(object sender, System.Windows.RoutedEventArgs e)
+        #region OnCollectionInfoClick
+        private void OnCollectionInfoClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
+            //await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
+
+            int nCollectionValue = m_cardCollector.GetTotalDustValueForAllCards();
+
+            CollectionInfoWindow window = new CollectionInfoWindow(m_account, nCollectionValue)
+            {
+                Owner = this
+            };
+
+            window.Show();
         }
         #endregion
 
@@ -201,7 +210,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<GridItem>())
+                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<DataGridCardItem>())
                 {
                     Owner = this
                 };
@@ -273,6 +282,18 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             };
 
             dialog.ShowDialog();
+        }
+        #endregion
+
+        #region OnDecksClick
+        private void OnDecksClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DecksInfoWindow window = new DecksInfoWindow(m_account)
+            {
+                Owner = this
+            };
+
+            window.Show();
         }
         #endregion
         #endregion

@@ -1,10 +1,8 @@
 ﻿using HearthDb.Enums;
-using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Spawn.HDT.DustUtility.Offline;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,25 +24,14 @@ namespace Spawn.HDT.DustUtility.Search
         private Account m_account;
 
         private List<CardWrapper> m_lstUnusedCards;
-        private bool m_blnOfflineMode;
-        #endregion
-
-        #region Properties
-        public bool OfflineMode
-        {
-            get => m_blnOfflineMode;
-            set => m_blnOfflineMode = value;
-        }
         #endregion
 
         #region Ctor
-        public CardCollector(MetroWindow mainWindow, Account account, bool offlineMode)
+        public CardCollector(MetroWindow mainWindow, Account account)
         {
             m_mainWindow = mainWindow;
 
             m_account = account;
-
-            m_blnOfflineMode = offlineMode;
 
             m_lstUnusedCards = new List<CardWrapper>();
         }
@@ -66,7 +53,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             Log.WriteLine(sb.ToString(), LogType.Debug);
 
-            List<Card> lstCollection = LoadCollection();
+            List<Card> lstCollection = m_account.LoadCollection();
 
             if (parameters.UnusedCardsOnly)
             {
@@ -256,9 +243,18 @@ namespace Spawn.HDT.DustUtility.Search
         #region GetTotalDustValueForAllCards
         public int GetTotalDustValueForAllCards()
         {
-            List<Card> lstCards = LoadCollection();
+            int nRet = 0;
 
-            return lstCards.Sum(c => new CardWrapper(c).GetDustValue());
+            List<Card> lstCards = m_account.LoadCollection();
+
+            for (int i = 0; i < lstCards.Count; i++)
+            {
+                Card card = lstCards[i];
+
+                nRet += card.GetDustValue() * card.Count;
+            }
+
+            return nRet;
         }
         #endregion
 
@@ -273,7 +269,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             m_lstUnusedCards.Clear();
 
-            List<Deck> lstDecks = LoadDecks();
+            List<Deck> lstDecks = m_account.LoadDecks();
 
             if (lstDecks.Count > 0 && lstDecks[0].Cards.Count > 0)
             {
@@ -284,7 +280,7 @@ namespace Spawn.HDT.DustUtility.Search
 
                     for (int j = 0; j < lstDecks.Count; j++)
                     {
-                        if (lstDecks[j].ContainsCard(card.Id))
+                        if (!m_account.IsDeckExcluded(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
                         {
                             Card c = lstDecks[j].GetCard(card.Id);
 
@@ -304,7 +300,7 @@ namespace Spawn.HDT.DustUtility.Search
                     else { }
                 }
             }
-            else if (!m_blnOfflineMode)
+            else if (!DustUtilityPlugin.IsOffline)
             {
                 await m_mainWindow.ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
                 //MessageBox.Show("Navigate to the \"Play\" page first!", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -365,58 +361,6 @@ namespace Spawn.HDT.DustUtility.Search
             {
                 lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.Card.Premium);
             }
-
-            return lstRet;
-        }
-        #endregion
-
-        #region LoadCollection
-        private List<Card> LoadCollection()
-        {
-            List<Card> lstRet = null;
-
-            Log.WriteLine("Loading collection...", LogType.Debug);
-
-            if (m_blnOfflineMode)
-            {
-                lstRet = Cache.LoadCollection(m_account);
-            }
-            else
-            {
-                lstRet = Reflection.GetCollection();
-            }
-
-            if (lstRet != null)
-            {
-                Log.WriteLine("Loaded collection", LogType.Debug);
-            }
-            else { }
-
-            return lstRet;
-        }
-        #endregion
-
-        #region LoadDecks
-        private List<Deck> LoadDecks()
-        {
-            List<Deck> lstRet = null;
-
-            Log.WriteLine("Loading decks...", LogType.Debug);
-
-            if (m_blnOfflineMode)
-            {
-                lstRet = Cache.LoadDecks(m_account);
-            }
-            else
-            {
-                lstRet = Reflection.GetDecks();
-            }
-
-            if (lstRet != null)
-            {
-                Log.WriteLine("Loaded decks", LogType.Debug);
-            }
-            else { }
 
             return lstRet;
         }

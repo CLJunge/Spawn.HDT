@@ -2,7 +2,6 @@
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Offline;
-using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Windows;
 using System;
@@ -18,7 +17,8 @@ namespace Spawn.HDT.DustUtility
     public class DustUtilityPlugin : IPlugin
     {
         #region Static Variables
-        public static string DataDirectory = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+        public static string DataDirectory => Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+        public static bool IsOffline { get; private set; }
         #endregion
 
         #region Member Variables
@@ -129,7 +129,9 @@ namespace Spawn.HDT.DustUtility
         #region OnUpdate
         public void OnUpdate()
         {
-            if (Core.Game.IsRunning && !Cache.TimerEnabled)
+            IsOffline = !Core.Game.IsRunning && Settings.OfflineMode;
+
+            if (Settings.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
             }
@@ -174,7 +176,7 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine($"Opening main window for {m_account.AccountString}", LogType.Info);
 
-                m_window = new MainWindow(this, m_account, !Core.Game.IsRunning && Settings.OfflineMode);
+                m_window = new MainWindow(this, m_account);
 
                 m_window.Closed += new EventHandler((s, e) => m_window = null);
 

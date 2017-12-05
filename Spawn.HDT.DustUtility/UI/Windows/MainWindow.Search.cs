@@ -40,7 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
             Log.WriteLine("Creating search result...", LogType.Debug);
 
-            GridItem[] vItems = new GridItem[vCards.Length];
+            DataGridCardItem[] vItems = new DataGridCardItem[vCards.Length];
 
             for (int i = 0; i < vCards.Length; i++)
             {
@@ -65,7 +65,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                         break;
                 }
 
-                GridItem item = GridItem.FromCardWrapper(wrapper);
+                DataGridCardItem item = DataGridCardItem.FromCardWrapper(wrapper);
 
                 retVal.TotalCount += item.Count;
                 retVal.Dust += item.Dust;
@@ -86,15 +86,15 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region OrderItems
-        private IEnumerable<GridItem> OrderItems(IEnumerable<GridItem> items)
+        private IEnumerable<DataGridCardItem> OrderItems(IEnumerable<DataGridCardItem> items)
         {
-            IEnumerable<GridItem> retVal;
+            IEnumerable<DataGridCardItem> retVal;
 
             SortOrder sortOrder = SortOrder.Parse(Settings.SortOrder);
 
             if (sortOrder != null && sortOrder.Items.Count > 0)
             {
-                IQueryable<GridItem> query = items.AsQueryable();
+                IQueryable<DataGridCardItem> query = items.AsQueryable();
 
                 for (int i = 0; i < sortOrder.Items.Count; i++)
                 {
