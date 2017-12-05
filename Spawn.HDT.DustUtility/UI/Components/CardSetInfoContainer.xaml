@@ -13,8 +13,6 @@
         <converters:CardCountToStringConverter x:Key="raresCountConverter"/>
         <converters:CardCountToStringConverter x:Key="epicsCountConverter"/>
         <converters:CardCountToStringConverter x:Key="legendariesCountConverter"/>
-        <!--Legendary: 30/60-->
-        <!--Total: 315/600 (53%)-->
     </UserControl.Resources>
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid>

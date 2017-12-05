@@ -1,15 +1,24 @@
 ﻿using HearthDb.Enums;
+using Spawn.HDT.DustUtility.UI.Components;
+using Spawn.HDT.DustUtility.UI.Converters;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using static Spawn.HDT.DustUtility.CardSets.Info;
 
 namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class CollectionInfoWindow
     {
+        #region Constants
+        private const string TotalCountConverterKey = "totalCountConverter";
+        private const string CommonsCountConverterKey = "commonsCountConverter";
+        private const string RaresCountConverterKey = "raresCountConverter";
+        private const string EpicsCountConverterKey = "epicsCountConverter";
+        private const string LegendariesCountConverterKey = "legendariesCountConverter";
+        #endregion
+
         #region Member Variables
         private List<HearthMirror.Objects.Card> m_lstCollection;
         #endregion
@@ -18,6 +27,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         public CollectionInfoWindow()
         {
             InitializeComponent();
+
+            listView.ItemContainerGenerator.StatusChanged += OnItemContainerGeneratorStatusChanged;
         }
 
         public CollectionInfoWindow(Account account, int collectionValue)
@@ -47,13 +58,27 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
         }
         #endregion
+
+        #region OnItemContainerGeneratorStatusChanged
+        private void OnItemContainerGeneratorStatusChanged(object sender, EventArgs e)
+        {
+            if (listView.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+            {
+                List<CardSetInfoContainer> lstContainers = new List<CardSetInfoContainer>(FindVisualChildren<CardSetInfoContainer>(listView));
+
+                for (int i = 0; i < lstContainers.Count; i++)
+                {
+                    UpdateContainer(lstContainers[i], listView.Items[i] as ListViewCardSetItem);
+                }
+            }
+            else { }
+        }
+        #endregion
         #endregion
 
         #region AddCardSet
         private void AddCardSet(CardSet cardSet)
         {
-            InfoItem infoItem = Dictionary[cardSet];
-
             ListViewCardSetItem cardSetItem = new ListViewCardSetItem
             {
                 Logo = GetLogo(cardSet),
@@ -63,7 +88,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                 RaresCount = GetCountForRarity(cardSet, Rarity.RARE),
                 EpicsCount = GetCountForRarity(cardSet, Rarity.EPIC),
                 LegendariesCount = GetCountForRarity(cardSet, Rarity.LEGENDARY),
-                DustValue = GetDustValue(cardSet)
+                DustValue = GetDustValue(cardSet),
+                Tag = cardSet
             };
 
             cardSetItem.TotalCount = cardSetItem.CommonsCount + cardSetItem.RaresCount + cardSetItem.EpicsCount + cardSetItem.LegendariesCount;
@@ -222,7 +248,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
 
-                return card.Set == cardSet && card.Rarity == rarity;
+                return card.Set == cardSet && card.Rarity == rarity && !c.Premium;
             });
 
             for (int i = 0; i < lstChunk.Count; i++)
@@ -247,6 +273,67 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
 
             return nRet;
+        }
+        #endregion
+
+        #region UpdateContainer
+        private void UpdateContainer(CardSetInfoContainer container, ListViewCardSetItem item)
+        {
+            CardSets.Info.InfoItem infoItem = CardSets.Info.Dictionary[(CardSet)item.Tag];
+            //Legendary: 30/60
+            //Total: 315/600 (53 %)
+
+            //TotalCount
+            CardCountToStringConverter totalCountConverter = GetResource<CardCountToStringConverter>(container, TotalCountConverterKey);
+            totalCountConverter.MaxAmount = infoItem.TotalCount;
+            totalCountConverter.Prefix = "Total:";
+            totalCountConverter.Suffix = $"({Convert.ToInt32(((float)item.TotalCount / infoItem.TotalCount) * 100)}%)";
+
+            //CommonsCount
+            CardCountToStringConverter commonsCountConverter = GetResource<CardCountToStringConverter>(container, CommonsCountConverterKey);
+            commonsCountConverter.MaxAmount = infoItem.MaxCommonsCount;
+            commonsCountConverter.Prefix = "Common:";
+
+            //RaresCount
+            CardCountToStringConverter raresCountConverter = GetResource<CardCountToStringConverter>(container, RaresCountConverterKey);
+            raresCountConverter.MaxAmount = infoItem.MaxRaresCount;
+            raresCountConverter.Prefix = "Rare:";
+
+            //EpicsCount
+            CardCountToStringConverter epicsCountConverter = GetResource<CardCountToStringConverter>(container, EpicsCountConverterKey);
+            epicsCountConverter.MaxAmount = infoItem.MaxEpicsCount;
+            epicsCountConverter.Prefix = "Epic:";
+
+            //LegendariesCount
+            CardCountToStringConverter legendariesCountConverter = GetResource<CardCountToStringConverter>(container, LegendariesCountConverterKey);
+            legendariesCountConverter.MaxAmount = infoItem.MaxLegendariesCount;
+            legendariesCountConverter.Prefix = "Legendary:";
+        }
+        #endregion
+
+        #region GetResource
+        private T GetResource<T>(CardSetInfoContainer container, string strKey)
+        {
+            return (T)container.FindResource(strKey);
+        }
+        #endregion
+
+        #region FindVisualChildren
+        public IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+
+                    if (child != null && child is T)
+                        yield return (T)child;
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                        yield return childOfChild;
+                }
+            }
         }
         #endregion
     }

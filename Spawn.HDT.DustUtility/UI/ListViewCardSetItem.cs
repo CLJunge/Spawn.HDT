@@ -40,6 +40,10 @@ namespace Spawn.HDT.DustUtility.UI
         #region DustValue
         public int DustValue { get; set; }
         #endregion
+
+        #region Tag
+        public object Tag { get; set; }
+        #endregion
         #endregion
     }
 }
