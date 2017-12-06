@@ -19,7 +19,7 @@
             <controls:WindowCommands.Resources>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </controls:WindowCommands.Resources>
-            <Button Name="switchAccountButton" Click="OnSwitchAccountClick">
+            <Button Name="switchAccountButton" Click="OnSwitchAccountClick" Visibility="Collapsed">
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="20" Height="20">
                             <Rectangle.Fill>

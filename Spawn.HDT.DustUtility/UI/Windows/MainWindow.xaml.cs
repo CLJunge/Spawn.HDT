@@ -85,6 +85,12 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             if (Settings.OfflineMode)
             {
                 historyButton.Visibility = System.Windows.Visibility.Visible;
+
+                if (DustUtilityPlugin.IsOffline)
+                {
+                    switchAccountButton.Visibility = System.Windows.Visibility.Visible;
+                }
+                else { }
             }
             else { }
 
