@@ -156,8 +156,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else if (m_currentItem.Count == 1)
             {
-                CurrentItems.Add(m_currentItem);
-
                 AddItem(m_currentItem);
             }
             else { }
@@ -188,8 +186,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 m_currentItem.Count = nNewCount;
                 m_currentItem.Dust = m_currentItem.Tag.GetDustValue(nNewCount);
-
-                CurrentItems.Add(m_currentItem);
 
                 AddItem(m_currentItem);
             }
@@ -234,6 +230,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
 
             cardsGrid.GridItems.Add(item);
+
+            CurrentItems.Add(item);
         }
         #endregion
 
@@ -263,6 +261,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
 
             cardsGrid.GridItems.Remove(item);
+
+            CurrentItems.Remove(item);
         }
         #endregion
 
