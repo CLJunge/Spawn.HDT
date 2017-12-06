@@ -104,6 +104,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnWindowLoaded
         private async void OnWindowLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            //Create backup
+            BackupManager.Create(m_account);
+
+            //Perform update check
             if (Settings.CheckForUpdate && await GitHubUpdateManager.CheckForUpdateAsync())
             {
                 StringBuilder sb = new StringBuilder();
@@ -128,8 +132,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                 else { }
             }
             else { }
-
-            BackupManager.Create(m_account);
         }
         #endregion
 
@@ -180,7 +182,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 m_collectionWindow.Show();
             }
-            else { }
+            else
+            {
+                BringWindowToFront(m_collectionWindow);
+            }
         }
         #endregion
 
@@ -267,7 +272,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 openSelectionButton.IsEnabled = false;
             }
-            else { }
+            else
+            {
+                BringWindowToFront(m_selectionWindow);
+            }
         }
         #endregion
 
@@ -331,7 +339,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 m_decksWindow.Show();
             }
-            else { }
+            else
+            {
+                BringWindowToFront(m_decksWindow);
+            }
         }
         #endregion
         #endregion
@@ -354,6 +365,16 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             inputBox.IsEnabled = blnIsEnabled;
             filterButton.IsEnabled = blnIsEnabled;
             sortOrderButton.IsEnabled = blnIsEnabled;
+        }
+        #endregion
+
+        #region BringWindowToFront
+        private void BringWindowToFront(System.Windows.Window window)
+        {
+            window.Activate();
+            window.Topmost = true;
+            window.Topmost = false;
+            window.Focus();
         }
         #endregion
     }
