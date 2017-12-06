@@ -80,18 +80,6 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region ExcludedDecks
-        public static StringCollection ExcludedDecks
-        {
-            get => Properties.Settings.Default.ExcludedDecks;
-            set
-            {
-                Properties.Settings.Default.ExcludedDecks = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-        #endregion
-
         #region CardSelection
         public static StringCollection CardSelection
         {
@@ -108,12 +96,6 @@ namespace Spawn.HDT.DustUtility
         #region Ctor
         static Settings()
         {
-            if (ExcludedDecks == null)
-            {
-                ExcludedDecks = new StringCollection();
-            }
-            else { }
-
             if (CardSelection == null)
             {
                 CardSelection = new StringCollection();

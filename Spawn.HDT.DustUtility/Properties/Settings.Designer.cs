@@ -108,17 +108,6 @@ namespace Spawn.HDT.DustUtility.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection ExcludedDecks {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["ExcludedDecks"]));
-            }
-            set {
-                this["ExcludedDecks"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Collections.Specialized.StringCollection CardSelection {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["CardSelection"]));
