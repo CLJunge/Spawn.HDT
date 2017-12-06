@@ -154,7 +154,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 await this.ShowMetroDialogAsync(m_dialog, m_dialogSettings);
             }
-            else if (e.Item.Count == 1)
+            else if (m_currentItem.Count == 1)
             {
                 CurrentItems.Add(m_currentItem);
 
