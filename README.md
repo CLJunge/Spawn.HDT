@@ -33,11 +33,11 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 
 #### Decks Info
 - Include/exclude decks from search (Use filter option 'Unused Cards Only'). You are also able to check the current deck list for each deck.
-![Overlay](https://i.imgur.com/ftOpkoX.png)
+![Overlay](https://i.imgur.com/v2zfoX7.png)
 
 #### Collection Info
 - Shows progress for each expansion. See possible amounts of dust for each expansion.
-![Overlay](https://i.imgur.com/UiDOJS4.png)
+![Overlay](https://i.imgur.com/ftOpkoX.png)
 
 ## Settings
 * Offline Mode: While Hearthstone is running, the plugin stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally.
