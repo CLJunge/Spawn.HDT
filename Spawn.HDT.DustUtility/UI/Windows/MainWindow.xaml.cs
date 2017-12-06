@@ -38,7 +38,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private Account m_account;
 
         private CardSelectionWindow m_selectionWindow;
-        private List<DataGridCardItem> m_lstSavedSelection;
+        private DecksInfoWindow m_decksWindow;
+        private CollectionInfoWindow m_collectionWindow;
 
         private CardCollector m_cardCollector;
         private Parameters m_parameters;
@@ -166,14 +167,20 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             //await this.ShowMessageAsync("Collection Value", $"Your collection is worth: {m_cardCollector.GetTotalDustValueForAllCards()} Dust");
 
-            int nCollectionValue = m_cardCollector.GetTotalDustValueForAllCards();
-
-            CollectionInfoWindow window = new CollectionInfoWindow(m_account, nCollectionValue)
+            if (m_collectionWindow == null)
             {
-                Owner = this
-            };
+                int nCollectionValue = m_cardCollector.GetTotalDustValueForAllCards();
 
-            window.Show();
+                m_collectionWindow = new CollectionInfoWindow(m_account, nCollectionValue)
+                {
+                    Owner = this
+                };
+
+                m_collectionWindow.Closed += new EventHandler((s, args) => m_collectionWindow = null);
+
+                m_collectionWindow.Show();
+            }
+            else { }
         }
         #endregion
 
@@ -216,21 +223,40 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow(m_lstSavedSelection ?? new List<DataGridCardItem>())
+                List<DataGridCardItem> lstSelection = new List<DataGridCardItem>();
+
+                if (Settings.CardSelection.Count > 0)
+                {
+                    for (int i = 0; i < Settings.CardSelection.Count; i++)
+                    {
+                        CardWrapper wrapper = CardWrapper.FromString(Settings.CardSelection[i]);
+
+                        lstSelection.Add(DataGridCardItem.FromCardWrapper(wrapper));
+                    }
+                }
+                else { }
+
+                m_selectionWindow = new CardSelectionWindow(lstSelection)
                 {
                     Owner = this
                 };
 
                 m_selectionWindow.Closed += new EventHandler((s, args) =>
                 {
+                    Settings.CardSelection.Clear();
+
                     if (m_selectionWindow.SaveSelection)
                     {
-                        m_lstSavedSelection = m_selectionWindow.CurrentItems;
+                        string[] vItems = new string[m_selectionWindow.CurrentItems.Count];
+
+                        for (int i = 0; i < m_selectionWindow.CurrentItems.Count; i++)
+                        {
+                            DataGridCardItem item = m_selectionWindow.CurrentItems[i];
+
+                            Settings.CardSelection.Add(item.Tag.ToString());
+                        }
                     }
-                    else
-                    {
-                        m_lstSavedSelection = null;
-                    }
+                    else { }
 
                     openSelectionButton.IsEnabled = true;
 
@@ -294,12 +320,18 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnDecksClick
         private void OnDecksClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            DecksInfoWindow window = new DecksInfoWindow(m_account)
+            if (m_decksWindow == null)
             {
-                Owner = this
-            };
+                m_decksWindow = new DecksInfoWindow(m_account)
+                {
+                    Owner = this
+                };
 
-            window.Show();
+                m_decksWindow.Closed += new EventHandler((s, args) => m_decksWindow = null);
+
+                m_decksWindow.Show();
+            }
+            else { }
         }
         #endregion
         #endregion

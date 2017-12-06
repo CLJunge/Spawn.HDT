@@ -58,6 +58,25 @@ namespace Spawn.HDT.DustUtility.Search
             return nRet;
         }
         #endregion
+
+        #region ToString
+        public override string ToString()
+        {
+            //id count premium
+            return $"{m_card.Id}:{m_card.Count}:{m_card.Premium}";
+        }
+        #endregion
+
+        #region [STATIC] FromString
+        public static CardWrapper FromString(string strValue)
+        {
+            string[] vValues = strValue.Split(':');
+
+            Card card = new Card(vValues[0], Convert.ToInt32(vValues[1]), Convert.ToBoolean(vValues[2]));
+
+            return new CardWrapper(card);
+        }
+        #endregion
     }
 
     [DebuggerDisplay("{Count}x {DbCard.Name} Golden={Card.Premium}")]

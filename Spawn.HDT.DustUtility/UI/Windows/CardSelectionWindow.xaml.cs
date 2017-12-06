@@ -278,6 +278,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             RaresCount = 0;
             EpicsCount = 0;
             LegendariesCount = 0;
+
+            CurrentItems.Clear();
         }
         #endregion
     }
