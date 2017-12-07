@@ -78,8 +78,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             if (DustUtilityPlugin.IsOffline)
             {
                 Title = $"{Title} [OFFLINE]";
-
-                switchAccountButton.IsEnabled = m_plugin.HasMultipleAccounts;
             }
             else { }
 
@@ -87,7 +85,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 historyButton.Visibility = System.Windows.Visibility.Visible;
 
-                if (DustUtilityPlugin.IsOffline)
+                if (DustUtilityPlugin.IsOffline && m_plugin.HasMultipleAccounts)
                 {
                     switchAccountButton.Visibility = System.Windows.Visibility.Visible;
                 }
