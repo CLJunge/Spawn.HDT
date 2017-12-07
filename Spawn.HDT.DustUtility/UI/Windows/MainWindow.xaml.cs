@@ -184,7 +184,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else
             {
-                BringWindowToFront(m_collectionWindow);
+                DustUtilityPlugin.BringWindowToFront(m_collectionWindow);
             }
         }
         #endregion
@@ -254,7 +254,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else
             {
-                BringWindowToFront(m_selectionWindow);
+                DustUtilityPlugin.BringWindowToFront(m_selectionWindow);
             }
         }
         #endregion
@@ -321,7 +321,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             }
             else
             {
-                BringWindowToFront(m_decksWindow);
+                DustUtilityPlugin.BringWindowToFront(m_decksWindow);
             }
         }
         #endregion
@@ -345,16 +345,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             inputBox.IsEnabled = blnIsEnabled;
             filterButton.IsEnabled = blnIsEnabled;
             sortOrderButton.IsEnabled = blnIsEnabled;
-        }
-        #endregion
-
-        #region BringWindowToFront
-        private void BringWindowToFront(System.Windows.Window window)
-        {
-            window.Activate();
-            window.Topmost = true;
-            window.Topmost = false;
-            window.Focus();
         }
         #endregion
     }
