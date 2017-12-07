@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
+        xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
         mc:Ignorable="d" GlowBrush="Black" WindowStartupLocation="CenterOwner" Loaded="OnLoaded"
         Title="Dust Utility - Decks" Height="450" Width="700" MinHeight="450" MinWidth="700" MaxWidth="700" ResizeMode="CanResize">
     <Grid>
@@ -12,7 +13,7 @@
             <converters:DustValueToStringConverter x:Key="dustConverter"/>
             <converters:CardCountToStringConverter x:Key="cardCountConverter" MaxAmount="30"/>
         </Grid.Resources>
-        
+
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
@@ -54,7 +55,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="66,0,66,0">
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="67,0,67,0">
                             <Image Source="{Binding HeroImage}" Width="39" Height="39" Grid.Column="0"/>
                         </Border>
                         <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -63,6 +64,9 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Items>
+                <ui:ListViewDeckItem CardCount="30" Cost="12200" HeroImage="/Spawn.HDT.DustUtility;component/Resources/hero_anduin.png" Name="Big Priest"/>
+            </ListView.Items>
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>

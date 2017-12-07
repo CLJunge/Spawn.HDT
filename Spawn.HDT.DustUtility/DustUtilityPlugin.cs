@@ -182,7 +182,10 @@ namespace Spawn.HDT.DustUtility
 
                 m_window.Show();
             }
-            else { }
+            else
+            {
+                BringWindowToFront(m_window);
+            }
         }
         #endregion
 
@@ -457,6 +460,16 @@ namespace Spawn.HDT.DustUtility
             Properties.Settings.Default.Save();
         }
         #endregion
+        #endregion
+
+        #region [STATIC] BringWindowToFront
+        public static void BringWindowToFront(Window window)
+        {
+            window.Activate();
+            window.Topmost = true;
+            window.Topmost = false;
+            window.Focus();
+        }
         #endregion
     }
 }
