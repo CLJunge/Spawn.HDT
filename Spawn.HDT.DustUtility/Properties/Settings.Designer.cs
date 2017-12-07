@@ -105,16 +105,5 @@ namespace Spawn.HDT.DustUtility.Properties {
                 this["LastSelectedAccount"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection CardSelection {
-            get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["CardSelection"]));
-            }
-            set {
-                this["CardSelection"] = value;
-            }
-        }
     }
 }

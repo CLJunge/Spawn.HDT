@@ -1,5 +1,4 @@
 ﻿using Spawn.HDT.DustUtility.Search;
-using System.Collections.Specialized;
 using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility
@@ -79,29 +78,6 @@ namespace Spawn.HDT.DustUtility
             }
         }
         #endregion
-
-        #region CardSelection
-        public static StringCollection CardSelection
-        {
-            get => Properties.Settings.Default.CardSelection;
-            set
-            {
-                Properties.Settings.Default.CardSelection = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-        #endregion
-        #endregion
-
-        #region Ctor
-        static Settings()
-        {
-            if (CardSelection == null)
-            {
-                CardSelection = new StringCollection();
-            }
-            else { }
-        }
         #endregion
     }
 }

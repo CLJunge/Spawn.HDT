@@ -43,6 +43,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
         private CardCollector m_cardCollector;
         private Parameters m_parameters;
+
+        private List<DataGridCardItem> m_lstSelection;
         #endregion
 
         #region Ctor
@@ -226,38 +228,18 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             if (m_selectionWindow == null)
             {
-                List<DataGridCardItem> lstSelection = new List<DataGridCardItem>();
-
-                if (Settings.CardSelection.Count > 0)
-                {
-                    for (int i = 0; i < Settings.CardSelection.Count; i++)
-                    {
-                        CardWrapper wrapper = CardWrapper.FromString(Settings.CardSelection[i]);
-
-                        lstSelection.Add(DataGridCardItem.FromCardWrapper(wrapper));
-                    }
-                }
-                else { }
-
-                m_selectionWindow = new CardSelectionWindow(lstSelection)
+                m_selectionWindow = new CardSelectionWindow(m_lstSelection ?? new List<DataGridCardItem>())
                 {
                     Owner = this
                 };
 
                 m_selectionWindow.Closed += new EventHandler((s, args) =>
                 {
-                    Settings.CardSelection.Clear();
+                    m_lstSelection = null;
 
                     if (m_selectionWindow.SaveSelection)
                     {
-                        string[] vItems = new string[m_selectionWindow.CurrentItems.Count];
-
-                        for (int i = 0; i < m_selectionWindow.CurrentItems.Count; i++)
-                        {
-                            DataGridCardItem item = m_selectionWindow.CurrentItems[i];
-
-                            Settings.CardSelection.Add(item.Tag.ToString());
-                        }
+                        m_lstSelection = m_selectionWindow.CurrentItems;
                     }
                     else { }
 
