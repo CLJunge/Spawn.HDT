@@ -13,39 +13,47 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            DateTime date = DateTime.Now;
-
-            if (!BackupExists(account, date))
+            if (Settings.OfflineMode && (!account.IsEmpty && account.IsValid))
             {
-                string strFileName = GetFileName(account, date);
+                DateTime date = DateTime.Now;
 
-                try
+                if (!BackupExists(account, date))
                 {
-                    string strDir = Path.Combine(DustUtilityPlugin.DataDirectory, "temp");
+                    string strFileName = GetFileName(account, date);
 
-                    Directory.CreateDirectory(strDir);
-
-                    string[] vFiles = Directory.GetFiles(DustUtilityPlugin.DataDirectory, $"{account.AccountString}*");
-
-                    for (int i = 0; i < vFiles.Length; i++)
+                    try
                     {
-                        string strTemp = Path.Combine(strDir, Path.GetFileName(vFiles[i]));
+                        string[] vFiles = Directory.GetFiles(DustUtilityPlugin.DataDirectory, $"{account.AccountString}*");
 
-                        File.Copy(vFiles[i], strTemp);
+                        if (vFiles.Length > 0)
+                        {
+                            string strDir = Path.Combine(DustUtilityPlugin.DataDirectory, "temp");
+
+                            Directory.CreateDirectory(strDir);
+
+                            for (int i = 0; i < vFiles.Length; i++)
+                            {
+                                string strTemp = Path.Combine(strDir, Path.GetFileName(vFiles[i]));
+
+                                File.Copy(vFiles[i], strTemp);
+                            }
+
+                            ZipFile.CreateFromDirectory(strDir, strFileName);
+
+                            Directory.Delete(strDir, true);
+
+                            Log.WriteLine($"Created backup for {account.AccountString}", LogType.Debug);
+
+                            blnRet = File.Exists(strFileName);
+                        }
+                        else { }
                     }
-
-                    ZipFile.CreateFromDirectory(strDir, strFileName);
-
-                    Directory.Delete(strDir, true);
-
-                    Log.WriteLine($"Created backup for {account.AccountString}", LogType.Debug);
-
-                    blnRet = File.Exists(strFileName);
+                    catch (Exception ex)
+                    {
+                        Log.WriteLine($"Exception occured while creating backup \"{strFileName}\": {ex}", LogType.Error);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Log.WriteLine($"Exception occured while extracting backup \"{strFileName}\": {ex}", LogType.Error);
-                }
+                else { }
             }
             else { }
 
@@ -58,7 +66,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            if (BackupExists(account, date))
+            if ((!account.IsEmpty && account.IsValid) && BackupExists(account, date))
             {
                 string strFileName = GetFileName(account, date);
 
@@ -91,7 +99,7 @@ namespace Spawn.HDT.DustUtility.Offline
                 }
                 catch (Exception ex)
                 {
-                    Log.WriteLine($"Exception occured while extracting backup \"{strFileName}\": {ex}", LogType.Error);
+                    Log.WriteLine($"Exception occured while restoring backup \"{strFileName}\": {ex}", LogType.Error);
                 }
             }
             else { }
