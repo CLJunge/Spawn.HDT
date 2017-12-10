@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            if (Settings.OfflineMode)
+            if (Settings.OfflineMode && (!account.IsEmpty && account.IsValid))
             {
                 DateTime date = DateTime.Now;
 
@@ -66,7 +66,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            if (BackupExists(account, date))
+            if ((!account.IsEmpty && account.IsValid) && BackupExists(account, date))
             {
                 string strFileName = GetFileName(account, date);
 
