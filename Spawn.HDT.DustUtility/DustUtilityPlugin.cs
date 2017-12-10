@@ -17,7 +17,7 @@ namespace Spawn.HDT.DustUtility
     public class DustUtilityPlugin : IPlugin
     {
         #region Static Variables
-        public static string DataDirectory => Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+        public static string DataDirectory => GetDataDirectory();
         public static bool IsOffline { get; private set; }
         #endregion
 
@@ -305,16 +305,25 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region GetDataDirectory
+        private static string GetDataDirectory()
+        {
+            string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+
+            if (!Directory.Exists(strRet))
+            {
+                Directory.CreateDirectory(strRet);
+            }
+            else { }
+
+            return strRet;
+        }
+        #endregion
+
         #region GetFullFileName
         public static string GetFullFileName(Account account, string strType)
         {
             string strRet = string.Empty;
-
-            if (!Directory.Exists(DataDirectory))
-            {
-                Directory.CreateDirectory(DataDirectory);
-            }
-            else { }
 
             if (!account.IsEmpty)
             {
