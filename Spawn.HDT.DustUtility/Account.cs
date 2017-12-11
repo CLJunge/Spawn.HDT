@@ -244,7 +244,7 @@ namespace Spawn.HDT.DustUtility
 
             #region Member Variables
             private List<long> m_lstExcludedDecks;
-            private List<string> m_lstCardSelection;
+            private List<CachedCard> m_lstCardSelection;
             #endregion
 
             #region Properties
@@ -257,7 +257,7 @@ namespace Spawn.HDT.DustUtility
             #endregion
 
             #region CardSelection
-            public List<string> CardSelection
+            public List<CachedCard> CardSelection
             {
                 get => m_lstCardSelection;
                 set => m_lstCardSelection = value;
@@ -269,7 +269,7 @@ namespace Spawn.HDT.DustUtility
             public Preferences()
             {
                 m_lstExcludedDecks = new List<long>();
-                m_lstCardSelection = new List<string>();
+                m_lstCardSelection = new List<CachedCard>();
             }
             #endregion
 

@@ -43,8 +43,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
         private CardCollector m_cardCollector;
         private Parameters m_parameters;
-
-        private List<DataGridCardItem> m_lstSelection;
         #endregion
 
         #region Ctor
@@ -228,18 +226,33 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow(m_lstSelection ?? new List<DataGridCardItem>())
+                List<DataGridCardItem> lstSelection = m_account.AccountPreferences.CardSelection.ConvertAll(c =>
+                {
+                    CardWrapper wrapper = new CardWrapper(new HearthMirror.Objects.Card(c.Id, c.Count, c.IsGolden));
+
+                    return DataGridCardItem.FromCardWrapper(wrapper);
+                });
+
+                m_selectionWindow = new CardSelectionWindow(lstSelection)
                 {
                     Owner = this
                 };
 
                 m_selectionWindow.Closed += new EventHandler((s, args) =>
                 {
-                    m_lstSelection = null;
+                    m_account.AccountPreferences.CardSelection.Clear();
 
                     if (m_selectionWindow.SaveSelection)
                     {
-                        m_lstSelection = m_selectionWindow.CurrentItems;
+                        m_account.AccountPreferences.CardSelection = m_selectionWindow.CurrentItems.ConvertAll(i =>
+                        {
+                            return new CachedCard
+                            {
+                                Id = i.Tag.Card.Id,
+                                Count = i.Tag.Card.Count,
+                                IsGolden = i.Tag.Card.Premium
+                            };
+                        });
                     }
                     else { }
 
