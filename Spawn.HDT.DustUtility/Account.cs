@@ -55,12 +55,7 @@ namespace Spawn.HDT.DustUtility
         public Preferences AccountPreferences
         {
             get => m_preferences ?? (m_preferences = Preferences.Load(this));
-            set
-            {
-                m_preferences = value;
-
-                Preferences.Save(this, m_preferences);
-            }
+            set => m_preferences = value;
         }
         #endregion
         #endregion
@@ -164,6 +159,13 @@ namespace Spawn.HDT.DustUtility
         public bool IsDeckExcluded(long nDeckId)
         {
             return AccountPreferences.ExcludedDecks.Contains(nDeckId);
+        }
+        #endregion
+
+        #region SaveAccountPreferenes
+        public void SaveAccountPreferenes()
+        {
+            AccountPreferences.Save(this);
         }
         #endregion
 
@@ -274,13 +276,13 @@ namespace Spawn.HDT.DustUtility
             #endregion
 
             #region Save
-            public static void Save(Account account, Preferences preferences)
+            public void Save(Account account)
             {
-                FileManager.Write(DustUtilityPlugin.GetFullFileName(account, PreferencesString), preferences);
+                FileManager.Write(DustUtilityPlugin.GetFullFileName(account, PreferencesString), this);
             }
             #endregion
 
-            #region Load
+            #region [STATIC] Load
             public static Preferences Load(Account account)
             {
                 return FileManager.Load<Preferences>(DustUtilityPlugin.GetFullFileName(account, PreferencesString));
