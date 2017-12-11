@@ -224,5 +224,57 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
         #endregion
+
+        public class Preferences
+        {
+            #region Constants
+            public const string PreferencesString = "prefs";
+            #endregion
+
+            #region Member Variables
+            private List<long> m_lstExcludedDecks;
+            private List<string> m_lstCardSelection;
+            #endregion
+
+            #region Properties
+            #region ExcludedDecks
+            public List<long> ExcludedDecks
+            {
+                get => m_lstExcludedDecks;
+                set => m_lstExcludedDecks = value;
+            }
+            #endregion
+
+            #region CardSelection
+            public List<string> CardSelection
+            {
+                get => m_lstCardSelection;
+                set => m_lstCardSelection = value;
+            }
+            #endregion
+            #endregion
+
+            #region Ctor
+            public Preferences()
+            {
+                m_lstExcludedDecks = new List<long>();
+                m_lstCardSelection = new List<string>();
+            }
+            #endregion
+
+            #region Save
+            public static void Save(Account account, Preferences preferences)
+            {
+                FileManager.Write(DustUtilityPlugin.GetFullFileName(account, PreferencesString), preferences);
+            }
+            #endregion
+
+            #region Load
+            public static Preferences Load(Account account)
+            {
+                return FileManager.Load<Preferences>(DustUtilityPlugin.GetFullFileName(account, PreferencesString));
+            }
+            #endregion
+        }
     }
 }
