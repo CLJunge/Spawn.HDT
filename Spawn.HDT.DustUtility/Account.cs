@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Member Variables
-        private List<long> m_lstExcludedDecks;
+        private Preferences m_preferences;
         #endregion
 
         #region Properties
@@ -50,6 +50,19 @@ namespace Spawn.HDT.DustUtility
         #region IsValid
         public bool IsValid => !string.IsNullOrEmpty(AccountString);
         #endregion
+
+        #region AccountPreferences
+        public Preferences AccountPreferences
+        {
+            get => m_preferences ?? (m_preferences = Preferences.Load(this));
+            set
+            {
+                m_preferences = value;
+
+                Preferences.Save(this, m_preferences);
+            }
+        }
+        #endregion
         #endregion
 
         #region Ctor
@@ -70,8 +83,6 @@ namespace Spawn.HDT.DustUtility
 
                 DisplayString = string.Empty;
             }
-
-            m_lstExcludedDecks = new List<long>();
         }
         #endregion
 
@@ -132,7 +143,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (!IsDeckExcluded(nDeckId))
             {
-                m_lstExcludedDecks.Add(nDeckId);
+                AccountPreferences.ExcludedDecks.Add(nDeckId);
             }
             else { }
         }
@@ -143,7 +154,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (IsDeckExcluded(nDeckId))
             {
-                m_lstExcludedDecks.Remove(nDeckId);
+                AccountPreferences.ExcludedDecks.Remove(nDeckId);
             }
             else { }
         }
@@ -152,7 +163,7 @@ namespace Spawn.HDT.DustUtility
         #region IsDeckExcluded
         public bool IsDeckExcluded(long nDeckId)
         {
-            return m_lstExcludedDecks.Contains(nDeckId);
+            return AccountPreferences.ExcludedDecks.Contains(nDeckId);
         }
         #endregion
 
