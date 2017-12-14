@@ -73,4 +73,11 @@
 - Fixed using negative card count in history window to calculate dust
 - Fixed issue clicking on a row would not always select it
 - Various other fixes and improvements
+
+## v2.3.1
+- Fixed an issue where the data directory is not created, if it is the first time using the plugin
+- Backups are only created, if there are existing files for the current account
+
+## v2.3.2
+- Card selection and include/excluded decks are now saved persistently for each account
 -----------------------------
