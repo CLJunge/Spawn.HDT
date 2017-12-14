@@ -58,15 +58,12 @@
                         <Border BorderBrush="Black" BorderThickness="1" Margin="67,0,67,0">
                             <Image Source="{Binding HeroImage}" Width="39" Height="39" Grid.Column="0"/>
                         </Border>
-                        <TextBlock Text="{Binding Name}" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding CardCount, Converter={StaticResource cardCountConverter}}" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <TextBlock Text="{Binding Cost, Converter={StaticResource dustConverter}}" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Items>
-                <ui:ListViewDeckItem CardCount="30" Cost="12200" HeroImage="/Spawn.HDT.DustUtility;component/Resources/hero_anduin.png" Name="Big Priest"/>
-            </ListView.Items>
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
                     <Setter Property="ContextMenu" Value="{StaticResource contextMenu}"/>
