@@ -253,6 +253,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                                 IsGolden = i.Tag.Card.Premium
                             };
                         });
+
+                        m_account.SaveAccountPreferenes();
                     }
                     else { }
 
@@ -328,7 +330,12 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     Owner = this
                 };
 
-                m_decksWindow.Closed += new EventHandler((s, args) => m_decksWindow = null);
+                m_decksWindow.Closed += new EventHandler((s, args) =>
+                {
+                    m_decksWindow = null;
+
+                    m_account.SaveAccountPreferenes();
+                });
 
                 m_decksWindow.Show();
             }
