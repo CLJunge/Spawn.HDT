@@ -166,6 +166,8 @@ namespace Spawn.HDT.DustUtility
         public void SaveAccountPreferenes()
         {
             AccountPreferences.Save(this);
+
+            Log.WriteLine($"Saved preferences for {AccountString}", LogType.Debug);
         }
         #endregion
 
