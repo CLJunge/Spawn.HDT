@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using HearthMirror;
+using MahApps.Metro.Controls.Dialogs;
+using Spawn.HDT.DustUtility.Search;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using System.Collections.Generic;
 using System.Windows;
@@ -173,6 +175,26 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private void OnClearGridClick(object sender, RoutedEventArgs e)
         {
             ClearItems();
+        }
+        #endregion
+
+        #region OnImportPackClick
+        private void OnImportPackClick(object sender, RoutedEventArgs e)
+        {
+            List<HearthMirror.Objects.Card> lstLatestPack = Reflection.GetPackCards();
+
+            if (lstLatestPack?.Count > 0)
+            {
+                for (int i = 0; i < lstLatestPack.Count; i++)
+                {
+                    CardWrapper wrapper = new CardWrapper(lstLatestPack[i]);
+
+                    DataGridCardItem item = DataGridCardItem.FromCardWrapper(wrapper);
+
+                    AddItem(item);
+                }
+            }
+            else { }
         }
         #endregion
 
