@@ -83,4 +83,5 @@
 
 ## v2.3.3
 - Fixed an issue where the account preferences were not saved properly
+- Latest opened pack can now be imported to card selection
 -----------------------------
