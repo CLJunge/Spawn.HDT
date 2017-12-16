@@ -24,7 +24,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 ![Overlay](https://i.imgur.com/0343Un9.png)
 
 #### Selection Window
-- Drag cards into the selection window to create a list of cards that you want to disenchant (Selection is temporarily storable)
+- Drag cards into the selection window to create a list of cards that you want to disenchant.
 ![Overlay](https://i.imgur.com/X0vApAZ.png)
 
 #### Card History
