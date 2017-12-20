@@ -50,17 +50,16 @@ namespace Spawn.HDT.DustUtility.UI.Components
                 Vector diff = m_startPosition.Value - position;
 
                 if (m_draggedItem != null
-                    && (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance
-                    && Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+                    && (Math.Abs(diff.X) > (SystemParameters.MinimumHorizontalDragDistance / 3)
+                    && Math.Abs(diff.Y) > (SystemParameters.MinimumVerticalDragDistance / 3)))
                 {
                     System.Diagnostics.Debug.WriteLine($"dragging {m_draggedItem.Name}");
 
-                    DataObject data = new DataObject("item", m_draggedItem);
+                    DataObject data = new DataObject("item", m_draggedItem.CreateCopy());
 
                     DragDrop.DoDragDrop(dataGrid, data, DragDropEffects.Copy);
 
                     m_startPosition = null;
-
                     m_draggedItem = null;
                 }
                 else { }
@@ -96,7 +95,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
             if (e.Data.GetDataPresent("item"))
             {
-                DataGridCardItem item = (e.Data.GetData("item") as DataGridCardItem).CreateCopy();
+                DataGridCardItem item = e.Data.GetData("item") as DataGridCardItem;
 
                 System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
 
