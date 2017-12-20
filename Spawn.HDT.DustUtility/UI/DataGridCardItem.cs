@@ -126,7 +126,7 @@ namespace Spawn.HDT.DustUtility.UI
         #region [STATIC] FromCardWrapperEx
         public static DataGridCardItemEx FromCardWrapperEx(CardWrapperEx wrapper)
         {
-            return new DataGridCardItemEx()
+            DataGridCardItemEx retVal = new DataGridCardItemEx()
             {
                 Count = wrapper.Count,
                 Dust = wrapper.GetDustValue(),
@@ -140,7 +140,15 @@ namespace Spawn.HDT.DustUtility.UI
                 ManaCost = wrapper.DbCard.Cost,
                 Timestamp = wrapper.Timestamp,
                 Tag = wrapper
-            }; ;
+            };
+
+            if (retVal.Count > 0)
+            {
+                retVal.Dust = wrapper.Card.GetCraftingCost();
+            }
+            else { }
+
+            return retVal;
         }
         #endregion
     }
