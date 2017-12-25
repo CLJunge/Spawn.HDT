@@ -39,70 +39,10 @@ namespace Spawn.HDT.DustUtility.Offline
                     int nChanges = 0;
 
                     //new cards
-                    for (int i = 0; i < lstCurrent.Count; i++)
-                    {
-                        Card cardA = lstCurrent[i];
-
-                        HearthDb.Card dbCardA = HearthDb.Cards.All[cardA.Id];
-
-                        if (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
-                        {
-                            Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
-
-                            int nCount = cardA.Count;
-
-                            if (cardB != null)
-                            {
-                                nCount = cardA.Count - cardB.Count;
-                            }
-                            else { }
-
-                            lstCardsHistory.Add(new CachedCardEx
-                            {
-                                Id = cardA.Id,
-                                Count = nCount,
-                                IsGolden = cardA.Premium,
-                                Timestamp = DateTime.Now
-                            });
-
-                            nChanges += 1;
-                        }
-                        else { }
-                    }
+                    nChanges += CheckForNewCards(lstOldCollection, lstCardsHistory, lstCurrent, lstOld);
 
                     //disenchanted cards
-                    for (int i = 0; i < lstOld.Count; i++)
-                    {
-                        Card cardB = lstOld[i];
-
-                        HearthDb.Card dbCardB = HearthDb.Cards.All[cardB.Id];
-
-                        if (CardSets.All.ContainsKey(dbCardB.Set))
-                        {
-                            Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
-
-                            int nCount = cardB.Count;
-
-                            if (cardA != null)
-                            {
-                                nCount = cardB.Count - cardA.Count;
-                            }
-                            else { }
-
-                            nCount *= -1;
-
-                            lstCardsHistory.Add(new CachedCardEx
-                            {
-                                Id = cardB.Id,
-                                Count = nCount,
-                                IsGolden = cardB.Premium,
-                                Timestamp = DateTime.Now
-                            });
-
-                            nChanges += 1;
-                        }
-                        else { }
-                    }
+                    nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstCardsHistory, lstOld);
 
                     Log.WriteLine($"Found {nChanges} changes", LogType.Debug);
 
@@ -113,6 +53,88 @@ namespace Spawn.HDT.DustUtility.Offline
                 s_blnCheckInProgress = false;
             }
             else { }
+        }
+        #endregion
+
+        #region CheckForNewCards
+        private static int CheckForNewCards(List<Card> lstOldCollection, List<CachedCardEx> lstCardsHistory, List<Card> lstCurrent, List<Card> lstOld)
+        {
+            int nRet = 0;
+
+            for (int i = 0; i < lstCurrent.Count; i++)
+            {
+                Card cardA = lstCurrent[i];
+
+                HearthDb.Card dbCardA = HearthDb.Cards.All[cardA.Id];
+
+                if (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
+                {
+                    Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
+
+                    int nCount = cardA.Count;
+
+                    if (cardB != null)
+                    {
+                        nCount = cardA.Count - cardB.Count;
+                    }
+                    else { }
+
+                    lstCardsHistory.Add(new CachedCardEx
+                    {
+                        Id = cardA.Id,
+                        Count = nCount,
+                        IsGolden = cardA.Premium,
+                        Timestamp = DateTime.Now
+                    });
+
+                    nRet += 1;
+                }
+                else { }
+            }
+
+            return nRet;
+        }
+        #endregion
+
+        #region CheckForDisenchantedCards
+        private static int CheckForDisenchantedCards(List<Card> lstCurrentCollection, List<CachedCardEx> lstCardsHistory, List<Card> lstOld)
+        {
+            int nRet = 0;
+
+            for (int i = 0; i < lstOld.Count; i++)
+            {
+                Card cardB = lstOld[i];
+
+                HearthDb.Card dbCardB = HearthDb.Cards.All[cardB.Id];
+
+                if (CardSets.All.ContainsKey(dbCardB.Set))
+                {
+                    Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+
+                    int nCount = cardB.Count;
+
+                    if (cardA != null)
+                    {
+                        nCount = cardB.Count - cardA.Count;
+                    }
+                    else { }
+
+                    nCount *= -1;
+
+                    lstCardsHistory.Add(new CachedCardEx
+                    {
+                        Id = cardB.Id,
+                        Count = nCount,
+                        IsGolden = cardB.Premium,
+                        Timestamp = DateTime.Now
+                    });
+
+                    nRet += 1;
+                }
+                else { }
+            }
+
+            return nRet;
         }
         #endregion
 

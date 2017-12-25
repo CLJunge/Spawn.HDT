@@ -6,7 +6,7 @@ namespace Spawn.HDT.DustUtility.Offline
     public static class FileManager
     {
         #region Write
-        public static void Write<T>(string strPath, T value)
+        public static void Write<T>(string strPath, T value) where T : class, new()
         {
             if (File.Exists(strPath))
             {
