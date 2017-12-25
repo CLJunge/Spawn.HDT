@@ -33,7 +33,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         #region OnWindowLoaded
         private void OnWindowLoaded(object sender, RoutedEventArgs e)
         {
-            GitHubUpdateManager.DownloadProgressChanged += new System.Net.DownloadProgressChangedEventHandler(async (s, args) => await UpdateProgressBarAsync(args.ProgressPercentage));
+            GitHubUpdateManager.DownloadProgressChanged += async (s, args) => await UpdateProgressBarAsync(args.ProgressPercentage);
 
             GitHubUpdateManager.DownloadCompleted += OnDownloadFinished;
 

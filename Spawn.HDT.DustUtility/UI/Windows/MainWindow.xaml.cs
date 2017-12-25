@@ -41,7 +41,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private DecksInfoWindow m_decksWindow;
         private CollectionInfoWindow m_collectionWindow;
 
-        private CardCollector m_cardCollector;
+        private CardManager m_cardManager;
         private Parameters m_parameters;
         #endregion
 
@@ -58,7 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
             m_account = account;
 
-            m_cardCollector = new CardCollector(this, m_account);
+            m_cardManager = new CardManager(this, m_account);
 
             if (Settings.SearchParameters == null)
             {
@@ -143,7 +143,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnFiltersClick
         private void OnFiltersClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (m_cardCollector != null && m_parameters != null)
+            if (m_cardManager != null && m_parameters != null)
             {
                 ParametersDialog dialog = new ParametersDialog(m_parameters.DeepClone())
                 {
@@ -169,14 +169,14 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
             if (m_collectionWindow == null)
             {
-                int nCollectionValue = m_cardCollector.GetTotalDustValueForAllCards();
+                int nCollectionValue = m_cardManager.GetTotalDustValueForAllCards();
 
                 m_collectionWindow = new CollectionInfoWindow(m_account, nCollectionValue)
                 {
                     Owner = this
                 };
 
-                m_collectionWindow.Closed += new EventHandler((s, args) => m_collectionWindow = null);
+                m_collectionWindow.Closed += (s, args) => m_collectionWindow = null;
 
                 m_collectionWindow.Show();
             }
@@ -238,7 +238,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     Owner = this
                 };
 
-                m_selectionWindow.Closed += new EventHandler((s, args) =>
+                m_selectionWindow.Closed += (s, args) =>
                 {
                     m_account.AccountPreferences.CardSelection.Clear();
 
@@ -261,7 +261,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     openSelectionButton.IsEnabled = true;
 
                     m_selectionWindow = null;
-                });
+                };
 
                 m_selectionWindow.Show();
 
@@ -330,12 +330,12 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     Owner = this
                 };
 
-                m_decksWindow.Closed += new EventHandler((s, args) =>
+                m_decksWindow.Closed += (s, args) =>
                 {
                     m_decksWindow = null;
 
                     m_account.SaveAccountPreferenes();
-                });
+                };
 
                 m_decksWindow.Show();
             }

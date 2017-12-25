@@ -127,9 +127,9 @@ namespace Spawn.HDT.DustUtility.Net
 
             using (m_webClient = new WebClient())
             {
-                m_webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler((s, e) => DownloadProgressChanged?.Invoke(s, e));
+                m_webClient.DownloadProgressChanged += (s, e) => DownloadProgressChanged?.Invoke(s, e);
 
-                m_webClient.DownloadDataCompleted += new DownloadDataCompletedEventHandler((s, e) =>
+                m_webClient.DownloadDataCompleted += (s, e) =>
                 {
                     if (!e.Cancelled)
                     {
@@ -139,7 +139,7 @@ namespace Spawn.HDT.DustUtility.Net
                     {
                         Log.WriteLine("Download canceled", LogType.Debug);
                     }
-                });
+                };
 
                 m_webClient.DownloadDataAsync(new Uri($"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
             }

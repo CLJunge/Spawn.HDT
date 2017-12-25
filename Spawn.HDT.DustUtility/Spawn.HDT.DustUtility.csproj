@@ -92,7 +92,7 @@
     <Compile Include="Offline\HistoryManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="UI\Converters\DisplayLabelConverter.cs" />
-    <Compile Include="Search\CardCollector.cs" />
+    <Compile Include="Search\CardManager.cs" />
     <Compile Include="UI\Converters\CountLabelConverter.cs" />
     <Compile Include="Offline\Cache.cs" />
     <Compile Include="Offline\CachedCard.cs" />

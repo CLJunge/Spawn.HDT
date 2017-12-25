@@ -68,7 +68,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         #region OnSaveIntervalPreviewTextInput
         private void OnSaveIntervalPreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            e.Handled = !Search.CardCollector.NumericRegex.IsMatch(e.Text);
+            e.Handled = !Search.CardManager.NumericRegex.IsMatch(e.Text);
         }
         #endregion
         #endregion

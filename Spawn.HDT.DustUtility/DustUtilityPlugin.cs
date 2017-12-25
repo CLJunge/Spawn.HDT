@@ -178,12 +178,12 @@ namespace Spawn.HDT.DustUtility
 
                 m_window = new MainWindow(this, m_account);
 
-                m_window.Closed += new EventHandler((s, e) =>
+                m_window.Closed += (s, e) =>
                 {
                     m_account.SaveAccountPreferenes();
 
                     m_window = null;
-                });
+                };
 
                 m_window.Show();
             }

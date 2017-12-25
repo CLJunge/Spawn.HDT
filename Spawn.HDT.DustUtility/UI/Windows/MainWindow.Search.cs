@@ -15,7 +15,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region SearchAsync
         private async Task SearchAsync()
         {
-            if (m_cardCollector != null && m_parameters != null)
+            if (m_cardManager != null && m_parameters != null)
             {
                 await Task.Delay(1); //Return to ui thread
 
@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                 m_parameters.QueryString = inputBox.Text;
 
-                CardWrapper[] vCards = await m_cardCollector.GetCardsAsync(m_parameters);
+                CardWrapper[] vCards = await m_cardManager.GetCardsAsync(m_parameters);
 
                 CreateSearchResult(vCards).CopyTo(GetSearchResultContainerComponent());
 

@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.Search
         #region Static Ctor
         static Parameters()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((s, e) => typeof(Parameters).Assembly);
+            AppDomain.CurrentDomain.AssemblyResolve += (s, e) => typeof(Parameters).Assembly;
         }
         #endregion
 

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.Search
 {
-    public class CardCollector
+    public class CardManager
     {
         #region Static Variables
         public static Regex NumericRegex = new Regex("[0-9]+");
@@ -27,7 +27,7 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region Ctor
-        public CardCollector(MetroWindow mainWindow, Account account)
+        public CardManager(MetroWindow mainWindow, Account account)
         {
             m_mainWindow = mainWindow;
 
