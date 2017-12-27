@@ -231,7 +231,7 @@ namespace Spawn.HDT.DustUtility
 
             if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning)
             {
-                retVal = new Account(HearthMirror.Reflection.GetBattleTag(), Hearthstone_Deck_Tracker.Helper.GetCurrentRegion().Result);
+                retVal = new Account(Reflection.GetBattleTag(), Hearthstone_Deck_Tracker.Helper.GetCurrentRegion().Result);
             }
             else { }
 
