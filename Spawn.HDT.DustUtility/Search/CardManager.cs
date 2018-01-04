@@ -75,11 +75,11 @@ namespace Spawn.HDT.DustUtility.Search
             {
                 if (blnDustMode)
                 {
-                    GetCardsForDustAmount(parameters, lstRet);
+                    lstRet = GetCardsForDustAmount(parameters);
                 }
                 else
                 {
-                    GetCardByQueryString(parameters, lstRet);
+                    lstRet = GetCardByQueryString(parameters);
                 }
             }
             else { }
@@ -91,8 +91,10 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region GetCardForDustAmount
-        private void GetCardsForDustAmount(Parameters parameters, List<CardWrapper> lstCards)
+        private List<CardWrapper> GetCardsForDustAmount(Parameters parameters)
         {
+            List<CardWrapper> lstRet = new List<CardWrapper>();
+
             int nDustAmount = 0;
 
             try
@@ -125,7 +127,7 @@ namespace Spawn.HDT.DustUtility.Search
 
                     nTotalAmount += cardWrapper.GetDustValue();
 
-                    lstCards.Add(cardWrapper);
+                    lstRet.Add(cardWrapper);
 
                     blnDone = nTotalAmount >= nDustAmount;
                 }
@@ -135,9 +137,11 @@ namespace Spawn.HDT.DustUtility.Search
             //Remove low rarity cards if the total amount is over the targeted amount
             if (nTotalAmount > nDustAmount)
             {
-                RemoveRedundantCards(lstCards, parameters, nDustAmount, nTotalAmount);
+                RemoveRedundantCards(lstRet, parameters, nDustAmount, nTotalAmount);
             }
             else { }
+
+            return lstRet;
         }
         #endregion
 
@@ -193,8 +197,10 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region GetCardsByQueryString
-        private void GetCardByQueryString(Parameters parameters, List<CardWrapper> lstCards)
+        private List<CardWrapper> GetCardByQueryString(Parameters parameters)
         {
+            List<CardWrapper> lstRet = new List<CardWrapper>();
+
             bool blnDone = false;
 
             string strQueryString = parameters.QueryString.ToLowerInvariant();
@@ -213,11 +219,13 @@ namespace Spawn.HDT.DustUtility.Search
 
                     if (IsCardMatch(cardWrapper, strQueryString))
                     {
-                        lstCards.Add(cardWrapper);
+                        lstRet.Add(cardWrapper);
                     }
                     else { }
                 }
             }
+
+            return lstRet;
         }
         #endregion
 
@@ -282,11 +290,11 @@ namespace Spawn.HDT.DustUtility.Search
                     {
                         if (!m_account.IsDeckExcluded(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
                         {
-                            Card c = lstDecks[j].GetCard(card.Id);
+                            Card cardInDeck = lstDecks[j].GetCard(card.Id);
 
-                            if (c.Count > cardWrapper.MaxCountInDecks)
+                            if (cardInDeck.Count > cardWrapper.MaxCountInDecks)
                             {
-                                cardWrapper.MaxCountInDecks = c.Count;
+                                cardWrapper.MaxCountInDecks = cardInDeck.Count;
                             }
                             else { }
                         }
