@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             Log.WriteLine(sb.ToString(), LogType.Debug);
 
-            List<Card> lstCollection = m_account.LoadCollection();
+            List<Card> lstCollection = m_account.GetCollection();
 
             if (parameters.UnusedCardsOnly)
             {
@@ -61,12 +61,14 @@ namespace Spawn.HDT.DustUtility.Search
             }
             else
             {
-                m_lstUnusedCards = new List<CardWrapper>();
+                //m_lstUnusedCards = new List<CardWrapper>();
 
-                for (int i = 0; i < lstCollection.Count; i++)
-                {
-                    m_lstUnusedCards.Add(new CardWrapper(lstCollection[i]));
-                }
+                //for (int i = 0; i < lstCollection.Count; i++)
+                //{
+                //    m_lstUnusedCards.Add(new CardWrapper(lstCollection[i]));
+                //}
+
+                m_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
             }
 
             List<CardWrapper> lstRet = new List<CardWrapper>();
@@ -75,11 +77,11 @@ namespace Spawn.HDT.DustUtility.Search
             {
                 if (blnDustMode)
                 {
-                    lstRet = GetCardsForDustAmount(parameters);
+                    GetCardsForDustAmount(parameters, lstRet);
                 }
                 else
                 {
-                    lstRet = GetCardByQueryString(parameters);
+                    GetCardsByQueryString(parameters, lstRet);
                 }
             }
             else { }
@@ -90,11 +92,9 @@ namespace Spawn.HDT.DustUtility.Search
         }
         #endregion
 
-        #region GetCardForDustAmount
-        private List<CardWrapper> GetCardsForDustAmount(Parameters parameters)
+        #region GetCardsForDustAmount
+        private void GetCardsForDustAmount(Parameters parameters, List<CardWrapper> lstCards)
         {
-            List<CardWrapper> lstRet = new List<CardWrapper>();
-
             int nDustAmount = 0;
 
             try
@@ -127,7 +127,7 @@ namespace Spawn.HDT.DustUtility.Search
 
                     nTotalAmount += cardWrapper.GetDustValue();
 
-                    lstRet.Add(cardWrapper);
+                    lstCards.Add(cardWrapper);
 
                     blnDone = nTotalAmount >= nDustAmount;
                 }
@@ -137,11 +137,9 @@ namespace Spawn.HDT.DustUtility.Search
             //Remove low rarity cards if the total amount is over the targeted amount
             if (nTotalAmount > nDustAmount)
             {
-                RemoveRedundantCards(lstRet, parameters, nDustAmount, nTotalAmount);
+                RemoveRedundantCards(lstCards, parameters, nDustAmount, nTotalAmount);
             }
             else { }
-
-            return lstRet;
         }
         #endregion
 
@@ -197,10 +195,8 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region GetCardsByQueryString
-        private List<CardWrapper> GetCardByQueryString(Parameters parameters)
+        private void GetCardsByQueryString(Parameters parameters, List<CardWrapper> lstCards)
         {
-            List<CardWrapper> lstRet = new List<CardWrapper>();
-
             bool blnDone = false;
 
             string strQueryString = parameters.QueryString.ToLowerInvariant();
@@ -219,13 +215,11 @@ namespace Spawn.HDT.DustUtility.Search
 
                     if (IsCardMatch(cardWrapper, strQueryString))
                     {
-                        lstRet.Add(cardWrapper);
+                        lstCards.Add(cardWrapper);
                     }
                     else { }
                 }
             }
-
-            return lstRet;
         }
         #endregion
 
@@ -253,7 +247,7 @@ namespace Spawn.HDT.DustUtility.Search
         {
             int nRet = 0;
 
-            List<Card> lstCards = m_account.LoadCollection();
+            List<Card> lstCards = m_account.GetCollection();
 
             for (int i = 0; i < lstCards.Count; i++)
             {
@@ -277,7 +271,7 @@ namespace Spawn.HDT.DustUtility.Search
 
             m_lstUnusedCards.Clear();
 
-            List<Deck> lstDecks = m_account.LoadDecks();
+            List<Deck> lstDecks = m_account.GetDecks();
 
             if (lstDecks.Count > 0 && lstDecks[0].Cards.Count > 0)
             {

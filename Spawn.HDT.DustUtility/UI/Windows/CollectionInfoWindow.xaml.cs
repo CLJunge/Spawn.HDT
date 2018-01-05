@@ -35,7 +35,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         public CollectionInfoWindow(Account account, int collectionValue)
             : this()
         {
-            m_lstCollection = account.LoadCollection();
+            m_lstCollection = account.GetCollection();
 
             Title = $"{Title} ({collectionValue} Dust)";
         }

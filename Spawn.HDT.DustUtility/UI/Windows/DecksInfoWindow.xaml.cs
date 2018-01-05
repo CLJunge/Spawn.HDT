@@ -39,7 +39,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnLoaded
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            List<Deck> lstDecks = m_account.LoadDecks();
+            List<Deck> lstDecks = m_account.GetDecks();
 
             for (int i = 0; i < lstDecks.Count; i++)
             {

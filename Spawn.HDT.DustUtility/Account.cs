@@ -81,8 +81,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region LoadCollection
-        public List<Card> LoadCollection()
+        #region GetCollection
+        public List<Card> GetCollection()
         {
             List<Card> lstRet = null;
 
@@ -107,8 +107,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region LoadDecks
-        public List<Deck> LoadDecks()
+        #region GetDecks
+        public List<Deck> GetDecks()
         {
             List<Deck> lstRet = null;
 
