@@ -16,16 +16,19 @@ namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
-        #region Static Variables
+        #region Static Properties
         public static string DataDirectory => GetDataDirectory();
         public static bool IsOffline { get; private set; }
         #endregion
 
+        #region Static Variables
+        private static Window s_window;
+
+        private static Account s_account;
+        #endregion
+
         #region Member Variables
         private MenuItem m_menuItem;
-        private Window m_window;
-
-        private Account m_account;
         #endregion
 
         #region Properties
@@ -52,10 +55,6 @@ namespace Spawn.HDT.DustUtility
         #region MenuItem
         public MenuItem MenuItem => m_menuItem;
         #endregion
-
-        #region HasMultipleAccounts
-        public bool HasMultipleAccounts => GetAccountList().Count > 1;
-        #endregion
         #endregion
 
         #region Ctor
@@ -69,7 +68,7 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            UpdateApp();
+            UpdatePlugin();
 
             CreateMenuItem();
 
@@ -148,13 +147,13 @@ namespace Spawn.HDT.DustUtility
         {
             if (Core.Game.IsRunning || Settings.OfflineMode)
             {
-                if (m_account == null || (m_account != null && m_account.IsEmpty))
+                if (s_account == null || (s_account != null && s_account.IsEmpty))
                 {
-                    ObtainAccount(false);
+                    SelectAccount(false);
                 }
                 else { }
 
-                if (m_account != null)
+                if (s_account != null)
                 {
                     OpenMainWindow();
                 }
@@ -167,131 +166,6 @@ namespace Spawn.HDT.DustUtility
             else { }
         }
         #endregion
-        #endregion
-
-        #region OpenMainWindow
-        private void OpenMainWindow()
-        {
-            if (m_window == null)
-            {
-                Log.WriteLine($"Opening main window for {m_account.AccountString}", LogType.Info);
-
-                m_window = new MainWindow(this, m_account);
-
-                m_window.Closed += (s, e) =>
-                {
-                    m_account.SaveAccountPreferenes();
-
-                    m_window = null;
-                };
-
-                m_window.Show();
-            }
-            else
-            {
-                BringWindowToFront(m_window);
-            }
-        }
-        #endregion
-
-        #region ObtainAccount
-        private void ObtainAccount(bool blnIsSwitching)
-        {
-            if (Core.Game.IsRunning && !blnIsSwitching)
-            {
-                m_account = Account.Current;
-            }
-            else
-            {
-                List<Account> lstAccounts = GetAccountList();
-
-                if (lstAccounts.Count == 1)
-                {
-                    m_account = lstAccounts[0];
-                }
-                else if (lstAccounts.Count > 1)
-                {
-                    AccountSelectorDialog accSelectorDialog = new AccountSelectorDialog(lstAccounts);
-
-                    if (accSelectorDialog.ShowDialog().Value)
-                    {
-                        m_account = Account.Parse(accSelectorDialog.SelectedAccount);
-
-                        Settings.LastSelectedAccount = m_account.AccountString;
-                    }
-                    else { }
-                }
-                else
-                {
-                    m_account = Account.Empty;
-                }
-            }
-
-            Log.WriteLine($"Account: {m_account?.AccountString}", LogType.Debug);
-        }
-        #endregion
-
-        #region GetAccountList
-        private List<Account> GetAccountList()
-        {
-            List<Account> lstRet = new List<Account>();
-
-            if (Directory.Exists(DataDirectory))
-            {
-                string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{Cache.CollectionString}.xml");
-
-                for (int i = 0; i < vFiles.Length; i++)
-                {
-                    string strCollectionFileName = vFiles[i];
-
-                    string strDecksFileName = strCollectionFileName.Replace($"_{Cache.CollectionString}", $"_{Cache.DecksString}");
-
-                    if (File.Exists(strDecksFileName))
-                    {
-                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Cache.CollectionString}", string.Empty);
-
-                        lstRet.Add(Account.Parse(strAccountString));
-                    }
-                    else { }
-                }
-            }
-            else { }
-
-            return lstRet;
-        }
-        #endregion
-
-        #region SwitchAccounts
-        public void SwitchAccounts()
-        {
-            if (m_window != null)
-            {
-                Log.WriteLine("Switching accounts...", LogType.Debug);
-
-                Account oldAcc = m_account;
-
-                m_account = null;
-
-                ObtainAccount(true);
-
-                if (m_account == null)
-                {
-                    m_account = oldAcc;
-                }
-                else { }
-
-                if (!m_account.Equals(oldAcc))
-                {
-                    m_window.Close();
-                }
-                else { }
-
-                OpenMainWindow();
-
-                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={m_account.AccountString}", LogType.Debug);
-            }
-            else { }
-        }
         #endregion
 
         #region CreateMenuItem
@@ -310,69 +184,9 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region GetDataDirectory
-        private static string GetDataDirectory()
-        {
-            string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
-
-            if (!Directory.Exists(strRet))
-            {
-                Directory.CreateDirectory(strRet);
-            }
-            else { }
-
-            return strRet;
-        }
-        #endregion
-
-        #region GetFullFileName
-        public static string GetFullFileName(Account account, string strType)
-        {
-            string strRet = string.Empty;
-
-            if (!account.IsEmpty)
-            {
-                strRet = Path.Combine(DataDirectory, $"{account.AccountString}_{strType}.xml");
-            }
-            else
-            {
-                strRet = Path.Combine(DataDirectory, $"{strType}.xml");
-            }
-
-            return strRet;
-        }
-        #endregion
-
-        #region OnAssemblyResolve
-        private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            Assembly retVal = null;
-
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            AssemblyName assemblyName = new AssemblyName(args.Name);
-
-            string strPath = $"{assemblyName.Name}.dll";
-
-            using (Stream stream = executingAssembly.GetManifestResourceStream(strPath))
-            {
-                if (stream != null)
-                {
-                    byte[] vRawBytes = new byte[stream.Length];
-
-                    stream.Read(vRawBytes, 0, vRawBytes.Length);
-
-                    retVal = Assembly.Load(vRawBytes);
-                }
-                else { }
-            }
-
-            return retVal;
-        }
-        #endregion
-
         #region Update Stuff
-        #region UpdateApp
-        public void UpdateApp()
+        #region UpdatePlugin
+        public void UpdatePlugin()
         {
             //Renamed sort order items
             if (Properties.Settings.Default.Version <= 1)
@@ -419,7 +233,7 @@ namespace Spawn.HDT.DustUtility
         private void UpdateHistoryFiles()
         {
             //Create backup for each account
-            List<Account> lstAccounts = GetAccountList();
+            List<Account> lstAccounts = GetAccounts();
 
             for (int i = 0; i < lstAccounts.Count; i++)
             {
@@ -476,7 +290,193 @@ namespace Spawn.HDT.DustUtility
         #endregion
         #endregion
 
-        #region [STATIC] BringWindowToFront
+        #region OnAssemblyResolve
+        private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            Assembly retVal = null;
+
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = new AssemblyName(args.Name);
+
+            string strPath = $"{assemblyName.Name}.dll";
+
+            using (Stream stream = executingAssembly.GetManifestResourceStream(strPath))
+            {
+                if (stream != null)
+                {
+                    byte[] vRawBytes = new byte[stream.Length];
+
+                    stream.Read(vRawBytes, 0, vRawBytes.Length);
+
+                    retVal = Assembly.Load(vRawBytes);
+                }
+                else { }
+            }
+
+            return retVal;
+        }
+        #endregion
+
+        #region Static Methods
+        #region OpenMainWindow
+        private static void OpenMainWindow()
+        {
+            if (s_window == null)
+            {
+                Log.WriteLine($"Opening main window for {s_account.AccountString}", LogType.Info);
+
+                s_window = new MainWindow(s_account, GetAccounts().Count > 1);
+
+                s_window.Closed += (s, e) =>
+                {
+                    s_account.SaveAccountPreferenes();
+
+                    s_window = null;
+                };
+
+                s_window.Show();
+            }
+            else
+            {
+                BringWindowToFront(s_window);
+            }
+        }
+        #endregion
+
+        #region SelectAccount
+        private static void SelectAccount(bool blnIsSwitching)
+        {
+            if (Core.Game.IsRunning && !blnIsSwitching)
+            {
+                s_account = Account.Current;
+            }
+            else
+            {
+                List<Account> lstAccounts = GetAccounts();
+
+                if (lstAccounts.Count == 1)
+                {
+                    s_account = lstAccounts[0];
+                }
+                else if (lstAccounts.Count > 1)
+                {
+                    AccountSelectorDialog accSelectorDialog = new AccountSelectorDialog(lstAccounts);
+
+                    if (accSelectorDialog.ShowDialog().Value)
+                    {
+                        s_account = Account.Parse(accSelectorDialog.SelectedAccount);
+
+                        Settings.LastSelectedAccount = s_account.AccountString;
+                    }
+                    else { }
+                }
+                else
+                {
+                    s_account = Account.Empty;
+                }
+            }
+
+            Log.WriteLine($"Account: {s_account?.AccountString}", LogType.Debug);
+        }
+        #endregion
+
+        #region GetAccounts
+        private static List<Account> GetAccounts()
+        {
+            List<Account> lstRet = new List<Account>();
+
+            if (Directory.Exists(DataDirectory))
+            {
+                string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{Cache.CollectionString}.xml");
+
+                for (int i = 0; i < vFiles.Length; i++)
+                {
+                    string strCollectionFileName = vFiles[i];
+
+                    string strDecksFileName = strCollectionFileName.Replace($"_{Cache.CollectionString}", $"_{Cache.DecksString}");
+
+                    if (File.Exists(strDecksFileName))
+                    {
+                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Cache.CollectionString}", string.Empty);
+
+                        lstRet.Add(Account.Parse(strAccountString));
+                    }
+                    else { }
+                }
+            }
+            else { }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region SwitchAccounts
+        public static void SwitchAccounts()
+        {
+            if (s_window != null)
+            {
+                Log.WriteLine("Switching accounts...", LogType.Debug);
+
+                Account oldAcc = s_account;
+
+                s_account = null;
+
+                SelectAccount(true);
+
+                if (s_account == null)
+                {
+                    s_account = oldAcc;
+                }
+                else { }
+
+                if (!s_account.Equals(oldAcc))
+                {
+                    s_window.Close();
+                }
+                else { }
+
+                OpenMainWindow();
+
+                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={s_account.AccountString}", LogType.Debug);
+            }
+            else { }
+        }
+        #endregion
+
+        #region GetDataDirectory
+        private static string GetDataDirectory()
+        {
+            string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+
+            if (!Directory.Exists(strRet))
+            {
+                Directory.CreateDirectory(strRet);
+            }
+            else { }
+
+            return strRet;
+        }
+        #endregion
+
+        #region GetFullFileName
+        public static string GetFullFileName(Account account, string strType)
+        {
+            string strRet = string.Empty;
+
+            if (!account.IsEmpty)
+            {
+                strRet = Path.Combine(DataDirectory, $"{account.AccountString}_{strType}.xml");
+            }
+            else
+            {
+                strRet = Path.Combine(DataDirectory, $"{strType}.xml");
+            }
+
+            return strRet;
+        }
+        #endregion
+
+        #region BringWindowToFront
         public static void BringWindowToFront(Window window)
         {
             window.Activate();
@@ -484,6 +484,7 @@ namespace Spawn.HDT.DustUtility
             window.Topmost = false;
             window.Focus();
         }
+        #endregion
         #endregion
     }
 }

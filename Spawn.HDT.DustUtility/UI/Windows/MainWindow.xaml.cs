@@ -34,7 +34,6 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region Member Variables
-        private DustUtilityPlugin m_plugin;
         private Account m_account;
 
         private CardSelectionWindow m_selectionWindow;
@@ -51,11 +50,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             InitializeComponent();
         }
 
-        public MainWindow(DustUtilityPlugin plugin, Account account)
+        public MainWindow(Account account, bool multipleAccountsAvailable)
             : this()
         {
-            m_plugin = plugin;
-
             m_account = account;
 
             m_cardManager = new CardManager(this, m_account);
@@ -85,7 +82,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 historyButton.Visibility = System.Windows.Visibility.Visible;
 
-                if (DustUtilityPlugin.IsOffline && m_plugin.HasMultipleAccounts)
+                if (DustUtilityPlugin.IsOffline && multipleAccountsAvailable)
                 {
                     switchAccountButton.Visibility = System.Windows.Visibility.Visible;
                 }
@@ -302,7 +299,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnSwitchAccountClick
         private void OnSwitchAccountClick(object sender, System.Windows.RoutedEventArgs e)
         {
-            m_plugin.SwitchAccounts();
+            DustUtilityPlugin.SwitchAccounts();
         }
         #endregion
 
