@@ -245,17 +245,30 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             int nRet = 0;
 
+            //Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
+
             List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c =>
             {
-                HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+                Card card = Cards.Collectible[c.Id];
 
                 return card.Set == cardSet && card.Rarity == rarity && !c.Premium;
             });
 
             for (int i = 0; i < lstChunk.Count; i++)
             {
-                nRet += lstChunk[i].Count;
+                if (Cards.All[lstChunk[i].Id].Rarity != Rarity.LEGENDARY)
+                {
+                    nRet += Math.Max(lstChunk[i].Count, 2);
+                }
+                else
+                {
+                    nRet += Math.Max(lstChunk[i].Count, 1);
+                }
+
+                //Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
             }
+
+            //Debug.WriteLine(string.Empty);
 
             return nRet;
         }
