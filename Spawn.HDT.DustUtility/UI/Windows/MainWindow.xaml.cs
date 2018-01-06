@@ -102,6 +102,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             //Create backup
             BackupManager.Create(m_account);
 
+            //Delete old backups
+            BackupManager.DeleteOldBackups(m_account);
+
             //Perform update check
             if (Settings.CheckForUpdate && await GitHubUpdateManager.CheckForUpdateAsync())
             {

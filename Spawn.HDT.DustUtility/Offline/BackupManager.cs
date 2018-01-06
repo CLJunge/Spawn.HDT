@@ -108,6 +108,26 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
+        #region DeleteOldBackups
+        public static void DeleteOldBackups(Account account)
+        {
+            string strDirectory = GetDirectory(account);
+
+            string[] vFiles = Directory.GetFiles(strDirectory);
+
+            for (int i = 0; i < vFiles.Length; i++)
+            {
+                FileInfo fileInfo = new FileInfo(vFiles[i]);
+
+                if (fileInfo.CreationTimeUtc.Date < DateTime.Now.Date.AddMonths(-1))
+                {
+                    fileInfo.Delete();
+                }
+                else { }
+            }
+        }
+        #endregion
+
         #region BackupExists
         public static bool BackupExists(Account account, DateTime date)
         {
@@ -117,20 +137,27 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
-        #region GetFileName
-        private static string GetFileName(Account account, DateTime date)
+        #region GetDirectory
+        private static string GetDirectory(Account account)
         {
-            string strDirectory = Path.Combine(DustUtilityPlugin.DataDirectory, "Backup", account.AccountString);
+            string strRet = Path.Combine(DustUtilityPlugin.DataDirectory, "Backup", account.AccountString);
 
-            if (!Directory.Exists(strDirectory))
+            if (!Directory.Exists(strRet))
             {
-                Directory.CreateDirectory(strDirectory);
+                Directory.CreateDirectory(strRet);
             }
             else { }
 
+            return strRet;
+        }
+        #endregion
+
+        #region GetFileName
+        private static string GetFileName(Account account, DateTime date)
+        {
             string strFileName = $"backup_{date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.zip";
 
-            return Path.Combine(strDirectory, strFileName);
+            return Path.Combine(GetDirectory(account), strFileName);
         }
         #endregion
     }
