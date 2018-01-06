@@ -84,4 +84,9 @@
 ## v2.3.3
 - Fixed an issue where the account preferences were not saved properly
 - Latest opened pack can now be imported to card selection
+
+## v2.3.4
+- Displaying correct card count in collection info window
+- Displaying crafting cost if a card is added (History)
+- Deleting backups older than one month
 -----------------------------
