@@ -183,8 +183,6 @@ namespace Spawn.HDT.DustUtility.Offline
 
             if (!account.IsEmpty && account.IsValid)
             {
-                Log.WriteLine("Checking for changes...", LogType.Debug);
-
                 HistoryManager.CheckCollection(account);
 
                 Log.WriteLine("Saving collection", LogType.Debug);
