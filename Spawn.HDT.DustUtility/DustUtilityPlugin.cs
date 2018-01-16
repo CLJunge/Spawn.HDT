@@ -233,11 +233,11 @@ namespace Spawn.HDT.DustUtility
         private void UpdateHistoryFiles()
         {
             //Create backup for each account
-            List<Account> lstAccounts = GetAccounts();
+            Account[] vAccounts = GetAccounts();
 
-            for (int i = 0; i < lstAccounts.Count; i++)
+            for (int i = 0; i < vAccounts.Length; i++)
             {
-                BackupManager.Create(lstAccounts[i]);
+                BackupManager.Create(vAccounts[i]);
             }
 
             //Modify files
@@ -325,7 +325,7 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine($"Opening main window for {s_account.AccountString}", LogType.Info);
 
-                s_window = new MainWindow(s_account, GetAccounts().Count > 1);
+                s_window = new MainWindow(s_account, GetAccounts().Length > 1);
 
                 s_window.Closed += (s, e) =>
                 {
@@ -352,15 +352,15 @@ namespace Spawn.HDT.DustUtility
             }
             else
             {
-                List<Account> lstAccounts = GetAccounts();
+                Account[] vAccounts = GetAccounts();
 
-                if (lstAccounts.Count == 1)
+                if (vAccounts.Length == 1)
                 {
-                    s_account = lstAccounts[0];
+                    s_account = vAccounts[0];
                 }
-                else if (lstAccounts.Count > 1)
+                else if (vAccounts.Length > 1)
                 {
-                    AccountSelectorDialog accSelectorDialog = new AccountSelectorDialog(lstAccounts);
+                    AccountSelectorDialog accSelectorDialog = new AccountSelectorDialog(vAccounts);
 
                     if (accSelectorDialog.ShowDialog().Value)
                     {
@@ -381,7 +381,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetAccounts
-        private static List<Account> GetAccounts()
+        private static Account[] GetAccounts()
         {
             List<Account> lstRet = new List<Account>();
 
@@ -406,7 +406,7 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            return lstRet;
+            return lstRet.ToArray();
         }
         #endregion
 

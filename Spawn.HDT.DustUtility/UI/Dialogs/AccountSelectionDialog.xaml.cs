@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Spawn.HDT.DustUtility.UI.Dialogs
 {
@@ -15,15 +14,15 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             InitializeComponent();
         }
 
-        public AccountSelectorDialog(List<Account> accounts)
+        public AccountSelectorDialog(Account[] accounts)
             : this()
         {
-            for (int i = 0; i < accounts.Count; i++)
+            for (int i = 0; i < accounts.Length; i++)
             {
                 cbAccounts.Items.Add(accounts[i]);
             }
 
-            if (accounts.Count > 0)
+            if (accounts.Length > 0)
             {
                 if (string.IsNullOrEmpty(Settings.LastSelectedAccount))
                 {
