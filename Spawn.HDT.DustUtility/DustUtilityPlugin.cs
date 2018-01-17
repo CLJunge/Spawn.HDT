@@ -329,7 +329,7 @@ namespace Spawn.HDT.DustUtility
 
                 s_window.Closed += (s, e) =>
                 {
-                    s_account.SaveAccountPreferenes();
+                    s_account.SavePreferenes();
 
                     s_window = null;
                 };

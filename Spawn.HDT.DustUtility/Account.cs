@@ -162,8 +162,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region SaveAccountPreferenes
-        public void SaveAccountPreferenes()
+        #region SavePreferenes
+        public void SavePreferenes()
         {
             AccountPreferences.Save(this);
 
