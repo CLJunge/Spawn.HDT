@@ -254,7 +254,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                             };
                         });
 
-                        m_account.SaveAccountPreferenes();
+                        m_account.SavePreferenes();
                     }
                     else { }
 
@@ -334,7 +334,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                 {
                     m_decksWindow = null;
 
-                    m_account.SaveAccountPreferenes();
+                    m_account.SavePreferenes();
                 };
 
                 m_decksWindow.Show();
