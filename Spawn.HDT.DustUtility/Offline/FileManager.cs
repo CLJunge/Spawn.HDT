@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace Spawn.HDT.DustUtility.Offline
@@ -8,17 +9,24 @@ namespace Spawn.HDT.DustUtility.Offline
         #region Write
         public static void Write<T>(string strPath, T value) where T : class, new()
         {
-            if (File.Exists(strPath))
+            try
             {
-                File.Delete(strPath);
+                if (File.Exists(strPath))
+                {
+                    File.Delete(strPath);
+                }
+                else { }
+
+                using (StreamWriter writer = new StreamWriter(strPath))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+                    serializer.Serialize(writer, value);
+                }
             }
-            else { }
-
-            using (StreamWriter writer = new StreamWriter(strPath))
+            catch (System.Exception ex)
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-                serializer.Serialize(writer, value);
+                Log.WriteLine($"Exception occured while writing to file \"{strPath}\": {ex}", LogType.Error);
             }
         }
         #endregion
@@ -28,16 +36,23 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             T retVal = default(T);
 
-            if (File.Exists(strPath))
+            try
             {
-                using (StreamReader reader = new StreamReader(strPath))
+                if (File.Exists(strPath))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    using (StreamReader reader = new StreamReader(strPath))
+                    {
+                        XmlSerializer serializer = new XmlSerializer(typeof(T));
 
-                    retVal = (T)serializer.Deserialize(reader);
+                        retVal = (T)serializer.Deserialize(reader);
+                    }
                 }
+                else { }
             }
-            else { }
+            catch (System.Exception ex)
+            {
+                Log.WriteLine($"Exception occured while reading from file \"{strPath}\": {ex}", LogType.Error);
+            }
 
             if (retVal == null)
             {
