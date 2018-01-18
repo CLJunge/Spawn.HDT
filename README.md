@@ -36,7 +36,7 @@ Enter the amout of dust you are aiming for and the plugin searches through your 
 ![Overlay](https://i.imgur.com/v2zfoX7.png)
 
 #### Collection Info
-- Shows progress for each expansion. See possible amounts of dust for each expansion.
+- Check progress and possible amounts of dust for each expansion.
 ![Overlay](https://i.imgur.com/ftOpkoX.png)
 
 ## Settings
