@@ -89,4 +89,5 @@
 - Displaying correct card count in collection info window
 - Displaying crafting cost if a card is added (History)
 - Deleting backups older than one month
+- Various other fixes and/or improvements
 -----------------------------
