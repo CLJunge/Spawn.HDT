@@ -1,5 +1,6 @@
 ﻿using HearthDb;
 using HearthDb.Enums;
+using Spawn.HDT.DustUtility.Search;
 using Spawn.HDT.DustUtility.UI.Components;
 using Spawn.HDT.DustUtility.UI.Converters;
 using System;
@@ -32,12 +33,12 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             listView.ItemContainerGenerator.StatusChanged += OnItemContainerGeneratorStatusChanged;
         }
 
-        public CollectionInfoWindow(Account account, int collectionValue)
+        public CollectionInfoWindow(Account account)
             : this()
         {
             m_lstCollection = account.GetCollection();
 
-            Title = $"{Title} ({collectionValue} Dust)";
+            Title = $"{Title} ({CardManager.GetCollectionValue(account)} Dust)";
         }
         #endregion
 
@@ -245,7 +246,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             int nRet = 0;
 
-            //Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
+            System.Diagnostics.Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
 
             List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c =>
             {
@@ -265,10 +266,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                     nRet += Math.Max(lstChunk[i].Count, 1);
                 }
 
-                //Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
+                System.Diagnostics.Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
             }
 
-            //Debug.WriteLine(string.Empty);
+            System.Diagnostics.Debug.WriteLine(string.Empty);
 
             return nRet;
         }

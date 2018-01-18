@@ -242,24 +242,6 @@ namespace Spawn.HDT.DustUtility.Search
         }
         #endregion
 
-        #region GetTotalDustValueForAllCards
-        public int GetTotalDustValueForAllCards()
-        {
-            int nRet = 0;
-
-            List<Card> lstCards = m_account.GetCollection();
-
-            for (int i = 0; i < lstCards.Count; i++)
-            {
-                Card card = lstCards[i];
-
-                nRet += card.GetDustValue() * card.Count;
-            }
-
-            return nRet;
-        }
-        #endregion
-
         #region CheckForUnusedCardsAsync
         private async Task CheckForUnusedCardsAsync(List<Card> lstCollection)
         {
@@ -365,6 +347,24 @@ namespace Spawn.HDT.DustUtility.Search
             }
 
             return lstRet;
+        }
+        #endregion
+
+        #region [STATIC] GetCollectionValue
+        public static int GetCollectionValue(Account account)
+        {
+            int nRet = 0;
+
+            List<Card> lstCards = account.GetCollection();
+
+            for (int i = 0; i < lstCards.Count; i++)
+            {
+                Card card = lstCards[i];
+
+                nRet += card.GetDustValue() * card.Count;
+            }
+
+            return nRet;
         }
         #endregion
     }

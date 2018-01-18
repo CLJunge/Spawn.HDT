@@ -169,9 +169,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
             if (m_collectionWindow == null)
             {
-                int nCollectionValue = m_cardManager.GetTotalDustValueForAllCards();
-
-                m_collectionWindow = new CollectionInfoWindow(m_account, nCollectionValue)
+                m_collectionWindow = new CollectionInfoWindow(m_account)
                 {
                     Owner = this
                 };
