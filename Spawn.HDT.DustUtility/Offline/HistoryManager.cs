@@ -27,6 +27,8 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 s_blnCheckInProgress = true;
 
+                Log.WriteLine("Checking for changes...", LogType.Debug);
+
                 List<Card> lstOldCollection = Cache.LoadCollection(account);
 
                 List<CachedCardEx> lstCardsHistory = LoadHistory(account);

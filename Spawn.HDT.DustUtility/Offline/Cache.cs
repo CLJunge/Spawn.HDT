@@ -93,20 +93,27 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             List<Card> lstRet = new List<Card>();
 
-            string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
-
-            if (File.Exists(strPath))
+            try
             {
-                List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
 
-                for (int i = 0; i < lstCachedCards.Count; i++)
+                if (File.Exists(strPath))
                 {
-                    CachedCard cachedCard = lstCachedCards[i];
+                    List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
 
-                    lstRet.Add(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden));
+                    for (int i = 0; i < lstCachedCards.Count; i++)
+                    {
+                        CachedCard cachedCard = lstCachedCards[i];
+
+                        lstRet.Add(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden));
+                    }
                 }
+                else { }
             }
-            else { }
+            catch (System.Exception ex)
+            {
+                Log.WriteLine($"Exception occured while loading collection: {ex}", LogType.Error);
+            }
 
             return lstRet;
         }
@@ -117,33 +124,40 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             List<Deck> lstRet = new List<Deck>();
 
-            string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
-
-            if (File.Exists(strPath))
+            try
             {
-                List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
 
-                for (int i = 0; i < lstCachedDecks.Count; i++)
+                if (File.Exists(strPath))
                 {
-                    CachedDeck cachedDeck = lstCachedDecks[i];
+                    List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
 
-                    Deck deck = new Deck()
+                    for (int i = 0; i < lstCachedDecks.Count; i++)
                     {
-                        Id = cachedDeck.Id,
-                        Name = cachedDeck.Name,
-                        Hero = cachedDeck.Hero,
-                        IsWild = cachedDeck.IsWild,
-                        Type = cachedDeck.Type,
-                        SeasonId = cachedDeck.SeasonId,
-                        CardBackId = cachedDeck.CardBackId,
-                        HeroPremium = cachedDeck.HeroPremium,
-                        Cards = cachedDeck.Cards.ToCards()
-                    };
+                        CachedDeck cachedDeck = lstCachedDecks[i];
 
-                    lstRet.Add(deck);
+                        Deck deck = new Deck()
+                        {
+                            Id = cachedDeck.Id,
+                            Name = cachedDeck.Name,
+                            Hero = cachedDeck.Hero,
+                            IsWild = cachedDeck.IsWild,
+                            Type = cachedDeck.Type,
+                            SeasonId = cachedDeck.SeasonId,
+                            CardBackId = cachedDeck.CardBackId,
+                            HeroPremium = cachedDeck.HeroPremium,
+                            Cards = cachedDeck.Cards.ToCards()
+                        };
+
+                        lstRet.Add(deck);
+                    }
                 }
+                else { }
             }
-            else { }
+            catch (System.Exception ex)
+            {
+                Log.WriteLine($"Exception occured while loading decks: {ex}", LogType.Error);
+            }
 
             return lstRet;
         }
@@ -183,8 +197,6 @@ namespace Spawn.HDT.DustUtility.Offline
 
             if (!account.IsEmpty && account.IsValid)
             {
-                Log.WriteLine("Checking for changes...", LogType.Debug);
-
                 HistoryManager.CheckCollection(account);
 
                 Log.WriteLine("Saving collection", LogType.Debug);

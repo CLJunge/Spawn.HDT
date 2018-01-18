@@ -92,7 +92,7 @@ namespace Spawn.HDT.DustUtility.Net
                                 }
                                 else { }
 
-                                Log.WriteLine("New release available", LogType.Info);
+                                Log.WriteLine("New update available", LogType.Info);
                             }
                             else
                             {

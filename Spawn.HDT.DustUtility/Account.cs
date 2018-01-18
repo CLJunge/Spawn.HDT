@@ -101,7 +101,10 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine("Loaded collection", LogType.Debug);
             }
-            else { }
+            else
+            {
+                Log.WriteLine("Couldn't load collection!", LogType.Error);
+            }
 
             return lstRet;
         }
@@ -127,7 +130,10 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine("Loaded decks", LogType.Debug);
             }
-            else { }
+            else
+            {
+                Log.WriteLine("Couldn't load decks!", LogType.Error);
+            }
 
             return lstRet;
         }
@@ -162,8 +168,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region SaveAccountPreferenes
-        public void SaveAccountPreferenes()
+        #region SavePreferenes
+        public void SavePreferenes()
         {
             AccountPreferences.Save(this);
 
