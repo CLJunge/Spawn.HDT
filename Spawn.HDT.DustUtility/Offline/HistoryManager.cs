@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
                 Log.WriteLine("Checking for changes...", LogType.Debug);
 
-                List<Card> lstOldCollection = Cache.LoadCollection(account);
+                List<Card> lstOldCollection = account.GetCollection();
 
                 List<CachedCardEx> lstCardsHistory = LoadHistory(account);
 
