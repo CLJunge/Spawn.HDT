@@ -257,16 +257,17 @@ namespace Spawn.HDT.DustUtility.UI.Windows
                 return card.Set == cardSet && card.Rarity == rarity && !c.Premium;
             });
 
+            int nMaxCount = 2;
+
+            if (rarity == Rarity.LEGENDARY)
+            {
+                nMaxCount = 1;
+            }
+            else { }
+
             for (int i = 0; i < lstChunk.Count; i++)
             {
-                if (Cards.All[lstChunk[i].Id].Rarity != Rarity.LEGENDARY)
-                {
-                    nRet += Math.Max(lstChunk[i].Count, 2);
-                }
-                else
-                {
-                    nRet += Math.Max(lstChunk[i].Count, 1);
-                }
+                nRet += Math.Min(lstChunk[i].Count, nMaxCount);
 
                 System.Diagnostics.Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
             }
