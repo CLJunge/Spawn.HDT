@@ -127,7 +127,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
                     dialog.ShowDialog();
                 }
-                else { }
+                else
+                {
+                    Log.WriteLine("User canceled update", LogType.Debug);
+                }
             }
             else { }
         }
