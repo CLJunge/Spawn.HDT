@@ -248,7 +248,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         {
             int nRet = 0;
 
-            System.Diagnostics.Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
+            //System.Diagnostics.Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
 
             List<HearthMirror.Objects.Card> lstChunk = m_lstCollection.FindAll(c =>
             {
@@ -269,10 +269,10 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 nRet += Math.Min(lstChunk[i].Count, nMaxCount);
 
-                System.Diagnostics.Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
+                //System.Diagnostics.Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
             }
 
-            System.Diagnostics.Debug.WriteLine(string.Empty);
+            //System.Diagnostics.Debug.WriteLine(string.Empty);
 
             return nRet;
         }
