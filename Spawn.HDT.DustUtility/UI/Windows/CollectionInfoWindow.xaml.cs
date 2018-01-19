@@ -19,6 +19,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         private const string RaresCountConverterKey = "raresCountConverter";
         private const string EpicsCountConverterKey = "epicsCountConverter";
         private const string LegendariesCountConverterKey = "legendariesCountConverter";
+
+        private const string BaseImagePath = "/Spawn.HDT.DustUtility;component/Resources/";
         #endregion
 
         #region Member Variables
@@ -128,51 +130,51 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 case CardSet.EXPERT1:
                 case CardSet.HOF://TODO add own logo or readd card set names
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hearthstone_logo.png";
+                    strSource = $"{BaseImagePath}hearthstone_logo.png";
                     break;
 
                 case CardSet.GVG:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/goblins_logo.png";
+                    strSource = $"{BaseImagePath}goblins_logo.png";
                     break;
 
                 case CardSet.TGT:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/tournament_logo.png";
+                    strSource = $"{BaseImagePath}tournament_logo.png";
                     break;
 
                 case CardSet.OG:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/oldgods_logo.png";
+                    strSource = $"{BaseImagePath}oldgods_logo.png";
                     break;
 
                 case CardSet.GANGS:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/gadgetzan_logo.png";
+                    strSource = $"{BaseImagePath}gadgetzan_logo.png";
                     break;
 
                 case CardSet.UNGORO:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/ungoro_logo.png";
+                    strSource = $"{BaseImagePath}ungoro_logo.png";
                     break;
 
                 case CardSet.ICECROWN:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/frozenthrone_logo.png";
+                    strSource = $"{BaseImagePath}frozenthrone_logo.png";
                     break;
 
                 case CardSet.LOOTAPALOOZA:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/kobolds_logo.png";
+                    strSource = $"{BaseImagePath}kobolds_logo.png";
                     break;
 
                 case CardSet.NAXX:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/naxx_logo.png";
+                    strSource = $"{BaseImagePath}naxx_logo.png";
                     break;
 
                 case CardSet.BRM:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/mountain_logo.png";
+                    strSource = $"{BaseImagePath}mountain_logo.png";
                     break;
 
                 case CardSet.LOE:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/league_logo.png";
+                    strSource = $"{BaseImagePath}league_logo.png";
                     break;
 
                 case CardSet.KARA:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/karazhan_logo.png";
+                    strSource = $"{BaseImagePath}karazhan_logo.png";
                     break;
             }
 
@@ -189,51 +191,51 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             {
                 case CardSet.EXPERT1:
                 case CardSet.HOF://TODO add own banner or readd card set names
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/hearthstone_banner.jpg";
+                    strSource = $"{BaseImagePath}hearthstone_banner.jpg";
                     break;
 
                 case CardSet.GVG:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/goblins_banner.jpg";
+                    strSource = $"{BaseImagePath}goblins_banner.jpg";
                     break;
 
                 case CardSet.TGT:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/tournament_banner.jpg";
+                    strSource = $"{BaseImagePath}tournament_banner.jpg";
                     break;
 
                 case CardSet.OG:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/oldgods_banner.jpg";
+                    strSource = $"{BaseImagePath}oldgods_banner.jpg";
                     break;
 
                 case CardSet.GANGS:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/gadgetzan_banner.jpg";
+                    strSource = $"{BaseImagePath}gadgetzan_banner.jpg";
                     break;
 
                 case CardSet.UNGORO:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/ungoro_banner.jpg";
+                    strSource = $"{BaseImagePath}ungoro_banner.jpg";
                     break;
 
                 case CardSet.ICECROWN:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/frozenthrone_banner.jpg";
+                    strSource = $"{BaseImagePath}frozenthrone_banner.jpg";
                     break;
 
                 case CardSet.LOOTAPALOOZA:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/kobolds_banner.jpg";
+                    strSource = $"{BaseImagePath}kobolds_banner.jpg";
                     break;
 
                 case CardSet.NAXX:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/naxx_banner.jpg";
+                    strSource = $"{BaseImagePath}naxx_banner.jpg";
                     break;
 
                 case CardSet.BRM:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/mountain_banner.jpg";
+                    strSource = $"{BaseImagePath}mountain_banner.jpg";
                     break;
 
                 case CardSet.LOE:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/league_banner.jpg";
+                    strSource = $"{BaseImagePath}league_banner.jpg";
                     break;
 
                 case CardSet.KARA:
-                    strSource = "/Spawn.HDT.DustUtility;component/Resources/karazhan_banner.jpg";
+                    strSource = $"{BaseImagePath}karazhan_banner.jpg";
                     break;
             }
 
