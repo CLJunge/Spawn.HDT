@@ -119,7 +119,7 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 FileInfo fileInfo = new FileInfo(vFiles[i]);
 
-                if (fileInfo.CreationTimeUtc.Date < DateTime.UtcNow.Date.AddMonths(-1))
+                if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
                 {
                     fileInfo.Delete();
                 }
