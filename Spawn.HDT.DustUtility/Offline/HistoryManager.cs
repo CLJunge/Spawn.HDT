@@ -27,7 +27,7 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 s_blnCheckInProgress = true;
 
-                Log.WriteLine("Checking for changes...", LogType.Debug);
+                Log.WriteLine($"Checking for changes for \"{account.AccountString}\"...", LogType.Debug);
 
                 List<Card> lstOldCollection = account.GetCollection();
 
@@ -143,6 +143,8 @@ namespace Spawn.HDT.DustUtility.Offline
         #region LoadHistory
         private static List<CachedCardEx> LoadHistory(Account account)
         {
+            Log.WriteLine($"Loading history for \"{account.AccountString}\"", LogType.Debug);
+
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
             return FileManager.Load<List<CachedCardEx>>(strPath);
@@ -152,6 +154,8 @@ namespace Spawn.HDT.DustUtility.Offline
         #region SaveHistory
         private static void SaveHistory(Account account, List<CachedCardEx> lstCardsHistory)
         {
+            Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
+
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
 
             FileManager.Write(strPath, lstCardsHistory);
@@ -197,7 +201,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #region RemoveItemAt
         public static void RemoveItemAt(Account account, int nIndex)
         {
-            Log.WriteLine($"Removing item at index \"{nIndex}\"", LogType.Debug);
+            Log.WriteLine($"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"", LogType.Debug);
 
             List<CachedCardEx> lstHistory = GetHistory(account);
 
