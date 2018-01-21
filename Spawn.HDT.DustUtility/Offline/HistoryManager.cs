@@ -185,6 +185,30 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
+        #region ClearHistory
+        public static void ClearHistory(Account account)
+        {
+            SaveHistory(account, new List<CachedCardEx>());
+
+            Log.WriteLine($"Cleared history for \"{account.AccountString}\"", LogType.Debug);
+        }
+        #endregion
+
+        #region RemoveItemAt
+        public static void RemoveItemAt(Account account, int nIndex)
+        {
+            Log.WriteLine($"Removing item at index \"{nIndex}\"", LogType.Debug);
+
+            List<CachedCardEx> lstHistory = GetHistory(account);
+
+            lstHistory.RemoveAt(nIndex);
+
+            lstHistory.Reverse();
+
+            SaveHistory(account, lstHistory);
+        }
+        #endregion
+
         private class CardComparer : IEqualityComparer<Card>
         {
             #region Equals

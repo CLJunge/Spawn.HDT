@@ -140,7 +140,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
                 if (RowDeleted != null)
                 {
-                    RowDeleted(this, new DataGridCardItemEventArgs(item));
+                    RowDeleted(this, new DataGridCardItemEventArgs(item, nIndex));
                 }
                 else { }
                 //}

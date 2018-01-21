@@ -18,7 +18,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
         {
             if (ItemDropped != null)
             {
-                ItemDropped(this, new DataGridCardItemEventArgs(item));
+                ItemDropped(this, new DataGridCardItemEventArgs(item, -1));
             }
             else { }
         }

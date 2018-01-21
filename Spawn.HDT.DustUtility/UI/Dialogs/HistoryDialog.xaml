@@ -6,8 +6,9 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" GlowBrush="Black"
-        Title="Dust Utility - History" Height="450" Width="700">
+        Title="Dust Utility - History" Height="450" Width="700" Loaded="OnWindowLoaded">
     <Grid>
-        <components:CardsDataGrid x:Name="grid" ColoredCountColumn="True" ContextMenuEnabled="False"/>
+        <components:CardsDataGrid x:Name="grid" ColoredCountColumn="True" RowDeleted="OnRowDeleted" Margin="0,0,0,30"/>
+        <Button Content="Clear" VerticalAlignment="Bottom" Height="30" Click="OnClearClick"/>
     </Grid>
 </controls:MetroWindow>
