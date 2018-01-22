@@ -152,11 +152,17 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region SaveHistory
-        private static void SaveHistory(Account account, List<CachedCardEx> lstCardsHistory)
+        private static void SaveHistory(Account account, List<CachedCardEx> lstCardsHistory, bool blnReverseList = false)
         {
             Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
+
+            if (blnReverseList)
+            {
+                lstCardsHistory.Reverse();
+            }
+            else { }
 
             FileManager.Write(strPath, lstCardsHistory);
         }
@@ -206,10 +212,8 @@ namespace Spawn.HDT.DustUtility.Offline
             List<CachedCardEx> lstHistory = GetHistory(account);
 
             lstHistory.RemoveAt(nIndex);
-
-            lstHistory.Reverse();
-
-            SaveHistory(account, lstHistory);
+            
+            SaveHistory(account, lstHistory, true);
         }
         #endregion
 
