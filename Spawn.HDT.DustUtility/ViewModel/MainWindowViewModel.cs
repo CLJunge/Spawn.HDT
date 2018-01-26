@@ -86,9 +86,12 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
+        #region SwitchAccounts
         private void SwitchAccounts()
         {
+            DustUtilityPlugin.SwitchAccounts();
         }
+        #endregion
 
         private void ShowHistory()
         {
