@@ -129,7 +129,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             switch (cardSet)
             {
                 case CardSet.EXPERT1:
-                case CardSet.HOF://TODO add own logo or readd card set names
+                case CardSet.HOF:
                     strSource = $"{ResourceBasePath}hearthstone_logo.png";
                     break;
 
@@ -190,7 +190,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
             switch (cardSet)
             {
                 case CardSet.EXPERT1:
-                case CardSet.HOF://TODO add own banner or readd card set names
+                case CardSet.HOF:
                     strSource = $"{ResourceBasePath}hearthstone_banner.jpg";
                     break;
 
