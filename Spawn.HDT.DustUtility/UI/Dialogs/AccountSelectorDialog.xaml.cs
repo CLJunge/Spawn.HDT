@@ -1,9 +1,9 @@
 ﻿namespace Spawn.HDT.DustUtility.UI.Dialogs
 {
-    public partial class SettingsDialog
+    public partial class AccountSelectorDialog
     {
         #region Ctor
-        public SettingsDialog()
+        public AccountSelectorDialog()
         {
             InitializeComponent();
         }

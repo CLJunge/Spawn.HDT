@@ -2,7 +2,6 @@
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 
 namespace Spawn.HDT.DustUtility.Offline
@@ -14,7 +13,7 @@ namespace Spawn.HDT.DustUtility.Offline
         public const string DecksString = "decks";
         #endregion
 
-        #region Static Variables
+        #region Static Fields
         private static Timer s_timer;
 
         private static bool s_blnSaveCollectionInProgress;
@@ -23,8 +22,6 @@ namespace Spawn.HDT.DustUtility.Offline
 
         #region Static Properties
         public static bool TimerEnabled => s_timer != null;
-
-        //public static bool SaveProcessSuccessful => s_blnSavedCollection && s_blnSavedDecks;
         #endregion
 
         #region SaveCollection
@@ -34,7 +31,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             List<Card> lstCollection = Reflection.GetCollection();
 
-            if (lstCollection != null && lstCollection.Count > 0 && !s_blnSaveCollectionInProgress)
+            if (lstCollection?.Count > 0 && !s_blnSaveCollectionInProgress)
             {
                 s_blnSaveCollectionInProgress = true;
 
@@ -59,7 +56,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             List<Deck> lstAllDecks = Reflection.GetDecks();
 
-            if (lstAllDecks != null && (lstAllDecks.Count > 0 && lstAllDecks[0].Cards.Count > 0) && !s_blnSaveDecksInProgress)
+            if ((lstAllDecks?.Count > 0 && lstAllDecks?[0]?.Cards.Count > 0) && !s_blnSaveDecksInProgress)
             {
                 s_blnSaveDecksInProgress = true;
 
@@ -97,18 +94,14 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
 
-                if (File.Exists(strPath))
+                List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
+
+                for (int i = 0; i < lstCachedCards.Count; i++)
                 {
-                    List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
+                    CachedCard cachedCard = lstCachedCards[i];
 
-                    for (int i = 0; i < lstCachedCards.Count; i++)
-                    {
-                        CachedCard cachedCard = lstCachedCards[i];
-
-                        lstRet.Add(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden));
-                    }
+                    lstRet.Add(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden));
                 }
-                else { }
             }
             catch (System.Exception ex)
             {
@@ -128,31 +121,27 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
 
-                if (File.Exists(strPath))
+                List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
+
+                for (int i = 0; i < lstCachedDecks.Count; i++)
                 {
-                    List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
+                    CachedDeck cachedDeck = lstCachedDecks[i];
 
-                    for (int i = 0; i < lstCachedDecks.Count; i++)
+                    Deck deck = new Deck()
                     {
-                        CachedDeck cachedDeck = lstCachedDecks[i];
+                        Id = cachedDeck.Id,
+                        Name = cachedDeck.Name,
+                        Hero = cachedDeck.Hero,
+                        IsWild = cachedDeck.IsWild,
+                        Type = cachedDeck.Type,
+                        SeasonId = cachedDeck.SeasonId,
+                        CardBackId = cachedDeck.CardBackId,
+                        HeroPremium = cachedDeck.HeroPremium,
+                        Cards = cachedDeck.Cards.ToCards()
+                    };
 
-                        Deck deck = new Deck()
-                        {
-                            Id = cachedDeck.Id,
-                            Name = cachedDeck.Name,
-                            Hero = cachedDeck.Hero,
-                            IsWild = cachedDeck.IsWild,
-                            Type = cachedDeck.Type,
-                            SeasonId = cachedDeck.SeasonId,
-                            CardBackId = cachedDeck.CardBackId,
-                            HeroPremium = cachedDeck.HeroPremium,
-                            Cards = cachedDeck.Cards.ToCards()
-                        };
-
-                        lstRet.Add(deck);
-                    }
+                    lstRet.Add(deck);
                 }
-                else { }
             }
             catch (System.Exception ex)
             {
@@ -172,9 +161,9 @@ namespace Spawn.HDT.DustUtility.Offline
             }
             else { }
 
-            s_timer = new Timer(OnTick, null, 0, 1000 * Settings.SaveInterval);
+            s_timer = new Timer(OnTick, null, 0, 1000 * DustUtilityPlugin.Config.SaveInterval);
 
-            Log.WriteLine($"Started cache timer (Interval={Settings.SaveInterval}s)", LogType.Debug);
+            Log.WriteLine($"Started cache timer (Interval={DustUtilityPlugin.Config.SaveInterval}s)", LogType.Debug);
         }
         #endregion
 
@@ -191,9 +180,9 @@ namespace Spawn.HDT.DustUtility.Offline
         #region OnTick
         private static void OnTick(object state)
         {
-            Log.WriteLine("Cache OnTick", LogType.Debug);
+            Log.WriteLine("Performing save operations", LogType.Debug);
 
-            Account account = Account.Current;
+            Account account = Account.LoggedInAccount;
 
             if (!account.IsEmpty && account.IsValid)
             {

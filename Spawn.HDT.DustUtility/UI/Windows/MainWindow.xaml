@@ -3,53 +3,50 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
-        xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
-        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Converters"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d" ResizeMode="CanResizeWithGrip" GlowBrush="Black" Title="Dust Utility"
-        Height="450" Width="950" MinHeight="425" MinWidth="800"
-        Loaded="OnWindowLoaded" WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <ui:SearchResultContainer x:Key="searchResult"/>
-    </Window.Resources>
-
+        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
+        mc:Ignorable="d" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource AccentColorBrush}"
+        Height="450" Width="950" MinHeight="425" MinWidth="800" WindowStartupLocation="CenterScreen"
+        Title="{Binding WindowTitle}">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <controls:WindowCommands.Resources>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </controls:WindowCommands.Resources>
-            <Button Name="switchAccountButton" Click="OnSwitchAccountClick" Visibility="Collapsed">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{StaticResource UserIcon}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="SWITCH ACCOUNTS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button Name="historyButton" Click="OnHistoryClick" Visibility="Collapsed">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Width="18" Height="18">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{StaticResource ClockIcon}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-                <Button Click="OnDecksClick">
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Width="20" Height="20">
-                            <Rectangle.Fill>
-                                <ImageBrush ImageSource="{StaticResource LayersIcon}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                        <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
-                    </StackPanel>
-                </Button>
-            <Button Click="OnCollectionInfoClick">
+            <Button Command="{Binding SwitchAccountsCommand}" Visibility="{Binding SwitchAccountButtonVisibility}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{StaticResource UserIcon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="SWITCH ACCOUNTS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowHistoryCommand}" Visibility="{Binding HistoryButtonVisibility}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="18" Height="18">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{StaticResource ClockIcon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowDecksCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{StaticResource LayersIcon}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ShowCollectionInfoCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -61,44 +58,7 @@
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
-
     <Grid>
-        <Button Content="GO!" Name="searchButton" HorizontalAlignment="Left" Margin="10,10,0,0" Width="100" VerticalAlignment="Top" Click="OnSearchClick" IsEnabled="False"/>
-        <TextBox Name="inputBox" HorizontalAlignment="Stretch" Margin="115,10,120,0" VerticalAlignment="Top" Height="28" TextChanged="OnInputBoxTextChanged" GotFocus="OnInputBoxGotFocus" PreviewKeyDown="OnInputBoxPreviewKeyDown"/>
-        <Button Content="?" Name="searchHelpButton" HorizontalAlignment="Right" Margin="0,10,90,0" Width="25" VerticalAlignment="Top" Click="OnSearchHelpClick"/>
-        <Button Content="Filters..." Name="filterButton" HorizontalAlignment="Right" Margin="0,10,10,0" Width="75" VerticalAlignment="Top" Click="OnFiltersClick"/>
-
-        <Border BorderBrush="Silver" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10,45,170,10" VerticalAlignment="Stretch">
-            <components:CardsDataGrid x:Name="cardsGrid" GridItems="{Binding Source={StaticResource searchResult}, Path=GridItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
-        </Border>
-
-        <Button Name="sortOrderButton" Content="Sort Order..." HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,40" Width="150" Height="21" Click="OnSortOrderClick"/>
-        <Button Name="openSelectionButton" Content="Open Selection..." HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="150" Height="21" Click="OnOpenSelectionClick"/>
-
-        <Button Name="clearGridButton" Content="Clear" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,285,10,0" Width="150" Height="21" Click="OnClearGridClick"/>
-
-        <GroupBox Header="Info" HorizontalAlignment="Right" Height="235" Margin="0,45,10,0" VerticalAlignment="Top" Width="150">
-            <Grid>
-                <Grid.Resources>
-                    <converters:DisplayLabelConverter x:Key="dustLabelConverter" Prefix="Dust:"/>
-                    <converters:DisplayLabelConverter x:Key="commonsCountLabelConverter" Prefix="Commons:"/>
-                    <converters:DisplayLabelConverter x:Key="raresCountLabelConverter" Prefix="Rares:"/>
-                    <converters:DisplayLabelConverter x:Key="epicsCountLabelConverter" Prefix="Epics:"/>
-                    <converters:DisplayLabelConverter x:Key="legendariesCountLabelConverter" Prefix="Legendaries:"/>
-                    <converters:DisplayLabelConverter x:Key="totalCountLabelConverter" Prefix="Total:"/>
-                </Grid.Resources>
-
-                <Label Name="lblDust" Content="{Binding Source={StaticResource searchResult}, Path=Dust, Converter={StaticResource dustLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,5,10,0"/>
-
-                <Separator Background="Gray" HorizontalAlignment="Stretch" Height="10" Margin="10,33,10,0" VerticalAlignment="Top"/>
-
-                <Label Name="lblCommonsCount" Content="{Binding Source={StaticResource searchResult}, Path=CommonsCount, Converter={StaticResource commonsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,40,10,0"/>
-                <Label Name="lblRaresCount" Content="{Binding Source={StaticResource searchResult}, Path=RaresCount, Converter={StaticResource raresCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,70,10,0"/>
-                <Label Name="lblEpicsCount" Content="{Binding Source={StaticResource searchResult}, Path=EpicsCount, Converter={StaticResource epicsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,100,10,0"/>
-                <Label Name="lblLegendariesCount" Content="{Binding Source={StaticResource searchResult}, Path=LegendariesCount, Converter={StaticResource legendariesCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,130,10,0"/>
-
-                <Label Name="lblTotalCount" Content="{Binding Source={StaticResource searchResult}, Path=TotalCount, Converter={StaticResource totalCountLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,160,10,0"/>
-            </Grid>
-        </GroupBox>
+        
     </Grid>
 </controls:MetroWindow>

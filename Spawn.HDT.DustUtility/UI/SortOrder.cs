@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Spawn.HDT.DustUtility.Search
+namespace Spawn.HDT.DustUtility.UI
 {
     public class SortOrder
     {
@@ -11,17 +11,12 @@ namespace Spawn.HDT.DustUtility.Search
         #endregion
 
         #region Properties
-        public List<ItemContainer> Items => m_lstItems;
+        #region Items
+        public List<ItemContainer> Items => m_lstItems ?? (m_lstItems = new List<ItemContainer>());
+        #endregion
         #endregion
 
-        #region Ctor
-        private SortOrder()
-        {
-            m_lstItems = new List<ItemContainer>();
-        }
-        #endregion
-
-        #region [STATIC]
+        #region Static Methods
         #region Parse
         public static SortOrder Parse(string strValue)
         {
@@ -98,8 +93,13 @@ namespace Spawn.HDT.DustUtility.Search
         public class ItemContainer
         {
             #region Properties
+            #region Name
             public string Name { get; set; }
+            #endregion
+
+            #region Value
             public Item Value { get; set; }
+            #endregion
             #endregion
 
             #region Ctor

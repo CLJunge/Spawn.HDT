@@ -1,6 +1,7 @@
 ﻿using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Spawn.HDT.DustUtility.Offline
         public const string HistoryString = "history";
         #endregion
 
-        #region Static Variables
+        #region Static Fields
         private static CardComparer s_cardComparer = new CardComparer();
         private static bool s_blnCheckInProgress;
         #endregion

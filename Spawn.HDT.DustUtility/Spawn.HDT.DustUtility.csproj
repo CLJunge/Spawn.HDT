@@ -34,6 +34,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="HearthDb">
       <HintPath>..\lib\HearthDb.dll</HintPath>
       <Private>False</Private>
@@ -60,6 +63,8 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -72,180 +77,60 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="CardSets.cs" />
-    <Compile Include="Offline\BackupManager.cs" />
-    <Compile Include="UI\Components\CardSetInfoContainer.xaml.cs">
-      <DependentUpon>CardSetInfoContainer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CheckBoxWithImage.xaml.cs">
-      <DependentUpon>CheckBoxWithImage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\OutlinedTextBlock.cs" />
-    <Compile Include="UI\Converters\CardClassToImageConverter.cs" />
-    <Compile Include="UI\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Converters\CardNameConverter.cs" />
-    <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
-    <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
-    <Compile Include="UI\Converters\CountToColorConverter.cs" />
-    <Compile Include="Offline\FileManager.cs" />
-    <Compile Include="Offline\HistoryManager.cs" />
+    <Compile Include="AccountPreferences.cs" />
+    <Compile Include="CardManagement\CardsManager.cs" />
+    <Compile Include="CardManagement\CardWrapper.cs" />
+    <Compile Include="CardManagement\ICardsManager.cs" />
+    <Compile Include="CardManagement\SearchParameters.cs" />
+    <Compile Include="Hearthstone\CardSets.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="DustUtilityPlugin.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="FileManager.cs" />
+    <Compile Include="Mvvm\BindableBase.cs" />
+    <Compile Include="Mvvm\RelayCommand.cs" />
+    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Net\GitHubUpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
-    <Compile Include="UI\Converters\DisplayLabelConverter.cs" />
-    <Compile Include="Search\CardManager.cs" />
-    <Compile Include="UI\Converters\CountLabelConverter.cs" />
+    <Compile Include="Offline\BackupManager.cs" />
     <Compile Include="Offline\Cache.cs" />
     <Compile Include="Offline\CachedCard.cs" />
     <Compile Include="Offline\CachedDeck.cs" />
-    <Compile Include="Search\Parameters.cs" />
-    <Compile Include="UI\Converters\DustValueToStringConverter.cs" />
-    <Compile Include="UI\Dialogs\CardCountDialog.xaml.cs">
-      <DependentUpon>CardCountDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\DeckListDialog.xaml.cs">
-      <DependentUpon>DeckListDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\ListViewCardSetItem.cs" />
-    <Compile Include="UI\ListViewDeckItem.cs" />
-    <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
-      <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CardImageContainer.xaml.cs">
-      <DependentUpon>CardImageContainer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CardsDataGrid.DragAndDrop.cs">
-      <DependentUpon>CardsDataGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Components\CardsDataGrid.xaml.cs">
-      <DependentUpon>CardsDataGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Converters\TimestampConverter.cs" />
-    <Compile Include="UI\Dialogs\AccountSelectionDialog.xaml.cs">
-      <DependentUpon>AccountSelectionDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\HistoryDialog.xaml.cs">
-      <DependentUpon>HistoryDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\DownloadProgressDialog.xaml.cs">
-      <DependentUpon>DownloadProgressDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\DataGridCardItemEventArgs.cs" />
-    <Compile Include="UI\SearchResultContainer.cs" />
-    <Compile Include="UI\SortOrder.cs" />
-    <Compile Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml.cs">
-      <DependentUpon>SortOrderItemSelectionDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Dialogs\SortOrderDialog.xaml.cs">
-      <DependentUpon>SortOrderDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Windows\CollectionInfoWindow.xaml.cs">
-      <DependentUpon>CollectionInfoWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Windows\DecksInfoWindow.xaml.cs">
-      <DependentUpon>DecksInfoWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DustUtilityPlugin.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="UI\DataGridCardItem.cs" />
+    <Compile Include="Offline\HistoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UI\Dialogs\ParametersDialog.xaml.cs">
-      <DependentUpon>ParametersDialog.xaml</DependentUpon>
+    <Compile Include="Account.cs" />
+    <Compile Include="Services\Providers\DialogServiceProvider.cs" />
+    <Compile Include="UI\Components\NumericValidationRule.cs" />
+    <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
+      <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Search\CardWrapper.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Services\IDialogResultService.cs" />
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Net\GitHubUpdateManager.cs" />
+    <Compile Include="UI\SortOrder.cs" />
+    <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="Mvvm\ViewModelBase.cs" />
+    <Compile Include="UI\Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\SettingsDialogViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\CardClassIcons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\CardSetIcons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Page Include="Resources\Icons.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\RarityGems.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Components\CardSetInfoContainer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\CardCountDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\DeckListDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Windows\CardSelectionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Components\CardImageContainer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Components\CardsDataGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Components\CheckBoxWithImage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\AccountSelectionDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\SortOrderItemSelectionDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\HistoryDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\DownloadProgressDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\SortOrderDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Windows\CollectionInfoWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Windows\DecksInfoWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Windows\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Dialogs\ParametersDialog.xaml">
+    <Page Include="UI\Dialogs\AccountSelectorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,70 +138,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
+    <Page Include="UI\Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="UI\Windows\MainWindow.Search.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\legend_cardback.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\hero_anduin.png" />
-    <Resource Include="Resources\hero_garrosh.png" />
-    <Resource Include="Resources\hero_guldan.png" />
-    <Resource Include="Resources\hero_jaina.png" />
-    <Resource Include="Resources\hero_malfurion.png" />
-    <Resource Include="Resources\hero_rexxar.png" />
-    <Resource Include="Resources\hero_thrall.png" />
-    <Resource Include="Resources\hero_uther.png" />
-    <Resource Include="Resources\hero_valeera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\naxx_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\frozenthrone_logo.png" />
-    <Resource Include="Resources\gadgetzan_logo.png" />
-    <Resource Include="Resources\goblins_logo.png" />
-    <Resource Include="Resources\karazhan_logo.png" />
-    <Resource Include="Resources\kobolds_logo.png" />
-    <Resource Include="Resources\league_logo.png" />
-    <Resource Include="Resources\mountain_logo.png" />
-    <Resource Include="Resources\oldgods_logo.png" />
-    <Resource Include="Resources\tournament_logo.png" />
-    <Resource Include="Resources\ungoro_logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\frozenthrone_banner.jpg" />
-    <Resource Include="Resources\gadgetzan_banner.jpg" />
-    <Resource Include="Resources\goblins_banner.jpg" />
-    <Resource Include="Resources\hearthstone_logo.png" />
-    <Resource Include="Resources\karazhan_banner.jpg" />
-    <Resource Include="Resources\kobolds_banner.jpg" />
-    <Resource Include="Resources\league_banner.jpg" />
-    <Resource Include="Resources\mountain_banner.jpg" />
-    <Resource Include="Resources\oldgods_banner.jpg" />
-    <Resource Include="Resources\tournament_banner.jpg" />
-    <Resource Include="Resources\ungoro_banner.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\naxx_banner.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\hearthstone_banner.jpg" />
+    <Folder Include="UI\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

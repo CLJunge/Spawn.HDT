@@ -17,13 +17,13 @@ namespace Spawn.HDT.DustUtility
         public static Account Empty => new Account(null, Region.UNKNOWN);
         #endregion
 
-        #region Current
-        public static Account Current => GetCurrentAccount();
+        #region LoggedInAccount
+        public static Account LoggedInAccount => GetLoggedInAccount();
         #endregion
         #endregion
 
         #region Member Variables
-        private Preferences m_preferences;
+        private AccountPreferences m_preferences;
         #endregion
 
         #region Properties
@@ -51,12 +51,8 @@ namespace Spawn.HDT.DustUtility
         public bool IsValid => !string.IsNullOrEmpty(AccountString);
         #endregion
 
-        #region AccountPreferences
-        public Preferences AccountPreferences
-        {
-            get => m_preferences ?? (m_preferences = Preferences.Load(this));
-            set => m_preferences = value;
-        }
+        #region Preferences
+        public AccountPreferences Preferences => m_preferences ?? (m_preferences = AccountPreferences.Load(this));
         #endregion
         #endregion
 
@@ -144,7 +140,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (!IsDeckExcluded(nDeckId))
             {
-                AccountPreferences.ExcludedDecks.Add(nDeckId);
+                Preferences.ExcludedDecks.Add(nDeckId);
             }
             else { }
         }
@@ -155,7 +151,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (IsDeckExcluded(nDeckId))
             {
-                AccountPreferences.ExcludedDecks.Remove(nDeckId);
+                Preferences.ExcludedDecks.Remove(nDeckId);
             }
             else { }
         }
@@ -164,14 +160,14 @@ namespace Spawn.HDT.DustUtility
         #region IsDeckExcluded
         public bool IsDeckExcluded(long nDeckId)
         {
-            return AccountPreferences.ExcludedDecks.Contains(nDeckId);
+            return Preferences.ExcludedDecks.Contains(nDeckId);
         }
         #endregion
 
-        #region SavePreferenes
-        public void SavePreferenes()
+        #region SavePreferences
+        public void SavePreferences()
         {
-            AccountPreferences.Save(this);
+            Preferences.Save(this);
 
             Log.WriteLine($"Saved preferences for {AccountString}", LogType.Debug);
         }
@@ -230,8 +226,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region GetCurrentAccount
-        private static Account GetCurrentAccount()
+        #region GetLoggedInAccount
+        private static Account GetLoggedInAccount()
         {
             Account retVal = Empty;
 
@@ -245,57 +241,5 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
         #endregion
-
-        public class Preferences
-        {
-            #region Constants
-            public const string PreferencesString = "prefs";
-            #endregion
-
-            #region Member Variables
-            private List<long> m_lstExcludedDecks;
-            private List<CachedCard> m_lstCardSelection;
-            #endregion
-
-            #region Properties
-            #region ExcludedDecks
-            public List<long> ExcludedDecks
-            {
-                get => m_lstExcludedDecks;
-                set => m_lstExcludedDecks = value;
-            }
-            #endregion
-
-            #region CardSelection
-            public List<CachedCard> CardSelection
-            {
-                get => m_lstCardSelection;
-                set => m_lstCardSelection = value;
-            }
-            #endregion
-            #endregion
-
-            #region Ctor
-            public Preferences()
-            {
-                m_lstExcludedDecks = new List<long>();
-                m_lstCardSelection = new List<CachedCard>();
-            }
-            #endregion
-
-            #region Save
-            public void Save(Account account)
-            {
-                FileManager.Write(DustUtilityPlugin.GetFullFileName(account, PreferencesString), this);
-            }
-            #endregion
-
-            #region [STATIC] Load
-            public static Preferences Load(Account account)
-            {
-                return FileManager.Load<Preferences>(DustUtilityPlugin.GetFullFileName(account, PreferencesString));
-            }
-            #endregion
-        }
     }
 }

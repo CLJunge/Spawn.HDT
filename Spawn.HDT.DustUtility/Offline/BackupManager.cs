@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            if (Settings.OfflineMode && (!account.IsEmpty && account.IsValid))
+            if (DustUtilityPlugin.Config.OfflineMode && (!account.IsEmpty && account.IsValid))
             {
                 DateTime date = DateTime.Now;
 

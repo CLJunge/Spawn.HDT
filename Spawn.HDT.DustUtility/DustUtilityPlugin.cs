@@ -1,34 +1,59 @@
-﻿using Hearthstone_Deck_Tracker.API;
+﻿using Autofac;
+using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Offline;
+using Spawn.HDT.DustUtility.Services;
+using Spawn.HDT.DustUtility.Services.Providers;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
         #region Static Properties
+        #region DataDirectory
         public static string DataDirectory => GetDataDirectory();
+        #endregion
+
+        #region IsOffline
         public static bool IsOffline { get; private set; }
         #endregion
 
-        #region Static Variables
-        private static Window s_window;
-
-        private static Account s_account;
+        #region MainWindow
+        public static Window MainWindow => s_mainWindow;
         #endregion
 
-        #region Member Variables
-        private MenuItem m_menuItem;
+        #region CurrentAccount
+        public static Account CurrentAccount => (s_account ?? Account.Empty);
+        #endregion
+
+        #region Config
+        public static Configuration Config => s_config ?? (s_config = Configuration.Load());
+        #endregion
+
+        #region Container
+        public static IContainer Container { get; private set; }
+        #endregion
+
+        #region NumericRegex
+        public static Regex NumericRegex => new Regex("^(0|[1-9][0-9]*)$");
+        #endregion
+        #endregion
+
+        #region Static Fields
+        private static Window s_mainWindow;
+
+        private static Account s_account;
+        private static Configuration s_config;
         #endregion
 
         #region Properties
@@ -53,7 +78,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region MenuItem
-        public MenuItem MenuItem => m_menuItem;
+        public MenuItem MenuItem => CreateMenuItem();
         #endregion
         #endregion
 
@@ -68,11 +93,11 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            UpdatePlugin();
+            BuildContainer();
 
             CreateMenuItem();
 
-            if (Settings.OfflineMode && Core.Game.IsRunning)
+            if (Config.OfflineMode && Core.Game.IsRunning)
             {
                 Cache.StartTimer();
             }
@@ -85,32 +110,34 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            //SettingsDialog dialog = new SettingsDialog(Directory.Exists(Path.Combine(DataDirectory, HearthstoneCardImageManager.CacheFolderName)));
-            SettingsDialog dialog = new SettingsDialog();
-
-            if (dialog.ShowDialog().Value)
+            using (ILifetimeScope scope = Container.BeginLifetimeScope())
             {
-                if (Settings.OfflineMode && Core.Game.IsRunning)
-                {
-                    if (!Cache.TimerEnabled)
-                    {
-                        Cache.StartTimer();
-                    }
-                    else
-                    {
-                        //Reinitialize timer with new interval
-                        Cache.StopTimer();
+                var dialogService = scope.Resolve<IDialogService>();
 
-                        Cache.StartTimer();
-                    }
-                }
-                else if (!Settings.OfflineMode && Cache.TimerEnabled)
+                if (dialogService.ShowDialog<SettingsDialog>())
                 {
-                    Cache.StopTimer();
+                    if (Config.OfflineMode && Core.Game.IsRunning)
+                    {
+                        if (!Cache.TimerEnabled)
+                        {
+                            Cache.StartTimer();
+                        }
+                        else
+                        {
+                            //Reinitialize timer with new interval
+                            Cache.StopTimer();
+
+                            Cache.StartTimer();
+                        }
+                    }
+                    else if (!Config.OfflineMode && Cache.TimerEnabled)
+                    {
+                        Cache.StopTimer();
+                    }
+                    else { }
                 }
                 else { }
             }
-            else { }
         }
         #endregion
 
@@ -122,15 +149,19 @@ namespace Spawn.HDT.DustUtility
                 Cache.StopTimer();
             }
             else { }
+
+            Config.Save();
+
+            Container.Dispose();
         }
         #endregion
 
         #region OnUpdate
         public void OnUpdate()
         {
-            IsOffline = !Core.Game.IsRunning && Settings.OfflineMode;
+            IsOffline = !Core.Game.IsRunning && Config.OfflineMode;
 
-            if (Settings.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
+            if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
             }
@@ -145,23 +176,25 @@ namespace Spawn.HDT.DustUtility
         #region OnClick
         private void OnClick(object sender, RoutedEventArgs e)
         {
-            if (Core.Game.IsRunning || Settings.OfflineMode)
+            if (Core.Game.IsRunning || Config.OfflineMode)
             {
-                if (s_account == null || (s_account != null && s_account.IsEmpty))
+                if (!s_account?.IsValid ?? true)
                 {
                     SelectAccount(false);
                 }
                 else { }
 
-                if (s_account != null)
+                if (s_account?.IsValid ?? false)
                 {
                     OpenMainWindow();
                 }
                 else { }
             }
-            else if (!Settings.OfflineMode)
+            else if (!Config.OfflineMode)
             {
-                MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                Log.WriteLine("Hearthstone isn't running!", LogType.Warning);
             }
             else { }
         }
@@ -169,125 +202,32 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region CreateMenuItem
-        private void CreateMenuItem()
+        private MenuItem CreateMenuItem()
         {
-            m_menuItem = new MenuItem()
+            MenuItem retVal = new MenuItem()
             {
                 Header = Name,
                 Icon = new Image()
                 {
-                    Source = new BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
+                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
                 }
             };
 
-            m_menuItem.Click += OnClick;
+            retVal.Click += OnClick;
+
+            return retVal;
         }
         #endregion
 
-        #region Update Stuff
-        #region UpdatePlugin
-        public void UpdatePlugin()
+        #region BuildContainer
+        private void BuildContainer()
         {
-            //Renamed sort order items
-            if (Properties.Settings.Default.Version <= 1)
-            {
-                UpdateSortOrderSetting();
-            }
-            else { }
+            ContainerBuilder builder = new ContainerBuilder();
 
-            //Added timestamp to history
-            if (Properties.Settings.Default.Version <= 2)
-            {
-                UpdateHistoryFiles();
-            }
-            else { }
+            builder.RegisterType<DialogServiceProvider>().As<IDialogService>();
+
+            Container = builder.Build();
         }
-        #endregion
-
-        #region UpdateSortOrderSetting
-        private void UpdateSortOrderSetting()
-        {
-            string strSortOrder = Properties.Settings.Default.SortOrder;
-
-            if (!strSortOrder.Contains("ManaCost"))
-            {
-                strSortOrder = strSortOrder.Replace("Cost", "ManaCost");
-            }
-            else { }
-
-            if (!strSortOrder.Contains("CardClass"))
-            {
-                strSortOrder = strSortOrder.Replace("Class", "CardClass");
-            }
-            else { }
-
-            Log.WriteLine($"Converted sort order string successfuly", LogType.Debug);
-
-            Properties.Settings.Default.SortOrder = strSortOrder;
-            Properties.Settings.Default.Version = 2;
-            Properties.Settings.Default.Save();
-        }
-        #endregion
-
-        #region UpdateHistoryFiles
-        private void UpdateHistoryFiles()
-        {
-            //Create backup for each account
-            Account[] vAccounts = GetAccounts();
-
-            for (int i = 0; i < vAccounts.Length; i++)
-            {
-                BackupManager.Create(vAccounts[i]);
-            }
-
-            //Modify files
-            string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{HistoryManager.HistoryString}.xml");
-
-            for (int i = 0; i < vFiles.Length; i++)
-            {
-                bool blnHasNewFormat = false;
-
-                try
-                {
-                    FileManager.Load<List<CachedCardEx>>(vFiles[i]);
-
-                    blnHasNewFormat = true;
-                }
-                catch
-                {
-                    Log.WriteLine($"New format not available, converting history file \"{vFiles[i]}\"", LogType.Debug);
-                }
-
-                if (!blnHasNewFormat)
-                {
-                    List<CachedCard> lstHistory = FileManager.Load<List<CachedCard>>(vFiles[i]);
-
-                    List<CachedCardEx> lstNewHistory = new List<CachedCardEx>(lstHistory.Count);
-
-                    for (int j = 0; j < lstHistory.Count; j++)
-                    {
-                        CachedCard card = lstHistory[j];
-
-                        lstNewHistory.Add(new CachedCardEx
-                        {
-                            Id = card.Id,
-                            Count = card.Count,
-                            IsGolden = card.IsGolden,
-                            Timestamp = DateTime.Now
-                        });
-                    }
-
-                    FileManager.Write(vFiles[i], lstNewHistory);
-
-                    Log.WriteLine($"Converted history file \"{vFiles[i]}\" successfuly", LogType.Debug);
-                }
-                else { }
-            }
-
-            Properties.Settings.Default.Version = 3;
-            Properties.Settings.Default.Save();
-        }
-        #endregion
         #endregion
 
         #region OnAssemblyResolve
@@ -321,24 +261,25 @@ namespace Spawn.HDT.DustUtility
         #region OpenMainWindow
         private static void OpenMainWindow()
         {
-            if (s_window == null)
+            if (s_mainWindow == null)
             {
                 Log.WriteLine($"Opening main window for {s_account.AccountString}", LogType.Info);
 
-                s_window = new MainWindow(s_account, GetAccounts().Length > 1);
+                //s_mainView = new MainWindowView(s_account, GetAccounts().Length > 1);
+                s_mainWindow = new MainWindow();
 
-                s_window.Closed += (s, e) =>
+                s_mainWindow.Closed += (s, e) =>
                 {
-                    s_account.SavePreferenes();
+                    s_account.SavePreferences();
 
-                    s_window = null;
+                    s_mainWindow = null;
                 };
 
-                s_window.Show();
+                s_mainWindow.Show();
             }
             else
             {
-                BringWindowToFront(s_window);
+                BringWindowToFront(s_mainWindow);
             }
         }
         #endregion
@@ -348,7 +289,7 @@ namespace Spawn.HDT.DustUtility
         {
             if (Core.Game.IsRunning && !blnIsSwitching)
             {
-                s_account = Account.Current;
+                s_account = Account.LoggedInAccount;
             }
             else
             {
@@ -360,15 +301,18 @@ namespace Spawn.HDT.DustUtility
                 }
                 else if (vAccounts.Length > 1)
                 {
-                    AccountSelectorDialog accSelectorDialog = new AccountSelectorDialog(vAccounts);
-
-                    if (accSelectorDialog.ShowDialog().Value)
+                    using (var scope = Container.BeginLifetimeScope())
                     {
-                        s_account = Account.Parse(accSelectorDialog.SelectedAccount);
+                        var dialogService = scope.Resolve<IDialogService>();
 
-                        Settings.LastSelectedAccount = s_account.AccountString;
+                        if (dialogService.ShowDialog<AccountSelectorDialog>())
+                        {
+                            s_account = Account.Parse(dialogService.GetDialogResult<string>());
+
+                            Config.LastSelectedAccount = s_account.AccountString;
+                        }
+                        else { }
                     }
-                    else { }
                 }
                 else
                 {
@@ -376,12 +320,19 @@ namespace Spawn.HDT.DustUtility
                 }
             }
 
-            Log.WriteLine($"Account: {s_account?.AccountString}", LogType.Debug);
+            if (s_account != null)
+            {
+                Log.WriteLine($"Account: {s_account.AccountString}", LogType.Debug);
+            }
+            else
+            {
+                Log.WriteLine($"No account selected", LogType.Debug);
+            }
         }
         #endregion
 
         #region GetAccounts
-        private static Account[] GetAccounts()
+        public static Account[] GetAccounts()
         {
             List<Account> lstRet = new List<Account>();
 
@@ -413,7 +364,7 @@ namespace Spawn.HDT.DustUtility
         #region SwitchAccounts
         public static void SwitchAccounts()
         {
-            if (s_window != null)
+            if (s_mainWindow != null)
             {
                 Log.WriteLine("Switching accounts...", LogType.Debug);
 
@@ -431,7 +382,7 @@ namespace Spawn.HDT.DustUtility
 
                 if (!s_account.Equals(oldAcc))
                 {
-                    s_window.Close();
+                    s_mainWindow.Close();
                 }
                 else { }
 

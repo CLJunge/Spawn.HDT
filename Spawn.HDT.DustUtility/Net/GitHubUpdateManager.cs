@@ -12,7 +12,7 @@ namespace Spawn.HDT.DustUtility.Net
         public const string BaseUrl = "https://github.com/CLJunge/Spawn.HDT.DustUtility/releases";
         #endregion
 
-        #region Static Member Variables
+        #region Static Fields
         private static Regex s_versionRegex;
         private static Regex s_updateTextRegex;
 
