@@ -4,7 +4,7 @@ namespace Spawn.HDT.DustUtility.Services
 {
     public interface IDialogService
     {
-        bool ShowDialog<T>() where T : Window, new();
+        bool ShowDialog<T>(Window owner = null) where T : Window, new();
         T GetDialogResult<T>();
     }
 }

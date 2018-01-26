@@ -9,9 +9,15 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         #endregion
 
         #region ShowDialog
-        public bool ShowDialog<T>() where T : Window, new()
+        public bool ShowDialog<T>(Window owner = null) where T : Window, new()
         {
             m_dialog = new T();
+
+            if (owner != null)
+            {
+                m_dialog.Owner = owner;
+            }
+            else { }
 
             return (m_dialog?.ShowDialog().Value ?? false);
         }

@@ -1,6 +1,9 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿using Autofac;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Mvvm;
+using Spawn.HDT.DustUtility.Services;
+using Spawn.HDT.DustUtility.UI.Dialogs;
 using System.Windows;
 using System.Windows.Input;
 
@@ -93,9 +96,17 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
+        #region ShowHistory
         private void ShowHistory()
         {
+            using (var scope = DustUtilityPlugin.Container.BeginLifetimeScope())
+            {
+                var dialogService = scope.Resolve<IDialogService>();
+
+                dialogService.ShowDialog<HistoryDialog>();
+            }
         }
+        #endregion
 
         private void ShowDecks()
         {

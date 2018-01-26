@@ -114,7 +114,7 @@ namespace Spawn.HDT.DustUtility
             {
                 var dialogService = scope.Resolve<IDialogService>();
 
-                if (dialogService.ShowDialog<SettingsDialog>())
+                if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
                 {
                     if (Config.OfflineMode && Core.Game.IsRunning)
                     {
@@ -305,7 +305,7 @@ namespace Spawn.HDT.DustUtility
                     {
                         var dialogService = scope.Resolve<IDialogService>();
 
-                        if (dialogService.ShowDialog<AccountSelectorDialog>())
+                        if (dialogService.ShowDialog<AccountSelectorDialog>(blnIsSwitching ? s_mainWindow : Core.MainWindow))
                         {
                             s_account = Account.Parse(dialogService.GetDialogResult<string>());
 

@@ -6,7 +6,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
-        mc:Ignorable="d" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource AccentColorBrush}"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Window.DataContext>
         <vm:SettingsDialogViewModel/>

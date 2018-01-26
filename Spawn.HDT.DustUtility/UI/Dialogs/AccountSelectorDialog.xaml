@@ -5,7 +5,7 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
             xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
-            mc:Ignorable="d" WindowStartupLocation="CenterScreen" BorderBrush="{DynamicResource AccentColorBrush}"
+            mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
             Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
     <Window.DataContext>
         <vm:AccountSelectorDialogViewModel/>
