@@ -1,7 +1,8 @@
-﻿using Spawn.HDT.DustUtility.UI.Converters;
+﻿using Spawn.HDT.DustUtility.UI.Components.Converters;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -75,11 +76,11 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
         #region Events
         #region OnDataGridMouseDoubleClick
-        private void OnDataGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void OnDataGridMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             m_blnDblClick = true;
 
-            OpenPopup();
+            await OpenPopupAsync();
         }
         #endregion
 
@@ -126,23 +127,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
             if (dataGrid.SelectedItem is DataGridCardItem)
             {
-                //MetroWindow window = Window.GetWindow(this) as MetroWindow;
-
-                //MessageDialogResult result = await window.ShowMessageAsync(string.Empty, "Are you sure you want to remove the selected card?", MessageDialogStyle.AffirmativeAndNegative);
-
-                //if (result == MessageDialogResult.Affirmative)
-                //{
                 DataGridCardItem item = dataGrid.SelectedItem as DataGridCardItem;
-
-                ((IList)ItemsSource).RemoveAt(nIndex);
 
                 if (RowDeleted != null)
                 {
                     RowDeleted(this, new DataGridCardItemEventArgs(item, nIndex));
                 }
                 else { }
-                //}
-                //else { }
             }
             else { }
         }
@@ -163,14 +154,14 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
         #endregion
 
-        #region OpenPopup
-        private void OpenPopup()
+        #region OpenPopupAsync
+        private async Task OpenPopupAsync()
         {
             if (dataGrid.SelectedItem is DataGridCardItem)
             {
                 cardImagePopup.IsOpen = true;
 
-                //cardImageContainer.CardWrapper = (dataGrid.SelectedItem as DataGridCardItem).Tag;
+                await cardImageContainer.UpdateCardWrapperAsync((dataGrid.SelectedItem as DataGridCardItem).Tag);
             }
             else { }
         }
@@ -182,8 +173,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             if (cardImagePopup.IsOpen)
             {
                 cardImagePopup.IsOpen = false;
-
-                //cardImageContainer.CardWrapper = null;
             }
             else { }
         }
