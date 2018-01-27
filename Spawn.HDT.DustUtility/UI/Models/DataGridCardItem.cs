@@ -1,4 +1,5 @@
-﻿using HearthDb.Enums;
+﻿using GalaSoft.MvvmLight;
+using HearthDb.Enums;
 using Spawn.HDT.DustUtility.CardManagement;
 using System;
 using System.Diagnostics;
@@ -6,51 +7,109 @@ using System.Diagnostics;
 namespace Spawn.HDT.DustUtility.UI.Models
 {
     [DebuggerDisplay("{Name} ({Count})")]
-    public class DataGridCardItem
+    public class DataGridCardItem : ObservableObject
     {
+        #region Member Variables
+        private int m_nCount;
+        private string m_strName;
+        private bool m_blnGolden;
+        private int m_nDust;
+        private Rarity m_rarity;
+        private string m_strRarityString;
+        private string m_strCardClass;
+        private CardSet m_cardSet;
+        private string m_strCardSetString;
+        private int m_nManaCost;
+        private CardWrapper m_tag;
+        #endregion
+
         #region Properties
         #region Count
-        public int Count { get; set; }
+        public int Count
+        {
+            get => m_nCount;
+            set => Set(ref m_nCount, value);
+        }
         #endregion
 
         #region Name
-        public string Name { get; set; }
+        public string Name
+        {
+            get => m_strName;
+            set => Set(ref m_strName, value);
+        }
         #endregion
 
         #region Golden
-        public bool Golden { get; set; }
+        public bool Golden
+        {
+            get => m_blnGolden;
+            set => Set(ref m_blnGolden, value);
+        }
         #endregion
 
         #region Dust
-        public int Dust { get; set; }
+        public int Dust
+        {
+            get => m_nDust;
+            set => Set(ref m_nDust, value);
+        }
         #endregion
 
         #region Rarity
-        public Rarity Rarity { get; set; }
+        public Rarity Rarity
+        {
+            get => m_rarity;
+            set => Set(ref m_rarity, value);
+        }
         #endregion
 
         #region RarityString
-        public string RarityString { get; set; }
+        public string RarityString
+        {
+            get => m_strRarityString;
+            set => Set(ref m_strRarityString, value);
+        }
         #endregion
 
         #region CardClass
-        public string CardClass { get; set; }
+        public string CardClass
+        {
+            get => m_strCardClass;
+            set => Set(ref m_strCardClass, value);
+        }
         #endregion
 
         #region CardSet
-        public CardSet CardSet { get; set; }
+        public CardSet CardSet
+        {
+            get => m_cardSet;
+            set => Set(ref m_cardSet, value);
+        }
         #endregion
 
         #region CardSetString
-        public string CardSetString { get; set; }
+        public string CardSetString
+        {
+            get => m_strCardSetString;
+            set => Set(ref m_strCardSetString, value);
+        }
         #endregion
 
         #region ManaCost
-        public int ManaCost { get; set; }
+        public int ManaCost
+        {
+            get => m_nManaCost;
+            set => Set(ref m_nManaCost, value);
+        }
         #endregion
 
         #region Tag
-        public CardWrapper Tag { get; set; }
+        public CardWrapper Tag
+        {
+            get => m_tag;
+            set => Set(ref m_tag, value);
+        }
         #endregion
         #endregion
 
@@ -98,8 +157,16 @@ namespace Spawn.HDT.DustUtility.UI.Models
     [DebuggerDisplay("{Name} ({Count})")]
     public class DataGridCardItemEx : DataGridCardItem
     {
+        #region Member Variables
+        private DateTime m_dtTimestamp;
+        #endregion
+
         #region Properties
-        public DateTime Timestamp { get; set; }
+        public DateTime Timestamp
+        {
+            get => m_dtTimestamp;
+            set => Set(ref m_dtTimestamp, value);
+        }
         #endregion
 
         #region CreateCopy
@@ -129,7 +196,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             DataGridCardItemEx retVal = new DataGridCardItemEx()
             {
                 Count = wrapper.Count,
-                Dust = wrapper.GetDustValue(),
+                Dust = (wrapper.Count > 0 ? wrapper.Card.GetCraftingCost() : wrapper.GetDustValue()),
                 Golden = wrapper.Card.Premium,
                 Name = wrapper.DbCard.Name,
                 Rarity = wrapper.DbCard.Rarity,
@@ -141,12 +208,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 Timestamp = wrapper.Timestamp,
                 Tag = wrapper
             };
-
-            if (retVal.Count > 0)
-            {
-                retVal.Dust = wrapper.Card.GetCraftingCost();
-            }
-            else { }
 
             return retVal;
         }
