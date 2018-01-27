@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
-        mc:Ignorable="d" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource AccentColorBrush}"
+        xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
+        mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"
         Height="450" Width="950" MinHeight="425" MinWidth="800" WindowStartupLocation="CenterScreen"
-        Title="{Binding WindowTitle}">
+        Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
+        RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never">
+    <Window.Resources>
+        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+    </Window.Resources>
     <Window.DataContext>
-        <vm:MainWindowViewModel/>
+        <Binding Path="Main" Source="{StaticResource Locator}"/>
     </Window.DataContext>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
@@ -26,7 +31,7 @@
                     <TextBlock Text="SWITCH ACCOUNTS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding ShowHistoryCommand}" Visibility="{Binding HistoryButtonVisibility}">
+            <Button Command="{Binding ShowHistoryCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -58,6 +63,13 @@
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout Name="HistoryFlyout" Header="History" Position="Top">
+                <flyouts:HistoryFlyoutView/>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
     <Grid>
         
     </Grid>
