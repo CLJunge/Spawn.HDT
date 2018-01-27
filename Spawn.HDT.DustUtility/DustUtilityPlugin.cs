@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
@@ -21,6 +22,10 @@ namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
+        #region Static Fields
+        private static Window s_mainWindow;
+        #endregion
+
         #region Static Properties
         #region DataDirectory
         public static string DataDirectory => GetDataDirectory();
@@ -55,10 +60,6 @@ namespace Spawn.HDT.DustUtility
         #endregion
         #endregion
 
-        #region Static Fields
-        private static Window s_mainWindow;
-        #endregion
-
         #region Properties
         #region Name
         public string Name => "Dust Utility";
@@ -85,10 +86,16 @@ namespace Spawn.HDT.DustUtility
         #endregion
         #endregion
 
-        #region Ctor
-        public DustUtilityPlugin()
+        #region Static Ctor
+        static DustUtilityPlugin()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+            SimpleIoc.Default.Register(() => (ViewModelBase.IsInDesignModeStatic ? Account.Test : Account.Empty));
+
+            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
+            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
+            SimpleIoc.Default.Register(() => Configuration.Load());
         }
         #endregion
 
@@ -96,8 +103,6 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            InitializeContainer();
-
             CheckAndMoveAccountFiles();
 
             CreateMenuItem();
@@ -156,6 +161,8 @@ namespace Spawn.HDT.DustUtility
             Config.Save();
 
             SimpleIoc.Default.Reset();
+
+            ServiceLocator.SetLocatorProvider(null);
         }
         #endregion
 
@@ -181,20 +188,19 @@ namespace Spawn.HDT.DustUtility
         {
             if (Core.Game.IsRunning || Config.OfflineMode)
             {
-                if (!SimpleIoc.Default.IsRegistered<Account>())
+                if (!CurrentAccount.IsValid)
                 {
                     Account selectedAcc = SelectAccount(false);
 
                     if (selectedAcc != null)
                     {
-                        //Add selected instance
-                        SimpleIoc.Default.Register(() => selectedAcc);
+                        UpdatedAccountInstance(selectedAcc);
                     }
                     else { }
                 }
                 else { }
 
-                if (SimpleIoc.Default.IsRegistered<Account>() && CurrentAccount.IsValid)
+                if (CurrentAccount.IsValid)
                 {
                     OpenMainWindow();
                 }
@@ -229,17 +235,6 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region InitializeContainer
-        private void InitializeContainer()
-        {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
-            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
-            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
-            SimpleIoc.Default.Register(() => Configuration.Load());
-        }
-        #endregion
-
         #region CheckAndMoveAccountFiles
         private void CheckAndMoveAccountFiles()
         {
@@ -263,33 +258,6 @@ namespace Spawn.HDT.DustUtility
                 else { }
             }
             else { }
-        }
-        #endregion
-
-        #region OnAssemblyResolve
-        private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            Assembly retVal = null;
-
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            AssemblyName assemblyName = new AssemblyName(args.Name);
-
-            string strPath = $"{assemblyName.Name}.dll";
-
-            using (Stream stream = executingAssembly.GetManifestResourceStream(strPath))
-            {
-                if (stream != null)
-                {
-                    byte[] vRawBytes = new byte[stream.Length];
-
-                    stream.Read(vRawBytes, 0, vRawBytes.Length);
-
-                    retVal = Assembly.Load(vRawBytes);
-                }
-                else { }
-            }
-
-            return retVal;
         }
         #endregion
 
@@ -420,11 +388,7 @@ namespace Spawn.HDT.DustUtility
                 {
                     s_mainWindow.Close();
 
-                    //Remove current account instance
-                    SimpleIoc.Default.Unregister<Account>();
-
-                    //Add selected instance
-                    SimpleIoc.Default.Register(() => selectedAcc);
+                    UpdatedAccountInstance(selectedAcc);
                 }
                 else { }
 
@@ -433,6 +397,17 @@ namespace Spawn.HDT.DustUtility
                 Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
             }
             else { }
+        }
+        #endregion
+
+        #region UpdatedAccountInstance
+        private static void UpdatedAccountInstance(Account account)
+        {
+            //Remove current account instance
+            SimpleIoc.Default.Unregister<Account>();
+
+            //Add selected instance
+            SimpleIoc.Default.Register(() => account);
         }
         #endregion
 
