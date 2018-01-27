@@ -24,6 +24,10 @@ namespace Spawn.HDT.DustUtility
         public static Account Empty => new Account(null, Region.UNKNOWN);
         #endregion
 
+        #region Test
+        public static Account Test => new Account(new BattleTag() { Name = "Test", Number = 123 }, Region.EU);
+        #endregion
+
         #region LoggedInAccount
         public static Account LoggedInAccount => GetLoggedInAccount();
         #endregion
@@ -55,7 +59,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region IsValid
-        public bool IsValid => !string.IsNullOrEmpty(AccountString);
+        public bool IsValid => !IsEmpty && !string.IsNullOrEmpty(AccountString);
         #endregion
 
         #region Preferences
@@ -181,9 +185,13 @@ namespace Spawn.HDT.DustUtility
         #region SavePreferences
         public void SavePreferences()
         {
-            Preferences.Save(this);
+            if (m_preferences != null)
+            {
+                m_preferences.Save(this);
 
-            Log.WriteLine($"Saved preferences for {AccountString}", LogType.Debug);
+                Log.WriteLine($"Saved preferences for {AccountString}", LogType.Debug);
+            }
+            else { }
         }
         #endregion
 
