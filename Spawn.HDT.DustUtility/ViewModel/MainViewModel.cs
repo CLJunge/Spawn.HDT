@@ -1,15 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Microsoft.Practices.ServiceLocation;
-using Spawn.HDT.DustUtility.Services;
-using Spawn.HDT.DustUtility.UI.Dialogs;
+using MahApps.Metro.Controls;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         #region Member Variables
         private string m_strWindowTitle;
@@ -47,7 +45,7 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #endregion
 
         #region ShowHistoryCommand
-        public ICommand ShowHistoryCommand => new RelayCommand(ShowHistory);
+        public ICommand ShowHistoryCommand => new RelayCommand<Flyout>(ShowHistory);
         #endregion
 
         #region ShowDecksCommand
@@ -60,7 +58,7 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #endregion
 
         #region Ctor
-        public MainWindowViewModel()
+        public MainViewModel()
         {
             Account account = DustUtilityPlugin.CurrentAccount;
 
@@ -73,6 +71,12 @@ namespace Spawn.HDT.DustUtility.ViewModel
             if (DustUtilityPlugin.IsOffline)
             {
                 WindowTitle = $"{WindowTitle} [OFFLINE]";
+            }
+            else { }
+
+            if (IsInDesignMode)
+            {
+                WindowTitle = $"{WindowTitle} (Design)";
             }
             else { }
 
@@ -104,12 +108,15 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #endregion
 
         #region ShowHistory
-        private void ShowHistory()
+        private void ShowHistory(Flyout flyout)
         {
-            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+            if (!flyout.IsOpen)
             {
-                dialogService.ShowDialog<HistoryDialog>();
+                ((FrameworkElement)flyout.Content).GetViewModel<HistoryFlyoutViewModel>().LoadHistory();
+
+                flyout.IsOpen = true;
             }
+            else { }
         }
         #endregion
 
