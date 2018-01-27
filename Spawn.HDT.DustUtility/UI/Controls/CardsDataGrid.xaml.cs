@@ -16,7 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         private bool m_blnDateColumnVisible;
         #endregion
 
-        #region DP
+        #region Properties
         #region ItemsSource DP
         public IEnumerable ItemsSource
         {
@@ -29,44 +29,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(CardsDataGrid));
         #endregion
 
-        #region AllowDrag DP
-        public bool AllowDrag
-        {
-            get { return (bool)GetValue(AllowDragProperty); }
-            set { SetValue(AllowDragProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for AllowDrag.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty AllowDragProperty =
-            DependencyProperty.Register("AllowDrag", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(false));
-        #endregion
-
-        #region ContextMenuEnabled DP
-        public bool ContextMenuEnabled
-        {
-            get { return (bool)GetValue(ContextMenuEnabledProperty); }
-            set { SetValue(ContextMenuEnabledProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ContextMenuEnabled.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ContextMenuEnabledProperty =
-            DependencyProperty.Register("ContextMenuEnabled", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(true));
-        #endregion
-
-        #region ColoredCountColumn
-        public bool ColoredCountColumn
-        {
-            get { return (bool)GetValue(ColoredCountColumnProperty); }
-            set { SetValue(ColoredCountColumnProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for ColoredCountColumn.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ColoredCountColumnProperty =
-            DependencyProperty.Register("ColoredCountColumn", typeof(bool), typeof(CardsDataGrid), new PropertyMetadata(false));
-        #endregion
-        #endregion
-
-        #region Properties
+        #region DateColumnVisible
         public bool DateColumnVisible
         {
             get => m_blnDateColumnVisible;
@@ -84,6 +47,19 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 m_blnDateColumnVisible = value;
             }
         }
+        #endregion
+
+        #region ColoredCountColumn
+        public bool ColoredCountColumn { get; set; }
+        #endregion
+
+        #region AllowDrag
+        public bool AllowDrag { get; set; }
+        #endregion
+
+        #region ContextMenuEnabled
+        public bool ContextMenuEnabled { get; set; }
+        #endregion
         #endregion
 
         #region Custom Events
