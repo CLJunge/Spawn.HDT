@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -41,7 +42,10 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 }
                 else { }
             }
-            else { }
+            else
+            {
+                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
+            }
 
             return strRet;
         }

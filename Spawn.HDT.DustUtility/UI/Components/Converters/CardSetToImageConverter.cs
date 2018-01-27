@@ -1,4 +1,5 @@
 ﻿using HearthDb.Enums;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -9,9 +10,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CardSetToImageConverter : IValueConverter
     {
-        #region Static Stuff
+        #region Static Fields
         private static ResourceDictionary s_setIcons;
+        #endregion
 
+        #region Static Ctor
         static CardSetToImageConverter()
         {
             s_setIcons = new ResourceDictionary
@@ -83,7 +86,10 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                         break;
                 }
             }
-            else { }
+            else
+            {
+                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
+            }
 
             return retVal;
         }

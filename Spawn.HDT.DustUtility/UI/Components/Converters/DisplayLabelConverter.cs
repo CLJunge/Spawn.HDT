@@ -13,7 +13,15 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return $"{Prefix} {value}";
+            string strRet = value?.ToString();
+
+            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Prefix))
+            {
+                strRet = $"{Prefix} {strRet}";
+            }
+            else { }
+
+            return strRet;
         }
         #endregion
 

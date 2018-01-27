@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -7,14 +8,20 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CountToColorConverter : IMultiValueConverter
     {
+        #region Properties
+        #region DefaultColorBrush
+        public SolidColorBrush DefaultColorBrush { get; set; }
+        #endregion
+        #endregion
+
         #region Convert
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush retVal = Brushes.Black;
+            SolidColorBrush retVal = DefaultColorBrush;
 
-            if (values.Length == 2 && (values[1] is bool && System.Convert.ToBoolean(values[1])))
+            try
             {
-                try
+                if (values.Length == 2 && (values[1] is bool && System.Convert.ToBoolean(values[1])))
                 {
                     int nValue = System.Convert.ToInt32(values[0]);
 
@@ -28,12 +35,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                     }
                     else { }
                 }
-                catch
-                {
-                    //invalid value
-                }
+                else { }
             }
-            else { }
+            catch
+            {
+                Log.WriteLine($"Passed invalid value: \"{string.Join(" ", values)}\"", LogType.Error);
+            }
 
             return retVal;
         }

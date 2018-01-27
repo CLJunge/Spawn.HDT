@@ -9,19 +9,19 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CardRarityToColorConverter : IValueConverter
     {
-        #region Static Variables
+        #region Static Fields
         private static Dictionary<int, SolidColorBrush> s_dColors = new Dictionary<int, SolidColorBrush>();
         #endregion
 
-        #region Properties
+        #region Static Properties
+        #region Brushes
         public static Dictionary<int, SolidColorBrush> Brushes => s_dColors;
+        #endregion
         #endregion
 
         #region Static Ctor
         static CardRarityToColorConverter()
         {
-            //Basic
-            s_dColors.Add(2, new SolidColorBrush(Colors.Black));
             //Common
             s_dColors.Add(1, new SolidColorBrush(Color.FromRgb(38, 168, 16)));
             //Rare
@@ -36,10 +36,16 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         }
         #endregion
 
+        #region Properties
+        #region DefaultColorBrush
+        public SolidColorBrush DefaultColorBrush { get; set; }
+        #endregion
+        #endregion
+
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush retVal = s_dColors[2]; //Basic
+            SolidColorBrush retVal = DefaultColorBrush;
 
             try
             {
@@ -48,7 +54,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             catch
             {
                 //Invalid rarity
-                Log.WriteLine("Passed invalid rarity", LogType.Debug);
+                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
             }
 
             return retVal;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -8,9 +9,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CardClassToImageConverter : IValueConverter
     {
-        #region Static Stuff
+        #region Static Fields
         private static ResourceDictionary s_classIcons;
+        #endregion
 
+        #region Static Ctor
         static CardClassToImageConverter()
         {
             s_classIcons = new ResourceDictionary
@@ -25,23 +28,25 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         {
             ImageSource retVal = null;
 
-            if (s_classIcons != null && s_classIcons.Count > 0)
+            try
             {
-                string strKey = $"{value}ClassIcon";
-
-                if (s_classIcons.Contains(strKey))
+                if (s_classIcons != null && s_classIcons.Count > 0)
                 {
-                    retVal = (ImageSource)s_classIcons[strKey];
+                    retVal = (ImageSource)s_classIcons[$"{value}ClassIcon"];
                 }
                 else { }
             }
-            else { }
+            catch
+            {
+                //Invalid class
+                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
+            }
 
             return retVal;
         }
         #endregion
 
-        #region Convert
+        #region ConvertBack
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();

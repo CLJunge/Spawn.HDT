@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using System;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -9,13 +10,22 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #region Convert
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            string strRet = $"{values[0]}x";
+            string strRet = string.Empty;
 
-            if (values.Length == 2 && (System.Convert.ToBoolean(values[1]) && System.Convert.ToInt32(values[0]) > 0))
+            try
             {
-                strRet = $"+{strRet}";
+                strRet = $"{values[0]}x";
+
+                if (values.Length == 2 && (System.Convert.ToBoolean(values[1]) && System.Convert.ToInt32(values[0]) > 0))
+                {
+                    strRet = $"+{strRet}";
+                }
+                else { }
             }
-            else { }
+            catch
+            {
+                Log.WriteLine($"Passed invalid values: \"{string.Join(" ", values)}\"", LogType.Error);
+            }
 
             return strRet;
         }
