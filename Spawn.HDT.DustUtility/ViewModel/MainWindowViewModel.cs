@@ -1,7 +1,7 @@
-﻿using Autofac;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Spawn.HDT.DustUtility.CardManagement;
-using Spawn.HDT.DustUtility.Mvvm;
+using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using System.Windows;
@@ -12,13 +12,20 @@ namespace Spawn.HDT.DustUtility.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         #region Member Variables
-        private ICardsManager m_cardsManager;
-
+        private string m_strWindowTitle;
         private Visibility m_historyButtonVisibility;
         private Visibility m_switchAccountButtonVisibility;
         #endregion
 
         #region Properties
+        #region WindowTitle
+        public string WindowTitle
+        {
+            get => m_strWindowTitle;
+            set => Set(ref m_strWindowTitle, value);
+        }
+        #endregion
+
         #region HistoryButtonVisibility
         public Visibility HistoryButtonVisibility
         {
@@ -55,9 +62,11 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region Ctor
         public MainWindowViewModel()
         {
-            if (!DustUtilityPlugin.CurrentAccount.IsEmpty)
+            Account account = DustUtilityPlugin.CurrentAccount;
+
+            if (!account.IsEmpty)
             {
-                WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.BattleTag.Name} ({DustUtilityPlugin.CurrentAccount.Region})]";
+                WindowTitle = $"Dust Utility [{account.BattleTag.Name} ({account.Region})]";
             }
             else { }
 
@@ -82,10 +91,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
             }
             else { }
 
-            Log.WriteLine($"Account={DustUtilityPlugin.CurrentAccount.AccountString}", LogType.Debug);
+            Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
-
-            m_cardsManager = new CardsManager(DustUtilityPlugin.CurrentAccount);
         }
         #endregion
 
@@ -99,10 +106,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region ShowHistory
         private void ShowHistory()
         {
-            using (var scope = DustUtilityPlugin.Container.BeginLifetimeScope())
+            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
             {
-                var dialogService = scope.Resolve<IDialogService>();
-
                 dialogService.ShowDialog<HistoryDialog>();
             }
         }

@@ -1,4 +1,4 @@
-﻿using Spawn.HDT.DustUtility.Mvvm;
+﻿using GalaSoft.MvvmLight;
 using Spawn.HDT.DustUtility.Services;
 using System.Collections.ObjectModel;
 
@@ -7,10 +7,19 @@ namespace Spawn.HDT.DustUtility.ViewModel
     public class AccountSelectorDialogViewModel : ViewModelBase, IDialogResultService<string>
     {
         #region Member Variables
+        private string m_strWindowTitle;
         private string m_selectedAccountString;
         #endregion
 
         #region Properties
+        #region WindowTitle
+        public string WindowTitle
+        {
+            get => m_strWindowTitle;
+            set => Set(ref m_strWindowTitle, value);
+        }
+        #endregion
+
         #region Accounts
         public ObservableCollection<Account> Accounts { get; set; }
         #endregion

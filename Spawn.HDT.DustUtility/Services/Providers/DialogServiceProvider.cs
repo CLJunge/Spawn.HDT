@@ -37,5 +37,12 @@ namespace Spawn.HDT.DustUtility.Services.Providers
             return retVal;
         }
         #endregion
+
+        #region Dispose
+        public void Dispose()
+        {
+            m_dialog = null;
+        }
+        #endregion
     }
 }

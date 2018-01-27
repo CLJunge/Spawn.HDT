@@ -8,11 +8,6 @@ namespace Spawn.HDT.DustUtility.Offline
 {
     public static class Cache
     {
-        #region Constants
-        public const string CollectionString = "collection";
-        public const string DecksString = "decks";
-        #endregion
-
         #region Static Fields
         private static Timer s_timer;
 
@@ -35,7 +30,7 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 s_blnSaveCollectionInProgress = true;
 
-                string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
 
                 FileManager.Write(strPath, lstCollection.ToCachedCards());
 
@@ -60,7 +55,7 @@ namespace Spawn.HDT.DustUtility.Offline
             {
                 s_blnSaveDecksInProgress = true;
 
-                string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
 
                 List<Deck> lstDecks = new List<Deck>(lstAllDecks.Count);
 
@@ -92,7 +87,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             try
             {
-                string strPath = DustUtilityPlugin.GetFullFileName(account, CollectionString);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
 
                 List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
 
@@ -119,7 +114,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             try
             {
-                string strPath = DustUtilityPlugin.GetFullFileName(account, DecksString);
+                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
 
                 List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
 

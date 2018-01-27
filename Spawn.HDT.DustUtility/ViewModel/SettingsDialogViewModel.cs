@@ -1,4 +1,5 @@
-﻿using Spawn.HDT.DustUtility.Mvvm;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 
 namespace Spawn.HDT.DustUtility.ViewModel
@@ -6,12 +7,22 @@ namespace Spawn.HDT.DustUtility.ViewModel
     public class SettingsDialogViewModel : ViewModelBase
     {
         #region Member Variables
+        private string m_strWindowTitle;
+
         private bool m_blnOfflineMode;
         private int m_nSaveInterval;
         private bool m_blnCheckForUpdates;
         #endregion
 
         #region Properties
+        #region WindowTitle
+        public string WindowTitle
+        {
+            get => m_strWindowTitle;
+            set => Set(ref m_strWindowTitle, value);
+        }
+        #endregion
+
         #region OfflineMode
         public bool OfflineMode
         {

@@ -13,17 +13,17 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             bool blnRet = false;
 
-            if (DustUtilityPlugin.Config.OfflineMode && (!account.IsEmpty && account.IsValid))
+            if (DustUtilityPlugin.Config.OfflineMode && (!account.IsEmpty && account.IsValid && account.HasFiles))
             {
                 DateTime date = DateTime.Now;
 
                 if (!BackupExists(account, date))
                 {
-                    string strFileName = GetFileName(account, date);
+                    string strFileName = GetBackupFileName(account, date);
 
                     try
                     {
-                        string[] vFiles = Directory.GetFiles(DustUtilityPlugin.DataDirectory, $"{account.AccountString}*");
+                        string[] vFiles = Directory.GetFiles(DustUtilityPlugin.AccountsDirectory, $"{account.AccountString}*");
 
                         if (vFiles.Length > 0)
                         {
@@ -68,7 +68,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
             if ((!account.IsEmpty && account.IsValid) && BackupExists(account, date))
             {
-                string strFileName = GetFileName(account, date);
+                string strFileName = GetBackupFileName(account, date);
 
                 try
                 {
@@ -80,7 +80,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
                     for (int i = 0; i < vFiles.Length; i++)
                     {
-                        string strTemp = Path.Combine(DustUtilityPlugin.DataDirectory, Path.GetFileName(vFiles[i]));
+                        string strTemp = Path.Combine(DustUtilityPlugin.AccountsDirectory, Path.GetFileName(vFiles[i]));
 
                         if (File.Exists(strTemp))
                         {
@@ -111,7 +111,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #region DeleteOldBackups
         public static void DeleteOldBackups(Account account)
         {
-            string strDirectory = GetDirectory(account);
+            string strDirectory = GetAccountBackupDirectory(account);
 
             string[] vFiles = Directory.GetFiles(strDirectory);
 
@@ -131,16 +131,16 @@ namespace Spawn.HDT.DustUtility.Offline
         #region BackupExists
         public static bool BackupExists(Account account, DateTime date)
         {
-            string strFileName = GetFileName(account, date);
+            string strFileName = GetBackupFileName(account, date);
 
             return File.Exists(strFileName);
         }
         #endregion
 
-        #region GetDirectory
-        private static string GetDirectory(Account account)
+        #region GetAccountBackupDirectory
+        private static string GetAccountBackupDirectory(Account account)
         {
-            string strRet = Path.Combine(DustUtilityPlugin.DataDirectory, "Backup", account.AccountString);
+            string strRet = Path.Combine(DustUtilityPlugin.BackupsDirectory, account.AccountString);
 
             if (!Directory.Exists(strRet))
             {
@@ -152,12 +152,12 @@ namespace Spawn.HDT.DustUtility.Offline
         }
         #endregion
 
-        #region GetFileName
-        private static string GetFileName(Account account, DateTime date)
+        #region GetBackupFileName
+        private static string GetBackupFileName(Account account, DateTime date)
         {
             string strFileName = $"backup_{date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.zip";
 
-            return Path.Combine(GetDirectory(account), strFileName);
+            return Path.Combine(GetAccountBackupDirectory(account), strFileName);
         }
         #endregion
     }

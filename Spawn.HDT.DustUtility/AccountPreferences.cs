@@ -5,10 +5,6 @@ namespace Spawn.HDT.DustUtility
 {
     public class AccountPreferences
     {
-        #region Constants
-        public const string PreferencesString = "prefs";
-        #endregion
-
         #region Member Variables
         private List<long> m_lstExcludedDecks;
         private List<CachedCard> m_lstCardSelection;
@@ -43,14 +39,14 @@ namespace Spawn.HDT.DustUtility
         #region Save
         public void Save(Account account)
         {
-            FileManager.Write(DustUtilityPlugin.GetFullFileName(account, PreferencesString), this);
+            FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
         }
         #endregion
 
         #region [STATIC] Load
         public static AccountPreferences Load(Account account)
         {
-            return FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, PreferencesString));
+            return FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
         }
         #endregion
     }

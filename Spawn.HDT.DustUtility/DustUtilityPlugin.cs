@@ -1,7 +1,9 @@
-﻿using Autofac;
+﻿using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using Microsoft.Practices.ServiceLocation;
+using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.Services.Providers;
@@ -24,6 +26,14 @@ namespace Spawn.HDT.DustUtility
         public static string DataDirectory => GetDataDirectory();
         #endregion
 
+        #region BackupsDirectory
+        public static string BackupsDirectory => GetDataDirectory("Backups");
+        #endregion
+
+        #region AccountsDirectory
+        public static string AccountsDirectory => GetDataDirectory("Accounts");
+        #endregion
+
         #region IsOffline
         public static bool IsOffline { get; private set; }
         #endregion
@@ -33,15 +43,11 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region CurrentAccount
-        public static Account CurrentAccount => (s_account ?? Account.Empty);
+        public static Account CurrentAccount => ServiceLocator.Current.GetInstance<Account>();
         #endregion
 
         #region Config
-        public static Configuration Config => s_config ?? (s_config = Configuration.Load());
-        #endregion
-
-        #region Container
-        public static IContainer Container { get; private set; }
+        public static Configuration Config => ServiceLocator.Current.GetInstance<Configuration>();
         #endregion
 
         #region NumericRegex
@@ -51,9 +57,6 @@ namespace Spawn.HDT.DustUtility
 
         #region Static Fields
         private static Window s_mainWindow;
-
-        private static Account s_account;
-        private static Configuration s_config;
         #endregion
 
         #region Properties
@@ -93,7 +96,9 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            BuildContainer();
+            InitializeContainer();
+
+            CheckAndMoveAccountFiles();
 
             CreateMenuItem();
 
@@ -110,10 +115,8 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            using (ILifetimeScope scope = Container.BeginLifetimeScope())
+            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
             {
-                var dialogService = scope.Resolve<IDialogService>();
-
                 if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
                 {
                     if (Config.OfflineMode && Core.Game.IsRunning)
@@ -152,7 +155,7 @@ namespace Spawn.HDT.DustUtility
 
             Config.Save();
 
-            Container.Dispose();
+            SimpleIoc.Default.Reset();
         }
         #endregion
 
@@ -178,13 +181,20 @@ namespace Spawn.HDT.DustUtility
         {
             if (Core.Game.IsRunning || Config.OfflineMode)
             {
-                if (!s_account?.IsValid ?? true)
+                if (!SimpleIoc.Default.IsRegistered<Account>())
                 {
-                    SelectAccount(false);
+                    Account selectedAcc = SelectAccount(false);
+
+                    if (selectedAcc != null)
+                    {
+                        //Add selected instance
+                        SimpleIoc.Default.Register(() => selectedAcc);
+                    }
+                    else { }
                 }
                 else { }
 
-                if (s_account?.IsValid ?? false)
+                if (SimpleIoc.Default.IsRegistered<Account>() && CurrentAccount.IsValid)
                 {
                     OpenMainWindow();
                 }
@@ -219,14 +229,40 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region BuildContainer
-        private void BuildContainer()
+        #region InitializeContainer
+        private void InitializeContainer()
         {
-            ContainerBuilder builder = new ContainerBuilder();
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            builder.RegisterType<DialogServiceProvider>().As<IDialogService>();
+            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
+            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
+            SimpleIoc.Default.Register(() => Configuration.Load());
+        }
+        #endregion
 
-            Container = builder.Build();
+        #region CheckAndMoveAccountFiles
+        private void CheckAndMoveAccountFiles()
+        {
+            if (!Directory.Exists(Path.Combine(DataDirectory, "Accounts")))
+            {
+                string[] vFiles = Directory.GetFiles(DataDirectory);
+
+                if (vFiles.Length > 1)
+                {
+                    for (int i = 0; i < vFiles.Length; i++)
+                    {
+                        if (!vFiles[i].Contains("config.xml"))
+                        {
+                            FileInfo fileInfo = new FileInfo(vFiles[i]);
+
+                            fileInfo.MoveTo(Path.Combine(AccountsDirectory, fileInfo.Name));
+                        }
+                        else { }
+                    }
+                }
+                else { }
+            }
+            else { }
         }
         #endregion
 
@@ -263,14 +299,14 @@ namespace Spawn.HDT.DustUtility
         {
             if (s_mainWindow == null)
             {
-                Log.WriteLine($"Opening main window for {s_account.AccountString}", LogType.Info);
+                Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
                 //s_mainView = new MainWindowView(s_account, GetAccounts().Length > 1);
                 s_mainWindow = new MainWindow();
 
                 s_mainWindow.Closed += (s, e) =>
                 {
-                    s_account.SavePreferences();
+                    CurrentAccount.SavePreferences();
 
                     s_mainWindow = null;
                 };
@@ -285,11 +321,13 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region SelectAccount
-        private static void SelectAccount(bool blnIsSwitching)
+        private static Account SelectAccount(bool blnIsSwitching)
         {
+            Account retVal = null;
+
             if (Core.Game.IsRunning && !blnIsSwitching)
             {
-                s_account = Account.LoggedInAccount;
+                retVal = Account.LoggedInAccount;
             }
             else
             {
@@ -297,37 +335,37 @@ namespace Spawn.HDT.DustUtility
 
                 if (vAccounts.Length == 1)
                 {
-                    s_account = vAccounts[0];
+                    retVal = vAccounts[0];
                 }
                 else if (vAccounts.Length > 1)
                 {
-                    using (var scope = Container.BeginLifetimeScope())
+                    using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
                     {
-                        var dialogService = scope.Resolve<IDialogService>();
-
                         if (dialogService.ShowDialog<AccountSelectorDialog>(blnIsSwitching ? s_mainWindow : Core.MainWindow))
                         {
-                            s_account = Account.Parse(dialogService.GetDialogResult<string>());
+                            retVal = Account.Parse(dialogService.GetDialogResult<string>());
 
-                            Config.LastSelectedAccount = s_account.AccountString;
+                            Config.LastSelectedAccount = retVal.AccountString;
                         }
                         else { }
                     }
                 }
                 else
                 {
-                    s_account = Account.Empty;
+                    retVal = Account.Empty;
                 }
             }
 
-            if (s_account != null)
+            if (retVal != null)
             {
-                Log.WriteLine($"Account: {s_account.AccountString}", LogType.Debug);
+                Log.WriteLine($"Account: {retVal.AccountString}", LogType.Debug);
             }
             else
             {
                 Log.WriteLine($"No account selected", LogType.Debug);
             }
+
+            return retVal;
         }
         #endregion
 
@@ -338,17 +376,17 @@ namespace Spawn.HDT.DustUtility
 
             if (Directory.Exists(DataDirectory))
             {
-                string[] vFiles = Directory.GetFiles(DataDirectory, $"*_{Cache.CollectionString}.xml");
+                string[] vFiles = Directory.GetFiles(AccountsDirectory, $"*_{Account.CollectionString}.xml");
 
                 for (int i = 0; i < vFiles.Length; i++)
                 {
                     string strCollectionFileName = vFiles[i];
 
-                    string strDecksFileName = strCollectionFileName.Replace($"_{Cache.CollectionString}", $"_{Cache.DecksString}");
+                    string strDecksFileName = strCollectionFileName.Replace($"_{Account.CollectionString}", $"_{Account.DecksString}");
 
                     if (File.Exists(strDecksFileName))
                     {
-                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Cache.CollectionString}", string.Empty);
+                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Account.CollectionString}", string.Empty);
 
                         lstRet.Add(Account.Parse(strAccountString));
                     }
@@ -368,36 +406,40 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine("Switching accounts...", LogType.Debug);
 
-                Account oldAcc = s_account;
+                Account oldAcc = CurrentAccount;
 
-                s_account = null;
+                Account selectedAcc = SelectAccount(true);
 
-                SelectAccount(true);
-
-                if (s_account == null)
+                if (selectedAcc == null)
                 {
-                    s_account = oldAcc;
+                    selectedAcc = oldAcc;
                 }
                 else { }
 
-                if (!s_account.Equals(oldAcc))
+                if (!selectedAcc.Equals(oldAcc))
                 {
                     s_mainWindow.Close();
+
+                    //Remove current account instance
+                    SimpleIoc.Default.Unregister<Account>();
+
+                    //Add selected instance
+                    SimpleIoc.Default.Register(() => selectedAcc);
                 }
                 else { }
 
                 OpenMainWindow();
 
-                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={s_account.AccountString}", LogType.Debug);
+                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
             }
             else { }
         }
         #endregion
 
         #region GetDataDirectory
-        private static string GetDataDirectory()
+        private static string GetDataDirectory(string strFolder = "")
         {
-            string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility");
+            string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility", strFolder);
 
             if (!Directory.Exists(strRet))
             {
@@ -416,11 +458,11 @@ namespace Spawn.HDT.DustUtility
 
             if (!account.IsEmpty)
             {
-                strRet = Path.Combine(DataDirectory, $"{account.AccountString}_{strType}.xml");
+                strRet = Path.Combine(DataDirectory, "Accounts", $"{account.AccountString}_{strType}.xml");
             }
             else
             {
-                strRet = Path.Combine(DataDirectory, $"{strType}.xml");
+                strRet = Path.Combine(DataDirectory, "Accounts", $"{strType}.xml");
             }
 
             return strRet;

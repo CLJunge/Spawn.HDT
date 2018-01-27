@@ -12,6 +12,13 @@ namespace Spawn.HDT.DustUtility
     [DebuggerDisplay("{AccountString}")]
     public class Account
     {
+        #region Constants
+        public const string CollectionString = "collection";
+        public const string DecksString = "decks";
+        public const string PreferencesString = "prefs";
+        public const string HistoryString = "history";
+        #endregion
+
         #region Static Properties
         #region Empty
         public static Account Empty => new Account(null, Region.UNKNOWN);
@@ -53,6 +60,13 @@ namespace Spawn.HDT.DustUtility
 
         #region Preferences
         public AccountPreferences Preferences => m_preferences ?? (m_preferences = AccountPreferences.Load(this));
+        #endregion
+
+        #region HasFiles
+        public bool HasFiles => System.IO.File.Exists(DustUtilityPlugin.GetFullFileName(this, CollectionString))
+            || System.IO.File.Exists(DustUtilityPlugin.GetFullFileName(this, DecksString))
+            || System.IO.File.Exists(DustUtilityPlugin.GetFullFileName(this, HistoryString))
+            || System.IO.File.Exists(DustUtilityPlugin.GetFullFileName(this, PreferencesString));
         #endregion
         #endregion
 

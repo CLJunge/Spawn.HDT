@@ -1,6 +1,7 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement;
-using Spawn.HDT.DustUtility.Mvvm;
 using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -12,7 +13,19 @@ namespace Spawn.HDT.DustUtility.ViewModel
 {
     public class HistoryDialogViewModel : ViewModelBase
     {
+        #region Member Variables
+        private string m_strWindowTitle;
+        #endregion
+
         #region Properties
+        #region WindowTitle
+        public string WindowTitle
+        {
+            get => m_strWindowTitle;
+            set => Set(ref m_strWindowTitle, value);
+        }
+        #endregion
+
         #region CardItems
         public ObservableCollection<DataGridCardItemEx> CardItems { get; set; }
         #endregion

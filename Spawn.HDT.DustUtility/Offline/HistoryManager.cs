@@ -10,10 +10,6 @@ namespace Spawn.HDT.DustUtility.Offline
 {
     public static class HistoryManager
     {
-        #region Constants
-        public const string HistoryString = "history";
-        #endregion
-
         #region Static Fields
         private static CardComparer s_cardComparer = new CardComparer();
         private static bool s_blnCheckInProgress;
@@ -146,7 +142,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             Log.WriteLine($"Loading history for \"{account.AccountString}\"", LogType.Debug);
 
-            string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
+            string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
             return FileManager.Load<List<CachedCardEx>>(strPath);
         }
@@ -157,7 +153,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
 
-            string strPath = DustUtilityPlugin.GetFullFileName(account, HistoryString);
+            string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
             FileManager.Write(strPath, lstCardsHistory);
         }
