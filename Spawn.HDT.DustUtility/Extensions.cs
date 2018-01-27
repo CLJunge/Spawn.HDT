@@ -1,4 +1,5 @@
-﻿using HearthDb;
+﻿using GalaSoft.MvvmLight;
+using HearthDb;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Offline;
@@ -290,6 +291,13 @@ namespace Spawn.HDT.DustUtility
             }
 
             return retVal;
+        }
+        #endregion
+
+        #region GetViewModel
+        public static T GetViewModel<T>(this System.Windows.FrameworkElement element) where T : ViewModelBase
+        {
+            return element.DataContext as T;
         }
         #endregion
     }
