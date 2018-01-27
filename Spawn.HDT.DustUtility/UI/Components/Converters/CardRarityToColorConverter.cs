@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Spawn.HDT.DustUtility.UI.Converters
+namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CardRarityToColorConverter : IValueConverter
     {

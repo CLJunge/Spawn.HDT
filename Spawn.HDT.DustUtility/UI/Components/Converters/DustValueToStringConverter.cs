@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media;
 
-namespace Spawn.HDT.DustUtility.UI.Converters
+namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class CardNameConverter : IValueConverter
+    public class DustValueToStringConverter : IValueConverter
     {
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush retVal = Brushes.Black;
-            //#c7a602
-            if (value is bool && (bool)value)
+            string strRet = string.Empty;
+
+            if (value is int)
             {
-                retVal = Brushes.Goldenrod;
+                strRet = $"{value} Dust";
             }
             else { }
 
-            return retVal;
+            return strRet;
         }
         #endregion
 

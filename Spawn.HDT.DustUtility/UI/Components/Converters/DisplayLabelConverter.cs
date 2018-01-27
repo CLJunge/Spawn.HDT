@@ -2,22 +2,18 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Spawn.HDT.DustUtility.UI.Converters
+namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class DustValueToStringConverter : IValueConverter
+    public class DisplayLabelConverter : IValueConverter
     {
+        #region Properties
+        public string Prefix { get; set; }
+        #endregion
+
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strRet = string.Empty;
-
-            if (value is int)
-            {
-                strRet = $"{value} Dust";
-            }
-            else { }
-
-            return strRet;
+            return $"{Prefix} {value}";
         }
         #endregion
 

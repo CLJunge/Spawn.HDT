@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using System.Windows.Media;
 
-namespace Spawn.HDT.DustUtility.UI.Converters
+namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class DisplayLabelConverter : IValueConverter
+    public class CardNameConverter : IValueConverter
     {
-        #region Properties
-        public string Prefix { get; set; }
-        #endregion
-
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return $"{Prefix} {value}";
+            SolidColorBrush retVal = Brushes.Black;
+            //#c7a602
+            if (value is bool && (bool)value)
+            {
+                retVal = Brushes.Goldenrod;
+            }
+            else { }
+
+            return retVal;
         }
         #endregion
 
