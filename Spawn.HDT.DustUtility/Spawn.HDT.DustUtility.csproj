@@ -119,16 +119,16 @@
     <Compile Include="UI\Controls\CardsDataGrid.xaml.cs">
       <DependentUpon>CardsDataGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Converters\CardClassToImageConverter.cs" />
-    <Compile Include="UI\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Converters\CardNameConverter.cs" />
-    <Compile Include="UI\Converters\CardRarityToColorConverter.cs" />
-    <Compile Include="UI\Converters\CardSetToImageConverter.cs" />
-    <Compile Include="UI\Converters\CountLabelConverter.cs" />
-    <Compile Include="UI\Converters\CountToColorConverter.cs" />
-    <Compile Include="UI\Converters\DisplayLabelConverter.cs" />
-    <Compile Include="UI\Converters\DustValueToStringConverter.cs" />
-    <Compile Include="UI\Converters\TimestampConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardClassToImageConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardNameConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardRarityToColorConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardSetToImageConverter.cs" />
+    <Compile Include="UI\Components\Converters\CountLabelConverter.cs" />
+    <Compile Include="UI\Components\Converters\CountToColorConverter.cs" />
+    <Compile Include="UI\Components\Converters\DisplayLabelConverter.cs" />
+    <Compile Include="UI\Components\Converters\DustValueToStringConverter.cs" />
+    <Compile Include="UI\Components\Converters\TimestampConverter.cs" />
     <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
       <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
     </Compile>
@@ -139,16 +139,21 @@
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\HistoryFlyoutView.xaml.cs">
+      <DependentUpon>HistoryFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Models\DataGridCardItem.cs" />
     <Compile Include="UI\DataGridCardItemEventArgs.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="ViewModel\HistoryFlyoutViewModel.cs" />
     <Compile Include="ViewModel\HistoryDialogViewModel.cs" />
-    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SettingsDialogViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +194,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\SettingsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flyouts\HistoryFlyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
