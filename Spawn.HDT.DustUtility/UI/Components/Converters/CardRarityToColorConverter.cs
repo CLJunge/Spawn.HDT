@@ -25,13 +25,13 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             //Common
             s_dColors.Add(1, new SolidColorBrush(Color.FromRgb(38, 168, 16)));
             //Rare
-            //s_dColors.Add(3, new SolidColorBrush(Color.FromRgb(18, 92, 204)));//30, 113, 255
+            //s_dColors.Add(3, new SolidColorBrush(Color.FromRgb(18, 92, 204)));
             s_dColors.Add(3, new SolidColorBrush(Color.FromRgb(30, 113, 255)));
             //Epic
-            //s_dColors.Add(4, new SolidColorBrush(Color.FromRgb(135, 14, 186)));//163, 58, 234
+            //s_dColors.Add(4, new SolidColorBrush(Color.FromRgb(135, 14, 186)));
             s_dColors.Add(4, new SolidColorBrush(Color.FromRgb(163, 58, 234)));
             //Legendary
-            //s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(226, 119, 24)));//255, 153, 0
+            //s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(226, 119, 24)));
             s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(255, 153, 0)));
         }
         #endregion
