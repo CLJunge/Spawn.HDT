@@ -7,7 +7,13 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
     public class DisplayLabelConverter : IValueConverter
     {
         #region Properties
+        #region Prefix
         public string Prefix { get; set; }
+        #endregion
+
+        #region Suffix
+        public string Suffix { get; set; }
+        #endregion
         #endregion
 
         #region Convert
@@ -18,6 +24,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Prefix))
             {
                 strRet = $"{Prefix} {strRet}";
+            }
+            else { }
+
+            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Suffix))
+            {
+                strRet = $"{strRet} {Suffix}";
             }
             else { }
 
