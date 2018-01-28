@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Spawn.HDT.DustUtility
 {
@@ -58,6 +59,10 @@ namespace Spawn.HDT.DustUtility
         #region NumericRegex
         public static Regex NumericRegex => new Regex("^(0|[1-9][0-9]*)$");
         #endregion
+
+        #region RarityBrushes
+        public static Dictionary<int, SolidColorBrush> RarityBrushes { get; }
+        #endregion
         #endregion
 
         #region Properties
@@ -96,6 +101,21 @@ namespace Spawn.HDT.DustUtility
             SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
             SimpleIoc.Default.Register<ICardsManager, CardsManager>();
             SimpleIoc.Default.Register(() => Configuration.Load());
+
+            RarityBrushes = new Dictionary<int, SolidColorBrush>
+            {
+                //Common
+                { 1, new SolidColorBrush(Color.FromRgb(38, 168, 16)) },
+                //Rare
+                //s_dColors.Add(3, new SolidColorBrush(Color.FromRgb(18, 92, 204)));
+                { 3, new SolidColorBrush(Color.FromRgb(30, 113, 255)) },
+                //Epic
+                //s_dColors.Add(4, new SolidColorBrush(Color.FromRgb(135, 14, 186)));
+                { 4, new SolidColorBrush(Color.FromRgb(163, 58, 234)) },
+                //Legendary
+                //s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(226, 119, 24)));
+                { 5, new SolidColorBrush(Color.FromRgb(255, 153, 0)) }
+            };
         }
         #endregion
 
@@ -367,12 +387,12 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region SwitchAccounts
-        public static void SwitchAccounts()
+        #region SwitchAccount
+        public static void SwitchAccount()
         {
             if (s_mainWindow != null)
             {
-                Log.WriteLine("Switching accounts...", LogType.Debug);
+                Log.WriteLine("Switching account...", LogType.Debug);
 
                 Account oldAcc = CurrentAccount;
 
@@ -394,7 +414,7 @@ namespace Spawn.HDT.DustUtility
 
                 OpenMainWindow();
 
-                Log.WriteLine($"Switched accounts: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
+                Log.WriteLine($"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
             }
             else { }
         }
