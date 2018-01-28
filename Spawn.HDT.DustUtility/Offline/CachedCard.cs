@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Spawn.HDT.DustUtility.Offline
+﻿namespace Spawn.HDT.DustUtility.Offline
 {
     public class CachedCard
     {
@@ -15,15 +13,6 @@ namespace Spawn.HDT.DustUtility.Offline
 
         #region IsGolden
         public bool IsGolden { get; set; }
-        #endregion
-        #endregion
-    }
-
-    public class CachedCardEx : CachedCard
-    {
-        #region Properties
-        #region Timestamp
-        public DateTime Timestamp { get; set; }
         #endregion
         #endregion
     }
