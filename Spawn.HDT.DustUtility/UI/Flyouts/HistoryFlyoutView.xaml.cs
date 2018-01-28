@@ -8,9 +8,5 @@
             InitializeComponent();
         }
         #endregion
-
-        private void OnRowDeleted(object sender, DataGridCardItemEventArgs e)
-        {
-        }
     }
 }

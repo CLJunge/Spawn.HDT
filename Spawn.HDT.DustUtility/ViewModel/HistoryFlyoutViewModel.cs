@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Spawn.HDT.DustUtility.CardManagement;
+using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Offline;
 using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -15,18 +15,18 @@ namespace Spawn.HDT.DustUtility.ViewModel
     {
         #region Properties
         #region CardItems
-        public ObservableCollection<DataGridCardItemEx> CardItems { get; set; }
+        public ObservableCollection<CardItem> CardItems { get; set; }
         #endregion
 
         #region ClearHistoryCommand
-        public ICommand ClearHistoryCommand => new RelayCommand(ClearHistory);
+        public ICommand ClearHistoryCommand => new RelayCommand(ClearHistory, (() => CardItems.Count > 0));
         #endregion
         #endregion
 
         #region Ctor
         public HistoryFlyoutViewModel()
         {
-            CardItems = new ObservableCollection<DataGridCardItemEx>();
+            CardItems = new ObservableCollection<CardItem>();
         }
         #endregion
 
@@ -35,19 +35,26 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             CardItems.Clear();
 
-            List<CachedCardEx> lstHistory = HistoryManager.GetHistory(DustUtilityPlugin.CurrentAccount);
+            List<CachedHistoryCard> lstHistory = HistoryManager.GetHistory(DustUtilityPlugin.CurrentAccount);
 
             for (int i = 0; i < lstHistory.Count; i++)
             {
-                CardItems.Add(DataGridCardItemEx.FromCardWrapperEx(new CardWrapperEx(lstHistory[i])));
+                CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])));
             }
 
-            Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);
+            if (lstHistory.Count > 0)
+            {
+                Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);
+            }
+            else
+            {
+                Log.WriteLine($"No history available", LogType.Debug);
+            }
         }
         #endregion
 
         #region RemoveItem
-        public void RemoveItem(DataGridCardItemEventArgs e)
+        public void RemoveItem(CardItemEventArgs e)
         {
             if (e.RowIndex > -1)
             {
