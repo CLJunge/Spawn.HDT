@@ -2,6 +2,8 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
+using Spawn.HDT.DustUtility.UI.Models;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -24,6 +26,10 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
+        #region CardItems
+        public ObservableCollection<CardItem> CardItems { get; set; }
+        #endregion
+
         #region HistoryButtonVisibility
         public Visibility HistoryButtonVisibility
         {
@@ -40,8 +46,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
-        #region SwitchAccountsCommand
-        public ICommand SwitchAccountsCommand => new RelayCommand(SwitchAccounts);
+        #region SwitchAccountCommand
+        public ICommand SwitchAccountCommand => new RelayCommand(SwitchAccount);
         #endregion
 
         #region ShowHistoryCommand
@@ -60,6 +66,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region Ctor
         public MainViewModel()
         {
+            CardItems = new ObservableCollection<CardItem>();
+
             Account account = DustUtilityPlugin.CurrentAccount;
 
             if (!account.IsEmpty)
@@ -78,7 +86,12 @@ namespace Spawn.HDT.DustUtility.ViewModel
             {
                 WindowTitle = $"{WindowTitle} (Design)";
             }
-            else { }
+            else
+            {
+#if DEBUG
+                WindowTitle = $"{WindowTitle} (Debug)";
+#endif
+            }
 
             HistoryButtonVisibility = Visibility.Collapsed;
             SwitchAccountButtonVisibility = Visibility.Collapsed;
@@ -100,10 +113,10 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
-        #region SwitchAccounts
-        private void SwitchAccounts()
+        #region SwitchAccount
+        private void SwitchAccount()
         {
-            DustUtilityPlugin.SwitchAccounts();
+            DustUtilityPlugin.SwitchAccount();
         }
         #endregion
 

@@ -6,36 +6,39 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
         xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
+        xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
         mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"
         Height="450" Width="950" MinHeight="425" MinWidth="800" WindowStartupLocation="CenterScreen"
         Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
         RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never">
     <Window.Resources>
-        <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.DataContext>
         <Binding Path="Main" Source="{StaticResource Locator}"/>
     </Window.DataContext>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <controls:WindowCommands.Resources>
-                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
-            </controls:WindowCommands.Resources>
-            <Button Command="{Binding SwitchAccountsCommand}" Visibility="{Binding SwitchAccountButtonVisibility}">
+            <Button Command="{Binding SwitchAccountCommand}" Visibility="{Binding SwitchAccountButtonVisibility}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{StaticResource UserIcon}" />
+                            <ImageBrush ImageSource="{DynamicResource UserIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock Text="SWITCH ACCOUNTS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Text="SWITCH ACCOUNT..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
             <Button Command="{Binding ShowHistoryCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{StaticResource ClockIcon}" />
+                            <ImageBrush ImageSource="{DynamicResource ClockIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -45,7 +48,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{StaticResource LayersIcon}" />
+                            <ImageBrush ImageSource="{DynamicResource LayersIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -55,7 +58,7 @@
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
-                            <ImageBrush ImageSource="{StaticResource InfoIcon}" />
+                            <ImageBrush ImageSource="{DynamicResource InfoIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Text="COLLECTION INFO..." VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -71,6 +74,8 @@
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
-        
+        <Border BorderBrush="Silver" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10,45,170,10" VerticalAlignment="Stretch">
+            <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
+        </Border>
     </Grid>
 </controls:MetroWindow>
