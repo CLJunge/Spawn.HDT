@@ -10,11 +10,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strRet = string.Empty;
+            string strRet = null;
 
-            if (value is DateTime)
+            if (value is DateTime date)
             {
-                strRet = ((DateTime)value).ToString("d", culture);
+                strRet = date.ToString("d", CultureInfo.InvariantCulture);
             }
             else
             {
