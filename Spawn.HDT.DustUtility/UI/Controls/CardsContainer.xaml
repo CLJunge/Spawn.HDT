@@ -5,10 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300" Name="Container">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style BasedOn="{StaticResource VirtualisedMetroListView}" TargetType="ListView"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <ListView x:Name="ItemsContainer" ItemsSource="{Binding ElementName=Container, Path=ItemsSource}"
                   ContextMenuOpening="OnItemsContainerContextMenuOpening" MouseDoubleClick="OnItemsContainerMouseDoubleClick"
-                  MouseDown="OnItemsContainerMouseDown" SelectionChanged="OnItemsContainerSelectionChanged">
+                  MouseDown="OnItemsContainerMouseDown" SelectionChanged="OnItemsContainerSelectionChanged"
+                  BorderThickness="0">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Remove" Click="OnDeleteRowClick"/>
