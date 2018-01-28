@@ -28,7 +28,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
                 List<Card> lstOldCollection = account.GetCollection();
 
-                List<CachedCardEx> lstCardsHistory = LoadHistory(account);
+                List<CachedHistoryCard> lstHistory = LoadHistory(account);
 
                 if (lstOldCollection != null && lstOldCollection.Count > 0)
                 {
@@ -38,14 +38,14 @@ namespace Spawn.HDT.DustUtility.Offline
                     int nChanges = 0;
 
                     //new cards
-                    nChanges += CheckForNewCards(lstOldCollection, lstCardsHistory, lstCurrent, lstOld);
+                    nChanges += CheckForNewCards(lstOldCollection, lstHistory, lstCurrent, lstOld);
 
                     //disenchanted cards
-                    nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstCardsHistory, lstOld);
+                    nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstHistory, lstOld);
 
                     Log.WriteLine($"Found {nChanges} changes", LogType.Debug);
 
-                    SaveHistory(account, lstCardsHistory);
+                    SaveHistory(account, lstHistory);
                 }
                 else { }
 
@@ -56,7 +56,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region CheckForNewCards
-        private static int CheckForNewCards(List<Card> lstOldCollection, List<CachedCardEx> lstCardsHistory, List<Card> lstCurrent, List<Card> lstOld)
+        private static int CheckForNewCards(List<Card> lstOldCollection, List<CachedHistoryCard> lstHistory, List<Card> lstCurrent, List<Card> lstOld)
         {
             int nRet = 0;
 
@@ -78,7 +78,7 @@ namespace Spawn.HDT.DustUtility.Offline
                     }
                     else { }
 
-                    lstCardsHistory.Add(new CachedCardEx
+                    lstHistory.Add(new CachedHistoryCard
                     {
                         Id = cardA.Id,
                         Count = nCount,
@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region CheckForDisenchantedCards
-        private static int CheckForDisenchantedCards(List<Card> lstCurrentCollection, List<CachedCardEx> lstCardsHistory, List<Card> lstOld)
+        private static int CheckForDisenchantedCards(List<Card> lstCurrentCollection, List<CachedHistoryCard> lstHistory, List<Card> lstOld)
         {
             int nRet = 0;
 
@@ -120,7 +120,7 @@ namespace Spawn.HDT.DustUtility.Offline
 
                     nCount *= -1;
 
-                    lstCardsHistory.Add(new CachedCardEx
+                    lstHistory.Add(new CachedHistoryCard
                     {
                         Id = cardB.Id,
                         Count = nCount,
@@ -138,31 +138,31 @@ namespace Spawn.HDT.DustUtility.Offline
         #endregion
 
         #region LoadHistory
-        private static List<CachedCardEx> LoadHistory(Account account)
+        private static List<CachedHistoryCard> LoadHistory(Account account)
         {
             Log.WriteLine($"Loading history for \"{account.AccountString}\"", LogType.Debug);
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
-            return FileManager.Load<List<CachedCardEx>>(strPath);
+            return FileManager.Load<List<CachedHistoryCard>>(strPath);
         }
         #endregion
 
         #region SaveHistory
-        private static void SaveHistory(Account account, List<CachedCardEx> lstCardsHistory)
+        private static void SaveHistory(Account account, List<CachedHistoryCard> lstHistory)
         {
             Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
-            FileManager.Write(strPath, lstCardsHistory);
+            FileManager.Write(strPath, lstHistory);
         }
         #endregion
 
         #region GetHistory
-        public static List<CachedCardEx> GetHistory(Account account)
+        public static List<CachedHistoryCard> GetHistory(Account account)
         {
-            List<CachedCardEx> lstHistory = LoadHistory(account);
+            List<CachedHistoryCard> lstHistory = LoadHistory(account);
 
             //List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
 
@@ -189,7 +189,7 @@ namespace Spawn.HDT.DustUtility.Offline
         #region ClearHistory
         public static void ClearHistory(Account account)
         {
-            SaveHistory(account, new List<CachedCardEx>());
+            SaveHistory(account, new List<CachedHistoryCard>());
 
             Log.WriteLine($"Cleared history for \"{account.AccountString}\"", LogType.Debug);
         }
@@ -200,7 +200,7 @@ namespace Spawn.HDT.DustUtility.Offline
         {
             Log.WriteLine($"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"", LogType.Debug);
 
-            List<CachedCardEx> lstHistory = GetHistory(account);
+            List<CachedHistoryCard> lstHistory = GetHistory(account);
 
             lstHistory.RemoveAt(nIndex);
 

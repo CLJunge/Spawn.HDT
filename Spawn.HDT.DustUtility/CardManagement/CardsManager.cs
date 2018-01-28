@@ -110,13 +110,13 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                 lstChunk = FilterForSets(lstChunk, parameters.Sets);
 
-                lstChunk = new List<CardWrapper>(lstChunk.OrderBy(c => c.GetDustValue()));
+                lstChunk = new List<CardWrapper>(lstChunk.OrderBy(c => c.DustValue));
 
                 for (int j = 0; j < lstChunk.Count && !blnDone; j++)
                 {
                     CardWrapper cardWrapper = lstChunk[j];
 
-                    nTotalAmount += cardWrapper.GetDustValue();
+                    nTotalAmount += cardWrapper.DustValue;
 
                     lstCards.Add(cardWrapper);
 
@@ -155,7 +155,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                         {
                             CardWrapper cardWrapper = lstChunk[j];
 
-                            nCurrentAmount += cardWrapper.GetDustValue();
+                            nCurrentAmount += cardWrapper.DustValue;
 
                             int nCurrentDifference = nDifference - nCurrentAmount;
 
@@ -268,7 +268,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                         else { }
                     }
 
-                    if (cardWrapper.MaxCountInDecks < 2 && cardWrapper.Card.Count > cardWrapper.MaxCountInDecks && !(cardWrapper.DbCard.Rarity == Rarity.LEGENDARY && cardWrapper.MaxCountInDecks == 1))
+                    if (cardWrapper.MaxCountInDecks < 2 && cardWrapper.RawCard.Count > cardWrapper.MaxCountInDecks && !(cardWrapper.DbCard.Rarity == Rarity.LEGENDARY && cardWrapper.MaxCountInDecks == 1))
                     {
                         m_lstUnusedCards.Add(cardWrapper);
                     }
@@ -325,7 +325,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 if (parameters.GoldenCardsOnly)
                 {
-                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.Card.Premium);
+                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.RawCard.Premium);
                 }
                 else
                 {
@@ -334,7 +334,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
             else
             {
-                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.Card.Premium);
+                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.RawCard.Premium);
             }
 
             return lstRet;

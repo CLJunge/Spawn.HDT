@@ -1,5 +1,5 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
-using Spawn.HDT.DustUtility.CardManagement;
+using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Net;
 using System.Drawing;
 using System.IO;
@@ -31,7 +31,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region UpdateCardWrapperAsync
         public async Task UpdateCardWrapperAsync(CardWrapper wrapper)
         {
-            if (wrapper != null && (wrapper.Card.Id != m_wrapper?.Card.Id || wrapper.Card.Premium != m_wrapper?.Card.Premium))
+            if (wrapper != null && (wrapper.RawCard.Id != m_wrapper?.RawCard.Id || wrapper.RawCard.Premium != m_wrapper?.RawCard.Premium))
             {
                 m_wrapper = wrapper;
 
@@ -51,15 +51,15 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 if (m_wrapper != null && Visibility == Visibility.Visible)
                 {
-                    Log.WriteLine($"Loading image for {m_wrapper.Card.Id} (Premium={m_wrapper.Card.Premium})", LogType.Debug);
+                    Log.WriteLine($"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})", LogType.Debug);
 
-                    m_currentImageStream = (await HearthstoneCardImageManager.GetStreamAsync(m_wrapper.Card.Id, m_wrapper.Card.Premium));
+                    m_currentImageStream = (await HearthstoneCardImageManager.GetStreamAsync(m_wrapper.RawCard.Id, m_wrapper.RawCard.Premium));
 
                     if (m_currentImageStream != null)
                     {
                         loadingLabel.Visibility = Visibility.Hidden;
 
-                        if (m_wrapper.Card.Premium)
+                        if (m_wrapper.RawCard.Premium)
                         {
                             SetAsGif(m_currentImageStream);
                         }
@@ -85,7 +85,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 image.Margin = new Thickness(-10, -35, 0, 25);
             }
-            else if (!m_wrapper.Card.Premium &&
+            else if (!m_wrapper.RawCard.Premium &&
                     (m_wrapper.DbCard.Id.Equals("CFM_321")
                     || m_wrapper.DbCard.Id.Equals("CFM_619")
                     || m_wrapper.DbCard.Id.Equals("CFM_621")
@@ -95,7 +95,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 image.Margin = new Thickness(0, 0, 0, -25);
             }
-            else if (m_wrapper.Card.Premium)
+            else if (m_wrapper.RawCard.Premium)
             {
                 if (m_wrapper.DbCard.Type == HearthDb.Enums.CardType.ABILITY && m_wrapper.DbCard.Rarity == HearthDb.Enums.Rarity.LEGENDARY)
                 {
@@ -114,7 +114,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     image.Margin = new Thickness();
                 }
             }
-            else if (!m_wrapper.Card.Premium)
+            else if (!m_wrapper.RawCard.Premium)
             {
                 image.Margin = new Thickness(0, -25, 0, 0);
             }

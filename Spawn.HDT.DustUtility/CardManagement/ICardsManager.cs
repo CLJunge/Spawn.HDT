@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Spawn.HDT.DustUtility.Hearthstone;
+using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {
