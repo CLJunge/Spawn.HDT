@@ -8,16 +8,10 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
     public class CountToColorConverter : IMultiValueConverter
     {
-        #region Properties
-        #region DefaultColorBrush
-        public SolidColorBrush DefaultColorBrush { get; set; }
-        #endregion
-        #endregion
-
         #region Convert
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            SolidColorBrush retVal = DefaultColorBrush;
+            SolidColorBrush retVal = Brushes.Black;
 
             try
             {
