@@ -15,9 +15,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Xml;
 
 namespace Spawn.HDT.DustUtility
 {
@@ -25,6 +27,7 @@ namespace Spawn.HDT.DustUtility
     {
         #region Static Fields
         private static Window s_mainWindow;
+        private static bool s_blnInitialized;
         #endregion
 
         #region Static Properties
@@ -123,15 +126,18 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            CheckAndMoveAccountFiles();
+            s_blnInitialized = false;
 
-            CreateMenuItem();
-
-            if (Config.OfflineMode && Core.Game.IsRunning)
+            Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
             {
-                Cache.StartTimer();
-            }
-            else { }
+                if (Config.OfflineMode && Core.Game.IsRunning)
+                {
+                    Cache.StartTimer();
+                }
+                else { }
+
+                s_blnInitialized = true;
+            });
         }
         #endregion
 
@@ -206,33 +212,50 @@ namespace Spawn.HDT.DustUtility
         #region OnClick
         private void OnClick(object sender, RoutedEventArgs e)
         {
-            if (Core.Game.IsRunning || Config.OfflineMode)
+            if (s_blnInitialized)
             {
-                if (!CurrentAccount.IsValid)
+                if (Core.Game.IsRunning || Config.OfflineMode)
                 {
-                    Account selectedAcc = SelectAccount(false);
-
-                    if (selectedAcc != null)
+                    if (!CurrentAccount.IsValid)
                     {
-                        UpdatedAccountInstance(selectedAcc);
+                        Account selectedAcc = SelectAccount(false);
+
+                        if (selectedAcc != null)
+                        {
+                            UpdatedAccountInstance(selectedAcc);
+                        }
+                        else { }
+                    }
+                    else { }
+
+                    if (CurrentAccount.IsValid)
+                    {
+                        OpenMainWindow();
                     }
                     else { }
                 }
-                else { }
-
-                if (CurrentAccount.IsValid)
+                else if (!Config.OfflineMode)
                 {
-                    OpenMainWindow();
+                    MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    Log.WriteLine("Hearthstone isn't running", LogType.Warning);
                 }
                 else { }
             }
-            else if (!Config.OfflineMode)
+            else
             {
-                MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+                string strMessage = "Plugin is still initializing...";
 
-                Log.WriteLine("Hearthstone isn't running!", LogType.Warning);
+                if (Config.Version == 1)
+                {
+                    strMessage = $"{strMessage} (Updating account files to new format)";
+                }
+                else { }
+
+                MessageBox.Show(strMessage, Name, MessageBoxButton.OK, MessageBoxImage.Information);
+
+                Log.WriteLine("Plugin is not initialized", LogType.Info);
             }
-            else { }
         }
         #endregion
         #endregion
@@ -255,29 +278,94 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region CheckAndMoveAccountFiles
-        private void CheckAndMoveAccountFiles()
+        #region UpdatePluginFiles
+        private void UpdatePluginFiles()
         {
-            if (!Directory.Exists(Path.Combine(DataDirectory, "Accounts")))
+            Log.WriteLine("Updating plugin files", LogType.Debug);
+
+            if (Config.Version == 1)
             {
-                string[] vFiles = Directory.GetFiles(DataDirectory);
+                MoveAccountFiles();
 
-                if (vFiles.Length > 1)
-                {
-                    for (int i = 0; i < vFiles.Length; i++)
-                    {
-                        if (!vFiles[i].Contains("config.xml"))
-                        {
-                            FileInfo fileInfo = new FileInfo(vFiles[i]);
+                UpdateHistoryFiles();
 
-                            fileInfo.MoveTo(Path.Combine(AccountsDirectory, fileInfo.Name));
-                        }
-                        else { }
-                    }
-                }
-                else { }
+                Config.Version = 2;
             }
             else { }
+
+            Log.WriteLine("Finished updating plugin files", LogType.Debug);
+        }
+        #endregion
+
+        #region MoveAccountFiles
+        private void MoveAccountFiles()
+        {
+            string[] vFiles = Directory.GetFiles(DataDirectory);
+
+            if (vFiles.Length >= 1)
+            {
+                for (int i = 0; i < vFiles.Length; i++)
+                {
+                    if (!vFiles[i].Contains("config.xml"))
+                    {
+                        FileInfo fileInfo = new FileInfo(vFiles[i]);
+
+                        string strTargetPath = Path.Combine(AccountsDirectory, fileInfo.Name);
+
+                        if (File.Exists(strTargetPath))
+                        {
+                            File.Delete(strTargetPath);
+                        }
+                        else { }
+
+                        fileInfo.MoveTo(strTargetPath);
+                    }
+                    else { }
+                }
+            }
+            else { }
+        }
+        #endregion
+
+        #region UpdateHistoryFiles
+        private void UpdateHistoryFiles()
+        {
+            string[] vFiles = Directory.GetFiles(AccountsDirectory, $"*_{Account.HistoryString}.xml");
+
+            for (int i = 0; i < vFiles.Length; i++)
+            {
+                XmlDocument document = new XmlDocument();
+
+                document.Load(vFiles[i]);
+
+                List<CachedHistoryCard> lstHistory = new List<CachedHistoryCard>();
+
+                for (int j = 0; j < document.DocumentElement.ChildNodes.Count; j++)
+                {
+                    XmlNode cardNode = document.DocumentElement.ChildNodes[j];
+
+                    XmlNode idNode = cardNode.SelectSingleNode("Id");
+                    XmlNode countNode = cardNode.SelectSingleNode("Count");
+                    XmlNode isGoldenNode = cardNode.SelectSingleNode("IsGolden");
+                    XmlNode timestampNode = cardNode.SelectSingleNode("Timestamp");
+
+                    if (idNode != null && countNode != null && isGoldenNode != null && timestampNode != null)
+                    {
+                        CachedHistoryCard card = new CachedHistoryCard
+                        {
+                            Id = idNode.InnerText,
+                            Count = Convert.ToInt32(countNode.InnerText),
+                            IsGolden = Convert.ToBoolean(isGoldenNode.InnerText),
+                            Timestamp = DateTime.Parse(timestampNode.InnerText)
+                        };
+
+                        lstHistory.Add(card);
+                    }
+                    else { }
+
+                    FileManager.Write(vFiles[i], lstHistory);
+                }
+            }
         }
         #endregion
 
