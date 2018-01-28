@@ -91,7 +91,7 @@
   <ItemGroup>
     <Compile Include="AccountPreferences.cs" />
     <Compile Include="CardManagement\CardsManager.cs" />
-    <Compile Include="CardManagement\CardWrapper.cs" />
+    <Compile Include="Hearthstone\CardWrapper.cs" />
     <Compile Include="CardManagement\ICardsManager.cs" />
     <Compile Include="CardManagement\SearchParameters.cs" />
     <Compile Include="Hearthstone\CardSets.cs" />
@@ -99,6 +99,7 @@
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FileManager.cs" />
+    <Compile Include="Offline\CachedHistoryCard.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Net\GitHubUpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
@@ -116,14 +117,13 @@
     <Compile Include="UI\Controls\CardImageContainer.xaml.cs">
       <DependentUpon>CardImageContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\CardsDataGrid.xaml.cs">
-      <DependentUpon>CardsDataGrid.xaml</DependentUpon>
+    <Compile Include="UI\Controls\CardItemView.xaml.cs">
+      <DependentUpon>CardItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\Converters\CardClassToImageConverter.cs" />
+    <Compile Include="UI\Controls\CardsContainer.xaml.cs">
+      <DependentUpon>CardsContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Components\Converters\CardNameConverter.cs" />
-    <Compile Include="UI\Components\Converters\CardRarityToColorConverter.cs" />
-    <Compile Include="UI\Components\Converters\CardSetToImageConverter.cs" />
     <Compile Include="UI\Components\Converters\CountLabelConverter.cs" />
     <Compile Include="UI\Components\Converters\CountToColorConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayLabelConverter.cs" />
@@ -139,8 +139,8 @@
     <Compile Include="UI\Flyouts\HistoryFlyoutView.xaml.cs">
       <DependentUpon>HistoryFlyoutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Models\DataGridCardItem.cs" />
-    <Compile Include="UI\DataGridCardItemEventArgs.cs" />
+    <Compile Include="UI\Models\CardItem.cs" />
+    <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
     <Compile Include="ViewModel\HistoryFlyoutViewModel.cs" />
@@ -154,13 +154,18 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Compile Include="UI\Controls\CardsDataGrid.DragAndDrop.cs">
-      <DependentUpon>CardsDataGrid.xaml</DependentUpon>
+      <DependentUpon>CardsContainer.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Properties\DesignTimeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <ContainsDesignTimeResources>true</ContainsDesignTimeResources>
+    </Page>
     <Page Include="Resources\CardClassIcons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -173,11 +178,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Resources\MockResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\RarityGems.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\CardImageContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Controls\CardsDataGrid.xaml">
+    <Page Include="UI\Controls\CardItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\CardsContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

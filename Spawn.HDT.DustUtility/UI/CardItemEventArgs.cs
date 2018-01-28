@@ -3,11 +3,11 @@ using System;
 
 namespace Spawn.HDT.DustUtility.UI
 {
-    public class DataGridCardItemEventArgs : EventArgs
+    public class CardItemEventArgs : EventArgs
     {
         #region Properties
         #region Item
-        public DataGridCardItem Item { get; }
+        public CardItem Item { get; }
         #endregion
 
         #region RowIndex
@@ -16,7 +16,7 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region Ctor
-        public DataGridCardItemEventArgs(DataGridCardItem item, int rowIndex)
+        public CardItemEventArgs(CardItem item, int rowIndex)
         {
             Item = item;
 
