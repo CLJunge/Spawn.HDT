@@ -9,6 +9,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #region Properties
         public static Dictionary<CardSet, string> All { get; }
         public static Dictionary<CardSet, string> AllFullName { get; }
+        public static Dictionary<CardSet, string> AllShortName { get; }
         public static Dictionary<CardSet, string> Expansions { get; }
         public static Dictionary<CardSet, string> Adventures { get; }
         public static Dictionary<CardSet, string> Standard { get; }
@@ -33,6 +34,23 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOE, "League of Explorers" },
                 { CardSet.KARA, "Karazhan" },
                 { CardSet.HOF, "Hall of Fame" }
+            };
+
+            AllShortName = new Dictionary<CardSet, string>
+            {
+                { CardSet.EXPERT1, "Expert" },
+                { CardSet.GVG, "Goblins" },
+                { CardSet.TGT, "Tournament" },
+                { CardSet.OG, "OldGods" },
+                { CardSet.GANGS, "Gadgetzan" },
+                { CardSet.UNGORO, "Ungoro" },
+                { CardSet.ICECROWN, "FrozenThrone" },
+                { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.NAXX, "Naxx" },
+                { CardSet.BRM, "Mountain" },
+                { CardSet.LOE, "League" },
+                { CardSet.KARA, "Karazhan" },
+                { CardSet.HOF, "Hall" }
             };
 
             AllFullName = new Dictionary<CardSet, string>
