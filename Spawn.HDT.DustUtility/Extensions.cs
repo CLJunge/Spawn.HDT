@@ -142,6 +142,11 @@ namespace Spawn.HDT.DustUtility
             return CardSets.All[cardSet];
         }
 
+        public static string GetShortString(this CardSet cardSet)
+        {
+            return CardSets.AllShortName[cardSet];
+        }
+
         public static string GetString(this Rarity rarity)
         {
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
