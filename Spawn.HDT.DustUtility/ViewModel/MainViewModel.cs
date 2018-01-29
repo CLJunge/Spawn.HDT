@@ -69,6 +69,13 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             CardItems = new ObservableCollection<CardItem>();
 
+            Initialize();
+        }
+        #endregion
+
+        #region Initialize
+        public override void Initialize()
+        {
             Account account = DustUtilityPlugin.CurrentAccount;
 
             if (!account.IsEmpty)
@@ -126,7 +133,7 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             if (!flyout.IsOpen)
             {
-                ((FrameworkElement)flyout.Content).GetViewModel<HistoryFlyoutViewModel>().LoadHistory();
+                ((FrameworkElement)flyout.Content).GetViewModel<ViewModelBase>().Initialize();
 
                 flyout.IsOpen = true;
             }

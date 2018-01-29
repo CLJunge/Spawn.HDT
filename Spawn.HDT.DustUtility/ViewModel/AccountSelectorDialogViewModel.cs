@@ -40,7 +40,12 @@ namespace Spawn.HDT.DustUtility.ViewModel
             WindowTitle = "Dust Utility - Select account...";
 
             Accounts = new ObservableCollection<Account>(DustUtilityPlugin.GetAccounts());
+        }
+        #endregion
 
+        #region Initialize
+        public override void Initialize()
+        {
             if (!string.IsNullOrEmpty(DustUtilityPlugin.Config.LastSelectedAccount))
             {
                 SelectedAccountString = DustUtilityPlugin.Config.LastSelectedAccount;

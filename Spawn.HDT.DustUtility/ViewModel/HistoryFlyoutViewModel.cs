@@ -32,8 +32,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
-        #region LoadHistory
-        public void LoadHistory()
+        #region Initialize
+        public override void Initialize()
         {
             if (ReloadRequired || Core.Game.IsRunning)
             {

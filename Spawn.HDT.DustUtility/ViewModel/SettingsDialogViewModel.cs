@@ -1,5 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Windows;
 using System.Windows.Input;
 #endregion
 
@@ -9,10 +10,12 @@ namespace Spawn.HDT.DustUtility.ViewModel
     {
         #region Member Variables
         private string m_strWindowTitle;
+        private Visibility m_coloredCardItemsSetttingVisibility;
 
         private bool m_blnOfflineMode;
         private int m_nSaveInterval;
         private bool m_blnCheckForUpdates;
+        private bool m_blnColoredCardItems;
         #endregion
 
         #region Properties
@@ -21,6 +24,14 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             get => m_strWindowTitle;
             set => Set(ref m_strWindowTitle, value);
+        }
+        #endregion
+
+        #region ColoredCardItemsSetttingVisibility
+        public Visibility ColoredCardItemsSetttingVisibility
+        {
+            get => m_coloredCardItemsSetttingVisibility;
+            set => Set(ref m_coloredCardItemsSetttingVisibility, value);
         }
         #endregion
 
@@ -48,6 +59,14 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
+        #region ColoredCardItems
+        public bool ColoredCardItems
+        {
+            get => m_blnColoredCardItems;
+            set => Set(ref m_blnColoredCardItems, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
         #endregion
@@ -58,9 +77,19 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             WindowTitle = "Dust Utility - Settings";
 
+#if DEBUG
+            ColoredCardItemsSetttingVisibility = Visibility.Visible;
+#endif
+        }
+        #endregion
+
+        #region Initialize
+        public override void Initialize()
+        {
             OfflineMode = DustUtilityPlugin.Config.OfflineMode;
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
+            ColoredCardItems = DustUtilityPlugin.Config.ColoredCardItems;
         }
         #endregion
 
@@ -69,14 +98,13 @@ namespace Spawn.HDT.DustUtility.ViewModel
         {
             DustUtilityPlugin.Config.OfflineMode = OfflineMode;
             DustUtilityPlugin.Config.CheckForUpdates = CheckForUpdates;
+            DustUtilityPlugin.Config.ColoredCardItems = ColoredCardItems;
 
             if (OfflineMode)
             {
                 DustUtilityPlugin.Config.SaveInterval = SaveInterval;
             }
             else { }
-
-            DustUtilityPlugin.Config.Save();
         }
         #endregion
     }
