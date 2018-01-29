@@ -106,7 +106,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
         public CardItem(CardWrapper wrapper)
         {
-            Wrapper = wrapper;
+            Wrapper = new CardWrapper(wrapper.ToString());
         }
         #endregion
 
