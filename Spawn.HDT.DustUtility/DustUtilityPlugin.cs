@@ -28,7 +28,7 @@ namespace Spawn.HDT.DustUtility
     public class DustUtilityPlugin : IPlugin
     {
         #region Static Fields
-        private static Window s_mainWindow;
+        private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
         #endregion
 
@@ -50,7 +50,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region MainWindow
-        public static Window MainWindow => s_mainWindow;
+        public static MainWindow MainWindow => s_mainWindow;
         #endregion
 
         #region CurrentAccount
@@ -99,6 +99,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
+#if DEBUG
             bool blnIsInDesignMode = GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic;
 
             if (!blnIsInDesignMode)
@@ -108,6 +109,10 @@ namespace Spawn.HDT.DustUtility
             else { }
 
             SimpleIoc.Default.Register(() => (blnIsInDesignMode ? Account.Test : Account.Empty));
+#else
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register(() => Account.Empty);
+#endif
 
             SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
             SimpleIoc.Default.Register<ICardsManager, CardsManager>();
@@ -404,6 +409,8 @@ namespace Spawn.HDT.DustUtility
                     s_mainWindow = null;
                 };
 
+                s_mainWindow.GetViewModel<ViewModelBase>().Initialize();
+
                 s_mainWindow.Show();
             }
             else
@@ -432,9 +439,17 @@ namespace Spawn.HDT.DustUtility
                 }
                 else if (vAccounts.Length > 1)
                 {
+                    Window owner = s_mainWindow;
+
+                    if (!blnIsSwitching)
+                    {
+                        owner = Core.MainWindow;
+                    }
+                    else { }
+
                     using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
                     {
-                        if (dialogService.ShowDialog<AccountSelectorDialog>(blnIsSwitching ? s_mainWindow : Core.MainWindow))
+                        if (dialogService.ShowDialog<AccountSelectorDialog>(owner))
                         {
                             retVal = Account.Parse(dialogService.GetDialogResult<string>());
 
