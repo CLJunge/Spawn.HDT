@@ -269,7 +269,7 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+            using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
             {
                 if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
                 {
@@ -447,7 +447,7 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+                    using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
                     {
                         if (dialogService.ShowDialog<AccountSelectorDialog>(owner))
                         {

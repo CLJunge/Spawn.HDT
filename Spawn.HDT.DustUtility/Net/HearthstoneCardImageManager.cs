@@ -44,7 +44,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                         if (!string.IsNullOrEmpty(strJson))
                         {
-                            var cardData = JsonConvert.DeserializeObject<JArray>(strJson)[0];
+                            JToken cardData = JsonConvert.DeserializeObject<JArray>(strJson)[0];
 
                             string strUrl = cardData.Value<string>("img");
 

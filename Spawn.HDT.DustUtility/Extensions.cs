@@ -168,15 +168,15 @@ namespace Spawn.HDT.DustUtility
         // All credits to Aaron Powell https://stackoverflow.com/a/307600
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string strProperty, int nIteration)
         {
-            var type = typeof(T);
+            System.Type type = typeof(T);
 
-            var property = type.GetProperty(strProperty);
+            System.Reflection.PropertyInfo property = type.GetProperty(strProperty);
 
-            var parameter = Expression.Parameter(type, "p");
+            ParameterExpression parameter = Expression.Parameter(type, "p");
 
-            var propertyAccess = Expression.MakeMemberAccess(parameter, property);
+            MemberExpression propertyAccess = Expression.MakeMemberAccess(parameter, property);
 
-            var expr = Expression.Lambda(propertyAccess, parameter);
+            LambdaExpression expr = Expression.Lambda(propertyAccess, parameter);
 
             string strMethod = "OrderBy";
 
