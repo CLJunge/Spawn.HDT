@@ -76,7 +76,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Description
-        public string Description => "Enter the amount of dust you want to get and check which cards are currently not used in any deck in order to see which can be disenchanted.";
+        public string Description => "Utility tool for dust management. Check GitHub readme for a detailed description and a list of all features.";
         #endregion
 
         #region ButtonText
