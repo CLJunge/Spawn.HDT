@@ -5,11 +5,9 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
             xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
+            vm:ViewModelLocator.ViewModelName="AccountSelectorDialogViewModel"
             mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
             Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
-    <Window.DataContext>
-        <vm:AccountSelectorDialogViewModel/>
-    </Window.DataContext>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="5"/>

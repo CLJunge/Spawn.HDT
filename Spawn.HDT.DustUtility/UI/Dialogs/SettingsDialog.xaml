@@ -4,13 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
+        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
+        vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
-    <Window.DataContext>
-        <vm:SettingsDialogViewModel/>
-    </Window.DataContext>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
