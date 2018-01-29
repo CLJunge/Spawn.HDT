@@ -13,8 +13,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
     public class CardItem : ObservableObject
     {
         #region Member Variables
-        private string m_strId;
         private CardWrapper m_wrapper;
+        private string m_strId;
         private bool m_blnColoredCount;
         #endregion
 

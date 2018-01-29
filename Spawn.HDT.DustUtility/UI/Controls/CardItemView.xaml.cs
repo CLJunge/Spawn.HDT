@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {
-    public partial class CardItemView : UserControl
+    public partial class CardItemView
     {
         #region Ctor
         public CardItemView()
