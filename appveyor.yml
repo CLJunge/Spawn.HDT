@@ -1,4 +1,4 @@
-version: "2.4.0.{build}-{branch}"
+version: "3.0.0.{build}-{branch}"
 
 configuration: Release
 
@@ -24,3 +24,4 @@ artifacts:
 branches:
   only:
     - master
+    - rewrite
