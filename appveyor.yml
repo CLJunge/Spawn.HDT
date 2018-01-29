@@ -19,9 +19,9 @@ image: Visual Studio 2017
 
 artifacts:
   - path: Releases
-	name: Spawn.HDT.DustUtility
+  name: Spawn.HDT.DustUtility
 
 branches:
   only:
-	- master
-	- rewrite
+    - master
+    - rewrite
