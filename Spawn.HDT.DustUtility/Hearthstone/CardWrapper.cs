@@ -43,8 +43,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         public int Count => RawCard.Count - MaxCountInDecks;
         #endregion
 
-        #region Timestamp
-        public DateTime? Timestamp { get; set; }
+        #region Date
+        public DateTime? Date { get; set; }
         #endregion
         #endregion
 
@@ -62,7 +62,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         public CardWrapper(CachedHistoryCard cachedCard)
             : this(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden))
         {
-            Timestamp = cachedCard.Timestamp;
+            Date = cachedCard.Date;
         }
         #endregion
 

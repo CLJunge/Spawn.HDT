@@ -42,16 +42,30 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                         NameTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
                         ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
                     }
+
+                    if (cardItem.ColoredCount)
+                    {
+                        if (cardItem.Count > 0)
+                        {
+                            CountTextBlock.Foreground = Brushes.Lime;
+                        }
+                        else if (cardItem.Count < 0)
+                        {
+                            CountTextBlock.Foreground = Brushes.Red;
+                        }
+                        else { }
+                    }
+                    else { }
                 }
                 else { }
 
-                if (cardItem.Timestamp.HasValue)
+                if (cardItem.Date.HasValue)
                 {
-                    TimestampTextBlock.Visibility = Visibility.Visible;
+                    DateTextBlock.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    TimestampTextBlock.Visibility = Visibility.Collapsed;
+                    DateTextBlock.Visibility = Visibility.Collapsed;
                 }
             }
             else { }

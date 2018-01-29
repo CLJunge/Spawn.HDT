@@ -123,11 +123,10 @@
     <Compile Include="UI\Controls\CardsContainer.xaml.cs">
       <DependentUpon>CardsContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Components\Converters\CountLabelConverter.cs" />
-    <Compile Include="UI\Components\Converters\CountToColorConverter.cs" />
-    <Compile Include="UI\Components\Converters\DisplayLabelConverter.cs" />
-    <Compile Include="UI\Components\Converters\TimestampConverter.cs" />
+    <Compile Include="UI\Components\Converters\CollectionCardCountToStringConverter.cs" />
+    <Compile Include="UI\Components\Converters\CountTextConverter.cs" />
+    <Compile Include="UI\Components\Converters\DisplayTextConverter.cs" />
+    <Compile Include="UI\Components\Converters\DateTimeFormatConverter.cs" />
     <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
       <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
     </Compile>

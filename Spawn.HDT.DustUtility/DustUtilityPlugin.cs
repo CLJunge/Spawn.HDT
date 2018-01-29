@@ -364,7 +364,7 @@ namespace Spawn.HDT.DustUtility
                             Id = idNode.InnerText,
                             Count = Convert.ToInt32(countNode.InnerText),
                             IsGolden = Convert.ToBoolean(isGoldenNode.InnerText),
-                            Timestamp = DateTime.Parse(timestampNode.InnerText)
+                            Date = DateTime.Parse(timestampNode.InnerText)
                         };
 
                         lstHistory.Add(card);

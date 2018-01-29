@@ -7,10 +7,10 @@
              mc:Ignorable="d" d:DesignWidth="600" Height="50" DataContextChanged="OnDataContextChanged">
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:CountLabelConverter x:Key="CountConverter"/>
-            <converters:DisplayLabelConverter x:Key="ManaCostConverter" Suffix="Mana"/>
-            <converters:DisplayLabelConverter x:Key="DustConverter" Suffix="Dust"/>
-            <converters:TimestampConverter x:Key="TimestampConverter"/>
+            <converters:CountTextConverter x:Key="CountConverter"/>
+            <converters:DisplayTextConverter x:Key="ManaCostConverter" Suffix="Mana"/>
+            <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
+            <converters:DateTimeFormatConverter x:Key="DateTimeFormatConverter" FormatString="d"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardClassIcons.xaml"/>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardSetIcons.xaml"/>
@@ -33,14 +33,15 @@
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Name="TimestampTextBlock" Grid.Column="1" Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="Collapsed"/>
+            <TextBlock Name="DateTextBlock" Grid.Column="1" Text="{Binding Timestamp, Converter={StaticResource DateTimeFormatConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="Collapsed"/>
             <Border Grid.Column="2" BorderBrush="Black" BorderThickness="2" Height="34.5" HorizontalAlignment="Center">
                 <Image Source="{Binding CardImage}" Width="100" Stretch="UniformToFill"/>
             </Border>
-            <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17">
+            <TextBlock Name="CountTextBlock" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource CountConverter}">
                         <Binding Path="Count"/>
+                        <Binding Path="ColoredCount"/>
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>

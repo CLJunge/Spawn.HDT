@@ -7,8 +7,14 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class TimestampConverter : IValueConverter
+    public class DateTimeFormatConverter : IValueConverter
     {
+        #region Properties
+        #region FormatString
+        public string FormatString { get; set; }
+        #endregion
+        #endregion
+
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -16,7 +22,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 
             if (value is DateTime date)
             {
-                strRet = date.ToString("d", CultureInfo.InvariantCulture);
+                strRet = date.ToString(FormatString, CultureInfo.InvariantCulture);
             }
             else
             {

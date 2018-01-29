@@ -43,7 +43,7 @@ namespace Spawn.HDT.DustUtility.ViewModel
 
                 for (int i = 0; i < lstHistory.Count; i++)
                 {
-                    CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])));
+                    CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])) { ColoredCount = true });
                 }
 
                 if (lstHistory.Count > 0)

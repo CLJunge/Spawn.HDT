@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class CountLabelConverter : IMultiValueConverter
+    public class CountTextConverter : IMultiValueConverter
     {
         #region Convert
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

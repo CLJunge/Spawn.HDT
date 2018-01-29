@@ -1,5 +1,4 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -7,13 +6,9 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class CardCountToStringConverter : IValueConverter
+    public class DisplayTextConverter : IValueConverter
     {
         #region Properties
-        #region MaxAmount
-        public int MaxAmount { get; set; }
-        #endregion
-
         #region Prefix
         public string Prefix { get; set; }
         #endregion
@@ -26,28 +21,19 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #region Convert
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string strRet = string.Empty;
+            string strRet = value?.ToString();
 
-            if (value is int)
+            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Prefix))
             {
-                strRet = $"{value}/{MaxAmount}";
-
-                if (!string.IsNullOrEmpty(Prefix))
-                {
-                    strRet = $"{Prefix} {strRet}";
-                }
-                else { }
-
-                if (!string.IsNullOrEmpty(Suffix))
-                {
-                    strRet = $"{strRet} {Suffix}";
-                }
-                else { }
+                strRet = $"{Prefix} {strRet}";
             }
-            else
+            else { }
+
+            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Suffix))
             {
-                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
+                strRet = $"{strRet} {Suffix}";
             }
+            else { }
 
             return strRet;
         }

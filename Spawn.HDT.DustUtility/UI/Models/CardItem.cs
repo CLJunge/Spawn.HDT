@@ -15,9 +15,18 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region Member Variables
         private string m_strId;
         private CardWrapper m_wrapper;
+        private bool m_blnColoredCount;
         #endregion
 
         #region Properties
+        #region Wrapper
+        public CardWrapper Wrapper
+        {
+            get => m_wrapper;
+            set => Set(ref m_wrapper, value);
+        }
+        #endregion
+
         #region Id
         public string Id
         {
@@ -73,19 +82,19 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public int ManaCost => (m_wrapper?.DbCard.Cost ?? HearthDb.Cards.All[Id].Cost);
         #endregion
 
-        #region Timestamp
-        public DateTime? Timestamp => m_wrapper?.Timestamp;
+        #region Date
+        public DateTime? Date => m_wrapper?.Date;
         #endregion
 
         #region CardImage
         public BitmapImage CardImage => Hearthstone_Deck_Tracker.Utility.ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.All[Id]));
         #endregion
 
-        #region Wrapper
-        public CardWrapper Wrapper
+        #region ColoredCount
+        public bool ColoredCount
         {
-            get => m_wrapper;
-            set => Set(ref m_wrapper, value);
+            get => m_blnColoredCount;
+            set => Set(ref m_blnColoredCount, value);
         }
         #endregion
         #endregion
