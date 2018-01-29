@@ -3,7 +3,6 @@ using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Diagnostics;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Spawn.HDT.DustUtility.UI.Models
@@ -78,10 +77,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
         #region CardImage
         public BitmapImage CardImage => Hearthstone_Deck_Tracker.Utility.ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.All[Id]));
-        #endregion
-
-        #region BorderBrush
-        public SolidColorBrush BorderBrush => (Golden ? Brushes.Goldenrod : Brushes.Black);
         #endregion
 
         #region Wrapper
