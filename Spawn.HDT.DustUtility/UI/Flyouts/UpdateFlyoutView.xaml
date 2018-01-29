@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Spawn.HDT.DustUtility.UI.Flyouts.UpdateFlyoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
+             vm:ViewModelLocator.ViewModelName="UpdateFlyoutViewModel"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="500">
+    <StackPanel>
+        <Grid Visibility="{Binding MessagePanelVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="1" Text="{Binding UpdateMessage}" TextAlignment="Center" TextWrapping="Wrap"/>
+            <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
+                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_Yes" Command="{Binding StartDownloadCommand}" Width="75" Margin="0,0,10,0"/>
+                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_No" Command="{Binding CloseFlyoutCommand}" Width="75"/>
+            </WrapPanel>
+        </Grid>
+        <Grid Visibility="{Binding DownloadPanelVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="1" Content="{Binding Path=DownloadHeaderText}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <ProgressBar Name="DownloadProgressBar" Grid.Row="2" Value="{Binding DownloadProgress}" Minimum="0" Maximum="100" Height="20" VerticalAlignment="Center" Margin="75,0,75,0"/>
+            <TextBlock Grid.Row="2" Text="{Binding ElementName=DownloadProgressBar, Path=Value, StringFormat={}{0:0}%}" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
+                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_Cancel" Command="{Binding CancelDownloadCommand}" Width="75"/>
+            </WrapPanel>
+        </Grid>
+        <Grid Visibility="{Binding DownloadFinishedPanelVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Download finished!" FontWeight="Bold" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <Label Content="Please restart HDT in order to load the new version." Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

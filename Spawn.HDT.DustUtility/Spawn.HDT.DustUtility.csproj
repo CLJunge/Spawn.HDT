@@ -137,6 +137,9 @@
     <Compile Include="UI\Flyouts\HistoryFlyoutView.xaml.cs">
       <DependentUpon>HistoryFlyoutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\UpdateFlyoutView.xaml.cs">
+      <DependentUpon>UpdateFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Models\CardItem.cs" />
     <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\SortOrder.cs" />
@@ -147,6 +150,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\SettingsDialogViewModel.cs" />
+    <Compile Include="ViewModel\UpdateFlyoutViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
   </ItemGroup>
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Flyouts\HistoryFlyoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flyouts\UpdateFlyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

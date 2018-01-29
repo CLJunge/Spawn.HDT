@@ -1,0 +1,220 @@
+﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
+using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Net;
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
+using System.Windows;
+using System.Windows.Input;
+#endregion
+
+namespace Spawn.HDT.DustUtility.ViewModel
+{
+    public class UpdateFlyoutViewModel : ViewModelBase
+    {
+        #region Member Variables
+        private string m_strUpdateMessage;
+        private string m_strDownloadHeaderText;
+        private Visibility m_messagePanelVisibility;
+        private Visibility m_downloadPanelVisibility;
+        private Visibility m_downloadFinishedPanelVisibility;
+        private int m_nDownloadProgress;
+        #endregion
+
+        #region Properties
+        #region UpdateMessage
+        public string UpdateMessage
+        {
+            get => m_strUpdateMessage;
+            set => Set(ref m_strUpdateMessage, value);
+        }
+        #endregion
+
+        #region DownloadHeaderText
+        public string DownloadHeaderText
+        {
+            get => m_strDownloadHeaderText;
+            set => Set(ref m_strDownloadHeaderText, value);
+        }
+        #endregion
+
+        #region MessagePanelVisibility
+        public Visibility MessagePanelVisibility
+        {
+            get => m_messagePanelVisibility;
+            set => Set(ref m_messagePanelVisibility, value);
+        }
+        #endregion
+
+        #region DownloadPanelVisibility
+        public Visibility DownloadPanelVisibility
+        {
+            get => m_downloadPanelVisibility;
+            set => Set(ref m_downloadPanelVisibility, value);
+        }
+        #endregion
+
+        #region DownloadFinishedPanelVisibility
+        public Visibility DownloadFinishedPanelVisibility
+        {
+            get => m_downloadFinishedPanelVisibility;
+            set => Set(ref m_downloadFinishedPanelVisibility, value);
+        }
+        #endregion
+
+        #region DownloadProgress
+        public int DownloadProgress
+        {
+            get => m_nDownloadProgress;
+            set => Set(ref m_nDownloadProgress, value);
+        }
+        #endregion
+
+        #region StartDownloadCommand
+        public ICommand StartDownloadCommand => new RelayCommand(StartDownload);
+        #endregion
+
+        #region CloseFlyoutCommand
+        public ICommand CloseFlyoutCommand => new RelayCommand(CloseFlyout);
+        #endregion
+
+        #region CancelDownloadCommand
+        public ICommand CancelDownloadCommand => new RelayCommand(CancelDownload);
+        #endregion
+        #endregion
+
+        #region Ctor
+        public UpdateFlyoutViewModel()
+        {
+            DownloadHeaderText = "Downloading \"Spawn.HDT.DustUtility.zip\"...";
+
+#if DEBUG
+            if (IsInDesignMode)
+            {
+                UpdateMessage = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod" + Environment.NewLine + Environment.NewLine + "tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo" + Environment.NewLine + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy" + Environment.NewLine + "eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." + Environment.NewLine + Environment.NewLine + "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+            }
+            else { }
+#endif
+        }
+        #endregion
+
+        #region Initialize
+        public override void Initialize()
+        {
+            MessagePanelVisibility = Visibility.Visible;
+            DownloadPanelVisibility = Visibility.Collapsed;
+            DownloadFinishedPanelVisibility = Visibility.Collapsed;
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append($"Update {GitHubUpdateManager.NewVersion.ToString(3)} has been released.")
+                .Append(Environment.NewLine + Environment.NewLine)
+                .Append("Release Notes:").Append(Environment.NewLine)
+                .Append(GitHubUpdateManager.ReleaseNotes)
+                .Append(Environment.NewLine + Environment.NewLine)
+                .Append("Would you like to download it?");
+
+            UpdateMessage = sb.ToString();
+        }
+        #endregion
+
+        #region StartDownload
+        private void StartDownload()
+        {
+            MessagePanelVisibility = Visibility.Collapsed;
+            DownloadPanelVisibility = Visibility.Visible;
+
+            GitHubUpdateManager.DownloadProgressChanged += OnDownloadProgressChanged;
+            GitHubUpdateManager.DownloadCompleted += OnDownloadCompleted;
+
+            GitHubUpdateManager.Download(GitHubUpdateManager.NewVersion);
+        }
+        #endregion
+
+        #region CloseFlyout
+        private void CloseFlyout()
+        {
+            DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen = false;
+        }
+        #endregion
+
+        #region CancelDownload
+        private void CancelDownload()
+        {
+            GitHubUpdateManager.CancelDownload();
+
+            CloseFlyout();
+        }
+        #endregion
+
+        #region Download Events
+        #region OnDownloadCompleted
+        private void OnDownloadCompleted(object sender, System.Net.DownloadDataCompletedEventArgs e)
+        {
+            Log.WriteLine("Download finished. Extracting zip file...", LogType.Debug);
+
+            GitHubUpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
+            GitHubUpdateManager.DownloadCompleted -= OnDownloadCompleted;
+
+            string strPath = Path.Combine(DustUtilityPlugin.DataDirectory, "update.zip");
+
+            using (FileStream fs = File.Open(strPath, FileMode.Create))
+            {
+                fs.Write(e.Result, 0, e.Result.Length);
+            }
+
+            DeleteOldPluginVersions();
+
+            string strTargetDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins", "Spawn.HDT.DustUtility");
+
+            if (!Directory.Exists(strTargetDir))
+            {
+                Directory.CreateDirectory(strTargetDir);
+            }
+            else { }
+
+            ZipFile.ExtractToDirectory(strPath, strTargetDir);
+
+            File.Delete(strPath);
+
+            DownloadPanelVisibility = Visibility.Collapsed;
+            DownloadFinishedPanelVisibility = Visibility.Visible;
+        }
+        #endregion
+
+        #region OnDownloadProgressChanged
+        private void OnDownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
+        {
+            DownloadProgress = e.ProgressPercentage;
+        }
+        #endregion
+        #endregion
+
+        #region DeleteOldPluginVersions
+        private void DeleteOldPluginVersions()
+        {
+            Log.WriteLine("Deleting old plugin versions", LogType.Debug);
+
+            string strHdtPluginDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins");
+
+            string strSearchPattern = "*DustUtility*";
+
+            string[] vOldFiles = Directory.GetFiles(strHdtPluginDir, strSearchPattern);
+
+            for (int i = 0; i < vOldFiles.Length; i++)
+            {
+                File.Delete(vOldFiles[i]);
+            }
+
+            string[] vOldPluginDirs = Directory.GetDirectories(strHdtPluginDir, strSearchPattern);
+
+            for (int i = 0; i < vOldPluginDirs.Length; i++)
+            {
+                Directory.Delete(vOldPluginDirs[i], true);
+            }
+        }
+        #endregion
+    }
+}
