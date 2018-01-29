@@ -7,104 +7,91 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 {
     public partial class CardsContainer
     {
-        //#region Member Variables
-        //private Point? m_startPosition;
-        //private DataGridCardItem m_draggedItem;
-        //#endregion
+        #region Member Variables
+        private Point? m_startPosition;
+        private CardItem m_draggedItem;
+        #endregion
 
-        //#region Custom Events
-        //public event EventHandler<DataGridCardItemEventArgs> ItemDropped;
+        #region Custom Events
+        public event EventHandler<CardItemEventArgs> ItemDropped;
 
-        //private void OnItemDropped(DataGridCardItem item)
-        //{
-        //    if (ItemDropped != null)
-        //    {
-        //        ItemDropped(this, new DataGridCardItemEventArgs(item, -1));
-        //    }
-        //    else { }
-        //}
-        //#endregion
+        private void OnItemDropped(CardItem item)
+        {
+            if (ItemDropped != null)
+            {
+                ItemDropped(this, new CardItemEventArgs(item, -1));
+            }
+            else { }
+        }
+        #endregion
 
-        //#region Events
-        //#region OnDataGridMouseMove
-        //private void OnDataGridMouseMove(object sender, MouseEventArgs e)
-        //{
-        //    //if (cardImagePopup.IsOpen)
-        //    //{
-        //    //    Point position = e.GetPosition(dataGrid);
+        #region Events
+        #region OnDataGridMouseMove
+        private void OnDataGridMouseMove(object sender, MouseEventArgs e)
+        {
+            if (AllowDrag && (m_startPosition != null && m_startPosition.HasValue))
+            {
+                if (m_draggedItem == null && ItemsContainer.SelectedIndex > -1)
+                {
+                    m_draggedItem = ItemsContainer.SelectedItem as CardItem;
+                }
+                else { }
 
-        //    //    cardImagePopup.HorizontalOffset = position.X + 20;
-        //    //    cardImagePopup.VerticalOffset = position.Y;
-        //    //}
-        //    //else { }
+                Point position = e.GetPosition(null);
 
-        //    //if (AllowDrag && (m_startPosition != null && m_startPosition.HasValue))
-        //    //{
-        //    //    if (m_draggedItem == null && dataGrid.SelectedIndex > -1)
-        //    //    {
-        //    //        m_draggedItem = dataGrid.SelectedItem as DataGridCardItem;
-        //    //    }
-        //    //    else { }
+                Vector diff = m_startPosition.Value - position;
 
-        //    //    Point position = e.GetPosition(null);
+                if (m_draggedItem != null
+                    && (Math.Abs(diff.X) > (SystemParameters.MinimumHorizontalDragDistance / 3)
+                    && Math.Abs(diff.Y) > (SystemParameters.MinimumVerticalDragDistance / 3)))
+                {
+                    System.Diagnostics.Debug.WriteLine($"dragging {m_draggedItem.Name}");
 
-        //    //    Vector diff = m_startPosition.Value - position;
+                    DataObject data = new DataObject("item", m_draggedItem.CreateCopy());
 
-        //    //    if (m_draggedItem != null
-        //    //        && (Math.Abs(diff.X) > (SystemParameters.MinimumHorizontalDragDistance / 3)
-        //    //        && Math.Abs(diff.Y) > (SystemParameters.MinimumVerticalDragDistance / 3)))
-        //    //    {
-        //    //        System.Diagnostics.Debug.WriteLine($"dragging {m_draggedItem.Name}");
+                    DragDrop.DoDragDrop(ItemsContainer, data, DragDropEffects.Copy);
 
-        //    //        DataObject data = new DataObject("item", m_draggedItem.CreateCopy());
+                    m_startPosition = null;
+                    m_draggedItem = null;
+                }
+                else { }
+            }
+            else { }
+        }
+        #endregion
 
-        //    //        DragDrop.DoDragDrop(dataGrid, data, DragDropEffects.Copy);
+        #region OnDataGridPreviewMouseLeftButtonDown
+        private void OnDataGridPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            m_startPosition = e.GetPosition(null);
+        }
+        #endregion
 
-        //    //        m_startPosition = null;
-        //    //        m_draggedItem = null;
-        //    //    }
-        //    //    else { }
-        //    //}
-        //    //else { }
-        //}
-        //#endregion
+        #region OnDataGridDragEnter
+        private void OnDataGridDragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("item"))
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            else { }
+        }
+        #endregion
 
-        //#region OnDataGridPreviewMouseLeftButtonDown
-        //private void OnDataGridPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    m_startPosition = e.GetPosition(null);
-        //}
-        //#endregion
+        #region OnDataGridDrop
+        private void OnDataGridDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("item"))
+            {
+                CardItem item = e.Data.GetData("item") as CardItem;
 
-        //#region OnDataGridDragEnter
-        //private void OnDataGridDragEnter(object sender, DragEventArgs e)
-        //{
-        //    System.Diagnostics.Debug.WriteLine("drag enter");
+                System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
 
-        //    if (!e.Data.GetDataPresent("item"))
-        //    {
-        //        e.Effects = DragDropEffects.None;
-        //    }
-        //    else { }
-        //}
-        //#endregion
-
-        //#region OnDataGridDrop
-        //private void OnDataGridDrop(object sender, DragEventArgs e)
-        //{
-        //    System.Diagnostics.Debug.WriteLine("drop");
-
-        //    if (e.Data.GetDataPresent("item"))
-        //    {
-        //        DataGridCardItem item = e.Data.GetData("item") as DataGridCardItem;
-
-        //        System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
-
-        //        OnItemDropped(item);
-        //    }
-        //    else { }
-        //}
-        //#endregion
-        //#endregion
+                OnItemDropped(item);
+            }
+            else { }
+        }
+        #endregion
+        #endregion
     }
 }
