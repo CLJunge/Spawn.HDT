@@ -6,7 +6,7 @@ using System.IO;
 using System.IO.Compression;
 #endregion
 
-namespace Spawn.HDT.DustUtility.CardManagement.Offline
+namespace Spawn.HDT.DustUtility
 {
     public static class BackupManager
     {

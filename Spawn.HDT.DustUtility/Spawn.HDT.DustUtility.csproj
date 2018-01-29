@@ -103,7 +103,7 @@
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Net\GitHubUpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
-    <Compile Include="CardManagement\Offline\BackupManager.cs" />
+    <Compile Include="BackupManager.cs" />
     <Compile Include="CardManagement\Offline\Cache.cs" />
     <Compile Include="CardManagement\Offline\CachedCard.cs" />
     <Compile Include="CardManagement\Offline\CachedDeck.cs" />
