@@ -1,7 +1,9 @@
-﻿using HearthMirror.Objects;
+﻿#region Using
+using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Diagnostics;
+#endregion
 
 namespace Spawn.HDT.DustUtility.Hearthstone
 {

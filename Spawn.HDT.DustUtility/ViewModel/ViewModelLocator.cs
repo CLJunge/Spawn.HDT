@@ -1,7 +1,9 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿#region Using
+using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Windows;
+#endregion
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {

@@ -1,4 +1,5 @@
-﻿using HearthDb.Enums;
+﻿#region Using
+using HearthDb.Enums;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {

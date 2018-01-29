@@ -1,4 +1,5 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Net;
 using System.Drawing;
@@ -6,6 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {

@@ -1,5 +1,7 @@
-﻿using Spawn.HDT.DustUtility.Services;
+﻿#region Using
+using Spawn.HDT.DustUtility.Services;
 using System.Collections.ObjectModel;
+#endregion
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {

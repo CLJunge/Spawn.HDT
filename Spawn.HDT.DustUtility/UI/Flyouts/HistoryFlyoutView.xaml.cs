@@ -1,4 +1,6 @@
-﻿using Spawn.HDT.DustUtility.ViewModel;
+﻿#region Using
+using Spawn.HDT.DustUtility.ViewModel;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Flyouts
 {

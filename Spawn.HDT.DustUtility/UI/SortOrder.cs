@@ -1,6 +1,8 @@
-﻿using System;
+﻿#region Using
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI
 {

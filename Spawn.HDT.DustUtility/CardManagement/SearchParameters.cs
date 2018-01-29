@@ -1,7 +1,9 @@
-﻿using HearthDb.Enums;
+﻿#region Using
+using HearthDb.Enums;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Collections.Generic;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {

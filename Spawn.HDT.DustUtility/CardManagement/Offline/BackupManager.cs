@@ -1,8 +1,10 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Globalization;
 using System.IO;
 using System.IO.Compression;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {

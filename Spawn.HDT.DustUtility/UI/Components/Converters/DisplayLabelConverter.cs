@@ -1,6 +1,8 @@
-﻿using System;
+﻿#region Using
+using System;
 using System.Globalization;
 using System.Windows.Data;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {

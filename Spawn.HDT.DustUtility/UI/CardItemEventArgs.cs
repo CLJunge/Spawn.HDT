@@ -1,5 +1,7 @@
-﻿using Spawn.HDT.DustUtility.UI.Models;
+﻿#region Using
+using Spawn.HDT.DustUtility.UI.Models;
 using System;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI
 {

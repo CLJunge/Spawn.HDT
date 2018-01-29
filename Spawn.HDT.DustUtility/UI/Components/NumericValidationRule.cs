@@ -1,5 +1,7 @@
-﻿using System.Globalization;
+﻿#region Using
+using System.Globalization;
 using System.Windows.Controls;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Components
 {

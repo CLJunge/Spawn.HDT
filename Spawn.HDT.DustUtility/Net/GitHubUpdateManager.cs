@@ -1,8 +1,10 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+#endregion
 
 namespace Spawn.HDT.DustUtility.Net
 {

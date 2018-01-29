@@ -1,8 +1,10 @@
-﻿using HearthMirror;
+﻿#region Using
+using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.Threading;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {

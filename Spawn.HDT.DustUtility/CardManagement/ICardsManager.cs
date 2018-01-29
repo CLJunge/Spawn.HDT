@@ -1,5 +1,7 @@
-﻿using Spawn.HDT.DustUtility.Hearthstone;
+﻿#region Using
+using Spawn.HDT.DustUtility.Hearthstone;
 using System.Threading.Tasks;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {

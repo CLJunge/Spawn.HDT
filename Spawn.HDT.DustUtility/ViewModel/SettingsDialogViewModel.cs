@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
+#endregion
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {

@@ -1,6 +1,8 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.IO;
 using System.Xml.Serialization;
+#endregion
 
 namespace Spawn.HDT.DustUtility
 {

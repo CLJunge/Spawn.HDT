@@ -1,7 +1,9 @@
-﻿using Spawn.HDT.DustUtility.UI.Models;
+﻿#region Using
+using Spawn.HDT.DustUtility.UI.Models;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {

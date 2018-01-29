@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region Using
+using System.Collections.Generic;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {

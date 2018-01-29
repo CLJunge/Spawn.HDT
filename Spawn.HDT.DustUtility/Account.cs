@@ -1,4 +1,5 @@
-﻿using HearthMirror;
+﻿#region Using
+using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
 using Hearthstone_Deck_Tracker.Utility.Logging;
@@ -6,6 +7,7 @@ using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#endregion
 
 namespace Spawn.HDT.DustUtility
 {

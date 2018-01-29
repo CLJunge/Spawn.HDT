@@ -1,8 +1,10 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {

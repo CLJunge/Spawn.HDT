@@ -1,5 +1,7 @@
-﻿using System;
+﻿#region Using
+using System;
 using System.Windows;
+#endregion
 
 namespace Spawn.HDT.DustUtility.Services
 {

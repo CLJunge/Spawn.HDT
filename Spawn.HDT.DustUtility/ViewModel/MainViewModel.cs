@@ -1,10 +1,12 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
+#endregion
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {

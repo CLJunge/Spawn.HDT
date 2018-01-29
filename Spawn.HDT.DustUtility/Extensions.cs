@@ -1,4 +1,5 @@
-﻿using HearthDb;
+﻿#region Using
+using HearthDb;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
@@ -11,6 +12,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Media.Imaging;
+#endregion
 
 namespace Spawn.HDT.DustUtility
 {

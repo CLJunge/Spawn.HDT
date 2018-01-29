@@ -1,7 +1,9 @@
-﻿using GalaSoft.MvvmLight;
+﻿#region Using
+using GalaSoft.MvvmLight;
 using Spawn.HDT.DustUtility.CardManagement;
 using System.ComponentModel;
 using System.IO;
+#endregion
 
 namespace Spawn.HDT.DustUtility
 {

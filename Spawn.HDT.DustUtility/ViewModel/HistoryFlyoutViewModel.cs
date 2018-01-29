@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
@@ -8,6 +9,7 @@ using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+#endregion
 
 namespace Spawn.HDT.DustUtility.ViewModel
 {

@@ -1,6 +1,8 @@
-﻿using HearthDb.Enums;
+﻿#region Using
+using HearthDb.Enums;
 using System.Collections.Generic;
 using static HearthDb.CardIds.Collectible;
+#endregion
 
 namespace Spawn.HDT.DustUtility.Hearthstone
 {

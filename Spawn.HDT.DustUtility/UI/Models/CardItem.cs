@@ -1,9 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿#region Using
+using GalaSoft.MvvmLight;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
