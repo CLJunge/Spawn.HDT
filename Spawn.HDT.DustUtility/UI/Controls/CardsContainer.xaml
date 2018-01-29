@@ -14,7 +14,7 @@
         <ListView x:Name="ItemsContainer" ItemsSource="{Binding ElementName=Container, Path=ItemsSource}"
                   ContextMenuOpening="OnItemsContainerContextMenuOpening" MouseDoubleClick="OnItemsContainerMouseDoubleClick"
                   MouseDown="OnItemsContainerMouseDown" SelectionChanged="OnItemsContainerSelectionChanged"
-                  BorderThickness="0">
+                  MouseMove="OnDataGridMouseMove" BorderThickness="0">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Remove" Click="OnMenuItemRemoveClick"/>
