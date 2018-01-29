@@ -123,10 +123,13 @@
     <Compile Include="UI\Controls\CardsContainer.xaml.cs">
       <DependentUpon>CardsContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\Converters\CollectionCardCountToStringConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
     <Compile Include="UI\Components\Converters\CountTextConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayTextConverter.cs" />
     <Compile Include="UI\Components\Converters\DateTimeFormatConverter.cs" />
+    <Compile Include="UI\Controls\DeckItemView.xaml.cs">
+      <DependentUpon>DeckItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
       <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,7 @@
     </Compile>
     <Compile Include="UI\Models\CardItem.cs" />
     <Compile Include="UI\CardItemEventArgs.cs" />
+    <Compile Include="UI\Models\DeckItem.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
     <Compile Include="ViewModel\DecksFlyoutViewModel.cs" />
@@ -202,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\CardsContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\DeckItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
