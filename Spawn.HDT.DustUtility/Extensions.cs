@@ -302,6 +302,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetViewModel
+        [System.Diagnostics.DebuggerStepThrough]
         public static T GetViewModel<T>(this System.Windows.FrameworkElement element) where T : ViewModelBase
         {
             return element.DataContext as T;
