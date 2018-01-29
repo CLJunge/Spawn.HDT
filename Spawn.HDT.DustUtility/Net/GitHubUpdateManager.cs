@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.Net
 {
+    [System.Runtime.InteropServices.Guid("30C3DCF0-27D6-48F8-B3DB-883BEAB69146")]
     public static class GitHubUpdateManager
     {
         #region Constants
@@ -37,7 +38,7 @@ namespace Spawn.HDT.DustUtility.Net
         public static event DownloadDataCompletedEventHandler DownloadCompleted;
         #endregion
 
-        #region Ctor
+        #region Static Ctor
         static GitHubUpdateManager()
         {
             s_versionRegex = new Regex("[0-9]\\.[0-9]{1,2}\\.?[0-9]{0,2}");
@@ -45,14 +46,14 @@ namespace Spawn.HDT.DustUtility.Net
         }
         #endregion
 
-        #region CheckForUpdateAsync
-        public static async Task<bool> CheckForUpdateAsync()
+        #region PerformUpdateCheckAsync
+        public static async Task<bool> PerformCheckAsync()
         {
             bool blnRet = false;
 
             try
             {
-                Log.WriteLine("Checking for updates...", LogType.Info);
+                Log.WriteLine("Checking GitHub for new update...", LogType.Info);
 
                 HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
