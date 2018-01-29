@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Windows;
@@ -54,14 +53,18 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region Static Ctor
         static ViewModelLocator()
         {
-            if (ViewModelBase.IsInDesignModeStatic)
+            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             }
             else { }
 
             SimpleIoc.Default.Register<MainViewModel>();
+
             SimpleIoc.Default.Register<HistoryFlyoutViewModel>();
+
+            SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
+            SimpleIoc.Default.Register<SettingsDialogViewModel>();
         }
         #endregion
     }

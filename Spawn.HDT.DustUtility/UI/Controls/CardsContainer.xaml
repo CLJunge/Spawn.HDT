@@ -17,7 +17,7 @@
                   BorderThickness="0">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Remove" Click="OnDeleteRowClick"/>
+                    <MenuItem Header="Remove" Click="OnMenuItemRemoveClick"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemTemplate>

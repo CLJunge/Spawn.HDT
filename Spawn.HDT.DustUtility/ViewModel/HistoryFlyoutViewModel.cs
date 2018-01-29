@@ -1,5 +1,5 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
@@ -33,28 +33,37 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region LoadHistory
         public void LoadHistory()
         {
-            CardItems.Clear();
-
-            List<CachedHistoryCard> lstHistory = HistoryManager.GetHistory(DustUtilityPlugin.CurrentAccount);
-
-            for (int i = 0; i < lstHistory.Count; i++)
+            if (ReloadRequired || Core.Game.IsRunning)
             {
-                CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])));
-            }
+                CardItems.Clear();
 
-            if (lstHistory.Count > 0)
-            {
-                Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);
+                List<CachedHistoryCard> lstHistory = HistoryManager.GetHistory(DustUtilityPlugin.CurrentAccount);
+
+                for (int i = 0; i < lstHistory.Count; i++)
+                {
+                    CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])));
+                }
+
+                if (lstHistory.Count > 0)
+                {
+                    Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);
+                }
+                else
+                {
+                    Log.WriteLine($"No history available", LogType.Debug);
+                }
+
+                ReloadRequired = false;
             }
             else
             {
-                Log.WriteLine($"No history available", LogType.Debug);
+                Log.WriteLine($"No reloading required", LogType.Debug);
             }
         }
         #endregion
 
-        #region RemoveItem
-        public void RemoveItem(CardItemEventArgs e)
+        #region RemoveCardItem
+        public void RemoveCardItem(CardItemEventArgs e)
         {
             if (e.RowIndex > -1)
             {

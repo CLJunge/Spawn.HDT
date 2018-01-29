@@ -36,7 +36,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region Custom Events
-        public event EventHandler<CardItemEventArgs> RowDeleted;
+        public event EventHandler<CardItemEventArgs> RemoveCardItem;
         #endregion
 
         #region Ctor
@@ -60,19 +60,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         private void OnItemsContainerMouseDown(object sender, MouseButtonEventArgs e)
         {
             IInputElement element = ItemsContainer.InputHitTest(e.GetPosition(ItemsContainer));
-
-            //TODO
-            //if (element is ScrollViewer)
-            //{
-            //    ItemsContainer.SelectedIndex = -1;
-            //}
-            //else if (element is Border)
-            //{
-            //    int nIndex = ((element as Border).TemplatedParent as DataGridRow).GetIndex();
-
-            //    ItemsContainer.SelectedIndex = nIndex;
-            //}
-            //else { }
 
             if (!m_blnDblClick)
             {
@@ -98,18 +85,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnDeleteRowClick
-        private void OnDeleteRowClick(object sender, RoutedEventArgs e)
+        #region OnMenuItemRemoveClick
+        private void OnMenuItemRemoveClick(object sender, RoutedEventArgs e)
         {
-            int nIndex = ItemsContainer.SelectedIndex;
-
             if (ItemsContainer.SelectedItem is CardItem selectedItem)
             {
-                if (RowDeleted != null)
-                {
-                    RowDeleted(this, new CardItemEventArgs(selectedItem, nIndex));
-                }
-                else { }
+                RemoveCardItem?.Invoke(this, new CardItemEventArgs(selectedItem, ItemsContainer.SelectedIndex));
             }
             else { }
         }

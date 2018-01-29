@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using Spawn.HDT.DustUtility.Services;
+﻿using Spawn.HDT.DustUtility.Services;
 using System.Collections.ObjectModel;
 
 namespace Spawn.HDT.DustUtility.ViewModel

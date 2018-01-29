@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
@@ -10,6 +9,7 @@ using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.Services.Providers;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Windows;
+using Spawn.HDT.DustUtility.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -97,9 +97,15 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            bool blnIsInDesignMode = GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic;
 
-            SimpleIoc.Default.Register(() => (ViewModelBase.IsInDesignModeStatic ? Account.Test : Account.Empty));
+            if (!blnIsInDesignMode)
+            {
+                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            }
+            else { }
+
+            SimpleIoc.Default.Register(() => (blnIsInDesignMode ? Account.Test : Account.Empty));
 
             SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
             SimpleIoc.Default.Register<ICardsManager, CardsManager>();
@@ -497,6 +503,8 @@ namespace Spawn.HDT.DustUtility
                     s_mainWindow.Close();
 
                     UpdatedAccountInstance(selectedAcc);
+
+                    ReloadFlyoutViews();
                 }
                 else { }
 
@@ -516,6 +524,13 @@ namespace Spawn.HDT.DustUtility
 
             //Add selected instance
             SimpleIoc.Default.Register(() => account);
+        }
+        #endregion
+
+        #region ReloadFlyoutViews
+        private static void ReloadFlyoutViews()
+        {
+            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
         }
         #endregion
 
