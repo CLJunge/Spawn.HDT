@@ -55,15 +55,18 @@ namespace Spawn.HDT.DustUtility.ViewModel
         #region Static Ctor
         static ViewModelLocator()
         {
+#if DEBUG
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             }
             else { }
+#endif
 
             SimpleIoc.Default.Register<MainViewModel>();
 
             SimpleIoc.Default.Register<HistoryFlyoutViewModel>();
+            SimpleIoc.Default.Register<UpdateFlyoutViewModel>();
 
             SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
             SimpleIoc.Default.Register<SettingsDialogViewModel>();

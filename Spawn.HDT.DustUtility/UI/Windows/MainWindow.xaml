@@ -69,7 +69,10 @@
     <controls:MetroWindow.Flyouts>
         <controls:FlyoutsControl>
             <controls:Flyout Name="HistoryFlyout" Header="History" Position="Top">
-                <flyouts:HistoryFlyoutView/>
+                <flyouts:HistoryFlyoutView x:Name="HistoryFlyoutView"/>
+            </controls:Flyout>
+            <controls:Flyout Name="UpdateFlyout" Header="New update available" Position="Bottom">
+                <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>

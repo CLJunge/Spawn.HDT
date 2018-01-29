@@ -18,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border Name="ControlBorder" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="2.2" CornerRadius="2">
+    <Border Name="ControlBorder" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="1.2" CornerRadius="2">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Name="DateTextBlock" Grid.Column="1" Text="{Binding Timestamp, Converter={StaticResource DateTimeFormatConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="Collapsed"/>
+            <TextBlock Name="DateTextBlock" Grid.Column="1" Text="{Binding Date, Converter={StaticResource DateTimeFormatConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="Collapsed"/>
             <Border Grid.Column="2" BorderBrush="Black" BorderThickness="2" Height="34.5" HorizontalAlignment="Center">
                 <Image Source="{Binding CardImage}" Width="100" Stretch="UniformToFill"/>
             </Border>
