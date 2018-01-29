@@ -47,7 +47,7 @@ namespace Spawn.HDT.DustUtility.Net
         #endregion
 
         #region PerformUpdateCheckAsync
-        public static async Task<bool> PerformCheckAsync()
+        public static async Task<bool> PerformUpdateCheckAsync()
         {
             bool blnRet = false;
 
