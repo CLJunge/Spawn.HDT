@@ -8,7 +8,7 @@
              vm:ViewModelLocator.ViewModelName="HistoryFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <controls:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem"/>
+        <controls:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem" AllowDrag="False" AllowDrop="False"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="CLEAR" Command="{Binding ClearHistoryCommand}" VerticalAlignment="Bottom" Height="30" Margin="5"/>
     </Grid>
 </UserControl>
