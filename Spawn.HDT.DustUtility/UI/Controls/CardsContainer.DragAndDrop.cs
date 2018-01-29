@@ -31,6 +31,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnDataGridMouseMove
         private void OnDataGridMouseMove(object sender, MouseEventArgs e)
         {
+            ItemsContainer.ReleaseMouseCapture();
+
             if (AllowDrag && (m_startPosition != null && m_startPosition.HasValue))
             {
                 if (m_draggedItem == null && ItemsContainer.SelectedIndex > -1)
