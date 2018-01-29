@@ -61,8 +61,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnItemsContainerMouseDown
         private void OnItemsContainerMouseDown(object sender, MouseButtonEventArgs e)
         {
-            IInputElement element = ItemsContainer.InputHitTest(e.GetPosition(ItemsContainer));
-
             if (!m_blnDblClick)
             {
                 ClosePopup();
@@ -90,11 +88,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnMenuItemRemoveClick
         private void OnMenuItemRemoveClick(object sender, RoutedEventArgs e)
         {
-            if (ItemsContainer.SelectedItem is CardItem selectedItem)
+            while (ItemsContainer.SelectedItems.Count > 0)
             {
-                RemoveCardItem?.Invoke(this, new CardItemEventArgs(selectedItem, ItemsContainer.SelectedIndex));
+                RemoveCardItem.Invoke(this, new CardItemEventArgs(ItemsContainer.SelectedItems[0] as CardItem, ItemsContainer.SelectedIndex));
             }
-            else { }
         }
         #endregion
 
