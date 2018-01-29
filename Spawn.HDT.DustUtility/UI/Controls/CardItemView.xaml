@@ -18,7 +18,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border BorderBrush="{Binding BorderBrush}" BorderThickness="2.2" CornerRadius="3">
+    <Border Name="ControlBorder" BorderBrush="{DynamicResource BlackBrush}" BorderThickness="2.2" CornerRadius="2">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>

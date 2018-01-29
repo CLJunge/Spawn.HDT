@@ -31,6 +31,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 if (cardItem.Golden)
                 {
                     NameTextBlock.Foreground = Brushes.Goldenrod;
+                    ControlBorder.BorderBrush = Brushes.Goldenrod;
                 }
                 else { }
 
