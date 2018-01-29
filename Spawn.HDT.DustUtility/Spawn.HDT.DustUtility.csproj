@@ -127,7 +127,6 @@
     <Compile Include="UI\Components\Converters\CountLabelConverter.cs" />
     <Compile Include="UI\Components\Converters\CountToColorConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayLabelConverter.cs" />
-    <Compile Include="UI\Components\Converters\DustValueToStringConverter.cs" />
     <Compile Include="UI\Components\Converters\TimestampConverter.cs" />
     <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
       <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
