@@ -85,7 +85,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                         Id = cardA.Id,
                         Count = nCount,
                         IsGolden = cardA.Premium,
-                        Timestamp = DateTime.Now
+                        Date = DateTime.Now
                     });
 
                     nRet += 1;
@@ -127,7 +127,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                         Id = cardB.Id,
                         Count = nCount,
                         IsGolden = cardB.Premium,
-                        Timestamp = DateTime.Now
+                        Date = DateTime.Now
                     });
 
                     nRet += 1;
