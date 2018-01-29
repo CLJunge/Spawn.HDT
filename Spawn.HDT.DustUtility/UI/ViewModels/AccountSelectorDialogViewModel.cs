@@ -3,7 +3,7 @@ using Spawn.HDT.DustUtility.Services;
 using System.Collections.ObjectModel;
 #endregion
 
-namespace Spawn.HDT.DustUtility.ViewModel
+namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class AccountSelectorDialogViewModel : ViewModelBase, IDialogResultService<string>
     {

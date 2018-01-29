@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.ViewModel"
+        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
         xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
         mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"

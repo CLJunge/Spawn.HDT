@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.CommandWpf;
 using System.Windows.Input;
 
-namespace Spawn.HDT.DustUtility.ViewModel
+namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class DecksFlyoutViewModel : ViewModelBase
     {

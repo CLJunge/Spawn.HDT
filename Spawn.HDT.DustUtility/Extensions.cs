@@ -3,7 +3,7 @@ using HearthDb;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.ViewModel;
+using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;

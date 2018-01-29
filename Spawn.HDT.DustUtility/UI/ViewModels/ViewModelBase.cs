@@ -1,4 +1,4 @@
-﻿namespace Spawn.HDT.DustUtility.ViewModel
+﻿namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {

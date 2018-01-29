@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 #endregion
 
-namespace Spawn.HDT.DustUtility.ViewModel
+namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class SettingsDialogViewModel : ViewModelBase
     {

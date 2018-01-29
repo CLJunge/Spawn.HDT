@@ -150,17 +150,17 @@
     <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\Models\DeckItem.cs" />
     <Compile Include="UI\SortOrder.cs" />
-    <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
-    <Compile Include="ViewModel\DecksFlyoutViewModel.cs" />
-    <Compile Include="ViewModel\HistoryFlyoutViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="UI\ViewModels\DecksFlyoutViewModel.cs" />
+    <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
+    <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\SettingsDialogViewModel.cs" />
-    <Compile Include="ViewModel\UpdateFlyoutViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="UI\ViewModels\SettingsDialogViewModel.cs" />
+    <Compile Include="UI\ViewModels\UpdateFlyoutViewModel.cs" />
+    <Compile Include="UI\ViewModels\ViewModelBase.cs" />
+    <Compile Include="UI\ViewModels\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

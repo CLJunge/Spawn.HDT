@@ -1,5 +1,5 @@
 ﻿#region Using
-using Spawn.HDT.DustUtility.ViewModel;
+using Spawn.HDT.DustUtility.UI.ViewModels;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Flyouts

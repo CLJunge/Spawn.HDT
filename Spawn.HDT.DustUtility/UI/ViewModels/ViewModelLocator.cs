@@ -5,7 +5,7 @@ using System;
 using System.Windows;
 #endregion
 
-namespace Spawn.HDT.DustUtility.ViewModel
+namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class ViewModelLocator
     {

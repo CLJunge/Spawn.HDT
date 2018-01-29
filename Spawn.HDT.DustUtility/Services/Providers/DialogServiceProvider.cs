@@ -1,5 +1,5 @@
 ﻿#region Using
-using Spawn.HDT.DustUtility.ViewModel;
+using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Windows;
 #endregion
 
