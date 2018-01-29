@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
-             mc:Ignorable="d" d:DesignWidth="600" Height="50" Loaded="OnLoaded">
+             mc:Ignorable="d" d:DesignWidth="600" Height="50" DataContextChanged="OnDataContextChanged">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:CountLabelConverter x:Key="CountConverter"/>
@@ -34,11 +34,9 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Name="TimestampTextBlock" Grid.Column="1" Text="{Binding Timestamp, Converter={StaticResource TimestampConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" Visibility="Collapsed"/>
-
             <Border Grid.Column="2" BorderBrush="Black" BorderThickness="2" Height="34.5" HorizontalAlignment="Center">
                 <Image Source="{Binding CardImage}" Width="100" Stretch="UniformToFill"/>
             </Border>
-
             <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource CountConverter}">
@@ -46,13 +44,9 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-
-            <TextBlock Name="NameTextBlock" Grid.Column="4" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17" FontWeight="Bold"/>
-
+            <TextBlock Name="NameTextBlock" Grid.Column="4" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
             <Image Name="RarityGemImage" Grid.Column="5" Width="28" Height="28"/>
-
             <TextBlock Name="RarityTextBlock" Grid.Column="6" Text="{Binding Rarity}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"/>
-
             <Grid Grid.Column="7">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -62,7 +56,6 @@
                 <TextBlock Grid.Row="0" Text="{Binding ManaCost, Converter={StaticResource ManaCostConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
                 <TextBlock Grid.Row="1" Text="{Binding Dust, Converter={StaticResource DustConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14"/>
             </Grid>
-
             <Grid Grid.Column="8">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

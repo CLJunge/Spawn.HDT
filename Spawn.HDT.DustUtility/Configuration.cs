@@ -14,6 +14,7 @@ namespace Spawn.HDT.DustUtility
         private SearchParameters m_searchParameters;
         private int m_nSaveInterval;
         private string m_strLastSelectedAccount;
+        private bool m_blnColoredCardItems;
         private int m_nVersion;
         #endregion
 
@@ -72,6 +73,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region ColoredCardItems
+        [DefaultValue(true)]
+        public bool ColoredCardItems
+        {
+            get => m_blnColoredCardItems;
+            set => Set(ref m_blnColoredCardItems, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -91,6 +101,7 @@ namespace Spawn.HDT.DustUtility
             SearchParameters = null;
             SaveInterval = 120;
             LastSelectedAccount = string.Empty;
+            ColoredCardItems = true;
             Version = 1;
 
             PropertyChanged += (s, e) => Save();

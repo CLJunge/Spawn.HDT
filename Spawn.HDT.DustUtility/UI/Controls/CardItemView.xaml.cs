@@ -15,10 +15,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region Events
-        #region OnLoaded
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        #region OnDataContextChanged
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (DataContext is CardItem cardItem)
+            if (e.NewValue is CardItem cardItem)
             {
                 CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
 
@@ -26,12 +26,20 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 RarityGemImage.Source = FindResource($"{cardItem.Rarity}Gem") as ImageSource;
 
-                RarityTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
-
-                if (cardItem.Golden)
+                if (DustUtilityPlugin.Config.ColoredCardItems)
                 {
-                    NameTextBlock.Foreground = Brushes.Goldenrod;
-                    ControlBorder.BorderBrush = Brushes.Goldenrod;
+                    RarityTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
+
+                    if (cardItem.Golden)
+                    {
+                        NameTextBlock.Foreground = Brushes.Goldenrod;
+                        ControlBorder.BorderBrush = Brushes.Goldenrod;
+                    }
+                    else
+                    {
+                        NameTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                        ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
+                    }
                 }
                 else { }
 
@@ -39,7 +47,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 {
                     TimestampTextBlock.Visibility = Visibility.Visible;
                 }
-                else { }
+                else
+                {
+                    TimestampTextBlock.Visibility = Visibility.Collapsed;
+                }
             }
             else { }
         }
