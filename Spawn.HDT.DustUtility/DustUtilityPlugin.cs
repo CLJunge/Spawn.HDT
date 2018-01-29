@@ -152,34 +152,7 @@ namespace Spawn.HDT.DustUtility
         #region OnButtonPress
         public void OnButtonPress()
         {
-            Log.WriteLine("Opening settings dialog", LogType.Debug);
-
-            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
-            {
-                if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
-                {
-                    if (Config.OfflineMode && Core.Game.IsRunning)
-                    {
-                        if (!Cache.TimerEnabled)
-                        {
-                            Cache.StartTimer();
-                        }
-                        else
-                        {
-                            //Reinitialize timer with new interval
-                            Cache.StopTimer();
-
-                            Cache.StartTimer();
-                        }
-                    }
-                    else if (!Config.OfflineMode && Cache.TimerEnabled)
-                    {
-                        Cache.StopTimer();
-                    }
-                    else { }
-                }
-                else { }
-            }
+            ShowSettingsDialog();
         }
         #endregion
 
@@ -286,6 +259,42 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region ShowSettingsDialog
+        private void ShowSettingsDialog()
+        {
+            Log.WriteLine("Opening settings dialog", LogType.Debug);
+
+            using (var dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+            {
+                if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
+                {
+                    if (Config.OfflineMode && Core.Game.IsRunning)
+                    {
+                        if (!Cache.TimerEnabled)
+                        {
+                            Cache.StartTimer();
+                        }
+                        else
+                        {
+                            //Reinitialize timer with new interval
+                            Cache.StopTimer();
+
+                            Cache.StartTimer();
+                        }
+                    }
+                    else if (!Config.OfflineMode && Cache.TimerEnabled)
+                    {
+                        Cache.StopTimer();
+                    }
+                    else { }
+
+                    ReloadFlyoutViews();
+                }
+                else { }
+            }
+        }
+        #endregion
+
         #region UpdatePluginFiles
         private void UpdatePluginFiles()
         {
@@ -370,9 +379,9 @@ namespace Spawn.HDT.DustUtility
                         lstHistory.Add(card);
                     }
                     else { }
-
-                    FileManager.Write(vFiles[i], lstHistory);
                 }
+
+                FileManager.Write(vFiles[i], lstHistory);
             }
         }
         #endregion

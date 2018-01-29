@@ -28,6 +28,15 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 RarityGemImage.Source = FindResource($"{cardItem.Rarity}Gem") as ImageSource;
 
+                if (cardItem.Golden)
+                {
+                    ControlBorder.BorderBrush = Brushes.Goldenrod;
+                }
+                else
+                {
+                    ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
+                }
+
                 if (DustUtilityPlugin.Config.ColoredCardItems)
                 {
                     RarityTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
@@ -35,12 +44,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     if (cardItem.Golden)
                     {
                         NameTextBlock.Foreground = Brushes.Goldenrod;
-                        ControlBorder.BorderBrush = Brushes.Goldenrod;
                     }
                     else
                     {
                         NameTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
-                        ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
                     }
 
                     if (cardItem.ColoredCount)

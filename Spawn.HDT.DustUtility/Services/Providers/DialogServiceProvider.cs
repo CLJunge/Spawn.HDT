@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.ViewModel;
 using System.Windows;
 #endregion
 
@@ -21,7 +22,9 @@ namespace Spawn.HDT.DustUtility.Services.Providers
             }
             else { }
 
-            return (m_dialog?.ShowDialog().Value ?? false);
+            m_dialog.GetViewModel<ViewModelBase>().Initialize();
+
+            return (m_dialog.ShowDialog() ?? false);
         }
         #endregion
 
