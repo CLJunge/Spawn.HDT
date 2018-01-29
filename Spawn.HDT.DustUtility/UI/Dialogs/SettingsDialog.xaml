@@ -11,33 +11,58 @@
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
 
-        <Label Content="Offline Mode" Grid.Row="0" Grid.Column="0" Margin="10,0,0,0"/>
-        <Label Content="Save Interval (sec.)" Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}"/>
-        <Label Content="Check For Updates" Grid.Row="2" Grid.Column="0" Margin="10,0,0,0"/>
+        <Grid Grid.Row="0" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
 
-        <CheckBox Name="cbOfflineMode" Grid.Row="0" Grid.Column="2" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        <TextBox Name="tbSaveInterval" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,11,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}">
-            <TextBox.Text>
-                <Binding Path="SaveInterval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <components:NumericValidationRule ValidatesOnTargetUpdated="True"/>
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
-        <CheckBox Grid.Row="2" Grid.Column="2" IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <Label Content="Offline Mode" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Name="cbOfflineMode" Grid.Column="1" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Grid.Row="1" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
 
-        <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
+            <Label Content="Save Interval (sec.)" Grid.Column="0" Margin="10,0,0,0" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}"/>
+            <TextBox Name="tbSaveInterval" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,11,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}">
+                <TextBox.Text>
+                    <Binding Path="SaveInterval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <components:NumericValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+        <Grid Grid.Row="2" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Check For Updates" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Grid.Column="2" IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Grid.Row="3" Height="30" Visibility="{Binding ColoredCardItemsSetttingVisibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Colored Card Items" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
