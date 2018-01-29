@@ -34,7 +34,7 @@
                     <TextBlock Text="SWITCH ACCOUNT..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding ShowHistoryCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}">
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -44,7 +44,7 @@
                     <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding ShowDecksCommand}">
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=DecksFlyout}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -54,7 +54,7 @@
                     <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding ShowCollectionInfoCommand}">
+            <Button>
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -73,6 +73,9 @@
             </controls:Flyout>
             <controls:Flyout Name="UpdateFlyout" Header="New update available" Position="Bottom">
                 <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
+            </controls:Flyout>
+            <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right">
+                <flyouts:DecksFlyoutView x:Name="DecksFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>

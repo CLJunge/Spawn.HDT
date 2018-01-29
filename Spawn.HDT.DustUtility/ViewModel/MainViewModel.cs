@@ -53,16 +53,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         public ICommand SwitchAccountCommand => new RelayCommand(SwitchAccount);
         #endregion
 
-        #region ShowHistoryCommand
-        public ICommand ShowHistoryCommand => new RelayCommand<Flyout>(ShowHistory);
-        #endregion
-
-        #region ShowDecksCommand
-        public ICommand ShowDecksCommand => new RelayCommand(ShowDecks);
-        #endregion
-
-        #region ShowCollectionInfoCommand
-        public ICommand ShowCollectionInfoCommand => new RelayCommand(ShowCollectionInfo);
+        #region OpenFlyoutCommand
+        public ICommand OpenFlyoutCommand => new RelayCommand<Flyout>(OpenFlyout);
         #endregion
         #endregion
 
@@ -130,8 +122,7 @@ namespace Spawn.HDT.DustUtility.ViewModel
                     {
                         DustUtilityPlugin.MainWindow.Dispatcher.Invoke(() =>
                         {
-                            DustUtilityPlugin.MainWindow.UpdateFlyoutView.GetViewModel<ViewModelBase>().Initialize();
-                            DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen = true;
+                            OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
                         });
                     }
                     else { }
@@ -148,8 +139,8 @@ namespace Spawn.HDT.DustUtility.ViewModel
         }
         #endregion
 
-        #region ShowHistory
-        private void ShowHistory(Flyout flyout)
+        #region OpenFlyout
+        private void OpenFlyout(Flyout flyout)
         {
             if (!flyout.IsOpen)
             {
@@ -160,13 +151,5 @@ namespace Spawn.HDT.DustUtility.ViewModel
             else { }
         }
         #endregion
-
-        private void ShowDecks()
-        {
-        }
-
-        private void ShowCollectionInfo()
-        {
-        }
     }
 }
