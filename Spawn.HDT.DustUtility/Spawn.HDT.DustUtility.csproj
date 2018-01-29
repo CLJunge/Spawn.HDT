@@ -134,6 +134,9 @@
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\DecksFlyoutView.xaml.cs">
+      <DependentUpon>DecksFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\HistoryFlyoutView.xaml.cs">
       <DependentUpon>HistoryFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,7 @@
     <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="ViewModel\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="ViewModel\DecksFlyoutViewModel.cs" />
     <Compile Include="ViewModel\HistoryFlyoutViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
@@ -206,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\SettingsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flyouts\DecksFlyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
