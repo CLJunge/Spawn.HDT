@@ -27,6 +27,7 @@
     <sys:Double x:Key="UpperCaseContentFontSize">10</sys:Double>
 
     <SolidColorBrush x:Key="TextBoxBorderBrush" Color="{StaticResource Gray6}" options:Freeze="True" />
+    <SolidColorBrush x:Key="ControlsDisabledBrush" Color="#A5FFFFFF" options:Freeze="True" />
 
     <!--  re-set brushes too  -->
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource BlackColor}" options:Freeze="True" />
