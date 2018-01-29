@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Spawn.HDT.DustUtility.Offline
+namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {
     public class CachedDeck
     {

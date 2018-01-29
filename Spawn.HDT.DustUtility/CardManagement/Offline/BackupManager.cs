@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 
-namespace Spawn.HDT.DustUtility.Offline
+namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {
     public static class BackupManager
     {

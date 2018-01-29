@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Spawn.HDT.DustUtility.Offline
+namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {
     public static class HistoryManager
     {

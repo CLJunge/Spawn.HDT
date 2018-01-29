@@ -1,5 +1,5 @@
 ﻿using HearthMirror.Objects;
-using Spawn.HDT.DustUtility.Offline;
+using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Diagnostics;
 

@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using HearthDb;
 using HearthDb.Enums;
+using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.Offline;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;

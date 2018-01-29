@@ -1,4 +1,4 @@
-﻿using Spawn.HDT.DustUtility.Offline;
+﻿using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System.Collections.Generic;
 
 namespace Spawn.HDT.DustUtility

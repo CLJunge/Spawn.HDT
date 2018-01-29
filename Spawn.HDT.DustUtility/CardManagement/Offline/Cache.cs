@@ -4,7 +4,7 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Spawn.HDT.DustUtility.Offline
+namespace Spawn.HDT.DustUtility.CardManagement.Offline
 {
     public static class Cache
     {

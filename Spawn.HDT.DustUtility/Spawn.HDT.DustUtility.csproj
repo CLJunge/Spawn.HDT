@@ -99,15 +99,15 @@
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FileManager.cs" />
-    <Compile Include="Offline\CachedHistoryCard.cs" />
+    <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Net\GitHubUpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
-    <Compile Include="Offline\BackupManager.cs" />
-    <Compile Include="Offline\Cache.cs" />
-    <Compile Include="Offline\CachedCard.cs" />
-    <Compile Include="Offline\CachedDeck.cs" />
-    <Compile Include="Offline\HistoryManager.cs" />
+    <Compile Include="CardManagement\Offline\BackupManager.cs" />
+    <Compile Include="CardManagement\Offline\Cache.cs" />
+    <Compile Include="CardManagement\Offline\CachedCard.cs" />
+    <Compile Include="CardManagement\Offline\CachedDeck.cs" />
+    <Compile Include="CardManagement\Offline\HistoryManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
