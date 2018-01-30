@@ -145,12 +145,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OpenFlyout
-        private void OpenFlyout(Flyout flyout)
+        public void OpenFlyout(Flyout flyout)
         {
+            (((FrameworkElement)flyout.Content).DataContext as ViewModelBase).Initialize();
+
             if (!flyout.IsOpen)
             {
-                ((FrameworkElement)flyout.Content).GetViewModel<ViewModelBase>().Initialize();
-
                 flyout.IsOpen = true;
             }
             else { }

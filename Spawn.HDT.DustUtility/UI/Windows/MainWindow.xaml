@@ -77,6 +77,9 @@
             <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right" Width="600">
                 <flyouts:DecksFlyoutView x:Name="DecksFlyoutView"/>
             </controls:Flyout>
+            <controls:Flyout Name="DeckListFlyout" Header="Deck list" Position="Left" Width="300">
+                <flyouts:DeckListFlyoutView x:Name="DeckListFlyoutView"/>
+            </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>

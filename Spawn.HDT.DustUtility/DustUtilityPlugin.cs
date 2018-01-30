@@ -422,7 +422,7 @@ namespace Spawn.HDT.DustUtility
                     s_mainWindow = null;
                 };
 
-                s_mainWindow.GetViewModel<ViewModelBase>().Initialize();
+                ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
 
                 s_mainWindow.Show();
             }

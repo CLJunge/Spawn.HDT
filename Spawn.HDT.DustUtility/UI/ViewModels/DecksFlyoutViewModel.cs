@@ -1,6 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthMirror.Objects;
+using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,6 +62,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DeckItems = new ObservableCollection<DeckItem>();
 
             ToggleDeckMenuItemHeader = ExcludeHeaderText;
+
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(SelectedDeckItem)))
+                {
+                    ServiceLocator.Current.GetInstance<DeckListFlyoutViewModel>().Deck = SelectedDeckItem.Deck;
+                }
+                else { }
+            };
 #if DEBUG
             if (IsInDesignMode)
             {
@@ -104,6 +114,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ShowDeckList
         private void ShowDeckList()
         {
+            ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyout(DustUtilityPlugin.MainWindow.DeckListFlyout);
         }
         #endregion
 

@@ -22,7 +22,7 @@ namespace Spawn.HDT.DustUtility.Services.Providers
             }
             else { }
 
-            m_dialog.GetViewModel<ViewModelBase>().Initialize();
+            (m_dialog.DataContext as ViewModelBase).Initialize();
 
             return (m_dialog.ShowDialog() ?? false);
         }

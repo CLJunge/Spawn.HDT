@@ -139,6 +139,9 @@
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\DeckListFlyoutView.xaml.cs">
+      <DependentUpon>DeckListFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\DecksFlyoutView.xaml.cs">
       <DependentUpon>DecksFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,7 @@
     <Compile Include="UI\Models\DeckItem.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="UI\ViewModels\DeckListFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\DecksFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
@@ -220,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Dialogs\SettingsDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flyouts\DeckListFlyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

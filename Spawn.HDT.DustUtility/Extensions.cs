@@ -3,7 +3,6 @@ using HearthDb;
 using HearthDb.Enums;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -298,14 +297,6 @@ namespace Spawn.HDT.DustUtility
             }
 
             return retVal;
-        }
-        #endregion
-
-        #region GetViewModel
-        [System.Diagnostics.DebuggerStepThrough]
-        public static T GetViewModel<T>(this System.Windows.FrameworkElement element) where T : ViewModelBase
-        {
-            return element.DataContext as T;
         }
         #endregion
     }
