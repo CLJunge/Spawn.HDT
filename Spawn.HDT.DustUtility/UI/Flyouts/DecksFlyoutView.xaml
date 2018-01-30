@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
-             vm:ViewModelLocator.ViewModelName="DecksFlyoutViewModel"
              xmlns:controls="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+             vm:ViewModelLocator.ViewModelName="DecksFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="500">
-    <ListView ItemsSource="{Binding DeckItems}" BorderThickness="0">
+    <ListView ItemsSource="{Binding DeckItems}" SelectedItem="{Binding SelectedDeckItem, Mode=TwoWay}" SelectionMode="Single"
+              BorderThickness="0" MouseMove="OnListViewMouseMove" ContextMenuOpening="OnListViewContextMenuOpening">
         <ListView.ContextMenu>
             <ContextMenu>
-                <ContextMenu.Items>
-                    <MenuItem Header="Show deck list" Command="{Binding ShowDeckListCommand}"/>
-                    <Separator/>
-                    <MenuItem Name="toggleDeckMenuItem" Header="Exclude (Search)" Command="{Binding ToggleDeckCommand}"/>
-                </ContextMenu.Items>
+                <MenuItem Header="Show deck list" Command="{Binding ShowDeckListCommand}"/>
+                <Separator/>
+                <MenuItem Header="{Binding ToggleDeckMenuItemHeader}" Command="{Binding ToggleDeckCommand}"/>
             </ContextMenu>
         </ListView.ContextMenu>
         <ListView.ItemTemplate>

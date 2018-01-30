@@ -16,6 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
         #region Member Variables
         private Deck m_deck;
+        private double m_dblOpacity;
         #endregion
 
         #region Properties
@@ -46,11 +47,20 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region HeroImage
         public BitmapImage HeroImage => GetHeroImage();
         #endregion
+
+        #region Opacity
+        public double Opacity
+        {
+            get => m_dblOpacity;
+            set => Set(ref m_dblOpacity, value);
+        }
+        #endregion
         #endregion
 
         #region Ctor
         public DeckItem()
         {
+            Opacity = 1;
 #if DEBUG
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -61,6 +71,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         }
 
         public DeckItem(Deck deck)
+            : this()
         {
             m_deck = deck;
         }
