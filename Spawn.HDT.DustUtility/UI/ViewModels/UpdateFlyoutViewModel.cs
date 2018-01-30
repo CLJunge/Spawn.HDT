@@ -107,6 +107,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DownloadPanelVisibility = Visibility.Collapsed;
             DownloadFinishedPanelVisibility = Visibility.Collapsed;
 
+            DownloadProgress = 0;
+
             StringBuilder sb = new StringBuilder();
 
             sb.Append($"Update {GitHubUpdateManager.NewVersion.ToString(3)} has been released.")
@@ -144,6 +146,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void CancelDownload()
         {
             GitHubUpdateManager.CancelDownload();
+
+            GitHubUpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
+            GitHubUpdateManager.DownloadCompleted -= OnDownloadCompleted;
 
             CloseFlyout();
         }
