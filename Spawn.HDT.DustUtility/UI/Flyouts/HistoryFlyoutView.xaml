@@ -2,13 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:controls="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="HistoryFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <controls:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem" AllowDrag="False" AllowDrop="False"/>
-        <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="Clear" Command="{Binding ClearHistoryCommand}" VerticalAlignment="Bottom" Margin="5"/>
+        <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem" AllowDrag="False" AllowDrop="False"/>
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearHistoryCommand}" VerticalAlignment="Bottom" Margin="5"/>
     </Grid>
 </UserControl>

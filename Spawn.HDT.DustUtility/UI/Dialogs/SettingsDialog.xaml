@@ -9,6 +9,13 @@
         vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+    </Window.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -65,7 +72,7 @@
         <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0">
                 <Button.Style>
-                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MetroButton}">
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CustomButtonStyle}">
                         <Setter Property="IsEnabled" Value="False"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ElementName=tbSaveInterval, Path=(Validation.HasError)}" Value="False">
@@ -75,7 +82,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="_Cancel" IsCancel="True" Width="75"/>
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75"/>
         </WrapPanel>
     </Grid>
 </controls:MetroWindow>

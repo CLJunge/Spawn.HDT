@@ -2,10 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="UpdateFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
         <Grid Visibility="{Binding MessagePanelVisibility}">
             <Grid.RowDefinitions>
@@ -16,8 +24,8 @@
 
             <TextBlock Grid.Row="1" Text="{Binding UpdateMessage}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap"/>
             <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
-                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_Yes" Command="{Binding StartDownloadCommand}" Width="75" Margin="0,0,10,0"/>
-                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_No" Command="{Binding CloseFlyoutCommand}" Width="75"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Yes" Command="{Binding StartDownloadCommand}" Width="75" Margin="0,0,10,0"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_No" Command="{Binding CloseFlyoutCommand}" Width="75"/>
             </WrapPanel>
         </Grid>
         <Grid Visibility="{Binding DownloadPanelVisibility}">
@@ -34,7 +42,7 @@
             <TextBlock Grid.Row="2" Text="{Binding ElementName=DownloadProgressBar, Path=Value, StringFormat={}{0:0}%}" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
-                <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="_Cancel" Command="{Binding CancelDownloadCommand}" Width="75"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" Command="{Binding CancelDownloadCommand}" Width="75"/>
             </WrapPanel>
         </Grid>
         <Grid Visibility="{Binding DownloadFinishedPanelVisibility}">
