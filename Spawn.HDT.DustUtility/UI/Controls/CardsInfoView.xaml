@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
              xmlns:models="clr-namespace:Spawn.HDT.DustUtility.UI.Models"
-             mc:Ignorable="d" d:DesignHeight="235" d:DesignWidth="150"
-             Width="150" Height="235" MinWidth="150" MinHeight="235" MaxWidth="150" MaxHeight="235">
+             mc:Ignorable="d" d:DesignHeight="265" d:DesignWidth="160"
+             Width="160" Height="265" MinWidth="160" MinHeight="265" MaxWidth="160" MaxHeight="265">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
         <converters:DisplayTextConverter x:Key="CommonsCountConverter" Prefix="Commons:"/>
@@ -24,14 +24,11 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <models:CardsInfoModel/>
-    </UserControl.DataContext>
     <GroupBox Header="Info">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="15"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -42,14 +39,14 @@
 
             <TextBlock Grid.Row="0" Text="{Binding DustAmount, Converter={StaticResource DustConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold"/>
 
-            <Separator Grid.Row="1" HorizontalAlignment="Stretch" Height="3" Margin="15,0,15,0"/>
+            <Separator Grid.Row="1" Background="{DynamicResource AccentColorBrush}" HorizontalAlignment="Stretch" Height="3" Margin="10,0,10,0"/>
 
             <TextBlock Grid.Row="2" Text="{Binding CommonsCount, Converter={StaticResource CommonsCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
             <TextBlock Grid.Row="3" Text="{Binding RaresCount, Converter={StaticResource RaresCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
             <TextBlock Grid.Row="4" Text="{Binding EpicsCount, Converter={StaticResource EpicsCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
             <TextBlock Grid.Row="5" Text="{Binding LegendariesCount, Converter={StaticResource LegendariesCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
 
-            <TextBlock Grid.Row="7" Text="{Binding TotalCount, Converter={StaticResource TotalCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
+            <TextBlock Grid.Row="7" Text="{Binding TotalCount, Converter={StaticResource TotalCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14" FontWeight="Bold"/>
         </Grid>
     </GroupBox>
 </UserControl>
