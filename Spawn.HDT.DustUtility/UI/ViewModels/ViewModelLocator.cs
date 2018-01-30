@@ -35,9 +35,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 if (viewModelType != null)
                 {
-                    object viewModel = ServiceLocator.Current.GetInstance(viewModelType);
-
-                    ((FrameworkElement)d).DataContext = viewModel;
+                    ((FrameworkElement)d).DataContext = ServiceLocator.Current.GetInstance(viewModelType);
                 }
                 else { }
             }
