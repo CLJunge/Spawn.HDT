@@ -31,7 +31,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (!string.IsNullOrEmpty(strViewModelName))
             {
-                Type viewModelType = Type.GetType($"Spawn.HDT.DustUtility.ViewModel.{strViewModelName}");
+                Type viewModelType = Type.GetType($"{typeof(MainViewModel).Namespace}.{strViewModelName}");
 
                 if (viewModelType != null)
                 {
