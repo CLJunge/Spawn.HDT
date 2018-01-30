@@ -10,9 +10,6 @@
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
         <converters:CardCountToStringConverter x:Key="CardCountConverter" MaxAmount="30"/>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <m:DeckItem/>
-    </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
