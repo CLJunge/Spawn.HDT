@@ -1,6 +1,5 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
-using Spawn.HDT.DustUtility.CardManagement;
 using System.ComponentModel;
 using System.IO;
 #endregion
@@ -13,7 +12,6 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnOfflineMode;
         private string m_strSortOrder;
         private bool m_blnCheckForUpdates;
-        private SearchParameters m_searchParameters;
         private int m_nSaveInterval;
         private string m_strLastSelectedAccount;
         private bool m_blnColoredCardItems;
@@ -45,15 +43,6 @@ namespace Spawn.HDT.DustUtility
         {
             get => m_blnCheckForUpdates;
             set => Set(ref m_blnCheckForUpdates, value);
-        }
-        #endregion
-
-        #region SearchParameters
-        [DefaultValue(null)]
-        public SearchParameters SearchParameters
-        {
-            get => m_searchParameters;
-            set => Set(ref m_searchParameters, value);
         }
         #endregion
 
@@ -100,7 +89,6 @@ namespace Spawn.HDT.DustUtility
             OfflineMode = true;
             SortOrder = string.Empty;
             CheckForUpdates = true;
-            SearchParameters = null;
             SaveInterval = 120;
             LastSelectedAccount = string.Empty;
             ColoredCardItems = true;
