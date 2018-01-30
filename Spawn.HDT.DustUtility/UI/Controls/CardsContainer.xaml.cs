@@ -49,8 +49,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region Events
-        #region OnItemsContainerMouseDoubleClick
-        private async void OnItemsContainerMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        #region OnListViewMouseDoubleClick
+        private async void OnListViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             m_blnDblClick = true;
 
@@ -58,8 +58,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnItemsContainerMouseDown
-        private void OnItemsContainerMouseDown(object sender, MouseButtonEventArgs e)
+        #region OnListViewMouseDown
+        private void OnListViewMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!m_blnDblClick)
             {
@@ -71,15 +71,15 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnItemsContainerSelectionChanged
-        private void OnItemsContainerSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        #region OnListViewSelectionChanged
+        private void OnListViewSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             ClosePopup();
         }
         #endregion
 
-        #region OnItemsContainerContextMenuOpening
-        private void OnItemsContainerContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
+        #region OnListViewContextMenuOpening
+        private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
         {
             e.Handled = !ContextMenuEnabled;
         }

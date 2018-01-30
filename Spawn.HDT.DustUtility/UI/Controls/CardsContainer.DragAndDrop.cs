@@ -28,8 +28,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region Events
-        #region OnDataGridMouseMove
-        private void OnDataGridMouseMove(object sender, MouseEventArgs e)
+        #region OnListViewMouseMove
+        private void OnListViewMouseMove(object sender, MouseEventArgs e)
         {
             ItemsContainer.ReleaseMouseCapture();
 
@@ -64,15 +64,15 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnDataGridPreviewMouseLeftButtonDown
-        private void OnDataGridPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        #region OnListViewPreviewMouseLeftButtonDown
+        private void OnListViewPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             m_startPosition = e.GetPosition(null);
         }
         #endregion
 
-        #region OnDataGridDragEnter
-        private void OnDataGridDragEnter(object sender, DragEventArgs e)
+        #region OnListViewDragEnter
+        private void OnListViewDragEnter(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent("item"))
             {
@@ -82,8 +82,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnDataGridDrop
-        private void OnDataGridDrop(object sender, DragEventArgs e)
+        #region OnListViewDrop
+        private void OnListViewDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent("item"))
             {
