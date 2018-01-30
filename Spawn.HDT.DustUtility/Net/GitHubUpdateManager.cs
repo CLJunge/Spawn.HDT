@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.Net
 {
-    [System.Runtime.InteropServices.Guid("30C3DCF0-27D6-48F8-B3DB-883BEAB69146")]
     public static class GitHubUpdateManager
     {
         #region Constants

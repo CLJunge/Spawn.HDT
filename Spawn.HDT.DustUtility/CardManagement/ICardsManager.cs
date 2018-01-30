@@ -7,7 +7,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
 {
     public interface ICardsManager
     {
+        #region Methods
         Task<CardWrapper[]> GetCardsAsync(SearchParameters parameters);
         int GetCollectionValue();
+        #endregion
     }
 }

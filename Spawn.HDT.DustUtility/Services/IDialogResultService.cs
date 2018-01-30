@@ -2,6 +2,8 @@
 {
     public interface IDialogResultService<T>
     {
+        #region Methods
         T GetDialogResult();
+        #endregion
     }
 }
