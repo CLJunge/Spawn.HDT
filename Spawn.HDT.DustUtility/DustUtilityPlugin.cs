@@ -354,7 +354,7 @@ namespace Spawn.HDT.DustUtility
         {
             string[] vFiles = Directory.GetFiles(AccountsDirectory, $"*_{Account.HistoryString}.xml");
 
-            for (int i = 0; i < vFiles.Length; i++)
+            Parallel.For(0, vFiles.Length, i =>
             {
                 XmlDocument document = new XmlDocument();
 
@@ -387,7 +387,7 @@ namespace Spawn.HDT.DustUtility
                 }
 
                 FileManager.Write(vFiles[i], lstHistory);
-            }
+            });
         }
         #endregion
 
