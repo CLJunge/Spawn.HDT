@@ -20,7 +20,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnDataContextChanged
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue is CardItem cardItem)
+            if (e.NewValue is CardItemModel cardItem)
             {
                 CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
 

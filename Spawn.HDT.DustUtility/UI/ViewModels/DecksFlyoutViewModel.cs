@@ -18,17 +18,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Member Variables
-        private DeckItem m_selectedDeckItem;
+        private DeckItemModel m_selectedDeckItem;
         private string m_strToggleDeckMenuItemHeader;
         #endregion
 
         #region Properties
         #region DeckItems
-        public ObservableCollection<DeckItem> DeckItems { get; set; }
+        public ObservableCollection<DeckItemModel> DeckItems { get; set; }
         #endregion
 
         #region SelectedDeckItem
-        public DeckItem SelectedDeckItem
+        public DeckItemModel SelectedDeckItem
         {
             get => m_selectedDeckItem;
             set => Set(ref m_selectedDeckItem, value);
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Ctor
         public DecksFlyoutViewModel()
         {
-            DeckItems = new ObservableCollection<DeckItem>();
+            DeckItems = new ObservableCollection<DeckItemModel>();
 
             ToggleDeckMenuItemHeader = ExcludeHeaderText;
 
@@ -92,7 +92,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 for (int i = 0; i < lstDecks.Count; i++)
                 {
-                    DeckItem item = new DeckItem(lstDecks[i]);
+                    DeckItemModel item = new DeckItemModel(lstDecks[i]);
 
                     if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(item.DeckId))
                     {

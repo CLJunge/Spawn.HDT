@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 namespace Spawn.HDT.DustUtility.UI.Models
 {
     [DebuggerDisplay("{Name} ({Count})")]
-    public class CardItem : ObservableObject
+    public class CardItemModel : ObservableObject
     {
         #region Member Variables
         private CardWrapper m_wrapper;
@@ -100,20 +100,20 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Ctor
-        public CardItem()
+        public CardItemModel()
         {
         }
 
-        public CardItem(CardWrapper wrapper)
+        public CardItemModel(CardWrapper wrapper)
         {
             Wrapper = new CardWrapper(wrapper.ToString());
         }
         #endregion
 
         #region CreateCopy
-        public CardItem CreateCopy()
+        public CardItemModel CreateCopy()
         {
-            return new CardItem(Wrapper);
+            return new CardItemModel(Wrapper);
         }
         #endregion
     }

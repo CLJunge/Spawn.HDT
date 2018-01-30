@@ -129,6 +129,9 @@
     <Compile Include="UI\Components\Converters\CardItemCountToStringConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayTextConverter.cs" />
     <Compile Include="UI\Components\Converters\DateTimeFormatConverter.cs" />
+    <Compile Include="UI\Controls\CardsInfoView.xaml.cs">
+      <DependentUpon>CardsInfoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
       <DependentUpon>DeckItemView.xaml</DependentUpon>
     </Compile>
@@ -151,9 +154,10 @@
     <Compile Include="UI\Flyouts\UpdateFlyoutView.xaml.cs">
       <DependentUpon>UpdateFlyoutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Models\CardItem.cs" />
+    <Compile Include="UI\Models\CardItemModel.cs" />
     <Compile Include="UI\CardItemEventArgs.cs" />
-    <Compile Include="UI\Models\DeckItem.cs" />
+    <Compile Include="UI\Models\CardsInfoModel.cs" />
+    <Compile Include="UI\Models\DeckItemModel.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
     <Compile Include="UI\ViewModels\DeckListFlyoutViewModel.cs" />
@@ -212,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\CardsContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\CardsInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

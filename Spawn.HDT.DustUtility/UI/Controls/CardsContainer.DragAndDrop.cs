@@ -11,13 +11,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
     {
         #region Member Variables
         private Point? m_startPosition;
-        private CardItem m_draggedItem;
+        private CardItemModel m_draggedItem;
         #endregion
 
         #region Custom Events
         public event EventHandler<CardItemEventArgs> ItemDropped;
 
-        private void OnItemDropped(CardItem item)
+        private void OnItemDropped(CardItemModel item)
         {
             if (ItemDropped != null)
             {
@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 if (m_draggedItem == null && ItemsContainer.SelectedIndex > -1)
                 {
-                    m_draggedItem = ItemsContainer.SelectedItem as CardItem;
+                    m_draggedItem = ItemsContainer.SelectedItem as CardItemModel;
                 }
                 else { }
 
@@ -87,7 +87,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (e.Data.GetDataPresent("item"))
             {
-                CardItem item = e.Data.GetData("item") as CardItem;
+                CardItemModel item = e.Data.GetData("item") as CardItemModel;
 
                 System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
 

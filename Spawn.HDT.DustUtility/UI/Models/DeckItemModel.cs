@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
-    public class DeckItem : ObservableObject
+    public class DeckItemModel : ObservableObject
     {
         #region Static Fields
         private static Dictionary<string, BitmapImage> s_dImageCache = new Dictionary<string, BitmapImage>();
@@ -58,7 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Ctor
-        public DeckItem()
+        public DeckItemModel()
         {
             Opacity = 1;
 #if DEBUG
@@ -70,7 +70,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
 #endif
         }
 
-        public DeckItem(Deck deck)
+        public DeckItemModel(Deck deck)
             : this()
         {
             m_deck = deck;

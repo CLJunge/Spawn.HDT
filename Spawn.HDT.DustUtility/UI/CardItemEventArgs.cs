@@ -9,7 +9,7 @@ namespace Spawn.HDT.DustUtility.UI
     {
         #region Properties
         #region Item
-        public CardItem Item { get; }
+        public CardItemModel Item { get; }
         #endregion
 
         #region RowIndex
@@ -18,7 +18,7 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region Ctor
-        public CardItemEventArgs(CardItem item, int rowIndex)
+        public CardItemEventArgs(CardItemModel item, int rowIndex)
         {
             Item = item;
 

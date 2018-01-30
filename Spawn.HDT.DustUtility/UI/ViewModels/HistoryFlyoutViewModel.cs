@@ -16,7 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Properties
         #region CardItems
-        public ObservableCollection<CardItem> CardItems { get; set; }
+        public ObservableCollection<CardItemModel> CardItems { get; set; }
         #endregion
 
         #region ClearHistoryCommand
@@ -27,7 +27,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Ctor
         public HistoryFlyoutViewModel()
         {
-            CardItems = new ObservableCollection<CardItem>();
+            CardItems = new ObservableCollection<CardItemModel>();
 
 #if DEBUG
             if (IsInDesignMode)
@@ -50,7 +50,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 for (int i = 0; i < lstHistory.Count; i++)
                 {
-                    CardItems.Add(new CardItem(new CardWrapper(lstHistory[i])) { ColoredCount = true });
+                    CardItems.Add(new CardItemModel(new CardWrapper(lstHistory[i])) { ColoredCount = true });
                 }
 
                 if (lstHistory.Count > 0)

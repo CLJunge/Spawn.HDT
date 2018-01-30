@@ -90,7 +90,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             while (ItemsContainer.SelectedItems.Count > 0)
             {
-                RemoveCardItem.Invoke(this, new CardItemEventArgs(ItemsContainer.SelectedItems[0] as CardItem, ItemsContainer.SelectedIndex));
+                RemoveCardItem.Invoke(this, new CardItemEventArgs(ItemsContainer.SelectedItems[0] as CardItemModel, ItemsContainer.SelectedIndex));
             }
         }
         #endregion
@@ -106,7 +106,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OpenPopupAsync
         private async Task OpenPopupAsync()
         {
-            if (ItemsContainer.SelectedItem is CardItem selectedItem)
+            if (ItemsContainer.SelectedItem is CardItemModel selectedItem)
             {
                 CardImagePopup.IsOpen = true;
 

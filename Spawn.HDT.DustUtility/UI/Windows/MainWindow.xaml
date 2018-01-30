@@ -41,7 +41,7 @@
                             <ImageBrush ImageSource="{DynamicResource ClockIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock Text="HISTORY..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Text="HISTORY" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
             <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=DecksFlyout}">
@@ -51,7 +51,7 @@
                             <ImageBrush ImageSource="{DynamicResource LayersIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock Text="DECKS..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Text="DECKS" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
             <Button>
@@ -61,7 +61,7 @@
                             <ImageBrush ImageSource="{DynamicResource InfoIcon}" />
                         </Rectangle.Fill>
                     </Rectangle>
-                    <TextBlock Text="COLLECTION INFO..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    <TextBlock Text="COLLECTION INFO" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
         </controls:WindowCommands>

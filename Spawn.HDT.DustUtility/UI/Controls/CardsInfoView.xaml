@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Spawn.HDT.DustUtility.UI.Controls.CardsInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <converters:DisplayTextConverter x:Key="dustLabelConverter" Prefix="Dust:"/>
+            <converters:DisplayTextConverter x:Key="commonsCountLabelConverter" Prefix="Commons:"/>
+            <converters:DisplayTextConverter x:Key="raresCountLabelConverter" Prefix="Rares:"/>
+            <converters:DisplayTextConverter x:Key="epicsCountLabelConverter" Prefix="Epics:"/>
+            <converters:DisplayTextConverter x:Key="legendariesCountLabelConverter" Prefix="Legendaries:"/>
+            <converters:DisplayTextConverter x:Key="totalCountLabelConverter" Prefix="Total:"/>
+        </Grid.Resources>
+
+        <Label Name="lblDust" Content="{Binding Source={StaticResource searchResult}, Path=Dust, Converter={StaticResource dustLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,5,10,0"/>
+
+        <Separator Background="Gray" HorizontalAlignment="Stretch" Height="10" Margin="10,33,10,0" VerticalAlignment="Top"/>
+
+        <Label Name="lblCommonsCount" Content="{Binding Source={StaticResource searchResult}, Path=CommonsCount, Converter={StaticResource commonsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,40,10,0"/>
+        <Label Name="lblRaresCount" Content="{Binding Source={StaticResource searchResult}, Path=RaresCount, Converter={StaticResource raresCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,70,10,0"/>
+        <Label Name="lblEpicsCount" Content="{Binding Source={StaticResource searchResult}, Path=EpicsCount, Converter={StaticResource epicsCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,100,10,0"/>
+        <Label Name="lblLegendariesCount" Content="{Binding Source={StaticResource searchResult}, Path=LegendariesCount, Converter={StaticResource legendariesCountLabelConverter}}" FontSize="14" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,130,10,0"/>
+
+        <Label Name="lblTotalCount" Content="{Binding Source={StaticResource searchResult}, Path=TotalCount, Converter={StaticResource totalCountLabelConverter}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,160,10,0"/>
+    </Grid>
+</UserControl>

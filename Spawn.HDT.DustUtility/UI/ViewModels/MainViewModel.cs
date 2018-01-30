@@ -31,7 +31,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region CardItems
-        public ObservableCollection<CardItem> CardItems { get; set; }
+        public ObservableCollection<CardItemModel> CardItems { get; set; }
         #endregion
 
         #region HistoryButtonVisibility
@@ -62,7 +62,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Ctor
         public MainViewModel()
         {
-            CardItems = new ObservableCollection<CardItem>();
+            CardItems = new ObservableCollection<CardItemModel>();
         }
         #endregion
 
