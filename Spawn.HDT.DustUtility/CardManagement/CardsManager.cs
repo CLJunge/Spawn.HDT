@@ -17,13 +17,13 @@ namespace Spawn.HDT.DustUtility.CardManagement
     public class CardsManager : ICardsManager
     {
         #region Member Variables
-        private Account m_account;
+        private IAccount m_account;
 
         private List<CardWrapper> m_lstUnusedCards;
         #endregion
 
         #region Ctor
-        public CardsManager(Account account)
+        public CardsManager(IAccount account)
         {
             m_account = account;
 
@@ -258,7 +258,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     for (int j = 0; j < lstDecks.Count; j++)
                     {
-                        if (!m_account.IsDeckExcluded(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
+                        if (!m_account.IsDeckExcludedFromSearch(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
                         {
                             Card cardInDeck = lstDecks[j].GetCard(card.Id);
 

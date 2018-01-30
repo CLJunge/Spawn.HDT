@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Accounts
-        public ObservableCollection<Account> Accounts { get; set; }
+        public ObservableCollection<IAccount> Accounts { get; set; }
         #endregion
 
         #region SelectedAccountString
@@ -40,7 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Select account...";
 
-            Accounts = new ObservableCollection<Account>(DustUtilityPlugin.GetAccounts());
+            Accounts = new ObservableCollection<IAccount>(DustUtilityPlugin.GetAccounts());
         }
         #endregion
 

@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveCollection
-        private static bool SaveCollection(Account account)
+        private static bool SaveCollection(IAccount account)
         {
             bool blnRet = false;
 
@@ -48,7 +48,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveDecks
-        private static bool SaveDecks(Account account)
+        private static bool SaveDecks(IAccount account)
         {
             bool blnRet = false;
 
@@ -84,7 +84,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region LoadCollection
-        public static List<Card> LoadCollection(Account account)
+        public static List<Card> LoadCollection(IAccount account)
         {
             List<Card> lstRet = new List<Card>();
 
@@ -111,7 +111,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region LoadDecks
-        public static List<Deck> LoadDecks(Account account)
+        public static List<Deck> LoadDecks(IAccount account)
         {
             List<Deck> lstRet = new List<Deck>();
 
@@ -180,7 +180,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             Log.WriteLine("Performing save operations", LogType.Debug);
 
-            Account account = Account.LoggedInAccount;
+            IAccount account = Account.LoggedInAccount;
 
             if (!account.IsEmpty && account.IsValid)
             {

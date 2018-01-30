@@ -39,14 +39,14 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region Save
-        public void Save(Account account)
+        public void Save(IAccount account)
         {
             FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
         }
         #endregion
 
         #region [STATIC] Load
-        public static AccountPreferences Load(Account account)
+        public static AccountPreferences Load(IAccount account)
         {
             return FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
         }

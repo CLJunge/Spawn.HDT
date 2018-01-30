@@ -12,7 +12,7 @@ using System.Diagnostics;
 namespace Spawn.HDT.DustUtility.AccountManagement
 {
     [DebuggerDisplay("{AccountString}")]
-    public class Account
+    public class Account : IAccount
     {
         #region Constants
         public const string CollectionString = "collection";
@@ -155,10 +155,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region ExcludeDeck
-        public void ExcludeDeck(long nDeckId)
+        #region ExcludeDeckInSearch
+        public void ExcludeDeckInSearch(long nDeckId)
         {
-            if (!IsDeckExcluded(nDeckId))
+            if (!IsDeckExcludedFromSearch(nDeckId))
             {
                 Preferences.ExcludedDecks.Add(nDeckId);
             }
@@ -166,10 +166,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region IncludeDeck
-        public void IncludeDeck(long nDeckId)
+        #region IncludeDeckInSearch
+        public void IncludeDeckInSearch(long nDeckId)
         {
-            if (IsDeckExcluded(nDeckId))
+            if (IsDeckExcludedFromSearch(nDeckId))
             {
                 Preferences.ExcludedDecks.Remove(nDeckId);
             }
@@ -177,8 +177,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region IsDeckExcluded
-        public bool IsDeckExcluded(long nDeckId)
+        #region IsDeckExcludedFromSearch
+        public bool IsDeckExcludedFromSearch(long nDeckId)
         {
             return Preferences.ExcludedDecks.Contains(nDeckId);
         }

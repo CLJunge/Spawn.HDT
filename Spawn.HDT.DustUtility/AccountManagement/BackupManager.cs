@@ -11,7 +11,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
     public static class BackupManager
     {
         #region Create
-        public static bool Create(Account account)
+        public static bool Create(IAccount account)
         {
             bool blnRet = false;
 
@@ -64,7 +64,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region Restore
-        public static bool Restore(Account account, DateTime date)
+        public static bool Restore(IAccount account, DateTime date)
         {
             bool blnRet = false;
 
@@ -111,7 +111,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region DeleteOldBackups
-        public static void DeleteOldBackups(Account account)
+        public static void DeleteOldBackups(IAccount account)
         {
             string strDirectory = GetAccountBackupDirectory(account);
 
@@ -131,7 +131,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region BackupExists
-        public static bool BackupExists(Account account, DateTime date)
+        public static bool BackupExists(IAccount account, DateTime date)
         {
             string strFileName = GetBackupFileName(account, date);
 
@@ -140,7 +140,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region GetAccountBackupDirectory
-        private static string GetAccountBackupDirectory(Account account)
+        private static string GetAccountBackupDirectory(IAccount account)
         {
             string strRet = Path.Combine(DustUtilityPlugin.BackupsDirectory, account.AccountString);
 
@@ -155,7 +155,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region GetBackupFileName
-        private static string GetBackupFileName(Account account, DateTime date)
+        private static string GetBackupFileName(IAccount account, DateTime date)
         {
             string strFileName = $"backup_{date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.zip";
 

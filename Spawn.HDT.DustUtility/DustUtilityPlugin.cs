@@ -55,7 +55,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region CurrentAccount
-        public static Account CurrentAccount => ServiceLocator.Current.GetInstance<Account>();
+        public static IAccount CurrentAccount => ServiceLocator.Current.GetInstance<IAccount>();
         #endregion
 
         #region Config
@@ -109,7 +109,7 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            SimpleIoc.Default.Register(() => (blnIsInDesignMode ? Account.Test : Account.Empty));
+            SimpleIoc.Default.Register<IAccount>(() => (blnIsInDesignMode ? Account.Test : Account.Empty));
 #else
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(() => Account.Empty);
@@ -205,7 +205,7 @@ namespace Spawn.HDT.DustUtility
                 {
                     if (!CurrentAccount.IsValid)
                     {
-                        Account selectedAcc = SelectAccount(false);
+                        IAccount selectedAcc = SelectAccount(false);
 
                         if (selectedAcc != null)
                         {
@@ -422,9 +422,9 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region SelectAccount
-        private static Account SelectAccount(bool blnIsSwitching)
+        private static IAccount SelectAccount(bool blnIsSwitching)
         {
-            Account retVal = null;
+            IAccount retVal = null;
 
             if (Core.Game.IsRunning && !blnIsSwitching)
             {
@@ -432,7 +432,7 @@ namespace Spawn.HDT.DustUtility
             }
             else
             {
-                Account[] vAccounts = GetAccounts();
+                IAccount[] vAccounts = GetAccounts();
 
                 if (vAccounts.Length == 1)
                 {
@@ -479,9 +479,9 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetAccounts
-        public static Account[] GetAccounts()
+        public static IAccount[] GetAccounts()
         {
-            List<Account> lstRet = new List<Account>();
+            List<IAccount> lstRet = new List<IAccount>();
 
             if (Directory.Exists(DataDirectory))
             {
@@ -515,9 +515,9 @@ namespace Spawn.HDT.DustUtility
             {
                 Log.WriteLine("Switching account...", LogType.Debug);
 
-                Account oldAcc = CurrentAccount;
+                IAccount oldAcc = CurrentAccount;
 
-                Account selectedAcc = SelectAccount(true);
+                IAccount selectedAcc = SelectAccount(true);
 
                 if (selectedAcc == null)
                 {
@@ -544,10 +544,10 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region UpdatedAccountInstance
-        private static void UpdatedAccountInstance(Account account)
+        private static void UpdatedAccountInstance(IAccount account)
         {
             //Remove current account instance
-            SimpleIoc.Default.Unregister<Account>();
+            SimpleIoc.Default.Unregister<IAccount>();
 
             //Add selected instance
             SimpleIoc.Default.Register(() => account);
@@ -577,7 +577,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetFullFileName
-        public static string GetFullFileName(Account account, string strType)
+        public static string GetFullFileName(IAccount account, string strType)
         {
             string strRet = string.Empty;
 

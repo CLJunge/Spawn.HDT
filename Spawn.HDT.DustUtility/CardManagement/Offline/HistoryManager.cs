@@ -19,7 +19,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region CheckCollection
-        public static void CheckCollection(Account account)
+        public static void CheckCollection(IAccount account)
         {
             List<Card> lstCurrentCollection = Reflection.GetCollection();
 
@@ -141,7 +141,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region LoadHistory
-        private static List<CachedHistoryCard> LoadHistory(Account account)
+        private static List<CachedHistoryCard> LoadHistory(IAccount account)
         {
             Log.WriteLine($"Loading history for \"{account.AccountString}\"", LogType.Debug);
 
@@ -152,7 +152,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveHistory
-        private static void SaveHistory(Account account, List<CachedHistoryCard> lstHistory)
+        private static void SaveHistory(IAccount account, List<CachedHistoryCard> lstHistory)
         {
             Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
 
@@ -163,7 +163,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region GetHistory
-        public static List<CachedHistoryCard> GetHistory(Account account)
+        public static List<CachedHistoryCard> GetHistory(IAccount account)
         {
             List<CachedHistoryCard> lstHistory = LoadHistory(account);
 
@@ -190,7 +190,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region ClearHistory
-        public static void ClearHistory(Account account)
+        public static void ClearHistory(IAccount account)
         {
             SaveHistory(account, new List<CachedHistoryCard>());
 
@@ -199,7 +199,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region RemoveItemAt
-        public static void RemoveItemAt(Account account, int nIndex)
+        public static void RemoveItemAt(IAccount account, int nIndex)
         {
             Log.WriteLine($"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"", LogType.Debug);
 

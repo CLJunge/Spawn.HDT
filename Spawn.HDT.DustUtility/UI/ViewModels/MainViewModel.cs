@@ -69,7 +69,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Initialize
         public override void Initialize()
         {
-            Account account = DustUtilityPlugin.CurrentAccount;
+            IAccount account = DustUtilityPlugin.CurrentAccount;
 
             if (!account.IsEmpty)
             {
