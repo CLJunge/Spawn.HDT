@@ -109,7 +109,7 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            SimpleIoc.Default.Register<IAccount>(() => (blnIsInDesignMode ? Account.Test : Account.Empty));
+            SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
 #else
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(() => Account.Empty);

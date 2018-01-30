@@ -26,10 +26,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public static Account Empty => new Account(null, Region.UNKNOWN);
         #endregion
 
-        #region Test
-        public static Account Test => new Account(new BattleTag() { Name = "Test", Number = 123 }, Region.EU);
-        #endregion
-
         #region LoggedInAccount
         public static Account LoggedInAccount => GetLoggedInAccount();
         #endregion

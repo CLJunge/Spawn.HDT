@@ -37,7 +37,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new Card("EX1_607", 2, true),
                 new Card("EX1_339", 2, false),
                 new Card("EX1_339", 2, true),
-                new Card("CS2_072", 2, false),
                 new Card("EX1_145", 2, false),
                 new Card("LOOT_542", 1, false),
                 new Card("CFM_637", 1, false),
@@ -45,19 +44,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new Card("KAR_069", 2, false),
                 new Card("EX1_012", 1, false),
                 new Card("EX1_124", 2, false),
-                new Card("EX1_581", 1, false),
                 new Card("EX1_613", 1, false),
-                new Card("EX1_129", 2, false),
                 new Card("EX1_134", 2, false),
                 new Card("LOOT_026", 2, false),
                 new Card("GVG_022", 2, false),
                 new Card("EX1_284", 2, false),
                 new Card("UNG_064", 1, false),
-                new Card("NEW1_004", 1, false),
                 new Card("LOOT_149", 2, false),
-                new Card("CS2_077", 2, false),
-                new Card("CS2_072", 2, false),
-                new Card("CS2_072", 2, false),
             };
 
             m_lstDecks = new List<Deck>
@@ -92,16 +85,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                         new Card("UNG_064", 1, false),
                         new Card("NEW1_004", 1, false),
                         new Card("LOOT_149", 2, false),
-                        new Card("CS2_077", 2, false),
-                        new Card("CS2_072", 2, false),
-                        new Card("CS2_072", 2, false),
+                        new Card("CS2_077", 2, false)
                     }
                 }
             };
 
             m_lstHistory = new List<CachedHistoryCard>
             {
-                new CachedHistoryCard { Id = "CS2_072", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_145", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id= "LOOT_542", Count = 1, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "CFM_637", Count = 1, IsGolden = false, Date = DateTime.Now },
@@ -109,19 +99,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new CachedHistoryCard { Id = "KAR_069", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_012", Count = 1, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_124", Count = 2, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "EX1_581", Count = 1, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_613", Count = 1, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "EX1_129", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_134", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "LOOT_026", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "GVG_022", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "EX1_284", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "UNG_064", Count = 1, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "NEW1_004", Count = 1, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "LOOT_149", Count = 2, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "CS2_077", Count = 2, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "CS2_072", Count = 2, IsGolden = false, Date = DateTime.Now },
-                new CachedHistoryCard { Id = "CS2_072", Count = 2, IsGolden = false, Date = DateTime.Now }
             };
 
             BattleTag = new BattleTag { Name = "Test123", Number = 12345 };
