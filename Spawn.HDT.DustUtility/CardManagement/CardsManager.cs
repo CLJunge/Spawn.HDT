@@ -34,53 +34,56 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #region GetCardsAsync
         public async Task<CardWrapper[]> GetCardsAsync(SearchParameters parameters)
         {
-            bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
-
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("Collecting cards... ").Append($"(Parameters: QueryString={parameters.QueryString} ")
-                .Append($"IncludeGoldenCards={parameters.IncludeGoldenCards} ")
-                .Append($"UnusedCardsOnly={parameters.UnusedCardsOnly} ")
-                .Append($"Rarities={string.Join(",", parameters.Rarities)} ")
-                .Append($"Classes={string.Join(",", parameters.Classes)} ")
-                .Append($"Sets={string.Join(",", parameters.Sets)}");
-
-            Log.WriteLine(sb.ToString(), LogType.Debug);
-
-            List<Card> lstCollection = m_account.GetCollection();
-
-            if (parameters.UnusedCardsOnly)
-            {
-                await CheckForUnusedCardsAsync(lstCollection);
-            }
-            else
-            {
-                //m_lstUnusedCards = new List<CardWrapper>();
-
-                //for (int i = 0; i < lstCollection.Count; i++)
-                //{
-                //    m_lstUnusedCards.Add(new CardWrapper(lstCollection[i]));
-                //}
-
-                m_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
-            }
-
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
-            if (lstCollection.Count > 0)
+            if (parameters != null)
             {
-                if (blnDustMode)
+                bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append("Collecting cards... ").Append($"(Parameters: QueryString={parameters.QueryString} ")
+                    .Append($"IncludeGoldenCards={parameters.IncludeGoldenCards} ")
+                    .Append($"UnusedCardsOnly={parameters.UnusedCardsOnly} ")
+                    .Append($"Rarities={string.Join(",", parameters.Rarities)} ")
+                    .Append($"Classes={string.Join(",", parameters.Classes)} ")
+                    .Append($"Sets={string.Join(",", parameters.Sets)}");
+
+                Log.WriteLine(sb.ToString(), LogType.Debug);
+
+                List<Card> lstCollection = m_account.GetCollection();
+
+                if (parameters.UnusedCardsOnly)
                 {
-                    GetCardsForDustAmount(parameters, lstRet);
+                    await CheckForUnusedCardsAsync(lstCollection);
                 }
                 else
                 {
-                    GetCardsByQueryString(parameters, lstRet);
-                }
-            }
-            else { }
+                    //m_lstUnusedCards = new List<CardWrapper>();
 
-            Log.WriteLine($"Found {lstRet.Count} cards", LogType.Debug);
+                    //for (int i = 0; i < lstCollection.Count; i++)
+                    //{
+                    //    m_lstUnusedCards.Add(new CardWrapper(lstCollection[i]));
+                    //}
+
+                    m_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
+                }
+
+                if (lstCollection.Count > 0)
+                {
+                    if (blnDustMode)
+                    {
+                        GetCardsForDustAmount(parameters, lstRet);
+                    }
+                    else
+                    {
+                        GetCardsByQueryString(parameters, lstRet);
+                    }
+                }
+                else { }
+
+                Log.WriteLine($"Found {lstRet.Count} cards", LogType.Debug);
+            }
 
             return lstRet.ToArray();
         }
