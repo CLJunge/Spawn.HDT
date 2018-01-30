@@ -57,5 +57,22 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public int TotalCount => CommonsCount + RaresCount + EpicsCount + LegendariesCount;
         #endregion
         #endregion
+
+        #region Ctor
+        public CardsInfoModel()
+        {
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(CommonsCount))
+                || e.PropertyName.Equals(nameof(RaresCount))
+                || e.PropertyName.Equals(nameof(EpicsCount))
+                || e.PropertyName.Equals(nameof(LegendariesCount)))
+                {
+                    RaisePropertyChanged(nameof(TotalCount));
+                }
+                else { }
+            };
+        }
+        #endregion
     }
 }

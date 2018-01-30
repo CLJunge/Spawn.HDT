@@ -102,9 +102,45 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region Ctor
         public CardItemModel()
         {
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(Wrapper)))
+                {
+                    RaisePropertyChanged(nameof(Id));
+                    RaisePropertyChanged(nameof(Count));
+                    RaisePropertyChanged(nameof(Name));
+                    RaisePropertyChanged(nameof(Golden));
+                    RaisePropertyChanged(nameof(Dust));
+                    RaisePropertyChanged(nameof(Rarity));
+                    RaisePropertyChanged(nameof(CardClass));
+                    RaisePropertyChanged(nameof(CardClassString));
+                    RaisePropertyChanged(nameof(CardSet));
+                    RaisePropertyChanged(nameof(CardSetString));
+                    RaisePropertyChanged(nameof(ManaCost));
+                    RaisePropertyChanged(nameof(Date));
+                    RaisePropertyChanged(nameof(CardImage));
+                }
+                else if (e.PropertyName.Equals(nameof(Id)))
+                {
+                    RaisePropertyChanged(nameof(Count));
+                    RaisePropertyChanged(nameof(Name));
+                    RaisePropertyChanged(nameof(Golden));
+                    RaisePropertyChanged(nameof(Dust));
+                    RaisePropertyChanged(nameof(Rarity));
+                    RaisePropertyChanged(nameof(CardClass));
+                    RaisePropertyChanged(nameof(CardClassString));
+                    RaisePropertyChanged(nameof(CardSet));
+                    RaisePropertyChanged(nameof(CardSetString));
+                    RaisePropertyChanged(nameof(ManaCost));
+                    RaisePropertyChanged(nameof(Date));
+                    RaisePropertyChanged(nameof(CardImage));
+                }
+                else { }
+            };
         }
 
         public CardItemModel(CardWrapper wrapper)
+            : this()
         {
             Wrapper = new CardWrapper(wrapper.ToString());
         }

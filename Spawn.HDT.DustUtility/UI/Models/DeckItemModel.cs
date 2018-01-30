@@ -61,6 +61,19 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public DeckItemModel()
         {
             Opacity = 1;
+
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(Deck)))
+                {
+                    RaisePropertyChanged(nameof(DeckId));
+                    RaisePropertyChanged(nameof(Name));
+                    RaisePropertyChanged(nameof(CardCount));
+                    RaisePropertyChanged(nameof(CraftingCost));
+                    RaisePropertyChanged(nameof(HeroImage));
+                }
+                else { }
+            };
 #if DEBUG
             if (ViewModelBase.IsInDesignModeStatic)
             {
