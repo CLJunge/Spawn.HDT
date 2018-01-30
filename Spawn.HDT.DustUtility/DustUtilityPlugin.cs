@@ -558,11 +558,13 @@ namespace Spawn.HDT.DustUtility
         #region UpdatedAccountInstance
         private static void UpdatedAccountInstance(IAccount account)
         {
-            //Remove current account instance
+            //Remove current account instance and card manager
             SimpleIoc.Default.Unregister<IAccount>();
+            SimpleIoc.Default.Unregister<ICardsManager>();
 
-            //Add selected instance
+            //And readd them
             SimpleIoc.Default.Register(() => account);
+            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
         }
         #endregion
 
