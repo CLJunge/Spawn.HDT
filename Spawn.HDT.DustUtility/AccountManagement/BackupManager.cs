@@ -21,6 +21,14 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                 if (!BackupExists(account, date))
                 {
+                    string strAccDir = GetAccountBackupDirectory(account);
+
+                    if (!Directory.Exists(strAccDir))
+                    {
+                        Directory.CreateDirectory(strAccDir);
+                    }
+                    else { }
+
                     string strFileName = GetBackupFileName(account, date);
 
                     try
@@ -113,20 +121,24 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region DeleteOldBackups
         public static void DeleteOldBackups(IAccount account)
         {
-            string strDirectory = GetAccountBackupDirectory(account);
+            string strDir = GetAccountBackupDirectory(account);
 
-            string[] vFiles = Directory.GetFiles(strDirectory);
-
-            for (int i = 0; i < vFiles.Length; i++)
+            if (Directory.Exists(strDir))
             {
-                FileInfo fileInfo = new FileInfo(vFiles[i]);
+                string[] vFiles = Directory.GetFiles(strDir);
 
-                if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
+                for (int i = 0; i < vFiles.Length; i++)
                 {
-                    fileInfo.Delete();
+                    FileInfo fileInfo = new FileInfo(vFiles[i]);
+
+                    if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
+                    {
+                        fileInfo.Delete();
+                    }
+                    else { }
                 }
-                else { }
             }
+            else { }
         }
         #endregion
 
@@ -140,18 +152,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region GetAccountBackupDirectory
-        private static string GetAccountBackupDirectory(IAccount account)
-        {
-            string strRet = Path.Combine(DustUtilityPlugin.BackupsDirectory, account.AccountString);
-
-            if (!Directory.Exists(strRet))
-            {
-                Directory.CreateDirectory(strRet);
-            }
-            else { }
-
-            return strRet;
-        }
+        private static string GetAccountBackupDirectory(IAccount account) => Path.Combine(DustUtilityPlugin.BackupsDirectory, account.AccountString);
         #endregion
 
         #region GetBackupFileName

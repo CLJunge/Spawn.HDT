@@ -115,6 +115,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
+            BackupManager.DeleteOldBackups(account);
+
+            BackupManager.Create(account);
+
             if (DustUtilityPlugin.Config.CheckForUpdates)
             {
                 Task.Run(async () =>
