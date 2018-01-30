@@ -570,6 +570,7 @@ namespace Spawn.HDT.DustUtility
         private static void ReloadFlyoutViews()
         {
             ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
+            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
         }
         #endregion
 

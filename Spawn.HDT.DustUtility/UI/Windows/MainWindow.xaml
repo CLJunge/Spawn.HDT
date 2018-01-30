@@ -74,7 +74,7 @@
             <controls:Flyout Name="UpdateFlyout" Header="New update available" Position="Bottom">
                 <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right" Width="400">
+            <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right" Width="600">
                 <flyouts:DecksFlyoutView x:Name="DecksFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
