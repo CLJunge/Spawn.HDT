@@ -3,7 +3,7 @@ using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System.Collections.Generic;
 #endregion
 
-namespace Spawn.HDT.DustUtility
+namespace Spawn.HDT.DustUtility.AccountManagement
 {
     public class AccountPreferences
     {

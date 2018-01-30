@@ -6,7 +6,7 @@ using System.IO;
 using System.IO.Compression;
 #endregion
 
-namespace Spawn.HDT.DustUtility
+namespace Spawn.HDT.DustUtility.AccountManagement
 {
     public static class BackupManager
     {

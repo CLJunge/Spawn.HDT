@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 #endregion
 
-namespace Spawn.HDT.DustUtility
+namespace Spawn.HDT.DustUtility.AccountManagement
 {
     [DebuggerDisplay("{AccountString}")]
     public class Account
