@@ -126,7 +126,7 @@
       <DependentUpon>CardsContainer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Components\Converters\CountTextConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardItemCountToStringConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayTextConverter.cs" />
     <Compile Include="UI\Components\Converters\DateTimeFormatConverter.cs" />
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
