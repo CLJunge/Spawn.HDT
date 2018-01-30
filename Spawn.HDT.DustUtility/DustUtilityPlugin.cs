@@ -309,6 +309,8 @@ namespace Spawn.HDT.DustUtility
 
                 UpdateHistoryFiles();
 
+                MoveBackupFiles();
+
                 Config.Version = 2;
             }
             else { }
@@ -386,6 +388,19 @@ namespace Spawn.HDT.DustUtility
 
                 FileManager.Write(vFiles[i], lstHistory);
             });
+        }
+        #endregion
+
+        #region MoveBackupFiles
+        private void MoveBackupFiles()
+        {
+            string strOldDir = Path.Combine(DataDirectory, "Backup");
+
+            if (Directory.Exists(strOldDir))
+            {
+                Directory.Move(strOldDir, Path.Combine(DataDirectory, "Backups"));
+            }
+            else { }
         }
         #endregion
 
