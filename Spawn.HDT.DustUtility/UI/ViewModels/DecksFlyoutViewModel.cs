@@ -29,6 +29,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public DecksFlyoutViewModel()
         {
             DeckItems = new ObservableCollection<DeckItem>();
+
+#if DEBUG
+            if (IsInDesignMode)
+            {
+                List<Card> lstCards = new List<Card>
+                {
+                    new Card("UNG_900", 2, false),
+                };
+
+                DeckItems.Add(new DeckItem(new Deck() { Id = 4323, Hero = "HERO_05", Name = "Test Deck2", Cards = lstCards }));
+                DeckItems.Add(new DeckItem(new Deck() { Id = 43523, Hero = "HERO_03", Name = "Test Deck3", Cards = lstCards }));
+                DeckItems.Add(new DeckItem(new Deck() { Id = 435433, Hero = "HERO_02", Name = "Test Deck4", Cards = lstCards }));
+                DeckItems.Add(new DeckItem(new Deck() { Id = 466823, Hero = "HERO_08", Name = "Test Deck5", Cards = lstCards }));
+                DeckItems.Add(new DeckItem(new Deck() { Id = 435923, Hero = "HERO_01", Name = "Test Deck6", Cards = lstCards }));
+                DeckItems.Add(new DeckItem(new Deck() { Id = 287653, Hero = "HERO_02", Name = "Test Deck7", Cards = lstCards }));
+            }
+            else { }
+#endif
         }
         #endregion
 
