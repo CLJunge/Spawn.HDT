@@ -203,7 +203,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             Log.WriteLine($"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"", LogType.Debug);
 
-            List<CachedHistoryCard> lstHistory = GetHistory(account);
+            List<CachedHistoryCard> lstHistory = account.GetHistory();
 
             lstHistory.RemoveAt(nIndex);
 

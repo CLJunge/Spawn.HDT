@@ -155,6 +155,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
+        #region GetHistory
+        public List<CachedHistoryCard> GetHistory() => HistoryManager.GetHistory(this);
+        #endregion
+
         #region ExcludeDeckInSearch
         public void ExcludeDeckInSearch(long nDeckId)
         {
@@ -178,10 +182,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region IsDeckExcludedFromSearch
-        public bool IsDeckExcludedFromSearch(long nDeckId)
-        {
-            return Preferences.ExcludedDecks.Contains(nDeckId);
-        }
+        public bool IsDeckExcludedFromSearch(long nDeckId) => Preferences.ExcludedDecks.Contains(nDeckId);
         #endregion
 
         #region SavePreferences
@@ -228,10 +229,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region GetHashCode
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        public override int GetHashCode() => base.GetHashCode();
         #endregion
 
         #region Static Methods

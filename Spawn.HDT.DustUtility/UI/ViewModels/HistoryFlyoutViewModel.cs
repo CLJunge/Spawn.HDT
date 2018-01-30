@@ -38,7 +38,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 CardItems.Clear();
 
-                List<CachedHistoryCard> lstHistory = HistoryManager.GetHistory(DustUtilityPlugin.CurrentAccount);
+                List<CachedHistoryCard> lstHistory = DustUtilityPlugin.CurrentAccount.GetHistory();
 
                 for (int i = 0; i < lstHistory.Count; i++)
                 {

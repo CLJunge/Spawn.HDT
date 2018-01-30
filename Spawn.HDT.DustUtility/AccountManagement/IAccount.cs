@@ -1,5 +1,6 @@
 ﻿using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
+using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System.Collections.Generic;
 
 namespace Spawn.HDT.DustUtility.AccountManagement
@@ -17,6 +18,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
         List<Card> GetCollection();
         List<Deck> GetDecks();
+        List<CachedHistoryCard> GetHistory();
         void ExcludeDeckInSearch(long nDeckId);
         void IncludeDeckInSearch(long nDeckId);
         bool IsDeckExcludedFromSearch(long nDeckId);
