@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountManagement\AccountPreferences.cs" />
+    <Compile Include="AccountManagement\MockAccount.cs" />
     <Compile Include="CardManagement\CardsManager.cs" />
     <Compile Include="Hearthstone\CardWrapper.cs" />
     <Compile Include="CardManagement\ICardsManager.cs" />
