@@ -1,17 +1,22 @@
-﻿using HearthMirror.Objects;
+﻿#region Using
+using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Collections.Generic;
+#endregion
 
 namespace Spawn.HDT.DustUtility.AccountManagement
 {
     public class MockAccount : IAccount
     {
+        #region Member Variables
         private List<Card> m_lstCollection;
         private List<Deck> m_lstDecks;
         private List<CachedHistoryCard> m_lstHistory;
+        #endregion
 
+        #region Properties
         public BattleTag BattleTag { get; }
 
         public Region Region => Region.EU;
@@ -27,7 +32,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public AccountPreferences Preferences { get; }
 
         public bool HasFiles => false;
+        #endregion
 
+        #region Ctor
         public MockAccount()
         {
             m_lstCollection = new List<Card>
@@ -113,7 +120,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             DisplayString = $"{BattleTag.Name}#{BattleTag.Number} ({Region})";
             Preferences = new AccountPreferences();
         }
+        #endregion
 
+        #region ExcludeDeckInSearch
         public void ExcludeDeckInSearch(long nDeckId)
         {
             if (!IsDeckExcludedFromSearch(nDeckId))
@@ -122,13 +131,21 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             }
             else { }
         }
+        #endregion
 
+        #region GetCollection
         public List<Card> GetCollection() => m_lstCollection;
+        #endregion
 
+        #region GetDecks
         public List<Deck> GetDecks() => m_lstDecks;
+        #endregion
 
+        #region GetHistory
         public List<CachedHistoryCard> GetHistory() => m_lstHistory;
+        #endregion
 
+        #region IncludeDeckInSearch
         public void IncludeDeckInSearch(long nDeckId)
         {
             if (IsDeckExcludedFromSearch(nDeckId))
@@ -137,11 +154,16 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             }
             else { }
         }
+        #endregion
 
+        #region IsDeckExcludedFromSearch
         public bool IsDeckExcludedFromSearch(long nDeckId) => Preferences.ExcludedDecks.Contains(nDeckId);
+        #endregion
 
+        #region SavePreferences
         public void SavePreferences()
         {
         }
+        #endregion
     }
 }
