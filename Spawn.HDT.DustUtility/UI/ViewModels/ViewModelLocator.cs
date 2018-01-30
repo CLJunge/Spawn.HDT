@@ -1,6 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Spawn.HDT.DustUtility.AccountManagement;
 using System;
 using System.Windows;
 #endregion
@@ -57,6 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+                SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
             }
             else { }
 #endif

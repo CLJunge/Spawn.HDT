@@ -101,15 +101,12 @@ namespace Spawn.HDT.DustUtility
         static DustUtilityPlugin()
         {
 #if DEBUG
-            bool blnIsInDesignMode = GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic;
-
-            if (!blnIsInDesignMode)
+            if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+                SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
             }
             else { }
-
-            SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
 #else
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register(() => Account.Empty);

@@ -6,7 +6,7 @@
              xmlns:controls="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="HistoryFlyoutViewModel"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="700">
     <Grid>
         <controls:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem" AllowDrag="False" AllowDrop="False"/>
         <Button Style="{StaticResource AccentedSquareButtonStyle}" Content="Clear" Command="{Binding ClearHistoryCommand}" VerticalAlignment="Bottom" Margin="5"/>

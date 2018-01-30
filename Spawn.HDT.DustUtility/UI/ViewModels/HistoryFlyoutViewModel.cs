@@ -28,6 +28,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public HistoryFlyoutViewModel()
         {
             CardItems = new ObservableCollection<CardItem>();
+
+#if DEBUG
+            if (IsInDesignMode)
+            {
+                Initialize();
+            }
+            else { }
+#endif
         }
         #endregion
 
