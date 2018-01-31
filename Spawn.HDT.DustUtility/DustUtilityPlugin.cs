@@ -110,7 +110,7 @@ namespace Spawn.HDT.DustUtility
             else { }
 #else
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register(() => Account.Empty);
+            SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
 #endif
 
             SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
