@@ -8,16 +8,28 @@ namespace Spawn.HDT.DustUtility.UI
 {
     public class SortOrder
     {
+        #region Member Variables
+        private List<SortOrderItemModel> m_lstItems;
+        #endregion
+
         #region Properties
-        #region Items
-        public List<SortOrderItemModel> Items { get; set; }
+        #region Indexer
+        public SortOrderItemModel this[int index]
+        {
+            get => m_lstItems[index];
+            set => m_lstItems[index] = value;
+        }
+        #endregion
+
+        #region Count
+        public int Count => m_lstItems.Count;
         #endregion
         #endregion
 
         #region Ctor
         public SortOrder()
         {
-            Items = new List<SortOrderItemModel>();
+            m_lstItems = new List<SortOrderItemModel>();
         }
         #endregion
 
@@ -35,9 +47,9 @@ namespace Spawn.HDT.DustUtility.UI
 
                 for (int i = 0; i < vItems.Length; i++)
                 {
-                    Item item = (Item)Enum.Parse(typeof(Item), vItems[i]);
+                    OrderItem item = (OrderItem)Enum.Parse(typeof(OrderItem), vItems[i]);
 
-                    retVal.Items.Add(new SortOrderItemModel(item));
+                    retVal.m_lstItems.Add(new SortOrderItemModel(item));
                 }
             }
             else { }
@@ -47,41 +59,41 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
 
         #region ItemToString
-        public static string ItemToString(Item item)
+        public static string ItemToString(OrderItem item)
         {
             string strRet = string.Empty;
 
             switch (item)
             {
-                case Item.Count:
+                case OrderItem.Count:
                     strRet = "Count";
                     break;
 
-                case Item.Name:
+                case OrderItem.Name:
                     strRet = "Name";
                     break;
 
-                case Item.Golden:
+                case OrderItem.Golden:
                     strRet = "Golden";
                     break;
 
-                case Item.Dust:
+                case OrderItem.Dust:
                     strRet = "Dust";
                     break;
 
-                case Item.Rarity:
+                case OrderItem.Rarity:
                     strRet = "Rarity";
                     break;
 
-                case Item.CardClass:
+                case OrderItem.CardClass:
                     strRet = "Class";
                     break;
 
-                case Item.CardSet:
+                case OrderItem.CardSet:
                     strRet = "Set";
                     break;
 
-                case Item.ManaCost:
+                case OrderItem.ManaCost:
                     strRet = "Mana";
                     break;
 
@@ -94,7 +106,7 @@ namespace Spawn.HDT.DustUtility.UI
         #endregion
         #endregion
 
-        public enum Item
+        public enum OrderItem
         {
             Count,
             Name,
