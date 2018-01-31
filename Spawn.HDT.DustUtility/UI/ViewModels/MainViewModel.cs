@@ -310,7 +310,23 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region OrderResult
+        #region UpdateCardItemsSortOrderAsync
+        public async Task UpdateCardItemsSortOrderAsync()
+        {
+            await Task.Delay(1); //return to ui thread
+
+            List<CardItemModel> orderedList = OrderItems(CardItems).ToList();
+
+            CardItems.Clear();
+
+            for (int i = 0; i < orderedList.Count; i++)
+            {
+                CardItems.Add(orderedList[i]);
+            }
+        }
+        #endregion
+
+        #region OrderItems
         private IEnumerable<CardItemModel> OrderItems(IEnumerable<CardItemModel> items)
         {
             IEnumerable<CardItemModel> retVal = null;

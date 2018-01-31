@@ -148,7 +148,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SaveSortOrder
-        private void SaveSortOrder()
+        private async void SaveSortOrder()
         {
             string strOrder = string.Empty;
 
@@ -166,6 +166,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.SortOrder = strOrder;
 
             DustUtilityPlugin.MainWindow.SortOrderFlyout.IsOpen = false;
+
+            await ServiceLocator.Current.GetInstance<MainViewModel>().UpdateCardItemsSortOrderAsync();
         }
         #endregion
 
