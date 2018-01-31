@@ -132,9 +132,6 @@
     <Compile Include="UI\Controls\CardsInfoView.xaml.cs">
       <DependentUpon>CardsInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Controls\ImageCheckBox.xaml.cs">
-      <DependentUpon>ImageCheckBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
       <DependentUpon>DeckItemView.xaml</DependentUpon>
     </Compile>
@@ -229,10 +226,6 @@
     <Page Include="UI\Controls\CardsInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UI\Controls\ImageCheckBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Controls\DeckItemView.xaml">
       <SubType>Designer</SubType>
