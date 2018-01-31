@@ -86,8 +86,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public ICommand ShowSearchHelpCommand => new RelayCommand(ShowSearchHelp);
         #endregion
 
-        #region OpenParametersDialogCommand
-        public ICommand OpenParametersDialogCommand => new RelayCommand(OpenParametersDialog);
+        #region OpenSearchParametersFlyoutCommand
+        public ICommand OpenSearchParametersFlyoutCommand => new RelayCommand(OpenSearchParametersFlyout);
         #endregion
         #endregion
 
@@ -221,9 +221,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region OpenParametersDialog
-        private void OpenParametersDialog()
+        #region OpenSearchParametersFlyout
+        private void OpenSearchParametersFlyout()
         {
+            OpenFlyout(DustUtilityPlugin.MainWindow.SearchParametersFlyout);
         }
         #endregion
     }
