@@ -74,5 +74,16 @@ namespace Spawn.HDT.DustUtility.UI.Models
             };
         }
         #endregion
+
+        #region Clear
+        public void Clear()
+        {
+            DustAmount = 0;
+            CommonsCount = 0;
+            RaresCount = 0;
+            EpicsCount = 0;
+            LegendariesCount = 0;
+        }
+        #endregion
     }
 }
