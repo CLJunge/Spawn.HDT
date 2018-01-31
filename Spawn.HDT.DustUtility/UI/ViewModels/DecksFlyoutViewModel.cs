@@ -65,7 +65,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName.Equals(nameof(SelectedDeckItem)))
+                if (e.PropertyName.Equals(nameof(SelectedDeckItem)) && SelectedDeckItem != null)
                 {
                     ServiceLocator.Current.GetInstance<DeckListFlyoutViewModel>().Deck = SelectedDeckItem.Deck;
                 }
