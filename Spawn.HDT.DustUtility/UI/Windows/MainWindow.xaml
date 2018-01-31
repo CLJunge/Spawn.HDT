@@ -86,7 +86,7 @@
             <controls:Flyout Name="SearchParametersFlyout" Header="Filters" Position="Left">
                 <flyouts:SearchParametersFlyoutView x:Name="SearchParametersFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="SortOrderFlyout" Header="Sort order" Position="Right" Width="300">
+            <controls:Flyout Name="SortOrderFlyout" Header="Sort order" Position="Right" Width="250">
                 <flyouts:SortOrderFlyoutView x:Name="SortOrderFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
