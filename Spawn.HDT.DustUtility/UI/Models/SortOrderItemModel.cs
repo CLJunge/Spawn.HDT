@@ -27,7 +27,14 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region Ctor
         public SortOrderItemModel()
         {
-            PropertyChanged += (s, e) => RaisePropertyChanged(nameof(Name));
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(Value)))
+                {
+                    RaisePropertyChanged(nameof(Name));
+                }
+                else { }
+            };
         }
 
         public SortOrderItemModel(SortOrder.OrderItem item)
