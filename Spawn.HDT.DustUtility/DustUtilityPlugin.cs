@@ -382,14 +382,14 @@ namespace Spawn.HDT.DustUtility
                     XmlNode isGoldenNode = cardNode.SelectSingleNode("IsGolden");
                     XmlNode timestampNode = cardNode.SelectSingleNode("Timestamp");
 
-                    if (idNode != null && countNode != null && isGoldenNode != null && timestampNode != null)
+                    if (idNode != null && countNode != null && isGoldenNode != null)
                     {
                         CachedHistoryCard card = new CachedHistoryCard
                         {
                             Id = idNode.InnerText,
                             Count = Convert.ToInt32(countNode.InnerText),
                             IsGolden = Convert.ToBoolean(isGoldenNode.InnerText),
-                            Date = DateTime.Parse(timestampNode.InnerText)
+                            Date = (timestampNode != null ? DateTime.Parse(timestampNode.InnerText) : DateTime.Now)
                         };
 
                         lstHistory.Add(card);
