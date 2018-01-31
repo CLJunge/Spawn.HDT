@@ -2,8 +2,8 @@
 using GalaSoft.MvvmLight;
 using HearthDb.Enums;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 #endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement
@@ -17,15 +17,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
         private bool m_blnUnusedCardsOnly;
         #endregion
 
-        #region Static Ctor
-        static SearchParameters()
-        {
-            AppDomain.CurrentDomain.AssemblyResolve += (s, e) => typeof(SearchParameters).Assembly;
-        }
-        #endregion
-
         #region Properties
         #region QueryString
+        [DefaultValue("")]
         public string QueryString
         {
             get => m_strQueryString;
@@ -34,6 +28,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region IncludeGoldenCards
+        [DefaultValue(false)]
         public bool IncludeGoldenCards
         {
             get => m_blnIncludeGoldenCards;
@@ -42,6 +37,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GoldenCardsOnly
+        [DefaultValue(false)]
         public bool GoldenCardsOnly
         {
             get => m_blnGoldenCardsOnly;
@@ -50,6 +46,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region UnusedCardsOnly
+        [DefaultValue(true)]
         public bool UnusedCardsOnly
         {
             get => m_blnUnusedCardsOnly;
@@ -57,15 +54,18 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region Rarites
+        #region Rarities
+        [DefaultValue(typeof(ObservableCollection<Rarity>))]
         public ObservableCollection<Rarity> Rarities { get; set; }
         #endregion
 
         #region Classes
+        [DefaultValue(typeof(ObservableCollection<CardClass>))]
         public ObservableCollection<CardClass> Classes { get; set; }
         #endregion
 
         #region Sets
+        [DefaultValue(typeof(ObservableCollection<CardSet>))]
         public ObservableCollection<CardSet> Sets { get; set; }
         #endregion
         #endregion
@@ -86,6 +86,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
             else
             {
+                QueryString = string.Empty;
                 IncludeGoldenCards = false;
                 GoldenCardsOnly = false;
                 UnusedCardsOnly = true;
