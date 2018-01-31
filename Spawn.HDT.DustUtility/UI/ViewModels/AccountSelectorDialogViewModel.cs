@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
-    public class AccountSelectorDialogViewModel : ViewModelBase, IDialogResultService<string>
+    public class AccountSelectorDialogViewModel : ViewModelBase, IResultProvider<string>
     {
         #region Member Variables
         private string m_strWindowTitle;
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region GetDialogResult
-        public string GetDialogResult() => SelectedAccountString;
+        public string GetResult() => SelectedAccountString;
         #endregion
     }
 }

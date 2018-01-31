@@ -138,7 +138,7 @@
     <Compile Include="UI\Dialogs\AccountSelectorDialogView.xaml.cs">
       <DependentUpon>AccountSelectorDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\IDialogResultService.cs" />
+    <Compile Include="Services\IResultProvider.cs" />
     <Compile Include="UI\Dialogs\SettingsDialogView.xaml.cs">
       <DependentUpon>SettingsDialogView.xaml</DependentUpon>
     </Compile>

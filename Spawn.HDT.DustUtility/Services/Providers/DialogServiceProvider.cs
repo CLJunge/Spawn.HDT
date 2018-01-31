@@ -33,9 +33,9 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         {
             T retVal = default(T);
 
-            if (m_dialog?.DataContext is IDialogResultService<T> resultProvider)
+            if (m_dialog?.DataContext is IResultProvider<T> resultProvider)
             {
-                retVal = resultProvider.GetDialogResult();
+                retVal = resultProvider.GetResult();
             }
             else { }
 

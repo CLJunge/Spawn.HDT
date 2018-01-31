@@ -1,9 +1,9 @@
 ﻿namespace Spawn.HDT.DustUtility.Services
 {
-    public interface IDialogResultService<T>
+    public interface IResultProvider<T>
     {
         #region Methods
-        T GetDialogResult();
+        T GetResult();
         #endregion
     }
 }

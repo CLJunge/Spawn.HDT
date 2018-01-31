@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
-    public class SortOrderItemSelectorDialogViewModel : ViewModelBase, IDialogResultService<SortOrder.OrderItem>
+    public class SortOrderItemSelectorDialogViewModel : ViewModelBase, IResultProvider<SortOrder.OrderItem>
     {
         #region Member Variables
         private string m_strWindowTitle;
@@ -83,7 +83,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region GetDialogResult
-        public SortOrder.OrderItem GetDialogResult() => SelectedSortOrderItem.Value;
+        public SortOrder.OrderItem GetResult() => SelectedSortOrderItem.Value;
         #endregion
     }
 }
