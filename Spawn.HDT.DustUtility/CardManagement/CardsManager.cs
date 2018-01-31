@@ -5,10 +5,10 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 #endregion
 
@@ -32,24 +32,20 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GetCardsAsync
-        public async Task<CardWrapper[]> GetCardsAsync(SearchParameters parameters)
+        public async Task<SearchResult> GetSearchResultAsync(SearchParameters parameters)
         {
-            List<CardWrapper> lstRet = new List<CardWrapper>();
+            SearchResult retVal = new SearchResult();
 
             if (parameters != null)
             {
-                bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
-
-                StringBuilder sb = new StringBuilder();
-
-                sb.Append("Collecting cards... ").Append($"(Parameters: QueryString={parameters.QueryString} ")
-                    .Append($"IncludeGoldenCards={parameters.IncludeGoldenCards} ")
-                    .Append($"UnusedCardsOnly={parameters.UnusedCardsOnly} ")
-                    .Append($"Rarities={string.Join(",", parameters.Rarities)} ")
-                    .Append($"Classes={string.Join(",", parameters.Classes)} ")
-                    .Append($"Sets={string.Join(",", parameters.Sets)}");
-
-                Log.WriteLine(sb.ToString(), LogType.Debug);
+                Log.WriteLine("Collecting cards...", LogType.Debug);
+                Log.WriteLine("Parameters:", LogType.Debug);
+                Log.WriteLine($"QueryString={parameters.QueryString}", LogType.Debug);
+                Log.WriteLine($"IncludeGoldenCards={parameters.IncludeGoldenCards}", LogType.Debug);
+                Log.WriteLine($"UnusedCardsOnly={parameters.UnusedCardsOnly}", LogType.Debug);
+                Log.WriteLine($"Rarities={string.Join(",", parameters.Rarities)}", LogType.Debug);
+                Log.WriteLine($"Classes={string.Join(",", parameters.Classes)}", LogType.Debug);
+                Log.WriteLine($"Sets={string.Join(",", parameters.Sets)}", LogType.Debug);
 
                 List<Card> lstCollection = m_account.GetCollection();
 
@@ -59,33 +55,32 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 }
                 else
                 {
-                    //m_lstUnusedCards = new List<CardWrapper>();
-
-                    //for (int i = 0; i < lstCollection.Count; i++)
-                    //{
-                    //    m_lstUnusedCards.Add(new CardWrapper(lstCollection[i]));
-                    //}
-
                     m_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
                 }
 
                 if (lstCollection.Count > 0)
                 {
+                    List<CardWrapper> lstCards = new List<CardWrapper>();
+
+                    bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
+
                     if (blnDustMode)
                     {
-                        GetCardsForDustAmount(parameters, lstRet);
+                        GetCardsForDustAmount(parameters, lstCards);
                     }
                     else
                     {
-                        GetCardsByQueryString(parameters, lstRet);
+                        GetCardsByQueryString(parameters, lstCards);
                     }
+
+                    Log.WriteLine($"Found {lstCards.Count} cards", LogType.Debug);
+
+                    retVal = CreateSearchResult(lstCards);
                 }
                 else { }
-
-                Log.WriteLine($"Found {lstRet.Count} cards", LogType.Debug);
             }
 
-            return lstRet.ToArray();
+            return retVal;
         }
         #endregion
 
@@ -344,6 +339,47 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
 
             return lstRet;
+        }
+        #endregion
+
+        #region CreateSearchResult
+        private SearchResult CreateSearchResult(List<CardWrapper> lstCards)
+        {
+            SearchResult retVal = new SearchResult();
+
+            Log.WriteLine("Creating search result...", LogType.Debug);
+
+            for (int i = 0; i < lstCards.Count; i++)
+            {
+                CardWrapper wrapper = lstCards[i];
+
+                switch (wrapper.DbCard.Rarity)
+                {
+                    case Rarity.COMMON:
+                        retVal.CommonsCount += wrapper.Count;
+                        break;
+
+                    case Rarity.RARE:
+                        retVal.RaresCount += wrapper.Count;
+                        break;
+
+                    case Rarity.EPIC:
+                        retVal.EpicsCount += wrapper.Count;
+                        break;
+
+                    case Rarity.LEGENDARY:
+                        retVal.LegendariesCount += wrapper.Count;
+                        break;
+                }
+
+                CardItemModel item = new CardItemModel(wrapper);
+
+                retVal.DustAmount += item.Dust;
+
+                retVal.CardItems.Add(item);
+            }
+
+            return retVal;
         }
         #endregion
 
