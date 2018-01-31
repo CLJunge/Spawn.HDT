@@ -68,7 +68,7 @@
             <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
         <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
-            <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0">
+            <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CustomButtonStyle}">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -80,7 +80,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75"/>
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75" Height="28"/>
         </WrapPanel>
     </Grid>
 </controls:MetroWindow>
