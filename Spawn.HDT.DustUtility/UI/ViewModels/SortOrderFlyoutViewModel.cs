@@ -29,15 +29,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region RemoveItemCommand
-        public ICommand RemoveItemCommand => new RelayCommand(RemoveItem);
+        public ICommand RemoveItemCommand => new RelayCommand(RemoveItem, () => SelectedSortOrderItem != null);
         #endregion
 
         #region MoveUpItemCommand
-        public ICommand MoveUpItemCommand => new RelayCommand(MoveUpItem);
+        public ICommand MoveUpItemCommand => new RelayCommand(MoveUpItem, () => SelectedSortOrderItem != null);
         #endregion
 
         #region MoveDownItemCommand
-        public ICommand MoveDownItemCommand => new RelayCommand(MoveDownItem);
+        public ICommand MoveDownItemCommand => new RelayCommand(MoveDownItem, () => SelectedSortOrderItem != null);
         #endregion
 
         #region SaveCommand

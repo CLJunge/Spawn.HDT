@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="5,5,0,5">
-            <ListBox ItemsSource="{Binding SortOrderItems}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
+            <ListBox ItemsSource="{Binding SortOrderItems}" SelectedItem="{Binding SelectedSortOrderItem, Mode=TwoWay}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
         </Border>
 
         <Button Grid.Row="1" Content="Add..." Margin="5" Command="{Binding AddItemCommand}"/>
