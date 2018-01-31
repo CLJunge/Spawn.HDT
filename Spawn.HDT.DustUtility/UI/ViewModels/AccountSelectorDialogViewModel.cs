@@ -58,7 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region GetDialogResult
+        #region GetResult
         public string GetResult() => SelectedAccountString;
         #endregion
     }

@@ -82,7 +82,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region GetDialogResult
+        #region GetResult
         public SortOrder.OrderItem GetResult() => SelectedSortOrderItem.Value;
         #endregion
     }
