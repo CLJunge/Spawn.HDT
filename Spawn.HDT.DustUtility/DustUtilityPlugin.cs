@@ -101,21 +101,22 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
+            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
+            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
+            SimpleIoc.Default.Register(() => Configuration.Load());
 #if DEBUG
             if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
                 SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+                SimpleIoc.Default.Register<MainViewModel>();
             }
             else { }
 #else
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
+            SimpleIoc.Default.Register<MainViewModel>();
 #endif
-
-            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
-            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
-            SimpleIoc.Default.Register(() => Configuration.Load());
 
             RarityBrushes = new Dictionary<int, SolidColorBrush>
             {
@@ -292,7 +293,7 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    ReloadFlyoutViews();
+                    ServiceLocator.Current.GetInstance<MainViewModel>().ReloadFlyouts();
                 }
                 else { }
             }
@@ -418,6 +419,8 @@ namespace Spawn.HDT.DustUtility
         #region OpenMainWindow
         private static void OpenMainWindow()
         {
+            ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+
             if (s_mainWindow == null)
             {
                 Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
@@ -425,21 +428,21 @@ namespace Spawn.HDT.DustUtility
                 //s_mainView = new MainWindowView(s_account, GetAccounts().Length > 1);
                 s_mainWindow = new MainWindow();
 
-                s_mainWindow.Closed += (s, e) =>
+                s_mainWindow.Closing += (s, e) =>
                 {
-                    CurrentAccount.SavePreferences();
+                    e.Cancel = true;
 
-                    s_mainWindow = null;
+                    s_mainWindow.Hide();
                 };
-
-                ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
-
-                s_mainWindow.Show();
             }
             else
             {
+                s_mainWindow.Show();
+
                 BringWindowToFront(s_mainWindow);
             }
+
+            s_mainWindow.Show();
         }
         #endregion
 
@@ -549,11 +552,7 @@ namespace Spawn.HDT.DustUtility
 
                 if (!selectedAcc.Equals(oldAcc))
                 {
-                    s_mainWindow.Close();
-
                     UpdatedAccountInstance(selectedAcc);
-
-                    ReloadFlyoutViews();
                 }
                 else { }
 
@@ -575,15 +574,6 @@ namespace Spawn.HDT.DustUtility
             //And readd them
             SimpleIoc.Default.Register(() => account);
             SimpleIoc.Default.Register<ICardsManager, CardsManager>();
-        }
-        #endregion
-
-        #region ReloadFlyoutViews
-        private static void ReloadFlyoutViews()
-        {
-            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
-            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
-            ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().ReloadRequired = true;
         }
         #endregion
 

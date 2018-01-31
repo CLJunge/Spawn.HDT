@@ -59,11 +59,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
                 SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+                SimpleIoc.Default.Register<MainViewModel>();
             }
             else { }
 #endif
-
-            SimpleIoc.Default.Register<MainViewModel>();
 
             SimpleIoc.Default.Register<HistoryFlyoutViewModel>();
             SimpleIoc.Default.Register<UpdateFlyoutViewModel>();

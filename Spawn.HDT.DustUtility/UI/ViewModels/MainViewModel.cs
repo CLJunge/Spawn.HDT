@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -20,6 +21,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Static Fields
         private static string s_strSearchHelpText;
+        private static bool s_blnHasCheckedForUpdates;
         #endregion
 
         #region Member Variables
@@ -101,6 +103,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 .Append("- Card type (e.g. Minion, Weapon, etc.)").Append(Environment.NewLine);
 
             s_strSearchHelpText = sb.ToString();
+
+            DustUtilityPlugin.Config.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(DustUtilityPlugin.Config.CheckForUpdates)))
+                {
+                    s_blnHasCheckedForUpdates = !DustUtilityPlugin.Config.CheckForUpdates;
+                }
+                else { }
+            };
         }
         #endregion
 
@@ -162,15 +173,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
-            if (DustUtilityPlugin.Config.CheckForUpdates)
+            BackupManager.Create(account);
+
+            Task.Run(async () =>
             {
-                Task.Run(async () =>
+                BackupManager.DeleteOldBackups(account);
+
+                if (!s_blnHasCheckedForUpdates)
                 {
-                    BackupManager.DeleteOldBackups(account);
-
-                    BackupManager.Create(account);
-
-                    if (await GitHubUpdateManager.PerformUpdateCheckAsync())
+                    if ((DustUtilityPlugin.Config.CheckForUpdates && await GitHubUpdateManager.PerformUpdateCheckAsync()))
                     {
                         DustUtilityPlugin.MainWindow.Dispatcher.Invoke(() =>
                         {
@@ -178,9 +189,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         });
                     }
                     else { }
-                });
-            }
-            else { }
+
+                    s_blnHasCheckedForUpdates = true;
+                }
+                else { }
+            });
         }
         #endregion
 
@@ -188,6 +201,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void SwitchAccount()
         {
             DustUtilityPlugin.SwitchAccount();
+
+            ReloadFlyouts();
         }
         #endregion
 
@@ -214,6 +229,37 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private async void ShowSearchHelp()
         {
             await DustUtilityPlugin.MainWindow.ShowMessageAsync("Help", s_strSearchHelpText);
+        }
+        #endregion
+
+        #region ReloadFlyoutViews
+        public void ReloadFlyouts()
+        {
+            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
+
+            if (DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen)
+            {
+                ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().Initialize();
+            }
+            else { }
+
+            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
+
+            if (DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen)
+            {
+                ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().Initialize();
+            }
+            else { }
+
+            ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().ReloadRequired = true;
+
+            if (DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen)
+            {
+                ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().Initialize();
+            }
+            else { }
+
+            DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
         }
         #endregion
     }
