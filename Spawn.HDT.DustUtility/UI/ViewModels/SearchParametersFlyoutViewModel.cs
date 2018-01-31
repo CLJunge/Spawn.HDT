@@ -283,10 +283,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region SaveCommand
         public ICommand SaveCommand => new RelayCommand(SaveParameters);
         #endregion
-
-        #region CancelCommand
-        public ICommand CancelCommand => new RelayCommand(CloseFlyout);
-        #endregion
         #endregion
 
         #region Ctor
@@ -522,15 +518,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             parameters.UnusedCardsOnly = IncludeUnusedCardsOnly;
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters = parameters;
-
-            DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
-        }
-        #endregion
-
-        #region CloseFlyout
-        private void CloseFlyout()
-        {
-            ReloadRequired = true;
 
             DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
         }
