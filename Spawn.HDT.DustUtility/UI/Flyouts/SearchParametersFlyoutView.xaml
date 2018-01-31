@@ -721,7 +721,7 @@
         </GroupBox>
 
         <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,5,5">
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Ok" Command="{Binding SaveCommand}" Width="75"/>
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Save" Command="{Binding SaveCommand}" Width="75"/>
         </WrapPanel>
     </Grid>
 </UserControl>

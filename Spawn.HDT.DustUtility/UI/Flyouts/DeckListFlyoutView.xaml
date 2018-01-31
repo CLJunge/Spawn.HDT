@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="DeckListFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
-    <ScrollViewer>
+    <ScrollViewer Margin="5">
         <ItemsControl ItemsSource="{Binding Cards}">
             <ItemsControl.ItemContainerStyle>
                 <Style>

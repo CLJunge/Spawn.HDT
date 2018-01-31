@@ -8,7 +8,8 @@
              vm:ViewModelLocator.ViewModelName="DecksFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="500">
     <ListView ItemsSource="{Binding DeckItems}" SelectedItem="{Binding SelectedDeckItem, Mode=TwoWay}" SelectionMode="Single"
-              BorderThickness="0" MouseMove="OnListViewMouseMove" ContextMenuOpening="OnListViewContextMenuOpening">
+              BorderThickness="0" MouseMove="OnListViewMouseMove" ContextMenuOpening="OnListViewContextMenuOpening"
+              Margin="5">
         <ListView.ContextMenu>
             <ContextMenu>
                 <MenuItem Header="Show deck list" Command="{Binding ShowDeckListCommand}"/>

@@ -15,7 +15,7 @@
             <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="5">
         <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" ContextMenuEnabled="True" Margin="0,0,0,40" RemoveCardItem="OnRemoveCardItem" AllowDrag="False" AllowDrop="False"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearHistoryCommand}" VerticalAlignment="Bottom" Margin="5"/>
     </Grid>

@@ -154,6 +154,9 @@
     <Compile Include="UI\Flyouts\SearchParametersFlyoutView.xaml.cs">
       <DependentUpon>SearchParametersFlyoutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\SortOrderFlyoutView.xaml.cs">
+      <DependentUpon>SortOrderFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\UpdateFlyoutView.xaml.cs">
       <DependentUpon>UpdateFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +171,7 @@
     <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\ViewModels\SearchParametersFlyoutViewModel.cs" />
+    <Compile Include="UI\ViewModels\SortOrderFlyoutViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -254,6 +258,10 @@
     <Page Include="UI\Flyouts\SearchParametersFlyoutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Flyouts\SortOrderFlyoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Flyouts\UpdateFlyoutView.xaml">
       <SubType>Designer</SubType>
