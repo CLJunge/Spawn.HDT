@@ -8,14 +8,5 @@
             InitializeComponent();
         }
         #endregion
-
-        #region Events
-        #region OnGoldenCheckBoxUnchecked
-        private void OnGoldenCheckBoxUnchecked(object sender, System.Windows.RoutedEventArgs e)
-        {
-            cbGoldenOnly.IsChecked = false;
-        }
-        #endregion
-        #endregion
     }
 }
