@@ -15,6 +15,7 @@ using Spawn.HDT.DustUtility.UI.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -326,11 +327,21 @@ namespace Spawn.HDT.DustUtility
 
             if (vFiles.Length >= 1)
             {
-                for (int i = 0; i < vFiles.Length; i++)
+                string[] vTypes = new string[]
                 {
-                    if (!vFiles[i].Contains("config.xml"))
+                    Account.CollectionString,
+                    Account.DecksString,
+                    Account.HistoryString,
+                    Account.PreferencesString
+                };
+
+                for (int i = 0; i < vTypes.Length; i++)
+                {
+                    string[] vChunk = vFiles.Where(s => s.Contains($"_{vTypes[i]}.xml")).ToArray();
+
+                    for (int j = 0; j < vChunk.Length; j++)
                     {
-                        FileInfo fileInfo = new FileInfo(vFiles[i]);
+                        FileInfo fileInfo = new FileInfo(vChunk[j]);
 
                         string strTargetPath = Path.Combine(AccountsDirectory, fileInfo.Name);
 
@@ -342,7 +353,6 @@ namespace Spawn.HDT.DustUtility
 
                         fileInfo.MoveTo(strTargetPath);
                     }
-                    else { }
                 }
             }
             else { }
