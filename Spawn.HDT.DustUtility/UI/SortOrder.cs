@@ -1,7 +1,7 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.UI.Models;
 using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Collections.Generic;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI
@@ -10,14 +10,14 @@ namespace Spawn.HDT.DustUtility.UI
     {
         #region Properties
         #region Items
-        public ObservableCollection<ItemContainer> Items { get; set; }
+        public List<SortOrderItemModel> Items { get; set; }
         #endregion
         #endregion
 
         #region Ctor
         public SortOrder()
         {
-            Items = new ObservableCollection<ItemContainer>();
+            Items = new List<SortOrderItemModel>();
         }
         #endregion
 
@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility.UI
                 {
                     Item item = (Item)Enum.Parse(typeof(Item), vItems[i]);
 
-                    retVal.Items.Add(new ItemContainer(item));
+                    retVal.Items.Add(new SortOrderItemModel(item));
                 }
             }
             else { }
@@ -93,28 +93,6 @@ namespace Spawn.HDT.DustUtility.UI
         }
         #endregion
         #endregion
-
-        [DebuggerDisplay("Name={Name} Value={Value}")]
-        public class ItemContainer
-        {
-            #region Properties
-            #region Name
-            public string Name { get; set; }
-            #endregion
-
-            #region Value
-            public Item Value { get; set; }
-            #endregion
-            #endregion
-
-            #region Ctor
-            public ItemContainer(Item item)
-            {
-                Name = ItemToString(item);
-                Value = item;
-            }
-            #endregion
-        }
 
         public enum Item
         {

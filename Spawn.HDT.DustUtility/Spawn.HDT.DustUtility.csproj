@@ -164,6 +164,7 @@
     <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\Models\CardsInfoModel.cs" />
     <Compile Include="UI\Models\DeckItemModel.cs" />
+    <Compile Include="UI\Models\SortOrderItemModel.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
     <Compile Include="UI\ViewModels\DeckListFlyoutViewModel.cs" />
