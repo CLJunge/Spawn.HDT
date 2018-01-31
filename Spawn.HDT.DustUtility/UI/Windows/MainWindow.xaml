@@ -8,7 +8,7 @@
         xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
         xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
         mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"
-        Height="450" Width="950" MinHeight="425" MinWidth="800" WindowStartupLocation="CenterScreen"
+        Height="460" Width="950" MinHeight="460" MinWidth="850" WindowStartupLocation="CenterScreen"
         Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
         RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never">
     <Window.Resources>
@@ -85,6 +85,9 @@
             <controls:Flyout Name="DeckListFlyout" Header="Deck list" Position="Left" Width="300">
                 <flyouts:DeckListFlyoutView x:Name="DeckListFlyoutView"/>
             </controls:Flyout>
+            <controls:Flyout Name="SearchParametersFlyout" Header="Filters" Position="Right">
+                <flyouts:SearchParametersFlyoutView x:Name="SearchParametersFlyoutView"/>
+            </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
@@ -104,7 +107,7 @@
         </TextBox>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="?" Command="{Binding ShowSearchHelpCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,140,0" Width="25"/>
-        <Button Style="{DynamicResource CustomButtonStyle}" Content="Filters..." Command="{Binding OpenParametersDialogCommand}"
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Filters..." Command="{Binding OpenSearchParametersFlyoutCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,15,0" Width="120"/>
 
         <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1"
