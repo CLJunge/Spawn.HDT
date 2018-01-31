@@ -22,8 +22,8 @@
 
             <TextBlock Grid.Row="1" Text="{Binding UpdateMessage}" FontSize="14" TextAlignment="Center" TextWrapping="Wrap"/>
             <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
-                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Yes" Command="{Binding StartDownloadCommand}" Width="75" Margin="0,0,10,0"/>
-                <Button Style="{DynamicResource CustomButtonStyle}" Content="_No" Command="{Binding CloseFlyoutCommand}" Width="75"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Yes" Command="{Binding StartDownloadCommand}" Width="75" Height="28" Margin="0,0,10,0"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_No" Command="{Binding CloseFlyoutCommand}" Width="75" Height="28"/>
             </WrapPanel>
         </Grid>
         <Grid Visibility="{Binding DownloadPanelVisibility}">
@@ -40,7 +40,7 @@
             <TextBlock Grid.Row="2" Text="{Binding ElementName=DownloadProgressBar, Path=Value, StringFormat={}{0:0}%}" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,20,0,15">
-                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" Command="{Binding CancelDownloadCommand}" Width="75"/>
+                <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" Command="{Binding CancelDownloadCommand}" Width="75" Height="28"/>
             </WrapPanel>
         </Grid>
         <Grid Visibility="{Binding DownloadFinishedPanelVisibility}">
