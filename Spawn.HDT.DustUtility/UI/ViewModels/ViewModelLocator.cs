@@ -69,6 +69,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SimpleIoc.Default.Register<UpdateFlyoutViewModel>();
             SimpleIoc.Default.Register<DecksFlyoutViewModel>();
             SimpleIoc.Default.Register<DeckListFlyoutViewModel>();
+            SimpleIoc.Default.Register<SearchParametersFlyoutViewModel>();
 
             SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
             SimpleIoc.Default.Register<SettingsDialogViewModel>();

@@ -132,6 +132,9 @@
     <Compile Include="UI\Controls\CardsInfoView.xaml.cs">
       <DependentUpon>CardsInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\ImageCheckBox.xaml.cs">
+      <DependentUpon>ImageCheckBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
       <DependentUpon>DeckItemView.xaml</DependentUpon>
     </Compile>
@@ -151,6 +154,9 @@
     <Compile Include="UI\Flyouts\HistoryFlyoutView.xaml.cs">
       <DependentUpon>HistoryFlyoutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\SearchParametersFlyoutView.xaml.cs">
+      <DependentUpon>SearchParametersFlyoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\UpdateFlyoutView.xaml.cs">
       <DependentUpon>UpdateFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -164,6 +170,7 @@
     <Compile Include="UI\ViewModels\DecksFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
+    <Compile Include="UI\ViewModels\SearchParametersFlyoutViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -223,6 +230,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Controls\ImageCheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UI\Controls\DeckItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -246,6 +257,10 @@
     <Page Include="UI\Flyouts\HistoryFlyoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Flyouts\SearchParametersFlyoutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Flyouts\UpdateFlyoutView.xaml">
       <SubType>Designer</SubType>

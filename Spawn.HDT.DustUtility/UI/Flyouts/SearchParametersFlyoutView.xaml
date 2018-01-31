@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="Spawn.HDT.DustUtility.UI.Flyouts.SearchParametersFlyoutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+             xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
+             vm:ViewModelLocator.ViewModelName="SearchParametersFlyoutViewModel"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="900">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardSetIcons.xaml"/>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/RarityGems.xaml"/>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardClassIcons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="625"/>
+            <ColumnDefinition Width="175"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="0" Text="Classic" ImageSource="{StaticResource ExpertIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="0" Text="GvG" ImageSource="{StaticResource GoblinsIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="0" Text="TGT" ImageSource="{StaticResource TournamentIcon}"/>
+                <controls:ImageCheckBox Grid.Row="3" Grid.Column="0" Text="Old Gods" ImageSource="{StaticResource OldGodsIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="1" Text="MSG" ImageSource="{StaticResource GadgetzanIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="1" Text="Un'Goro" ImageSource="{StaticResource UngoroIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="1" Text="Frozen Throne" ImageSource="{StaticResource FrozenThroneIcon}"/>
+                <controls:ImageCheckBox Grid.Row="3" Grid.Column="1" Text="Kobolds" ImageSource="{StaticResource KoboldsIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="2" Text="Naxxramas" ImageSource="{StaticResource NaxxIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="2" Text="BRM" ImageSource="{StaticResource MountainIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="2" Text="LOE" ImageSource="{StaticResource LeagueIcon}"/>
+                <controls:ImageCheckBox Grid.Row="4" Grid.Column="2" Text="Karazhan" ImageSource="{StaticResource KarazhanIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="3" Text="Hall of Fame" ImageSource="{StaticResource HallIcon}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Rarities" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <controls:ImageCheckBox Grid.Row="0" Text="Common" ImageSource="{StaticResource CommonGem}"/>
+                <controls:ImageCheckBox Grid.Row="1" Text="Rare" ImageSource="{StaticResource RareGem}"/>
+                <controls:ImageCheckBox Grid.Row="2" Text="Epic" ImageSource="{StaticResource EpicGem}"/>
+                <controls:ImageCheckBox Grid.Row="3" Text="Legendary" ImageSource="{StaticResource LegendaryGem}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Classes" Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="0" Text="Druid" ImageSource="{StaticResource DruidClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="0" Text="Hunter" ImageSource="{StaticResource HunterClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="0" Text="Mage" ImageSource="{StaticResource MageClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="1" Text="Paladin" ImageSource="{StaticResource PaladinClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="1" Text="Priest" ImageSource="{StaticResource PriestClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="1" Text="Rogue" ImageSource="{StaticResource RogueClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="2" Text="Shaman" ImageSource="{StaticResource ShamanClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="1" Grid.Column="2" Text="Warlock" ImageSource="{StaticResource WarlockClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="2" Grid.Column="2" Text="Warrior" ImageSource="{StaticResource WarriorClassIcon}"/>
+                <controls:ImageCheckBox Grid.Row="0" Grid.Column="3" Text="Neutral" ImageSource="{StaticResource NeutralClassIcon}"/>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Misc." Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Incl. Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBlock Text="Golden Cards Only" Grid.Row="1" VerticalAlignment="Center"/>
+                <TextBlock Text="Unused Cards Only" Grid.Row="2" VerticalAlignment="Center"/>
+
+                <CheckBox x:Name="cbGolden" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0" Unchecked="OnGoldenCheckBoxUnchecked"/>
+                <CheckBox x:Name="cbGoldenOnly" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}"/>
+                <CheckBox x:Name="cbUnusedOnly" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0"/>
+            </Grid>
+        </GroupBox>
+
+        <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5">
+            <Button Content="_Ok" IsDefault="True" Width="75" Margin="0,0,10,0"/>
+            <Button Content="_Cancel" IsCancel="True" Width="75"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>
