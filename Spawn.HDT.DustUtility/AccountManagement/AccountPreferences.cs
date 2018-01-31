@@ -2,6 +2,7 @@
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 #endregion
 
@@ -12,12 +13,12 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region Properties
         #region ExcludedDecks
         [DefaultValue(typeof(List<long>))]
-        public List<long> ExcludedDecks { get; set; }
+        public ObservableCollection<long> ExcludedDecks { get; set; }
         #endregion
 
         #region CardSelection
         [DefaultValue(typeof(List<CachedCard>))]
-        public List<CachedCard> CardSelection { get; set; }
+        public ObservableCollection<CachedCard> CardSelection { get; set; }
         #endregion
 
         #region SearchParameters
@@ -29,8 +30,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region Ctor
         public AccountPreferences()
         {
-            ExcludedDecks = new List<long>();
-            CardSelection = new List<CachedCard>();
+            ExcludedDecks = new ObservableCollection<long>();
+            CardSelection = new ObservableCollection<CachedCard>();
             SearchParameters = new SearchParameters(true);
         }
         #endregion

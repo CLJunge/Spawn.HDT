@@ -112,9 +112,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
 
-                lstChunk = FilterForClasses(lstChunk, parameters.Classes);
+                lstChunk = FilterForClasses(lstChunk, parameters.Classes.ToList());
 
-                lstChunk = FilterForSets(lstChunk, parameters.Sets);
+                lstChunk = FilterForSets(lstChunk, parameters.Sets.ToList());
 
                 lstChunk = new List<CardWrapper>(lstChunk.OrderBy(c => c.DustValue));
 
@@ -202,9 +202,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
 
-                lstChunk = FilterForClasses(lstChunk, parameters.Classes);
+                lstChunk = FilterForClasses(lstChunk, parameters.Classes.ToList());
 
-                lstChunk = FilterForSets(lstChunk, parameters.Sets);
+                lstChunk = FilterForSets(lstChunk, parameters.Sets.ToList());
 
                 for (int j = 0; j < lstChunk.Count; j++)
                 {

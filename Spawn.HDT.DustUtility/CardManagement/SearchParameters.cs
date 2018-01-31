@@ -1,14 +1,22 @@
 ﻿#region Using
+using GalaSoft.MvvmLight;
 using HearthDb.Enums;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 #endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {
-    public class SearchParameters
+    public class SearchParameters : ObservableObject
     {
+        #region Member Variables
+        private string m_strQueryString;
+        private bool m_blnIncludeGoldenCards;
+        private bool m_blnGoldenCardsOnly;
+        private bool m_blnUnusedCardsOnly;
+        #endregion
+
         #region Static Ctor
         static SearchParameters()
         {
@@ -18,31 +26,47 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
         #region Properties
         #region QueryString
-        public string QueryString { get; set; }
+        public string QueryString
+        {
+            get => m_strQueryString;
+            set => Set(ref m_strQueryString, value);
+        }
         #endregion
 
         #region IncludeGoldenCards
-        public bool IncludeGoldenCards { get; set; }
+        public bool IncludeGoldenCards
+        {
+            get => m_blnIncludeGoldenCards;
+            set => Set(ref m_blnIncludeGoldenCards, value);
+        }
         #endregion
 
         #region GoldenCardsOnly
-        public bool GoldenCardsOnly { get; set; }
+        public bool GoldenCardsOnly
+        {
+            get => m_blnGoldenCardsOnly;
+            set => Set(ref m_blnGoldenCardsOnly, value);
+        }
         #endregion
 
         #region UnusedCardsOnly
-        public bool UnusedCardsOnly { get; set; }
+        public bool UnusedCardsOnly
+        {
+            get => m_blnUnusedCardsOnly;
+            set => Set(ref m_blnUnusedCardsOnly, value);
+        }
         #endregion
 
         #region Rarites
-        public List<Rarity> Rarities { get; set; }
+        public ObservableCollection<Rarity> Rarities { get; set; }
         #endregion
 
         #region Classes
-        public List<CardClass> Classes { get; set; }
+        public ObservableCollection<CardClass> Classes { get; set; }
         #endregion
 
         #region Sets
-        public List<CardSet> Sets { get; set; }
+        public ObservableCollection<CardSet> Sets { get; set; }
         #endregion
         #endregion
 
@@ -56,9 +80,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             if (!setDefaultValues)
             {
-                Rarities = new List<Rarity>();
-                Classes = new List<CardClass>();
-                Sets = new List<CardSet>();
+                Rarities = new ObservableCollection<Rarity>();
+                Classes = new ObservableCollection<CardClass>();
+                Sets = new ObservableCollection<CardSet>();
             }
             else
             {
@@ -66,7 +90,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 GoldenCardsOnly = false;
                 UnusedCardsOnly = true;
 
-                Rarities = new List<Rarity>
+                Rarities = new ObservableCollection<Rarity>
                 {
                     Rarity.COMMON,
                     Rarity.RARE,
@@ -74,7 +98,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     Rarity.LEGENDARY
                 };
 
-                Classes = new List<CardClass>
+                Classes = new ObservableCollection<CardClass>
                 {
                     CardClass.DRUID,
                     CardClass.HUNTER,
@@ -88,7 +112,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardClass.NEUTRAL
                 };
 
-                Sets = new List<CardSet>
+                Sets = new ObservableCollection<CardSet>
                 {
                     CardSet.EXPERT1,
                     CardSet.GVG,
@@ -108,6 +132,10 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                 Log.WriteLine("Loaded default parameters", LogType.Debug);
             }
+
+            Rarities.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Rarities));
+            Classes.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Classes));
+            Sets.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Sets));
         }
         #endregion
     }

@@ -181,6 +181,19 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public bool IsDeckExcludedFromSearch(long nDeckId) => Preferences.ExcludedDecks.Contains(nDeckId);
         #endregion
 
+        #region LoadPreferences
+        private AccountPreferences LoadPreferences()
+        {
+            AccountPreferences retVal = AccountPreferences.Load(this);
+
+            retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
+            retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
+            retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
+
+            return retVal;
+        }
+        #endregion
+
         #region SavePreferences
         public void SavePreferences()
         {
