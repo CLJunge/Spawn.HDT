@@ -30,19 +30,19 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="5,5,0,5">
-            <ListBox DisplayMemberPath="Name" SelectedValuePath="Value"/>
+            <ListBox ItemsSource="{Binding SortOrderItems}" DisplayMemberPath="Name" SelectedValuePath="Value"/>
         </Border>
 
-        <Button Grid.Row="1" Content="Add..." Margin="5" />
-        <Button Grid.Row="2" Content="Remove" Margin="5" />
+        <Button Grid.Row="1" Content="Add..." Margin="5" Command="{Binding AddItemCommand}"/>
+        <Button Grid.Row="2" Content="Remove" Margin="5" Command="{Binding RemoveItemCommand}"/>
 
         <Separator Grid.Row="3" Background="{DynamicResource AccentColorBrush}" Height="2" Margin="5,0,5,0"/>
 
-        <Button Grid.Row="4" Content="Move Up" Margin="5"/>
-        <Button Grid.Row="5" Content="Move Down" Margin="5"/>
+        <Button Grid.Row="4" Content="Move Up" Margin="5" Command="{Binding MoveUpItemCommand}"/>
+        <Button Grid.Row="5" Content="Move Down" Margin="5" Command="{Binding MoveDownItemCommand}"/>
 
         <Separator Grid.Row="6" Background="{DynamicResource AccentColorBrush}" Height="2" Margin="5,0,5,0"/>
         
-        <Button Grid.Row="7"  Content="Save" Height="25" Margin="5"/>
+        <Button Grid.Row="7"  Content="Save" Height="25" Margin="5" Command="{Binding SaveCommand}"/>
     </Grid>
 </UserControl>

@@ -7,12 +7,12 @@ namespace Spawn.HDT.DustUtility.UI.Models
     public class SortOrderItemModel : ObservableObject
     {
         #region Member Variables
-        private SortOrder.Item m_item;
+        private SortOrder.OrderItem m_item;
         #endregion
 
         #region Properties
         #region Value
-        public SortOrder.Item Value
+        public SortOrder.OrderItem Value
         {
             get => m_item;
             set => Set(ref m_item, value);
@@ -30,7 +30,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             PropertyChanged += (s, e) => RaisePropertyChanged(nameof(Name));
         }
 
-        public SortOrderItemModel(SortOrder.Item item)
+        public SortOrderItemModel(SortOrder.OrderItem item)
             : this()
         {
             Value = item;
