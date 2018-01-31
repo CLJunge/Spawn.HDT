@@ -5,10 +5,13 @@ using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
+using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -81,7 +84,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SearchCommand
-        public ICommand SearchCommand => new RelayCommand(Search, () => !string.IsNullOrEmpty(SearchQuery));
+        public ICommand SearchCommand => new RelayCommand(Search, () =>
+        {
+            return !string.IsNullOrEmpty(SearchQuery) && !DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen;
+        });
         #endregion
 
         #region ShowSearchHelpCommand
@@ -170,10 +176,21 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 
+            BackupManager.Create(account);
+
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
-            BackupManager.Create(account);
+            if (!string.IsNullOrEmpty(account.Preferences.SearchParameters.QueryString))
+            {
+                SearchQuery = account.Preferences.SearchParameters.QueryString;
+            }
+            else
+            {
+                SearchQuery = string.Empty;
+            }
+
+            ClearContainer();
 
             Task.Run(async () =>
             {
@@ -220,8 +237,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Search
-        private void Search()
+        private async void Search()
         {
+            ClearContainer();
+
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+
+            ICardsManager cardsManager = ServiceLocator.Current.GetInstance<ICardsManager>();
+
+            SearchResult result = await cardsManager.GetSearchResultAsync(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters);
+
+            result.CardItems = OrderItems(result.CardItems).ToList();
+
+            result.CopyToCardsInfoModel(CardsInfo);
+
+            for (int i = 0; i < result.CardItems.Count; i++)
+            {
+                CardItems.Add(result.CardItems[i]);
+            }
         }
         #endregion
 
@@ -260,6 +293,41 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             else { }
 
             DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+        }
+        #endregion
+
+        #region OrderResult
+        private IEnumerable<CardItemModel> OrderItems(IEnumerable<CardItemModel> items)
+        {
+            IEnumerable<CardItemModel> retVal = null;
+
+            SortOrder sortOrder = SortOrder.Parse(DustUtilityPlugin.Config.SortOrder);
+
+            if (sortOrder != null && sortOrder.Count > 0)
+            {
+                IQueryable<CardItemModel> query = items.AsQueryable();
+
+                for (int i = 0; i < sortOrder.Count; i++)
+                {
+                    query = query.OrderBy(sortOrder[i].Value.ToString(), i);
+                }
+
+                retVal = query.ToList();
+            }
+            else
+            {
+                retVal = items;
+            }
+
+            return retVal;
+        }
+        #endregion
+
+        #region ClearContainer
+        private void ClearContainer()
+        {
+            CardItems.Clear();
+            CardsInfo.Clear();
         }
         #endregion
     }
