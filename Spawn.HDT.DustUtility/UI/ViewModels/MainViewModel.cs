@@ -84,14 +84,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SearchCommand
-        public ICommand SearchCommand => new RelayCommand(Search, () =>
-        {
-            return !string.IsNullOrEmpty(SearchQuery) && !DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen;
-        });
+        public ICommand SearchCommand => new RelayCommand(Search, () => !DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen);
         #endregion
 
         #region ShowSearchHelpCommand
         public ICommand ShowSearchHelpCommand => new RelayCommand(ShowSearchHelp);
+        #endregion
+
+        #region ClearCommand
+        public ICommand ClearCommand => new RelayCommand(Clear, () => !string.IsNullOrEmpty(SearchQuery) || CardItems.Count > 0);
         #endregion
         #endregion
 
@@ -241,20 +242,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             ClearContainer();
 
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
-
-            ICardsManager cardsManager = ServiceLocator.Current.GetInstance<ICardsManager>();
-
-            SearchResult result = await cardsManager.GetSearchResultAsync(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters);
-
-            result.CardItems = OrderItems(result.CardItems).ToList();
-
-            result.CopyToCardsInfoModel(CardsInfo);
-
-            for (int i = 0; i < result.CardItems.Count; i++)
+            if (!string.IsNullOrEmpty(SearchQuery))
             {
-                CardItems.Add(result.CardItems[i]);
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+
+                ICardsManager cardsManager = ServiceLocator.Current.GetInstance<ICardsManager>();
+
+                SearchResult result = await cardsManager.GetSearchResultAsync(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters);
+
+                result.CardItems = OrderItems(result.CardItems).ToList();
+
+                result.CopyToCardsInfoModel(CardsInfo);
+
+                for (int i = 0; i < result.CardItems.Count; i++)
+                {
+                    CardItems.Add(result.CardItems[i]);
+                }
             }
+            else { }
         }
         #endregion
 
@@ -262,6 +267,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private async void ShowSearchHelp()
         {
             await DustUtilityPlugin.MainWindow.ShowMessageAsync("Help", s_strSearchHelpText);
+        }
+        #endregion
+
+        #region Clear
+        private void Clear()
+        {
+            SearchQuery = string.Empty;
+
+            ClearContainer();
         }
         #endregion
 

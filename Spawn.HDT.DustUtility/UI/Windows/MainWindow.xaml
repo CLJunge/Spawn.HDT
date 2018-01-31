@@ -93,7 +93,7 @@
     </controls:MetroWindow.Flyouts>
     <Grid>
         <TextBox Style="{DynamicResource MetroButtonTextBox}" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,10,175,0" Height="28"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="135,10,175,0" Height="28"
                  controls:TextBoxHelper.Watermark="Enter dust amount or search term..."
                  controls:TextBoxHelper.ButtonCommand="{Binding SearchCommand}">
             <TextBox.InputBindings>
@@ -115,6 +115,9 @@
         <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="10,43,175,10">
             <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
         </Border>
+
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearCommand}"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Width="120" Height="28"/>
 
         <uicontrols:CardsInfoView DataContext="{Binding CardsInfo}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,10,0"/>
 
