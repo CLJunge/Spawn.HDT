@@ -1,6 +1,6 @@
 ﻿#region Using
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 #endregion
 
@@ -8,33 +8,36 @@ namespace Spawn.HDT.DustUtility.UI
 {
     public class SortOrder
     {
-        #region Member Variables
-        private List<ItemContainer> m_lstItems;
-        #endregion
-
         #region Properties
         #region Items
-        public List<ItemContainer> Items => m_lstItems ?? (m_lstItems = new List<ItemContainer>());
+        public ObservableCollection<ItemContainer> Items { get; set; }
         #endregion
+        #endregion
+
+        #region Ctor
+        public SortOrder()
+        {
+            Items = new ObservableCollection<ItemContainer>();
+        }
         #endregion
 
         #region Static Methods
         #region Parse
-        public static SortOrder Parse(string strValue)
+        public static SortOrder Parse(string strSortOrderString)
         {
             SortOrder retVal = null;
 
-            if (!string.IsNullOrEmpty(strValue))
+            if (!string.IsNullOrEmpty(strSortOrderString))
             {
                 retVal = new SortOrder();
 
-                string[] vItems = strValue.Split(';');
+                string[] vItems = strSortOrderString.Split(';');
 
                 for (int i = 0; i < vItems.Length; i++)
                 {
                     Item item = (Item)Enum.Parse(typeof(Item), vItems[i]);
 
-                    retVal.m_lstItems.Add(new ItemContainer(item));
+                    retVal.Items.Add(new ItemContainer(item));
                 }
             }
             else { }
