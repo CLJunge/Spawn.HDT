@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region SortOrder
-        [DefaultValue("")]
+        [DefaultValue("Rarity;Golden;Dust;CardClass;CardSet;Name")]
         public string SortOrder
         {
             get => m_strSortOrder;
@@ -87,7 +87,7 @@ namespace Spawn.HDT.DustUtility
         public Configuration()
         {
             OfflineMode = true;
-            SortOrder = string.Empty;
+            SortOrder = "Rarity;Golden;Dust;CardClass;CardSet;Name";
             CheckForUpdates = true;
             SaveInterval = 120;
             LastSelectedAccount = string.Empty;
