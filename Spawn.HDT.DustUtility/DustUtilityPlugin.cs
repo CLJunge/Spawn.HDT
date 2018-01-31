@@ -573,6 +573,7 @@ namespace Spawn.HDT.DustUtility
         {
             ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
             ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
+            ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().ReloadRequired = true;
         }
         #endregion
 
