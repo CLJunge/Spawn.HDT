@@ -9,9 +9,7 @@
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="500">
     <UserControl.Resources>
         <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
-            <Setter Property="BorderBrush" Value="Gray"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
         </Style>
     </UserControl.Resources>
     <StackPanel>

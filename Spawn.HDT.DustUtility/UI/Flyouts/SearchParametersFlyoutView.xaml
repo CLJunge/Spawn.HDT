@@ -10,9 +10,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
-                <Setter Property="BorderBrush" Value="Gray"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+                <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
             </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardSetIcons.xaml"/>
