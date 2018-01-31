@@ -270,7 +270,7 @@ namespace Spawn.HDT.DustUtility
 
             using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
             {
-                if (dialogService.ShowDialog<SettingsDialog>(Core.MainWindow))
+                if (dialogService.ShowDialog<SettingsDialogView>(Core.MainWindow))
                 {
                     if (Config.OfflineMode && Core.Game.IsRunning)
                     {
@@ -472,7 +472,7 @@ namespace Spawn.HDT.DustUtility
 
                     using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
                     {
-                        if (dialogService.ShowDialog<AccountSelectorDialog>(owner))
+                        if (dialogService.ShowDialog<AccountSelectorDialogView>(owner))
                         {
                             retVal = Account.Parse(dialogService.GetDialogResult<string>());
 

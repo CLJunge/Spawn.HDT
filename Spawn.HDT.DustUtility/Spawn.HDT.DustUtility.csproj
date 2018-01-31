@@ -135,12 +135,12 @@
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
       <DependentUpon>DeckItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Dialogs\AccountSelectorDialog.xaml.cs">
-      <DependentUpon>AccountSelectorDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\AccountSelectorDialogView.xaml.cs">
+      <DependentUpon>AccountSelectorDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\IDialogResultService.cs" />
-    <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
-      <DependentUpon>SettingsDialog.xaml</DependentUpon>
+    <Compile Include="UI\Dialogs\SettingsDialogView.xaml.cs">
+      <DependentUpon>SettingsDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml.cs">
       <DependentUpon>SortOrderItemSelectorDialogView.xaml</DependentUpon>
@@ -240,11 +240,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\AccountSelectorDialog.xaml">
+    <Page Include="UI\Dialogs\AccountSelectorDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Dialogs\SettingsDialog.xaml">
+    <Page Include="UI\Dialogs\SettingsDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
