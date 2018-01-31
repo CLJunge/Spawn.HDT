@@ -107,7 +107,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
             {
-                if (dialogService.ShowDialog<SortOrderItemSelectorDialogView>())
+                if (dialogService.ShowDialog<SortOrderItemSelectorDialogView>(DustUtilityPlugin.MainWindow))
                 {
                     SortOrder.OrderItem orderItem = dialogService.GetDialogResult<SortOrder.OrderItem>();
 
