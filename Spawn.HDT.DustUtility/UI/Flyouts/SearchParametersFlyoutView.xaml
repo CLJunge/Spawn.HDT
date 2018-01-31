@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="SearchParametersFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="900">
@@ -48,19 +47,305 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="0" Text="Classic" ImageSource="{StaticResource ExpertIcon}" Checked="{Binding ExpertSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="0" Text="GvG" ImageSource="{StaticResource GoblinsIcon}" Checked="{Binding GoblinsSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="0" Text="TGT" ImageSource="{StaticResource TournamentIcon}" Checked="{Binding TournamentSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="3" Grid.Column="0" Text="Old Gods" ImageSource="{StaticResource OldGodsIcon}" Checked="{Binding OldGodsSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="1" Text="MSG" ImageSource="{StaticResource GadgetzanIcon}" Checked="{Binding GadgetzanSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="1" Text="Un'Goro" ImageSource="{StaticResource UngoroIcon}" Checked="{Binding UngoroSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="1" Text="Frozen Throne" ImageSource="{StaticResource FrozenThroneIcon}" Checked="{Binding FrozenThroneSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="3" Grid.Column="1" Text="Kobolds" ImageSource="{StaticResource KoboldsIcon}" Checked="{Binding KoboldsSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="2" Text="Naxxramas" ImageSource="{StaticResource NaxxIcon}" Checked="{Binding NaxxSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="2" Text="BRM" ImageSource="{StaticResource MountainIcon}" Checked="{Binding MountainSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="2" Text="LOE" ImageSource="{StaticResource LeagueIcon}" Checked="{Binding LeagueSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="4" Grid.Column="2" Text="Karazhan" ImageSource="{StaticResource KarazhanIcon}" Checked="{Binding KarazhanSetEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="3" Text="Hall of Fame" ImageSource="{StaticResource HallIcon}" Checked="{Binding HallSetEnabled, Mode=TwoWay}"/>
+                <CheckBox Name="ExpertSetCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding ExpertSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=ExpertSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource ExpertIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Classic" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=ExpertSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="GoblinsSetCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding GoblinsSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=GoblinsSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource GoblinsIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="GvG" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=GoblinsSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="TournamentSetCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding TournamentSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=TournamentSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource TournamentIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="TGT" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=TournamentSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="OldGodsSetCheckBox" Grid.Row="3" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding OldGodsSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=OldGodsSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource OldGodsIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Old Gods" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=OldGodsSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="GadgetzanSetCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding GadgetzanSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=GadgetzanSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource GadgetzanIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="MSG" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=GadgetzanSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="UngoroSetCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding UngoroSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=UngoroSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource UngoroIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Un'Goro" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=UngoroSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="FrozenThroneSetCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding FrozenThroneSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=FrozenThroneSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource FrozenThroneIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Frozen Throne" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=FrozenThroneSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="KoboldsSetCheckBox" Grid.Row="3" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding KoboldsSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=KoboldsSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource KoboldsIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Kobolds" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=KoboldsSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="NaxxSetCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding NaxxSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=NaxxSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource NaxxIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Naxxramas" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=NaxxSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="MountainSetCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding MountainSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=MountainSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource MountainIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="BRM" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=MountainSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="LeagueSetCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding LeagueSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=LeagueSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource LeagueIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="LOE" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=LeagueSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="KarazhanSetCheckBox" Grid.Row="3" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding KarazhanSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=KarazhanSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource KarazhanIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Karazhan" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=KarazhanSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="HallSetCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding HallSetEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=HallSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource HallIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Hall of Fame" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=HallSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
             </Grid>
         </GroupBox>
 
@@ -73,10 +358,98 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <uicontrols:ImageCheckBox Grid.Row="0" Text="Common" ImageSource="{StaticResource CommonGem}" Checked="{Binding CommonRarityEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Text="Rare" ImageSource="{StaticResource RareGem}" Checked="{Binding RareRarityEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Text="Epic" ImageSource="{StaticResource EpicGem}" Checked="{Binding EpicRarityEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="3" Text="Legendary" ImageSource="{StaticResource LegendaryGem}" Checked="{Binding LegendaryRarityEnabled, Mode=TwoWay}"/>
+                <CheckBox Name="CommonRarityCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding CommonRarityEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=CommonRarityCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource CommonGem}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Common" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=CommonRarityCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="RareRarityCheckBox" Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding RareRarityEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=RareRarityCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource RareGem}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Rare" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=RareRarityCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="EpicRarityCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding EpicRarityEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=EpicRarityCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource EpicGem}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Epic" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=EpicRarityCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="LegendaryRarityCheckBox" Grid.Row="3" Margin="5,0,0,0" IsChecked="{Binding LegendaryRarityEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=LegendaryRarityCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource LegendaryGem}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Legendary" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=LegendaryRarityCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
             </Grid>
         </GroupBox>
 
@@ -94,16 +467,236 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="0" Text="Druid" ImageSource="{StaticResource DruidClassIcon}" Checked="{Binding DruidClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="0" Text="Hunter" ImageSource="{StaticResource HunterClassIcon}" Checked="{Binding HunterClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="0" Text="Mage" ImageSource="{StaticResource MageClassIcon}" Checked="{Binding MageClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="1" Text="Paladin" ImageSource="{StaticResource PaladinClassIcon}" Checked="{Binding PaladinClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="1" Text="Priest" ImageSource="{StaticResource PriestClassIcon}" Checked="{Binding PriestClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="1" Text="Rogue" ImageSource="{StaticResource RogueClassIcon}" Checked="{Binding RogueClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="2" Text="Shaman" ImageSource="{StaticResource ShamanClassIcon}" Checked="{Binding ShamanClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="1" Grid.Column="2" Text="Warlock" ImageSource="{StaticResource WarlockClassIcon}" Checked="{Binding WarlockClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="2" Grid.Column="2" Text="Warrior" ImageSource="{StaticResource WarriorClassIcon}" Checked="{Binding WarriorClassEnabled, Mode=TwoWay}"/>
-                <uicontrols:ImageCheckBox Grid.Row="0" Grid.Column="3" Text="Neutral" ImageSource="{StaticResource NeutralClassIcon}" Checked="{Binding NeutralClassEnabled, Mode=TwoWay}"/>
+                <CheckBox Name="DruidClassCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding DruidClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=DruidClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource DruidClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Druid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=DruidClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="HunterClassCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding HunterClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=HunterClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource HunterClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Hunter" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=HunterClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="MageClassCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding MageClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=MageClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource MageClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Hunter" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=MageClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="PaladingClassCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PaladinClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=PaladingClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource PaladinClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Paladin" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=PaladingClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="PriestClassCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PriestClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=PriestClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource PriestClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Priest" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=PriestClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="RogueClassCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding RogueClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=RogueClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource RogueClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Rogue" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=RogueClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="ShamanClassCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding ShamanClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=ShamanClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource ShamanClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Shaman" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=ShamanClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="WarlockClassCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarlockClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=WarlockClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource WarlockClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Warlock" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=WarlockClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="WarriorClassCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarriorClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=WarriorClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource WarriorClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Warrior" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=WarriorClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="NeutralClassCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding NeutralClassEnabled, Mode=TwoWay}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=NeutralClassCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource NeutralClassIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="Neutral" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=NeutralClassCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
             </Grid>
         </GroupBox>
 
@@ -115,19 +708,21 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Incl. Golden Cards" Grid.Row="0" VerticalAlignment="Center"/>
-                <TextBlock Text="Golden Cards Only" Grid.Row="1" VerticalAlignment="Center"/>
-                <TextBlock Text="Unused Cards Only" Grid.Row="2" VerticalAlignment="Center"/>
-
-                <CheckBox Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}"/>
-                <CheckBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}"/>
-                <CheckBox Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,3,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}"/>
+                <CheckBox Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}">
+                    <TextBlock Text="Incl. Golden Cards" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </CheckBox>
+                <CheckBox Grid.Row="1" Margin="5,0,0,0" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}">
+                    <TextBlock Text="Golden Cards Only" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </CheckBox>
+                <CheckBox Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}">
+                    <TextBlock Text="Unused Cards Only" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                </CheckBox>
             </Grid>
         </GroupBox>
 
-        <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5">
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Ok" Width="75" Margin="0,0,10,0"/>
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" Width="75"/>
+        <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,10,5,5">
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Ok" Command="{Binding SaveCommand}" Width="75" Margin="0,0,10,0"/>
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" Command="{Binding CancelCommand}" Width="75"/>
         </WrapPanel>
     </Grid>
 </UserControl>
