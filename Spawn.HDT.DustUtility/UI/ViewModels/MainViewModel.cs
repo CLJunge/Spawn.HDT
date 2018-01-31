@@ -85,10 +85,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ShowSearchHelpCommand
         public ICommand ShowSearchHelpCommand => new RelayCommand(ShowSearchHelp);
         #endregion
-
-        #region OpenSearchParametersFlyoutCommand
-        public ICommand OpenSearchParametersFlyoutCommand => new RelayCommand(OpenSearchParametersFlyout);
-        #endregion
         #endregion
 
         #region Static Ctor
@@ -218,13 +214,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private async void ShowSearchHelp()
         {
             await DustUtilityPlugin.MainWindow.ShowMessageAsync("Help", s_strSearchHelpText);
-        }
-        #endregion
-
-        #region OpenSearchParametersFlyout
-        private void OpenSearchParametersFlyout()
-        {
-            OpenFlyout(DustUtilityPlugin.MainWindow.SearchParametersFlyout);
         }
         #endregion
     }
