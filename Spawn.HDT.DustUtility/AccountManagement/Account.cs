@@ -61,7 +61,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region Preferences
-        public AccountPreferences Preferences => m_preferences ?? (m_preferences = AccountPreferences.Load(this));
+        public AccountPreferences Preferences => m_preferences ?? (m_preferences = LoadPreferences());
         #endregion
 
         #region HasFiles
