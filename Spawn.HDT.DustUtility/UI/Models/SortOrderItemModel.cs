@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿#region Using
+using GalaSoft.MvvmLight;
 using System.Diagnostics;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {

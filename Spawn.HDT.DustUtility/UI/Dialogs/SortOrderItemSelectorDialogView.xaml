@@ -1,0 +1,31 @@
+﻿<controls:MetroWindow x:Class="Spawn.HDT.DustUtility.UI.Dialogs.SortOrderItemSelectorDialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
+        vm:ViewModelLocator.ViewModelName="SortOrderItemSelectorDialogViewModel"
+        mc:Ignorable="d" BorderBrush="{DynamicResource AccentColorBrush}" ResizeMode="NoResize"
+        Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ComboBox Grid.Row="0" ItemsSource="{Binding SortOrderItems}" SelectedItem="{Binding SelectedSortOrderItem, Mode=TwoWay}"
+                  SelectedIndex="{Binding SelectedSortOrderItemIndex}" DisplayMemberPath="Name" SelectedValuePath="Value"
+                  VerticalAlignment="Center" Margin="5,0,5,0" Height="23"/>
+
+        <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,10,5,5">
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Ok" IsDefault="True" Click="OnOkClick" Width="75" Height="28" Margin="0,0,10,0"/>
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75" Height="28"/>
+        </WrapPanel>
+    </Grid>
+</controls:MetroWindow>

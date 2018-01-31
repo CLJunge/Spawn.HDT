@@ -1,6 +1,8 @@
-﻿using GalaSoft.MvvmLight.CommandWpf;
+﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.CardManagement;
 using System.Windows.Input;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {

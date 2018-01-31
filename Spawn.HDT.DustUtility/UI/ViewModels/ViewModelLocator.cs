@@ -74,6 +74,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
             SimpleIoc.Default.Register<SettingsDialogViewModel>();
+            SimpleIoc.Default.Register<SortOrderItemSelectorDialogViewModel>();
         }
         #endregion
     }

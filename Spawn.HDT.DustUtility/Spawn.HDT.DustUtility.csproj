@@ -142,6 +142,9 @@
     <Compile Include="UI\Dialogs\SettingsDialog.xaml.cs">
       <DependentUpon>SettingsDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml.cs">
+      <DependentUpon>SortOrderItemSelectorDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\DeckListFlyoutView.xaml.cs">
       <DependentUpon>DeckListFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,7 @@
     <Compile Include="UI\ViewModels\MainViewModel.cs" />
     <Compile Include="UI\ViewModels\SearchParametersFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\SortOrderFlyoutViewModel.cs" />
+    <Compile Include="UI\ViewModels\SortOrderItemSelectorDialogViewModel.cs" />
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -243,6 +247,10 @@
     <Page Include="UI\Dialogs\SettingsDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\Flyouts\DeckListFlyoutView.xaml">
       <SubType>Designer</SubType>
