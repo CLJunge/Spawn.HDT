@@ -85,7 +85,7 @@
             <controls:Flyout Name="DeckListFlyout" Header="Deck list" Position="Left" Width="300">
                 <flyouts:DeckListFlyoutView x:Name="DeckListFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="SearchParametersFlyout" Header="Filters" Position="Right">
+            <controls:Flyout Name="SearchParametersFlyout" Header="Filters" Position="Left">
                 <flyouts:SearchParametersFlyoutView x:Name="SearchParametersFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
