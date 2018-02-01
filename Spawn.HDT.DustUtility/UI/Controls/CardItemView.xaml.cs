@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 CardSetImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardSet.GetShortString()}Icon");
 
-                RarityGemImage.Source = FindResource($"{cardItem.Rarity}Gem") as ImageSource;
+                RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
 
                 if (cardItem.Golden)
                 {

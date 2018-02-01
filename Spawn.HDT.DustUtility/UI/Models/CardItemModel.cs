@@ -59,7 +59,11 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Rarity
-        public string Rarity => (Wrapper?.DbCard.Rarity.GetString() ?? HearthDb.Cards.All[Id].Rarity.GetString());
+        public Rarity Rarity => (Wrapper?.DbCard.Rarity ?? HearthDb.Cards.All[Id].Rarity);
+        #endregion
+
+        #region Rarity
+        public string RarityString => Rarity.GetString();
         #endregion
 
         #region CardClass
@@ -112,6 +116,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(Golden));
                     RaisePropertyChanged(nameof(Dust));
                     RaisePropertyChanged(nameof(Rarity));
+                    RaisePropertyChanged(nameof(RarityString));
                     RaisePropertyChanged(nameof(CardClass));
                     RaisePropertyChanged(nameof(CardClassString));
                     RaisePropertyChanged(nameof(CardSet));
@@ -127,6 +132,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(Golden));
                     RaisePropertyChanged(nameof(Dust));
                     RaisePropertyChanged(nameof(Rarity));
+                    RaisePropertyChanged(nameof(RarityString));
                     RaisePropertyChanged(nameof(CardClass));
                     RaisePropertyChanged(nameof(CardClassString));
                     RaisePropertyChanged(nameof(CardSet));

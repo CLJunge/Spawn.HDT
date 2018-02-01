@@ -45,7 +45,7 @@
             </TextBlock>
             <TextBlock Name="NameTextBlock" Grid.Column="3" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold"/>
             <Image Name="RarityGemImage" Grid.Column="4" Width="28" Height="28"/>
-            <TextBlock Name="RarityTextBlock" Grid.Column="5" Text="{Binding Rarity}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"/>
+            <TextBlock Name="RarityTextBlock" Grid.Column="5" Text="{Binding RarityString}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="17"/>
             <Grid Grid.Column="6">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
