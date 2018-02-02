@@ -27,6 +27,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
                 CardSetImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardSet.GetShortString()}Icon");
 
+                DateTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
                 CountTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
                 ManaCostTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
                 DustTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
