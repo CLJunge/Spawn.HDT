@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class CardItemCountToStringConverter : IMultiValueConverter
+    public class CardItemCountConverter : IMultiValueConverter
     {
         #region Convert
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

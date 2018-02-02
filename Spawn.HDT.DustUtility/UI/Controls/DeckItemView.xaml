@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignHeight="51" d:DesignWidth="500" Opacity="{Binding Opacity}">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
-        <converters:CardCountToStringConverter x:Key="CardCountConverter" MaxAmount="30" Suffix="Cards"/>
+        <converters:DeckCardCountConverter x:Key="CardCountConverter" MaxAmount="30" Suffix="Cards"/>
     </UserControl.Resources>
     <Grid Margin="15,0,15,0">
         <Grid.ColumnDefinitions>

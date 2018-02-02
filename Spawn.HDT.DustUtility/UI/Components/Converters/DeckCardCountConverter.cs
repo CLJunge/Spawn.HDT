@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class CardCountToStringConverter : IValueConverter
+    public class DeckCardCountConverter : IValueConverter
     {
         #region Properties
         #region MaxAmount

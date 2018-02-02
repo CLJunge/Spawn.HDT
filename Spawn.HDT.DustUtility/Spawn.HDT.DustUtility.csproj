@@ -129,10 +129,13 @@
     <Compile Include="UI\Controls\CardsContainer.xaml.cs">
       <DependentUpon>CardsContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Components\Converters\CardCountToStringConverter.cs" />
-    <Compile Include="UI\Components\Converters\CardItemCountToStringConverter.cs" />
+    <Compile Include="UI\Components\Converters\DeckCardCountConverter.cs" />
+    <Compile Include="UI\Components\Converters\CardItemCountConverter.cs" />
     <Compile Include="UI\Components\Converters\DisplayTextConverter.cs" />
     <Compile Include="UI\Components\Converters\DateTimeFormatConverter.cs" />
+    <Compile Include="UI\Controls\CardSetItemView.xaml.cs">
+      <DependentUpon>CardSetItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\CardsInfoView.xaml.cs">
       <DependentUpon>CardsInfoView.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Controls\CardsContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Controls\CardSetItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
