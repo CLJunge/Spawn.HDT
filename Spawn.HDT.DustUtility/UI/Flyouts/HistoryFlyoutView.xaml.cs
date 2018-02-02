@@ -16,10 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
 
         #region Events
         #region OnRemoveCardItem
-        private void OnRemoveCardItem(object sender, CardItemEventArgs e)
-        {
-            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().RemoveCardItem(e);
-        }
+        private void OnRemoveCardItem(object sender, CardItemEventArgs e) => ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().RemoveCardItem(e);
         #endregion
         #endregion
     }
