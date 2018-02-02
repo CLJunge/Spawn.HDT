@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region ContextMenuOpeningCommand
-        public ICommand ContextMenuOpeningCommand => new RelayCommand(OnContextMenuOpening);
+        public ICommand ContextMenuOpeningCommand => new RelayCommand<System.Windows.Controls.ContextMenuEventArgs>(OnContextMenuOpening);
         #endregion
         #endregion
 
@@ -137,16 +137,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnContextMenuOpening
-        private void OnContextMenuOpening()
+        private void OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs e)
         {
-            if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId))
+            bool blnDeckSelected = SelectedDeckItem != null;
+
+            e.Handled = !blnDeckSelected;
+
+            if (blnDeckSelected)
             {
-                ToggleDeckMenuItemHeader = IncludeHeaderText;
+                if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId))
+                {
+                    ToggleDeckMenuItemHeader = IncludeHeaderText;
+                }
+                else
+                {
+                    ToggleDeckMenuItemHeader = ExcludeHeaderText;
+                }
             }
-            else
-            {
-                ToggleDeckMenuItemHeader = ExcludeHeaderText;
-            }
+            else { }
         }
         #endregion
     }

@@ -81,7 +81,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnListViewContextMenuOpening
         private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
         {
-            e.Handled = !ContextMenuEnabled;
+            e.Handled = !(ContextMenuEnabled && ItemsContainer.SelectedItem != null);
         }
         #endregion
 

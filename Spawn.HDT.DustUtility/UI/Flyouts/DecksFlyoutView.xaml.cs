@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnListViewContextMenuOpening
         private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
         {
-            ((DecksFlyoutViewModel)DataContext).ContextMenuOpeningCommand.Execute(null);
+            ((DecksFlyoutViewModel)DataContext).ContextMenuOpeningCommand.Execute(e);
         }
         #endregion
         #endregion
