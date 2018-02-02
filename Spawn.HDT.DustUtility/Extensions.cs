@@ -9,7 +9,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Media.Imaging;
 #endregion
 
@@ -277,26 +276,6 @@ namespace Spawn.HDT.DustUtility
             }
 
             return nRet;
-        }
-        #endregion
-
-        #region DeepClone
-        public static T DeepClone<T>(this T value) where T : new()
-        {
-            T retVal = new T();
-
-            BinaryFormatter bf = new BinaryFormatter();
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                bf.Serialize(ms, value);
-
-                ms.Position = 0;
-
-                retVal = (T)bf.Deserialize(ms);
-            }
-
-            return retVal;
         }
         #endregion
     }
