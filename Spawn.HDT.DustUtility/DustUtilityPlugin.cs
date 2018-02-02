@@ -29,6 +29,13 @@ namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
+        #region Constants
+        public const int SettingsDialogKey = 10;
+        public const int AccountSelectorDialogKey = 20;
+        public const int SortOrderItemSelectorKey = 30;
+        public const int CardSelectionWindowKey = 40;
+        #endregion
+
         #region Static Fields
         private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
@@ -271,7 +278,7 @@ namespace Spawn.HDT.DustUtility
 
             using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
             {
-                if (dialogService.ShowDialog<SettingsDialogView>(Core.MainWindow))
+                if (dialogService.ShowDialog<SettingsDialogView>(SettingsDialogKey, Core.MainWindow))
                 {
                     if (Config.OfflineMode && Core.Game.IsRunning)
                     {
@@ -475,7 +482,7 @@ namespace Spawn.HDT.DustUtility
 
                     using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
                     {
-                        if (dialogService.ShowDialog<AccountSelectorDialogView>(owner))
+                        if (dialogService.ShowDialog<AccountSelectorDialogView>(AccountSelectorDialogKey, owner))
                         {
                             retVal = Account.Parse(dialogService.GetResult<string>());
 

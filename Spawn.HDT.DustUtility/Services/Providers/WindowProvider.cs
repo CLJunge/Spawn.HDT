@@ -1,5 +1,6 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.UI.ViewModels;
+using System.Collections.Generic;
 using System.Windows;
 #endregion
 
@@ -8,33 +9,49 @@ namespace Spawn.HDT.DustUtility.Services.Providers
     public class WindowProvider : IWindowService
     {
         #region Member Variables
-        private Window m_window;
+        private Dictionary<int, Window> m_dWindows;
+        private int m_nCurrentWindowKey;
+        #endregion
+
+        #region Ctor
+        public WindowProvider()
+        {
+            m_dWindows = new Dictionary<int, Window>();
+
+            m_nCurrentWindowKey = -1;
+        }
         #endregion
 
         #region Show
-        public void Show<T>(Window owner = null) where T : Window, new()
+        public void Show<T>(int nKey, Window owner = null) where T : Window, new()
         {
-            InitializeWindow<T>(owner);
+            InitializeWindow<T>(nKey, owner);
 
-            m_window?.Show();
+            m_dWindows[nKey]?.Show();
         }
         #endregion
 
         #region ShowDialog
-        public bool ShowDialog<T>(Window owner = null) where T : Window, new()
+        public bool ShowDialog<T>(int nKey, Window owner = null) where T : Window, new()
         {
-            InitializeWindow<T>(owner);
+            InitializeWindow<T>(nKey, owner);
 
-            return (m_window.ShowDialog() ?? false);
+            return (m_dWindows[nKey].ShowDialog() ?? false);
         }
         #endregion
 
         #region GetResult
-        public T GetResult<T>()
+        public T GetResult<T>(int nKey = -1)
         {
             T retVal = default(T);
 
-            if (m_window?.DataContext is IResultProvider<T> resultProvider)
+            if (nKey == -1)
+            {
+                nKey = m_nCurrentWindowKey;
+            }
+            else { }
+
+            if (m_dWindows.ContainsKey(nKey) && m_dWindows[nKey].DataContext is IResultProvider<T> resultProvider)
             {
                 retVal = resultProvider.GetResult();
             }
@@ -44,25 +61,69 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         }
         #endregion
 
+        #region IsVisible
+        public bool IsVisible(int nKey = -1)
+        {
+            bool blnRet = false;
+
+            if (nKey == -1)
+            {
+                nKey = m_nCurrentWindowKey;
+            }
+            else { }
+
+            if (m_dWindows.ContainsKey(nKey))
+            {
+                blnRet = m_dWindows[nKey].Visibility == Visibility.Visible;
+            }
+            else { }
+
+            return blnRet;
+        }
+        #endregion
+
         #region Dispose
         public void Dispose()
         {
-            m_window = null;
+            if (m_dWindows.ContainsKey(m_nCurrentWindowKey))
+            {
+                m_dWindows[m_nCurrentWindowKey].Close();
+
+                m_dWindows.Remove(m_nCurrentWindowKey);
+
+                m_nCurrentWindowKey = -1;
+            }
+            else { }
+        }
+
+        public void Dispose(int nKey)
+        {
+            int nCurrentKey = m_nCurrentWindowKey;
+
+            m_nCurrentWindowKey = nKey;
+
+            Dispose();
+
+            m_nCurrentWindowKey = nCurrentKey;
         }
         #endregion
 
         #region InitializeWindow
-        private void InitializeWindow<T>(Window owner) where T : Window, new()
+        private void InitializeWindow<T>(int nKey, Window owner) where T : Window, new()
         {
-            m_window = new T();
+            T window = new T();
 
             if (owner != null)
             {
-                m_window.Owner = owner;
+                window.Owner = owner;
             }
             else { }
 
-            (m_window.DataContext as ViewModelBase).Initialize();
+            (window.DataContext as ViewModelBase).Initialize();
+
+            m_dWindows.Add(nKey, window);
+
+            m_nCurrentWindowKey = nKey;
         }
         #endregion
     }

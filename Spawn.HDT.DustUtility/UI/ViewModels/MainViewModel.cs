@@ -7,6 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Net;
+using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -93,6 +94,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region ClearCommand
         public ICommand ClearCommand => new RelayCommand(Clear, () => !string.IsNullOrEmpty(SearchQuery) || CardItems.Count > 0);
+        #endregion
+
+        #region OpenCardSelectionWindowCommand
+        public ICommand OpenCardSelectionWindowCommand => new RelayCommand(OpenCardSelectionWindow);
         #endregion
         #endregion
 
@@ -220,9 +225,19 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
 
-            DustUtilityPlugin.SwitchAccount();
+            if (DustUtilityPlugin.SwitchAccount())
+            {
+                ReloadFlyouts();
 
-            ReloadFlyouts();
+                IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
+
+                if (windowService.IsVisible(DustUtilityPlugin.CardSelectionWindowKey))
+                {
+                    windowService.Dispose(DustUtilityPlugin.CardSelectionWindowKey);
+                }
+                else { }
+            }
+            else { }
         }
         #endregion
 
@@ -325,6 +340,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 CardItems.Add(orderedList[i]);
             }
+        }
+        #endregion
+
+        #region OpenCardSelectionWindow
+        public void OpenCardSelectionWindow()
+        {
+            IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
+
+            windowService.Show<Windows.CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey, DustUtilityPlugin.MainWindow);
         }
         #endregion
 
