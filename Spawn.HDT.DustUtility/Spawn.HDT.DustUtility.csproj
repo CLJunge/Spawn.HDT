@@ -174,6 +174,7 @@
     </Compile>
     <Compile Include="UI\Models\CardItemModel.cs" />
     <Compile Include="UI\CardItemEventArgs.cs" />
+    <Compile Include="UI\Models\CardSetItemModel.cs" />
     <Compile Include="UI\Models\CardsInfoModel.cs" />
     <Compile Include="UI\Models\DeckItemModel.cs" />
     <Compile Include="UI\Models\SortOrderItemModel.cs" />

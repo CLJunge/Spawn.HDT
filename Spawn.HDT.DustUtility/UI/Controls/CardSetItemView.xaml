@@ -8,12 +8,12 @@
              mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="1000">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
-        <converters:DeckCardCountConverter x:Key="TotalCountConverter"/>
-        <converters:DeckCardCountConverter x:Key="GoldenTotalCountConverter"/>
-        <converters:DeckCardCountConverter x:Key="CommonsCountConverter"/>
-        <converters:DeckCardCountConverter x:Key="RaresCountConverter"/>
-        <converters:DeckCardCountConverter x:Key="EpicsCountConverter"/>
-        <converters:DeckCardCountConverter x:Key="LegendariesCountConverter"/>
+        <converters:CardSetCardCountConverter x:Key="TotalCountConverter" Prefix="Regular:" Suffix="(Total)"/>
+        <converters:CardSetCardCountConverter x:Key="GoldenTotalCountConverter" Prefix="Golden:" Suffix="(Total)"/>
+        <converters:CardSetCardCountConverter x:Key="CommonsCountConverter" Prefix="Common:"/>
+        <converters:CardSetCardCountConverter x:Key="RaresCountConverter" Prefix="Rare:"/>
+        <converters:CardSetCardCountConverter x:Key="EpicsCountConverter" Prefix="Epic"/>
+        <converters:CardSetCardCountConverter x:Key="LegendariesCountConverter" Prefix="Legendary:"/>
     </UserControl.Resources>
     <Border BorderBrush="Black" BorderThickness="2">
         <Grid>
@@ -44,22 +44,57 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding TotalCount, Converter={StaticResource TotalCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource TotalCountConverter}">
+                            <Binding Path="TotalCount"/>
+                            <Binding Path="MaxTotalCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Text="{Binding CommonsCount, Converter={StaticResource CommonsCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource CommonsCountConverter}">
+                            <Binding Path="CommonsCount"/>
+                            <Binding Path="MaxCommonsCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Text="{Binding EpicsCount, Converter={StaticResource EpicsCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource EpicsCountConverter}">
+                            <Binding Path="EpicsCount"/>
+                            <Binding Path="MaxEpicsCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{Binding RaresCount, Converter={StaticResource RaresCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource RaresCountConverter}">
+                            <Binding Path="RaresCount"/>
+                            <Binding Path="MaxRaresCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Text="{Binding LegendariesCount, Converter={StaticResource LegendariesCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
+                            <Binding Path="LegendariesCount"/>
+                            <Binding Path="MaxLegendariesCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding DustValue, Converter={StaticResource DustConverter}}"
+                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding DustAmount, Converter={StaticResource DustConverter}}"
                                          Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
             
@@ -75,22 +110,57 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{Binding GoldenTotalCount, Converter={StaticResource GoldenTotalCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource GoldenTotalCountConverter}">
+                            <Binding Path="GoldenTotalCount"/>
+                            <Binding Path="MaxTotalCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Text="{Binding GoldenCommonsCount, Converter={StaticResource CommonsCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource CommonsCountConverter}">
+                            <Binding Path="GoldenCommonsCount"/>
+                            <Binding Path="MaxCommonsCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Text="{Binding GoldenEpicsCount, Converter={StaticResource EpicsCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource EpicsCountConverter}">
+                            <Binding Path="GoldenEpicsCount"/>
+                            <Binding Path="MaxEpicsCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Text="{Binding GoldenRaresCount, Converter={StaticResource RaresCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource RaresCountConverter}">
+                            <Binding Path="GoldenRaresCount"/>
+                            <Binding Path="MaxRaresCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Text="{Binding GoldenLegendariesCount, Converter={StaticResource LegendariesCountConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
+                                         VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <local:OutlinedTextBlock.Text>
+                        <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
+                            <Binding Path="GoldenLegendariesCount"/>
+                            <Binding Path="MaxLegendariesCount"/>
+                        </MultiBinding>
+                    </local:OutlinedTextBlock.Text>
+                </local:OutlinedTextBlock>
 
-                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding GoldenDustValue, Converter={StaticResource DustConverter}}"
+                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding GoldenDustAmount, Converter={StaticResource DustConverter}}"
                                          Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </Grid>
