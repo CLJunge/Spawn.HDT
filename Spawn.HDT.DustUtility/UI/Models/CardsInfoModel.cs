@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿#region Using
+using GalaSoft.MvvmLight;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
