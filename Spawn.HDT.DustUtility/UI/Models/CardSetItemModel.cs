@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿#region Using
+using GalaSoft.MvvmLight;
 using System.Windows.Media.Imaging;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
@@ -19,6 +21,10 @@ namespace Spawn.HDT.DustUtility.UI.Models
         private int m_nGoldenEpicsCount;
         private int m_nGoldenLegendariesCount;
         private int m_nGoldenDustAmount;
+        private int m_nMaxCommonsCount;
+        private int m_nMaxRaresCount;
+        private int m_nMaxEpicsCount;
+        private int m_nMaxLegendariesCount;
         #endregion
 
         #region Properties
@@ -132,11 +138,50 @@ namespace Spawn.HDT.DustUtility.UI.Models
         }
         #endregion
 
-        #region DustAmount
+        #region GoldenDustAmount
         public int GoldenDustAmount
         {
             get => m_nGoldenDustAmount;
             set => Set(ref m_nGoldenDustAmount, value);
+        }
+        #endregion
+
+        #region MaxCommonsCount
+        public int MaxCommonsCount
+        {
+            get => m_nMaxCommonsCount;
+            set => Set(ref m_nMaxCommonsCount, value);
+        }
+        #endregion
+
+        #region MaxRaresCount
+        public int MaxRaresCount
+        {
+            get => m_nMaxRaresCount;
+            set => Set(ref m_nMaxRaresCount, value);
+        }
+        #endregion
+
+        #region MaxEpicsCount
+        public int MaxEpicsCount
+        {
+            get => m_nMaxEpicsCount;
+            set => Set(ref m_nMaxEpicsCount, value);
+        }
+        #endregion
+
+        #region MaxLegendariesCount
+        public int MaxLegendariesCount
+        {
+            get => m_nMaxLegendariesCount;
+            set => Set(ref m_nMaxLegendariesCount, value);
+        }
+        #endregion
+
+        #region MaxTotalCount
+        public int MaxTotalCount
+        {
+            get => MaxCommonsCount + MaxRaresCount + MaxEpicsCount + MaxLegendariesCount;
         }
         #endregion
         #endregion
@@ -159,6 +204,13 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 || e.PropertyName.Equals(nameof(GoldenLegendariesCount)))
                 {
                     RaisePropertyChanged(nameof(GoldenTotalCount));
+                }
+                else if (e.PropertyName.Equals(nameof(MaxCommonsCount))
+                || e.PropertyName.Equals(nameof(MaxRaresCount))
+                || e.PropertyName.Equals(nameof(MaxEpicsCount))
+                || e.PropertyName.Equals(nameof(MaxLegendariesCount)))
+                {
+                    RaisePropertyChanged(nameof(MaxTotalCount));
                 }
                 else { }
             };

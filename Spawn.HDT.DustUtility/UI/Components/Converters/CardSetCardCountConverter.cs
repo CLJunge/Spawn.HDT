@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 
             if (values.Length == 2)
             {
-                strRet = $"{values[0]}/{values[0]}";
+                strRet = $"{values[0]}/{values[1]}";
 
                 if (!string.IsNullOrEmpty(Prefix))
                 {
@@ -36,7 +36,8 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
 
                 if (!string.IsNullOrEmpty(Suffix))
                 {
-                    strRet = $"{strRet} {Suffix}";
+                    //strRet = $"{strRet} {Suffix}";
+                    strRet = $"{strRet} ({(int)((System.Convert.ToSingle(values[0]) / (int)values[1]) * 100)}%)";
                 }
                 else { }
             }

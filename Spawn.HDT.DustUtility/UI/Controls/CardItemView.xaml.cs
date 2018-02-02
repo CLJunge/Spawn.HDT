@@ -22,6 +22,15 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (e.NewValue is CardItemModel cardItem)
             {
+                if (cardItem.Date.HasValue)
+                {
+                    DateTextBlock.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    DateTextBlock.Visibility = Visibility.Collapsed;
+                }
+
                 RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
 
                 CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
@@ -71,15 +80,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     else { }
                 }
                 else { }
-
-                if (cardItem.Date.HasValue)
-                {
-                    DateTextBlock.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    DateTextBlock.Visibility = Visibility.Collapsed;
-                }
             }
             else { }
         }

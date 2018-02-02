@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
-             mc:Ignorable="d" d:DesignHeight="400" d:DesignWidth="1000">
+             mc:Ignorable="d" Height="400" Width="800">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
         <converters:CardSetCardCountConverter x:Key="TotalCountConverter" Prefix="Regular:" Suffix="(Total)"/>
@@ -15,7 +15,7 @@
         <converters:CardSetCardCountConverter x:Key="EpicsCountConverter" Prefix="Epic"/>
         <converters:CardSetCardCountConverter x:Key="LegendariesCountConverter" Prefix="Legendary:"/>
     </UserControl.Resources>
-    <Border BorderBrush="Black" BorderThickness="2">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="175"/>
@@ -25,14 +25,14 @@
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.RowSpan="10" Source="{Binding BackgroundImage}"/>
+            <Image Grid.RowSpan="10" Source="{Binding BackgroundImage}" Stretch="UniformToFill"/>
 
             <Image Grid.Row="0" Source="{Binding Logo}"/>
 
             <local:OutlinedTextBlock Grid.Row="1" Text="{Binding Name}" Fill="White" StrokeThickness="2" FontSize="28"
                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-            <Grid Grid.Row="3" Width="500" HorizontalAlignment="Left">
+            <Grid Grid.Row="3" Width="400" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -98,7 +98,7 @@
                                          Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
             
-            <Grid Grid.Row="3" Width="500" HorizontalAlignment="Right">
+            <Grid Grid.Row="3" Width="400" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
