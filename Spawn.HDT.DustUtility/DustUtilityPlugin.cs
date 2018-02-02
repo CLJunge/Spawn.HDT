@@ -216,7 +216,7 @@ namespace Spawn.HDT.DustUtility
 
                     if (CurrentAccount.IsValid)
                     {
-                        OpenMainWindow();
+                        ShowMainWindow();
                     }
                     else { }
                 }
@@ -416,8 +416,8 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Static Methods
-        #region OpenMainWindow
-        private static void OpenMainWindow()
+        #region ShowMainWindow
+        private static void ShowMainWindow()
         {
             ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
 
@@ -534,8 +534,10 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region SwitchAccount
-        public static void SwitchAccount()
+        public static bool SwitchAccount()
         {
+            bool blnRet = false;
+
             if (s_mainWindow != null)
             {
                 Log.WriteLine("Switching account...", LogType.Debug);
@@ -553,14 +555,18 @@ namespace Spawn.HDT.DustUtility
                 if (!selectedAcc.Equals(oldAcc))
                 {
                     UpdatedAccountInstance(selectedAcc);
+
+                    blnRet = true;
                 }
                 else { }
 
-                OpenMainWindow();
+                ShowMainWindow();
 
                 Log.WriteLine($"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
             }
             else { }
+
+            return blnRet;
         }
         #endregion
 

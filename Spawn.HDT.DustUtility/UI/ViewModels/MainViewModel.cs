@@ -218,6 +218,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region SwitchAccount
         private void SwitchAccount()
         {
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+
             DustUtilityPlugin.SwitchAccount();
 
             ReloadFlyouts();
