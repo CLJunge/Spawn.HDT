@@ -52,7 +52,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     CardWrapper wrapper = new CardWrapper(lstHistory[i].Id, lstHistory[i].Count, lstHistory[i].IsGolden, lstHistory[i].Date);
 
-                    CardItems.Add(new CardItemModel(wrapper) { ColoredCount = true });
+                    CardItemModel cardItem = new CardItemModel(wrapper)
+                    {
+                        ColoredCount = true
+                    };
+
+                    if (cardItem.Count > 0)
+                    {
+                        cardItem.Dust = wrapper.RawCard.GetCraftingCost();
+                    }
+                    else { }
+
+                    CardItems.Add(cardItem);
                 }
 
                 if (lstHistory.Count > 0)
