@@ -171,6 +171,7 @@
     <Compile Include="UI\Models\SortOrderItemModel.cs" />
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
+    <Compile Include="UI\ViewModels\CardSelectionWindowViewModel.cs" />
     <Compile Include="UI\ViewModels\DeckListFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\DecksFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
@@ -178,6 +179,9 @@
     <Compile Include="UI\ViewModels\SearchParametersFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\SortOrderFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\SortOrderItemSelectorDialogViewModel.cs" />
+    <Compile Include="UI\Windows\CardSelectionWindow.xaml.cs">
+      <DependentUpon>CardSelectionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Flyouts\UpdateFlyoutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Windows\CardSelectionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
