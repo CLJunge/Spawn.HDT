@@ -58,7 +58,7 @@
                     <TextBlock Text="DECKS" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button>
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=CollectionInfoFlyout}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -75,26 +75,29 @@
             <controls:Flyout Name="HistoryFlyout" Header="History" Position="Top">
                 <flyouts:HistoryFlyoutView x:Name="HistoryFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="UpdateFlyout" Header="New update available" Position="Bottom">
+            <controls:Flyout Name="UpdateFlyout" Header="New Update Available" Position="Bottom">
                 <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
             </controls:Flyout>
             <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right" Width="600">
                 <flyouts:DecksFlyoutView x:Name="DecksFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="DeckListFlyout" Header="Deck list" Position="Left" Width="300">
+            <controls:Flyout Name="DeckListFlyout" Header="Deck List" Position="Left" Width="300">
                 <flyouts:DeckListFlyoutView x:Name="DeckListFlyoutView"/>
             </controls:Flyout>
             <controls:Flyout Name="SearchParametersFlyout" Header="Filters" Position="Left">
                 <flyouts:SearchParametersFlyoutView x:Name="SearchParametersFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="SortOrderFlyout" Header="Sort order" Position="Right" Width="250">
+            <controls:Flyout Name="SortOrderFlyout" Header="Sort Order" Position="Right" Width="250">
                 <flyouts:SortOrderFlyoutView x:Name="SortOrderFlyoutView"/>
+            </controls:Flyout>
+            <controls:Flyout Name="CollectionInfoFlyout" Header="Collection Info" Position="Top">
+                <flyouts:CollectionInfoFlyout x:Name="CollectionInfoFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
     <Grid>
         <TextBox Style="{DynamicResource MetroButtonTextBox}" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10,10,205,0" Height="28"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="15,10,205,0" Height="28"
                  controls:TextBoxHelper.Watermark="Enter dust amount or search term..."
                  controls:TextBoxHelper.ButtonCommand="{Binding SearchCommand}">
             <TextBox.InputBindings>
@@ -119,7 +122,7 @@
                 Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=SortOrderFlyout}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,15,0" Width="150" Height="28"/>
 
-        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="10,43,175,10">
+        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="15,43,175,15">
             <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
         </Border>
 
@@ -127,6 +130,6 @@
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Selection"
                 Command="{Binding OpenCardSelectionWindowCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Margin="0,0,15,10" Width="150" Height="28"/>
+                Margin="0,0,15,15" Width="150" Height="28"/>
     </Grid>
 </controls:MetroWindow>

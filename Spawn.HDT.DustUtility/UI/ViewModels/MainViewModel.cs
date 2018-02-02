@@ -316,6 +316,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 
+            ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().ReloadRequired = true;
+
+            if (DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen)
+            {
+                ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().Initialize();
+            }
+            else { }
+
             DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
         }
         #endregion

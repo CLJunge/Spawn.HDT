@@ -154,6 +154,9 @@
     <Compile Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml.cs">
       <DependentUpon>SortOrderItemSelectorDialogView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Flyouts\CollectionInfoFlyout.xaml.cs">
+      <DependentUpon>CollectionInfoFlyout.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Flyouts\DeckListFlyoutView.xaml.cs">
       <DependentUpon>DeckListFlyoutView.xaml</DependentUpon>
     </Compile>
@@ -181,6 +184,7 @@
     <Compile Include="UI\SortOrder.cs" />
     <Compile Include="UI\ViewModels\AccountSelectorDialogViewModel.cs" />
     <Compile Include="UI\ViewModels\CardSelectionWindowViewModel.cs" />
+    <Compile Include="UI\ViewModels\CollectionInfoFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\DeckListFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\DecksFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\HistoryFlyoutViewModel.cs" />
@@ -273,6 +277,10 @@
     <Page Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Flyouts\CollectionInfoFlyout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Flyouts\DeckListFlyoutView.xaml">
       <SubType>Designer</SubType>
