@@ -61,7 +61,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #endregion
 
         #region GetDustValue
-        private int GetDustValue(int nCount = -1)
+        public int GetDustValue(int nCount = -1)
         {
             int nRet = RawCard.GetDustValue();
 

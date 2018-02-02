@@ -85,11 +85,9 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnListViewDrop
         private void OnListViewDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("item"))
+            if (e.Data.GetDataPresent("item") && e.Data.GetData("item") is CardItemModel item)
             {
-                CardItemModel item = e.Data.GetData("item") as CardItemModel;
-
-                System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
+                //System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
 
                 OnItemDropped(item);
             }

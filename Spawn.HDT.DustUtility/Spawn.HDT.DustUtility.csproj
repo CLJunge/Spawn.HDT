@@ -117,6 +117,9 @@
     <Compile Include="AccountManagement\Account.cs" />
     <Compile Include="Services\Providers\WindowProvider.cs" />
     <Compile Include="UI\Components\NumericValidationRule.cs" />
+    <Compile Include="UI\Controls\CardCountDialog.xaml.cs">
+      <DependentUpon>CardCountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Controls\CardImageContainer.xaml.cs">
       <DependentUpon>CardImageContainer.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <Page Include="Resources\RarityGems.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Controls\CardCountDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

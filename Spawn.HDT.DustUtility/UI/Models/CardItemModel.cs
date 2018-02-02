@@ -43,7 +43,23 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Count
-        public int Count => (Wrapper?.Count ?? 0);
+        public int Count
+        {
+            get => (Wrapper?.Count ?? 0);
+            set
+            {
+                if (Wrapper != null && Wrapper.RawCard != null)
+                {
+                    if (Wrapper.RawCard.Count != value)
+                    {
+                        Wrapper.RawCard.Count = value;
+                        RaisePropertyChanged(nameof(Wrapper));
+                    }
+                    else { }
+                }
+                else { }
+            }
+        }
         #endregion
 
         #region Name
@@ -55,7 +71,19 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Dust
-        public int Dust => (Wrapper?.DustValue ?? 0);
+        public int Dust
+        {
+            get => (Wrapper?.DustValue ?? 0);
+            set
+            {
+                if (Wrapper != null && Wrapper.RawCard != null)
+                {
+                    Wrapper.DustValue = value;
+                    RaisePropertyChanged(nameof(Wrapper));
+                }
+                else { }
+            }
+        }
         #endregion
 
         #region Rarity
