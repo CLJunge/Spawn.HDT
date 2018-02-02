@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.Net
 {
-    public static class HearthstoneCardImageManager
+    public static class CardImageDownloader
     {
         #region Constants
         private const string BaseUrl = "https://omgvamp-hearthstone-v1.p.mashape.com";
