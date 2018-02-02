@@ -12,7 +12,7 @@
         <converters:DisplayTextConverter x:Key="RaresCountConverter" Prefix="Rares:"/>
         <converters:DisplayTextConverter x:Key="EpicsCountConverter" Prefix="Epics:"/>
         <converters:DisplayTextConverter x:Key="LegendariesCountConverter" Prefix="Legendaries:"/>
-        <converters:DisplayTextConverter x:Key="TotalCountConverter" Suffix="Total"/>
+        <converters:DisplayTextConverter x:Key="TotalCountConverter" Prefix="Total:"/>
         <Style TargetType="{x:Type Separator}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -45,7 +45,7 @@
             <TextBlock Grid.Row="4" Text="{Binding EpicsCount, Converter={StaticResource EpicsCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
             <TextBlock Grid.Row="5" Text="{Binding LegendariesCount, Converter={StaticResource LegendariesCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14"/>
 
-            <TextBlock Grid.Row="7" Text="{Binding TotalCount, Converter={StaticResource TotalCountConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14" FontWeight="Bold"/>
+            <TextBlock Grid.Row="7" Text="{Binding TotalCount, Converter={StaticResource TotalCountConverter}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="14" FontWeight="Bold"/>
         </Grid>
     </GroupBox>
 </UserControl>
