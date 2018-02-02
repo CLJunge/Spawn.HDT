@@ -5,7 +5,6 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +74,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     Log.WriteLine($"Found {lstCards.Count} cards", LogType.Debug);
 
-                    retVal = CreateSearchResult(lstCards);
+                    retVal = SearchResult.Create(lstCards);
                 }
                 else { }
             }
@@ -339,47 +338,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
 
             return lstRet;
-        }
-        #endregion
-
-        #region CreateSearchResult
-        private SearchResult CreateSearchResult(List<CardWrapper> lstCards)
-        {
-            SearchResult retVal = new SearchResult();
-
-            Log.WriteLine("Creating search result...", LogType.Debug);
-
-            for (int i = 0; i < lstCards.Count; i++)
-            {
-                CardWrapper wrapper = lstCards[i];
-
-                switch (wrapper.DbCard.Rarity)
-                {
-                    case Rarity.COMMON:
-                        retVal.CommonsCount += wrapper.Count;
-                        break;
-
-                    case Rarity.RARE:
-                        retVal.RaresCount += wrapper.Count;
-                        break;
-
-                    case Rarity.EPIC:
-                        retVal.EpicsCount += wrapper.Count;
-                        break;
-
-                    case Rarity.LEGENDARY:
-                        retVal.LegendariesCount += wrapper.Count;
-                        break;
-                }
-
-                CardItemModel item = new CardItemModel(wrapper);
-
-                retVal.DustAmount += item.Dust;
-
-                retVal.CardItems.Add(item);
-            }
-
-            return retVal;
         }
         #endregion
 
