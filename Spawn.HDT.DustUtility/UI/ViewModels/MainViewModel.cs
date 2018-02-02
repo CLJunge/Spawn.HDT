@@ -25,7 +25,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Static Fields
         private static string s_strSearchHelpText;
-        private static bool s_blnHasCheckedForUpdates;
+        private static bool s_blnCheckedForUpdates;
         #endregion
 
         #region Member Variables
@@ -120,7 +120,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 if (e.PropertyName.Equals(nameof(DustUtilityPlugin.Config.CheckForUpdates)))
                 {
-                    s_blnHasCheckedForUpdates = !DustUtilityPlugin.Config.CheckForUpdates;
+                    s_blnCheckedForUpdates = !DustUtilityPlugin.Config.CheckForUpdates;
                 }
                 else { }
             };
@@ -187,14 +187,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
-            if (!string.IsNullOrEmpty(account.Preferences.SearchParameters.QueryString))
-            {
-                SearchQuery = account.Preferences.SearchParameters.QueryString;
-            }
-            else
-            {
-                SearchQuery = string.Empty;
-            }
+            SearchQuery = account.Preferences.SearchParameters.QueryString;
 
             ClearContainer();
 
@@ -202,7 +195,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 BackupManager.DeleteOldBackups(account);
 
-                if (!s_blnHasCheckedForUpdates)
+                if (!s_blnCheckedForUpdates)
                 {
                     if ((DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync()))
                     {
@@ -213,7 +206,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else { }
 
-                    s_blnHasCheckedForUpdates = true;
+                    s_blnCheckedForUpdates = true;
                 }
                 else { }
             });
@@ -350,6 +343,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             windowService.Show<Windows.CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey, DustUtilityPlugin.MainWindow);
         }
+        #endregion
+
+        #region OnClosing
+        public void OnClosing() => DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
         #endregion
 
         #region OrderItems

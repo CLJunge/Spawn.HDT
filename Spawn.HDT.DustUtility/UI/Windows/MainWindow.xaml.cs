@@ -1,4 +1,7 @@
-﻿namespace Spawn.HDT.DustUtility.UI.Windows
+﻿using Microsoft.Practices.ServiceLocation;
+using Spawn.HDT.DustUtility.UI.ViewModels;
+
+namespace Spawn.HDT.DustUtility.UI.Windows
 {
     public partial class MainWindow
     {
@@ -7,6 +10,12 @@
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region Events
+        #region OnClosing
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) => ServiceLocator.Current.GetInstance<MainViewModel>().OnClosing();
+        #endregion
         #endregion
     }
 }

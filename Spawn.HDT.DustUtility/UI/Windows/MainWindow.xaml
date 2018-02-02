@@ -10,7 +10,8 @@
         mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"
         Height="550" Width="1100" MinHeight="550" MinWidth="1100" WindowStartupLocation="CenterScreen"
         Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
-        RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never">
+        RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never"
+        Closing="OnClosing">
     <Window.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
