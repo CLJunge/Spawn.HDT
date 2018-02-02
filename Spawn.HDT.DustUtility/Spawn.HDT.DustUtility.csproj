@@ -103,7 +103,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
-    <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\IWindowService.cs" />
     <Compile Include="Net\GitHubUpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="AccountManagement\BackupManager.cs" />
@@ -115,7 +115,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccountManagement\Account.cs" />
-    <Compile Include="Services\Providers\DialogServiceProvider.cs" />
+    <Compile Include="Services\Providers\WindowProvider.cs" />
     <Compile Include="UI\Components\NumericValidationRule.cs" />
     <Compile Include="UI\Controls\CardImageContainer.xaml.cs">
       <DependentUpon>CardImageContainer.xaml</DependentUpon>

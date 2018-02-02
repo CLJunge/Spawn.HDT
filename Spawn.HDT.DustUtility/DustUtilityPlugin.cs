@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
-            SimpleIoc.Default.Register<IDialogService, DialogServiceProvider>();
+            SimpleIoc.Default.Register<IWindowService, WindowProvider>();
             SimpleIoc.Default.Register<ICardsManager, CardsManager>();
             SimpleIoc.Default.Register(() => Configuration.Load());
 #if DEBUG
@@ -269,7 +269,7 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+            using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
             {
                 if (dialogService.ShowDialog<SettingsDialogView>(Core.MainWindow))
                 {
@@ -473,11 +473,11 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+                    using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
                     {
                         if (dialogService.ShowDialog<AccountSelectorDialogView>(owner))
                         {
-                            retVal = Account.Parse(dialogService.GetDialogResult<string>());
+                            retVal = Account.Parse(dialogService.GetResult<string>());
 
                             Config.LastSelectedAccount = retVal.AccountString;
                         }

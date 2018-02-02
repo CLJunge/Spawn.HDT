@@ -105,11 +105,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 viewModel.SortOrderItems.Add(lstUnusedItems[i]);
             }
 
-            using (IDialogService dialogService = ServiceLocator.Current.GetInstance<IDialogService>())
+            using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
             {
                 if (dialogService.ShowDialog<SortOrderItemSelectorDialogView>(DustUtilityPlugin.MainWindow))
                 {
-                    SortOrder.OrderItem orderItem = dialogService.GetDialogResult<SortOrder.OrderItem>();
+                    SortOrder.OrderItem orderItem = dialogService.GetResult<SortOrder.OrderItem>();
 
                     SortOrderItems.Add(new SortOrderItemModel(orderItem));
                 }
