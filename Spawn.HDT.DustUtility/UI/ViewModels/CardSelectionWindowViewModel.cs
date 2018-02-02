@@ -1,6 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthDb.Enums;
+using HearthMirror;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.CardManagement;
@@ -48,6 +49,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region ClearCommand
         public ICommand ClearCommand => new RelayCommand(Clear, () => CardItems.Count > 0);
+        #endregion
+
+        #region ImportLatestPackCommand
+        public ICommand ImportLatestPackCommand => new RelayCommand(ImportLatestPack, () => Reflection.GetPackCards()?.Count > 0);
         #endregion
         #endregion
 
@@ -136,6 +141,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             CardItems.Clear();
             CardsInfo.Clear();
+        }
+        #endregion
+
+        #region ImportLatestPack
+        private void ImportLatestPack()
+        {
+            List<HearthMirror.Objects.Card> lstCards = Reflection.GetPackCards();
+
+            if (lstCards?.Count > 0)
+            {
+                for (int i = 0; i < lstCards.Count; i++)
+                {
+                    AddCardItem(new CardItemModel(new CardWrapper(lstCards[i])));
+                }
+            }
+            else { }
         }
         #endregion
 

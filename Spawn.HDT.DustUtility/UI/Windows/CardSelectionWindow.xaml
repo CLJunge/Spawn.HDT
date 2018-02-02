@@ -21,6 +21,9 @@
         
         <uicontrols:CardsInfoView DataContext="{Binding CardsInfo}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"/>
 
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,265,15,0" Width="150" Height="28"/>
+        
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,10" Width="150" Height="28"/>
     </Grid>
