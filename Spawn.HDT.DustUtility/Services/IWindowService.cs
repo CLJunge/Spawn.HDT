@@ -10,6 +10,7 @@ namespace Spawn.HDT.DustUtility.Services
         #region Methods
         void Show<T>(int nKey, Window owner = null) where T : Window, new();
         bool ShowDialog<T>(int nKey, Window owner = null) where T : Window, new();
+        T GetInstance<T>(int nKey = -1) where T : Window;
         T GetResult<T>(int nKey = -1);
         bool IsVisible(int nKey = -1);
         void Dispose(int nKey);

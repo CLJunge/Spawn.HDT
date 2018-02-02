@@ -40,6 +40,19 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         }
         #endregion
 
+        #region GetInstance
+        public T GetInstance<T>(int nKey = -1) where T : Window
+        {
+            if (nKey == -1)
+            {
+                nKey = m_nCurrentWindowKey;
+            }
+            else { }
+
+            return (T)m_dWindows[nKey];
+        }
+        #endregion
+
         #region GetResult
         public T GetResult<T>(int nKey = -1)
         {
