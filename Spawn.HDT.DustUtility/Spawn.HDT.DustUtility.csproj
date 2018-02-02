@@ -104,7 +104,7 @@
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
     <Compile Include="Services\IWindowService.cs" />
-    <Compile Include="Net\GitHubUpdateManager.cs" />
+    <Compile Include="Net\UpdateManager.cs" />
     <Compile Include="Net\HearthstoneCardImageManager.cs" />
     <Compile Include="AccountManagement\BackupManager.cs" />
     <Compile Include="CardManagement\Offline\Cache.cs" />

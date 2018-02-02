@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.Net
 {
-    public static class GitHubUpdateManager
+    public static class UpdateManager
     {
         #region Constants
         public const string BaseUrl = "https://github.com/CLJunge/Spawn.HDT.DustUtility/releases";
@@ -38,7 +38,7 @@ namespace Spawn.HDT.DustUtility.Net
         #endregion
 
         #region Static Ctor
-        static GitHubUpdateManager()
+        static UpdateManager()
         {
             s_versionRegex = new Regex("[0-9]\\.[0-9]{1,2}\\.?[0-9]{0,2}");
             s_updateTextRegex = new Regex("<div class=\"markdown-body\">\\s*?<p>(?<Content>.*)</p>\\s*?</div>");

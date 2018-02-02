@@ -111,10 +111,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Update {GitHubUpdateManager.NewVersion.ToString(3)} has been released.")
+            sb.Append($"Update {UpdateManager.NewVersion.ToString(3)} has been released.")
                 .Append(Environment.NewLine + Environment.NewLine)
                 .Append("Release Notes:").Append(Environment.NewLine)
-                .Append(GitHubUpdateManager.ReleaseNotes)
+                .Append(UpdateManager.ReleaseNotes)
                 .Append(Environment.NewLine + Environment.NewLine)
                 .Append("Would you like to download it?");
 
@@ -128,10 +128,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             MessagePanelVisibility = Visibility.Collapsed;
             DownloadPanelVisibility = Visibility.Visible;
 
-            GitHubUpdateManager.DownloadProgressChanged += OnDownloadProgressChanged;
-            GitHubUpdateManager.DownloadCompleted += OnDownloadCompleted;
+            UpdateManager.DownloadProgressChanged += OnDownloadProgressChanged;
+            UpdateManager.DownloadCompleted += OnDownloadCompleted;
 
-            GitHubUpdateManager.Download(GitHubUpdateManager.NewVersion);
+            UpdateManager.Download(UpdateManager.NewVersion);
         }
         #endregion
 
@@ -145,10 +145,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region CancelDownload
         private void CancelDownload()
         {
-            GitHubUpdateManager.CancelDownload();
+            UpdateManager.CancelDownload();
 
-            GitHubUpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
-            GitHubUpdateManager.DownloadCompleted -= OnDownloadCompleted;
+            UpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
+            UpdateManager.DownloadCompleted -= OnDownloadCompleted;
 
             CloseFlyout();
         }
@@ -160,8 +160,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             Log.WriteLine("Download finished. Extracting zip file...", LogType.Debug);
 
-            GitHubUpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
-            GitHubUpdateManager.DownloadCompleted -= OnDownloadCompleted;
+            UpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
+            UpdateManager.DownloadCompleted -= OnDownloadCompleted;
 
             string strPath = Path.Combine(DustUtilityPlugin.DataDirectory, "update.zip");
 

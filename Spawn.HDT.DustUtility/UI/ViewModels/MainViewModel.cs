@@ -204,7 +204,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 if (!s_blnHasCheckedForUpdates)
                 {
-                    if ((DustUtilityPlugin.Config.CheckForUpdates && await GitHubUpdateManager.PerformUpdateCheckAsync()))
+                    if ((DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync()))
                     {
                         DustUtilityPlugin.MainWindow.Dispatcher.Invoke(() =>
                         {
