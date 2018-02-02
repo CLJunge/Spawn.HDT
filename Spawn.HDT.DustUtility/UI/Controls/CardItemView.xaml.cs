@@ -22,11 +22,16 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (e.NewValue is CardItemModel cardItem)
             {
-                CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
+                RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
 
+                CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
                 CardSetImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardSet.GetShortString()}Icon");
 
-                RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
+                CountTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                ManaCostTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                DustTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                CardClassTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
+                CardSetTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
 
                 if (cardItem.Golden)
                 {
