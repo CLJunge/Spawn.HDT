@@ -1,6 +1,5 @@
 ﻿#region Using
 using HearthMirror.Objects;
-using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Diagnostics;
 #endregion
@@ -54,15 +53,10 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             RawCard = card;
         }
 
-        public CardWrapper(string cardString)
-            : this(ParseCardString(cardString))
+        public CardWrapper(string id, int count, bool isGolden, DateTime? date)
+            : this(new Card(id, count, isGolden))
         {
-        }
-
-        public CardWrapper(CachedHistoryCard cachedCard)
-            : this(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden))
-        {
-            Date = cachedCard.Date;
+            Date = date;
         }
         #endregion
 
@@ -82,23 +76,6 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             else { }
 
             return nRet;
-        }
-        #endregion
-
-        #region ToString
-        public override string ToString()
-        {
-            //id count premium
-            return $"{RawCard.Id}:{RawCard.Count}:{RawCard.Premium}";
-        }
-        #endregion
-
-        #region [STATIC] ParseCardString
-        private static Card ParseCardString(string strCardString)
-        {
-            string[] vValues = strCardString.Split(':');
-
-            return new Card(vValues[0], Convert.ToInt32(vValues[1]), Convert.ToBoolean(vValues[2]));
         }
         #endregion
     }

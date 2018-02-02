@@ -50,7 +50,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 for (int i = 0; i < lstHistory.Count; i++)
                 {
-                    CardItems.Add(new CardItemModel(new CardWrapper(lstHistory[i])) { ColoredCount = true });
+                    CardWrapper wrapper = new CardWrapper(lstHistory[i].Id, lstHistory[i].Count, lstHistory[i].IsGolden, lstHistory[i].Date);
+
+                    CardItems.Add(new CardItemModel(wrapper) { ColoredCount = true });
                 }
 
                 if (lstHistory.Count > 0)
