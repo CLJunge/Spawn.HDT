@@ -139,6 +139,7 @@
     <Compile Include="UI\Controls\DeckItemView.xaml.cs">
       <DependentUpon>DeckItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\OutlinedTextBlock.cs" />
     <Compile Include="UI\Dialogs\AccountSelectorDialogView.xaml.cs">
       <DependentUpon>AccountSelectorDialogView.xaml</DependentUpon>
     </Compile>
