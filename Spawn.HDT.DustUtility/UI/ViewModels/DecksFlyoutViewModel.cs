@@ -50,10 +50,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ToggleDeckCommand
         public ICommand ToggleDeckCommand => new RelayCommand(ToggleDeck);
         #endregion
-
-        #region ContextMenuOpeningCommand
-        public ICommand ContextMenuOpeningCommand => new RelayCommand<System.Windows.Controls.ContextMenuEventArgs>(OnContextMenuOpening);
-        #endregion
         #endregion
 
         #region Ctor
@@ -137,7 +133,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnContextMenuOpening
-        private void OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs e)
+        public void OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs e)
         {
             bool blnDeckSelected = SelectedDeckItem != null;
 
