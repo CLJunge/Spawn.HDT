@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="AccountManagement\Account.cs" />
     <Compile Include="Services\Providers\WindowProvider.cs" />
+    <Compile Include="UI\Components\Converters\CardSetCardCountConverter.cs" />
     <Compile Include="UI\Components\NumericValidationRule.cs" />
     <Compile Include="UI\Controls\CardCountDialog.xaml.cs">
       <DependentUpon>CardCountDialog.xaml</DependentUpon>
