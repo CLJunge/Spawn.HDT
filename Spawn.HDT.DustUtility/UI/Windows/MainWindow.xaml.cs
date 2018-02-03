@@ -16,7 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
         #region Events
         #region OnClosing
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) => ServiceLocator.Current.GetInstance<MainViewModel>().OnClosing();
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) => ServiceLocator.Current.GetInstance<MainViewModel>().OnClosing(sender, e);
         #endregion
         #endregion
     }

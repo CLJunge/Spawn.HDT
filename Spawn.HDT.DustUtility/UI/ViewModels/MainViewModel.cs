@@ -354,7 +354,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnClosing
-        public void OnClosing() => DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+        public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+
+            (sender as Window).Hide();
+
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+        }
         #endregion
 
         #region OrderItems

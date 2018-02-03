@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #endregion
 
         #region OnClosing
-        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) => ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().OnClosing(e);
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) => ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().OnClosing(sender, e);
         #endregion
         #endregion
     }

@@ -25,7 +25,11 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         #region Show
         public void Show<T>(int nKey, Window owner = null) where T : Window, new()
         {
-            InitializeWindow<T>(nKey, owner);
+            if (!m_dWindows.ContainsKey(nKey))
+            {
+                InitializeWindow<T>(nKey, owner);
+            }
+            else { }
 
             m_dWindows[nKey]?.Show();
         }
@@ -100,8 +104,6 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         {
             if (m_dWindows.ContainsKey(m_nCurrentWindowKey))
             {
-                m_dWindows[m_nCurrentWindowKey].Close();
-
                 m_dWindows.Remove(m_nCurrentWindowKey);
 
                 m_nCurrentWindowKey = -1;

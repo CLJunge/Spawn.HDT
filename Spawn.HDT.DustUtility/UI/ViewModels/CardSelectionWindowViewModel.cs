@@ -13,7 +13,6 @@ using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -220,7 +219,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnClosing
-        public void OnClosing(CancelEventArgs e)
+        public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             List<CachedCard> lstCards = CardItems.Select(i => new CachedCard() { Id = i.Id, Count = i.Count, IsGolden = i.Golden }).ToList();
 
@@ -230,6 +229,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Add(lstCards[i]);
             }
+
+            ServiceLocator.Current.GetInstance<IWindowService>().Dispose(DustUtilityPlugin.CardSelectionWindowKey);
         }
         #endregion
 

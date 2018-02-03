@@ -430,26 +430,15 @@ namespace Spawn.HDT.DustUtility
 
             if (s_mainWindow == null)
             {
-                Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
-
-                //s_mainView = new MainWindowView(s_account, GetAccounts().Length > 1);
                 s_mainWindow = new MainWindow();
-
-                s_mainWindow.Closing += (s, e) =>
-                {
-                    e.Cancel = true;
-
-                    s_mainWindow.Hide();
-                };
             }
-            else
-            {
-                s_mainWindow.Show();
+            else { }
 
-                BringWindowToFront(s_mainWindow);
-            }
+            Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
             s_mainWindow.Show();
+
+            BringWindowToFront(s_mainWindow);
         }
         #endregion
 
