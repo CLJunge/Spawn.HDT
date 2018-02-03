@@ -1,4 +1,5 @@
 ﻿#region Using
+
 using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
@@ -23,6 +24,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
+
 #endregion
 
 namespace Spawn.HDT.DustUtility
@@ -217,7 +219,12 @@ namespace Spawn.HDT.DustUtility
                         {
                             UpdatedAccountInstance(selectedAcc);
                         }
-                        else { }
+                        else
+                        {
+                            MessageBox.Show("No account(s) available!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                            Log.WriteLine("No accounts available", LogType.Info);
+                        }
                     }
                     else { }
 
@@ -480,10 +487,7 @@ namespace Spawn.HDT.DustUtility
                         else { }
                     }
                 }
-                else
-                {
-                    retVal = Account.Empty;
-                }
+                else { }
             }
 
             if (retVal != null)
