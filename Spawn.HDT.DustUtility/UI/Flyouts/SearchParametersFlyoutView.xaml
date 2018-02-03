@@ -706,10 +706,10 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <CheckBox Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}">
+                <CheckBox Name="IncludeGoldenCardsCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}">
                     <TextBlock Text="Incl. Golden Cards" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
-                <CheckBox Grid.Row="1" Margin="5,0,0,0" IsEnabled="{Binding ElementName=cbGolden, Path=IsChecked}" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}">
+                <CheckBox Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}" IsEnabled="{Binding ElementName=IncludeGoldenCardsCheckBox, Path=IsChecked}">
                     <TextBlock Text="Golden Cards Only" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
                 <CheckBox Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}">
