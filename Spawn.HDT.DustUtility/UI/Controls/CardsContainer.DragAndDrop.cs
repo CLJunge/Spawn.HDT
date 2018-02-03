@@ -67,7 +67,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnListViewPreviewMouseLeftButtonDown
         private void OnListViewPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            m_startPosition = e.GetPosition(null);
+            //handles scrollbar
+            if (!(e.OriginalSource is System.Windows.Shapes.Rectangle))
+            {
+                m_startPosition = e.GetPosition(null);
+            }
+            else { }
         }
         #endregion
 
