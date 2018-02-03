@@ -11,7 +11,7 @@
         Height="550" Width="1100" MinHeight="550" MinWidth="1100" WindowStartupLocation="CenterScreen"
         Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
         RightWindowCommandsOverlayBehavior="Never" LeftWindowCommandsOverlayBehavior="Never"
-        Closing="OnClosing">
+        Closing="OnClosing" GlowBrush="Black">
     <Window.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"/>
@@ -90,7 +90,7 @@
             <controls:Flyout Name="SortOrderFlyout" Header="Sort Order" Position="Right" Width="250">
                 <flyouts:SortOrderFlyoutView x:Name="SortOrderFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="CollectionInfoFlyout" Header="Collection Info" Position="Top">
+            <controls:Flyout Name="CollectionInfoFlyout" Header="Collection Info" Position="Left">
                 <flyouts:CollectionInfoFlyout x:Name="CollectionInfoFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>

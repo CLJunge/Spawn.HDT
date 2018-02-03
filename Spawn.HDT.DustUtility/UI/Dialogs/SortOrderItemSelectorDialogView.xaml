@@ -6,7 +6,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         vm:ViewModelLocator.ViewModelName="SortOrderItemSelectorDialogViewModel"
-        mc:Ignorable="d" BorderBrush="{DynamicResource AccentColorBrush}" ResizeMode="NoResize"
+        mc:Ignorable="d" BorderBrush="{DynamicResource AccentColorBrush}" ResizeMode="NoResize" GlowBrush="Black"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">

@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
-        Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+        Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" GlowBrush="Black">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
             <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
