@@ -237,7 +237,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OpenFlyout
         public void OpenFlyout(Flyout flyout)
         {
-            (((FrameworkElement)flyout.Content).DataContext as ViewModelBase).Initialize();
+            ViewModelBase viewModel = (((FrameworkElement)flyout.Content).DataContext as ViewModelBase);
+
+            if (flyout.Content is Flyouts.CollectionInfoFlyout && viewModel.ReloadRequired)
+            {
+                int nCollectionValue = ServiceLocator.Current.GetInstance<ICardsManager>().GetCollectionValue();
+
+                flyout.Header = $"Collection Info ({nCollectionValue} Dust)";
+            }
+            else { }
+
+            viewModel.Initialize();
 
             if (!flyout.IsOpen)
             {
@@ -292,39 +302,16 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ReloadFlyoutViews
         public void ReloadFlyouts()
         {
-            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
-
-            if (DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen)
-            {
-                ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().Initialize();
-            }
-            else { }
-
-            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
-
-            if (DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen)
-            {
-                ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().Initialize();
-            }
-            else { }
-
-            ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().ReloadRequired = true;
-
-            if (DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen)
-            {
-                ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().Initialize();
-            }
-            else { }
-
-            ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().ReloadRequired = true;
-
-            if (DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen)
-            {
-                ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().Initialize();
-            }
-            else { }
-
+            DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen = false;
+            DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen = false;
+            DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
+            DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen = false;
             DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+
+            ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
+            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
+            ServiceLocator.Current.GetInstance<SearchParametersFlyoutViewModel>().ReloadRequired = true;
+            ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().ReloadRequired = true;
         }
         #endregion
 
