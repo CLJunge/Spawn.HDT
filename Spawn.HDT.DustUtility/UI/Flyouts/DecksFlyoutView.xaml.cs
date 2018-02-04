@@ -27,6 +27,17 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
             ((DecksFlyoutViewModel)DataContext).OnContextMenuOpening(e);
         }
         #endregion
+
+        #region OnListViewMouseDoubleClick
+        private void OnListViewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                ((DecksFlyoutViewModel)DataContext).ShowDeckListCommand.Execute(null);
+            }
+            else { }
+        }
+        #endregion
         #endregion
     }
 }
