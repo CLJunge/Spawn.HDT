@@ -1,4 +1,5 @@
-﻿using HearthDb.Enums;
+﻿#region Using
+using HearthDb.Enums;
 using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
