@@ -52,9 +52,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OnListViewMouseDoubleClick
         private async void OnListViewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            m_blnDblClick = true;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                m_blnDblClick = true;
 
-            await OpenPopupAsync();
+                await OpenPopupAsync();
+            }
+            else { }
         }
         #endregion
 
