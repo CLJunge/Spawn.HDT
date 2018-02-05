@@ -422,7 +422,11 @@ namespace Spawn.HDT.DustUtility
                 }
                 else
                 {
+#if DEBUG
+                    SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+#else
                     SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
+#endif
                 }
 
                 SimpleIoc.Default.Register<IWindowService, WindowProvider>();
