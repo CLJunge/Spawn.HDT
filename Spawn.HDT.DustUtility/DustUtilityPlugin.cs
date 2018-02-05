@@ -508,7 +508,7 @@ namespace Spawn.HDT.DustUtility
                 }
                 else
                 {
-                    MessageBox.Show("No account(s) available!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("No account(s) available!", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                     Log.WriteLine("No accounts available", LogType.Info);
                 }
