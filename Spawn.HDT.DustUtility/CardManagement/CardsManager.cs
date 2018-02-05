@@ -352,5 +352,26 @@ namespace Spawn.HDT.DustUtility.CardManagement
             return nRet;
         }
         #endregion
+
+        public static async Task<bool> Disenchant(IAccount account, List<CardWrapper> lstCards)
+        {
+            bool blnRet = false;
+
+            if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning && account.Equals(Account.LoggedInAccount))
+            {
+                Hearthstone_Deck_Tracker.Hearthstone.Deck deck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
+                deck.Name = "test";
+
+                for (int i = 0; i < lstCards.Count; i++)
+                {
+                    deck.Cards.Add(lstCards[i].Card);
+                }
+
+                await AutoDisenchant.DeckExporter.Export(deck, null);
+            }
+            else { }
+
+            return blnRet;
+        }
     }
 }

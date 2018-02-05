@@ -91,6 +91,12 @@
   <ItemGroup>
     <Compile Include="AccountManagement\AccountPreferences.cs" />
     <Compile Include="AccountManagement\MockAccount.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\DeckExporter.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\DisenchantConfig.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\ExportingActions.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\ExportingHelper.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\ExportingInfo.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\MouseActions.cs" />
     <Compile Include="CardManagement\CardsManager.cs" />
     <Compile Include="CardManagement\SearchResult.cs" />
     <Compile Include="Hearthstone\CardWrapper.cs" />
@@ -356,6 +362,7 @@
     <Resource Include="Resources\Images\tournament_banner.jpg" />
     <Resource Include="Resources\Images\ungoro_banner.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--<Target Name="AfterResolveReferences">
     <ItemGroup>
@@ -365,7 +372,7 @@
     </ItemGroup>
   </Target>-->
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
+    <PostBuildEvent>rem if $(ConfigurationName) == Debug "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
 if $(ConfigurationName) == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild</PostBuildEvent>
   </PropertyGroup>
 </Project>
