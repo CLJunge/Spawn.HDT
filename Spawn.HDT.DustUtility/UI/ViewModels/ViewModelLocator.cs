@@ -1,7 +1,5 @@
 ﻿#region Using
-using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using Spawn.HDT.DustUtility.AccountManagement;
 using System;
 using System.Windows;
 #endregion
@@ -54,28 +52,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Static Ctor
         static ViewModelLocator()
         {
-#if DEBUG
-            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-            {
-                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-                SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
-                SimpleIoc.Default.Register<MainViewModel>();
-            }
-            else { }
-#endif
-
-            SimpleIoc.Default.Register<HistoryFlyoutViewModel>();
-            SimpleIoc.Default.Register<UpdateFlyoutViewModel>();
-            SimpleIoc.Default.Register<DecksFlyoutViewModel>();
-            SimpleIoc.Default.Register<DeckListFlyoutViewModel>();
-            SimpleIoc.Default.Register<SearchParametersFlyoutViewModel>();
-            SimpleIoc.Default.Register<SortOrderFlyoutViewModel>();
-            SimpleIoc.Default.Register<CollectionInfoFlyoutViewModel>();
-
-            SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
-            SimpleIoc.Default.Register<SettingsDialogViewModel>();
-            SimpleIoc.Default.Register<SortOrderItemSelectorDialogViewModel>();
-            SimpleIoc.Default.Register<CardSelectionWindowViewModel>();
+            DustUtilityPlugin.CreateContainer();
         }
         #endregion
     }

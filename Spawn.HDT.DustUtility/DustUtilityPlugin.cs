@@ -108,22 +108,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
-            SimpleIoc.Default.Register<IWindowService, WindowProvider>();
-            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
-            SimpleIoc.Default.Register(() => Configuration.Load());
-#if DEBUG
-            if (!GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-            {
-                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-                SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
-                SimpleIoc.Default.Register<MainViewModel>();
-            }
-            else { }
-#else
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
-            SimpleIoc.Default.Register<MainViewModel>();
-#endif
+            CreateContainer();
 
             RarityBrushes = new Dictionary<int, SolidColorBrush>
             {
@@ -428,6 +413,45 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Static Methods
+        #region CreateContainer
+        public static void CreateContainer()
+        {
+            if (!ServiceLocator.IsLocationProviderSet)
+            {
+                ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
+                if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+                {
+                    SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+                }
+                else
+                {
+                    SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
+                }
+
+                SimpleIoc.Default.Register<IWindowService, WindowProvider>();
+                SimpleIoc.Default.Register<ICardsManager, CardsManager>();
+                SimpleIoc.Default.Register(() => Configuration.Load());
+
+                SimpleIoc.Default.Register<MainViewModel>();
+                SimpleIoc.Default.Register<CardSelectionWindowViewModel>();
+
+                SimpleIoc.Default.Register<HistoryFlyoutViewModel>();
+                SimpleIoc.Default.Register<UpdateFlyoutViewModel>();
+                SimpleIoc.Default.Register<DecksFlyoutViewModel>();
+                SimpleIoc.Default.Register<DeckListFlyoutViewModel>();
+                SimpleIoc.Default.Register<SearchParametersFlyoutViewModel>();
+                SimpleIoc.Default.Register<SortOrderFlyoutViewModel>();
+                SimpleIoc.Default.Register<CollectionInfoFlyoutViewModel>();
+
+                SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
+                SimpleIoc.Default.Register<SettingsDialogViewModel>();
+                SimpleIoc.Default.Register<SortOrderItemSelectorDialogViewModel>();
+            }
+            else { }
+        }
+        #endregion
+
         #region ShowMainWindow
         private static void ShowMainWindow()
         {
