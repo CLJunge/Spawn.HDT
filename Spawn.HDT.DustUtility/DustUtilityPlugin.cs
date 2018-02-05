@@ -186,9 +186,11 @@ namespace Spawn.HDT.DustUtility
             else { }
         }
         #endregion
+        #endregion
 
-        #region OnClick
-        private void OnClick(object sender, RoutedEventArgs e)
+        #region Events
+        #region OnMenuItemClick
+        private void OnMenuItemClick(object sender, RoutedEventArgs e)
         {
             if (s_blnInitialized)
             {
@@ -255,7 +257,7 @@ namespace Spawn.HDT.DustUtility
                 }
             };
 
-            retVal.Click += OnClick;
+            retVal.Click += OnMenuItemClick;
 
             return retVal;
         }
