@@ -241,7 +241,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (flyout.Content is Flyouts.CollectionInfoFlyout && viewModel.ReloadRequired)
             {
-                int nCollectionValue = ServiceLocator.Current.GetInstance<ICardsManager>().GetCollectionValue();
+                int nCollectionValue = CardsManager.GetCollectionValue(DustUtilityPlugin.CurrentAccount);
 
                 flyout.Header = $"Collection Info ({nCollectionValue} Dust)";
             }
@@ -266,9 +266,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
 
-                ICardsManager cardsManager = ServiceLocator.Current.GetInstance<ICardsManager>();
-
-                SearchResult result = await cardsManager.GetSearchResultAsync(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters);
+                SearchResult result = await CardsManager.GetCardsAsync(DustUtilityPlugin.CurrentAccount);
 
                 result.CardItems = OrderItems(result.CardItems).ToList();
 

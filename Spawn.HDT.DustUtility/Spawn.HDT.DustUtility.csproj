@@ -94,7 +94,6 @@
     <Compile Include="CardManagement\CardsManager.cs" />
     <Compile Include="CardManagement\SearchResult.cs" />
     <Compile Include="Hearthstone\CardWrapper.cs" />
-    <Compile Include="CardManagement\ICardsManager.cs" />
     <Compile Include="CardManagement\SearchParameters.cs" />
     <Compile Include="Hearthstone\CardSets.cs" />
     <Compile Include="Configuration.cs" />

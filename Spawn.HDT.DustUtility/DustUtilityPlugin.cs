@@ -5,7 +5,6 @@ using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
-using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.Services.Providers;
@@ -427,7 +426,6 @@ namespace Spawn.HDT.DustUtility
                 }
 
                 SimpleIoc.Default.Register<IWindowService, WindowProvider>();
-                SimpleIoc.Default.Register<ICardsManager, CardsManager>();
                 SimpleIoc.Default.Register(() => Configuration.Load());
 
                 SimpleIoc.Default.Register<MainViewModel>();
@@ -597,13 +595,11 @@ namespace Spawn.HDT.DustUtility
         #region UpdatedAccountInstance
         private static void UpdatedAccountInstance(IAccount account)
         {
-            //Remove current account instance and card manager
+            //Remove current account instance
             SimpleIoc.Default.Unregister<IAccount>();
-            SimpleIoc.Default.Unregister<ICardsManager>();
 
-            //And readd them
+            //And readd it
             SimpleIoc.Default.Register(() => account);
-            SimpleIoc.Default.Register<ICardsManager, CardsManager>();
         }
         #endregion
 

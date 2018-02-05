@@ -13,27 +13,25 @@ using System.Threading.Tasks;
 
 namespace Spawn.HDT.DustUtility.CardManagement
 {
-    public class CardsManager : ICardsManager
+    public static class CardsManager
     {
         #region Member Variables
-        private IAccount m_account;
-
-        private List<CardWrapper> m_lstUnusedCards;
+        private static List<CardWrapper> s_lstUnusedCards;
         #endregion
 
-        #region Ctor
-        public CardsManager(IAccount account)
+        #region Static Ctor
+        static CardsManager()
         {
-            m_account = account;
-
-            m_lstUnusedCards = new List<CardWrapper>();
+            s_lstUnusedCards = new List<CardWrapper>();
         }
         #endregion
 
         #region GetCardsAsync
-        public async Task<SearchResult> GetSearchResultAsync(SearchParameters parameters)
+        public static async Task<SearchResult> GetCardsAsync(IAccount account)
         {
             SearchResult retVal = new SearchResult();
+
+            SearchParameters parameters = account.Preferences.SearchParameters;
 
             if (parameters != null)
             {
@@ -46,19 +44,19 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 Log.WriteLine($"Classes={string.Join(",", parameters.Classes)}", LogType.Debug);
                 Log.WriteLine($"Sets={string.Join(",", parameters.Sets)}", LogType.Debug);
 
-                List<Card> lstCollection = m_account.GetCollection();
-
-                if (parameters.UnusedCardsOnly)
-                {
-                    await CheckForUnusedCardsAsync(lstCollection);
-                }
-                else
-                {
-                    m_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
-                }
+                List<Card> lstCollection = account.GetCollection();
 
                 if (lstCollection.Count > 0)
                 {
+                    if (parameters.UnusedCardsOnly)
+                    {
+                        await CheckCollectionForUnusedCardsAsync(account);
+                    }
+                    else
+                    {
+                        s_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
+                    }
+
                     List<CardWrapper> lstCards = new List<CardWrapper>();
 
                     bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
@@ -84,7 +82,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GetCardsForDustAmount
-        private void GetCardsForDustAmount(SearchParameters parameters, List<CardWrapper> lstCards)
+        private static void GetCardsForDustAmount(SearchParameters parameters, List<CardWrapper> lstCards)
         {
             int nDustAmount = 0;
 
@@ -135,7 +133,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region RemoveRedundantCards
-        private void RemoveRedundantCards(List<CardWrapper> lstCards, SearchParameters parameters, int nDustAmount, int nTotalAmount)
+        private static void RemoveRedundantCards(List<CardWrapper> lstCards, SearchParameters parameters, int nDustAmount, int nTotalAmount)
         {
             if (lstCards.Count > 0 && parameters.Rarities.Count > 0)
             {
@@ -186,7 +184,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GetCardsByQueryString
-        private void GetCardsByQueryString(SearchParameters parameters, List<CardWrapper> lstCards)
+        private static void GetCardsByQueryString(SearchParameters parameters, List<CardWrapper> lstCards)
         {
             bool blnDone = false;
 
@@ -215,7 +213,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region IsCardMatch
-        private bool IsCardMatch(CardWrapper cardWrapper, string strKeyString)
+        private static bool IsCardMatch(CardWrapper cardWrapper, string strKeyString)
         {
             bool blnRet = false;
 
@@ -233,21 +231,17 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region CheckForUnusedCardsAsync
-        private async Task CheckForUnusedCardsAsync(List<Card> lstCollection)
+        #region CheckCollectionForUnusedCardsAsync
+        private static async Task CheckCollectionForUnusedCardsAsync(IAccount account)
         {
-            if (lstCollection == null)
-            {
-                throw new ArgumentNullException("lstCollection");
-            }
-            else { }
+            s_lstUnusedCards.Clear();
 
-            m_lstUnusedCards.Clear();
-
-            List<Deck> lstDecks = m_account.GetDecks();
+            List<Deck> lstDecks = account.GetDecks();
 
             if (lstDecks.Count > 0 && lstDecks[0].Cards.Count > 0)
             {
+                List<Card> lstCollection = account.GetCollection();
+
                 for (int i = 0; i < lstCollection.Count; i++)
                 {
                     Card card = lstCollection[i];
@@ -255,7 +249,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     for (int j = 0; j < lstDecks.Count; j++)
                     {
-                        if (!m_account.IsDeckExcludedFromSearch(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
+                        if (!account.IsDeckExcludedFromSearch(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
                         {
                             Card cardInDeck = lstDecks[j].GetCard(card.Id);
 
@@ -270,7 +264,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     if (cardWrapper.MaxCountInDecks < 2 && cardWrapper.RawCard.Count > cardWrapper.MaxCountInDecks && !(cardWrapper.DbCard.Rarity == Rarity.LEGENDARY && cardWrapper.MaxCountInDecks == 1))
                     {
-                        m_lstUnusedCards.Add(cardWrapper);
+                        s_lstUnusedCards.Add(cardWrapper);
                     }
                     else { }
                 }
@@ -285,7 +279,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region FilterForClasses
-        private List<CardWrapper> FilterForClasses(List<CardWrapper> lstCards, List<CardClass> lstClasses)
+        private static List<CardWrapper> FilterForClasses(List<CardWrapper> lstCards, List<CardClass> lstClasses)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
@@ -301,7 +295,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region FilterForSets
-        private List<CardWrapper> FilterForSets(List<CardWrapper> lstCards, List<CardSet> lstSets)
+        private static List<CardWrapper> FilterForSets(List<CardWrapper> lstCards, List<CardSet> lstSets)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
@@ -317,7 +311,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GetCardsForRarity
-        private List<CardWrapper> GetCardsForRarity(Rarity rarity, SearchParameters parameters)
+        private static List<CardWrapper> GetCardsForRarity(Rarity rarity, SearchParameters parameters)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
@@ -325,16 +319,16 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 if (parameters.GoldenCardsOnly)
                 {
-                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.RawCard.Premium);
+                    lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.RawCard.Premium);
                 }
                 else
                 {
-                    lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity);
+                    lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity);
                 }
             }
             else
             {
-                lstRet = m_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.RawCard.Premium);
+                lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.RawCard.Premium);
             }
 
             return lstRet;
@@ -342,11 +336,11 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region GetCollectionValue
-        public int GetCollectionValue()
+        public static int GetCollectionValue(IAccount account)
         {
             int nRet = 0;
 
-            List<Card> lstCards = m_account.GetCollection();
+            List<Card> lstCards = account.GetCollection();
 
             for (int i = 0; i < lstCards.Count; i++)
             {
