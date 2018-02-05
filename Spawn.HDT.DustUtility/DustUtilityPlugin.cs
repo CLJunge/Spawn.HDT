@@ -204,12 +204,7 @@ namespace Spawn.HDT.DustUtility
                         {
                             UpdatedAccountInstance(selectedAcc);
                         }
-                        else
-                        {
-                            MessageBox.Show("No account(s) available!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
-
-                            Log.WriteLine("No accounts available", LogType.Info);
-                        }
+                        else { }
                     }
                     else { }
 
@@ -511,7 +506,12 @@ namespace Spawn.HDT.DustUtility
                         else { }
                     }
                 }
-                else { }
+                else
+                {
+                    MessageBox.Show("No account(s) available!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                    Log.WriteLine("No accounts available", LogType.Info);
+                }
             }
 
             if (retVal != null)
