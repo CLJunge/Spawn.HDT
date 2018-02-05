@@ -1,9 +1,12 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
 using HearthDb.Enums;
+using Hearthstone_Deck_Tracker.Utility;
 using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Diagnostics;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 #endregion
 
@@ -119,7 +122,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region CardImage
-        public BitmapImage CardImage => Hearthstone_Deck_Tracker.Utility.ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.All[Id]));
+        public ImageSource CardImage => GetCardImage();
         #endregion
 
         #region ColoredCount
@@ -184,6 +187,23 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public CardItemModel CreateCopy()
         {
             return new CardItemModel(Wrapper);
+        }
+        #endregion
+
+        #region GetCardImage
+        private ImageSource GetCardImage()
+        {
+            ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.All[Id]));
+
+            if (image != null)
+            {
+                int nCropAmount = 40;
+
+                image = new CroppedBitmap((BitmapSource)image, new Int32Rect(nCropAmount, 0, (int)image.Width - nCropAmount, (int)image.Height));
+            }
+            else { }
+
+            return image;
         }
         #endregion
     }
