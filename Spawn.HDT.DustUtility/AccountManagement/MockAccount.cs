@@ -58,6 +58,16 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new Card("EX1_284", 2, false),
                 new Card("UNG_064", 1, false),
                 new Card("LOOT_149", 2, false),
+                new Card("ICC_021", 2, true),
+                new Card("BRM_024", 2, false),
+                new Card("LOE_002", 2, true),
+                new Card("FP1_001", 2, true),
+                new Card("OG_006", 2, true),
+                new Card("AT_037", 2, false),
+                new Card("LOE_119", 2, false),
+                new Card("ICC_836", 2, false),
+                new Card("FP1_013", 2, true),
+                new Card("OG_134", 2, true)
             };
 
             m_lstDecks = new List<Deck>
