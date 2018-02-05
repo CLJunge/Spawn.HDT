@@ -53,7 +53,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ImportLatestPackCommand
         public ICommand ImportLatestPackCommand => new RelayCommand(ImportLatestPack, () => Reflection.GetPackCards()?.Count > 0);
         #endregion
+
+        #region DisenchantSelectionCommandCommand
+        public ICommand DisenchantSelectionCommand => new RelayCommand(DisenchantSelection, () =>
+        {
+            return CardItems.Count > 0 && Hearthstone_Deck_Tracker.API.Core.Game.IsRunning;
+        });
         #endregion
+        #endregion DisenchantSelectionCommand
 
         #region Ctor
         public CardSelectionWindowViewModel()
@@ -154,6 +161,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     AddCardItem(new CardItemModel(new CardWrapper(lstCards[i])));
                 }
+            }
+            else { }
+        }
+        #endregion
+
+        #region DisenchantSelection
+        private async void DisenchantSelection()
+        {
+            List<CardWrapper> lstCards = new List<CardWrapper>();
+
+            for (int i = 0; i < CardItems.Count; i++)
+            {
+                lstCards.Add(CardItems[i].Wrapper);
+            }
+
+            if (await CardsManager.Disenchant(DustUtilityPlugin.CurrentAccount, lstCards))
+            {
+                Clear();
             }
             else { }
         }

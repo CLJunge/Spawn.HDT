@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
-    public class ExportingHelper
+    public class Helper
     {
         private static readonly Dictionary<string, string> ArtistDict = new Dictionary<string, string>
         {
@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             return searchString;
         }
 
-        public static async Task<ExportingInfo> EnsureHearthstoneInForeground(ExportingInfo info)
+        public static async Task<HearthstoneInfo> EnsureHearthstoneInForeground(HearthstoneInfo info)
         {
             if (User32.IsHearthstoneInForeground())
                 return info;
@@ -104,7 +104,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             User32.SetForegroundWindow(info.HsHandle);
             await Task.Delay(500);
             if (User32.IsHearthstoneInForeground())
-                return new ExportingInfo();
+                return new HearthstoneInfo();
             await DustUtilityPlugin.MainWindow.ShowMessageAsync("Exporting error", "Can't find Hearthstone window.");
             Log.Error("Can't find Hearthstone window.");
             return null;

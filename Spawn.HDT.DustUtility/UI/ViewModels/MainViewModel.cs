@@ -165,8 +165,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 WindowTitle = $"{WindowTitle} (Debug)";
             }
-#endif
 
+            HistoryButtonVisibility = Visibility.Visible;
+            SwitchAccountButtonVisibility = Visibility.Visible;
+#else
             HistoryButtonVisibility = Visibility.Collapsed;
             SwitchAccountButtonVisibility = Visibility.Collapsed;
 
@@ -181,6 +183,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 else { }
             }
             else { }
+#endif
 
             BackupManager.Create(account);
 

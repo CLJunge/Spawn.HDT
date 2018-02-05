@@ -4,18 +4,17 @@ using System.Drawing;
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
-    public class ExportingInfo
+    public class HearthstoneInfo
     {
-        public ExportingInfo()
+        public HearthstoneInfo()
         {
             HsHandle = User32.GetHearthstoneWindow();
             HsRect = User32.GetHearthstoneRect(false);
             Ratio = (4.0 / 3.0) / ((double)HsRect.Width / HsRect.Height);
-            SearchBoxPos = new Point((int)(Helper.GetScaledXPos(DisenchantConfig.Instance.ExportSearchBoxX, HsRect.Width, Ratio)),
-                                     (int)(DisenchantConfig.Instance.ExportSearchBoxY * HsRect.Height));
-            CardPosX = Helper.GetScaledXPos(DisenchantConfig.Instance.ExportCard1X, HsRect.Width, Ratio);
-            Card2PosX = Helper.GetScaledXPos(DisenchantConfig.Instance.ExportCard2X, HsRect.Width, Ratio);
-            CardPosY = DisenchantConfig.Instance.ExportCardsY * HsRect.Height;
+            SearchBoxPos = new Point((int)(Hearthstone_Deck_Tracker.Helper.GetScaledXPos(DisenchantConfig.Instance.SearchBoxX, HsRect.Width, Ratio)), (int)(DisenchantConfig.Instance.SearchBoxY * HsRect.Height));
+            CardPosX = Hearthstone_Deck_Tracker.Helper.GetScaledXPos(DisenchantConfig.Instance.Card1X, HsRect.Width, Ratio);
+            Card2PosX = Hearthstone_Deck_Tracker.Helper.GetScaledXPos(DisenchantConfig.Instance.Card2X, HsRect.Width, Ratio);
+            CardPosY = DisenchantConfig.Instance.CardsY * HsRect.Height;
         }
 
         public IntPtr HsHandle { get; set; }

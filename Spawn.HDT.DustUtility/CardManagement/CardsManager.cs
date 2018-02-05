@@ -353,25 +353,21 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
+        #region Disenchant
         public static async Task<bool> Disenchant(IAccount account, List<CardWrapper> lstCards)
         {
             bool blnRet = false;
 
             if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning && account.Equals(Account.LoggedInAccount))
             {
-                Hearthstone_Deck_Tracker.Hearthstone.Deck deck = new Hearthstone_Deck_Tracker.Hearthstone.Deck();
-                deck.Name = "test";
+                AutoDisenchant.DisenchantConfig.Instance.ForceClear = true;
 
-                for (int i = 0; i < lstCards.Count; i++)
-                {
-                    deck.Cards.Add(lstCards[i].Card);
-                }
-
-                await AutoDisenchant.DeckExporter.Export(deck, null);
+                blnRet = await AutoDisenchant.AutoDisenchanter.Disenchant(lstCards, null);
             }
             else { }
 
             return blnRet;
         }
+        #endregion
     }
 }

@@ -9,24 +9,24 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
     public class MouseActions
     {
-        private ExportingInfo _info;
+        private HearthstoneInfo _info;
         private readonly Func<Task<bool>> _onUnexpectedMousePos;
 
-        public MouseActions(ExportingInfo info, Func<Task<bool>> onUnexpectedMousePos)
+        public MouseActions(HearthstoneInfo info, Func<Task<bool>> onUnexpectedMousePos)
         {
             _info = info;
             _onUnexpectedMousePos = onUnexpectedMousePos;
         }
 
         private Point _previousCursorPos = Point.Empty;
-        public async Task ClickOnPoint(Point clientPoint)
+        public async Task ClickOnPoint(Point clientPoint, bool blnUseRightMouseButton = false)
         {
             if (!User32.IsHearthstoneInForeground() || (_onUnexpectedMousePos != null && _previousCursorPos != Point.Empty &&
                 (Math.Abs(_previousCursorPos.X - Cursor.Position.X) > 10 || Math.Abs(_previousCursorPos.Y - Cursor.Position.Y) > 10)))
             {
                 if (!(_onUnexpectedMousePos == null || await _onUnexpectedMousePos()))
                     throw new Exception("Export interrupted, not continuing");
-                if ((_info = await ExportingHelper.EnsureHearthstoneInForeground(_info)) == null)
+                if ((_info = await Helper.EnsureHearthstoneInForeground(_info)) == null)
                     throw new Exception("Export interrupted - could not re-focus hearthstone");
                 await Task.Delay(500);
             }
@@ -36,20 +36,20 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             Log.Debug("Clicking " + Cursor.Position);
 
             //mouse down
-            if (SystemInformation.MouseButtonsSwapped)
+            if (SystemInformation.MouseButtonsSwapped || blnUseRightMouseButton)
                 User32.mouse_event((uint)User32.MouseEventFlags.RightDown, 0, 0, 0, UIntPtr.Zero);
             else
                 User32.mouse_event((uint)User32.MouseEventFlags.LeftDown, 0, 0, 0, UIntPtr.Zero);
 
-            await Task.Delay(DisenchantConfig.Instance.DeckExportDelay);
+            await Task.Delay(DisenchantConfig.Instance.Delay);
 
             //mouse up
-            if (SystemInformation.MouseButtonsSwapped)
+            if (SystemInformation.MouseButtonsSwapped || blnUseRightMouseButton)
                 User32.mouse_event((uint)User32.MouseEventFlags.RightUp, 0, 0, 0, UIntPtr.Zero);
             else
                 User32.mouse_event((uint)User32.MouseEventFlags.LeftUp, 0, 0, 0, UIntPtr.Zero);
 
-            await Task.Delay(DisenchantConfig.Instance.DeckExportDelay);
+            await Task.Delay(DisenchantConfig.Instance.Delay);
         }
     }
 }
