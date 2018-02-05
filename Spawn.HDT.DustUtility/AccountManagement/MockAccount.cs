@@ -123,6 +123,12 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new CachedHistoryCard { Id = "EX1_284", Count = 2, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "UNG_064", Count = 1, IsGolden = false, Date = DateTime.Now },
                 new CachedHistoryCard { Id = "LOOT_149", Count = 2, IsGolden = false, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "ICC_021", Count = 2, IsGolden = true, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "BRM_024", Count = 2, IsGolden = false, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "LOE_002", Count = 2, IsGolden = false, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "FP1_013", Count = 1, IsGolden = true, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "OG_134", Count = 1, IsGolden = true, Date = DateTime.Now },
+                new CachedHistoryCard { Id = "AT_037", Count = 2, IsGolden = true, Date = DateTime.Now },
             };
 
             BattleTag = new BattleTag { Name = "Test123", Number = 12345 };
