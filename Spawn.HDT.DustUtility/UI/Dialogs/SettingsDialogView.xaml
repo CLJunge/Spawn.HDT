@@ -21,6 +21,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Height="30">
@@ -58,7 +59,16 @@
             <Label Content="Check For Updates" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="2" IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Grid.Row="3" Height="30" Visibility="{Binding ColoredCardItemsSetttingVisibility}">
+        <Grid Grid.Row="3" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Auto Disenchanting" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Grid.Column="1" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Grid.Row="4" Height="30" Visibility="{Binding ColoredCardItemsSetttingVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -67,6 +77,7 @@
             <Label Content="Colored Card Items" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
+        
         <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">
                 <Button.Style>

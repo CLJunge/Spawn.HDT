@@ -15,6 +15,7 @@ namespace Spawn.HDT.DustUtility
         private int m_nSaveInterval;
         private string m_strLastSelectedAccount;
         private bool m_blnColoredCardItems;
+        private bool m_blnAutoDisenchanting;
         private int m_nVersion;
         #endregion
 
@@ -73,6 +74,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region AutoDisenchanting
+        [DefaultValue(false)]
+        public bool AutoDisenchanting
+        {
+            get => m_blnAutoDisenchanting;
+            set => Set(ref m_blnAutoDisenchanting, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -92,6 +102,7 @@ namespace Spawn.HDT.DustUtility
             SaveInterval = 120;
             LastSelectedAccount = string.Empty;
             ColoredCardItems = true;
+            AutoDisenchanting = false;
             Version = 1;
 
             PropertyChanged += (s, e) => Save();

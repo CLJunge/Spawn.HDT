@@ -16,6 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private int m_nSaveInterval;
         private bool m_blnCheckForUpdates;
         private bool m_blnColoredCardItems;
+        private bool m_blnAutoDisenchanting;
         #endregion
 
         #region Properties
@@ -67,6 +68,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region AutoDisenchanting
+        public bool AutoDisenchanting
+        {
+            get => m_blnAutoDisenchanting;
+            set => Set(ref m_blnAutoDisenchanting, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
         #endregion
@@ -90,6 +99,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
             ColoredCardItems = DustUtilityPlugin.Config.ColoredCardItems;
+            AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
         }
         #endregion
 
@@ -99,6 +109,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.OfflineMode = OfflineMode;
             DustUtilityPlugin.Config.CheckForUpdates = CheckForUpdates;
             DustUtilityPlugin.Config.ColoredCardItems = ColoredCardItems;
+            DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
 
             if (OfflineMode)
             {

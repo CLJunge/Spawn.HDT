@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 #endregion
 
@@ -24,6 +25,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Member Variables
         private string m_strWindowTitle;
+        private Visibility m_disenchantButtonVisibility;
         private CardItemModel m_currentItem;
         private MetroDialogSettings m_dialogSettings;
         private CustomDialog m_cardCountDialog;
@@ -44,6 +46,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region CardsInfo
         public CardsInfoModel CardsInfo { get; set; }
+        #endregion
+
+        #region DisenchantButtonVisibility
+        public Visibility DisenchantButtonVisibility
+        {
+            get => m_disenchantButtonVisibility;
+            set => Set(ref m_disenchantButtonVisibility, value);
+        }
         #endregion
 
         #region ClearCommand
@@ -123,6 +133,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public override void Initialize()
         {
             Clear();
+
+            DisenchantButtonVisibility = (DustUtilityPlugin.Config.AutoDisenchanting ? Visibility.Visible : Visibility.Hidden);
 
             if (DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Count > 0)
             {
