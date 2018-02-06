@@ -191,6 +191,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (await CardsManager.Disenchant(DustUtilityPlugin.CurrentAccount, lstCards))
             {
                 Clear();
+
+                ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
             }
             else { }
         }
