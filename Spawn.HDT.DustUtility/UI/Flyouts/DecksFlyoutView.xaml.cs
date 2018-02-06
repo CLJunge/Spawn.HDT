@@ -1,4 +1,5 @@
 ﻿#region Using
+using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 #endregion
 
@@ -24,7 +25,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnListViewContextMenuOpening
         private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
         {
-            ((DecksFlyoutViewModel)DataContext).OnContextMenuOpening(e);
+            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().OnContextMenuOpening(e);
         }
         #endregion
 
@@ -33,7 +34,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         {
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
             {
-                ((DecksFlyoutViewModel)DataContext).ShowDeckListCommand.Execute(null);
+                ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ShowDeckListCommand.Execute(null);
             }
             else { }
         }
