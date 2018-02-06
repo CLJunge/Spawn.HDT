@@ -1,4 +1,5 @@
 ﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Windows;
@@ -104,6 +105,15 @@ namespace Spawn.HDT.DustUtility.Services.Providers
         {
             if (m_dWindows.ContainsKey(m_nCurrentWindowKey))
             {
+                try
+                {
+                    m_dWindows[m_nCurrentWindowKey].Close();
+                }
+                catch (System.Exception e)
+                {
+                    Log.WriteLine($"Exception occured while trying to close window ({m_nCurrentWindowKey}): {e}", LogType.Debug);
+                }
+
                 m_dWindows.Remove(m_nCurrentWindowKey);
 
                 m_nCurrentWindowKey = -1;

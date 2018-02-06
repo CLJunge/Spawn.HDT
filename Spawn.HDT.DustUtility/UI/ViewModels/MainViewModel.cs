@@ -344,9 +344,21 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = true;
+            IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
 
-            (sender as Window).Hide();
+            if (windowService.IsVisible(DustUtilityPlugin.CardSelectionWindowKey))
+            {
+                windowService.Dispose(DustUtilityPlugin.CardSelectionWindowKey);
+            }
+            else { }
+
+            if (DustUtilityPlugin.HideMainWindowOnClose)
+            {
+                e.Cancel = true;
+
+                (sender as Window).Hide();
+            }
+            else { }
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
         }

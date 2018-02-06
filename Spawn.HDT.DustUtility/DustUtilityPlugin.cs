@@ -61,6 +61,10 @@ namespace Spawn.HDT.DustUtility
         public static MainWindow MainWindow => s_mainWindow;
         #endregion
 
+        #region HideMainWindowOnClose
+        public static bool HideMainWindowOnClose { get; private set; }
+        #endregion
+
         #region CurrentAccount
         public static IAccount CurrentAccount => ServiceLocator.Current.GetInstance<IAccount>();
         #endregion
@@ -132,6 +136,10 @@ namespace Spawn.HDT.DustUtility
         {
             s_blnInitialized = false;
 
+            HideMainWindowOnClose = true;
+
+            CreateContainer();
+
             Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
             {
                 if (Config.OfflineMode && Core.Game.IsRunning)
@@ -155,6 +163,16 @@ namespace Spawn.HDT.DustUtility
         #region OnUnload
         public void OnUnload()
         {
+            if (MainWindow.Visibility == Visibility.Visible || MainWindow.Visibility == Visibility.Hidden)
+            {
+                HideMainWindowOnClose = false;
+
+                MainWindow.Close();
+            }
+            else { }
+
+            s_mainWindow = null;
+
             if (Cache.TimerEnabled)
             {
                 Cache.StopTimer();
