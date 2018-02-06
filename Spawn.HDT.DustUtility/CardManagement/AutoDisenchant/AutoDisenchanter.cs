@@ -1,4 +1,5 @@
 ﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
     public static class AutoDisenchanter
     {
-        public static async Task<bool> Disenchant(List<CardWrapper> lstCards, Func<Task<bool>> onInterrupt)
+        #region Disenchant
+        public static async Task<bool> Disenchant(IAccount account, List<CardWrapper> lstCards, Func<Task<bool>> onInterrupt)
         {
             bool blnRet = false;
 
@@ -34,7 +36,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                         await Task.Delay(DisenchantConfig.Instance.StartDelay * 1000);
 
-                        DisenchantActions actions = new DisenchantActions(info, lstCards, onInterrupt);
+                        DisenchantActions actions = new DisenchantActions(account, info, lstCards, onInterrupt);
 
                         await actions.ClearFilters();
                         blnRet &= await actions.DisenchantCards();
@@ -55,7 +57,10 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
             return blnRet;
         }
+        #endregion
 
+        #region LogDebugInfo
         private static void LogDebugInfo(HearthstoneInfo info) => Log.Debug($"HsHandle={info.HsHandle} HsRect={info.HsRect} Ratio={info.Ratio} SearchBoxPosX={DisenchantConfig.Instance.SearchBoxX} SearchBoxPosY={DisenchantConfig.Instance.SearchBoxY} CardPosX={DisenchantConfig.Instance.Card1X} Card2PosX={DisenchantConfig.Instance.Card2X} CardPosY={DisenchantConfig.Instance.CardsY} DeckExportDelay={DisenchantConfig.Instance.Delay} EnableExportAutoFilter={DisenchantConfig.Instance.AutoFilter} ExportZeroButtonX={DisenchantConfig.Instance.ZeroButtonX} ExportZeroButtonY={DisenchantConfig.Instance.ZeroButtonY} ForceClear={DisenchantConfig.Instance.ForceClear}");
+        #endregion
     }
 }

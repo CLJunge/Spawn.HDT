@@ -17,16 +17,16 @@ namespace Spawn.HDT.DustUtility
     public static class Extensions
     {
         #region ContainsCard
-        public static bool ContainsCard(this HearthMirror.Objects.Deck deck, string strId)
+        public static bool ContainsCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium)
         {
-            return GetCard(deck, strId) != null;
+            return GetCard(deck, strId, blnPremium) != null;
         }
         #endregion
 
         #region GetCard
-        public static HearthMirror.Objects.Card GetCard(this HearthMirror.Objects.Deck deck, string strId)
+        public static HearthMirror.Objects.Card GetCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium)
         {
-            return deck.Cards.Find(delegate (HearthMirror.Objects.Card c) { return string.CompareOrdinal(c.Id, strId) == 0; });
+            return deck.Cards.Find(delegate (HearthMirror.Objects.Card c) { return string.CompareOrdinal(c.Id, strId) == 0 && c.Premium == blnPremium; });
         }
         #endregion
 

@@ -249,9 +249,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     for (int j = 0; j < lstDecks.Count; j++)
                     {
-                        if (!account.IsDeckExcludedFromSearch(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id))
+                        if (!account.IsDeckExcludedFromSearch(lstDecks[j].Id) && lstDecks[j].ContainsCard(card.Id, card.Premium))
                         {
-                            Card cardInDeck = lstDecks[j].GetCard(card.Id);
+                            Card cardInDeck = lstDecks[j].GetCard(card.Id, card.Premium);
 
                             if (cardInDeck.Count > cardWrapper.MaxCountInDecks)
                             {
@@ -362,7 +362,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 AutoDisenchant.DisenchantConfig.Instance.ForceClear = true;
 
-                blnRet = await AutoDisenchant.AutoDisenchanter.Disenchant(lstCards, null);
+                blnRet = await AutoDisenchant.AutoDisenchanter.Disenchant(account, lstCards, null);
             }
             else { }
 

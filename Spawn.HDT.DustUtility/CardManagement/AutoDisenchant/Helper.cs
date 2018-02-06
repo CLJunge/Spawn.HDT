@@ -1,5 +1,4 @@
-﻿using HearthMirror;
-using Hearthstone_Deck_Tracker;
+﻿using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Hearthstone;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
@@ -108,26 +107,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             await DustUtilityPlugin.MainWindow.ShowMessageAsync("Exporting error", "Can't find Hearthstone window.");
             Log.Error("Can't find Hearthstone window.");
             return null;
-        }
-
-        public static IEnumerable<Card> GetMissingCards(Deck deck)
-        {
-            var collection = Reflection.GetCollection()
-                .GroupBy(x => x.Id)
-                .Select(x => new { Id = x.Key, Count = x.Sum(c => c.Count) })
-                .ToList();
-            foreach (var card in deck.GetSelectedDeckVersion().Cards)
-            {
-                var collectionCard = collection.FirstOrDefault(cCard => cCard.Id == card.Id);
-                if (collectionCard == null)
-                    yield return (Card)card.Clone();
-                else if (collectionCard.Count < card.Count)
-                {
-                    var missing = (Card)card.Clone();
-                    missing.Count = card.Count - collectionCard.Count;
-                    yield return missing;
-                }
-            }
         }
     }
 }

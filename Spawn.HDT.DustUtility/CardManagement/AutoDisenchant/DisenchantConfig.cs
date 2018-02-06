@@ -56,11 +56,17 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         [DefaultValue(0.915)]
         public double SearchBoxY = 0.915;
 
-        [DefaultValue(0.5)]
+        [DefaultValue(0.387)]
         public double DisenchantButtonX = 0.387;
 
-        [DefaultValue(0.5)]
+        [DefaultValue(0.827)]
         public double DisenchantButtonY = 0.827;
+
+        [DefaultValue(0.427)]
+        public double DialogAcceptButtonX = 0.427;
+
+        [DefaultValue(0.595)]
+        public double DialogAcceptButtonY = 0.595;
 
         [DefaultValue(1)]
         public int StartDelay = 1;
