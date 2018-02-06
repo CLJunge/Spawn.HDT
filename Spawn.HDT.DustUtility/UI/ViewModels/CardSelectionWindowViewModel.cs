@@ -64,13 +64,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public ICommand ImportLatestPackCommand => new RelayCommand(ImportLatestPack, () => Reflection.GetPackCards()?.Count > 0);
         #endregion
 
-        #region DisenchantSelectionCommandCommand
+        #region DisenchantSelectionCommand
         public ICommand DisenchantSelectionCommand => new RelayCommand(DisenchantSelection, () =>
         {
             return CardItems.Count > 0 && Hearthstone_Deck_Tracker.API.Core.Game.IsRunning;
         });
         #endregion
-        #endregion DisenchantSelectionCommand
+        #endregion
 
         #region Ctor
         public CardSelectionWindowViewModel()
