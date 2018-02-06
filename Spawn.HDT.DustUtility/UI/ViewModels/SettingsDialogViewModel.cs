@@ -10,7 +10,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Member Variables
         private string m_strWindowTitle;
-        private Visibility m_coloredCardItemsSetttingVisibility;
+        private Visibility m_coloredCardItemsSettingVisibility;
 
         private bool m_blnOfflineMode;
         private int m_nSaveInterval;
@@ -28,11 +28,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region ColoredCardItemsSetttingVisibility
-        public Visibility ColoredCardItemsSetttingVisibility
+        #region ColoredCardItemsSettingVisibility
+        public Visibility ColoredCardItemsSettingVisibility
         {
-            get => m_coloredCardItemsSetttingVisibility;
-            set => Set(ref m_coloredCardItemsSetttingVisibility, value);
+            get => m_coloredCardItemsSettingVisibility;
+            set => Set(ref m_coloredCardItemsSettingVisibility, value);
         }
         #endregion
 
@@ -86,8 +86,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Settings";
 
+            ColoredCardItemsSettingVisibility = Visibility.Collapsed;
+
 #if DEBUG
-            ColoredCardItemsSetttingVisibility = Visibility.Visible;
+            ColoredCardItemsSettingVisibility = Visibility.Visible;
 #endif
         }
         #endregion
