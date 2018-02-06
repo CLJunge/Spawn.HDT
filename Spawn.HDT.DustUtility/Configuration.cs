@@ -21,7 +21,7 @@ namespace Spawn.HDT.DustUtility
 
         #region Properties
         #region OfflineMode
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool OfflineMode
         {
             get => m_blnOfflineMode;
@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility
         #region Ctor
         public Configuration()
         {
-            OfflineMode = true;
+            OfflineMode = false;
             SortOrder = "Rarity;Golden;CardClass;CardSet;Name";
             CheckForUpdates = true;
             SaveInterval = 120;
