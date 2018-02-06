@@ -304,47 +304,41 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Initialize
         public override void Initialize()
         {
-            if (ReloadRequired)
-            {
-                SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
+            SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
 
-                ExpertSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.EXPERT1);
-                GoblinsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GVG);
-                TournamentSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.TGT);
-                OldGodsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.OG);
-                GadgetzanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GANGS);
-                UngoroSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.UNGORO);
-                FrozenThroneSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.ICECROWN);
-                KoboldsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOOTAPALOOZA);
-                NaxxSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.NAXX);
-                MountainSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.BRM);
-                LeagueSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOE);
-                KarazhanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.KARA);
-                HallSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.HOF);
+            ExpertSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.EXPERT1);
+            GoblinsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GVG);
+            TournamentSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.TGT);
+            OldGodsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.OG);
+            GadgetzanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GANGS);
+            UngoroSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.UNGORO);
+            FrozenThroneSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.ICECROWN);
+            KoboldsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOOTAPALOOZA);
+            NaxxSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.NAXX);
+            MountainSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.BRM);
+            LeagueSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOE);
+            KarazhanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.KARA);
+            HallSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.HOF);
 
-                CommonRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.COMMON);
-                RareRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.RARE);
-                EpicRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.EPIC);
-                LegendaryRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.LEGENDARY);
+            CommonRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.COMMON);
+            RareRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.RARE);
+            EpicRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.EPIC);
+            LegendaryRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.LEGENDARY);
 
-                DruidClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.DRUID);
-                HunterClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.HUNTER);
-                MageClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.MAGE);
-                PaladinClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PALADIN);
-                PriestClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PRIEST);
-                RogueClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.ROGUE);
-                ShamanClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.SHAMAN);
-                WarlockClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARLOCK);
-                WarriorClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARRIOR);
-                NeutralClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.NEUTRAL);
+            DruidClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.DRUID);
+            HunterClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.HUNTER);
+            MageClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.MAGE);
+            PaladinClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PALADIN);
+            PriestClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PRIEST);
+            RogueClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.ROGUE);
+            ShamanClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.SHAMAN);
+            WarlockClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARLOCK);
+            WarriorClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARRIOR);
+            NeutralClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.NEUTRAL);
 
-                IncludeGoldenCards = parameters.IncludeGoldenCards;
-                IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
-                IncludeUnusedCardsOnly = parameters.UnusedCardsOnly;
-
-                ReloadRequired = false;
-            }
-            else { }
+            IncludeGoldenCards = parameters.IncludeGoldenCards;
+            IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
+            IncludeUnusedCardsOnly = parameters.UnusedCardsOnly;
         }
         #endregion
 
