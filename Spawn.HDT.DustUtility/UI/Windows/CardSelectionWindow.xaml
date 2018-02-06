@@ -8,7 +8,8 @@
         vm:ViewModelLocator.ViewModelName="CardSelectionWindowViewModel"
         xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
-        Title="{Binding WindowTitle}" Width="900" Height="450" Closing="OnClosing" GlowBrush="Black">
+        Title="{Binding WindowTitle}" Width="900" Height="450" MinWidth="900" MinHeight="450"
+        Closing="OnClosing" GlowBrush="Black">
     <Window.Resources>
         <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
             <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
