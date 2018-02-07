@@ -38,6 +38,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Fields
         private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
+        private static bool s_blnIsOffline;
         #endregion
 
         #region Static Properties
@@ -54,7 +55,20 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region IsOffline
-        public static bool IsOffline { get; private set; }
+        public static bool IsOffline
+        {
+            get => s_blnIsOffline;
+            private set
+            {
+                if (s_blnIsOffline != value)
+                {
+                    s_blnIsOffline = value;
+
+                    IsOfflineChanged?.Invoke(null, EventArgs.Empty);
+                }
+                else { }
+            }
+        }
         #endregion
 
         #region MainWindow
@@ -130,6 +144,12 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region Custom Events
+        #region [STATIC] IsOfflineChanged
+        public static event EventHandler IsOfflineChanged;
+        #endregion
+        #endregion
+
         #region IPlugin Methods
         #region OnLoad
         public void OnLoad()
@@ -139,6 +159,8 @@ namespace Spawn.HDT.DustUtility
             HideMainWindowOnClose = true;
 
             CreateContainer();
+
+            IsOfflineChanged += OnIsOfflineChanged;
 
             Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
             {
@@ -163,10 +185,10 @@ namespace Spawn.HDT.DustUtility
         #region OnUnload
         public void OnUnload()
         {
-            if (MainWindow.Visibility == Visibility.Visible || MainWindow.Visibility == Visibility.Hidden)
-            {
-                HideMainWindowOnClose = false;
+            HideMainWindowOnClose = false;
 
+            if (MainWindow != null && (MainWindow.Visibility == Visibility.Visible || MainWindow.Visibility == Visibility.Hidden))
+            {
                 MainWindow.Close();
             }
             else { }
@@ -191,16 +213,6 @@ namespace Spawn.HDT.DustUtility
         public void OnUpdate()
         {
             IsOffline = !Core.Game.IsRunning && Config.OfflineMode;
-
-            if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
-            {
-                Cache.StartTimer();
-            }
-            else if (!Core.Game.IsRunning && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
-            else { }
         }
         #endregion
         #endregion
@@ -253,6 +265,21 @@ namespace Spawn.HDT.DustUtility
 
                 Log.WriteLine("Plugin is not initialized", LogType.Info);
             }
+        }
+        #endregion
+
+        #region OnIsOfflineChanged
+        private void OnIsOfflineChanged(object sender, EventArgs e)
+        {
+            if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
+            {
+                Cache.StartTimer();
+            }
+            else if (!Core.Game.IsRunning && Cache.TimerEnabled)
+            {
+                Cache.StopTimer();
+            }
+            else { }
         }
         #endregion
         #endregion
