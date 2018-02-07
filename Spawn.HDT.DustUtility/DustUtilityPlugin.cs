@@ -273,6 +273,14 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private void OnIsOfflineChanged(object sender, EventArgs e)
         {
+            if (!IsOffline && !ServiceLocator.Current.GetInstance<IAccount>().Equals(Account.LoggedInAccount))
+            {
+                UpdatedAccountInstance(Account.LoggedInAccount);
+            }
+            else { }
+
+            ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+
             if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
@@ -332,8 +340,6 @@ namespace Spawn.HDT.DustUtility
                         Cache.StopTimer();
                     }
                     else { }
-
-                    ServiceLocator.Current.GetInstance<MainViewModel>().ReloadFlyouts();
                 }
                 else { }
             }
@@ -627,8 +633,6 @@ namespace Spawn.HDT.DustUtility
 
                 if (!selectedAcc.Equals(oldAcc))
                 {
-                    oldAcc.SavePreferences();
-
                     UpdatedAccountInstance(selectedAcc);
 
                     blnRet = true;
@@ -648,6 +652,8 @@ namespace Spawn.HDT.DustUtility
         #region UpdatedAccountInstance
         private static void UpdatedAccountInstance(IAccount account)
         {
+            CurrentAccount.SavePreferences();
+
             //Remove current account instance
             SimpleIoc.Default.Unregister<IAccount>();
 

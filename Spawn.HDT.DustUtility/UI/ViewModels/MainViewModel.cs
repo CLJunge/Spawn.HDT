@@ -192,7 +192,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SearchQuery = account.Preferences.SearchParameters.QueryString;
 
-            ClearContainer();
+            ClearControls();
+
+            ReloadFlyouts();
 
             Task.Run(async () =>
             {
@@ -223,8 +225,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (DustUtilityPlugin.SwitchAccount())
             {
-                ReloadFlyouts();
-
                 IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
 
                 if (windowService.IsVisible(DustUtilityPlugin.CardSelectionWindowKey))
@@ -263,7 +263,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Search
         private async void Search()
         {
-            ClearContainer();
+            ClearControls();
 
             if (!string.IsNullOrEmpty(SearchQuery))
             {
@@ -296,7 +296,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             SearchQuery = string.Empty;
 
-            ClearContainer();
+            ClearControls();
         }
         #endregion
 
@@ -307,9 +307,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen = false;
                 DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen = false;
-                DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
                 DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
                 DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.SortOrderFlyout.IsOpen = false;
             }
             else { }
 
@@ -394,8 +395,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region ClearContainer
-        private void ClearContainer()
+        #region ClearControls
+        private void ClearControls()
         {
             CardItems.Clear();
             CardsInfo.Clear();
