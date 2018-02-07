@@ -303,11 +303,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ReloadFlyoutViews
         public void ReloadFlyouts()
         {
-            DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen = false;
-            DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen = false;
-            DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
-            DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen = false;
-            DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+            if (DustUtilityPlugin.MainWindow != null)
+            {
+                DustUtilityPlugin.MainWindow.HistoryFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.DecksFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.CollectionInfoFlyout.IsOpen = false;
+                DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+            }
+            else { }
 
             ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
             ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
