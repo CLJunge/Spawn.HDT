@@ -1,4 +1,5 @@
-﻿using HearthMirror;
+﻿#region Using
+using HearthMirror;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {

@@ -1,9 +1,11 @@
-﻿using Hearthstone_Deck_Tracker.Utility.Logging;
+﻿#region Using
+using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {

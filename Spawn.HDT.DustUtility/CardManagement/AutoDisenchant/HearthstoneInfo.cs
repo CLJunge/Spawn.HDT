@@ -1,11 +1,24 @@
-﻿using Hearthstone_Deck_Tracker;
+﻿#region Using
+using Hearthstone_Deck_Tracker;
 using System;
 using System.Drawing;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
     public class HearthstoneInfo
     {
+        #region Properties
+        public IntPtr HsHandle { get; set; }
+        public Rectangle HsRect { get; set; }
+        public double Ratio { get; set; }
+        public Point SearchBoxPos { get; set; }
+        public double CardPosX { get; set; }
+        public double Card2PosX { get; set; }
+        public double CardPosY { get; set; }
+        #endregion
+
+        #region Ctor
         public HearthstoneInfo()
         {
             HsHandle = User32.GetHearthstoneWindow();
@@ -16,13 +29,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             Card2PosX = Hearthstone_Deck_Tracker.Helper.GetScaledXPos(DisenchantConfig.Instance.Card2X, HsRect.Width, Ratio);
             CardPosY = DisenchantConfig.Instance.CardsY * HsRect.Height;
         }
-
-        public IntPtr HsHandle { get; set; }
-        public Rectangle HsRect { get; set; }
-        public double Ratio { get; set; }
-        public Point SearchBoxPos { get; set; }
-        public double CardPosX { get; set; }
-        public double Card2PosX { get; set; }
-        public double CardPosY { get; set; }
+        #endregion
     }
 }

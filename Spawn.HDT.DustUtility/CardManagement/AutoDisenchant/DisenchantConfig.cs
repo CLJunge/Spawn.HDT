@@ -1,13 +1,18 @@
-﻿using System.ComponentModel;
+﻿#region Using
+using System.ComponentModel;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
     public class DisenchantConfig
     {
+        #region [STATIC] Instance
         private static DisenchantConfig s_instance;
 
         public static DisenchantConfig Instance => (s_instance ?? (s_instance = new DisenchantConfig()));
+        #endregion
 
+        #region Properties
         [DefaultValue(true)]
         public bool AutoFilter = true;
 
@@ -70,5 +75,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
         [DefaultValue(1)]
         public int StartDelay = 1;
+        #endregion
     }
 }

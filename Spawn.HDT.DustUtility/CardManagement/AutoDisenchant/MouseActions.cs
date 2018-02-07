@@ -1,38 +1,46 @@
-﻿using Hearthstone_Deck_Tracker;
+﻿#region Using
+using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+#endregion
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
     public class MouseActions
     {
-        private HearthstoneInfo _info;
-        private readonly Func<Task<bool>> _onUnexpectedMousePos;
+        #region Member Variables
+        private HearthstoneInfo m_info;
+        private readonly Func<Task<bool>> m_onUnexpectedMousePos;
+        private Point m_previousCursorPos;
+        #endregion
 
+        #region Ctor
         public MouseActions(HearthstoneInfo info, Func<Task<bool>> onUnexpectedMousePos)
         {
-            _info = info;
-            _onUnexpectedMousePos = onUnexpectedMousePos;
+            m_info = info;
+            m_onUnexpectedMousePos = onUnexpectedMousePos;
+            m_previousCursorPos = Point.Empty;
         }
+        #endregion
 
-        private Point _previousCursorPos = Point.Empty;
+        #region ClickOnPoint
         public async Task ClickOnPoint(Point clientPoint, bool blnUseRightMouseButton = false)
         {
-            if (!User32.IsHearthstoneInForeground() || (_onUnexpectedMousePos != null && _previousCursorPos != Point.Empty &&
-                (Math.Abs(_previousCursorPos.X - Cursor.Position.X) > 10 || Math.Abs(_previousCursorPos.Y - Cursor.Position.Y) > 10)))
+            if (!User32.IsHearthstoneInForeground() || (m_onUnexpectedMousePos != null && m_previousCursorPos != Point.Empty &&
+                (Math.Abs(m_previousCursorPos.X - Cursor.Position.X) > 10 || Math.Abs(m_previousCursorPos.Y - Cursor.Position.Y) > 10)))
             {
-                if (!(_onUnexpectedMousePos == null || await _onUnexpectedMousePos()))
+                if (!(m_onUnexpectedMousePos == null || await m_onUnexpectedMousePos()))
                     throw new Exception("Export interrupted, not continuing");
-                if ((_info = await Helper.EnsureHearthstoneInForeground(_info)) == null)
+                if ((m_info = await Helper.EnsureHearthstoneInForeground(m_info)) == null)
                     throw new Exception("Export interrupted - could not re-focus hearthstone");
                 await Task.Delay(500);
             }
 
-            User32.ClientToScreen(_info.HsHandle, ref clientPoint);
-            Cursor.Position = _previousCursorPos = new Point(clientPoint.X, clientPoint.Y);
+            User32.ClientToScreen(m_info.HsHandle, ref clientPoint);
+            Cursor.Position = m_previousCursorPos = new Point(clientPoint.X, clientPoint.Y);
             Log.Debug("Clicking " + Cursor.Position);
 
             //mouse down
@@ -51,5 +59,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
             await Task.Delay(DisenchantConfig.Instance.Delay);
         }
+        #endregion
     }
 }

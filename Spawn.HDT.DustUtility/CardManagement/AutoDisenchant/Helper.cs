@@ -1,4 +1,5 @@
-﻿using Hearthstone_Deck_Tracker;
+﻿#region Using
+using Hearthstone_Deck_Tracker;
 using Hearthstone_Deck_Tracker.Hearthstone;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
@@ -6,11 +7,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+#endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 {
-    public class Helper
+    public static class Helper
     {
+        #region Dicts
         private static readonly Dictionary<string, string> ArtistDict = new Dictionary<string, string>
         {
             {"enUS", "artist"},
@@ -62,39 +65,46 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             {"esMX", "ataque"},
             {"esES", "ataque"},
         };
+        #endregion
 
-        public static string GetArtistSearchString(string artist)
+        #region GetArtistSearchString
+        public static string GetArtistSearchString(string strArtist)
         {
-            string artistStr;
-            if (ArtistDict.TryGetValue(Config.Instance.SelectedLanguage, out artistStr))
-                return $" {artistStr}:{artist.Split(' ').LastOrDefault()}";
+            if (ArtistDict.TryGetValue(Config.Instance.SelectedLanguage, out string artistStr))
+                return $" {artistStr}:{strArtist.Split(' ').LastOrDefault()}";
             return "";
         }
+        #endregion
 
-        public static string GetManaSearchString(int cost)
+        #region GetManaSearchString
+        public static string GetManaSearchString(int nCost)
         {
-            string manaStr;
-            if (ManaDict.TryGetValue(Config.Instance.SelectedLanguage, out manaStr))
-                return $" {manaStr}:{cost}";
+            if (ManaDict.TryGetValue(Config.Instance.SelectedLanguage, out string manaStr))
+                return $" {manaStr}:{nCost}";
             return "";
         }
+        #endregion
 
-        public static string GetAttackSearchString(int atk)
+        #region GetAttackSearchString
+        public static string GetAttackSearchString(int nAttack)
         {
-            string atkStr;
-            if (AttackDict.TryGetValue(Config.Instance.SelectedLanguage, out atkStr))
-                return $" {atkStr}:{atk}";
+            if (AttackDict.TryGetValue(Config.Instance.SelectedLanguage, out string atkStr))
+                return $" {atkStr}:{nAttack}";
             return "";
         }
+        #endregion
 
+        #region GetSearchString
         public static string GetSearchString(Card card)
         {
-            var searchString = $"{card.LocalizedName}{GetArtistSearchString(card.Artist)} {GetManaSearchString(card.Cost)}".ToLowerInvariant();
+            string searchString = $"{card.LocalizedName}{GetArtistSearchString(card.Artist)} {GetManaSearchString(card.Cost)}".ToLowerInvariant();
             if (card.Id == HearthDb.CardIds.Collectible.Neutral.Feugen || card.Id == HearthDb.CardIds.Collectible.Neutral.Stalagg)
                 searchString += GetAttackSearchString(card.Attack);
             return searchString;
         }
+        #endregion
 
+        #region EnsureHearthstoneInForeground
         public static async Task<HearthstoneInfo> EnsureHearthstoneInForeground(HearthstoneInfo info)
         {
             if (User32.IsHearthstoneInForeground())
@@ -108,5 +118,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             Log.Error("Can't find Hearthstone window.");
             return null;
         }
+        #endregion
     }
 }
