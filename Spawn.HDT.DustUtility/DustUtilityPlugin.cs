@@ -203,6 +203,8 @@ namespace Spawn.HDT.DustUtility
 
             Config.Save();
 
+            CurrentAccount.SavePreferences();
+
             SimpleIoc.Default.Reset();
 
             ServiceLocator.SetLocatorProvider(null);
@@ -625,6 +627,8 @@ namespace Spawn.HDT.DustUtility
 
                 if (!selectedAcc.Equals(oldAcc))
                 {
+                    oldAcc.SavePreferences();
+
                     UpdatedAccountInstance(selectedAcc);
 
                     blnRet = true;

@@ -105,7 +105,7 @@ namespace Spawn.HDT.DustUtility
             AutoDisenchanting = false;
             Version = 1;
 
-            PropertyChanged += (s, e) => Save();
+            //PropertyChanged += (s, e) => Save();
         }
         #endregion
 

@@ -186,9 +186,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             AccountPreferences retVal = AccountPreferences.Load(this);
 
-            retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
-            retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
-            retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
+            //retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
+            //retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
+            //retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
 
             return retVal;
         }
@@ -197,7 +197,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region SavePreferences
         public void SavePreferences()
         {
-            if (m_preferences != null)
+            if (m_preferences != null && IsValid)
             {
                 m_preferences.Save(this);
 
