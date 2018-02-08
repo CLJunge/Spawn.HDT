@@ -105,7 +105,6 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
-    <Compile Include="Services\IWindowService.cs" />
     <Compile Include="Net\UpdateManager.cs" />
     <Compile Include="Net\CardImageDownloader.cs" />
     <Compile Include="AccountManagement\BackupManager.cs" />
@@ -117,7 +116,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccountManagement\Account.cs" />
-    <Compile Include="Services\Providers\WindowProvider.cs" />
     <Compile Include="UI\Components\Converters\CardSetCardCountConverter.cs" />
     <Compile Include="UI\Components\NumericValidationRule.cs" />
     <Compile Include="UI\Controls\CardCountDialog.xaml.cs">
@@ -149,7 +147,6 @@
     <Compile Include="UI\Dialogs\AccountSelectorDialogView.xaml.cs">
       <DependentUpon>AccountSelectorDialogView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\IResultProvider.cs" />
     <Compile Include="UI\Dialogs\SettingsDialogView.xaml.cs">
       <DependentUpon>SettingsDialogView.xaml</DependentUpon>
     </Compile>

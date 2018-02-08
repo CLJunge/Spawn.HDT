@@ -1,12 +1,11 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.AccountManagement;
-using Spawn.HDT.DustUtility.Services;
 using System.Collections.ObjectModel;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
-    public class AccountSelectorDialogViewModel : ViewModelBase, IResultProvider<string>
+    public class AccountSelectorDialogViewModel : ViewModelBase
     {
         #region Member Variables
         private string m_strWindowTitle;
@@ -56,10 +55,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SelectedAccountString = Accounts[0].AccountString;
             }
         }
-        #endregion
-
-        #region GetResult
-        public string GetResult() => SelectedAccountString;
         #endregion
     }
 }

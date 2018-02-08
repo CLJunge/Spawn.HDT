@@ -79,10 +79,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
         #endregion
-
-        #region OnAutoDisenchantingCheckBoxCheckedCommand
-        public ICommand OnAutoDisenchantingCheckBoxCheckedCommand => new RelayCommand(OnAutoDisenchantingCheckBoxChecked);
-        #endregion
         #endregion
 
         #region Ctor
@@ -120,17 +116,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (OfflineMode)
             {
                 DustUtilityPlugin.Config.SaveInterval = SaveInterval;
-            }
-            else { }
-        }
-        #endregion
-
-        #region OnAutoDisenchantingCheckBoxChecked
-        private void OnAutoDisenchantingCheckBoxChecked()
-        {
-            if (MessageBox.Show("You are using this feature at your own risk!\r\n\r\nThere is always a slight chance, that the wrong card might get disenchanted.\r\n\r\nAre you sure you want to enable auto disenchanting?", "Dust Utility", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            {
-                AutoDisenchanting = false;
             }
             else { }
         }

@@ -6,8 +6,6 @@ using Hearthstone_Deck_Tracker.Utility.Logging;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
-using Spawn.HDT.DustUtility.Services;
-using Spawn.HDT.DustUtility.Services.Providers;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using Spawn.HDT.DustUtility.UI.Windows;
@@ -28,13 +26,6 @@ namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
-        #region Constants
-        public const int SettingsDialogKey = 10;
-        public const int AccountSelectorDialogKey = 20;
-        public const int SortOrderItemSelectorKey = 30;
-        public const int CardSelectionWindowKey = 40;
-        #endregion
-
         #region Static Fields
         private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
@@ -317,32 +308,45 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
-            {
-                if (dialogService.ShowDialog<SettingsDialogView>(SettingsDialogKey, Core.MainWindow))
-                {
-                    if (Config.OfflineMode && Core.Game.IsRunning)
-                    {
-                        if (!Cache.TimerEnabled)
-                        {
-                            Cache.StartTimer();
-                        }
-                        else
-                        {
-                            //Reinitialize timer with new interval
-                            Cache.StopTimer();
+            ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().Initialize();
 
-                            Cache.StartTimer();
-                        }
-                    }
-                    else if (!Config.OfflineMode && Cache.TimerEnabled)
+            SettingsDialogView dialog = new SettingsDialogView()
+            {
+                Owner = Core.MainWindow
+            };
+
+            dialog.AutoDisenchantingCheckBox.Checked += (s, e) =>
+            {
+                if (MessageBox.Show("You are using this feature at your own risk!\r\n\r\nThere is always a slight chance, that the wrong card might get disenchanted.\r\n\r\nAre you sure you want to enable auto disenchanting?", "Dust Utility", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().AutoDisenchanting = false;
+                }
+                else { }
+            };
+
+            if (dialog.ShowDialog().Value)
+            {
+                if (Config.OfflineMode && Core.Game.IsRunning)
+                {
+                    if (!Cache.TimerEnabled)
                     {
-                        Cache.StopTimer();
+                        Cache.StartTimer();
                     }
-                    else { }
+                    else
+                    {
+                        //Reinitialize timer with new interval
+                        Cache.StopTimer();
+
+                        Cache.StartTimer();
+                    }
+                }
+                else if (!Config.OfflineMode && Cache.TimerEnabled)
+                {
+                    Cache.StopTimer();
                 }
                 else { }
             }
+            else { }
         }
         #endregion
 
@@ -482,7 +486,6 @@ namespace Spawn.HDT.DustUtility
 #endif
                 }
 
-                SimpleIoc.Default.Register<IWindowService, WindowProvider>();
                 SimpleIoc.Default.Register(() => Configuration.Load());
 
                 SimpleIoc.Default.Register<MainViewModel>();
@@ -550,16 +553,20 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
-                    {
-                        if (dialogService.ShowDialog<AccountSelectorDialogView>(AccountSelectorDialogKey, owner))
-                        {
-                            retVal = Account.Parse(dialogService.GetResult<string>());
+                    ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().Initialize();
 
-                            Config.LastSelectedAccount = retVal.AccountString;
-                        }
-                        else { }
+                    AccountSelectorDialogView dialog = new AccountSelectorDialogView()
+                    {
+                        Owner = owner
+                    };
+
+                    if (dialog.ShowDialog().Value)
+                    {
+                        retVal = Account.Parse(ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().SelectedAccountString);
+
+                        Config.LastSelectedAccount = retVal.AccountString;
                     }
+                    else { }
                 }
                 else
                 {

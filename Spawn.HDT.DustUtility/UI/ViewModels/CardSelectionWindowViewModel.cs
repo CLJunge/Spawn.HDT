@@ -7,10 +7,8 @@ using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.UI.Controls;
 using Spawn.HDT.DustUtility.UI.Models;
-using Spawn.HDT.DustUtility.UI.Windows;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,6 +24,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Member Variables
         private string m_strWindowTitle;
         private Visibility m_disenchantButtonVisibility;
+
         private CardItemModel m_currentItem;
         private MetroDialogSettings m_dialogSettings;
         private CustomDialog m_cardCountDialog;
@@ -81,50 +80,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             CardsInfo = new CardsInfoModel();
 
-            m_dialogSettings = new MetroDialogSettings()
-            {
-                AnimateShow = true,
-                AnimateHide = true,
-                ColorScheme = MetroDialogColorScheme.Accented
-            };
-
-            CardCountDialog dialogControl = new CardCountDialog();
-
-            dialogControl.CancelButton.Click += (s, e) =>
-            {
-                ServiceLocator.Current.GetInstance<IWindowService>()
-                .GetInstance<CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey)
-                .HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
-            };
-
-            dialogControl.AcceptButton.Click += (s, e) =>
-            {
-                if (m_currentItem != null && m_cardCountDialog.Content is CardCountDialog countControl)
-                {
-                    if (countControl.NumericUpDownCtrl.Value.HasValue
-                    && countControl.NumericUpDownCtrl.Value > 0)
-                    {
-                        int nNewCount = (int)countControl.NumericUpDownCtrl.Value;
-
-                        m_currentItem.Count = nNewCount;
-                        m_currentItem.Dust = m_currentItem.Wrapper.GetDustValue(nNewCount);
-
-                        AddCardItem(m_currentItem);
-                    }
-                    else { }
-                }
-                else { }
-
-                ServiceLocator.Current.GetInstance<IWindowService>()
-                .GetInstance<CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey)
-                .HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
-
-                m_currentItem = null;
-            };
-
             m_cardCountDialog = new CustomDialog(DustUtilityPlugin.MainWindow)
             {
-                Content = dialogControl
+                Content = CreateCardCountDialogContent()
             };
         }
         #endregion
@@ -241,9 +199,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     (m_cardCountDialog.Content as CardCountDialog).Initialize(e.Item.Name, e.Item.Count);
 
-                    await ServiceLocator.Current.GetInstance<IWindowService>()
-                        .GetInstance<CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey)
-                        .ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+                    await ServiceLocator.Current.GetInstance<MainViewModel>()
+                        .SelectionWindow.ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
                 }
                 else if (m_currentItem.Count == 1)
                 {
@@ -268,8 +225,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Add(lstCards[i]);
             }
-
-            ServiceLocator.Current.GetInstance<IWindowService>().Dispose(DustUtilityPlugin.CardSelectionWindowKey);
         }
         #endregion
 
@@ -298,6 +253,52 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             CardsInfo.DustAmount += cardItem.Dust;
 
             CardItems.Add(cardItem);
+        }
+        #endregion
+
+        #region CreateCardCountDialogContent
+        private CardCountDialog CreateCardCountDialogContent()
+        {
+            CardCountDialog retVal = new CardCountDialog();
+
+            m_dialogSettings = new MetroDialogSettings()
+            {
+                AnimateShow = true,
+                AnimateHide = true,
+                ColorScheme = MetroDialogColorScheme.Accented
+            };
+
+            retVal.CancelButton.Click += async (s, e) =>
+            {
+                await ServiceLocator.Current.GetInstance<MainViewModel>()
+                .SelectionWindow.HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+            };
+
+            retVal.AcceptButton.Click += async (s, e) =>
+            {
+                if (m_currentItem != null && m_cardCountDialog.Content is CardCountDialog countControl)
+                {
+                    if (countControl.NumericUpDownCtrl.Value.HasValue
+                    && countControl.NumericUpDownCtrl.Value > 0)
+                    {
+                        int nNewCount = (int)countControl.NumericUpDownCtrl.Value;
+
+                        m_currentItem.Count = nNewCount;
+                        m_currentItem.Dust = m_currentItem.Wrapper.GetDustValue(nNewCount);
+
+                        AddCardItem(m_currentItem);
+                    }
+                    else { }
+                }
+                else { }
+
+                await ServiceLocator.Current.GetInstance<MainViewModel>()
+                .SelectionWindow.HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+
+                m_currentItem = null;
+            };
+
+            return retVal;
         }
         #endregion
     }

@@ -1,7 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Practices.ServiceLocation;
-using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
@@ -105,16 +104,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 viewModel.SortOrderItems.Add(lstUnusedItems[i]);
             }
 
-            using (IWindowService dialogService = ServiceLocator.Current.GetInstance<IWindowService>())
+            SortOrderItemSelectorDialogView dialog = new SortOrderItemSelectorDialogView()
             {
-                if (dialogService.ShowDialog<SortOrderItemSelectorDialogView>(DustUtilityPlugin.SortOrderItemSelectorKey, DustUtilityPlugin.MainWindow))
-                {
-                    SortOrder.OrderItem orderItem = dialogService.GetResult<SortOrder.OrderItem>(DustUtilityPlugin.SortOrderItemSelectorKey);
+                Owner = DustUtilityPlugin.MainWindow
+            };
 
-                    SortOrderItems.Add(new SortOrderItemModel(orderItem));
-                }
-                else { }
+            if (dialog.ShowDialog().Value)
+            {
+                SortOrder.OrderItem orderItem = ServiceLocator.Current.GetInstance<SortOrderItemSelectorDialogViewModel>().SelectedSortOrderItem.Value;
+
+                SortOrderItems.Add(new SortOrderItemModel(orderItem));
             }
+            else { }
         }
         #endregion
 

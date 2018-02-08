@@ -7,8 +7,8 @@ using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Net;
-using Spawn.HDT.DustUtility.Services;
 using Spawn.HDT.DustUtility.UI.Models;
+using Spawn.HDT.DustUtility.UI.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,6 +33,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private Visibility m_historyButtonVisibility;
         private Visibility m_switchAccountButtonVisibility;
         private string m_strSearchQuery;
+
+        private CardSelectionWindow m_selectionWindow;
         #endregion
 
         #region Properties
@@ -98,6 +100,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region OpenCardSelectionWindowCommand
         public ICommand OpenCardSelectionWindowCommand => new RelayCommand(OpenCardSelectionWindow);
+        #endregion
+
+        #region SelectionWindow
+        public CardSelectionWindow SelectionWindow => m_selectionWindow;
         #endregion
         #endregion
 
@@ -225,13 +231,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (DustUtilityPlugin.SwitchAccount())
             {
-                IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
-
-                if (windowService.IsVisible(DustUtilityPlugin.CardSelectionWindowKey))
-                {
-                    windowService.Dispose(DustUtilityPlugin.CardSelectionWindowKey);
-                }
-                else { }
+                m_selectionWindow?.Close();
+                m_selectionWindow = null;
             }
             else { }
         }
@@ -339,22 +340,24 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OpenCardSelectionWindow
         public void OpenCardSelectionWindow()
         {
-            IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
+            ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().Initialize();
 
-            windowService.Show<Windows.CardSelectionWindow>(DustUtilityPlugin.CardSelectionWindowKey, DustUtilityPlugin.MainWindow);
+            if (m_selectionWindow == null)
+            {
+                m_selectionWindow = new CardSelectionWindow();
+            }
+            else
+            {
+                DustUtilityPlugin.BringWindowToFront(m_selectionWindow);
+            }
         }
         #endregion
 
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            IWindowService windowService = ServiceLocator.Current.GetInstance<IWindowService>();
-
-            if (windowService.IsVisible(DustUtilityPlugin.CardSelectionWindowKey))
-            {
-                windowService.Dispose(DustUtilityPlugin.CardSelectionWindowKey);
-            }
-            else { }
+            m_selectionWindow?.Close();
+            m_selectionWindow = null;
 
             if (DustUtilityPlugin.HideMainWindowOnClose)
             {
