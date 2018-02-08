@@ -344,7 +344,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (m_selectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow();
+                m_selectionWindow = new CardSelectionWindow()
+                {
+                    Owner = DustUtilityPlugin.MainWindow
+                };
+
+                m_selectionWindow.Closed += (s, e) => m_selectionWindow = null;
+
+                m_selectionWindow.Show();
             }
             else
             {
