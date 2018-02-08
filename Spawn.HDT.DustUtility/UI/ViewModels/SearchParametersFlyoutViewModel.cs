@@ -298,6 +298,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
                 else { }
             };
+
+            if (IsInDesignMode)
+            {
+                Initialize();
+            }
+            else { }
         }
         #endregion
 

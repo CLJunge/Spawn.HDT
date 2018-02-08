@@ -52,7 +52,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Static Ctor
         static ViewModelLocator()
         {
-            DustUtilityPlugin.CreateContainer();
+            if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
+            {
+                DustUtilityPlugin.CreateContainer();
+            }
+            else { }
         }
         #endregion
     }

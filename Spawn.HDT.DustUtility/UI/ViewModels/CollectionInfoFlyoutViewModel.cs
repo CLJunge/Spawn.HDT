@@ -25,6 +25,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public CollectionInfoFlyoutViewModel()
         {
             CardSetItems = new ObservableCollection<CardSetItemModel>();
+
+            if (IsInDesignMode)
+            {
+                ReloadRequired = true;
+
+                Initialize();
+            }
+            else { }
         }
         #endregion
 

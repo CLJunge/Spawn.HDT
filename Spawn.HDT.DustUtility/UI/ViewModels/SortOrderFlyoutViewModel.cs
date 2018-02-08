@@ -71,6 +71,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public SortOrderFlyoutViewModel()
         {
             SortOrderItems = new ObservableCollection<SortOrderItemModel>();
+
+            if (IsInDesignMode)
+            {
+                Initialize();
+            }
+            else { }
         }
         #endregion
 

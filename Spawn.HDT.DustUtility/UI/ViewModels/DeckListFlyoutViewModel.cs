@@ -38,6 +38,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
                 else { }
             };
+
+            if (IsInDesignMode)
+            {
+                Deck = DustUtilityPlugin.CurrentAccount.GetDecks()[0];
+
+                Initialize();
+            }
+            else { }
         }
         #endregion
 
