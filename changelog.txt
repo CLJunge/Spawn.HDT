@@ -90,4 +90,9 @@
 - Displaying crafting cost if a card is added (History)
 - Deleting backups older than one month
 - Other fixes and/or improvements
+
+## 3.0.0
+- Complete rewrite
+- Added auto disenchanting
+- Added golden cards to collection info
 -----------------------------
