@@ -25,6 +25,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strWindowTitle;
         private Visibility m_disenchantButtonVisibility;
 
+        private bool m_blnDisenchantingConfirmation;
+
         private CardItemModel m_currentItem;
         private MetroDialogSettings m_dialogSettings;
         private CustomDialog m_cardCountDialog;
@@ -109,6 +111,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
             }
             else { }
+
+            m_blnDisenchantingConfirmation = false;
         }
         #endregion
 
@@ -139,20 +143,25 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region DisenchantSelection
         private async void DisenchantSelection()
         {
-            List<CardWrapper> lstCards = new List<CardWrapper>();
-
-            for (int i = 0; i < CardItems.Count; i++)
+            if (!m_blnDisenchantingConfirmation)
             {
-                lstCards.Add(CardItems[i].Wrapper);
-            }
+                MessageDialogResult result = await ServiceLocator.Current.GetInstance<MainViewModel>()
+                        .SelectionWindow.ShowMessageAsync(string.Empty, "Go to your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
 
-            if (await CardsManager.Disenchant(DustUtilityPlugin.CurrentAccount, lstCards))
+                m_blnDisenchantingConfirmation = result == MessageDialogResult.Affirmative;
+            }
+            else
             {
-                Clear();
+                List<CardWrapper> lstCards = CardItems.Select(m => m.Wrapper).ToList();
 
-                ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
+                if (await CardsManager.Disenchant(DustUtilityPlugin.CurrentAccount, lstCards))
+                {
+                    Clear();
+
+                    ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
+                }
+                else { }
             }
-            else { }
         }
         #endregion
 
