@@ -33,6 +33,24 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Copy Plugin|AnyCPU'">
+    <OutputPath>bin\Release + Copy Plugin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug + Copy Plugin|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug + Copy Plugin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -365,7 +383,9 @@
     </ItemGroup>
   </Target>-->
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
-if $(ConfigurationName) == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild</PostBuildEvent>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Debug + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
+if "$(ConfigurationName)" == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild
+if "$(ConfigurationName)" == "Release + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild
+if "$(ConfigurationName)" == "Release + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>
