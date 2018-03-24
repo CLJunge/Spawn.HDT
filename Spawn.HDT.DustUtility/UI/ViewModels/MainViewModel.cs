@@ -272,14 +272,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 SearchResult result = await CardsManager.GetCardsAsync(DustUtilityPlugin.CurrentAccount);
 
-                result.CardItems = OrderItems(result.CardItems).ToList();
-
-                result.CopyToCardsInfoModel(CardsInfo);
-
-                for (int i = 0; i < result.CardItems.Count; i++)
+                if (result != null)
                 {
-                    CardItems.Add(result.CardItems[i]);
+                    result.CardItems = OrderItems(result.CardItems).ToList();
+
+                    result.CopyToCardsInfoModel(CardsInfo);
+
+                    for (int i = 0; i < result.CardItems.Count; i++)
+                    {
+                        CardItems.Add(result.CardItems[i]);
+                    }
                 }
+                else { }
             }
             else { }
         }

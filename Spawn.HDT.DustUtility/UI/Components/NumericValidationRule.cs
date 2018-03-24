@@ -14,7 +14,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
 
             if (!DustUtilityPlugin.NumericRegex.IsMatch(value.ToString()))
             {
-                retVal = new ValidationResult(false, "Not a valid number!");
+                retVal = new ValidationResult(false, "Invalid value!");
             }
             else { }
 

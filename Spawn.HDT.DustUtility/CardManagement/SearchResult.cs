@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #endregion
 
         #region Ctor
-        public SearchResult()
+        private SearchResult()
         {
             CardItems = new List<CardItemModel>();
         }

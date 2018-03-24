@@ -63,10 +63,14 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                         if (m_wrapper.RawCard.Premium)
                         {
-                            SetAsGif(m_currentImageStream);
+                            Log.WriteLine("Setting current image as GIF", LogType.Debug);
+
+                            image.SetValue(XamlAnimatedGif.AnimationBehavior.SourceStreamProperty, m_currentImageStream);
                         }
                         else
                         {
+                            Log.WriteLine("Setting current image as normal bitmap", LogType.Debug);
+
                             image.Source = (Image.FromStream(m_currentImageStream) as Bitmap).ToBitmapImage();
                         }
 
@@ -124,15 +128,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 image.Margin = new Thickness();
             }
-        }
-        #endregion
-
-        #region SetAsGif
-        private void SetAsGif(Stream stream)
-        {
-            Log.WriteLine("Setting current image as GIF", LogType.Debug);
-
-            image.SetValue(XamlAnimatedGif.AnimationBehavior.SourceStreamProperty, stream);
         }
         #endregion
     }

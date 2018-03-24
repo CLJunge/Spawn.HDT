@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #region GetCardsAsync
         public static async Task<SearchResult> GetCardsAsync(IAccount account)
         {
-            SearchResult retVal = new SearchResult();
+            SearchResult retVal = null;
 
             SearchParameters parameters = account.Preferences.SearchParameters;
 
