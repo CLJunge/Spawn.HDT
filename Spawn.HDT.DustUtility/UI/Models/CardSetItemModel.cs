@@ -1,10 +1,12 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
+using System.Diagnostics;
 using System.Windows.Media.Imaging;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
+    [DebuggerDisplay("{Name}")]
     public class CardSetItemModel : ObservableObject
     {
         #region Member Variables

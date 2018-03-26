@@ -1,9 +1,11 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
+using System.Diagnostics;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
+    [DebuggerDisplay("{DustAmount} Dust ({CommonsCount} Commons, {RaresCount} Rares, {EpicsCount} Epics, {LegendariesCount} Legendaries)")]
     public class CardsInfoModel : ObservableObject
     {
         #region Member Variables

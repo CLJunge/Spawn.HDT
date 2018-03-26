@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
-    [DebuggerDisplay("{Name} ({Count})")]
+    [DebuggerDisplay("{Name} ({Count}x)")]
     public class CardItemModel : ObservableObject
     {
         #region Member Variables

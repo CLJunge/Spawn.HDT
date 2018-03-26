@@ -3,11 +3,13 @@ using GalaSoft.MvvmLight;
 using HearthMirror.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Media.Imaging;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
+    [DebuggerDisplay("{Name}: {CardCount} Card(s) ({CraftingCost} Dust)")]
     public class DeckItemModel : ObservableObject
     {
         #region Static Fields

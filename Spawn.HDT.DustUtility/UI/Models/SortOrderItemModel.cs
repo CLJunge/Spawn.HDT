@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Spawn.HDT.DustUtility.UI.Models
 {
-    [DebuggerDisplay("Name={Name} Value={Value}")]
+    [DebuggerDisplay("{Name} ({Value})")]
     public class SortOrderItemModel : ObservableObject
     {
         #region Member Variables
