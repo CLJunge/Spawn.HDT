@@ -10,7 +10,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 #### Selection Window
 - Drag cards into the selection window to create a list of cards that you would like to disenchant.
-- With the setting 'Auto Disenchanting' enabled, the plugin can automatically disenchant the current selection by emulating the mouse cursor.
+- With the setting `Auto Disenchanting` enabled, the plugin can automatically disenchant the current selection by emulating the mouse cursor.
 ![Overlay](https://i.imgur.com/X0vApAZ.png)
 
 #### Offline Mode
