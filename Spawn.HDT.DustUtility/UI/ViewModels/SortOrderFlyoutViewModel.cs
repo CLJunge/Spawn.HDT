@@ -87,7 +87,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SortOrder sortOrder = SortOrder.Parse(DustUtilityPlugin.Config.SortOrder);
 
-            for (int i = 0; i < sortOrder.Count; i++)
+            for (int i = 0; i < sortOrder?.Count; i++)
             {
                 SortOrderItems.Add(sortOrder[i]);
             }

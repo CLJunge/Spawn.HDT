@@ -38,14 +38,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public AccountSelectorDialogViewModel()
         {
             WindowTitle = "Dust Utility - Select account...";
-
-            Accounts = new ObservableCollection<IAccount>(DustUtilityPlugin.GetAccounts());
         }
         #endregion
 
         #region Initialize
         public override void Initialize()
         {
+            Accounts = new ObservableCollection<IAccount>(DustUtilityPlugin.GetAccounts());
+
             if (!string.IsNullOrEmpty(DustUtilityPlugin.Config.LastSelectedAccount))
             {
                 SelectedAccountString = DustUtilityPlugin.Config.LastSelectedAccount;

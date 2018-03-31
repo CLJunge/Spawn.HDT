@@ -54,21 +54,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             Cards.Clear();
 
-            if (Deck != null)
+            for (int i = 0; i < Deck?.Cards.Count; i++)
             {
-                for (int i = 0; i < Deck.Cards.Count; i++)
+                HearthDb.Card dbCard = HearthDb.Cards.Collectible[Deck.Cards[i].Id];
+
+                Card card = new Card(dbCard)
                 {
-                    HearthDb.Card dbCard = HearthDb.Cards.Collectible[Deck.Cards[i].Id];
+                    Count = Deck.Cards[i].Count
+                };
 
-                    Card card = new Card(dbCard)
-                    {
-                        Count = Deck.Cards[i].Count
-                    };
-
-                    Cards.Add(card);
-                }
+                Cards.Add(card);
             }
-            else { }
         }
         #endregion
     }

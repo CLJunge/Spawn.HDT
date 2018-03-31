@@ -335,8 +335,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region GetCollectionValue
-        public static int GetCollectionValue(IAccount account)
+        #region GetTotalCollectionValue
+        public static int GetTotalCollectionValue(IAccount account)
         {
             int nRet = 0;
 

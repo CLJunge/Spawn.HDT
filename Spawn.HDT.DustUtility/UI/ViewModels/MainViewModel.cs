@@ -191,7 +191,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             else { }
 #endif
 
-            BackupManager.Create(account);
+            BackupManager.CreateBackup(account);
 
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
@@ -245,7 +245,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (flyout.Content is Flyouts.CollectionInfoFlyout && viewModel.ReloadRequired)
             {
-                int nCollectionValue = CardsManager.GetCollectionValue(DustUtilityPlugin.CurrentAccount);
+                int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
 
                 flyout.Header = $"Collection Info ({nCollectionValue} Dust)";
             }
@@ -330,13 +330,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await Task.Delay(1); //return to ui thread
 
-            List<CardItemModel> orderedList = OrderItems(CardItems).ToList();
+            List<CardItemModel> lstItems = OrderItems(CardItems).ToList();
 
             CardItems.Clear();
 
-            for (int i = 0; i < orderedList.Count; i++)
+            for (int i = 0; i < lstItems.Count; i++)
             {
-                CardItems.Add(orderedList[i]);
+                CardItems.Add(lstItems[i]);
             }
         }
         #endregion

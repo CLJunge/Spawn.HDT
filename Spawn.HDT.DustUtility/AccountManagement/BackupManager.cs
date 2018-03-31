@@ -10,8 +10,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 {
     public static class BackupManager
     {
-        #region Create
-        public static bool Create(IAccount account)
+        #region CreateBackup
+        public static bool CreateBackup(IAccount account)
         {
             bool blnRet = false;
 
@@ -71,8 +71,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region Restore
-        public static bool Restore(IAccount account, DateTime date)
+        #region RestoreFromBackup
+        public static bool RestoreFromBackup(IAccount account, DateTime date)
         {
             bool blnRet = false;
 

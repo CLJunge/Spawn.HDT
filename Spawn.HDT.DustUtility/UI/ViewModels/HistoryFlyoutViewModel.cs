@@ -79,7 +79,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else
             {
-                Log.WriteLine($"No reloading required", LogType.Debug);
+                Log.WriteLine($"No reload required", LogType.Debug);
             }
         }
         #endregion
