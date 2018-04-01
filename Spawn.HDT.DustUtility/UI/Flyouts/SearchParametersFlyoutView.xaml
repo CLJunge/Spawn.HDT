@@ -718,8 +718,8 @@
             </Grid>
         </GroupBox>
 
-        <WrapPanel Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,10,5,5">
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Save" Command="{Binding SaveCommand}" Width="75" Height="28"/>
+        <WrapPanel x:Name="wrapPanel" Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0,10,5,5">
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Save" Command="{Binding SaveCommand}" Height="28" Width="{Binding ActualWidth, ElementName=wrapPanel, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </WrapPanel>
     </Grid>
 </UserControl>
