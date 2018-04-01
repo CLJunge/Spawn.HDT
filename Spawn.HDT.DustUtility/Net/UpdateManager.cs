@@ -15,20 +15,19 @@ namespace Spawn.HDT.DustUtility.Net
         #endregion
 
         #region Static Fields
+        private static Version NewVersionFormat => new Version(1, 6, 1);
+
         private static Regex s_versionRegex;
         private static Regex s_updateTextRegex;
 
-        private static Version s_newVersion;
-        private static string s_strReleaseNotes;
-
-        private static WebClient m_webClient;
+        private static WebClient s_webClient;
+        private static UpdateInfo s_updateInfo;
         #endregion
 
-        #region Properties
-        public static Version NewVersion => s_newVersion;
-        public static string ReleaseNotes => s_strReleaseNotes;
-
-        private static Version NewVersionFormat => new Version(1, 6, 1);
+        #region Static Properties
+        #region Info
+        public static UpdateInfo Info => s_updateInfo;
+        #endregion
         #endregion
 
         #region Custom Events
@@ -49,6 +48,8 @@ namespace Spawn.HDT.DustUtility.Net
         public static async Task<bool> PerformUpdateCheckAsync()
         {
             bool blnRet = false;
+
+            s_updateInfo = null;
 
             try
             {
@@ -74,7 +75,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                             if (blnRet)
                             {
-                                s_newVersion = newVersion;
+                                s_updateInfo = new UpdateInfo(newVersion);
 
                                 string strResult;
 
@@ -90,7 +91,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                                 if (updateTextMatch.Success)
                                 {
-                                    s_strReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
+                                    s_updateInfo.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
                                 }
                                 else { }
 
@@ -119,7 +120,11 @@ namespace Spawn.HDT.DustUtility.Net
         #region DownloadLatestRelease
         public static void DownloadLatestRelease()
         {
-            Download(NewVersion);
+            if (Info != null)
+            {
+                Download(Info.Version);
+            }
+            else { }
         }
         #endregion
 
@@ -134,11 +139,11 @@ namespace Spawn.HDT.DustUtility.Net
             }
             else { }
 
-            using (m_webClient = new WebClient())
+            using (s_webClient = new WebClient())
             {
-                m_webClient.DownloadProgressChanged += (s, e) => DownloadProgressChanged?.Invoke(s, e);
+                s_webClient.DownloadProgressChanged += (s, e) => DownloadProgressChanged?.Invoke(s, e);
 
-                m_webClient.DownloadDataCompleted += (s, e) =>
+                s_webClient.DownloadDataCompleted += (s, e) =>
                 {
                     if (!e.Cancelled)
                     {
@@ -150,7 +155,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                 };
 
-                m_webClient.DownloadDataAsync(new Uri($"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
+                s_webClient.DownloadDataAsync(new Uri($"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
             }
         }
         #endregion
@@ -158,7 +163,7 @@ namespace Spawn.HDT.DustUtility.Net
         #region CancelDownload
         public static void CancelDownload()
         {
-            m_webClient?.CancelAsync();
+            s_webClient?.CancelAsync();
         }
         #endregion
     }

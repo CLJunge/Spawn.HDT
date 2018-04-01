@@ -111,12 +111,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             StringBuilder sb = new StringBuilder();
 
-            sb.Append($"Update {UpdateManager.NewVersion.ToString(3)} has been released.")
-                .Append(Environment.NewLine + Environment.NewLine)
-                .Append("Release Notes:").Append(Environment.NewLine)
-                .Append(UpdateManager.ReleaseNotes)
-                .Append(Environment.NewLine + Environment.NewLine)
-                .Append("Would you like to download it?");
+            sb.Append($"Update {UpdateManager.Info.Version.ToString(3)} has been released.")
+                .Append(Environment.NewLine + Environment.NewLine);
+
+            if (UpdateManager.Info.HasReleaseNotes)
+            {
+                sb.Append("Release Notes:").Append(Environment.NewLine)
+                .Append(UpdateManager.Info.ReleaseNotes)
+                .Append(Environment.NewLine + Environment.NewLine);
+            }
+            else { }
+
+            sb.Append("Would you like to download it?");
 
             UpdateMessage = sb.ToString();
         }
