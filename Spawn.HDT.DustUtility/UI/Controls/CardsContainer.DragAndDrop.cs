@@ -84,6 +84,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 e.Effects = DragDropEffects.None;
             }
             else { }
+
+            e.Handled = true;
         }
         #endregion
 
