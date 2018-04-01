@@ -110,6 +110,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 viewModel.SortOrderItems.Add(lstUnusedItems[i]);
             }
 
+            viewModel.Initialize();
+
             SortOrderItemSelectorDialogView dialog = new SortOrderItemSelectorDialogView()
             {
                 Owner = DustUtilityPlugin.MainWindow
