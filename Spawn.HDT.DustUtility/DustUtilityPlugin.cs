@@ -315,6 +315,7 @@ namespace Spawn.HDT.DustUtility
                 Owner = Core.MainWindow
             };
 
+            //TODO: still buggy, dialog pops up multiple timess
             dialog.AutoDisenchantingCheckBox.Checked += (s, e) =>
             {
                 if (MessageBox.Show("You are using this feature at your own risk!\r\n\r\nThere is always a slight chance, that the wrong card might get disenchanted.\r\n\r\nAre you sure you want to enable auto disenchanting?", "Dust Utility", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
