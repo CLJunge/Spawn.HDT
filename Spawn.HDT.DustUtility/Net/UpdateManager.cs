@@ -117,17 +117,6 @@ namespace Spawn.HDT.DustUtility.Net
         }
         #endregion
 
-        #region DownloadLatestRelease
-        public static void DownloadLatestRelease()
-        {
-            if (Info != null)
-            {
-                Download(Info.Version);
-            }
-            else { }
-        }
-        #endregion
-
         #region Download
         public static void Download(Version version)
         {

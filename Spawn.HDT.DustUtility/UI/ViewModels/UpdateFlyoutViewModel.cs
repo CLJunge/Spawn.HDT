@@ -137,7 +137,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             UpdateManager.DownloadProgressChanged += OnDownloadProgressChanged;
             UpdateManager.DownloadCompleted += OnDownloadCompleted;
 
-            UpdateManager.DownloadLatestRelease();
+            UpdateManager.Download(UpdateManager.Info.Version);
         }
         #endregion
 
