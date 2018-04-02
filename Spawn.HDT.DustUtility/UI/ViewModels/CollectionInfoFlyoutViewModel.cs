@@ -243,7 +243,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             List<Card> lstChunk = lstCollection.FindAll(c =>
             {
-                HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+                HearthDb.Card card = HearthDb.Cards.All[c.Id];
 
                 return card.Set == cardSet && card.Rarity == rarity && c.Premium == blnIsGolden;
             });
@@ -282,7 +282,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+                        HearthDb.Card card = HearthDb.Cards.All[c.Id];
 
                         return card.Set == cardSet && card.Rarity == rarity && c.Premium == blnIsGolden;
                     });
@@ -291,7 +291,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+                        HearthDb.Card card = HearthDb.Cards.All[c.Id];
 
                         return card.Set == cardSet && c.Premium == blnIsGolden;
                     });
@@ -300,7 +300,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
+                        HearthDb.Card card = HearthDb.Cards.All[c.Id];
 
                         return card.Rarity == rarity && c.Premium == blnIsGolden;
                     });
