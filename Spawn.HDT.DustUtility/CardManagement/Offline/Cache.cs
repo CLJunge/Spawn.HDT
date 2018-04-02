@@ -22,6 +22,13 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         public static bool TimerEnabled => s_timer != null;
         #endregion
 
+        #region ForceSave
+        public static void ForceSave(IAccount account)
+        {
+            OnTick(account);
+        }
+        #endregion
+
         #region SaveCollection
         private static bool SaveCollection(IAccount account)
         {
@@ -178,15 +185,21 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region OnTick
         private static void OnTick(object state)
         {
-            Log.WriteLine("Performing save operations", LogType.Debug);
+            Log.WriteLine("Saving collection and decks...", LogType.Debug);
 
             IAccount account = Account.LoggedInAccount;
+
+            if (state != null)
+            {
+                account = state as IAccount;
+            }
+            else { }
 
             if (!account.IsEmpty && account.IsValid)
             {
                 HistoryManager.CheckCollection(account);
 
-                Log.WriteLine("Saving collection", LogType.Debug);
+                Log.WriteLine("Saving collection...", LogType.Debug);
 
                 if (SaveCollection(account))
                 {
@@ -194,7 +207,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 }
                 else { }
 
-                Log.WriteLine("Saving decks", LogType.Debug);
+                Log.WriteLine("Saving decks...", LogType.Debug);
 
                 if (SaveDecks(account))
                 {
@@ -204,7 +217,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             else
             {
-                Log.WriteLine("Couldn't retrieve account", LogType.Debug);
+                Log.WriteLine("Couldn't retrieve account!", LogType.Debug);
             }
         }
         #endregion

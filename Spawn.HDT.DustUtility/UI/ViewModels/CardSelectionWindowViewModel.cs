@@ -162,6 +162,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     Clear();
 
+                    if (DustUtilityPlugin.Config.OfflineMode)
+                    {
+                        Cache.ForceSave(DustUtilityPlugin.CurrentAccount);
+                    }
+                    else { }
+
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
                 }
                 else { }
