@@ -210,7 +210,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
                     {
-                        DustUtilityPlugin.MainWindow.Dispatcher.Invoke(() =>
+                        DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
                         {
                             OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
                         });

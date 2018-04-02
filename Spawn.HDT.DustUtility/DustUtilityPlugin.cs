@@ -30,6 +30,9 @@ namespace Spawn.HDT.DustUtility
         private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
         private static bool s_blnIsOffline;
+#if DEBUG
+        private static IAccount s_mockAcc = new MockAccount();
+#endif
         #endregion
 
         #region Static Properties
@@ -270,7 +273,11 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+            if (MainWindow != null)
+            {
+                ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+            }
+            else { }
 
             if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
@@ -476,12 +483,12 @@ namespace Spawn.HDT.DustUtility
 
                 if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
                 {
-                    SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+                    SimpleIoc.Default.Register(() => s_mockAcc);
                 }
                 else
                 {
 #if DEBUG
-                    SimpleIoc.Default.Register<IAccount>(() => new MockAccount());
+                    SimpleIoc.Default.Register(() => s_mockAcc);
 #else
                     SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
 #endif
@@ -594,6 +601,10 @@ namespace Spawn.HDT.DustUtility
         public static IAccount[] GetAccounts()
         {
             List<IAccount> lstRet = new List<IAccount>();
+
+#if DEBUG
+            lstRet.Add(s_mockAcc);
+#endif
 
             if (Directory.Exists(DataDirectory))
             {
