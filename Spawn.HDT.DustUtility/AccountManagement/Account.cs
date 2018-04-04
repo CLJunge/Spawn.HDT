@@ -7,6 +7,7 @@ using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 #endregion
 
 namespace Spawn.HDT.DustUtility.AccountManagement
@@ -112,6 +113,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             if (lstRet != null)
             {
                 Log.WriteLine("Loaded collection", LogType.Debug);
+
+                lstRet = lstRet.Where(c => HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
             }
             else
             {
