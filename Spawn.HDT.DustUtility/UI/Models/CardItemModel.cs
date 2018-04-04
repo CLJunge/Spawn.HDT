@@ -66,7 +66,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Name
-        public string Name => (Wrapper?.DbCard.Name ?? HearthDb.Cards.All[Id].Name);
+        public string Name => (Wrapper?.DbCard.Name ?? HearthDb.Cards.Collectible[Id].Name);
         #endregion
 
         #region Golden
@@ -90,7 +90,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region Rarity
-        public Rarity Rarity => (Wrapper?.DbCard.Rarity ?? HearthDb.Cards.All[Id].Rarity);
+        public Rarity Rarity => (Wrapper?.DbCard.Rarity ?? HearthDb.Cards.Collectible[Id].Rarity);
         #endregion
 
         #region Rarity
@@ -98,7 +98,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region CardClass
-        public CardClass CardClass => (Wrapper?.DbCard.Class ?? HearthDb.Cards.All[Id].Class);
+        public CardClass CardClass => (Wrapper?.DbCard.Class ?? HearthDb.Cards.Collectible[Id].Class);
         #endregion
 
         #region CardClassString
@@ -106,7 +106,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region CardSet
-        public CardSet CardSet => (Wrapper?.DbCard.Set ?? HearthDb.Cards.All[Id].Set);
+        public CardSet CardSet => (Wrapper?.DbCard.Set ?? HearthDb.Cards.Collectible[Id].Set);
         #endregion
 
         #region CardSetString
@@ -114,7 +114,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region ManaCost
-        public int ManaCost => (m_wrapper?.DbCard.Cost ?? HearthDb.Cards.All[Id].Cost);
+        public int ManaCost => (m_wrapper?.DbCard.Cost ?? HearthDb.Cards.Collectible[Id].Cost);
         #endregion
 
         #region Date
@@ -193,7 +193,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region GetCardImage
         private ImageSource GetCardImage()
         {
-            ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.All[Id]));
+            ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.Collectible[Id]));
 
             if (image != null)
             {

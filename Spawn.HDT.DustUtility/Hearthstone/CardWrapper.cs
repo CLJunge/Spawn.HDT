@@ -23,7 +23,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #endregion
 
         #region DbCard
-        public HearthDb.Card DbCard => HearthDb.Cards.All[RawCard.Id];
+        public HearthDb.Card DbCard => HearthDb.Cards.Collectible[RawCard.Id];
         #endregion
 
         #region MaxCountInDecks

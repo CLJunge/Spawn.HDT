@@ -56,7 +56,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             for (int i = 0; i < Deck?.Cards.Count; i++)
             {
-                HearthDb.Card dbCard = HearthDb.Cards.All[Deck.Cards[i].Id];
+                HearthDb.Card dbCard = HearthDb.Cards.Collectible[Deck.Cards[i].Id];
 
                 Card card = new Card(dbCard)
                 {
