@@ -22,6 +22,8 @@ namespace Spawn.HDT.DustUtility.Net
 
         private static WebClient s_webClient;
         private static UpdateInfo s_updateInfo;
+
+        private static bool s_blnIsChecking;
         #endregion
 
         #region Static Properties
@@ -49,69 +51,77 @@ namespace Spawn.HDT.DustUtility.Net
         {
             bool blnRet = false;
 
-            s_updateInfo = null;
-
-            try
+            if (!s_blnIsChecking)
             {
-                Log.WriteLine("Checking GitHub for new update...", LogType.Info);
+                s_blnIsChecking = true;
 
-                HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
+                s_updateInfo = null;
 
-                using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
+                try
                 {
-                    if (response.StatusCode == HttpStatusCode.OK)
-                    {
-                        Match versionMatch = s_versionRegex.Match(response.ResponseUri.AbsoluteUri);
+                    Log.WriteLine("Checking GitHub for new update...", LogType.Info);
 
-                        if (versionMatch.Success)
+                    HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
+
+                    using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
+                    {
+                        if (response.StatusCode == HttpStatusCode.OK)
                         {
-                            Version newVersion = new Version(versionMatch.Value);
+                            Match versionMatch = s_versionRegex.Match(response.ResponseUri.AbsoluteUri);
+
+                            if (versionMatch.Success)
+                            {
+                                Version newVersion = new Version(versionMatch.Value);
 
 #if DEBUG
-                            blnRet = newVersion > new Version(0, 0);
+                                blnRet = newVersion > new Version(0, 0);
 #else
                             blnRet = newVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 #endif
 
-                            if (blnRet)
-                            {
-                                s_updateInfo = new UpdateInfo(newVersion);
-
-                                string strResult;
-
-                                using (WebClient webClient = new WebClient())
+                                if (blnRet)
                                 {
-                                    strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
+                                    s_updateInfo = new UpdateInfo(newVersion);
+
+                                    string strResult;
+
+                                    using (WebClient webClient = new WebClient())
+                                    {
+                                        strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
+                                    }
+
+                                    //prepare for regex check
+                                    strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
+
+                                    Match updateTextMatch = s_updateTextRegex.Match(strResult);
+
+                                    if (updateTextMatch.Success)
+                                    {
+                                        s_updateInfo.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
+                                    }
+                                    else { }
+
+                                    Log.WriteLine("New update available", LogType.Info);
                                 }
-
-                                //prepare for regex check
-                                strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
-
-                                Match updateTextMatch = s_updateTextRegex.Match(strResult);
-
-                                if (updateTextMatch.Success)
+                                else
                                 {
-                                    s_updateInfo.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
+                                    Log.WriteLine("No update available", LogType.Info);
                                 }
-                                else { }
-
-                                Log.WriteLine("New update available", LogType.Info);
                             }
-                            else
-                            {
-                                Log.WriteLine("No update available", LogType.Info);
-                            }
+                            else { }
                         }
                         else { }
                     }
-                    else { }
                 }
+                catch (Exception ex)
+                {
+                    //No internet connection or github down
+                    Log.WriteLine($"Couldn't perform update check: {ex}", LogType.Error);
+                }
+
+                s_blnIsChecking = false;
             }
-            catch (Exception ex)
-            {
-                //No internet connection or github down
-                Log.WriteLine($"Couldn't perform update check: {ex}", LogType.Error);
-            }
+            else { }
 
             return blnRet;
         }
