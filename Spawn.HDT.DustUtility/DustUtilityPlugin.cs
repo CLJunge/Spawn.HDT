@@ -483,7 +483,9 @@ namespace Spawn.HDT.DustUtility
 
                 if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
                 {
+#if DEBUG
                     SimpleIoc.Default.Register(() => s_mockAcc);
+#endif
                 }
                 else
                 {
