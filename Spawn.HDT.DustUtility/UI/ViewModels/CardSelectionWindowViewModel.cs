@@ -210,29 +210,28 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (IsCardSelectable(m_currentItem))
             {
-                if (m_currentItem.Count > 1)
+                int nCount = m_currentItem.Count;
+
+                CardItemModel cardItem = CardItems.FirstOrDefault(i => i.Id.Equals(m_currentItem.Id) && i.Golden == m_currentItem.Golden);
+
+                if (cardItem != null)
                 {
-                    if (m_cardCountDialog != null)
-                    {
-                        int nCount = e.Item.Count;
-
-                        CardItemModel cardItem = CardItems.FirstOrDefault(i => i.Id.Equals(m_currentItem.Id) && i.Golden == m_currentItem.Golden);
-
-                        if (cardItem != null)
-                        {
-                            nCount = nCount - cardItem.Count;
-                        }
-                        else { }
-
-                        (m_cardCountDialog.Content as CardCountDialog).Initialize(e.Item.Name, nCount);
-
-                        await ServiceLocator.Current.GetInstance<MainViewModel>()
-                            .SelectionWindow.ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
-                    }
-                    else { }
+                    nCount = nCount - cardItem.Count;
                 }
-                else if (m_currentItem.Count == 1)
+                else { }
+
+                if (nCount > 1 && m_cardCountDialog != null)
                 {
+                    (m_cardCountDialog.Content as CardCountDialog).Initialize(e.Item.Name, nCount);
+
+                    await ServiceLocator.Current.GetInstance<MainViewModel>()
+                        .SelectionWindow.ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+                }
+                else if (nCount == 1)
+                {
+                    m_currentItem.Count = nCount;
+                    m_currentItem.Dust = m_currentItem.Wrapper.GetDustValue(nCount);
+
                     AddOrUpdateCardItem(m_currentItem);
 
                     m_currentItem = null;
