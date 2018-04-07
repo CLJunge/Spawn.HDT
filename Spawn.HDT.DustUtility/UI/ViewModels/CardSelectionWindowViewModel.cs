@@ -26,7 +26,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private Visibility m_disenchantButtonVisibility;
 
         private bool m_blnDisenchantingConfirmation;
-        private List<SelectedCardInfo> m_lstSelectedCardInfos;
 
         private CardItemModel m_currentItem;
         private MetroDialogSettings m_dialogSettings;
@@ -83,8 +82,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             CardsInfo = new CardsInfoModel();
 
-            m_lstSelectedCardInfos = new List<SelectedCardInfo>();
-
             m_cardCountDialog = new CustomDialog(DustUtilityPlugin.MainWindow)
             {
                 Content = CreateCardCountDialogContent()
@@ -124,7 +121,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             CardItems.Clear();
             CardsInfo.Clear();
-            m_lstSelectedCardInfos.Clear();
         }
         #endregion
 
@@ -202,14 +198,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
 
                 CardsInfo.DustAmount -= e.Item.Dust;
-
-                int nIndex = m_lstSelectedCardInfos.FindIndex(i => i.Id.Equals(e.Item.Id) && i.IsGolden == e.Item.Golden);
-
-                if (nIndex > -1)
-                {
-                    m_lstSelectedCardInfos.RemoveAt(nIndex);
-                }
-                else { }
             }
             else { }
         }
@@ -228,11 +216,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         int nCount = e.Item.Count;
 
-                        SelectedCardInfo cardInfo = m_lstSelectedCardInfos.Find(i => i.Id.Equals(m_currentItem.Id) && i.IsGolden == m_currentItem.Golden);
+                        CardItemModel cardItem = CardItems.FirstOrDefault(i => i.Id.Equals(m_currentItem.Id) && i.Golden == m_currentItem.Golden);
 
-                        if (cardInfo != null)
+                        if (cardItem != null)
                         {
-                            nCount = nCount - cardInfo.Count;
+                            nCount = nCount - cardItem.Count;
                         }
                         else { }
 
@@ -304,8 +292,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 CardItems.Add(cardItem);
             }
-
-            AddOrUpdateCardInfo(cardItem);
         }
         #endregion
 
@@ -362,11 +348,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (cardItem != null)
             {
-                SelectedCardInfo cardInfo = m_lstSelectedCardInfos?.Find(i => i.Id.Equals(cardItem.Id) && i.IsGolden == cardItem.Golden);
+                CardItemModel temp = CardItems.FirstOrDefault(i => i.Id.Equals(cardItem.Id) && i.Golden == cardItem.Golden);
 
-                if (cardInfo != null)
+                if (temp != null)
                 {
-                    blnRet = cardInfo.Count < cardItem.Count;
+                    blnRet = temp.Count < cardItem.Count;
                 }
                 else
                 {
@@ -378,52 +364,5 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             return blnRet;
         }
         #endregion
-
-        #region AddOrUpdateCardInfo
-        private void AddOrUpdateCardInfo(CardItemModel cardItem)
-        {
-            SelectedCardInfo cardInfo = m_lstSelectedCardInfos.Find(i => i.Id.Equals(cardItem.Id) && i.IsGolden == cardItem.Golden);
-
-            if (cardInfo != null)
-            {
-                cardInfo.Count += cardItem.Count;
-            }
-            else
-            {
-                m_lstSelectedCardInfos.Add(new SelectedCardInfo(cardItem));
-            }
-        }
-        #endregion
-
-        private class SelectedCardInfo
-        {
-            #region Properties
-            #region Id
-            public string Id { get; set; }
-            #endregion
-
-            #region Count
-            public int Count { get; set; }
-            #endregion
-
-            #region IsGolden
-            public bool IsGolden { get; set; }
-            #endregion
-            #endregion
-
-            #region Ctor
-            public SelectedCardInfo(CardItemModel cardItem)
-                : this(cardItem.Id, cardItem.Count, cardItem.Golden)
-            {
-            }
-
-            public SelectedCardInfo(string id, int count, bool isGolden)
-            {
-                Id = id;
-                Count = count;
-                IsGolden = isGolden;
-            }
-            #endregion
-        }
     }
 }
