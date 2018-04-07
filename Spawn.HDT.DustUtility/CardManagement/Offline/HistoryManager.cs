@@ -155,7 +155,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         private static void SaveHistory(IAccount account, List<CachedHistoryCard> lstHistory)
         {
 #if DEBUG
-            if (account is MockAccount)
+            if (!(account is MockAccount))
             {
 #endif
                 Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
