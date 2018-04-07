@@ -181,7 +181,7 @@ namespace Spawn.HDT.DustUtility
         {
             HideMainWindowOnClose = false;
 
-            if (MainWindow != null && (MainWindow.Visibility == Visibility.Visible || MainWindow.Visibility == Visibility.Hidden))
+            if (MainWindow != null)
             {
                 MainWindow.Close();
             }
@@ -372,10 +372,13 @@ namespace Spawn.HDT.DustUtility
                 MoveBackupFiles();
 
                 Config.Version = 2;
-            }
-            else { }
 
-            Log.WriteLine("Finished updating plugin files", LogType.Debug);
+                Log.WriteLine("Finished updating plugin files", LogType.Debug);
+            }
+            else
+            {
+                Log.WriteLine("No file update required", LogType.Debug);
+            }
         }
         #endregion
 
