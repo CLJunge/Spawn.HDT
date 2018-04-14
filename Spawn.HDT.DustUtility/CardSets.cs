@@ -28,6 +28,7 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -45,6 +46,7 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.UNGORO, "Journey to Un'Goro" },
                 { CardSet.ICECROWN, "Knights of the Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds and Catacombs" },
+                { CardSet.GILNEAS, "The Witchwood" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -61,7 +63,8 @@ namespace Spawn.HDT.DustUtility
                 { CardSet.GANGS, "Gadgetzan" },
                 { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
-                { CardSet.LOOTAPALOOZA, "Kobolds" }
+                { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -75,18 +78,14 @@ namespace Spawn.HDT.DustUtility
             Standard = new Dictionary<CardSet, string>
             {
                 { CardSet.EXPERT1, "Classic" },
-                { CardSet.OG, "Old Gods" },
-                { CardSet.GANGS, "Gadgetzan" },
-                { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
-                { CardSet.KARA, "Karazhan" }
+                { CardSet.KARA, "Karazhan" },
+                { CardSet.GILNEAS, "Witchwood" }
             };
 
             NonCraftableCardIds = new List<string>
             {
-                Neutral.Cthun,
-                Neutral.BeckonerOfEvil,
                 Neutral.MarinTheFox
             };
         }

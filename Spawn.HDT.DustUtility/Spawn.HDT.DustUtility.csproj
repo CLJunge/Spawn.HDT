@@ -327,7 +327,7 @@
     </ItemGroup>
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Debug "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --source "$(TargetPath)" --target "$(ProjectName)" --launch
+    <PostBuildEvent>if "$(ConfigurationName)" == "Debug" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
 if $(ConfigurationName) == Release "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputfile Spawn.HDT.DustUtility.dll --nobuild</PostBuildEvent>
   </PropertyGroup>
 </Project>
