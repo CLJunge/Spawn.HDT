@@ -31,6 +31,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -48,6 +49,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.UNGORO, "Ungoro" },
                 { CardSet.ICECROWN, "FrozenThrone" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
@@ -65,6 +67,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.UNGORO, "Journey to Un'Goro" },
                 { CardSet.ICECROWN, "Knights of the Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds and Catacombs" },
+                { CardSet.GILNEAS, "The Witchwood" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -81,7 +84,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GANGS, "Gadgetzan" },
                 { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
-                { CardSet.LOOTAPALOOZA, "Kobolds" }
+                { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -95,12 +99,10 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             Standard = new Dictionary<CardSet, string>
             {
                 { CardSet.EXPERT1, "Classic" },
-                { CardSet.OG, "Old Gods" },
-                { CardSet.GANGS, "Gadgetzan" },
                 { CardSet.UNGORO, "Un'Goro" },
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
-                { CardSet.KARA, "Karazhan" }
+                { CardSet.GILNEAS, "Witchwood" },
             };
 
             NonCraftableCardIds = new List<string>
@@ -136,6 +138,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Ungoro { get; }
             public static InfoItem FrozenThrone { get; }
             public static InfoItem Kobolds { get; }
+            public static InfoItem Witchwood { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -156,6 +159,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Ungoro = new InfoItem(98, 72, 54, 23);
                 FrozenThrone = new InfoItem(98, 72, 54, 23);
                 Kobolds = new InfoItem(98, 72, 54, 23);
+                Witchwood = new InfoItem(98, 72, 54, 23);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -173,6 +177,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.UNGORO, Ungoro },
                     { CardSet.ICECROWN, FrozenThrone },
                     { CardSet.LOOTAPALOOZA, Kobolds },
+                    { CardSet.GILNEAS, Witchwood },
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },
