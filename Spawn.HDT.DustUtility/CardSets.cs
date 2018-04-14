@@ -108,6 +108,7 @@ namespace Spawn.HDT.DustUtility
             public static InfoItem Ungoro { get; }
             public static InfoItem FrozenThrone { get; }
             public static InfoItem Kobolds { get; }
+            public static InfoItem Witchwood { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -128,6 +129,7 @@ namespace Spawn.HDT.DustUtility
                 Ungoro = new InfoItem(98, 72, 54, 23);
                 FrozenThrone = new InfoItem(98, 72, 54, 23);
                 Kobolds = new InfoItem(98, 72, 54, 23);
+                Witchwood = new InfoItem(98, 72, 54, 23);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -145,6 +147,7 @@ namespace Spawn.HDT.DustUtility
                     { CardSet.UNGORO, Ungoro },
                     { CardSet.ICECROWN, FrozenThrone },
                     { CardSet.LOOTAPALOOZA, Kobolds },
+                    { CardSet.GILNEAS, Witchwood },
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },

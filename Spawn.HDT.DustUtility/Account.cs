@@ -6,6 +6,7 @@ using Spawn.HDT.DustUtility.Offline;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Spawn.HDT.DustUtility
 {
@@ -99,6 +100,8 @@ namespace Spawn.HDT.DustUtility
 
             if (lstRet != null)
             {
+                lstRet = lstRet.Where(c => HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
+
                 Log.WriteLine("Loaded collection", LogType.Debug);
             }
             else
