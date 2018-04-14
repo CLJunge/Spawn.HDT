@@ -90,4 +90,7 @@
 - Displaying crafting cost if a card is added (History)
 - Deleting backups older than one month
 - Other fixes and/or improvements
+
+## v2.3.5
+- Ready for The Witchwood
 -----------------------------
