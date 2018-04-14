@@ -86,6 +86,8 @@ namespace Spawn.HDT.DustUtility
 
             NonCraftableCardIds = new List<string>
             {
+                Neutral.Cthun,
+                Neutral.BeckonerOfEvil,
                 Neutral.MarinTheFox
             };
         }
