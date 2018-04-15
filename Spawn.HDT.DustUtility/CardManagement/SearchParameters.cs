@@ -123,6 +123,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardSet.UNGORO,
                     CardSet.ICECROWN,
                     CardSet.LOOTAPALOOZA,
+                    CardSet.GILNEAS,
                     CardSet.NAXX,
                     CardSet.BRM,
                     CardSet.LOE,

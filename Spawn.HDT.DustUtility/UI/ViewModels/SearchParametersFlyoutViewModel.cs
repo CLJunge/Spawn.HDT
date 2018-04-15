@@ -17,6 +17,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private bool m_blnUngoroSetEnabled;
         private bool m_blnFrozenThroneSetEnabled;
         private bool m_blnKoboldsSetEnabled;
+        private bool m_blnWitchwoodSetEnabled;
         private bool m_blnNaxxSetEnabled;
         private bool m_blnMountainSetEnabled;
         private bool m_blnLeagueSetEnabled;
@@ -103,6 +104,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_blnKoboldsSetEnabled;
             set => Set(ref m_blnKoboldsSetEnabled, value);
+        }
+        #endregion
+
+        #region WitchwoodSetEnabled
+        public bool WitchwoodSetEnabled
+        {
+            get => m_blnWitchwoodSetEnabled;
+            set => Set(ref m_blnWitchwoodSetEnabled, value);
         }
         #endregion
 
@@ -320,6 +329,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             UngoroSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.UNGORO);
             FrozenThroneSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.ICECROWN);
             KoboldsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOOTAPALOOZA);
+            WitchwoodSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GILNEAS);
             NaxxSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.NAXX);
             MountainSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.BRM);
             LeagueSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOE);
@@ -400,6 +410,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (KoboldsSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.LOOTAPALOOZA);
+            }
+            else { }
+
+            if (WitchwoodSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.GILNEAS);
             }
             else { }
 
