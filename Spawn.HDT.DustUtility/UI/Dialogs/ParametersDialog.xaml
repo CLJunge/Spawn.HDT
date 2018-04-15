@@ -46,11 +46,12 @@
                 <components:CheckBoxWithImage x:Name="cbUngoro" Text="Un'Goro" ImageSource="{StaticResource UngoroIcon}" Grid.Row="1" Grid.Column="1"/>
                 <components:CheckBoxWithImage x:Name="cbFrozenThrone" Text="Frozen Throne" ImageSource="{StaticResource FrozenThroneIcon}" Grid.Row="2" Grid.Column="1"/>
                 <components:CheckBoxWithImage x:Name="cbKobolds" Text="Kobolds" ImageSource="{StaticResource KoboldsIcon}" Grid.Row="3" Grid.Column="1"/>
-                <components:CheckBoxWithImage x:Name="cbNaxx" Text="Naxxramas" ImageSource="{StaticResource NaxxIcon}" Grid.Row="0" Grid.Column="2"/>
-                <components:CheckBoxWithImage x:Name="cbMountain" Text="BRM" ImageSource="{StaticResource MountainIcon}" Grid.Row="1" Grid.Column="2"/>
-                <components:CheckBoxWithImage x:Name="cbLeague" Text="LOE" ImageSource="{StaticResource LeagueIcon}" Grid.Row="2" Grid.Column="2"/>
-                <components:CheckBoxWithImage x:Name="cbKarazhan" Text="Karazhan" ImageSource="{StaticResource KarazhanIcon}" Grid.Row="4" Grid.Column="2"/>
-                <components:CheckBoxWithImage x:Name="cbHall" Text="Hall of Fame" ImageSource="{StaticResource HallIcon}" Grid.Row="0" Grid.Column="3"/>
+                <components:CheckBoxWithImage x:Name="cbWitchwood" Text="Witchwood" ImageSource="{StaticResource WitchwoodIcon}" Grid.Row="0" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbNaxx" Text="Naxxramas" ImageSource="{StaticResource NaxxIcon}" Grid.Row="1" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbMountain" Text="BRM" ImageSource="{StaticResource MountainIcon}" Grid.Row="2" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbLeague" Text="LOE" ImageSource="{StaticResource LeagueIcon}" Grid.Row="3" Grid.Column="2"/>
+                <components:CheckBoxWithImage x:Name="cbKarazhan" Text="Karazhan" ImageSource="{StaticResource KarazhanIcon}" Grid.Row="0" Grid.Column="3"/>
+                <components:CheckBoxWithImage x:Name="cbHall" Text="Hall of Fame" ImageSource="{StaticResource HallIcon}" Grid.Row="1" Grid.Column="3"/>
             </Grid>
         </GroupBox>
 

@@ -99,6 +99,7 @@ namespace Spawn.HDT.DustUtility.Search
                     CardSet.UNGORO,
                     CardSet.ICECROWN,
                     CardSet.LOOTAPALOOZA,
+                    CardSet.GILNEAS,
                     CardSet.NAXX,
                     CardSet.BRM,
                     CardSet.LOE,

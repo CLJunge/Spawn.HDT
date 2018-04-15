@@ -78,6 +78,10 @@ namespace Spawn.HDT.DustUtility.UI.Converters
                         retVal = (ImageSource)s_setIcons["KoboldsIcon"];
                         break;
 
+                    case CardSet.GILNEAS:
+                        retVal = (ImageSource)s_setIcons["WitchwoodIcon"];
+                        break;
+
                     case CardSet.HOF:
                         retVal = (ImageSource)s_setIcons["HallIcon"];
                         break;

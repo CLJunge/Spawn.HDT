@@ -251,6 +251,12 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             }
             else { }
 
+            if (cbWitchwood.IsChecked.Value)
+            {
+                Parameters.Sets.Add(CardSet.GILNEAS);
+            }
+            else { }
+
             if (cbNaxx.IsChecked.Value)
             {
                 Parameters.Sets.Add(CardSet.NAXX);
@@ -408,6 +414,10 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
 
                     case CardSet.LOOTAPALOOZA:
                         cbKobolds.IsChecked = true;
+                        break;
+
+                    case CardSet.GILNEAS:
+                        cbWitchwood.IsChecked = true;
                         break;
 
                     case CardSet.NAXX:
