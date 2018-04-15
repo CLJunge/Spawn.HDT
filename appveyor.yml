@@ -1,4 +1,4 @@
-version: "2.3.5.{build}-{branch}"
+version: "2.3.6.{build}-{branch}"
 
 configuration: Release
 
