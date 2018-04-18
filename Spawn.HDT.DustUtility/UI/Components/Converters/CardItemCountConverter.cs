@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             catch
             {
-                Log.WriteLine($"Passed invalid values: \"{string.Join(" ", values)}\"", LogType.Error);
+                Log.WriteLine($"Passed invalid values: \"{string.Join(", ", values)}\"!", LogType.Error);
             }
 
             return strRet;

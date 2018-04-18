@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                Log.WriteLine($"Passed invalid value: \"{value}\"", LogType.Error);
+                Log.WriteLine($"Passed invalid value: \"{value}\"!", LogType.Error);
             }
 
             return strRet;
