@@ -67,9 +67,15 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 Card cardA = lstCurrent[i];
 
-                HearthDb.Card dbCardA = HearthDb.Cards.Collectible[cardA.Id];
+                HearthDb.Card dbCardA = null;
 
-                if (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null)
+                if (HearthDb.Cards.Collectible.ContainsKey(cardA.Id))
+                {
+                    dbCardA = HearthDb.Cards.Collectible[cardA.Id];
+                }
+                else { }
+
+                if (dbCardA != null && (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null))
                 {
                     Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
 
