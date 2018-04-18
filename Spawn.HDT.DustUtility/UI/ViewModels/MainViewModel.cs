@@ -287,10 +287,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 flyout.Header = $"Collection Info ({nCollectionValue} Dust)";
             }
-            else if (flyout.Content is Flyouts.DeckListFlyoutView)
-            {
-                flyout.Header = ServiceLocator.Current.GetInstance<DeckListFlyoutViewModel>().Deck?.Name ?? "Deck List";
-            }
             else { }
 
             viewModel.Initialize();
