@@ -1,4 +1,6 @@
-﻿namespace Spawn.HDT.DustUtility.UI.ViewModels
+﻿using System.Threading.Tasks;
+
+namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
@@ -8,8 +10,8 @@
         #endregion
         #endregion
 
-        #region Initialize
-        public abstract void Initialize();
+        #region InitializeAsync
+        public abstract Task InitializeAsync();
         #endregion
     }
 }

@@ -1,11 +1,13 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
 
@@ -74,15 +76,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (IsInDesignMode)
             {
-                Initialize();
+                InitializeAsync().Forget();
             }
             else { }
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             SortOrderItems.Clear();
 
             SortOrder sortOrder = SortOrder.Parse(DustUtilityPlugin.Config.SortOrder);
@@ -97,7 +101,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region AddItem
-        private void AddItem()
+        private async void AddItem()
         {
             List<SortOrderItemModel> lstUnusedItems = GetUnusedSortOrderItems();
 
@@ -110,7 +114,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 viewModel.SortOrderItems.Add(lstUnusedItems[i]);
             }
 
-            viewModel.Initialize();
+            await viewModel.InitializeAsync();
 
             SortOrderItemSelectorDialogView dialog = new SortOrderItemSelectorDialogView()
             {

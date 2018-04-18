@@ -1,6 +1,8 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.CardManagement;
+using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
 
@@ -310,15 +312,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (IsInDesignMode)
             {
-                Initialize();
+                InitializeAsync().Forget();
             }
             else { }
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
 
             ExpertSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.EXPERT1);

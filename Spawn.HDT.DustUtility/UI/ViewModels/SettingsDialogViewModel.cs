@@ -1,5 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 #endregion
@@ -94,9 +95,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             OfflineMode = DustUtilityPlugin.Config.OfflineMode;
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;

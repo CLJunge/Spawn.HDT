@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 #endregion
@@ -100,9 +101,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             MessagePanelVisibility = Visibility.Visible;
             DownloadPanelVisibility = Visibility.Collapsed;
             DownloadFinishedPanelVisibility = Visibility.Collapsed;

@@ -1,10 +1,12 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthMirror.Objects;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
 
@@ -70,15 +72,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (IsInDesignMode)
             {
-                Initialize();
+                InitializeAsync().Forget();
             }
             else { }
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             if (ReloadRequired)
             {
                 DeckItems.Clear();

@@ -171,9 +171,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             IAccount account = DustUtilityPlugin.CurrentAccount;
 
             if (!account.IsEmpty)
@@ -240,25 +242,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             ReloadFlyouts();
 
-            Task.Run(async () =>
+            BackupManager.DeleteOldBackups(account);
+
+            if (!s_blnCheckedForUpdates)
             {
-                BackupManager.DeleteOldBackups(account);
-
-                if (!s_blnCheckedForUpdates)
+                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
                 {
-                    if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
+                    DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
                     {
-                        DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
-                        {
-                            OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
-                        });
-                    }
-                    else { }
-
-                    s_blnCheckedForUpdates = true;
+                        OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
+                    });
                 }
                 else { }
-            });
+
+                s_blnCheckedForUpdates = true;
+            }
+            else { }
         }
         #endregion
 
@@ -277,7 +276,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OpenFlyout
-        public void OpenFlyout(Flyout flyout)
+        public async void OpenFlyout(Flyout flyout)
         {
             ViewModelBase viewModel = (((FrameworkElement)flyout.Content).DataContext as ViewModelBase);
 
@@ -289,7 +288,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 
-            viewModel.Initialize();
+            await viewModel.InitializeAsync();
 
             if (!flyout.IsOpen)
             {
@@ -380,9 +379,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OpenCardSelectionWindow
-        public void OpenCardSelectionWindow()
+        public async void OpenCardSelectionWindow()
         {
-            ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().Initialize();
+            await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
 
             if (m_selectionWindow == null)
             {

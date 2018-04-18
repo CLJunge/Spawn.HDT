@@ -1,6 +1,7 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
@@ -52,9 +53,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             SelectedSortOrderItemIndex = 0;
         }
         #endregion

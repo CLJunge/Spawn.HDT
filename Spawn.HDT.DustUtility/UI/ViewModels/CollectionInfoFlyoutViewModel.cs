@@ -1,11 +1,13 @@
 ﻿#region Using
 using HearthDb.Enums;
 using HearthMirror.Objects;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 #endregion
 
@@ -30,15 +32,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 ReloadRequired = true;
 
-                Initialize();
+                InitializeAsync().Forget();
             }
             else { }
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             if (ReloadRequired)
             {
                 CardSetItems.Clear();

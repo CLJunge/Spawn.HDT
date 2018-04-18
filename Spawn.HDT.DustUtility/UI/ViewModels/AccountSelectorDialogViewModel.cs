@@ -1,6 +1,7 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.AccountManagement;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
@@ -41,9 +42,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             Accounts = new ObservableCollection<IAccount>(DustUtilityPlugin.GetAccounts());
 
             if (!string.IsNullOrEmpty(DustUtilityPlugin.Config.LastSelectedAccount))

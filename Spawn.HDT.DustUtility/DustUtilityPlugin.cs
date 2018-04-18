@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
@@ -215,7 +216,7 @@ namespace Spawn.HDT.DustUtility
 
         #region Events
         #region OnMenuItemClick
-        private void OnMenuItemClick(object sender, RoutedEventArgs e)
+        private async void OnMenuItemClick(object sender, RoutedEventArgs e)
         {
             if (s_blnInitialized)
             {
@@ -235,7 +236,7 @@ namespace Spawn.HDT.DustUtility
 
                     if (CurrentAccount.IsValid)
                     {
-                        ShowMainWindow();
+                        await ShowMainWindowAsync();
                     }
                     else { }
                 }
@@ -265,7 +266,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OnIsOfflineChanged
-        private void OnIsOfflineChanged(object sender, EventArgs e)
+        private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
             if (!IsOffline && !ServiceLocator.Current.GetInstance<IAccount>().Equals(Account.LoggedInAccount))
             {
@@ -275,7 +276,7 @@ namespace Spawn.HDT.DustUtility
 
             if (MainWindow != null)
             {
-                ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
             else { }
 
@@ -311,11 +312,11 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ShowSettingsDialog
-        private void ShowSettingsDialog()
+        private async void ShowSettingsDialog()
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().Initialize();
+            await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
 
             SettingsDialogView dialog = new SettingsDialogView()
             {
@@ -520,10 +521,10 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region ShowMainWindow
-        private static void ShowMainWindow()
+        #region ShowMainWindowAsync
+        private static async Task ShowMainWindowAsync()
         {
-            ServiceLocator.Current.GetInstance<MainViewModel>().Initialize();
+            await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
 
             if (s_mainWindow == null)
             {
@@ -566,7 +567,7 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().Initialize();
+                    ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().InitializeAsync().Forget();
 
                     AccountSelectorDialogView dialog = new AccountSelectorDialogView()
                     {
@@ -665,7 +666,7 @@ namespace Spawn.HDT.DustUtility
                 }
                 else { }
 
-                ShowMainWindow();
+                ShowMainWindowAsync().Forget();
 
                 Log.WriteLine($"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
             }

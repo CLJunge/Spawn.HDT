@@ -7,6 +7,7 @@ using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
 
@@ -39,9 +40,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region Initialize
-        public override void Initialize()
+        #region InitializeAsync
+        public override async Task InitializeAsync()
         {
+            await Task.Delay(0);
+
             if (ReloadRequired || Core.Game.IsRunning)
             {
                 CardItems.Clear();
