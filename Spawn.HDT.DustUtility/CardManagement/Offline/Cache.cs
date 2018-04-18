@@ -2,7 +2,9 @@
 using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
+using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Threading;
 #endregion
@@ -187,6 +189,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             Log.WriteLine("Saving collection and decks...", LogType.Debug);
 
+            ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
+
             IAccount account = Account.LoggedInAccount;
 
             if (state != null)
@@ -219,6 +223,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 Log.WriteLine("Couldn't retrieve account!", LogType.Debug);
             }
+
+            ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = false;
         }
         #endregion
     }

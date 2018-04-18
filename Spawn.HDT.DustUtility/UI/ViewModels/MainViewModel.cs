@@ -23,6 +23,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        #region Constants
+        private const string SyncingTag = " - Syncing...";
+        #endregion
+
         #region Static Fields
         private static string s_strSearchHelpText;
         private static bool s_blnCheckedForUpdates;
@@ -33,6 +37,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private Visibility m_historyButtonVisibility;
         private Visibility m_switchAccountButtonVisibility;
         private string m_strSearchQuery;
+        private bool m_blnIsSyncing;
 
         private CardSelectionWindow m_selectionWindow;
         #endregion
@@ -75,6 +80,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strSearchQuery;
             set => Set(ref m_strSearchQuery, value);
+        }
+        #endregion
+
+        #region IsSyncing
+        public bool IsSyncing
+        {
+            get => m_blnIsSyncing;
+            set => Set(ref m_blnIsSyncing, value);
         }
         #endregion
 
@@ -139,6 +152,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             CardItems = new ObservableCollection<CardItemModel>();
 
             CardsInfo = new CardsInfoModel();
+
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(IsSyncing)))
+                {
+                    if (IsSyncing)
+                    {
+                        WindowTitle = $"{WindowTitle}{SyncingTag}";
+                    }
+                    else
+                    {
+                        WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
+                    }
+                }
+                else { }
+            };
         }
         #endregion
 
@@ -190,6 +219,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 #endif
+
+            if (IsSyncing)
+            {
+                WindowTitle = $"{WindowTitle}{SyncingTag}";
+            }
+            else
+            {
+                WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
+            }
 
             BackupManager.CreateBackup(account);
 
