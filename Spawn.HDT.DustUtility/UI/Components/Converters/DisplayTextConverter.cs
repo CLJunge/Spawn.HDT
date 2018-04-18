@@ -23,17 +23,20 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         {
             string strRet = value?.ToString();
 
-            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Prefix))
+            if (!string.IsNullOrEmpty(strRet))
             {
-                strRet = $"{Prefix} {strRet}";
-            }
-            else { }
+                if (!string.IsNullOrEmpty(Prefix))
+                {
+                    strRet = $"{Prefix} {strRet}";
+                }
+                else { }
 
-            if (!string.IsNullOrEmpty(strRet) && !string.IsNullOrEmpty(Suffix))
-            {
-                strRet = $"{strRet} {Suffix}";
+                if (!string.IsNullOrEmpty(Suffix))
+                {
+                    strRet = $"{strRet} {Suffix}";
+                }
+                else { }
             }
-            else { }
 
             return strRet;
         }
