@@ -67,6 +67,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
                 else { }
             }
+
+            DustUtilityPlugin.MainWindow.DeckListFlyout.Header = Deck?.Name ?? "Deck List";
         }
         #endregion
     }
