@@ -158,8 +158,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public List<CachedHistoryCard> GetHistory() => HistoryManager.GetHistory(this);
         #endregion
 
-        #region ExcludeDeckInSearch
-        public void ExcludeDeckInSearch(long nDeckId)
+        #region ExcludeDeckFromSearch
+        public void ExcludeDeckFromSearch(long nDeckId)
         {
             if (!IsDeckExcludedFromSearch(nDeckId))
             {

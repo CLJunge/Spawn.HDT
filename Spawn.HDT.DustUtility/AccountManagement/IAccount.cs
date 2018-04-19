@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         List<Card> GetCollection();
         List<Deck> GetDecks();
         List<CachedHistoryCard> GetHistory();
-        void ExcludeDeckInSearch(long nDeckId);
+        void ExcludeDeckFromSearch(long nDeckId);
         void IncludeDeckInSearch(long nDeckId);
         bool IsDeckExcludedFromSearch(long nDeckId);
         void SavePreferences();

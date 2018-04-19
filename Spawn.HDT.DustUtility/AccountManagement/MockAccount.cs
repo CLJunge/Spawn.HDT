@@ -138,8 +138,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region ExcludeDeckInSearch
-        public void ExcludeDeckInSearch(long nDeckId)
+        #region ExcludeDeckFromSearch
+        public void ExcludeDeckFromSearch(long nDeckId)
         {
             if (!IsDeckExcludedFromSearch(nDeckId))
             {
