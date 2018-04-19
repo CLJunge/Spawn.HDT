@@ -57,7 +57,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                     if (HasCardSet(lstCollection, cardSet))
                     {
-                        CardSetItems.Add(CreateCardSetItem(cardSet));
+                        CardSetItems.Add(CreateCardSetItem(lstCollection, cardSet));
                     }
                     else { }
                 }
@@ -94,10 +94,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region CreateCardSetItem
-        private CardSetItemModel CreateCardSetItem(CardSet cardSet)
+        private CardSetItemModel CreateCardSetItem(List<Card> lstCollection, CardSet cardSet)
         {
-            List<Card> lstCollection = DustUtilityPlugin.CurrentAccount.GetCollection();
-
             CardSets.Info.InfoItem cardSetInfo = CardSets.Info.Dictionary[cardSet];
 
             return new CardSetItemModel

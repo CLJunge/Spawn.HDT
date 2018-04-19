@@ -128,7 +128,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else
             {
-                DustUtilityPlugin.CurrentAccount.ExcludeDeckInSearch(SelectedDeckItem.DeckId);
+                DustUtilityPlugin.CurrentAccount.ExcludeDeckFromSearch(SelectedDeckItem.DeckId);
 
                 SelectedDeckItem.Opacity = .5;
             }

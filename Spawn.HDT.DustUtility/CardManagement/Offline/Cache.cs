@@ -6,6 +6,7 @@ using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 #endregion
 
@@ -18,6 +19,9 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
         private static bool s_blnSaveCollectionInProgress;
         private static bool s_blnSaveDecksInProgress;
+
+        private static List<Card> m_lstCachedCollection;
+        private static List<Deck> m_lstCachedDecks;
         #endregion
 
         #region Static Properties
@@ -97,6 +101,30 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             List<Card> lstRet = new List<Card>();
 
+            if (DustUtilityPlugin.IsOffline)
+            {
+                if (m_lstCachedCollection == null)
+                {
+                    m_lstCachedCollection = InternalLoadCollection(account);
+                }
+                else { }
+
+                lstRet = m_lstCachedCollection.Select(c => c.Clone()).ToList();
+            }
+            else
+            {
+                lstRet = InternalLoadCollection(account);
+            }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region InternalLoadCollection
+        private static List<Card> InternalLoadCollection(IAccount account)
+        {
+            List<Card> lstRet = new List<Card>();
+
             try
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
@@ -121,6 +149,30 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
         #region LoadDecks
         public static List<Deck> LoadDecks(IAccount account)
+        {
+            List<Deck> lstRet = new List<Deck>();
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                if (m_lstCachedDecks == null)
+                {
+                    m_lstCachedDecks = InternalLoadDecks(account);
+                }
+                else { }
+
+                lstRet = m_lstCachedDecks.Select(d => d.Clone()).ToList();
+            }
+            else
+            {
+                lstRet = InternalLoadDecks(account);
+            }
+
+            return lstRet;
+        }
+        #endregion
+
+        #region InternalLoadDecks
+        private static List<Deck> InternalLoadDecks(IAccount account)
         {
             List<Deck> lstRet = new List<Deck>();
 
@@ -181,6 +233,17 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             s_timer = null;
 
             Log.WriteLine("Stopped cache timer", LogType.Debug);
+        }
+        #endregion
+
+        #region ClearCache
+        public static void ClearCache()
+        {
+            m_lstCachedCollection?.Clear();
+            m_lstCachedCollection = null;
+
+            m_lstCachedDecks?.Clear();
+            m_lstCachedDecks = null;
         }
         #endregion
 

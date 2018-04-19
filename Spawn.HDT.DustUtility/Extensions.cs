@@ -278,5 +278,35 @@ namespace Spawn.HDT.DustUtility
             return nRet;
         }
         #endregion
+
+        #region Clone
+        #region HearthMirror.Objects.Card
+        public static HearthMirror.Objects.Card Clone(this HearthMirror.Objects.Card card)
+        {
+            return new HearthMirror.Objects.Card(card.Id, card.Count, card.Premium);
+        }
+        #endregion
+
+        #region HearthMirror.Objects.Deck
+        public static HearthMirror.Objects.Deck Clone(this HearthMirror.Objects.Deck deck)
+        {
+            return new HearthMirror.Objects.Deck()
+            {
+                Id = deck.Id,
+                Name = deck.Name,
+                Hero = deck.Hero,
+                IsWild = deck.IsWild,
+                Type = deck.Type,
+                SeasonId = deck.SeasonId,
+                CardBackId = deck.CardBackId,
+                HeroPremium = deck.HeroPremium,
+                SourceType = deck.SourceType,
+                CreateDate = deck.CreateDate,
+                Cards = deck.Cards.Select(c => c.Clone()).ToList()
+            };
+        }
+
+        #endregion
+        #endregion
     }
 }

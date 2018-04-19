@@ -1,6 +1,9 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.API;
+#if DEBUG
+using Hearthstone_Deck_Tracker.Utility.Extensions;
+#endif
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
@@ -33,7 +36,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 #if DEBUG
             if (IsInDesignMode)
             {
-                Initialize();
+                InitializeAsync().Forget();
             }
             else { }
 #endif

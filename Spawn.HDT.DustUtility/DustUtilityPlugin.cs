@@ -280,6 +280,12 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
+            if (!IsOffline)
+            {
+                Cache.ClearCache();
+            }
+            else { }
+
             if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
