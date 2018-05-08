@@ -1,5 +1,6 @@
 ﻿#region Using
 using HearthMirror.Objects;
+using Spawn.HDT.DustUtility.CardManagement.Offline;
 using System;
 using System.Diagnostics;
 #endregion
@@ -7,7 +8,7 @@ using System.Diagnostics;
 namespace Spawn.HDT.DustUtility.Hearthstone
 {
     [DebuggerDisplay("({Count}x) {DbCard.Name} Golden={RawCard.Premium}")]
-    public class CardWrapper
+    public class CardWrapper : ICloneable
     {
         #region Member Variables
         private int? m_nDustValue;
@@ -48,16 +49,16 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #endregion
 
         #region Ctor
-        public CardWrapper(Card card)
-        {
-            RawCard = card;
-        }
+        public CardWrapper(Card card) => RawCard = card;
 
-        public CardWrapper(string id, int count, bool isGolden, DateTime? date)
-            : this(new Card(id, count, isGolden))
-        {
-            Date = date;
-        }
+        public CardWrapper(CachedCard cachedCard)
+            : this(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden)) { }
+
+        public CardWrapper(CachedHistoryCard historyCard)
+            : this(new Card(historyCard.Id, historyCard.Count, historyCard.IsGolden)) => Date = historyCard.Date;
+
+        private CardWrapper(string id, int count, bool isGolden, DateTime? date)
+            : this(new Card(id, count, isGolden)) => Date = date;
         #endregion
 
         #region GetDustValue
@@ -76,6 +77,13 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             else { }
 
             return nRet;
+        }
+        #endregion
+
+        #region Clone
+        public object Clone()
+        {
+            return new CardWrapper(RawCard.Id, RawCard.Count, RawCard.Premium, Date);
         }
         #endregion
     }

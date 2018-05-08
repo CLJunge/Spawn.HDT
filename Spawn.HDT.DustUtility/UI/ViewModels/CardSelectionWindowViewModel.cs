@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Count > 0)
             {
                 List<CardWrapper> lstWrappers = DustUtilityPlugin.CurrentAccount.Preferences.CardSelection
-                    .Select(c => new CardWrapper(c.Id, c.Count, c.IsGolden, null)).ToList();
+                    .Select(c => new CardWrapper(c)).ToList();
 
                 SearchResult result = SearchResult.Create(lstWrappers);
 

@@ -177,10 +177,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         }
 
         public CardItemModel(CardWrapper wrapper)
-            : this()
-        {
-            Wrapper = new CardWrapper(wrapper.RawCard.Id, wrapper.Count, wrapper.RawCard.Premium, wrapper.Date);
-        }
+            : this() => Wrapper = wrapper.Clone() as CardWrapper;
         #endregion
 
         #region CreateCopy

@@ -56,7 +56,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 for (int i = 0; i < lstHistory.Count; i++)
                 {
-                    CardWrapper wrapper = new CardWrapper(lstHistory[i].Id, lstHistory[i].Count, lstHistory[i].IsGolden, lstHistory[i].Date);
+                    CardWrapper wrapper = new CardWrapper(lstHistory[i]);
 
                     CardItemModel cardItem = new CardItemModel(wrapper)
                     {
