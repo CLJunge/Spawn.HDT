@@ -19,6 +19,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private SortOrderItemModel m_selectedSortOrderItem;
         private int m_nSelectedSortOrderItemIndex;
         private int m_nMaxCount;
+
+        private bool m_blnIsDirty;
         #endregion
 
         #region Properties
@@ -65,7 +67,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SaveCommand
-        public ICommand SaveCommand => new RelayCommand(SaveSortOrder);
+        public ICommand SaveCommand => new RelayCommand(SaveSortOrder, () => m_blnIsDirty);
         #endregion
         #endregion
 
@@ -97,6 +99,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.OrderItem)).Length;
+
+            m_blnIsDirty = false;
         }
         #endregion
 
@@ -126,6 +130,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SortOrder.OrderItem orderItem = ServiceLocator.Current.GetInstance<SortOrderItemSelectorDialogViewModel>().SelectedSortOrderItem.Value;
 
                 SortOrderItems.Add(new SortOrderItemModel(orderItem));
+
+                m_blnIsDirty = true;
             }
             else { }
         }
@@ -139,6 +145,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SortOrderItems.Remove(SelectedSortOrderItem);
 
             SelectedSortOrderItemIndex = (nIndex > 0 ? nIndex - 1 : 0);
+
+            m_blnIsDirty = true;
         }
         #endregion
 
@@ -148,6 +156,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             int nIndex = SortOrderItems.IndexOf(SelectedSortOrderItem);
 
             SortOrderItems.Move(nIndex, nIndex - 1);
+
+            m_blnIsDirty = true;
         }
         #endregion
 
@@ -157,6 +167,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             int nIndex = SortOrderItems.IndexOf(SelectedSortOrderItem);
 
             SortOrderItems.Move(nIndex, nIndex + 1);
+
+            m_blnIsDirty = true;
         }
         #endregion
 
