@@ -268,9 +268,7 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            IAccount acc = ServiceLocator.Current.GetInstance<IAccount>();
-
-            if (!IsOffline && (acc != null && acc.Equals(Account.LoggedInAccount)))
+            if (!IsOffline && (ServiceLocator.Current.GetInstance<IAccount>()?.Equals(Account.LoggedInAccount) ?? false))
             {
                 UpdatedAccountInstance(Account.LoggedInAccount);
             }
