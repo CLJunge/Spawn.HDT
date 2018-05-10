@@ -265,7 +265,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region GetLoggedInAccount
         private static Account GetLoggedInAccount()
         {
-            Account retVal = Empty;
+            Account retVal = null;
 
             if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning)
             {
