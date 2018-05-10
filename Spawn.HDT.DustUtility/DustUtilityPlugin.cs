@@ -28,11 +28,10 @@ namespace Spawn.HDT.DustUtility
     public class DustUtilityPlugin : IPlugin
     {
         #region Static Fields
-        private static MainWindow s_mainWindow;
         private static bool s_blnInitialized;
-        private static bool s_blnIsOffline;
+        private static bool s_blnIsOffline = true;
 #if DEBUG
-        private static IAccount s_mockAcc = new MockAccount();
+        private static readonly IAccount s_mockAcc = new MockAccount();
 #endif
         #endregion
 
@@ -67,7 +66,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region MainWindow
-        public static MainWindow MainWindow => s_mainWindow;
+        public static MainWindow MainWindow { get; private set; }
         #endregion
 
         #region HideMainWindowOnClose
@@ -188,7 +187,7 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            s_mainWindow = null;
+            MainWindow = null;
 
             if (Cache.TimerEnabled)
             {
@@ -532,17 +531,17 @@ namespace Spawn.HDT.DustUtility
         {
             await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
 
-            if (s_mainWindow == null)
+            if (MainWindow == null)
             {
-                s_mainWindow = new MainWindow();
+                MainWindow = new MainWindow();
             }
             else { }
 
             Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
-            s_mainWindow.Show();
+            MainWindow.Show();
 
-            BringWindowToFront(s_mainWindow);
+            BringWindowToFront(MainWindow);
         }
         #endregion
 
@@ -565,7 +564,7 @@ namespace Spawn.HDT.DustUtility
                 }
                 else if (vAccounts.Length > 1)
                 {
-                    Window owner = s_mainWindow;
+                    Window owner = MainWindow;
 
                     if (!blnIsSwitching)
                     {
@@ -650,7 +649,7 @@ namespace Spawn.HDT.DustUtility
         {
             bool blnRet = false;
 
-            if (s_mainWindow != null)
+            if (MainWindow != null)
             {
                 Log.WriteLine("Switching account...", LogType.Debug);
 
