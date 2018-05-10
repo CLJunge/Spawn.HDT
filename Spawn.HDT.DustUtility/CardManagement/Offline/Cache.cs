@@ -262,7 +262,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             else { }
 
-            if (!account.IsEmpty && account.IsValid)
+            if ((!account?.IsEmpty ?? false) && (account?.IsValid ?? false))
             {
                 HistoryManager.CheckCollection(account);
 
