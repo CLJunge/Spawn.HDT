@@ -1,6 +1,5 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
-using Hearthstone_Deck_Tracker.API;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
@@ -48,7 +47,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await Task.Delay(0);
 
-            if (ReloadRequired || Core.Game.IsRunning)
+            if (ReloadRequired)
             {
                 CardItems.Clear();
 
