@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#region Using
+using System.Threading.Tasks;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
