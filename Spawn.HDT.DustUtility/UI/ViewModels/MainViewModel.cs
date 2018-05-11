@@ -262,11 +262,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SwitchAccount
-        private void SwitchAccount()
+        private async void SwitchAccount()
         {
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
 
-            if (DustUtilityPlugin.SwitchAccount())
+            if (await DustUtilityPlugin.SwitchAccount())
             {
                 m_selectionWindow?.Close();
                 m_selectionWindow = null;

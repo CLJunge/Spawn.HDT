@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             List<Card> lstRet = new List<Card>();
 
-            if (DustUtilityPlugin.IsOffline)
+            if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 if (m_lstCachedCollection == null)
                 {
@@ -152,7 +152,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             List<Deck> lstRet = new List<Deck>();
 
-            if (DustUtilityPlugin.IsOffline)
+            if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 if (m_lstCachedDecks == null)
                 {
@@ -248,13 +248,13 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region OnTick
-        private static void OnTick(object state)
+        private static async void OnTick(object state)
         {
             Log.WriteLine("Saving collection and decks...", LogType.Debug);
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
-            IAccount account = Account.LoggedInAccount;
+            IAccount account = await Account.GetLoggedInAccountAsync();
 
             if (state != null)
             {

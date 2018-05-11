@@ -68,7 +68,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region DisenchantSelectionCommand
         public ICommand DisenchantSelectionCommand => new RelayCommand(DisenchantSelection, () =>
         {
-            return CardItems.Count > 0 && Hearthstone_Deck_Tracker.API.Core.Game.IsRunning;
+            return CardItems.Count > 0 && !DustUtilityPlugin.IsOffline;
         });
         #endregion
         #endregion

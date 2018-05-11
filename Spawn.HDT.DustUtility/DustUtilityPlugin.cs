@@ -158,7 +158,7 @@ namespace Spawn.HDT.DustUtility
 
             Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
             {
-                if (Config.OfflineMode && Core.Game.IsRunning)
+                if (Config.OfflineMode && !IsOffline)
                 {
                     Cache.StartTimer();
                 }
@@ -208,7 +208,7 @@ namespace Spawn.HDT.DustUtility
         #region OnUpdate
         public void OnUpdate()
         {
-            IsOffline = !Core.Game.IsRunning && Config.OfflineMode;
+            IsOffline = !Core.Game.IsRunning;
         }
         #endregion
         #endregion
@@ -219,11 +219,11 @@ namespace Spawn.HDT.DustUtility
         {
             if (s_blnInitialized)
             {
-                if (Core.Game.IsRunning || Config.OfflineMode)
+                if (!IsOffline || Config.OfflineMode)
                 {
                     if (!CurrentAccount.IsValid)
                     {
-                        IAccount selectedAcc = SelectAccount(false);
+                        IAccount selectedAcc = await SelectAccountAsync(false);
 
                         if (selectedAcc != null)
                         {
@@ -267,15 +267,17 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            if (!IsOffline && (ServiceLocator.Current.GetInstance<IAccount>()?.Equals(Account.LoggedInAccount) ?? false))
-            {
-                UpdatedAccountInstance(Account.LoggedInAccount);
-            }
-            else { }
+            Account loggedInAcc = await Account.GetLoggedInAccountAsync();
 
-            if (MainWindow != null)
+            if (!IsOffline && (!ServiceLocator.Current.GetInstance<IAccount>()?.Equals(loggedInAcc) ?? false))
             {
-                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                UpdatedAccountInstance(loggedInAcc);
+
+                if (MainWindow != null)
+                {
+                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                }
+                else { }
             }
             else { }
 
@@ -285,11 +287,11 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            if (Config.OfflineMode && (Core.Game.IsRunning && !Cache.TimerEnabled))
+            if (Config.OfflineMode && (!IsOffline && !Cache.TimerEnabled))
             {
                 Cache.StartTimer();
             }
-            else if (!Core.Game.IsRunning && Cache.TimerEnabled)
+            else if (IsOffline && Cache.TimerEnabled)
             {
                 Cache.StopTimer();
             }
@@ -340,7 +342,7 @@ namespace Spawn.HDT.DustUtility
 
             if (dialog.ShowDialog().Value)
             {
-                if (Config.OfflineMode && Core.Game.IsRunning)
+                if (Config.OfflineMode && !IsOffline)
                 {
                     if (!Cache.TimerEnabled)
                     {
@@ -545,14 +547,14 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region SelectAccount
-        private static IAccount SelectAccount(bool blnIsSwitching)
+        #region SelectAccountAsync
+        private static async Task<IAccount> SelectAccountAsync(bool blnIsSwitching)
         {
             IAccount retVal = null;
 
-            if (Core.Game.IsRunning && !blnIsSwitching)
+            if (!IsOffline && !blnIsSwitching)
             {
-                retVal = Account.LoggedInAccount;
+                retVal = await Account.GetLoggedInAccountAsync();
             }
             else
             {
@@ -645,7 +647,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region SwitchAccount
-        public static bool SwitchAccount()
+        public static async Task<bool> SwitchAccount()
         {
             bool blnRet = false;
 
@@ -655,7 +657,7 @@ namespace Spawn.HDT.DustUtility
 
                 IAccount oldAcc = CurrentAccount;
 
-                IAccount selectedAcc = SelectAccount(true);
+                IAccount selectedAcc = await SelectAccountAsync(true);
 
                 if (selectedAcc == null)
                 {

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 #endregion
 
 namespace Spawn.HDT.DustUtility.AccountManagement
@@ -25,10 +26,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region Static Properties
         #region Empty
         public static Account Empty => new Account(null, Region.UNKNOWN);
-        #endregion
-
-        #region LoggedInAccount
-        public static Account LoggedInAccount => GetLoggedInAccount();
         #endregion
         #endregion
 
@@ -101,7 +98,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             Log.WriteLine("Loading collection...", LogType.Debug);
 
-            if (DustUtilityPlugin.IsOffline)
+            if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 lstRet = Cache.LoadCollection(this);
             }
@@ -132,7 +129,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             Log.WriteLine("Loading decks...", LogType.Debug);
 
-            if (DustUtilityPlugin.IsOffline)
+            if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 lstRet = Cache.LoadDecks(this);
             }
@@ -262,14 +259,14 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         }
         #endregion
 
-        #region GetLoggedInAccount
-        private static Account GetLoggedInAccount()
+        #region GetLoggedInAccountAsync
+        public static async Task<Account> GetLoggedInAccountAsync()
         {
             Account retVal = null;
 
-            if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning)
+            if (!DustUtilityPlugin.IsOffline)
             {
-                retVal = new Account(Reflection.GetBattleTag(), Hearthstone_Deck_Tracker.Helper.GetCurrentRegion().Result);
+                retVal = new Account(Reflection.GetBattleTag(), await Hearthstone_Deck_Tracker.Helper.GetCurrentRegion());
             }
             else { }
 

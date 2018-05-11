@@ -358,7 +358,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             bool blnRet = false;
 
-            if (Hearthstone_Deck_Tracker.API.Core.Game.IsRunning && (account?.Equals(Account.LoggedInAccount) ?? false))
+            Account loggedInAcc = await Account.GetLoggedInAccountAsync();
+
+            if (!DustUtilityPlugin.IsOffline && (account?.Equals(loggedInAcc) ?? false))
             {
                 AutoDisenchant.DisenchantConfig.Instance.ForceClear = true;
 
