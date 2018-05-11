@@ -216,17 +216,24 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             {
                 if (obj is Account acc)
                 {
-                    blnRet = true;
-
-                    if (acc.BattleTag != null)
+                    if (!IsEmpty && !acc.IsEmpty)
                     {
-                        blnRet &= acc.BattleTag.Name.Equals(BattleTag.Name);
+                        blnRet = true;
 
-                        blnRet &= acc.BattleTag.Number == BattleTag.Number;
+                        if (acc.BattleTag != null)
+                        {
+                            blnRet &= acc.BattleTag.Name.Equals(BattleTag.Name);
+
+                            blnRet &= acc.BattleTag.Number == BattleTag.Number;
+                        }
+                        else { }
+
+                        blnRet &= acc.Region == Region;
                     }
-                    else { }
-
-                    blnRet &= acc.Region == Region;
+                    else
+                    {
+                        blnRet = IsEmpty && acc.IsEmpty;
+                    }
                 }
                 else
                 {
