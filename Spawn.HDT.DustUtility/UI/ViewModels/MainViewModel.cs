@@ -1,9 +1,9 @@
 ﻿#region Using
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Net;

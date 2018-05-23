@@ -1,9 +1,9 @@
 ﻿#region Using
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthDb.Enums;
 using HearthMirror;
 using MahApps.Metro.Controls.Dialogs;
-using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;

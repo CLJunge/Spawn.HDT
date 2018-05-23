@@ -1,8 +1,8 @@
 ﻿#region Using
+using CommonServiceLocator;
 using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;

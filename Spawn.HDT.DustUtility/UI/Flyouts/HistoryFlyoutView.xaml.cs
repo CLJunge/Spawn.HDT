@@ -1,5 +1,5 @@
 ﻿#region Using
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 #endregion
 

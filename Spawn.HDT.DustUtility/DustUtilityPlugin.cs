@@ -1,10 +1,10 @@
 ﻿#region Using
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Hearthstone_Deck_Tracker.Utility.Logging;
-using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.UI.Dialogs;

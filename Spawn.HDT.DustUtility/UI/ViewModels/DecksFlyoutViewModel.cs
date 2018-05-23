@@ -1,8 +1,8 @@
 ﻿#region Using
+using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
-using Microsoft.Practices.ServiceLocation;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

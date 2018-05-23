@@ -1,5 +1,5 @@
 ﻿#region Using
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using System;
 using System.Windows;
 #endregion
