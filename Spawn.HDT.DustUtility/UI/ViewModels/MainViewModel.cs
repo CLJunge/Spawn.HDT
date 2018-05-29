@@ -238,8 +238,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
-            SearchQuery = account.Preferences.SearchParameters.QueryString;
-
             ClearControls();
 
             ReloadFlyouts();
@@ -258,6 +256,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 else { }
 
                 s_blnCheckedForUpdates = true;
+            }
+            else { }
+
+            if (DustUtilityPlugin.Config.RememberQueryString
+                && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
+            {
+                SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
+
+                Search();
             }
             else { }
         }
@@ -419,7 +426,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             Messenger.Default.Send(new PopupMessage(true));
 
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+            if (DustUtilityPlugin.Config.RememberQueryString)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+            }
+            else
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
+            }
         }
         #endregion
 
