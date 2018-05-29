@@ -171,6 +171,12 @@ namespace Spawn.HDT.DustUtility
 
                 s_blnInitialized = true;
             });
+
+            if (MainWindow == null)
+            {
+                MainWindow = new MainWindow();
+            }
+            else { }
         }
         #endregion
 
@@ -531,12 +537,6 @@ namespace Spawn.HDT.DustUtility
         private static async Task ShowMainWindowAsync()
         {
             await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-
-            if (MainWindow == null)
-            {
-                MainWindow = new MainWindow();
-            }
-            else { }
 
             Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
