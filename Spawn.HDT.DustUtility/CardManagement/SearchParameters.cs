@@ -87,9 +87,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
             else
             {
                 QueryString = string.Empty;
-                IncludeGoldenCards = false;
+                IncludeGoldenCards = true;
                 GoldenCardsOnly = false;
-                UnusedCardsOnly = true;
+                UnusedCardsOnly = false;
 
                 Rarities = new ObservableCollection<Rarity>
                 {
