@@ -278,15 +278,15 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
+            if (IsOffline && Cache.TimerEnabled)
+            {
+                Cache.StopTimer();
+            }
+            else { }
+
             if (!IsOffline)
             {
                 UpdatedAccountInstance(await Account.GetLoggedInAccountAsync());
-
-                if (MainWindow != null)
-                {
-                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-                }
-                else { }
 
                 Cache.ClearCache();
             }
@@ -296,11 +296,9 @@ namespace Spawn.HDT.DustUtility
             {
                 Cache.StartTimer();
             }
-            else if (IsOffline && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
             else { }
+
+            await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
         }
         #endregion
         #endregion
