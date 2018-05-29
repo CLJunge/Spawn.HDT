@@ -244,20 +244,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             BackupManager.DeleteOldBackups(account);
 
-            if (!s_blnCheckedForUpdates)
-            {
-                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
-                {
-                    DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
-                    {
-                        OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
-                    });
-                }
-                else { }
-
-                s_blnCheckedForUpdates = true;
-            }
-            else { }
+            await PerformUpdateCheck();
 
             if (DustUtilityPlugin.Config.RememberQueryString
                 && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
@@ -348,6 +335,26 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SearchQuery = string.Empty;
 
             ClearControls();
+        }
+        #endregion
+
+        #region PerformUpdateCheck
+        private async Task PerformUpdateCheck()
+        {
+            if (!s_blnCheckedForUpdates)
+            {
+                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
+                {
+                    DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
+                    {
+                        OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
+                    });
+                }
+                else { }
+
+                s_blnCheckedForUpdates = true;
+            }
+            else { }
         }
         #endregion
 

@@ -50,6 +50,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Static Ctor
+#if DEBUG
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
@@ -58,6 +59,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
         }
+#endif
         #endregion
     }
 }
