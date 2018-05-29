@@ -743,6 +743,21 @@ namespace Spawn.HDT.DustUtility
             window.Focus();
         }
         #endregion
+
+        #region GetCollectionWrapper
+        public static List<HearthMirror.Objects.Card> GetCollectionWrapper()
+        {
+            List<HearthMirror.Objects.Card> lstRet = null;
+
+            if (!IsOffline)
+            {
+                lstRet = HearthMirror.Reflection.GetCollection().Where(c => c.Count > 0).ToList();
+            }
+            else { }
+
+            return lstRet;
+        }
+        #endregion
         #endregion
     }
 }

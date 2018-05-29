@@ -1,5 +1,4 @@
 ﻿#region Using
-using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
@@ -21,7 +20,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region CheckCollection
         public static void CheckCollection(IAccount account)
         {
-            List<Card> lstCurrentCollection = Reflection.GetCollection();
+            List<Card> lstCurrentCollection = DustUtilityPlugin.GetCollectionWrapper();
 
             if (!s_blnCheckInProgress && account != null && (lstCurrentCollection != null && lstCurrentCollection.Count > 0))
             {

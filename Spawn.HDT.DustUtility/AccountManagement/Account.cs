@@ -104,7 +104,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             }
             else
             {
-                lstRet = Reflection.GetCollection();
+                lstRet = DustUtilityPlugin.GetCollectionWrapper();
             }
 
             if (lstRet != null)

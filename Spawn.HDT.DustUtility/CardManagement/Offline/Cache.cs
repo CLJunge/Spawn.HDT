@@ -40,7 +40,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             bool blnRet = false;
 
-            List<Card> lstCollection = Reflection.GetCollection();
+            List<Card> lstCollection = DustUtilityPlugin.GetCollectionWrapper();
 
             if (lstCollection?.Count > 0 && !s_blnSaveCollectionInProgress)
             {
