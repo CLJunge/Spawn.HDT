@@ -76,11 +76,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             SortOrderItems = new ObservableCollection<SortOrderItemModel>();
 
+#if DEBUG
             if (IsInDesignMode)
             {
                 InitializeAsync().Forget();
             }
             else { }
+#endif
         }
         #endregion
 

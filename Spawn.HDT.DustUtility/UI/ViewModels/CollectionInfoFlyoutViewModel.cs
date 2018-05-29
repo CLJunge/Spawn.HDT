@@ -28,6 +28,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             CardSetItems = new ObservableCollection<CardSetItemModel>();
 
+#if DEBUG
             if (IsInDesignMode)
             {
                 ReloadRequired = true;
@@ -35,6 +36,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 InitializeAsync().Forget();
             }
             else { }
+#endif
         }
         #endregion
 

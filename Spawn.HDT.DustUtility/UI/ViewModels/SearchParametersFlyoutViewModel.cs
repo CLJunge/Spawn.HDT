@@ -310,11 +310,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 else { }
             };
 
+#if DEBUG
             if (IsInDesignMode)
             {
                 InitializeAsync().Forget();
             }
             else { }
+#endif
         }
         #endregion
 

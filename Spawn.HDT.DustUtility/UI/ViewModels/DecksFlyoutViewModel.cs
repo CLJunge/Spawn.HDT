@@ -72,11 +72,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 else { }
             };
 
+#if DEBUG
             if (IsInDesignMode)
             {
                 InitializeAsync().Forget();
             }
             else { }
+#endif
 
             Messenger.Default.Register<CMOpeningMessage>(this, OnContextMenuOpening);
             Messenger.Default.Register<LVMouseDblClickMessage>(this, OnListViewMouseDoubleClick);
