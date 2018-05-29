@@ -14,17 +14,8 @@
             <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
         </Style>
     </Window.Resources>
-    <Grid Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="0" Height="30">
+    <StackPanel Orientation="Vertical" Margin="5">
+        <Grid Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -33,7 +24,25 @@
             <Label Content="Offline Mode" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Name="cbOfflineMode" Grid.Column="1" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Grid.Row="1" Height="30">
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Remember Search Term" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Grid.Column="2" IsChecked="{Binding RememberSearchTerm, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Auto Disenchanting" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Name="AutoDisenchantingCheckBox" Grid.Column="1" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+        <Grid Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -50,25 +59,7 @@
                 </TextBox.Text>
             </TextBox>
         </Grid>
-        <Grid Grid.Row="2" Height="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="60"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="Check For Updates" Grid.Column="0" Margin="10,0,0,0"/>
-            <CheckBox Grid.Column="2" IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        </Grid>
-        <Grid Grid.Row="3" Height="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="60"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="Auto Disenchanting" Grid.Column="0" Margin="10,0,0,0"/>
-            <CheckBox Name="AutoDisenchantingCheckBox" Grid.Column="1" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-        </Grid>
-        <Grid Grid.Row="4" Height="30" Visibility="{Binding ColoredCardItemsSettingVisibility}">
+        <Grid Height="30" Visibility="{Binding ColoredCardItemsSettingVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -77,8 +68,18 @@
             <Label Content="Colored Card Items" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        
-        <WrapPanel Grid.Row="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
+        <Separator Background="{DynamicResource AccentColorBrush}"/>
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Check For Updates" Grid.Column="0" Margin="10,0,0,0"/>
+            <CheckBox Grid.Column="2" IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </Grid>
+
+        <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CustomButtonStyle}">
@@ -93,5 +94,5 @@
             </Button>
             <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75" Height="28"/>
         </WrapPanel>
-    </Grid>
+    </StackPanel>
 </controls:MetroWindow>
