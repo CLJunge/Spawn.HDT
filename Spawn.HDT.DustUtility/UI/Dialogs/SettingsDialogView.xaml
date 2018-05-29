@@ -30,6 +30,24 @@
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
 
+            <Label Content="Save Interval (sec.)" Grid.Column="0" Margin="10,0,0,0" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}"/>
+            <TextBox Name="tbSaveInterval" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,11,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}">
+                <TextBox.Text>
+                    <Binding Path="SaveInterval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <components:NumericValidationRule ValidatesOnTargetUpdated="True"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+        <Separator Background="{DynamicResource AccentColorBrush}" Margin="5"/>
+        <Grid Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+
             <Label Content="Remember Search Term" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="2" IsChecked="{Binding RememberSearchTerm, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
@@ -42,23 +60,6 @@
             <Label Content="Auto Disenchanting" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Name="AutoDisenchantingCheckBox" Grid.Column="1" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Height="30">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="60"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="Save Interval (sec.)" Grid.Column="0" Margin="10,0,0,0" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}"/>
-            <TextBox Name="tbSaveInterval" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="10,0,11,0" TextAlignment="Right" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}">
-                <TextBox.Text>
-                    <Binding Path="SaveInterval" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
-                        <Binding.ValidationRules>
-                            <components:NumericValidationRule ValidatesOnTargetUpdated="True"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-        </Grid>
         <Grid Height="30" Visibility="{Binding ColoredCardItemsSettingVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
@@ -68,7 +69,7 @@
             <Label Content="Colored Card Items" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Separator Background="{DynamicResource AccentColorBrush}"/>
+        <Separator Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         <Grid Height="30">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>

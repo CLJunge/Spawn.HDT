@@ -233,7 +233,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
             }
 
-            BackupManager.CreateBackup(account);
+            await Task.Run(() => BackupManager.CreateBackup(account));
 
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
