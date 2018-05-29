@@ -125,6 +125,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
+    <Compile Include="Messaging\PopupStatusMessage.cs" />
     <Compile Include="Net\UpdateInfo.cs" />
     <Compile Include="Net\UpdateManager.cs" />
     <Compile Include="Net\CardImageDownloader.cs" />

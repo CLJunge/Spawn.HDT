@@ -1,11 +1,13 @@
 ﻿#region Using
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement;
+using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.Windows;
@@ -414,6 +416,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 (sender as Window).Hide();
             }
             else { }
+
+            Messenger.Default.Send(new PopupStatusMessage(true));
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
         }

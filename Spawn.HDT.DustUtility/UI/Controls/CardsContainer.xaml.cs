@@ -1,4 +1,6 @@
 ﻿#region Using
+using GalaSoft.MvvmLight.Messaging;
+using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections;
@@ -45,7 +47,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         public CardsContainer()
         {
             InitializeComponent(); //TODO add more logging to this class
+
+            Messenger.Default.Register<PopupStatusMessage>(this, OnPopupStatusMessage);
         }
+        #endregion
+
+        #region Dtor
+        ~CardsContainer() => Messenger.Default.Unregister(this);
         #endregion
 
         #region Events
@@ -103,6 +111,17 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         private void OnPopupMouseDown(object sender, MouseButtonEventArgs e)
         {
             ClosePopup();
+        }
+        #endregion
+
+        #region OnPopupStatusMessage
+        private void OnPopupStatusMessage(PopupStatusMessage message)
+        {
+            if (message.CloseRequest && CardImagePopup.IsOpen)
+            {
+                ClosePopup();
+            }
+            else { }
         }
         #endregion
         #endregion
