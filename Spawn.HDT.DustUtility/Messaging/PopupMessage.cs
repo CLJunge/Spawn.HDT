@@ -1,6 +1,6 @@
 ﻿namespace Spawn.HDT.DustUtility.Messaging
 {
-    public class PopupStatusMessage
+    public class PopupMessage
     {
         #region Properties
         #region CloseRequest
@@ -9,7 +9,7 @@
         #endregion
 
         #region Ctor
-        public PopupStatusMessage(bool closeRequest)
+        public PopupMessage(bool closeRequest)
         {
             CloseRequest = closeRequest;
         }

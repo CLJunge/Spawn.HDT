@@ -48,7 +48,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             InitializeComponent(); //TODO add more logging to this class
 
-            Messenger.Default.Register<PopupStatusMessage>(this, OnPopupStatusMessage);
+            Messenger.Default.Register<PopupMessage>(this, OnPopupMessage);
         }
         #endregion
 
@@ -114,8 +114,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
         #endregion
 
-        #region OnPopupStatusMessage
-        private void OnPopupStatusMessage(PopupStatusMessage message)
+        #region OnPopupMessage
+        private void OnPopupMessage(PopupMessage message)
         {
             if (message.CloseRequest && CardImagePopup.IsOpen)
             {

@@ -417,7 +417,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 
-            Messenger.Default.Send(new PopupStatusMessage(true));
+            Messenger.Default.Send(new PopupMessage(true));
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
         }
