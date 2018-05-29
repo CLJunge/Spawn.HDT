@@ -128,6 +128,7 @@
     <Compile Include="Messaging\CMOpeningMessage.cs" />
     <Compile Include="Messaging\LVMouseDblClickMessage.cs" />
     <Compile Include="Messaging\PopupMessage.cs" />
+    <Compile Include="Messaging\RemoveCardItemMessage.cs" />
     <Compile Include="Net\UpdateInfo.cs" />
     <Compile Include="Net\UpdateManager.cs" />
     <Compile Include="Net\CardImageDownloader.cs" />

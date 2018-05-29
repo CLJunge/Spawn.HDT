@@ -29,6 +29,7 @@ namespace Spawn.HDT.DustUtility
     {
         #region Constants
         public const string DecksFlyoutName = "DecksFlyout";
+        public const string HistoryFlyoutName = "HistoryFlyout";
         #endregion
 
         #region Static Fields

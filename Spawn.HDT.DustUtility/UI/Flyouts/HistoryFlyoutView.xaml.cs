@@ -1,6 +1,6 @@
 ﻿#region Using
-using CommonServiceLocator;
-using Spawn.HDT.DustUtility.UI.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
+using Spawn.HDT.DustUtility.Messaging;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Flyouts
@@ -16,7 +16,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
 
         #region Events
         #region OnRemoveCardItem
-        private void OnRemoveCardItem(object sender, CardItemEventArgs e) => ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().RemoveCardItem(e);
+        private void OnRemoveCardItem(object sender, CardItemEventArgs e) => Messenger.Default.Send(new RemoveCardItemMessage(DustUtilityPlugin.HistoryFlyoutName, e));
         #endregion
         #endregion
     }

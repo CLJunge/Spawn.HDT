@@ -1,11 +1,13 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,7 +41,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 #endif
+
+            Messenger.Default.Register<RemoveCardItemMessage>(this, RemoveCardItem);
         }
+        #endregion
+
+        #region Dtor
+        ~HistoryFlyoutViewModel() => Messenger.Default.Unregister(this);
         #endregion
 
         #region InitializeAsync
@@ -90,13 +98,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region RemoveCardItem
-        public void RemoveCardItem(CardItemEventArgs e)
+        private void RemoveCardItem(RemoveCardItemMessage message)
         {
-            if (e.RowIndex > -1)
+            if ((message.FlyoutName?.Equals(DustUtilityPlugin.HistoryFlyoutName) ?? false) && message.EventArgs?.RowIndex > -1)
             {
-                CardItems.RemoveAt(e.RowIndex);
+                CardItems.RemoveAt(message.EventArgs.RowIndex);
 
-                HistoryManager.RemoveItemAt(DustUtilityPlugin.CurrentAccount, e.RowIndex);
+                HistoryManager.RemoveItemAt(DustUtilityPlugin.CurrentAccount, message.EventArgs.RowIndex);
             }
             else { }
         }
