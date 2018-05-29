@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Description
-        public string Description => "Utility tool for dust management. Check GitHub readme for a detailed description and a list of all features.";
+        public string Description => "Utility tool for collection management. Check GitHub readme for a detailed description and a list of all features.";
         #endregion
 
         #region ButtonText
