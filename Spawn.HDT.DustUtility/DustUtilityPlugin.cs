@@ -27,6 +27,10 @@ namespace Spawn.HDT.DustUtility
 {
     public class DustUtilityPlugin : IPlugin
     {
+        #region Constants
+        public const string DecksFlyoutName = "DecksFlyout";
+        #endregion
+
         #region Static Fields
         private static bool s_blnInitialized;
         private static bool s_blnIsOffline = true;

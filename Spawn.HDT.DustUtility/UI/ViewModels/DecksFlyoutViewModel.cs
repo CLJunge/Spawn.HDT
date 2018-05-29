@@ -1,8 +1,10 @@
 ﻿#region Using
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
+using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -75,7 +77,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 InitializeAsync().Forget();
             }
             else { }
+
+            Messenger.Default.Register<CMOpeningMessage>(this, OnContextMenuOpening);
+            Messenger.Default.Register<LVMouseDblClickMessage>(this, OnListViewMouseDoubleClick);
         }
+        #endregion
+
+        #region Dtor
+        ~DecksFlyoutViewModel() => Messenger.Default.Unregister(this);
         #endregion
 
         #region InitializeAsync
@@ -136,22 +145,37 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnContextMenuOpening
-        public void OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs e)
+        private void OnContextMenuOpening(CMOpeningMessage message)
         {
-            bool blnDeckSelected = SelectedDeckItem != null;
-
-            e.Handled = !blnDeckSelected;
-
-            if (blnDeckSelected)
+            if (message.FlyoutName?.Equals(DustUtilityPlugin.DecksFlyoutName) ?? false)
             {
-                if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId))
+                bool blnDeckSelected = SelectedDeckItem != null;
+
+                message.EventArgs.Handled = !blnDeckSelected;
+
+                if (blnDeckSelected)
                 {
-                    ToggleDeckMenuItemHeader = IncludeHeaderText;
+                    if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId))
+                    {
+                        ToggleDeckMenuItemHeader = IncludeHeaderText;
+                    }
+                    else
+                    {
+                        ToggleDeckMenuItemHeader = ExcludeHeaderText;
+                    }
                 }
-                else
-                {
-                    ToggleDeckMenuItemHeader = ExcludeHeaderText;
-                }
+                else { }
+            }
+            else { }
+        }
+        #endregion
+
+        #region OnListViewMouseDoubleClick
+        private void OnListViewMouseDoubleClick(LVMouseDblClickMessage message)
+        {
+            if ((message.FlyoutName?.Equals(DustUtilityPlugin.DecksFlyoutName) ?? false) && message.EventArgs?.LeftButton == MouseButtonState.Pressed)
+            {
+                ShowDeckList();
             }
             else { }
         }

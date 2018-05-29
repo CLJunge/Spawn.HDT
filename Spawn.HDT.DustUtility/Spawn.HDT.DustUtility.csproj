@@ -125,6 +125,8 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
+    <Compile Include="Messaging\CMOpeningMessage.cs" />
+    <Compile Include="Messaging\LVMouseDblClickMessage.cs" />
     <Compile Include="Messaging\PopupMessage.cs" />
     <Compile Include="Net\UpdateInfo.cs" />
     <Compile Include="Net\UpdateManager.cs" />

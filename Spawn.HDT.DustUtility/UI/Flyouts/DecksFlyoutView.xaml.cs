@@ -1,6 +1,6 @@
 ﻿#region Using
-using CommonServiceLocator;
-using Spawn.HDT.DustUtility.UI.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
+using Spawn.HDT.DustUtility.Messaging;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Flyouts
@@ -25,18 +25,20 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnListViewContextMenuOpening
         private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
         {
-            ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().OnContextMenuOpening(e);
+            Messenger.Default.Send(new CMOpeningMessage(DustUtilityPlugin.DecksFlyoutName, e));
+            //ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().OnContextMenuOpening(e);
         }
         #endregion
 
         #region OnListViewMouseDoubleClick
         private void OnListViewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            {
-                ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ShowDeckListCommand.Execute(null);
-            }
-            else { }
+            Messenger.Default.Send(new LVMouseDblClickMessage(DustUtilityPlugin.DecksFlyoutName, e));
+            //if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            //{
+            //    ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ShowDeckListCommand.Execute(null);
+            //}
+            //else { }
         }
         #endregion
         #endregion
