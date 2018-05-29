@@ -10,12 +10,17 @@
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" GlowBrush="Black">
     <Window.Resources>
-        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
-            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
-        </Style>
+        <ResourceDictionary>
+            <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+                <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CustomToolTipStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
     <StackPanel Orientation="Vertical" Margin="5">
-        <Grid Height="30">
+        <Grid Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -24,7 +29,7 @@
             <Label Content="Offline Mode" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Name="cbOfflineMode" Grid.Column="1" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Height="30">
+        <Grid Height="30" ToolTip="With 'Offline Mode' enabled, collection and decks are saved each X seconds." ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -41,8 +46,8 @@
                 </TextBox.Text>
             </TextBox>
         </Grid>
-        <Separator Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <Grid Height="30">
+        <Separator Height="2" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
+        <Grid Height="30" ToolTip="Save the current search term after closing the main window." ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -51,7 +56,7 @@
             <Label Content="Remember Search Term" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="2" IsChecked="{Binding RememberSearchTerm, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Height="30">
+        <Grid Height="30" ToolTip="!!! USE AT YOUR OWN RISK !!!&#x0a;Enable the option to let the plugin disenchant the current card selection automatically.&#x0a;(Works like the old HDT export feature)" ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -60,7 +65,7 @@
             <Label Content="Auto Disenchanting" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Name="AutoDisenchantingCheckBox" Grid.Column="1" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Grid Height="30" Visibility="{Binding ColoredCardItemsSettingVisibility}">
+        <Grid Height="30" ToolTip="Distinguish easier between normal and golden cards." ToolTipService.ShowDuration="5000" Visibility="{Binding ColoredCardItemsSettingVisibility}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
@@ -69,8 +74,8 @@
             <Label Content="Colored Card Items" Grid.Column="0" Margin="10,0,0,0"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
-        <Separator Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <Grid Height="30">
+        <Separator Height="2" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
+        <Grid Height="30" ToolTip="Check and display a notification wether a new release is available after opening the main window." ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
