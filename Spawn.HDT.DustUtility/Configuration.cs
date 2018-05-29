@@ -16,6 +16,7 @@ namespace Spawn.HDT.DustUtility
         private string m_strLastSelectedAccount;
         private bool m_blnColoredCardItems;
         private bool m_blnAutoDisenchanting;
+        private bool m_blnRememberQueryString;
         private int m_nVersion;
         #endregion
 
@@ -57,7 +58,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region LastSelectedAccount
-        [DefaultValue("")]
+        [DefaultValue(null)]
         public string LastSelectedAccount
         {
             get => m_strLastSelectedAccount;
@@ -83,6 +84,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region RememberQueryString
+        [DefaultValue(false)]
+        public bool RememberQueryString
+        {
+            get => m_blnRememberQueryString;
+            set => Set(ref m_blnRememberQueryString, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -100,9 +110,10 @@ namespace Spawn.HDT.DustUtility
             SortOrder = "Rarity;Golden;CardClass;CardSet;Name";
             CheckForUpdates = true;
             SaveInterval = 120;
-            LastSelectedAccount = string.Empty;
+            LastSelectedAccount = null;
             ColoredCardItems = true;
             AutoDisenchanting = false;
+            RememberQueryString = false;
             Version = 1;
 
             //PropertyChanged += (s, e) => Save();
