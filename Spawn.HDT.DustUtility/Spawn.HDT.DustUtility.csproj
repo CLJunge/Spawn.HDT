@@ -199,6 +199,7 @@
     <Compile Include="UI\Flyouts\UpdateFlyoutView.xaml.cs">
       <DependentUpon>UpdateFlyoutView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\NotifyDirtyStatusEventArgs.cs" />
     <Compile Include="UI\Models\CardItemModel.cs" />
     <Compile Include="UI\CardItemEventArgs.cs" />
     <Compile Include="UI\Models\CardSetItemModel.cs" />

@@ -20,6 +20,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     public class HistoryFlyoutViewModel : ViewModelBase
     {
         #region Properties
+        #region CanNotifyDirtyStatus
+        public override bool CanNotifyDirtyStatus => false;
+        #endregion
+
         #region CardItems
         public ObservableCollection<CardItemModel> CardItems { get; set; }
         #endregion

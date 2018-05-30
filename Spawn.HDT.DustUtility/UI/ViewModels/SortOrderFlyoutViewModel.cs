@@ -16,14 +16,25 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     public class SortOrderFlyoutViewModel : ViewModelBase
     {
         #region Member Variables
+        private string m_strSortOrderString;
         private SortOrderItemModel m_selectedSortOrderItem;
         private int m_nSelectedSortOrderItemIndex;
         private int m_nMaxCount;
-
-        private bool m_blnIsDirty;
         #endregion
 
         #region Properties
+        #region CanNotifyDirtyStatus
+        public override bool CanNotifyDirtyStatus => true;
+        #endregion
+
+        #region SortOrderString
+        public string SortOrderString
+        {
+            get => m_strSortOrderString;
+            set => Set(ref m_strSortOrderString, value);
+        }
+        #endregion
+
         #region SortOrderItems
         public ObservableCollection<SortOrderItemModel> SortOrderItems { get; set; }
         #endregion
@@ -67,7 +78,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SaveCommand
-        public ICommand SaveCommand => new RelayCommand(SaveSortOrder, () => m_blnIsDirty);
+        public ICommand SaveCommand => new RelayCommand(SaveSortOrder, () => IsDirty);
         #endregion
         #endregion
 
@@ -102,7 +113,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.OrderItem)).Length;
 
-            m_blnIsDirty = false;
+            IsDirty = false;
+
+            m_dInitialPropertyValues?.Clear();
+
+            SetInitialPropertyValue(nameof(SortOrderString), DustUtilityPlugin.Config.SortOrder);
         }
         #endregion
 
@@ -133,7 +148,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 SortOrderItems.Add(new SortOrderItemModel(orderItem));
 
-                m_blnIsDirty = true;
+                UpdateSortOrderString();
             }
             else { }
         }
@@ -148,7 +163,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SelectedSortOrderItemIndex = (nIndex > 0 ? nIndex - 1 : 0);
 
-            m_blnIsDirty = true;
+            UpdateSortOrderString();
         }
         #endregion
 
@@ -159,7 +174,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SortOrderItems.Move(nIndex, nIndex - 1);
 
-            m_blnIsDirty = true;
+            UpdateSortOrderString();
         }
         #endregion
 
@@ -170,27 +185,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             SortOrderItems.Move(nIndex, nIndex + 1);
 
-            m_blnIsDirty = true;
+            UpdateSortOrderString();
         }
         #endregion
 
         #region SaveSortOrder
         private async void SaveSortOrder()
         {
-            string strOrder = string.Empty;
-
-            if (SortOrderItems.Count >= 1)
-            {
-                strOrder = SortOrderItems[0].Value.ToString();
-
-                for (int i = 1; i < SortOrderItems.Count; i++)
-                {
-                    strOrder = $"{strOrder};{SortOrderItems[i].Value}";
-                }
-            }
-            else { }
-
-            DustUtilityPlugin.Config.SortOrder = strOrder;
+            DustUtilityPlugin.Config.SortOrder = CreateSortOrderString();
 
             DustUtilityPlugin.MainWindow.SortOrderFlyout.IsOpen = false;
 
@@ -219,6 +221,33 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             return lstRet;
+        }
+        #endregion
+
+        #region CreateSortOrderString
+        private string CreateSortOrderString()
+        {
+            string strRet = string.Empty;
+
+            if (SortOrderItems.Count > 0)
+            {
+                strRet = SortOrderItems[0].Value.ToString();
+
+                for (int i = 1; i < SortOrderItems.Count; i++)
+                {
+                    strRet = $"{strRet};{SortOrderItems[i].Value}";
+                }
+            }
+            else { }
+
+            return strRet;
+        }
+        #endregion
+
+        #region UpdateSortOrderString
+        private void UpdateSortOrderStringProperty()
+        {
+            SortOrderString = CreateSortOrderString();
         }
         #endregion
     }

@@ -15,6 +15,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Properties
+        #region CanNotifyDirtyStatus
+        public override bool CanNotifyDirtyStatus => false;
+        #endregion
+
         #region WindowTitle
         public string WindowTitle
         {

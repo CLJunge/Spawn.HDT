@@ -27,6 +27,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Properties
+        #region CanNotifyDirtyStatus
+        public override bool CanNotifyDirtyStatus => false;
+        #endregion
+
         #region DeckItems
         public ObservableCollection<DeckItemModel> DeckItems { get; set; }
         #endregion

@@ -13,6 +13,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Properties
+        #region CanNotifyDirtyStatus
+        public override bool CanNotifyDirtyStatus => false;
+        #endregion
+
         #region Cards
         public ObservableCollection<Card> Cards { get; set; }
         #endregion
