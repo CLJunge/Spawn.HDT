@@ -180,6 +180,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             IAccount account = DustUtilityPlugin.CurrentAccount;
 
+            Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
+            Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
+
+            await Task.Run(() => BackupManager.CreateBackup(account))
+                .ContinueWith(t => BackupManager.DeleteOldBackups(account));
+
             if (!account.IsEmpty)
             {
                 WindowTitle = $"Dust Utility [{account.BattleTag.Name} ({account.Region})]";
@@ -224,25 +230,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             else { }
 #endif
 
-            if (IsSyncing)
-            {
-                WindowTitle = $"{WindowTitle}{SyncingTag}";
-            }
-            else
-            {
-                WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
-            }
-
-            await Task.Run(() => BackupManager.CreateBackup(account));
-
-            Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
-            Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
-
             ClearControls();
 
             ReloadFlyouts();
-
-            BackupManager.DeleteOldBackups(account);
 
             await PerformUpdateCheck();
 
@@ -250,10 +240,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
             {
                 SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
-
-                Search();
             }
-            else { }
+            else
+            {
+                SearchQuery = null;
+            }
         }
         #endregion
 
@@ -433,14 +424,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             Messenger.Default.Send(new PopupMessage(true));
 
-            if (DustUtilityPlugin.Config.RememberQueryString)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
-            }
-            else
+            if (!DustUtilityPlugin.Config.RememberQueryString)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
             }
+            else { }
         }
         #endregion
 

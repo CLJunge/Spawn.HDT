@@ -148,9 +148,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (!m_blnDisenchantingConfirmation)
             {
                 MessageDialogResult result = await ServiceLocator.Current.GetInstance<MainViewModel>()
-                        .SelectionWindow.ShowMessageAsync(string.Empty, "Go to your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
+                        .SelectionWindow.ShowMessageAsync(string.Empty, "Open your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
 
                 m_blnDisenchantingConfirmation = result == MessageDialogResult.Affirmative;
+
+                //if (m_blnDisenchantingConfirmation)
+                //{
+                //    DisenchantSelection();
+                //}
+                //else { }
             }
             else
             {

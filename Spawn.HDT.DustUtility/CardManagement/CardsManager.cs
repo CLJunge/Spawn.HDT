@@ -271,7 +271,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
             else if (!DustUtilityPlugin.IsOffline)
             {
-                await (DustUtilityPlugin.MainWindow as MahApps.Metro.Controls.MetroWindow).ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
+                await DustUtilityPlugin.MainWindow.ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
                 //MessageBox.Show("Navigate to the \"Play\" page first!", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else { }
