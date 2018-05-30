@@ -273,7 +273,14 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if (!DustUtilityPlugin.IsOffline)
             {
-                retVal = new Account(Reflection.GetBattleTag(), await Hearthstone_Deck_Tracker.Helper.GetCurrentRegion());
+                try
+                {
+                    retVal = new Account(Reflection.GetBattleTag(), await Hearthstone_Deck_Tracker.Helper.GetCurrentRegion());
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLine($"Couldn't retrieve currently logged in account: {ex}", LogType.Error);
+                }
             }
             else { }
 
