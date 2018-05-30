@@ -144,7 +144,7 @@ namespace Spawn.HDT.DustUtility
 
         public static string GetDisplayString(this CardSet cardSet)
         {
-            return Cards.AllDisplayName[cardSet];
+            return CardSets.AllDisplayName[cardSet];
         }
 
         public static string GetShortString(this CardSet cardSet)
