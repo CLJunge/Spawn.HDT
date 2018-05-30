@@ -77,7 +77,7 @@ namespace Spawn.HDT.DustUtility.Net
                 }
                 catch
                 {
-                    Log.WriteLine("Couldn't load card image! Probably no internet connection...", LogType.Warning);
+                    Log.WriteLine("Couldn't load card image!", LogType.Warning);
                 }
             }
             else { }
