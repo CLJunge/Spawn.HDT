@@ -743,7 +743,7 @@ namespace Spawn.HDT.DustUtility
 
             if (!IsOffline)
             {
-                lstRet = HearthMirror.Reflection.GetCollection().Where(c => c.Count > 0).ToList();
+                lstRet = HearthMirror.Reflection.GetCollection()?.Where(c => c.Count > 0).ToList();
             }
             else { }
 
