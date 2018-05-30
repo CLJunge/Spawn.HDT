@@ -101,8 +101,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                 await ClickOnCard((wrapper.RawCard.Premium ? CardPosition.Right : CardPosition.Left), true);
 
-                //TODO actually disenchant the card (dangerous)
-
                 int nDialogCardCountLimit = (wrapper.DbCard.Rarity == HearthDb.Enums.Rarity.LEGENDARY ? 1 : 2);
 
                 while ((wrapper.RawCard.Count - nRet) > nDialogCardCountLimit)
