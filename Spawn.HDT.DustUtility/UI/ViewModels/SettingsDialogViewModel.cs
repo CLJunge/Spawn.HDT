@@ -18,6 +18,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private bool m_blnCheckForUpdates;
         private bool m_blnColoredCardItems;
         private bool m_blnAutoDisenchanting;
+        private bool m_blnRememberQueryString;
         #endregion
 
         #region Properties
@@ -77,6 +78,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region RememberQueryString
+        public bool RememberQueryString
+        {
+            get => m_blnRememberQueryString;
+            set => Set(ref m_blnRememberQueryString, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
         #endregion
@@ -87,10 +96,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Settings";
 
-            ColoredCardItemsSettingVisibility = Visibility.Collapsed;
-
 #if DEBUG
             ColoredCardItemsSettingVisibility = Visibility.Visible;
+#else
+            ColoredCardItemsSettingVisibility = Visibility.Collapsed;
 #endif
         }
         #endregion
@@ -105,6 +114,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
             ColoredCardItems = DustUtilityPlugin.Config.ColoredCardItems;
             AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
+            RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
         }
         #endregion
 
@@ -115,6 +125,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.CheckForUpdates = CheckForUpdates;
             DustUtilityPlugin.Config.ColoredCardItems = ColoredCardItems;
             DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
+            DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
 
             if (OfflineMode)
             {

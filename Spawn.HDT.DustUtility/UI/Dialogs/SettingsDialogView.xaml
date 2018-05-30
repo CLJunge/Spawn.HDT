@@ -47,14 +47,14 @@
             </TextBox>
         </Grid>
         <Separator Height="2" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <Grid Height="30" ToolTip="Save the current search term after closing the main window." ToolTipService.ShowDuration="5000">
+        <Grid Height="30" ToolTip="Save the last search term for the current account after closing the main window." ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Remember Search Term" Grid.Column="0" Margin="10,0,0,0"/>
-            <CheckBox Grid.Column="2" IsChecked="{Binding RememberSearchTerm, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <CheckBox Grid.Column="2" IsChecked="{Binding RememberQueryString, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </Grid>
         <Grid Height="30" ToolTip="!!! USE AT YOUR OWN RISK !!!&#x0a;Enable the option to let the plugin disenchant the current card selection automatically.&#x0a;(Works like the old HDT export feature)" ToolTipService.ShowDuration="5000">
             <Grid.ColumnDefinitions>
