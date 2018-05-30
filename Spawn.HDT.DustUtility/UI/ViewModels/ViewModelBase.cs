@@ -42,33 +42,39 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 m_dInitialPropertyValues = new Dictionary<string, object>();
                 DirtyProperties = new List<string>();
 
-                PropertyChanged += (s, e) =>
-                {
-                    if (CanNotifyDirtyStatus && (m_dInitialPropertyValues?.ContainsKey(e.PropertyName) ?? false))
-                    {
-                        object objInitialValue = m_dInitialPropertyValues[e.PropertyName];
-
-                        object objNewValue = GetType().GetProperty(e.PropertyName).GetValue(this, null);
-
-                        IsDirty = !objInitialValue.Equals(objNewValue);
-
-                        if (IsDirty && !DirtyProperties.Contains(e.PropertyName))
-                        {
-                            DirtyProperties.Add(e.PropertyName);
-                        }
-                        else if (!IsDirty && DirtyProperties.Contains(e.PropertyName))
-                        {
-                            DirtyProperties.Remove(e.PropertyName);
-                        }
-                        else { }
-
-                        NotifyDirtyStatus?.Invoke(s, new NotifyDirtyStatusEventArgs(e.PropertyName, IsDirty));
-                    }
-                    else { }
-                };
+                PropertyChanged += OnPropertyChanged;
             }
             else { }
         }
+        #endregion
+
+        #region Events
+        #region OnPropertyChanged
+        private void OnPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (CanNotifyDirtyStatus && (m_dInitialPropertyValues?.ContainsKey(e.PropertyName) ?? false))
+            {
+                object objInitialValue = m_dInitialPropertyValues[e.PropertyName];
+
+                object objNewValue = GetType().GetProperty(e.PropertyName).GetValue(this, null);
+
+                IsDirty = !ComparePropertyValues(objInitialValue, objNewValue);
+
+                if (IsDirty && !DirtyProperties.Contains(e.PropertyName))
+                {
+                    DirtyProperties.Add(e.PropertyName);
+                }
+                else if (!IsDirty && DirtyProperties.Contains(e.PropertyName))
+                {
+                    DirtyProperties.Remove(e.PropertyName);
+                }
+                else { }
+
+                NotifyDirtyStatus?.Invoke(sender, new NotifyDirtyStatusEventArgs(e.PropertyName, IsDirty));
+            }
+            else { }
+        }
+        #endregion
         #endregion
 
         #region InitializeAsync
@@ -83,6 +89,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 m_dInitialPropertyValues[strPropertyName] = objValue;
             }
             else { }
+        }
+        #endregion
+
+        #region ComparePropertyValues
+        protected virtual bool ComparePropertyValues<T>(T a, T b)
+        {
+            return EqualityComparer<T>.Default.Equals(a, b);
         }
         #endregion
     }
