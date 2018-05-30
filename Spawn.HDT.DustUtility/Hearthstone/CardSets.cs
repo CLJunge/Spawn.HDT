@@ -11,6 +11,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #region Properties
         public static Dictionary<CardSet, string> All { get; }
         public static Dictionary<CardSet, string> AllFullName { get; }
+        public static Dictionary<CardSet, string> AllDisplayName { get; }
         public static Dictionary<CardSet, string> AllShortName { get; }
         public static Dictionary<CardSet, string> Expansions { get; }
         public static Dictionary<CardSet, string> Adventures { get; }
@@ -39,24 +40,6 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.HOF, "Hall of Fame" }
             };
 
-            AllShortName = new Dictionary<CardSet, string>
-            {
-                { CardSet.EXPERT1, "Expert" },
-                { CardSet.GVG, "Goblins" },
-                { CardSet.TGT, "Tournament" },
-                { CardSet.OG, "OldGods" },
-                { CardSet.GANGS, "Gadgetzan" },
-                { CardSet.UNGORO, "Ungoro" },
-                { CardSet.ICECROWN, "FrozenThrone" },
-                { CardSet.LOOTAPALOOZA, "Kobolds" },
-                { CardSet.GILNEAS, "Witchwood" },
-                { CardSet.NAXX, "Naxx" },
-                { CardSet.BRM, "Mountain" },
-                { CardSet.LOE, "League" },
-                { CardSet.KARA, "Karazhan" },
-                { CardSet.HOF, "Hall" }
-            };
-
             AllFullName = new Dictionary<CardSet, string>
             {
                 { CardSet.EXPERT1, "Classic" },
@@ -73,6 +56,42 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOE, "The League of Explorers" },
                 { CardSet.KARA, "One Night in Karazhan" },
                 { CardSet.HOF, "Hall of Fame" }
+            };
+
+            AllDisplayName = new Dictionary<CardSet, string>
+            {
+                { CardSet.EXPERT1, "Classic" },
+                { CardSet.GVG, "GvG" },
+                { CardSet.TGT, "TGT" },
+                { CardSet.OG, "Old Gods" },
+                { CardSet.GANGS, "MSG" },
+                { CardSet.UNGORO, "Un'goro" },
+                { CardSet.ICECROWN, "KFT" },
+                { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" },
+                { CardSet.NAXX, "Naxx" },
+                { CardSet.BRM, "BRM" },
+                { CardSet.LOE, "LOE" },
+                { CardSet.KARA, "Karazhan" },
+                { CardSet.HOF, "Hall Of Fame" }
+            };
+
+            AllShortName = new Dictionary<CardSet, string>
+            {
+                { CardSet.EXPERT1, "Expert" },
+                { CardSet.GVG, "Goblins" },
+                { CardSet.TGT, "Tournament" },
+                { CardSet.OG, "OldGods" },
+                { CardSet.GANGS, "Gadgetzan" },
+                { CardSet.UNGORO, "Ungoro" },
+                { CardSet.ICECROWN, "FrozenThrone" },
+                { CardSet.LOOTAPALOOZA, "Kobolds" },
+                { CardSet.GILNEAS, "Witchwood" },
+                { CardSet.NAXX, "Naxx" },
+                { CardSet.BRM, "Mountain" },
+                { CardSet.LOE, "League" },
+                { CardSet.KARA, "Karazhan" },
+                { CardSet.HOF, "Hall" }
             };
 
             Expansions = new Dictionary<CardSet, string>
