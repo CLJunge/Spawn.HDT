@@ -5,6 +5,7 @@ using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.UI.Dialogs;
@@ -192,12 +193,7 @@ namespace Spawn.HDT.DustUtility
         {
             HideMainWindowOnClose = false;
 
-            if (MainWindow != null)
-            {
-                MainWindow.Close();
-            }
-            else { }
-
+            MainWindow?.Close();
             MainWindow = null;
 
             if (Cache.TimerEnabled)
@@ -210,9 +206,9 @@ namespace Spawn.HDT.DustUtility
 
             CurrentAccount.SavePreferences();
 
-            SimpleIoc.Default.Reset();
-
             ServiceLocator.SetLocatorProvider(null);
+
+            SimpleIoc.Default.Reset();
         }
         #endregion
 
@@ -284,21 +280,32 @@ namespace Spawn.HDT.DustUtility
             }
             else { }
 
-            if (!IsOffline)
+            IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
+
+            if (loggedInAcc != null)
             {
-                UpdatedAccountInstance(await Account.GetLoggedInAccountAsync());
+                if (!IsOffline)
+                {
+                    UpdatedAccountInstance(loggedInAcc);
 
-                Cache.ClearCache();
+                    Cache.ClearCache();
+                }
+                else { }
+
+                if (Config.OfflineMode && (!IsOffline && !Cache.TimerEnabled))
+                {
+                    Cache.StartTimer();
+                }
+                else { }
+
+                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
-            else { }
-
-            if (Config.OfflineMode && (!IsOffline && !Cache.TimerEnabled))
+            else
             {
-                Cache.StartTimer();
-            }
-            else { }
+                await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't retrieve the currently logged in account! Closing window...");
 
-            await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                MainWindow?.Close();
+            }
         }
         #endregion
         #endregion
@@ -538,7 +545,7 @@ namespace Spawn.HDT.DustUtility
 
             Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
-            MainWindow.Show();
+            MainWindow?.Show();
 
             BringWindowToFront(MainWindow);
         }
@@ -729,10 +736,14 @@ namespace Spawn.HDT.DustUtility
         #region BringWindowToFront
         public static void BringWindowToFront(Window window)
         {
-            window.Activate();
-            window.Topmost = true;
-            window.Topmost = false;
-            window.Focus();
+            if (window != null)
+            {
+                window.Activate();
+                window.Topmost = true;
+                window.Topmost = false;
+                window.Focus();
+            }
+            else { }
         }
         #endregion
 
