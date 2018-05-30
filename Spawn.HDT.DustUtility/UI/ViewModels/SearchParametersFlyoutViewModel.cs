@@ -1,8 +1,8 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using HearthDb.Enums;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.CardManagement;
-using Spawn.HDT.DustUtility.Hearthstone;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
@@ -1042,34 +1042,34 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region LoadLabelTexts
         private void LoadLabelTexts()
         {
-            ExpertSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.EXPERT1];
-            GoblinsSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.GVG];
-            TournamentSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.TGT];
-            OldGodsSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.OG];
-            GadgetzanSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.GANGS];
-            UngoroSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.UNGORO];
-            FrozenThroneSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.ICECROWN];
-            KoboldsSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.LOOTAPALOOZA];
-            WitchwoodSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.GILNEAS];
-            NaxxSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.NAXX];
-            MountainSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.BRM];
-            LeagueSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.LOE];
-            KarazhanSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.KARA];
-            HallSetEnabledLabelText = CardSets.AllShortName[HearthDb.Enums.CardSet.HOF];
-            CommonRarityEnabledLabelText = "Common";
-            RareRarityEnabledLabelText = "Rare";
-            EpicRarityEnabledLabelText = "Epic";
-            LegendaryRarityEnabledLabelText = "Legendary";
-            DruidClassEnabledLabelText = "Druid";
-            HunterClassEnabledLabelText = "Hunter";
-            MageClassEnabledLabelText = "Mage";
-            PaladinClassEnabledLabelText = "Paladin";
-            PriestClassEnabledLabelText = "Priest";
-            RogueClassEnabledLabelText = "Rogue";
-            ShamanClassEnabledLabelText = "Shaman";
-            WarlockClassEnabledLabelText = "Warlock";
-            WarriorClassEnabledLabelText = "Warrior";
-            NeutralClassEnabledLabelText = "Neutral";
+            ExpertSetEnabledLabelText = CardSet.EXPERT1.GetDisplayString();
+            GoblinsSetEnabledLabelText = CardSet.GVG.GetDisplayString();
+            TournamentSetEnabledLabelText = CardSet.TGT.GetDisplayString();
+            OldGodsSetEnabledLabelText = CardSet.OG.GetDisplayString();
+            GadgetzanSetEnabledLabelText = CardSet.GANGS.GetDisplayString();
+            UngoroSetEnabledLabelText = CardSet.UNGORO.GetDisplayString();
+            FrozenThroneSetEnabledLabelText = CardSet.ICECROWN.GetDisplayString();
+            KoboldsSetEnabledLabelText = CardSet.LOOTAPALOOZA.GetDisplayString();
+            WitchwoodSetEnabledLabelText = CardSet.GILNEAS.GetDisplayString();
+            NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
+            MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
+            LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
+            KarazhanSetEnabledLabelText = CardSet.KARA.GetDisplayString();
+            HallSetEnabledLabelText = CardSet.HOF.GetDisplayString();
+            CommonRarityEnabledLabelText = Rarity.COMMON.GetString();
+            RareRarityEnabledLabelText = Rarity.RARE.GetString();
+            EpicRarityEnabledLabelText = Rarity.EPIC.GetString();
+            LegendaryRarityEnabledLabelText = Rarity.LEGENDARY.GetString();
+            DruidClassEnabledLabelText = CardClass.DRUID.GetString();
+            HunterClassEnabledLabelText = CardClass.HUNTER.GetString();
+            MageClassEnabledLabelText = CardClass.MAGE.GetString();
+            PaladinClassEnabledLabelText = CardClass.PALADIN.GetString();
+            PriestClassEnabledLabelText = CardClass.PRIEST.GetString();
+            RogueClassEnabledLabelText = CardClass.ROGUE.GetString();
+            ShamanClassEnabledLabelText = CardClass.SHAMAN.GetString();
+            WarlockClassEnabledLabelText = CardClass.WARLOCK.GetString();
+            WarriorClassEnabledLabelText = CardClass.WARRIOR.GetString();
+            NeutralClassEnabledLabelText = CardClass.NEUTRAL.GetString();
             IncludeGoldenCardsLabelText = "Incl. Golden Cards";
             IncludeGoldenCardsOnlyLabelText = "Golden Cards Only";
             IncludeUnusedCardsOnlyLabelText = "Unused Cards Only";
