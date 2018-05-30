@@ -142,6 +142,11 @@ namespace Spawn.HDT.DustUtility
             return CardSets.All[cardSet];
         }
 
+        public static string GetDisplayString(this CardSet cardSet)
+        {
+            return Cards.AllDisplayName[cardSet];
+        }
+
         public static string GetShortString(this CardSet cardSet)
         {
             return CardSets.AllShortName[cardSet];
