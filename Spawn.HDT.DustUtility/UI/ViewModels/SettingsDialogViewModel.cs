@@ -174,7 +174,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(OfflineMode):
                         if (e.IsDirty)
                         {
-                            OfflineModeLabelText = $"{OfflineModeLabelText}*";
+                            OfflineModeLabelText = $"{OfflineModeLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
@@ -185,7 +185,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(SaveInterval):
                         if (e.IsDirty)
                         {
-                            SaveIntervalLabelText = $"{SaveIntervalLabelText}*";
+                            SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
@@ -196,7 +196,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(CheckForUpdates):
                         if (e.IsDirty)
                         {
-                            CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}*";
+                            CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
@@ -207,7 +207,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(ColoredCardItems):
                         if (e.IsDirty)
                         {
-                            ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}*";
+                            ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
@@ -218,7 +218,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(AutoDisenchanting):
                         if (e.IsDirty)
                         {
-                            AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}*";
+                            AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
@@ -229,7 +229,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     case nameof(RememberQueryString):
                         if (e.IsDirty)
                         {
-                            RememberQueryStringLabelText = $"{RememberQueryStringLabelText}*";
+                            RememberQueryStringLabelText = $"{RememberQueryStringLabelText}{IsDirtySuffix}";
                         }
                         else
                         {
