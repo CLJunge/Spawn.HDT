@@ -58,19 +58,21 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 object objNewValue = GetType().GetProperty(e.PropertyName).GetValue(this, null);
 
-                IsDirty = !ComparePropertyValues(objInitialValue, objNewValue);
+                bool blnIsDirty = !ComparePropertyValues(objInitialValue, objNewValue);
 
-                if (IsDirty && !DirtyProperties.Contains(e.PropertyName))
+                if (blnIsDirty && !DirtyProperties.Contains(e.PropertyName))
                 {
                     DirtyProperties.Add(e.PropertyName);
                 }
-                else if (!IsDirty && DirtyProperties.Contains(e.PropertyName))
+                else if (!blnIsDirty && DirtyProperties.Contains(e.PropertyName))
                 {
                     DirtyProperties.Remove(e.PropertyName);
                 }
                 else { }
 
-                NotifyDirtyStatus?.Invoke(sender, new NotifyDirtyStatusEventArgs(e.PropertyName, IsDirty));
+                IsDirty = blnIsDirty && DirtyProperties.Count > 0;
+
+                NotifyDirtyStatus?.Invoke(sender, new NotifyDirtyStatusEventArgs(e.PropertyName, blnIsDirty));
             }
             else { }
         }
