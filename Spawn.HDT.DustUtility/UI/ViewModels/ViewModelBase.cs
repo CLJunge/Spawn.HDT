@@ -8,6 +8,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
+        #region Constants
+        public const string IsDirtySuffix = "*";
+        #endregion
+
         #region Member Variables
         protected Dictionary<string, object> m_dInitialPropertyValues;
         #endregion
@@ -70,7 +74,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
                 else { }
 
-                IsDirty = blnIsDirty && DirtyProperties.Count > 0;
+                IsDirty = DirtyProperties.Count > 0;
 
                 NotifyDirtyStatus?.Invoke(sender, new NotifyDirtyStatusEventArgs(e.PropertyName, blnIsDirty));
             }
