@@ -14,16 +14,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private Visibility m_coloredCardItemsSettingVisibility;
 
         private bool m_blnOfflineMode;
+        private string m_strOfflineModeLabelText;
         private int m_nSaveInterval;
+        private string m_strSaveIntervalLabelText;
         private bool m_blnCheckForUpdates;
+        private string m_strCheckForUpdatesLabelText;
         private bool m_blnColoredCardItems;
+        private string m_strColoredCardItemsLabelText;
         private bool m_blnAutoDisenchanting;
+        private string m_strAutoDisenchantingLabelText;
         private bool m_blnRememberQueryString;
+        private string m_strRememberQueryStringLabelText;
         #endregion
 
         #region Properties
         #region CanNotifyDirtyStatus
-        public override bool CanNotifyDirtyStatus => false; //TODO -> true
+        public override bool CanNotifyDirtyStatus => true;
         #endregion
 
         #region WindowTitle
@@ -50,11 +56,27 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region OfflineModeLabelText
+        public string OfflineModeLabelText
+        {
+            get => m_strOfflineModeLabelText;
+            set => Set(ref m_strOfflineModeLabelText, value);
+        }
+        #endregion
+
         #region SaveInterval
         public int SaveInterval
         {
             get => m_nSaveInterval;
             set => Set(ref m_nSaveInterval, value);
+        }
+        #endregion
+
+        #region SaveIntervalLabelText
+        public string SaveIntervalLabelText
+        {
+            get => m_strSaveIntervalLabelText;
+            set => Set(ref m_strSaveIntervalLabelText, value);
         }
         #endregion
 
@@ -66,11 +88,27 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region CheckForUpdatesLabelText
+        public string CheckForUpdatesLabelText
+        {
+            get => m_strCheckForUpdatesLabelText;
+            set => Set(ref m_strCheckForUpdatesLabelText, value);
+        }
+        #endregion
+
         #region ColoredCardItems
         public bool ColoredCardItems
         {
             get => m_blnColoredCardItems;
             set => Set(ref m_blnColoredCardItems, value);
+        }
+        #endregion
+
+        #region ColoredCardItemsLabelText
+        public string ColoredCardItemsLabelText
+        {
+            get => m_strColoredCardItemsLabelText;
+            set => Set(ref m_strColoredCardItemsLabelText, value);
         }
         #endregion
 
@@ -82,6 +120,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region AutoDisenchantingLabelText
+        public string AutoDisenchantingLabelText
+        {
+            get => m_strAutoDisenchantingLabelText;
+            set => Set(ref m_strAutoDisenchantingLabelText, value);
+        }
+        #endregion
+
         #region RememberQueryString
         public bool RememberQueryString
         {
@@ -90,8 +136,16 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region RememberQueryStringLabelText
+        public string RememberQueryStringLabelText
+        {
+            get => m_strRememberQueryStringLabelText;
+            set => Set(ref m_strRememberQueryStringLabelText, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
-        public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
+        public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
         #endregion
 
@@ -100,11 +154,90 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Settings";
 
+            OfflineModeLabelText = "Offline Mode";
+            SaveIntervalLabelText = "Save Interval (sec.)";
+            CheckForUpdatesLabelText = "Check For Updates";
+            ColoredCardItemsLabelText = "Colored Card Items";
+            AutoDisenchantingLabelText = "Auto Disenchanting";
+            RememberQueryStringLabelText = "Remember Search Term";
+
 #if DEBUG
             ColoredCardItemsSettingVisibility = Visibility.Visible;
 #else
             ColoredCardItemsSettingVisibility = Visibility.Collapsed;
 #endif
+
+            NotifyDirtyStatus += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case nameof(OfflineMode):
+                        if (e.IsDirty)
+                        {
+                            OfflineModeLabelText = $"{OfflineModeLabelText}*";
+                        }
+                        else
+                        {
+                            OfflineModeLabelText = OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - 1);
+                        }
+                        break;
+
+                    case nameof(SaveInterval):
+                        if (e.IsDirty)
+                        {
+                            SaveIntervalLabelText = $"{SaveIntervalLabelText}*";
+                        }
+                        else
+                        {
+                            SaveIntervalLabelText = SaveIntervalLabelText.Substring(0, SaveIntervalLabelText.Length - 1);
+                        }
+                        break;
+
+                    case nameof(CheckForUpdates):
+                        if (e.IsDirty)
+                        {
+                            CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}*";
+                        }
+                        else
+                        {
+                            CheckForUpdatesLabelText = CheckForUpdatesLabelText.Substring(0, CheckForUpdatesLabelText.Length - 1);
+                        }
+                        break;
+
+                    case nameof(ColoredCardItems):
+                        if (e.IsDirty)
+                        {
+                            ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}*";
+                        }
+                        else
+                        {
+                            ColoredCardItemsLabelText = ColoredCardItemsLabelText.Substring(0, ColoredCardItemsLabelText.Length - 1);
+                        }
+                        break;
+
+                    case nameof(AutoDisenchanting):
+                        if (e.IsDirty)
+                        {
+                            AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}*";
+                        }
+                        else
+                        {
+                            AutoDisenchantingLabelText = AutoDisenchantingLabelText.Substring(0, AutoDisenchantingLabelText.Length - 1);
+                        }
+                        break;
+
+                    case nameof(RememberQueryString):
+                        if (e.IsDirty)
+                        {
+                            RememberQueryStringLabelText = $"{RememberQueryStringLabelText}*";
+                        }
+                        else
+                        {
+                            RememberQueryStringLabelText = RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - 1);
+                        }
+                        break;
+                }
+            };
         }
         #endregion
 
@@ -119,6 +252,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ColoredCardItems = DustUtilityPlugin.Config.ColoredCardItems;
             AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
+
+            m_dInitialPropertyValues?.Clear();
+
+            SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
+            SetInitialPropertyValue(nameof(SaveInterval), SaveInterval);
+            SetInitialPropertyValue(nameof(CheckForUpdates), CheckForUpdates);
+            SetInitialPropertyValue(nameof(ColoredCardItems), ColoredCardItems);
+            SetInitialPropertyValue(nameof(AutoDisenchanting), AutoDisenchanting);
+            SetInitialPropertyValue(nameof(RememberQueryString), RememberQueryString);
         }
         #endregion
 
