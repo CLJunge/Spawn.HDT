@@ -245,7 +245,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region UpdateSortOrderString
-        private void UpdateSortOrderStringProperty()
+        private void UpdateSortOrderString()
         {
             SortOrderString = CreateSortOrderString();
         }
