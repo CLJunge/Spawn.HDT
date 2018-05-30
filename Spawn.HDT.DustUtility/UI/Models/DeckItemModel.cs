@@ -4,6 +4,7 @@ using HearthMirror.Objects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Media.Imaging;
 #endregion
 
@@ -39,7 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region CardCount
-        public int CardCount => (Deck?.Cards.Count ?? 0);
+        public int CardCount => (Deck?.Cards.Sum(c => c.Count) ?? 0);
         #endregion
 
         #region CraftingCost
