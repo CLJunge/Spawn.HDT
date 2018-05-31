@@ -31,7 +31,7 @@
 
             <Border Grid.Row="2" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Black" Background="WhiteSmoke" Margin="15,0"/>
 
-            <Label Grid.Row="2" Content="{Binding Name}" FontSize="28" FontStretch="Expanded" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+            <Label Grid.Row="2" Content="{Binding Name}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
 
             <Grid Grid.Row="4" Width="400" HorizontalAlignment="Left" Margin="5,0,0,0">
                 <Grid.ColumnDefinitions>
