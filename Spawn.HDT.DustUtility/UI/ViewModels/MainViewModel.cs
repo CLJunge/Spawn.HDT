@@ -428,11 +428,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             Messenger.Default.Send(new PopupMessage(true));
 
-            if (!DustUtilityPlugin.Config.RememberQueryString)
+            if (DustUtilityPlugin.Config.RememberQueryString)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+            }
+            else
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
             }
-            else { }
         }
         #endregion
 

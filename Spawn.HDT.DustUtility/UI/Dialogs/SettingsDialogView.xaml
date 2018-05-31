@@ -37,7 +37,7 @@
             </TextBox>
         </DockPanel>
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <DockPanel Height="30" ToolTip="Save the last search term for the current account after closing the main window." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Save the search term for the current account when closing the main window." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding RememberQueryStringLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding RememberQueryString, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
