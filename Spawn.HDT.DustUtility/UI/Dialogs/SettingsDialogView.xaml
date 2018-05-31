@@ -24,7 +24,7 @@
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="cbOfflineMode" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="With 'Offline Mode' enabled, collection and decks are saved each X seconds." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="With 'Offline Mode' enabled, collection and decks are saved each X seconds while Hearthstone is running." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding SaveIntervalLabelText}" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <TextBox Name="tbSaveInterval" IsEnabled="{Binding ElementName=cbOfflineMode, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="50" TextAlignment="Right" Margin="0,0,10,0">
                 <TextBox.Text>
@@ -45,9 +45,9 @@
             <Label Content="{Binding AutoDisenchantingLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="AutoDisenchantingCheckBox" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="Distinguish easier between normal and golden cards." ToolTipService.ShowDuration="8000" Visibility="{Binding ColoredCardItemsSettingVisibility}">
-            <Label Content="{Binding ColoredCardItemsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <CheckBox IsChecked="{Binding ColoredCardItems, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        <DockPanel Height="30" ToolTip="Use colored labels for the card items." ToolTipService.ShowDuration="8000">
+            <Label Content="{Binding ColoredCardLabelsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <CheckBox IsChecked="{Binding ColoredCardLabels, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         <DockPanel Height="30" ToolTip="Check and display a notification wether a new release is available after opening the main window." ToolTipService.ShowDuration="8000">

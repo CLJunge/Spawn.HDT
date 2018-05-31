@@ -14,7 +14,7 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnCheckForUpdates;
         private int m_nSaveInterval;
         private string m_strLastSelectedAccount;
-        private bool m_blnColoredCardItems;
+        private bool m_blnColoredCardLabels;
         private bool m_blnAutoDisenchanting;
         private bool m_blnRememberQueryString;
         private int m_nVersion;
@@ -66,12 +66,12 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region ColoredCardItems
+        #region ColoredCardLabels
         [DefaultValue(true)]
-        public bool ColoredCardItems
+        public bool ColoredCardLabels
         {
-            get => m_blnColoredCardItems;
-            set => Set(ref m_blnColoredCardItems, value);
+            get => m_blnColoredCardLabels;
+            set => Set(ref m_blnColoredCardLabels, value);
         }
         #endregion
 
@@ -111,7 +111,7 @@ namespace Spawn.HDT.DustUtility
             CheckForUpdates = true;
             SaveInterval = 120;
             LastSelectedAccount = null;
-            ColoredCardItems = true;
+            ColoredCardLabels = true;
             AutoDisenchanting = false;
             RememberQueryString = false;
             Version = 1;

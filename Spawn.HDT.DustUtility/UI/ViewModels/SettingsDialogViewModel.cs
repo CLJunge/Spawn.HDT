@@ -1,7 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 #endregion
 
@@ -11,7 +10,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Member Variables
         private string m_strWindowTitle;
-        private Visibility m_coloredCardItemsSettingVisibility;
 
         private bool m_blnOfflineMode;
         private string m_strOfflineModeLabelText;
@@ -19,8 +17,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strSaveIntervalLabelText;
         private bool m_blnCheckForUpdates;
         private string m_strCheckForUpdatesLabelText;
-        private bool m_blnColoredCardItems;
-        private string m_strColoredCardItemsLabelText;
+        private bool m_blnColoredCardLabels;
+        private string m_strColoredCardLabelsLabelText;
         private bool m_blnAutoDisenchanting;
         private string m_strAutoDisenchantingLabelText;
         private bool m_blnRememberQueryString;
@@ -37,14 +35,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strWindowTitle;
             set => Set(ref m_strWindowTitle, value);
-        }
-        #endregion
-
-        #region ColoredCardItemsSettingVisibility
-        public Visibility ColoredCardItemsSettingVisibility
-        {
-            get => m_coloredCardItemsSettingVisibility;
-            set => Set(ref m_coloredCardItemsSettingVisibility, value);
         }
         #endregion
 
@@ -96,19 +86,19 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region ColoredCardItems
-        public bool ColoredCardItems
+        #region ColoredCardLabels
+        public bool ColoredCardLabels
         {
-            get => m_blnColoredCardItems;
-            set => Set(ref m_blnColoredCardItems, value);
+            get => m_blnColoredCardLabels;
+            set => Set(ref m_blnColoredCardLabels, value);
         }
         #endregion
 
-        #region ColoredCardItemsLabelText
-        public string ColoredCardItemsLabelText
+        #region ColoredCardLabelsLabelText
+        public string ColoredCardLabelsLabelText
         {
-            get => m_strColoredCardItemsLabelText;
-            set => Set(ref m_strColoredCardItemsLabelText, value);
+            get => m_strColoredCardLabelsLabelText;
+            set => Set(ref m_strColoredCardLabelsLabelText, value);
         }
         #endregion
 
@@ -154,12 +144,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Settings";
 
-#if DEBUG
-            ColoredCardItemsSettingVisibility = Visibility.Visible;
-#else
-            ColoredCardItemsSettingVisibility = Visibility.Collapsed;
-#endif
-
             NotifyDirtyStatus += OnNotifyDirtyStatus;
         }
         #endregion
@@ -203,14 +187,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     break;
 
-                case nameof(ColoredCardItems):
+                case nameof(ColoredCardLabels):
                     if (e.IsDirty)
                     {
-                        ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}{IsDirtySuffix}";
+                        ColoredCardLabelsLabelText = $"{ColoredCardLabelsLabelText}{IsDirtySuffix}";
                     }
                     else
                     {
-                        ColoredCardItemsLabelText = ColoredCardItemsLabelText.Substring(0, ColoredCardItemsLabelText.Length - IsDirtySuffix.Length);
+                        ColoredCardLabelsLabelText = ColoredCardLabelsLabelText.Substring(0, ColoredCardLabelsLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -250,7 +234,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             OfflineMode = DustUtilityPlugin.Config.OfflineMode;
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
-            ColoredCardItems = DustUtilityPlugin.Config.ColoredCardItems;
+            ColoredCardLabels = DustUtilityPlugin.Config.ColoredCardLabels;
             AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
 
@@ -259,7 +243,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(SaveInterval), SaveInterval);
             SetInitialPropertyValue(nameof(CheckForUpdates), CheckForUpdates);
-            SetInitialPropertyValue(nameof(ColoredCardItems), ColoredCardItems);
+            SetInitialPropertyValue(nameof(ColoredCardLabels), ColoredCardLabels);
             SetInitialPropertyValue(nameof(AutoDisenchanting), AutoDisenchanting);
             SetInitialPropertyValue(nameof(RememberQueryString), RememberQueryString);
         }
@@ -270,7 +254,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             DustUtilityPlugin.Config.OfflineMode = OfflineMode;
             DustUtilityPlugin.Config.CheckForUpdates = CheckForUpdates;
-            DustUtilityPlugin.Config.ColoredCardItems = ColoredCardItems;
+            DustUtilityPlugin.Config.ColoredCardLabels = ColoredCardLabels;
             DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
             DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
 
@@ -288,7 +272,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             OfflineModeLabelText = "Offline Mode";
             SaveIntervalLabelText = "Save Interval (sec.)";
             CheckForUpdatesLabelText = "Check For Updates";
-            ColoredCardItemsLabelText = "Colored Card Items";
+            ColoredCardLabelsLabelText = "Colored Card Labels";
             AutoDisenchantingLabelText = "Auto Disenchanting";
             RememberQueryStringLabelText = "Remember Search Term";
         }

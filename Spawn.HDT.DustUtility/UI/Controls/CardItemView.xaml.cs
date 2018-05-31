@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
                 }
 
-                if (DustUtilityPlugin.Config.ColoredCardItems)
+                if (DustUtilityPlugin.Config.ColoredCardLabels)
                 {
                     RarityTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
 
