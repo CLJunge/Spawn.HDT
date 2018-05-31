@@ -1,6 +1,6 @@
 # Dust Utility v3.0 [![Build status](https://ci.appveyor.com/api/projects/status/github/cljunge/spawn.hdt.dustutility?branch=master&svg=true)](https://ci.appveyor.com/project/spawndev/spawn-hdt-dustutility)
 A utility/management tool, which can help you to obtain certain amounts of dust out of your collection.
-![Overlay](https://i.imgur.com/6ZEmBOH.png)
+![Overlay](https://i.imgur.com/rvwXuao.png)
 
 ## Features
 #### Search
