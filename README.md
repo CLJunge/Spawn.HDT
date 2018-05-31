@@ -1,9 +1,10 @@
 # Dust Utility v3.0 [![Build status](https://ci.appveyor.com/api/projects/status/github/cljunge/spawn.hdt.dustutility?branch=master&svg=true)](https://ci.appveyor.com/project/spawndev/spawn-hdt-dustutility)
 A utility/management tool, which can help you to obtain certain amounts of dust out of your collection.
+
 ![Overlay](https://i.imgur.com/5BigbrO.png)
 
+
 ## Features
-![Overlay](https://i.imgur.com/lGmibo6.png)
 
 #### Search
 - Enter a specific amount of dust (ex. 1600), which you would like to get and the plugin displays a list of available cards based on your set filters. With the filter option 'Unused Cards Only' checked, the plugin only considers cards, that are not being used in a deck. (For this option, you have to navigate to the 'Play' menu at least once, in order for the plugin to retrieve your in-game decks)
@@ -34,10 +35,14 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 #### Collection Info
 - Check progress and possible amounts of dust for each expansion (Adding stats for golden cards later).
 
+![Overlay](https://i.imgur.com/lGmibo6.png)
+
+
 ## Settings
 * Offline Mode: While Hearthstone is running, the plugin stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally.
 * Save Interval: The interval for storing collection and decks.
 * Check For Updates: Checks if there is a new release available on GitHub after opening the main window.
+
 ![Overlay](https://i.imgur.com/i1zl588.png)
 
 
