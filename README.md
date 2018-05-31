@@ -1,6 +1,6 @@
 # Dust Utility v3.0 [![Build status](https://ci.appveyor.com/api/projects/status/github/cljunge/spawn.hdt.dustutility?branch=master&svg=true)](https://ci.appveyor.com/project/spawndev/spawn-hdt-dustutility)
 A utility/management tool, which can help you to obtain certain amounts of dust out of your collection.
-![Overlay](https://i.imgur.com/rvwXuao.png)
+![Overlay](https://i.imgur.com/lGmibo6.png)
 
 ## Features
 #### Search
@@ -15,19 +15,15 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 #### Offline Mode
 - The plugin detects the account, which is currently logged into Hearthstone and saves it collection and decks locally, so you are able to use the plugin while Hearthstone is not running.
-![Overlay](https://i.imgur.com/0DYdS9x.png)
 
 #### Support for multiple accounts and regions
 - With `Offline Mode` enabled, you are able to switch between multiple accounts and regions, if their collection and decks have been saved.
-![Overlay](https://i.imgur.com/159yCyu.png)
 
 #### Card Images
 - Double-click a row to display the actual card image (Golden cards are animated, requires internet connection).
-![Overlay](https://i.imgur.com/Nd8b2Rm.png)
 
 #### Customizable Sort Order
 - Order the result for your needs. Sortable properties: Mana Cost, Name, Dust, Class, Set, etc...
-![Overlay](https://i.imgur.com/0343Un9.png)
 
 #### Card History
 - Whenever the plugin stores collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted. (newest to oldest)
