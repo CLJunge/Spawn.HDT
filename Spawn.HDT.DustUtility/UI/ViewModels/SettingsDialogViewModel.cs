@@ -167,78 +167,84 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ColoredCardItemsSettingVisibility = Visibility.Collapsed;
 #endif
 
-            NotifyDirtyStatus += (s, e) =>
-            {
-                switch (e.PropertyName)
-                {
-                    case nameof(OfflineMode):
-                        if (e.IsDirty)
-                        {
-                            OfflineModeLabelText = $"{OfflineModeLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            OfflineModeLabelText = OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - 1);
-                        }
-                        break;
-
-                    case nameof(SaveInterval):
-                        if (e.IsDirty)
-                        {
-                            SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            SaveIntervalLabelText = SaveIntervalLabelText.Substring(0, SaveIntervalLabelText.Length - 1);
-                        }
-                        break;
-
-                    case nameof(CheckForUpdates):
-                        if (e.IsDirty)
-                        {
-                            CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            CheckForUpdatesLabelText = CheckForUpdatesLabelText.Substring(0, CheckForUpdatesLabelText.Length - 1);
-                        }
-                        break;
-
-                    case nameof(ColoredCardItems):
-                        if (e.IsDirty)
-                        {
-                            ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            ColoredCardItemsLabelText = ColoredCardItemsLabelText.Substring(0, ColoredCardItemsLabelText.Length - 1);
-                        }
-                        break;
-
-                    case nameof(AutoDisenchanting):
-                        if (e.IsDirty)
-                        {
-                            AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            AutoDisenchantingLabelText = AutoDisenchantingLabelText.Substring(0, AutoDisenchantingLabelText.Length - 1);
-                        }
-                        break;
-
-                    case nameof(RememberQueryString):
-                        if (e.IsDirty)
-                        {
-                            RememberQueryStringLabelText = $"{RememberQueryStringLabelText}{IsDirtySuffix}";
-                        }
-                        else
-                        {
-                            RememberQueryStringLabelText = RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - 1);
-                        }
-                        break;
-                }
-            };
+            NotifyDirtyStatus += OnNotifyDirtyStatus;
         }
+        #endregion
+
+        #region Events
+        #region OnNotifyDirtyStatus
+        private void OnNotifyDirtyStatus(object sender, NotifyDirtyStatusEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(OfflineMode):
+                    if (e.IsDirty)
+                    {
+                        OfflineModeLabelText = $"{OfflineModeLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        OfflineModeLabelText = OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(SaveInterval):
+                    if (e.IsDirty)
+                    {
+                        SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        SaveIntervalLabelText = SaveIntervalLabelText.Substring(0, SaveIntervalLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(CheckForUpdates):
+                    if (e.IsDirty)
+                    {
+                        CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        CheckForUpdatesLabelText = CheckForUpdatesLabelText.Substring(0, CheckForUpdatesLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(ColoredCardItems):
+                    if (e.IsDirty)
+                    {
+                        ColoredCardItemsLabelText = $"{ColoredCardItemsLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        ColoredCardItemsLabelText = ColoredCardItemsLabelText.Substring(0, ColoredCardItemsLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(AutoDisenchanting):
+                    if (e.IsDirty)
+                    {
+                        AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        AutoDisenchantingLabelText = AutoDisenchantingLabelText.Substring(0, AutoDisenchantingLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(RememberQueryString):
+                    if (e.IsDirty)
+                    {
+                        RememberQueryStringLabelText = $"{RememberQueryStringLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        RememberQueryStringLabelText = RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+            }
+        }
+        #endregion
         #endregion
 
         #region InitializeAsync
