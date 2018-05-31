@@ -154,13 +154,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             WindowTitle = "Dust Utility - Settings";
 
-            OfflineModeLabelText = "Offline Mode";
-            SaveIntervalLabelText = "Save Interval (sec.)";
-            CheckForUpdatesLabelText = "Check For Updates";
-            ColoredCardItemsLabelText = "Colored Card Items";
-            AutoDisenchantingLabelText = "Auto Disenchanting";
-            RememberQueryStringLabelText = "Remember Search Term";
-
 #if DEBUG
             ColoredCardItemsSettingVisibility = Visibility.Visible;
 #else
@@ -252,6 +245,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await Task.Delay(0);
 
+            LoadLabelTexts();
+
             OfflineMode = DustUtilityPlugin.Config.OfflineMode;
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
@@ -284,6 +279,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 DustUtilityPlugin.Config.SaveInterval = SaveInterval;
             }
             else { }
+        }
+        #endregion
+
+        #region LoadLabelTexts
+        private void LoadLabelTexts()
+        {
+            OfflineModeLabelText = "Offline Mode";
+            SaveIntervalLabelText = "Save Interval (sec.)";
+            CheckForUpdatesLabelText = "Check For Updates";
+            ColoredCardItemsLabelText = "Colored Card Items";
+            AutoDisenchantingLabelText = "Auto Disenchanting";
+            RememberQueryStringLabelText = "Remember Search Term";
         }
         #endregion
     }

@@ -1,7 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthDb.Enums;
-using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.CardManagement;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -585,8 +584,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Ctor
         public SearchParametersFlyoutViewModel()
         {
-            LoadLabelTexts();
-
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(IncludeGoldenCards)) && !IncludeGoldenCards)
@@ -964,38 +961,40 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await Task.Delay(0);
 
+            LoadLabelTexts();
+
             SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
 
-            ExpertSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.EXPERT1);
-            GoblinsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GVG);
-            TournamentSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.TGT);
-            OldGodsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.OG);
-            GadgetzanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GANGS);
-            UngoroSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.UNGORO);
-            FrozenThroneSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.ICECROWN);
-            KoboldsSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOOTAPALOOZA);
-            WitchwoodSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.GILNEAS);
-            NaxxSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.NAXX);
-            MountainSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.BRM);
-            LeagueSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.LOE);
-            KarazhanSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.KARA);
-            HallSetEnabled = parameters.Sets.Contains(HearthDb.Enums.CardSet.HOF);
+            ExpertSetEnabled = parameters.Sets.Contains(CardSet.EXPERT1);
+            GoblinsSetEnabled = parameters.Sets.Contains(CardSet.GVG);
+            TournamentSetEnabled = parameters.Sets.Contains(CardSet.TGT);
+            OldGodsSetEnabled = parameters.Sets.Contains(CardSet.OG);
+            GadgetzanSetEnabled = parameters.Sets.Contains(CardSet.GANGS);
+            UngoroSetEnabled = parameters.Sets.Contains(CardSet.UNGORO);
+            FrozenThroneSetEnabled = parameters.Sets.Contains(CardSet.ICECROWN);
+            KoboldsSetEnabled = parameters.Sets.Contains(CardSet.LOOTAPALOOZA);
+            WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
+            NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
+            MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
+            LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
+            KarazhanSetEnabled = parameters.Sets.Contains(CardSet.KARA);
+            HallSetEnabled = parameters.Sets.Contains(CardSet.HOF);
 
-            CommonRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.COMMON);
-            RareRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.RARE);
-            EpicRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.EPIC);
-            LegendaryRarityEnabled = parameters.Rarities.Contains(HearthDb.Enums.Rarity.LEGENDARY);
+            CommonRarityEnabled = parameters.Rarities.Contains(Rarity.COMMON);
+            RareRarityEnabled = parameters.Rarities.Contains(Rarity.RARE);
+            EpicRarityEnabled = parameters.Rarities.Contains(Rarity.EPIC);
+            LegendaryRarityEnabled = parameters.Rarities.Contains(Rarity.LEGENDARY);
 
-            DruidClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.DRUID);
-            HunterClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.HUNTER);
-            MageClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.MAGE);
-            PaladinClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PALADIN);
-            PriestClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.PRIEST);
-            RogueClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.ROGUE);
-            ShamanClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.SHAMAN);
-            WarlockClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARLOCK);
-            WarriorClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.WARRIOR);
-            NeutralClassEnabled = parameters.Classes.Contains(HearthDb.Enums.CardClass.NEUTRAL);
+            DruidClassEnabled = parameters.Classes.Contains(CardClass.DRUID);
+            HunterClassEnabled = parameters.Classes.Contains(CardClass.HUNTER);
+            MageClassEnabled = parameters.Classes.Contains(CardClass.MAGE);
+            PaladinClassEnabled = parameters.Classes.Contains(CardClass.PALADIN);
+            PriestClassEnabled = parameters.Classes.Contains(CardClass.PRIEST);
+            RogueClassEnabled = parameters.Classes.Contains(CardClass.ROGUE);
+            ShamanClassEnabled = parameters.Classes.Contains(CardClass.SHAMAN);
+            WarlockClassEnabled = parameters.Classes.Contains(CardClass.WARLOCK);
+            WarriorClassEnabled = parameters.Classes.Contains(CardClass.WARRIOR);
+            NeutralClassEnabled = parameters.Classes.Contains(CardClass.NEUTRAL);
 
             IncludeGoldenCards = parameters.IncludeGoldenCards;
             IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
@@ -1039,6 +1038,189 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region SaveParameters
+        private void SaveParameters()
+        {
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Clear();
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Clear();
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Clear();
+
+            if (ExpertSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.EXPERT1);
+            }
+            else { }
+
+            if (GoblinsSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GVG);
+            }
+            else { }
+
+            if (TournamentSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.TGT);
+            }
+            else { }
+
+            if (OldGodsSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.OG);
+            }
+            else { }
+
+            if (GadgetzanSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GANGS);
+            }
+            else { }
+
+            if (UngoroSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.UNGORO);
+            }
+            else { }
+
+            if (FrozenThroneSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.ICECROWN);
+            }
+            else { }
+
+            if (KoboldsSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOOTAPALOOZA);
+            }
+            else { }
+
+            if (WitchwoodSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GILNEAS);
+            }
+            else { }
+
+            if (NaxxSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
+            }
+            else { }
+
+            if (MountainSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BRM);
+            }
+            else { }
+
+            if (LeagueSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOE);
+            }
+            else { }
+
+            if (KarazhanSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.KARA);
+            }
+            else { }
+
+            if (HallSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.HOF);
+            }
+            else { }
+
+            if (CommonRarityEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.COMMON);
+            }
+            else { }
+
+            if (RareRarityEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.RARE);
+            }
+            else { }
+
+            if (EpicRarityEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.EPIC);
+            }
+            else { }
+
+            if (LegendaryRarityEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.LEGENDARY);
+            }
+            else { }
+
+            if (DruidClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.DRUID);
+            }
+            else { }
+
+            if (HunterClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.HUNTER);
+            }
+            else { }
+
+            if (MageClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.MAGE);
+            }
+            else { }
+
+            if (PaladinClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PALADIN);
+            }
+            else { }
+
+            if (PriestClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PRIEST);
+            }
+            else { }
+
+            if (RogueClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.ROGUE);
+            }
+            else { }
+
+            if (ShamanClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.SHAMAN);
+            }
+            else { }
+
+            if (WarlockClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARLOCK);
+            }
+            else { }
+
+            if (WarriorClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARRIOR);
+            }
+            else { }
+
+            if (NeutralClassEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.NEUTRAL);
+            }
+            else { }
+
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.IncludeGoldenCards = IncludeGoldenCards;
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.GoldenCardsOnly = IncludeGoldenCardsOnly;
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.UnusedCardsOnly = IncludeUnusedCardsOnly;
+
+            DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
+        }
+        #endregion
+
         #region LoadLabelTexts
         private void LoadLabelTexts()
         {
@@ -1073,189 +1255,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             IncludeGoldenCardsLabelText = "Incl. Golden Cards";
             IncludeGoldenCardsOnlyLabelText = "Golden Cards Only";
             IncludeUnusedCardsOnlyLabelText = "Unused Cards Only";
-        }
-        #endregion
-
-        #region SaveParameters
-        private void SaveParameters()
-        {
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Clear();
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Clear();
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Clear();
-
-            if (ExpertSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.EXPERT1);
-            }
-            else { }
-
-            if (GoblinsSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.GVG);
-            }
-            else { }
-
-            if (TournamentSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.TGT);
-            }
-            else { }
-
-            if (OldGodsSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.OG);
-            }
-            else { }
-
-            if (GadgetzanSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.GANGS);
-            }
-            else { }
-
-            if (UngoroSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.UNGORO);
-            }
-            else { }
-
-            if (FrozenThroneSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.ICECROWN);
-            }
-            else { }
-
-            if (KoboldsSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.LOOTAPALOOZA);
-            }
-            else { }
-
-            if (WitchwoodSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.GILNEAS);
-            }
-            else { }
-
-            if (NaxxSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.NAXX);
-            }
-            else { }
-
-            if (MountainSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.BRM);
-            }
-            else { }
-
-            if (LeagueSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.LOE);
-            }
-            else { }
-
-            if (KarazhanSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.KARA);
-            }
-            else { }
-
-            if (HallSetEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(HearthDb.Enums.CardSet.HOF);
-            }
-            else { }
-
-            if (CommonRarityEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(HearthDb.Enums.Rarity.COMMON);
-            }
-            else { }
-
-            if (RareRarityEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(HearthDb.Enums.Rarity.RARE);
-            }
-            else { }
-
-            if (EpicRarityEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(HearthDb.Enums.Rarity.EPIC);
-            }
-            else { }
-
-            if (LegendaryRarityEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(HearthDb.Enums.Rarity.LEGENDARY);
-            }
-            else { }
-
-            if (DruidClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.DRUID);
-            }
-            else { }
-
-            if (HunterClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.HUNTER);
-            }
-            else { }
-
-            if (MageClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.MAGE);
-            }
-            else { }
-
-            if (PaladinClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.PALADIN);
-            }
-            else { }
-
-            if (PriestClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.PRIEST);
-            }
-            else { }
-
-            if (RogueClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.ROGUE);
-            }
-            else { }
-
-            if (ShamanClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.SHAMAN);
-            }
-            else { }
-
-            if (WarlockClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.WARLOCK);
-            }
-            else { }
-
-            if (WarriorClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.WARRIOR);
-            }
-            else { }
-
-            if (NeutralClassEnabled)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(HearthDb.Enums.CardClass.NEUTRAL);
-            }
-            else { }
-
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.IncludeGoldenCards = IncludeGoldenCards;
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.GoldenCardsOnly = IncludeGoldenCardsOnly;
-            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.UnusedCardsOnly = IncludeUnusedCardsOnly;
-
-            DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
         }
         #endregion
     }
