@@ -1,7 +1,6 @@
 ﻿#region Using
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
-using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
@@ -100,7 +99,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region InitializeAsync
         public override async Task InitializeAsync()
         {
-            await Task.Delay(0);
+            await base.InitializeAsync();
 
             SortOrderItems.Clear();
 
@@ -112,10 +111,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.OrderItem)).Length;
-
-            IsDirty = false;
-
-            m_dInitialPropertyValues?.Clear();
 
             SetInitialPropertyValue(nameof(SortOrderString), DustUtilityPlugin.Config.SortOrder);
         }

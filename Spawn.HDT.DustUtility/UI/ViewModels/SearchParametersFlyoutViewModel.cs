@@ -962,7 +962,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region InitializeAsync
         public override async Task InitializeAsync()
         {
-            await Task.Delay(0);
+            await base.InitializeAsync();
 
             LoadLabelTexts();
 
@@ -1002,10 +1002,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             IncludeGoldenCards = parameters.IncludeGoldenCards;
             IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
             IncludeUnusedCardsOnly = parameters.UnusedCardsOnly;
-
-            IsDirty = false;
-
-            m_dInitialPropertyValues?.Clear();
 
             SetInitialPropertyValue(nameof(ExpertSetEnabled), ExpertSetEnabled);
             SetInitialPropertyValue(nameof(GoblinsSetEnabled), GoblinsSetEnabled);

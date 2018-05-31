@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region InitializeAsync
         public override async Task InitializeAsync()
         {
-            await Task.Delay(0);
+            await base.InitializeAsync();
 
             Clear();
 

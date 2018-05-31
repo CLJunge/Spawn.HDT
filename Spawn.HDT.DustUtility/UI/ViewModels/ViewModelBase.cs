@@ -84,7 +84,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region InitializeAsync
-        public abstract Task InitializeAsync();
+        public virtual async Task InitializeAsync()
+        {
+            await Task.Delay(5);
+
+            if (CanNotifyDirtyStatus)
+            {
+                IsDirty = false;
+
+                m_dInitialPropertyValues?.Clear();
+            }
+            else { }
+        }
         #endregion
 
         #region AddInitialPropertyValue
