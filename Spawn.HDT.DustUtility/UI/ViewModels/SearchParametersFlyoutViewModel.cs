@@ -621,7 +621,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        ExpertSetEnabledLabelText = ExpertSetEnabledLabelText.Substring(0, ExpertSetEnabledLabelText.Length - 1);
+                        ExpertSetEnabledLabelText = ExpertSetEnabledLabelText.Substring(0, ExpertSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -632,7 +632,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        GoblinsSetEnabledLabelText = GoblinsSetEnabledLabelText.Substring(0, GoblinsSetEnabledLabelText.Length - 1);
+                        GoblinsSetEnabledLabelText = GoblinsSetEnabledLabelText.Substring(0, GoblinsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -643,7 +643,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        TournamentSetEnabledLabelText = TournamentSetEnabledLabelText.Substring(0, TournamentSetEnabledLabelText.Length - 1);
+                        TournamentSetEnabledLabelText = TournamentSetEnabledLabelText.Substring(0, TournamentSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -654,7 +654,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        OldGodsSetEnabledLabelText = OldGodsSetEnabledLabelText.Substring(0, OldGodsSetEnabledLabelText.Length - 1);
+                        OldGodsSetEnabledLabelText = OldGodsSetEnabledLabelText.Substring(0, OldGodsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -665,7 +665,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        GadgetzanSetEnabledLabelText = GadgetzanSetEnabledLabelText.Substring(0, GadgetzanSetEnabledLabelText.Length - 1);
+                        GadgetzanSetEnabledLabelText = GadgetzanSetEnabledLabelText.Substring(0, GadgetzanSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -676,7 +676,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        UngoroSetEnabledLabelText = UngoroSetEnabledLabelText.Substring(0, UngoroSetEnabledLabelText.Length - 1);
+                        UngoroSetEnabledLabelText = UngoroSetEnabledLabelText.Substring(0, UngoroSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -687,7 +687,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        FrozenThroneSetEnabledLabelText = FrozenThroneSetEnabledLabelText.Substring(0, FrozenThroneSetEnabledLabelText.Length - 1);
+                        FrozenThroneSetEnabledLabelText = FrozenThroneSetEnabledLabelText.Substring(0, FrozenThroneSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -698,7 +698,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        KoboldsSetEnabledLabelText = KoboldsSetEnabledLabelText.Substring(0, KoboldsSetEnabledLabelText.Length - 1);
+                        KoboldsSetEnabledLabelText = KoboldsSetEnabledLabelText.Substring(0, KoboldsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -709,7 +709,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        WitchwoodSetEnabledLabelText = WitchwoodSetEnabledLabelText.Substring(0, WitchwoodSetEnabledLabelText.Length - 1);
+                        WitchwoodSetEnabledLabelText = WitchwoodSetEnabledLabelText.Substring(0, WitchwoodSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -720,7 +720,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        NaxxSetEnabledLabelText = NaxxSetEnabledLabelText.Substring(0, NaxxSetEnabledLabelText.Length - 1);
+                        NaxxSetEnabledLabelText = NaxxSetEnabledLabelText.Substring(0, NaxxSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -731,7 +731,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        MountainSetEnabledLabelText = MountainSetEnabledLabelText.Substring(0, MountainSetEnabledLabelText.Length - 1);
+                        MountainSetEnabledLabelText = MountainSetEnabledLabelText.Substring(0, MountainSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -742,7 +742,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        LeagueSetEnabledLabelText = LeagueSetEnabledLabelText.Substring(0, LeagueSetEnabledLabelText.Length - 1);
+                        LeagueSetEnabledLabelText = LeagueSetEnabledLabelText.Substring(0, LeagueSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -753,7 +753,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        KarazhanSetEnabledLabelText = KarazhanSetEnabledLabelText.Substring(0, KarazhanSetEnabledLabelText.Length - 1);
+                        KarazhanSetEnabledLabelText = KarazhanSetEnabledLabelText.Substring(0, KarazhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -764,7 +764,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        HallSetEnabledLabelText = HallSetEnabledLabelText.Substring(0, HallSetEnabledLabelText.Length - 1);
+                        HallSetEnabledLabelText = HallSetEnabledLabelText.Substring(0, HallSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -775,7 +775,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        CommonRarityEnabledLabelText = CommonRarityEnabledLabelText.Substring(0, CommonRarityEnabledLabelText.Length - 1);
+                        CommonRarityEnabledLabelText = CommonRarityEnabledLabelText.Substring(0, CommonRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -786,7 +786,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        RareRarityEnabledLabelText = RareRarityEnabledLabelText.Substring(0, RareRarityEnabledLabelText.Length - 1);
+                        RareRarityEnabledLabelText = RareRarityEnabledLabelText.Substring(0, RareRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -797,7 +797,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        EpicRarityEnabledLabelText = EpicRarityEnabledLabelText.Substring(0, EpicRarityEnabledLabelText.Length - 1);
+                        EpicRarityEnabledLabelText = EpicRarityEnabledLabelText.Substring(0, EpicRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -808,7 +808,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        LegendaryRarityEnabledLabelText = LegendaryRarityEnabledLabelText.Substring(0, LegendaryRarityEnabledLabelText.Length - 1);
+                        LegendaryRarityEnabledLabelText = LegendaryRarityEnabledLabelText.Substring(0, LegendaryRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -819,7 +819,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        DruidClassEnabledLabelText = DruidClassEnabledLabelText.Substring(0, DruidClassEnabledLabelText.Length - 1);
+                        DruidClassEnabledLabelText = DruidClassEnabledLabelText.Substring(0, DruidClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -830,7 +830,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        HunterClassEnabledLabelText = HunterClassEnabledLabelText.Substring(0, HunterClassEnabledLabelText.Length - 1);
+                        HunterClassEnabledLabelText = HunterClassEnabledLabelText.Substring(0, HunterClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -841,7 +841,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        MageClassEnabledLabelText = MageClassEnabledLabelText.Substring(0, MageClassEnabledLabelText.Length - 1);
+                        MageClassEnabledLabelText = MageClassEnabledLabelText.Substring(0, MageClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -852,7 +852,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        PaladinClassEnabledLabelText = PaladinClassEnabledLabelText.Substring(0, PaladinClassEnabledLabelText.Length - 1);
+                        PaladinClassEnabledLabelText = PaladinClassEnabledLabelText.Substring(0, PaladinClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -863,7 +863,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        PriestClassEnabledLabelText = PriestClassEnabledLabelText.Substring(0, PriestClassEnabledLabelText.Length - 1);
+                        PriestClassEnabledLabelText = PriestClassEnabledLabelText.Substring(0, PriestClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -874,7 +874,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        RogueClassEnabledLabelText = RogueClassEnabledLabelText.Substring(0, RogueClassEnabledLabelText.Length - 1);
+                        RogueClassEnabledLabelText = RogueClassEnabledLabelText.Substring(0, RogueClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -885,7 +885,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        ShamanClassEnabledLabelText = ShamanClassEnabledLabelText.Substring(0, ShamanClassEnabledLabelText.Length - 1);
+                        ShamanClassEnabledLabelText = ShamanClassEnabledLabelText.Substring(0, ShamanClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -896,7 +896,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        WarlockClassEnabledLabelText = WarlockClassEnabledLabelText.Substring(0, WarlockClassEnabledLabelText.Length - 1);
+                        WarlockClassEnabledLabelText = WarlockClassEnabledLabelText.Substring(0, WarlockClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -907,7 +907,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        WarriorClassEnabledLabelText = WarriorClassEnabledLabelText.Substring(0, WarriorClassEnabledLabelText.Length - 1);
+                        WarriorClassEnabledLabelText = WarriorClassEnabledLabelText.Substring(0, WarriorClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -918,7 +918,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        NeutralClassEnabledLabelText = NeutralClassEnabledLabelText.Substring(0, NeutralClassEnabledLabelText.Length - 1);
+                        NeutralClassEnabledLabelText = NeutralClassEnabledLabelText.Substring(0, NeutralClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -929,7 +929,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        IncludeGoldenCardsLabelText = IncludeGoldenCardsLabelText.Substring(0, IncludeGoldenCardsLabelText.Length - 1);
+                        IncludeGoldenCardsLabelText = IncludeGoldenCardsLabelText.Substring(0, IncludeGoldenCardsLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -940,7 +940,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        IncludeGoldenCardsOnlyLabelText = IncludeGoldenCardsOnlyLabelText.Substring(0, IncludeGoldenCardsOnlyLabelText.Length - 1);
+                        IncludeGoldenCardsOnlyLabelText = IncludeGoldenCardsOnlyLabelText.Substring(0, IncludeGoldenCardsOnlyLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -951,7 +951,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     else
                     {
-                        IncludeUnusedCardsOnlyLabelText = IncludeUnusedCardsOnlyLabelText.Substring(0, IncludeUnusedCardsOnlyLabelText.Length - 1);
+                        IncludeUnusedCardsOnlyLabelText = IncludeUnusedCardsOnlyLabelText.Substring(0, IncludeUnusedCardsOnlyLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
             }
