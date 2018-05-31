@@ -47,5 +47,5 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 
 
-## Credits
+## Used Resources
 * Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
