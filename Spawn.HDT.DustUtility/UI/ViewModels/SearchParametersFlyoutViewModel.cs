@@ -1,6 +1,9 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthDb.Enums;
+#if DEBUG
+using Hearthstone_Deck_Tracker.Utility.Extensions;
+#endif
 using Spawn.HDT.DustUtility.CardManagement;
 using System.Threading.Tasks;
 using System.Windows.Input;
