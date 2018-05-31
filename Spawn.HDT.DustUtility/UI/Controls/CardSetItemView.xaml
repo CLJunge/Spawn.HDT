@@ -29,9 +29,9 @@
 
             <Image Grid.Row="0" Source="{Binding Logo}"/>
 
-            <Border Grid.Row="2" Grid.RowSpan="3" BorderThickness="2" BorderBrush="DimGray" Background="WhiteSmoke" Margin="15,0"/>
+            <Border Grid.Row="2" Grid.RowSpan="3" BorderThickness="2" BorderBrush="Black" Background="WhiteSmoke" Margin="15,0"/>
 
-            <Label Grid.Row="2" Content="{Binding Name}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
+            <Label Grid.Row="2" Content="{Binding Name}" FontSize="28" FontStretch="Expanded" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
 
             <Grid Grid.Row="4" Width="400" HorizontalAlignment="Left" Margin="5,0,0,0">
                 <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource TotalCountConverter}">
                             <Binding Path="TotalCount"/>
@@ -55,7 +55,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource CommonsCountConverter}">
                             <Binding Path="CommonsCount"/>
@@ -64,7 +64,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource RaresCountConverter}">
                             <Binding Path="RaresCount"/>
@@ -73,7 +73,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource EpicsCountConverter}">
                             <Binding Path="EpicsCount"/>
@@ -82,7 +82,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
                             <Binding Path="LegendariesCount"/>
@@ -92,10 +92,10 @@
                 </Label>
 
                 <Label Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding DustAmount, Converter={StaticResource DustConverter}}"
-                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
+                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
             </Grid>
 
-            <Separator Grid.Row="3" Grid.RowSpan="2" Background="DimGray">
+            <Separator Grid.Row="3" Grid.RowSpan="2" Background="Black">
                 <Separator.LayoutTransform>
                     <TransformGroup>
                         <TransformGroup.Children>
@@ -120,7 +120,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource GoldenTotalCountConverter}">
                             <Binding Path="GoldenTotalCount"/>
@@ -129,7 +129,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource CommonsCountConverter}">
                             <Binding Path="GoldenCommonsCount"/>
@@ -138,7 +138,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource RaresCountConverter}">
                             <Binding Path="GoldenRaresCount"/>
@@ -147,7 +147,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource EpicsCountConverter}">
                             <Binding Path="GoldenEpicsCount"/>
@@ -156,7 +156,7 @@
                     </Label.Content>
                 </Label>
 
-                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black">
                     <Label.Content>
                         <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
                             <Binding Path="GoldenLegendariesCount"/>
@@ -166,7 +166,7 @@
                 </Label>
 
                 <Label Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding GoldenDustAmount, Converter={StaticResource DustConverter}}"
-                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
+                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
             </Grid>
         </Grid>
     </Border>
