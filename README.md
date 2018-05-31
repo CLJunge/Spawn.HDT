@@ -43,7 +43,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 * Save Interval: The interval for storing collection and decks.
 * Check For Updates: Checks if there is a new release available on GitHub after opening the main window.
 
-![Overlay](https://i.imgur.com/i1zl588.png)
+![Overlay](https://i.imgur.com/Pw0HJ76.png)
 
 
 
