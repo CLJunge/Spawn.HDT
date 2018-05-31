@@ -7,7 +7,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 ## Features
 
 #### Search
-- Enter a specific amount of dust (ex. 1600), which you would like to get and the plugin displays a list of available cards based on your set filters. With the filter option 'Unused Cards Only' checked, the plugin only considers cards, that are not being used in a deck. (For this option, you have to navigate to the 'Play' menu at least once, in order for the plugin to retrieve your in-game decks)
+- Enter a specific amount of dust (ex. 1600), which you would like to get and the plugin displays a list of available cards based on your filters. With the filter option 'Unused Cards Only' checked, the plugin only considers cards, that are not being used in a deck. (For this option, you have to navigate to the 'Play' menu at least once, in order for the plugin to retrieve your in-game decks)
 - Another possiblity is to enter a card name or mechanic to look for specfic cards (ex. Raza). (Click the help button next to the "Filters" button for more information)
 
 #### Selection Window
