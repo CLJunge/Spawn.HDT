@@ -2,10 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
-             mc:Ignorable="d" Height="400" Width="800">
+             mc:Ignorable="d" Height="475" Width="800">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
         <converters:CardSetCardCountConverter x:Key="TotalCountConverter" Prefix="Regular:" Suffix="(Total)"/>
@@ -18,150 +17,156 @@
     <Border BorderBrush="Black" BorderThickness="1" Margin="5">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="175"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="65"/>
                 <RowDefinition Height="10"/>
                 <RowDefinition/>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="15"/>
             </Grid.RowDefinitions>
 
             <Image Grid.RowSpan="10" Source="{Binding BackgroundImage}" Stretch="UniformToFill"/>
 
             <Image Grid.Row="0" Source="{Binding Logo}"/>
 
-            <local:OutlinedTextBlock Grid.Row="1" Text="{Binding Name}" Fill="White" StrokeThickness="2" FontSize="28"
-                                     VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Border Grid.Row="2" Grid.RowSpan="3" BorderThickness="2" BorderBrush="DimGray" Background="WhiteSmoke" Margin="15,0"/>
 
-            <Grid Grid.Row="3" Width="400" HorizontalAlignment="Left">
+            <Label Grid.Row="2" Content="{Binding Name}" FontSize="28" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
+
+            <Grid Grid.Row="4" Width="400" HorizontalAlignment="Left" Margin="5,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource TotalCountConverter}">
                             <Binding Path="TotalCount"/>
                             <Binding Path="MaxTotalCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource CommonsCountConverter}">
                             <Binding Path="CommonsCount"/>
                             <Binding Path="MaxCommonsCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource RaresCountConverter}">
                             <Binding Path="RaresCount"/>
                             <Binding Path="MaxRaresCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource EpicsCountConverter}">
                             <Binding Path="EpicsCount"/>
                             <Binding Path="MaxEpicsCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
                             <Binding Path="LegendariesCount"/>
                             <Binding Path="MaxLegendariesCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding DustAmount, Converter={StaticResource DustConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding DustAmount, Converter={StaticResource DustConverter}}"
+                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
             </Grid>
-            
-            <Grid Grid.Row="3" Width="400" HorizontalAlignment="Right">
+
+            <Separator Grid.Row="3" Grid.RowSpan="2" Background="DimGray">
+                <Separator.LayoutTransform>
+                    <TransformGroup>
+                        <TransformGroup.Children>
+                            <TransformCollection>
+                                <RotateTransform Angle="90"/>
+                            </TransformCollection>
+                        </TransformGroup.Children>
+                    </TransformGroup>
+                </Separator.LayoutTransform>
+            </Separator>
+
+            <Grid Grid.Row="4" Width="400" HorizontalAlignment="Right" Margin="0,0,5,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
+                    <RowDefinition Height="10"/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <local:OutlinedTextBlock Grid.Row="0" Grid.ColumnSpan="2" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource GoldenTotalCountConverter}">
                             <Binding Path="GoldenTotalCount"/>
                             <Binding Path="MaxTotalCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource CommonsCountConverter}">
                             <Binding Path="GoldenCommonsCount"/>
                             <Binding Path="MaxCommonsCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="1" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="2" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource RaresCountConverter}">
                             <Binding Path="GoldenRaresCount"/>
                             <Binding Path="MaxRaresCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="0" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource EpicsCountConverter}">
                             <Binding Path="GoldenEpicsCount"/>
                             <Binding Path="MaxEpicsCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="2" Grid.Column="1" Fill="White" StrokeThickness="2" FontSize="20"
-                                         VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <local:OutlinedTextBlock.Text>
+                <Label Grid.Row="3" Grid.Column="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray">
+                    <Label.Content>
                         <MultiBinding Converter="{StaticResource LegendariesCountConverter}">
                             <Binding Path="GoldenLegendariesCount"/>
                             <Binding Path="MaxLegendariesCount"/>
                         </MultiBinding>
-                    </local:OutlinedTextBlock.Text>
-                </local:OutlinedTextBlock>
+                    </Label.Content>
+                </Label>
 
-                <local:OutlinedTextBlock Grid.Row="3" Grid.ColumnSpan="2" Text="{Binding GoldenDustAmount, Converter={StaticResource DustConverter}}"
-                                         Fill="White" StrokeThickness="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Label Grid.Row="4" Grid.ColumnSpan="2" Content="{Binding GoldenDustAmount, Converter={StaticResource DustConverter}}"
+                       FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DimGray"/>
             </Grid>
         </Grid>
     </Border>
