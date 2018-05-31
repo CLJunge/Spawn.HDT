@@ -131,7 +131,7 @@
     <Compile Include="Messaging\RemoveCardItemMessage.cs" />
     <Compile Include="Net\UpdateInfo.cs" />
     <Compile Include="Net\UpdateManager.cs" />
-    <Compile Include="Net\CardImageDownloader.cs" />
+    <Compile Include="Net\CardImageProvider.cs" />
     <Compile Include="AccountManagement\BackupManager.cs" />
     <Compile Include="CardManagement\Offline\Cache.cs" />
     <Compile Include="CardManagement\Offline\CachedCard.cs" />

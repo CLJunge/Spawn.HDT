@@ -55,7 +55,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 {
                     Log.WriteLine($"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})", LogType.Debug);
 
-                    m_currentImageStream = (await CardImageDownloader.GetStreamAsync(m_wrapper.RawCard.Id, m_wrapper.RawCard.Premium));
+                    m_currentImageStream = (await CardImageProvider.GetStreamAsync(m_wrapper.RawCard.Id, m_wrapper.RawCard.Premium));
 
                     if (m_currentImageStream != null)
                     {
