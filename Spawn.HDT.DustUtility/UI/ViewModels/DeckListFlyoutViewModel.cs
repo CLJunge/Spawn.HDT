@@ -1,5 +1,6 @@
 ﻿#region Using
 using Hearthstone_Deck_Tracker.Hearthstone;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 #endregion
@@ -35,11 +36,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             Cards = new ObservableCollection<Card>();
 
-            PropertyChanged += async (s, e) =>
+            PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(Deck)))
                 {
-                    await InitializeAsync();
+                    InitializeAsync().Forget();
                 }
                 else { }
             };
