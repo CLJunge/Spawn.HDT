@@ -300,11 +300,15 @@ namespace Spawn.HDT.DustUtility
 
                 await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
-            else
+            else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
             {
                 await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't retrieve the currently logged in account! Closing window...");
 
                 MainWindow?.Close();
+            }
+            else
+            {
+                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
         }
         #endregion
