@@ -576,7 +576,7 @@ namespace Spawn.HDT.DustUtility
                     }
                     else { }
 
-                    ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().InitializeAsync().Forget();
+                    await ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().InitializeAsync();
 
                     AccountSelectorDialogView dialog = new AccountSelectorDialogView()
                     {
