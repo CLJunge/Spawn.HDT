@@ -1,6 +1,9 @@
 ﻿#region Using
 using HearthDb.Enums;
 using HearthMirror.Objects;
+#if DEBUG
+using Hearthstone_Deck_Tracker.Utility.Extensions;
+#endif
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
