@@ -75,6 +75,10 @@ namespace Spawn.HDT.DustUtility
         public static MainWindow MainWindow { get; private set; }
         #endregion
 
+        #region SettingsDialog
+        public static SettingsDialogView SettingsDialog { get; private set; }
+        #endregion
+
         #region HideMainWindowOnClose
         public static bool HideMainWindowOnClose { get; private set; }
         #endregion
@@ -337,24 +341,14 @@ namespace Spawn.HDT.DustUtility
         {
             Log.WriteLine("Opening settings dialog", LogType.Debug);
 
-            await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
-
-            SettingsDialogView dialog = new SettingsDialogView()
+            SettingsDialog = new SettingsDialogView()
             {
                 Owner = Core.MainWindow
             };
 
-            //TODO: still buggy, sometimes dialog pops up multiple times
-            dialog.AutoDisenchantingCheckBox.Checked += (s, e) =>
-            {
-                if (MessageBox.Show("You are using this feature at your own risk!\r\n\r\nThere is always a slight chance, that the wrong card might get disenchanted.\r\n\r\nAre you sure you want to enable auto disenchanting?", "Dust Utility", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-                {
-                    ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().AutoDisenchanting = false;
-                }
-                else { }
-            };
+            await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
 
-            if (dialog.ShowDialog().Value)
+            if (SettingsDialog.ShowDialog().Value)
             {
                 if (Config.OfflineMode && !IsOffline)
                 {

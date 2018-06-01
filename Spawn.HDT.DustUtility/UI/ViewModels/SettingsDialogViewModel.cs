@@ -235,7 +235,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SaveInterval = DustUtilityPlugin.Config.SaveInterval;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
             ColoredCardLabels = DustUtilityPlugin.Config.ColoredCardLabels;
-            AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
+            DustUtilityPlugin.SettingsDialog.AutoDisenchantingCheckBox.IsChecked = AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);

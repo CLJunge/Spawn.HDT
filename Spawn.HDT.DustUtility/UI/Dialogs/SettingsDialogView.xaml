@@ -43,7 +43,7 @@
         </DockPanel>
         <DockPanel Height="30" ToolTip="!!! USE AT YOUR OWN RISK !!!&#x0a;Enable the option to let the plugin disenchant the current card selection automatically.&#x0a;(Works like the old HDT export feature)" ToolTipService.ShowDuration="8000">
             <Label Content="{Binding AutoDisenchantingLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <CheckBox Name="AutoDisenchantingCheckBox" IsChecked="{Binding AutoDisenchanting, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <CheckBox Name="AutoDisenchantingCheckBox" IsChecked="{Binding AutoDisenchanting, Mode=OneWayToSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Checked="OnAutoDisenchantingCheckBoxChecked"/>
         </DockPanel>
         <DockPanel Height="30" ToolTip="Use colored labels for the card items." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding ColoredCardLabelsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
