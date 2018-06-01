@@ -46,8 +46,8 @@ namespace Spawn.HDT.DustUtility.Net
         }
         #endregion
 
-        #region PerformUpdateCheckAsync
-        public static async Task<bool> PerformUpdateCheckAsync()
+        #region CheckForUpdatesAsync
+        public static async Task<bool> CheckForUpdatesAsync()
         {
             bool blnRet = false;
 
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Log.WriteLine("Checking GitHub for new update...", LogType.Info);
+                    Log.WriteLine("Checking GitHub for new a new version...", LogType.Info);
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
@@ -76,7 +76,7 @@ namespace Spawn.HDT.DustUtility.Net
 #if DEBUG
                                 blnRet = newVersion > new Version(0, 0);
 #else
-                            blnRet = newVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                                blnRet = newVersion > System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 #endif
 
                                 if (blnRet)

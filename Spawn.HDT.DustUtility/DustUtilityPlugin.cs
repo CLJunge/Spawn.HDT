@@ -541,11 +541,11 @@ namespace Spawn.HDT.DustUtility
         #region ShowMainWindowAsync
         private static async Task ShowMainWindowAsync()
         {
-            await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-
             Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
 
             MainWindow?.Show();
+
+            await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
 
             BringWindowToFront(MainWindow);
         }

@@ -75,7 +75,7 @@
             <controls:Flyout Name="HistoryFlyout" Header="History" Position="Top">
                 <flyouts:HistoryFlyoutView x:Name="HistoryFlyoutView"/>
             </controls:Flyout>
-            <controls:Flyout Name="UpdateFlyout" Header="New Update Available" Position="Bottom">
+            <controls:Flyout Name="UpdateFlyout" Header="New Version Available" Position="Bottom">
                 <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
             </controls:Flyout>
             <controls:Flyout Name="DecksFlyout" Header="Decks" Position="Right" Width="600">

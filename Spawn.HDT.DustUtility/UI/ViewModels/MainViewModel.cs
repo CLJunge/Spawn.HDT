@@ -187,9 +187,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
             Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
 
-            await Task.Run(() => BackupManager.CreateBackup(account))
-                .ContinueWith(t => BackupManager.DeleteOldBackups(account));
-
             if (!account.IsEmpty)
             {
                 WindowTitle = $"Dust Utility [{account.BattleTag.Name} ({account.Region})]";
@@ -238,8 +235,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             ReloadFlyouts();
 
-            await PerformUpdateCheck();
-
             if (DustUtilityPlugin.Config.RememberQueryString
                 && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
             {
@@ -249,6 +244,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 SearchQuery = null;
             }
+
+            await Task.Run(() => BackupManager.CreateBackup(account))
+                .ContinueWith(t => BackupManager.DeleteOldBackups(account));
+
+            await PerformUpdateCheck();
         }
         #endregion
 
@@ -279,13 +279,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
             else { }
 
-            await viewModel.InitializeAsync();
-
             if (!flyout.IsOpen)
             {
                 flyout.IsOpen = true;
             }
             else { }
+
+            await viewModel.InitializeAsync();
         }
         #endregion
 
@@ -338,7 +338,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             if (!s_blnCheckedForUpdates)
             {
-                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.PerformUpdateCheckAsync())
+                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.CheckForUpdatesAsync())
                 {
                     DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
                     {
@@ -392,8 +392,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OpenCardSelectionWindow
         public async void OpenCardSelectionWindow()
         {
-            await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
-
             if (m_selectionWindow == null)
             {
                 m_selectionWindow = new CardSelectionWindow()
@@ -409,6 +407,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.BringWindowToFront(m_selectionWindow);
             }
+
+            await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
         }
         #endregion
 
