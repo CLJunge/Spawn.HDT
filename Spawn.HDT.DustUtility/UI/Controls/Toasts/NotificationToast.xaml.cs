@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
 {
-    public partial class NotificationToast : UserControl
+    public partial class NotificationToast
     {
         #region Ctor
         public NotificationToast()
