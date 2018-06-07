@@ -168,7 +168,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 case nameof(SaveInterval):
                     if (e.IsDirty)
                     {
-                        SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}";
+                        if (!SaveIntervalLabelText.EndsWith(IsDirtySuffix))
+                        {
+                            SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}"; 
+                        }
+                        else { }
                     }
                     else
                     {
