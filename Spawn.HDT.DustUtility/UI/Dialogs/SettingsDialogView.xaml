@@ -54,6 +54,10 @@
             <Label Content="{Binding CheckForUpdatesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
+        <DockPanel Height="30" ToolTip="Display notifications using the HSReplay notification system." ToolTipService.ShowDuration="8000">
+            <Label Content="{Binding ShowNotifiationsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <CheckBox IsChecked="{Binding ShowNotifiations, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </DockPanel>
 
         <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">

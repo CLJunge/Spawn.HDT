@@ -17,6 +17,7 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnColoredCardLabels;
         private bool m_blnAutoDisenchanting;
         private bool m_blnRememberQueryString;
+        private bool m_blnShowNotifications;
         private int m_nVersion;
         #endregion
 
@@ -93,6 +94,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region ShowNotifications
+        [DefaultValue(true)]
+        public bool ShowNotifications
+        {
+            get => m_blnShowNotifications;
+            set => Set(ref m_blnShowNotifications, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -114,6 +124,7 @@ namespace Spawn.HDT.DustUtility
             ColoredCardLabels = true;
             AutoDisenchanting = false;
             RememberQueryString = false;
+            ShowNotifications = true;
             Version = 1;
 
             //PropertyChanged += (s, e) => Save();

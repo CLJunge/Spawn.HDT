@@ -23,6 +23,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strAutoDisenchantingLabelText;
         private bool m_blnRememberQueryString;
         private string m_strRememberQueryStringLabelText;
+        private bool m_blnShowNotifications;
+        private string m_strShowNotificationsLabelText;
         #endregion
 
         #region Properties
@@ -134,6 +136,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region ShowNotifications
+        public bool ShowNotifications
+        {
+            get => m_blnShowNotifications;
+            set => Set(ref m_blnShowNotifications, value);
+        }
+        #endregion
+
+        #region ShowNotificationsLabelText
+        public string ShowNotificationsLabelText
+        {
+            get => m_strShowNotificationsLabelText;
+            set => Set(ref m_strShowNotificationsLabelText, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -223,6 +241,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         RememberQueryStringLabelText = RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+                case nameof(ShowNotifications):
+                    if (e.IsDirty)
+                    {
+                        ShowNotificationsLabelText = $"{ShowNotificationsLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        ShowNotificationsLabelText = ShowNotificationsLabelText.Substring(0, ShowNotificationsLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
             }
         }
         #endregion
@@ -241,6 +270,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ColoredCardLabels = DustUtilityPlugin.Config.ColoredCardLabels;
             DustUtilityPlugin.SettingsDialog.AutoDisenchantingCheckBox.IsChecked = AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
+            ShowNotifications = DustUtilityPlugin.Config.ShowNotifications;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(SaveInterval), SaveInterval);
@@ -248,6 +278,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(ColoredCardLabels), ColoredCardLabels);
             SetInitialPropertyValue(nameof(AutoDisenchanting), AutoDisenchanting);
             SetInitialPropertyValue(nameof(RememberQueryString), RememberQueryString);
+            SetInitialPropertyValue(nameof(ShowNotifications), ShowNotifications);
         }
         #endregion
 
@@ -259,6 +290,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.ColoredCardLabels = ColoredCardLabels;
             DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
             DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
+            DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
 
             if (OfflineMode)
             {
@@ -277,6 +309,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ColoredCardLabelsLabelText = "Colored Card Labels";
             AutoDisenchantingLabelText = "Auto Disenchanting";
             RememberQueryStringLabelText = "Remember Search Term";
+            ShowNotificationsLabelText = "Show Notifications";
         }
         #endregion
     }
