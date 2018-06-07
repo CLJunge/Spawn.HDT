@@ -11,10 +11,7 @@
 
         #region Events
         #region OnOkClick
-        private void OnOkClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
+        private void OnOkClick(object sender, System.Windows.RoutedEventArgs e) => DialogResult = true;
         #endregion
         #endregion
     }

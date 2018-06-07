@@ -16,30 +16,15 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
 
         #region Events
         #region OnListViewMouseMove
-        private void OnListViewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            (sender as System.Windows.Controls.ListView).ReleaseMouseCapture();
-        }
+        private void OnListViewMouseMove(object sender, System.Windows.Input.MouseEventArgs e) => (sender as System.Windows.Controls.ListView).ReleaseMouseCapture();
         #endregion
 
         #region OnListViewContextMenuOpening
-        private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
-        {
-            Messenger.Default.Send(new CMOpeningMessage(DustUtilityPlugin.DecksFlyoutName, e));
-            //ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().OnContextMenuOpening(e);
-        }
+        private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e) => Messenger.Default.Send(new CMOpeningMessage(DustUtilityPlugin.DecksFlyoutName, e));
         #endregion
 
         #region OnListViewMouseDoubleClick
-        private void OnListViewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Messenger.Default.Send(new LVMouseDblClickMessage(DustUtilityPlugin.DecksFlyoutName, e));
-            //if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
-            //{
-            //    ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ShowDeckListCommand.Execute(null);
-            //}
-            //else { }
-        }
+        private void OnListViewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e) => Messenger.Default.Send(new LVMouseDblClickMessage(DustUtilityPlugin.DecksFlyoutName, e));
         #endregion
         #endregion
     }
