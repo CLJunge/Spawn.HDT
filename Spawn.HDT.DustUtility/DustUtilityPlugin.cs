@@ -765,9 +765,12 @@ namespace Spawn.HDT.DustUtility
         #region ShowToastNotification
         public static void ShowToastNotification(string strMessage)
         {
-            NotificationToast toast = new NotificationToast(strMessage);
+            Hearthstone_Deck_Tracker.Core.MainWindow?.Dispatcher.Invoke(() =>
+            {
+                NotificationToast toast = new NotificationToast(strMessage);
 
-            ToastManager.ShowCustomToast(toast);
+                ToastManager.ShowCustomToast(toast);
+            });
         }
         #endregion
         #endregion
