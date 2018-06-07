@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Log.WriteLine("Checking GitHub for new version...", LogType.Info);
+                    Log.WriteLine("Checking GitHub for updates...", LogType.Info);
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
@@ -101,7 +101,7 @@ namespace Spawn.HDT.DustUtility.Net
                                     }
                                     else { }
 
-                                    Log.WriteLine("New update available", LogType.Info);
+                                    Log.WriteLine("Update available", LogType.Info);
                                 }
                                 else
                                 {
