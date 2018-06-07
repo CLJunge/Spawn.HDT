@@ -271,6 +271,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 if (SaveCollection(account))
                 {
                     Log.WriteLine("Saved collection successfuly", LogType.Info);
+
+                    DustUtilityPlugin.ShowToastNotification("Saved Collection!");
                 }
                 else { }
 
@@ -279,6 +281,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 if (SaveDecks(account))
                 {
                     Log.WriteLine("Saved decks successfuly", LogType.Info);
+
+                    DustUtilityPlugin.ShowToastNotification("Saved Decks!");
                 }
                 else { }
             }

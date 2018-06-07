@@ -344,6 +344,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
                     });
+
+                    DustUtilityPlugin.ShowToastNotification("New update available!");
                 }
                 else { }
 

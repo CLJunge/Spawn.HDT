@@ -5,9 +5,11 @@ using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Hearthstone_Deck_Tracker.Utility.Logging;
+using Hearthstone_Deck_Tracker.Utility.Toasts;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.UI.Controls.Toasts;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using Spawn.HDT.DustUtility.UI.Windows;
@@ -757,6 +759,15 @@ namespace Spawn.HDT.DustUtility
             else { }
 
             return lstRet;
+        }
+        #endregion
+
+        #region ShowToastNotification
+        public static void ShowToastNotification(string strMessage)
+        {
+            NotificationToast toast = new NotificationToast(strMessage);
+
+            ToastManager.ShowCustomToast(toast);
         }
         #endregion
         #endregion
