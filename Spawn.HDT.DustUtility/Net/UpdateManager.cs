@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Log.WriteLine("Checking GitHub for new a new version...", LogType.Info);
+                    Log.WriteLine("Checking GitHub for new version...", LogType.Info);
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
