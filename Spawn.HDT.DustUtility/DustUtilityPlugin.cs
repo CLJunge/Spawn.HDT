@@ -9,6 +9,7 @@ using Hearthstone_Deck_Tracker.Utility.Toasts;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Controls.Toasts;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.ViewModels;
@@ -38,6 +39,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Fields
         private static bool s_blnInitialized;
         private static bool s_blnIsOffline = true;
+        private static bool s_blnCheckedForUpdates;
 #if DEBUG
         private static readonly IAccount s_mockAcc = new MockAccount();
 #endif
@@ -146,6 +148,15 @@ namespace Spawn.HDT.DustUtility
                 //Legendary
                 //s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(226, 119, 24)));
                 { 5, new SolidColorBrush(Color.FromRgb(255, 153, 0)) }
+            };
+
+            Config.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(Config.CheckForUpdates)))
+                {
+                    s_blnCheckedForUpdates = !Config.CheckForUpdates;
+                }
+                else { }
             };
         }
         #endregion
@@ -773,6 +784,28 @@ namespace Spawn.HDT.DustUtility
 
                         ToastManager.ShowCustomToast(toast);
                     }); 
+            }
+            else { }
+        }
+        #endregion
+
+        #region PerformUpdateCheckAsync
+        public static async Task PerformUpdateCheckAsync()
+        {
+            if (!s_blnCheckedForUpdates)
+            {
+                if (Config.CheckForUpdates && await UpdateManager.CheckForUpdatesAsync())
+                {
+                    MainWindow?.Dispatcher.Invoke(() =>
+                    {
+                        ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyoutCommand.Execute(MainWindow.UpdateFlyout);
+                    });
+
+                    ShowToastNotification("New Update Available!");
+                }
+                else { }
+
+                s_blnCheckedForUpdates = true;
             }
             else { }
         }

@@ -31,7 +31,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region Static Fields
         private static string s_strSearchHelpText;
-        private static bool s_blnCheckedForUpdates;
         #endregion
 
         #region Member Variables
@@ -140,15 +139,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 .Append("- Card type (e.g. Minion, Weapon, etc.)").Append(Environment.NewLine);
 
             s_strSearchHelpText = sb.ToString();
-
-            DustUtilityPlugin.Config.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName.Equals(nameof(DustUtilityPlugin.Config.CheckForUpdates)))
-                {
-                    s_blnCheckedForUpdates = !DustUtilityPlugin.Config.CheckForUpdates;
-                }
-                else { }
-            };
         }
         #endregion
 
@@ -248,7 +238,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             await Task.Run(() => BackupManager.CreateBackup(account))
                 .ContinueWith(t => BackupManager.DeleteOldBackups(account));
 
-            await PerformUpdateCheck();
+            await DustUtilityPlugin.PerformUpdateCheckAsync();
         }
         #endregion
 
@@ -330,28 +320,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SearchQuery = string.Empty;
 
             ClearControls();
-        }
-        #endregion
-
-        #region PerformUpdateCheck
-        private async Task PerformUpdateCheck()
-        {
-            if (!s_blnCheckedForUpdates)
-            {
-                if (DustUtilityPlugin.Config.CheckForUpdates && await UpdateManager.CheckForUpdatesAsync())
-                {
-                    DustUtilityPlugin.MainWindow?.Dispatcher.Invoke(() =>
-                    {
-                        OpenFlyout(DustUtilityPlugin.MainWindow.UpdateFlyout);
-                    });
-
-                    DustUtilityPlugin.ShowToastNotification("New update available!");
-                }
-                else { }
-
-                s_blnCheckedForUpdates = true;
-            }
-            else { }
         }
         #endregion
 
