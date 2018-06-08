@@ -810,7 +810,7 @@ namespace Spawn.HDT.DustUtility
                         ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyoutCommand.Execute(MainWindow.UpdateFlyout);
                     });
 
-                    if (MainWindow?.Visibility != Visibility.Visible)
+                    if (MainWindow == null || MainWindow?.Visibility != Visibility.Visible)
                     {
                         ShowToastNotification("New Update Available!");
                     }
