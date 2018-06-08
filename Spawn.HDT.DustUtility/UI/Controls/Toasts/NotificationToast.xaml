@@ -6,7 +6,7 @@
              mc:Ignorable="d" Background="{DynamicResource AccentColorBrush}"
              MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave"
              MouseLeftButtonUp="OnMouseLeftButtonUp"
-             MinHeight="40" MinWidth="220">
+             MinHeight="40" MinWidth="230">
     <Grid VerticalAlignment="Center" Margin="10,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="28"/>
