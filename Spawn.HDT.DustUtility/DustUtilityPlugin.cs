@@ -792,7 +792,7 @@ namespace Spawn.HDT.DustUtility
                         NotificationToast toast = new NotificationToast(strMessage);
 
                         ToastManager.ShowCustomToast(toast);
-                    }); 
+                    });
             }
             else { }
         }
@@ -810,7 +810,11 @@ namespace Spawn.HDT.DustUtility
                         ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyoutCommand.Execute(MainWindow.UpdateFlyout);
                     });
 
-                    ShowToastNotification("New Update Available!");
+                    if (MainWindow?.Visibility != Visibility.Visible)
+                    {
+                        ShowToastNotification("New Update Available!");
+                    }
+                    else { }
                 }
                 else { }
 
