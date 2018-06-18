@@ -325,7 +325,11 @@ namespace Spawn.HDT.DustUtility
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
-                    await Cache.SaveAll(CurrentAccount);
+                    if (Config.OfflineMode)
+                    {
+                        await Cache.SaveAll(CurrentAccount);
+                    }
+                    else { }
                     break;
             }
         }
