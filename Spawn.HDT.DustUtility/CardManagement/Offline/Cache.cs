@@ -7,7 +7,7 @@ using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 #endregion
 
 namespace Spawn.HDT.DustUtility.CardManagement.Offline
@@ -15,44 +15,24 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
     public static class Cache
     {
         #region Static Fields
-        private static Timer s_timer;
-
-        private static bool s_blnSaveCollectionInProgress;
-        private static bool s_blnSaveDecksInProgress;
-
         private static List<Card> m_lstCachedCollection;
         private static List<Deck> m_lstCachedDecks;
         #endregion
 
-        #region Static Properties
-        public static bool TimerEnabled => s_timer != null;
-        #endregion
-
-        #region ForceSave
-        public static void ForceSave(IAccount account)
-        {
-            OnTick(account);
-        }
-        #endregion
-
         #region SaveCollection
-        private static bool SaveCollection(IAccount account)
+        public static bool SaveCollection(IAccount account)
         {
             bool blnRet = false;
 
             List<Card> lstCollection = DustUtilityPlugin.GetCollectionWrapper();
 
-            if (lstCollection?.Count > 0 && !s_blnSaveCollectionInProgress)
+            if (lstCollection?.Count > 0)
             {
-                s_blnSaveCollectionInProgress = true;
-
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
 
                 FileManager.Write(strPath, lstCollection.ToCachedCards());
 
                 blnRet = true;
-
-                s_blnSaveCollectionInProgress = false;
             }
             else { }
 
@@ -61,16 +41,14 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveDecks
-        private static bool SaveDecks(IAccount account)
+        public static bool SaveDecks(IAccount account)
         {
             bool blnRet = false;
 
             List<Deck> lstAllDecks = Reflection.GetDecks();
 
-            if ((lstAllDecks?.Count > 0 && lstAllDecks?[0]?.Cards.Count > 0) && !s_blnSaveDecksInProgress)
+            if ((lstAllDecks?.Count > 0 && lstAllDecks?[0]?.Cards.Count > 0))
             {
-                s_blnSaveDecksInProgress = true;
-
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
 
                 List<Deck> lstDecks = new List<Deck>(lstAllDecks.Count);
@@ -87,8 +65,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 FileManager.Write(strPath, lstDecks.ToCachedDecks());
 
                 blnRet = true;
-
-                s_blnSaveDecksInProgress = false;
             }
             else { }
 
@@ -211,31 +187,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         }
         #endregion
 
-        #region StartTimer
-        public static void StartTimer()
-        {
-            if (s_timer != null)
-            {
-                StopTimer();
-            }
-            else { }
-
-            s_timer = new Timer(OnTick, null, 0, 1000 * DustUtilityPlugin.Config.SaveInterval);
-
-            Log.WriteLine($"Started cache timer (Interval={DustUtilityPlugin.Config.SaveInterval}s)", LogType.Debug);
-        }
-        #endregion
-
-        #region StopTimer
-        public static void StopTimer()
-        {
-            s_timer.Dispose();
-            s_timer = null;
-
-            Log.WriteLine("Stopped cache timer", LogType.Debug);
-        }
-        #endregion
-
         #region ClearCache
         public static void ClearCache()
         {
@@ -247,18 +198,16 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         }
         #endregion
 
-        #region OnTick
-        private static async void OnTick(object state)
+        #region SaveAll
+        public static async Task SaveAll(IAccount account)
         {
             Log.WriteLine("Saving collection and decks...", LogType.Debug);
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
-            IAccount account = await Account.GetLoggedInAccountAsync();
-
-            if (state != null)
+            if (account == null)
             {
-                account = state as IAccount;
+                account = await Account.GetLoggedInAccountAsync();
             }
             else { }
 
