@@ -172,7 +172,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                     if (DustUtilityPlugin.Config.OfflineMode)
                     {
-                        Cache.ForceSave(DustUtilityPlugin.CurrentAccount);
+                        Cache.SaveCollection(DustUtilityPlugin.CurrentAccount);
                     }
                     else { }
 

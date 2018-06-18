@@ -179,22 +179,18 @@ namespace Spawn.HDT.DustUtility
 
             IsOfflineChanged += OnIsOfflineChanged;
 
-            Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
-            {
-                if (Config.OfflineMode && !IsOffline)
-                {
-                    Cache.StartTimer();
-                }
-                else { }
-
-                s_blnInitialized = true;
-            });
-
             if (MainWindow == null)
             {
                 MainWindow = new MainWindow();
             }
             else { }
+
+            GameEvents.OnModeChanged.Add(OnModeChanged);
+
+            Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
+            {
+                s_blnInitialized = true;
+            });
         }
         #endregion
 
@@ -212,12 +208,6 @@ namespace Spawn.HDT.DustUtility
 
             MainWindow?.Close();
             MainWindow = null;
-
-            if (Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
-            else { }
 
             Config.Save();
 
@@ -291,12 +281,6 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            if (IsOffline && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
-            else { }
-
             IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
 
             if (loggedInAcc != null)
@@ -306,12 +290,6 @@ namespace Spawn.HDT.DustUtility
                     UpdatedAccountInstance(loggedInAcc);
 
                     Cache.ClearCache();
-                }
-                else { }
-
-                if (Config.OfflineMode && (!IsOffline && !Cache.TimerEnabled))
-                {
-                    Cache.StartTimer();
                 }
                 else { }
 
@@ -335,6 +313,20 @@ namespace Spawn.HDT.DustUtility
             else
             {
                 ShowToastNotification("Current Mode: Online");
+            }
+        }
+        #endregion
+
+        #region OnModeChanged
+        private async void OnModeChanged(Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode mode)
+        {
+            switch (mode)
+            {
+                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
+                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
+                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
+                    await Cache.SaveAll(CurrentAccount);
+                    break;
             }
         }
         #endregion
@@ -370,29 +362,7 @@ namespace Spawn.HDT.DustUtility
 
             await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
 
-            if (SettingsDialog.ShowDialog().Value)
-            {
-                if (Config.OfflineMode && !IsOffline)
-                {
-                    if (!Cache.TimerEnabled)
-                    {
-                        Cache.StartTimer();
-                    }
-                    else
-                    {
-                        //Reinitialize timer with new interval
-                        Cache.StopTimer();
-
-                        Cache.StartTimer();
-                    }
-                }
-                else if (!Config.OfflineMode && Cache.TimerEnabled)
-                {
-                    Cache.StopTimer();
-                }
-                else { }
-            }
-            else { }
+            SettingsDialog.ShowDialog();
         }
         #endregion
 
