@@ -1,5 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
+using Spawn.HDT.DustUtility.Logging;
 using System.ComponentModel;
 using System.IO;
 #endregion
@@ -18,6 +19,7 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnAutoDisenchanting;
         private bool m_blnRememberQueryString;
         private bool m_blnShowNotifications;
+        private LogLevel m_logLevel;
         private int m_nVersion;
         #endregion
 
@@ -103,6 +105,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region LogLevel
+        [DefaultValue(LogLevel.Info)]
+        public LogLevel LogLevel
+        {
+            get => m_logLevel;
+            set => Set(ref m_logLevel, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -125,6 +136,7 @@ namespace Spawn.HDT.DustUtility
             AutoDisenchanting = false;
             RememberQueryString = false;
             ShowNotifications = true;
+            LogLevel = LogLevel.Info;
             Version = 1;
 
             //PropertyChanged += (s, e) => Save();
