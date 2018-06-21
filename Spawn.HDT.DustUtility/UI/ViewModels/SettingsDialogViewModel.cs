@@ -296,12 +296,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
             DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
             DustUtilityPlugin.Config.LogLevel = LogLevel;
-
-            if (OfflineMode)
-            {
-                DustUtilityPlugin.Config.SaveInterval = SaveInterval;
-            }
-            else { }
         }
         #endregion
 

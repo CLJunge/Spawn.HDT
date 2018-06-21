@@ -201,8 +201,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region SaveAll
         public static async Task SaveAll(IAccount account)
         {
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saving collection and decks...");
-
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
             if (account == null)
@@ -215,7 +213,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 HistoryManager.CheckCollection(account);
 
-                Log.WriteLine("Saving collection and decks...", LogType.Debug);
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saving collection and decks...");
 
                 bool blnSavedCollection = SaveCollection(account);
                 bool blnSavedDecks = SaveDecks(account);
@@ -227,12 +225,12 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 else if (blnSavedCollection)
                 {
                     DustUtilityPlugin.ShowToastNotification("Saved Collection!");
-                    Log.WriteLine("Saved collection successfuly", LogType.Info);
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved collection successfuly");
                 }
                 else if (blnSavedDecks)
                 {
                     DustUtilityPlugin.ShowToastNotification("Saved Decks!");
-                    Log.WriteLine("Saved decks successfuly", LogType.Info);
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved decks successfuly");
                 }
                 else { }
             }

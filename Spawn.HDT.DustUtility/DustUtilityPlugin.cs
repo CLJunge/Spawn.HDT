@@ -294,12 +294,6 @@ namespace Spawn.HDT.DustUtility
         {
             Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
 
-            if (IsOffline && Cache.TimerEnabled)
-            {
-                Cache.StopTimer();
-            }
-            else { }
-
             IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
 
             if (loggedInAcc != null)
