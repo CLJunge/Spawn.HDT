@@ -109,39 +109,42 @@ namespace Spawn.HDT.DustUtility.Logging
 
             lock (s_objLock)
             {
-                SetLogFileName();
-
-                try
+                if (level >= DustUtilityPlugin.Config.LogLevel)
                 {
-                    retEntry = new LogEntry(DateTime.Now, level, strChannel, strMessage, GetCallingMember(strMemberName, strFilePath));
+                    SetLogFileName();
 
-                    if (WriteToConsole)
+                    try
                     {
-                        LogToConsole(retEntry);
-                    }
-                    else { }
+                        retEntry = new LogEntry(DateTime.Now, level, strChannel, strMessage, GetCallingMember(strMemberName, strFilePath));
 
-                    if (IsDebugMode)
-                    {
-                        System.Diagnostics.Debug.WriteLine(retEntry.LogMessage);
-                    }
-                    else { }
-
-                    if (WriteToFile)
-                    {
-                        using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
+                        if (WriteToConsole)
                         {
-                            writer.WriteLine(retEntry.LogMessage);
-                            writer.Flush();
+                            LogToConsole(retEntry);
                         }
-                    }
-                    else { }
+                        else { }
 
-                    OnLogging(retEntry);
-                }
-                catch (IOException ex)
-                {
-                    throw new FileAccessException("Can't access log file!", ex);
+                        if (IsDebugMode)
+                        {
+                            System.Diagnostics.Debug.WriteLine(retEntry.LogMessage);
+                        }
+                        else { }
+
+                        if (WriteToFile)
+                        {
+                            using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
+                            {
+                                writer.WriteLine(retEntry.LogMessage);
+                                writer.Flush();
+                            }
+                        }
+                        else { }
+
+                        OnLogging(retEntry);
+                    }
+                    catch (IOException ex)
+                    {
+                        throw new FileAccessException("Can't access log file!", ex);
+                    }
                 }
             }
 
