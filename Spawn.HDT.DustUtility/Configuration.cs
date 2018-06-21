@@ -13,7 +13,6 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnOfflineMode;
         private string m_strSortOrder;
         private bool m_blnCheckForUpdates;
-        private int m_nSaveInterval;
         private string m_strLastSelectedAccount;
         private bool m_blnColoredCardLabels;
         private bool m_blnAutoDisenchanting;
@@ -48,15 +47,6 @@ namespace Spawn.HDT.DustUtility
         {
             get => m_blnCheckForUpdates;
             set => Set(ref m_blnCheckForUpdates, value);
-        }
-        #endregion
-
-        #region SaveInterval
-        [DefaultValue(120)]
-        public int SaveInterval
-        {
-            get => m_nSaveInterval;
-            set => Set(ref m_nSaveInterval, value);
         }
         #endregion
 
@@ -130,7 +120,6 @@ namespace Spawn.HDT.DustUtility
             OfflineMode = false;
             SortOrder = "Rarity;Golden;CardClass;CardSet;Name";
             CheckForUpdates = true;
-            SaveInterval = 120;
             LastSelectedAccount = null;
             ColoredCardLabels = true;
             AutoDisenchanting = false;
