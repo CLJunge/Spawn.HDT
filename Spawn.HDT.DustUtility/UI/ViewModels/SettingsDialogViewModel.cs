@@ -1,5 +1,9 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using Spawn.HDT.DustUtility.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
@@ -25,6 +29,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strRememberQueryStringLabelText;
         private bool m_blnShowNotifications;
         private string m_strShowNotificationsLabelText;
+        private LogLevel m_logLevel;
+        private string m_strLogLevelLabelText;
         #endregion
 
         #region Properties
@@ -152,6 +158,26 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region LogLevel
+        public LogLevel LogLevel
+        {
+            get => m_logLevel;
+            set => Set(ref m_logLevel, value);
+        }
+        #endregion
+
+        #region LogLevelLabelText
+        public string LogLevelLabelText
+        {
+            get => m_strLogLevelLabelText;
+            set => Set(ref m_strLogLevelLabelText, value);
+        }
+        #endregion
+
+        #region LogLevels
+        public IList<LogLevel> LogLevels => Enum.GetValues(typeof(LogLevel)).Cast<LogLevel>().ToList();
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -188,7 +214,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         if (!SaveIntervalLabelText.EndsWith(IsDirtySuffix))
                         {
-                            SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}"; 
+                            SaveIntervalLabelText = $"{SaveIntervalLabelText}{IsDirtySuffix}";
                         }
                         else { }
                     }
@@ -252,6 +278,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         ShowNotificationsLabelText = ShowNotificationsLabelText.Substring(0, ShowNotificationsLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+                case nameof(LogLevel):
+                    if (e.IsDirty)
+                    {
+                        LogLevelLabelText = $"{LogLevelLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        LogLevelLabelText = LogLevelLabelText.Substring(0, LogLevelLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
             }
         }
         #endregion
@@ -271,6 +308,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.SettingsDialog.AutoDisenchantingCheckBox.IsChecked = AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
             ShowNotifications = DustUtilityPlugin.Config.ShowNotifications;
+            LogLevel = DustUtilityPlugin.Config.LogLevel;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(SaveInterval), SaveInterval);
@@ -279,6 +317,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(AutoDisenchanting), AutoDisenchanting);
             SetInitialPropertyValue(nameof(RememberQueryString), RememberQueryString);
             SetInitialPropertyValue(nameof(ShowNotifications), ShowNotifications);
+            SetInitialPropertyValue(nameof(LogLevel), LogLevel);
         }
         #endregion
 
@@ -291,6 +330,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
             DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
             DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
+            DustUtilityPlugin.Config.LogLevel = LogLevel;
 
             if (OfflineMode)
             {
@@ -310,6 +350,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AutoDisenchantingLabelText = "Auto Disenchanting";
             RememberQueryStringLabelText = "Remember Search Term";
             ShowNotificationsLabelText = "Show Notifications";
+            LogLevelLabelText = "Log Level";
         }
         #endregion
     }

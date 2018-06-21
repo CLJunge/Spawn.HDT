@@ -58,6 +58,10 @@
             <Label Content="{Binding ShowNotificationsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding ShowNotifications, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
+        <DockPanel Height="30" ToolTip="Only log messages with the specified log level or have a log level below the specified one." ToolTipService.ShowDuration="8000">
+            <Label Content="{Binding LogLevelLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <ComboBox ItemsSource="{Binding LogLevels}" SelectedItem="{Binding LogLevel}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+        </DockPanel>
 
         <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">
