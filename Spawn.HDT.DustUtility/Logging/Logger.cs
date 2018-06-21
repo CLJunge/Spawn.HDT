@@ -1,6 +1,8 @@
 ﻿#region Using
 using System;
 using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 #endregion
 
 namespace Spawn.HDT.DustUtility.Logging
@@ -39,6 +41,10 @@ namespace Spawn.HDT.DustUtility.Logging
         public bool WriteToConsole { get; set; } = true;
         #endregion
 
+        #region WriteToFile
+        public bool WriteToFile { get; set; } = true;
+        #endregion
+
         #region [STATIC] Default
         private static Logger s_default = null;
 
@@ -59,14 +65,22 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region Ctor
-        public Logger(string name)
+        public Logger(string name, string logDirectory = null)
         {
             if (Directory.Exists(Environment.CurrentDirectory))
             {
                 s_objLock = new object();
 
                 Name = name;
-                m_logDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
+
+                if (!string.IsNullOrEmpty(logDirectory))
+                {
+                    m_logDirectory = new DirectoryInfo(logDirectory);
+                }
+                else
+                {
+                    m_logDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
+                }
 
                 if (!m_logDirectory.Exists)
                 {
@@ -84,12 +98,12 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region Log
-        public LogEntry Log(LogLevel level, string strMessage, params object[] vArgs)
+        public LogEntry Log(LogLevel level, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "")
         {
-            return Log(level, string.Empty, strMessage, vArgs);
+            return Log(level, string.Empty, strMessage, strMemberName, strFilePath);
         }
 
-        public LogEntry Log(LogLevel level, string strChannel, string strMessage, params object[] vArgs)
+        public LogEntry Log(LogLevel level, string strChannel, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "")
         {
             LogEntry retEntry = new LogEntry();
 
@@ -99,15 +113,11 @@ namespace Spawn.HDT.DustUtility.Logging
 
                 try
                 {
-                    retEntry = new LogEntry(DateTime.Now, level, strChannel, strMessage, vArgs);
+                    retEntry = new LogEntry(DateTime.Now, level, strChannel, strMessage, GetCallingMember(strMemberName, strFilePath));
 
                     if (WriteToConsole)
                     {
-                        if (IsDebugMode || level != LogLevel.Debug)
-                        {
-                            LogToConsole(retEntry);
-                        }
-                        else { }
+                        LogToConsole(retEntry);
                     }
                     else { }
 
@@ -117,11 +127,15 @@ namespace Spawn.HDT.DustUtility.Logging
                     }
                     else { }
 
-                    using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
+                    if (WriteToFile)
                     {
-                        writer.WriteLine(retEntry.LogMessage);
-                        writer.Flush();
+                        using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
+                        {
+                            writer.WriteLine(retEntry.LogMessage);
+                            writer.Flush();
+                        }
                     }
+                    else { }
 
                     OnLogging(retEntry);
                 }
@@ -166,7 +180,7 @@ namespace Spawn.HDT.DustUtility.Logging
         #region SetLogFileName
         private void SetLogFileName()
         {
-            m_strFilePath = Path.Combine(m_logDirectory.FullName, string.Format("{0}_{1}.txt", Name, DateTime.Now.ToShortDateString()));
+            m_strFilePath = Path.Combine(m_logDirectory.FullName, string.Format("{0}_{1}.txt", Name, DateTime.Now.ToString("yyyyMMdd")));
 
             m_logFile = new FileInfo(m_strFilePath);
 
@@ -175,6 +189,35 @@ namespace Spawn.HDT.DustUtility.Logging
                 using (m_logFile.Create()) { }
             }
             else { }
+
+            m_logFile.Refresh();
+        }
+        #endregion
+
+        #region GetCallingMember
+        private string GetCallingMember(string strMemberName, string strFilePath)
+        {
+            string strRet = string.Empty;
+
+            if (!string.IsNullOrEmpty(strMemberName) && !string.IsNullOrEmpty(strFilePath))
+            {
+                string strTemp = strFilePath.Split('\\').LastOrDefault();
+
+                if (!string.IsNullOrEmpty(strTemp))
+                {
+                    strTemp = strTemp.Replace(".cs", string.Empty);
+
+                    strRet = $"{strTemp}.{strMemberName.TrimStart('.')}";
+                }
+                else { }
+            }
+            else if (!string.IsNullOrEmpty(strMemberName))
+            {
+                strRet = strMemberName;
+            }
+            else { }
+
+            return strRet;
         }
         #endregion
     }

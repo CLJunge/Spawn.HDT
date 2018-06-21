@@ -6,10 +6,6 @@ namespace Spawn.HDT.DustUtility.Logging
 {
     public struct LogEntry
     {
-        #region Member Variables
-        private readonly object[] m_vArgs;
-        #endregion
-
         #region Properties
         #region Timestamp
         public DateTime Timestamp { get; }
@@ -30,24 +26,28 @@ namespace Spawn.HDT.DustUtility.Logging
         #region LogMessage
         public string LogMessage { get; }
         #endregion
+
+        #region CallingMember
+        public string CallingMember { get; }
+        #endregion
         #endregion
 
         #region Ctor
-        public LogEntry(DateTime logTime, LogLevel level, string channel, string message, object[] arguments)
+        public LogEntry(DateTime logTime, LogLevel level, string channel, string message, string callingMember)
         {
             Timestamp = logTime;
             Level = level;
             Channel = channel;
-            Message = string.Format(message, arguments);
-            m_vArgs = arguments;
+            Message = message;
+            CallingMember = callingMember;
 
-            if (!string.IsNullOrEmpty(channel))
+            if (!string.IsNullOrEmpty(Channel))
             {
-                LogMessage = string.Format("{0} [{1}::{2}] {3}", Timestamp.ToLongTimeString(), Level, Channel, string.Format(Message, m_vArgs));
+                LogMessage = string.Format("{0} [{1}::{2}::{3}] {4}", Timestamp.ToString("hh:mm:ss.fff tt"), Channel, Level, CallingMember, Message);
             }
             else
             {
-                LogMessage = string.Format("{0} [{1}] {2}", Timestamp.ToLongTimeString(), Level, string.Format(Message, m_vArgs));
+                LogMessage = string.Format("{0} [{1}::{2}] {3}", Timestamp.ToString("hh:mm:ss.fff tt"), Level, CallingMember, Message);
             }
         }
         #endregion
