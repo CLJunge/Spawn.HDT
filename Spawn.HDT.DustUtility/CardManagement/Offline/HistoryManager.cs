@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 s_blnCheckInProgress = true;
 
-                Logger.Default.Log(LogLevel.Debug, $"Checking for changes for \"{account.AccountString}\"...");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking for changes for \"{account.AccountString}\"...");
 
                 List<Card> lstOldCollection = account.GetCollection();
 
@@ -45,7 +45,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     //disenchanted cards
                     nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstHistory, lstOld);
 
-                    Logger.Default.Log(LogLevel.Debug, $"Found {nChanges} changes");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nChanges} changes");
 
                     SaveHistory(account, lstHistory);
                 }
@@ -148,7 +148,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region LoadHistory
         private static List<CachedHistoryCard> LoadHistory(IAccount account)
         {
-            Logger.Default.Log(LogLevel.Debug, $"Loading history for \"{account.AccountString}\"");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading history for \"{account.AccountString}\"");
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
@@ -163,7 +163,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             if (!(account is MockAccount))
             {
 #endif
-                Logger.Default.Log(LogLevel.Debug, $"Saving history for \"{account.AccountString}\"");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saving history for \"{account.AccountString}\"");
 
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
@@ -207,14 +207,14 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             SaveHistory(account, new List<CachedHistoryCard>());
 
-            Logger.Default.Log(LogLevel.Debug, $"Cleared history for \"{account.AccountString}\"");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Cleared history for \"{account.AccountString}\"");
         }
         #endregion
 
         #region RemoveItemAt
         public static void RemoveItemAt(IAccount account, int nIndex)
         {
-            Logger.Default.Log(LogLevel.Debug, $"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"");
 
             List<CachedHistoryCard> lstHistory = account.GetHistory();
 

@@ -35,14 +35,14 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             if (parameters != null)
             {
-                Logger.Default.Log(LogLevel.Debug, "Collecting cards...");
-                Logger.Default.Log(LogLevel.Debug, "Parameters:");
-                Logger.Default.Log(LogLevel.Debug, $"QueryString={parameters.QueryString}");
-                Logger.Default.Log(LogLevel.Debug, $"IncludeGoldenCards={parameters.IncludeGoldenCards}");
-                Logger.Default.Log(LogLevel.Debug, $"UnusedCardsOnly={parameters.UnusedCardsOnly}");
-                Logger.Default.Log(LogLevel.Debug, $"Rarities={string.Join(",", parameters.Rarities)}");
-                Logger.Default.Log(LogLevel.Debug, $"Classes={string.Join(",", parameters.Classes)}");
-                Logger.Default.Log(LogLevel.Debug, $"Sets={string.Join(",", parameters.Sets)}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Collecting cards...");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Parameters:");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"QueryString={parameters.QueryString}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"IncludeGoldenCards={parameters.IncludeGoldenCards}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"UnusedCardsOnly={parameters.UnusedCardsOnly}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Rarities={string.Join(",", parameters.Rarities)}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Classes={string.Join(",", parameters.Classes)}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Sets={string.Join(",", parameters.Sets)}");
 
                 List<Card> lstCollection = account.GetCollection();
 
@@ -70,7 +70,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                         GetCardsByQueryString(parameters, lstCards);
                     }
 
-                    Logger.Default.Log(LogLevel.Debug, $"Found {lstCards.Count} cards");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {lstCards.Count} cards");
 
                     retVal = SearchResult.Create(lstCards);
                 }
@@ -283,7 +283,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
-            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by classes... [{string.Join(",", lstClasses)}]");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by classes... [{string.Join(",", lstClasses)}]");
 
             for (int i = 0; i < lstClasses.Count; i++)
             {
@@ -301,7 +301,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
-            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by sets... [{string.Join(",", lstSets)}]");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by sets... [{string.Join(",", lstSets)}]");
 
             for (int i = 0; i < lstSets.Count; i++)
             {
@@ -319,7 +319,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
 
-            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by rarity... ({rarity})");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by rarity... ({rarity})");
 
             if (parameters.IncludeGoldenCards)
             {
@@ -348,7 +348,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             List<Card> lstCards = account.GetCollection();
 
-            Logger.Default.Log(LogLevel.Debug, "Calculating total collection value");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Calculating total collection value");
 
             for (int i = 0; i < lstCards.Count; i++)
             {

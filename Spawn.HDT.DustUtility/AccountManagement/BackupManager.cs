@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                             Directory.Delete(strDir, true);
 
-                            Logger.Default.Log(LogLevel.Debug, $"Created backup for {account.AccountString}");
+                            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created backup for {account.AccountString}");
 
                             blnRet = File.Exists(strFileName);
                         }
@@ -60,7 +60,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     }
                     catch (Exception ex)
                     {
-                        Logger.Default.Log(LogLevel.Error, $"Exception occured while creating backup \"{strFileName}\": {ex}");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while creating backup \"{strFileName}\": {ex}");
                     }
                 }
                 else { }
@@ -103,13 +103,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                     Directory.Delete(strDir);
 
-                    Logger.Default.Log(LogLevel.Debug, $"Restored backup for {account.AccountString}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored backup for {account.AccountString}");
 
                     blnRet = true;
                 }
                 catch (Exception ex)
                 {
-                    Logger.Default.Log(LogLevel.Error, $"Exception occured while restoring backup \"{strFileName}\": {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while restoring backup \"{strFileName}\": {ex}");
                 }
             }
             else { }

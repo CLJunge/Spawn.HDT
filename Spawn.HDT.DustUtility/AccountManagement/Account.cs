@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Card> lstRet = null;
 
-            Logger.Default.Log(LogLevel.Debug, "Loading collection...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loading collection...");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -109,13 +109,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if (lstRet != null)
             {
-                Logger.Default.Log(LogLevel.Debug, "Collection loaded");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Collection loaded");
 
                 lstRet = lstRet.Where(c => HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
             }
             else
             {
-                Logger.Default.Log(LogLevel.Error, "Couldn't load collection!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, "Couldn't load collection!");
             }
 
             return lstRet;
@@ -127,7 +127,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Deck> lstRet = null;
 
-            Logger.Default.Log(LogLevel.Debug, "Loading decks...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loading decks...");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -140,11 +140,11 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if (lstRet != null)
             {
-                Logger.Default.Log(LogLevel.Debug, "Loaded decks");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded decks");
             }
             else
             {
-                Logger.Default.Log(LogLevel.Error, "Couldn't load decks!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, "Couldn't load decks!");
             }
 
             return lstRet;
@@ -201,7 +201,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             {
                 m_preferences.Save(this);
 
-                Logger.Default.Log(LogLevel.Debug, $"Saved preferences for {AccountString}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {AccountString}");
             }
             else { }
         }
@@ -279,7 +279,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 }
                 catch (Exception ex)
                 {
-                    Logger.Default.Log(LogLevel.Error, $"Couldn't retrieve currently logged in account: {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't retrieve currently logged in account: {ex}");
                 }
             }
             else { }

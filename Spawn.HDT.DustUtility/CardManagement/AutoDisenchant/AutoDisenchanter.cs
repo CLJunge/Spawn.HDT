@@ -21,7 +21,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             {
                 try
                 {
-                    Logger.Default.Log(LogLevel.Info, $"Disenchanting current card selection...");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Info, $"Disenchanting current card selection...");
 
                     HearthstoneInfo info = new HearthstoneInfo();
 
@@ -35,7 +35,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                         LogDebugInfo(info);
 
-                        Logger.Default.Log(LogLevel.Debug, $"Waiting for {DisenchantConfig.Instance.StartDelay} seconds before starting to disenchant");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Waiting for {DisenchantConfig.Instance.StartDelay} seconds before starting to disenchant");
 
                         await Task.Delay(DisenchantConfig.Instance.StartDelay * 1000);
 
@@ -45,13 +45,13 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                         blnRet &= await actions.DisenchantCards();
                         //await actions.ClearSearchBox();
 
-                        Logger.Default.Log(LogLevel.Info, $"Sucessfully disenchanted {lstCards?.Count} card(s)");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Info, $"Sucessfully disenchanted {lstCards?.Count} card(s)");
                     }
                     else { }
                 }
                 catch (Exception e)
                 {
-                    Logger.Default.Log(LogLevel.Error, $"Exception occured while disenchanting card selection: {e}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting card selection: {e}");
 
                     blnRet = false;
                 }

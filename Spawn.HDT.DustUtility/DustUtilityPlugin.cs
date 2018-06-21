@@ -34,6 +34,7 @@ namespace Spawn.HDT.DustUtility
         #region Constants
         public const string DecksFlyoutName = "DecksFlyout";
         public const string HistoryFlyoutName = "HistoryFlyout";
+
         #endregion
 
         #region Static Fields
@@ -41,11 +42,15 @@ namespace Spawn.HDT.DustUtility
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
 #if DEBUG
-        private static readonly IAccount s_mockAcc = new MockAccount();
+        private static readonly IAccount s_mockAcc;
 #endif
         #endregion
 
         #region Static Properties
+        #region Logger
+        public static Logger Logger { get; }
+        #endregion
+
         #region DataDirectory
         public static string DataDirectory => GetDataDirectory();
         #endregion
@@ -133,6 +138,8 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
+            Logger = new Logger("dustutility", Path.Combine(DataDirectory, "Logs"));
+
             CreateContainer();
 
             RarityBrushes = new Dictionary<int, SolidColorBrush>
@@ -158,6 +165,10 @@ namespace Spawn.HDT.DustUtility
                 }
                 else { }
             };
+
+#if DEBUG
+            s_mockAcc = new MockAccount();
+#endif
         }
         #endregion
 
@@ -267,7 +278,7 @@ namespace Spawn.HDT.DustUtility
                 {
                     MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                    Logger.Default.Log(LogLevel.Warning, "Hearthstone isn't running");
+                    Logger.Log(LogLevel.Warning, "Hearthstone isn't running");
                 }
                 else { }
             }
@@ -283,7 +294,7 @@ namespace Spawn.HDT.DustUtility
 
                 MessageBox.Show(strMessage, Name, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                Logger.Default.Log(LogLevel.Warning, "Plugin is not initialized");
+                Logger.Log(LogLevel.Warning, "Plugin is not initialized");
             }
         }
         #endregion
@@ -291,7 +302,7 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            Logger.Default.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
+            Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
 
             if (IsOffline && Cache.TimerEnabled)
             {
@@ -363,7 +374,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowSettingsDialog
         private async void ShowSettingsDialog()
         {
-            Logger.Default.Log(LogLevel.Debug, "Opening settings dialog");
+            Logger.Log(LogLevel.Debug, "Opening settings dialog");
 
             SettingsDialog = new SettingsDialogView()
             {
@@ -401,7 +412,7 @@ namespace Spawn.HDT.DustUtility
         #region UpdatePluginFiles
         private void UpdatePluginFiles()
         {
-            Logger.Default.Log(LogLevel.Debug, "Updating plugin files");
+            Logger.Log(LogLevel.Debug, "Updating plugin files");
 
             if (Config.Version == 1)
             {
@@ -413,11 +424,11 @@ namespace Spawn.HDT.DustUtility
 
                 Config.Version = 2;
 
-                Logger.Default.Log(LogLevel.Debug, "Finished updating plugin files");
+                Logger.Log(LogLevel.Debug, "Finished updating plugin files");
             }
             else
             {
-                Logger.Default.Log(LogLevel.Debug, "No file update required");
+                Logger.Log(LogLevel.Debug, "No file update required");
             }
         }
         #endregion
@@ -563,7 +574,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowMainWindowAsync
         private static async Task ShowMainWindowAsync()
         {
-            Logger.Default.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.AccountString}");
+            Logger.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.AccountString}");
 
             MainWindow?.Show();
 
@@ -621,17 +632,17 @@ namespace Spawn.HDT.DustUtility
                         + Environment.NewLine + Environment.NewLine +
                         "Collection and decks have to be stored locally for an account to be available.", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                    Logger.Default.Log(LogLevel.Warning, "No accounts available");
+                    Logger.Log(LogLevel.Warning, "No accounts available");
                 }
             }
 
             if (retVal != null)
             {
-                Logger.Default.Log(LogLevel.Debug, $"Account: {retVal.AccountString}");
+                Logger.Log(LogLevel.Debug, $"Account: {retVal.AccountString}");
             }
             else
             {
-                Logger.Default.Log(LogLevel.Debug, $"No account selected");
+                Logger.Log(LogLevel.Debug, $"No account selected");
             }
 
             return retVal;
@@ -679,7 +690,7 @@ namespace Spawn.HDT.DustUtility
 
             if (MainWindow != null)
             {
-                Logger.Default.Log(LogLevel.Debug, "Switching account...");
+                Logger.Log(LogLevel.Debug, "Switching account...");
 
                 IAccount oldAcc = CurrentAccount;
 
@@ -701,7 +712,7 @@ namespace Spawn.HDT.DustUtility
 
                 ShowMainWindowAsync().Forget();
 
-                Logger.Default.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}");
+                Logger.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}");
             }
             else { }
 

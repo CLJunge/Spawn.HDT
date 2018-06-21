@@ -132,7 +132,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardSet.HOF
                 };
 
-                Logger.Default.Log(LogLevel.Debug, "Loaded default parameters");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded default parameters");
             }
 
             Rarities.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Rarities));

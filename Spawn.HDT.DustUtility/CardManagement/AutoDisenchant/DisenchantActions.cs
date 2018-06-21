@@ -57,7 +57,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         #region DisenchantCards
         public async Task<bool> DisenchantCards()
         {
-            Logger.Default.Log(LogLevel.Debug, "Disenchanting...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Disenchanting...");
 
             int nTotalCount = m_lstCards.Sum(c => c.Count);
 
@@ -136,7 +136,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             }
             catch (Exception ex)
             {
-                Logger.Default.Log(LogLevel.Error, $"Exception occured while disenchanting \"{wrapper?.Card?.Name}\": {ex}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting \"{wrapper?.Card?.Name}\": {ex}");
             }
 
             return nRet;
@@ -202,7 +202,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         {
             if (Reflection.GetCurrentManaFilter() != -1)
             {
-                Logger.Default.Log(LogLevel.Debug, "Clearing mana filter");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Clearing mana filter");
 
                 await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
 
@@ -216,7 +216,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             }
             else
             {
-                Logger.Default.Log(LogLevel.Debug, "No mana filter set");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "No mana filter set");
             }
         }
         #endregion
