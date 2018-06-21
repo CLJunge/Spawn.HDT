@@ -215,23 +215,24 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 HistoryManager.CheckCollection(account);
 
-                Log.WriteLine("Saving collection...", LogType.Debug);
+                Log.WriteLine("Saving collection and decks...", LogType.Debug);
 
-                if (SaveCollection(account))
+                bool blnSavedCollection = SaveCollection(account);
+                bool blnSavedDecks = SaveDecks(account);
+
+                if (blnSavedCollection && blnSavedDecks)
                 {
-                    Log.WriteLine("Saved collection successfuly", LogType.Info);
-
-                    DustUtilityPlugin.ShowToastNotification("Saved Collection!");
+                    DustUtilityPlugin.ShowToastNotification("Saved Collection & Decks!");
                 }
-                else { }
-
-                Log.WriteLine("Saving decks...", LogType.Debug);
-
-                if (SaveDecks(account))
+                else if (blnSavedCollection)
                 {
-                    Log.WriteLine("Saved decks successfuly", LogType.Info);
-
+                    DustUtilityPlugin.ShowToastNotification("Saved Collection!");
+                    Log.WriteLine("Saved collection successfuly", LogType.Info);
+                }
+                else if (blnSavedDecks)
+                {
                     DustUtilityPlugin.ShowToastNotification("Saved Decks!");
+                    Log.WriteLine("Saved decks successfuly", LogType.Info);
                 }
                 else { }
             }
