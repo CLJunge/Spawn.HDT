@@ -38,18 +38,18 @@ namespace Spawn.HDT.DustUtility.Logging
         #region WriteToConsole
         public bool WriteToConsole { get; set; } = true;
         #endregion
-        #endregion
 
-        #region Default
+        #region [STATIC] Default
         private static Logger s_default = null;
 
         public static Logger Default => s_default ?? (s_default = new Logger("Default"));
         #endregion
 
-        #region Debug
+        #region [STATIC] Debug
         private static Logger s_debug = null;
 
         public static Logger Debug => s_debug ?? (s_debug = new Logger("Debug") { IsDebugMode = true });
+        #endregion
         #endregion
 
         #region Events
