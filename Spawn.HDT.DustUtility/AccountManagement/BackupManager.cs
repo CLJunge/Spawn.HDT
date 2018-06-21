@@ -1,5 +1,5 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Globalization;
 using System.IO;
@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                             Directory.Delete(strDir, true);
 
-                            Log.WriteLine($"Created backup for {account.AccountString}", LogType.Debug);
+                            Logger.Default.Log(LogLevel.Debug, $"Created backup for {account.AccountString}");
 
                             blnRet = File.Exists(strFileName);
                         }
@@ -60,7 +60,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     }
                     catch (Exception ex)
                     {
-                        Log.WriteLine($"Exception occured while creating backup \"{strFileName}\": {ex}", LogType.Error);
+                        Logger.Default.Log(LogLevel.Error, $"Exception occured while creating backup \"{strFileName}\": {ex}");
                     }
                 }
                 else { }
@@ -103,13 +103,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                     Directory.Delete(strDir);
 
-                    Log.WriteLine($"Restored backup for {account.AccountString}", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"Restored backup for {account.AccountString}");
 
                     blnRet = true;
                 }
                 catch (Exception ex)
                 {
-                    Log.WriteLine($"Exception occured while restoring backup \"{strFileName}\": {ex}", LogType.Error);
+                    Logger.Default.Log(LogLevel.Error, $"Exception occured while restoring backup \"{strFileName}\": {ex}");
                 }
             }
             else { }

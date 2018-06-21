@@ -1,7 +1,7 @@
 ﻿#region Using
 using HearthDb.Enums;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
 #endregion
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             SearchResult retVal = new SearchResult();
 
-            Log.WriteLine("Creating new search result...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Creating search result for {lstCards?.Count} card(s)...");
 
             for (int i = 0; i < lstCards.Count; i++)
             {

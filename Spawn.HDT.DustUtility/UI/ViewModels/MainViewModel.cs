@@ -2,13 +2,12 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Messaging;
-using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.Windows;
 using System;
@@ -174,8 +173,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             IAccount account = DustUtilityPlugin.CurrentAccount;
 
-            Log.WriteLine($"Account={account.AccountString}", LogType.Debug);
-            Log.WriteLine($"OfflineMode={DustUtilityPlugin.IsOffline}", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Account={account.AccountString}");
+            Logger.Default.Log(LogLevel.Debug, $"OfflineMode={DustUtilityPlugin.IsOffline}");
 
             if (!account.IsEmpty)
             {

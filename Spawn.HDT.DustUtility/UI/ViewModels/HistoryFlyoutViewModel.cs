@@ -4,9 +4,9 @@ using GalaSoft.MvvmLight.Messaging;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.Generic;
@@ -85,18 +85,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 if (lstHistory.Count > 0)
                 {
-                    Log.WriteLine($"Loaded history: {lstHistory.Count} entries", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"Loaded history: {lstHistory.Count} entries");
                 }
                 else
                 {
-                    Log.WriteLine($"No history available", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"No history available");
                 }
 
                 ReloadRequired = false;
             }
             else
             {
-                Log.WriteLine($"No reload required", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"No reload required");
             }
         }
         #endregion

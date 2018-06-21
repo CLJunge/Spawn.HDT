@@ -1,5 +1,5 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using System.IO;
 using System.Xml.Serialization;
 #endregion
@@ -28,7 +28,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                Log.WriteLine($"Exception occured while writing to file \"{strPath}\": {ex}", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Exception occured while writing to file \"{strPath}\": {ex}");
             }
         }
         #endregion
@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                Log.WriteLine($"Exception occured while reading from file \"{strPath}\": {ex}", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Exception occured while reading from file \"{strPath}\": {ex}");
             }
 
             if (retVal == null)

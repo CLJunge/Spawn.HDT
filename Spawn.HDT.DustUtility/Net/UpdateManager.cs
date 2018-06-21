@@ -1,5 +1,5 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Log.WriteLine("Checking GitHub for updates...", LogType.Info);
+                    Logger.Default.Log(LogLevel.Info, "Checking GitHub for updates...");
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
@@ -101,11 +101,11 @@ namespace Spawn.HDT.DustUtility.Net
                                     }
                                     else { }
 
-                                    Log.WriteLine("Update available", LogType.Info);
+                                    Logger.Default.Log(LogLevel.Info, "Update available");
                                 }
                                 else
                                 {
-                                    Log.WriteLine("No update available", LogType.Info);
+                                    Logger.Default.Log(LogLevel.Info, "No update available");
                                 }
                             }
                             else { }
@@ -116,7 +116,7 @@ namespace Spawn.HDT.DustUtility.Net
                 catch (Exception ex)
                 {
                     //No internet connection or github down
-                    Log.WriteLine($"Couldn't perform update check: {ex}", LogType.Error);
+                    Logger.Default.Log(LogLevel.Error, $"Couldn't perform update check: {ex}");
                 }
 
                 s_blnIsChecking = false;
@@ -150,7 +150,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                     else
                     {
-                        Log.WriteLine("Download canceled", LogType.Debug);
+                        Logger.Default.Log(LogLevel.Warning, "User canceled download");
                     }
                 };
 

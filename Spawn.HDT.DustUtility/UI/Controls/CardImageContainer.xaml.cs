@@ -1,6 +1,6 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
 using System.Drawing;
 using System.IO;
@@ -44,7 +44,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 if (m_currentImageStream != null)
                 {
-                    Log.WriteLine("Disposing current image...", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, "Disposing current image...");
 
                     m_currentImageStream.Dispose();
                     m_currentImageStream = null;
@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 if (m_wrapper != null && Visibility == Visibility.Visible)
                 {
-                    Log.WriteLine($"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})");
 
                     m_currentImageStream = (await CardImageProvider.GetStreamAsync(m_wrapper.RawCard.Id, m_wrapper.RawCard.Premium));
 
@@ -63,13 +63,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                         if (m_wrapper.RawCard.Premium)
                         {
-                            Log.WriteLine("Setting current image as GIF", LogType.Debug);
+                            Logger.Default.Log(LogLevel.Debug, "Setting current image as GIF");
 
                             image.SetValue(XamlAnimatedGif.AnimationBehavior.SourceStreamProperty, m_currentImageStream);
                         }
                         else
                         {
-                            Log.WriteLine("Setting current image as normal bitmap", LogType.Debug);
+                            Logger.Default.Log(LogLevel.Debug, "Setting current image as normal bitmap");
 
                             image.Source = (Image.FromStream(m_currentImageStream) as Bitmap).ToBitmapImage();
                         }

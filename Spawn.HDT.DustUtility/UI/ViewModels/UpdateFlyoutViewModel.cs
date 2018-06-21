@@ -1,6 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
 using System;
 using System.IO;
@@ -171,7 +171,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnDownloadCompleted
         private void OnDownloadCompleted(object sender, System.Net.DownloadDataCompletedEventArgs e)
         {
-            Log.WriteLine("Download finished. Extracting zip file...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Download finished. Extracting zip file...");
 
             UpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
             UpdateManager.DownloadCompleted -= OnDownloadCompleted;
@@ -213,7 +213,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region DeleteOldPluginVersions
         private void DeleteOldPluginVersions()
         {
-            Log.WriteLine("Deleting old plugin versions", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Deleting old plugin versions");
 
             string strHdtPluginDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins");
 

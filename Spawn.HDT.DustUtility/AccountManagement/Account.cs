@@ -2,8 +2,8 @@
 using HearthMirror;
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -96,7 +96,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Card> lstRet = null;
 
-            Log.WriteLine("Loading collection...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Loading collection...");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -109,13 +109,13 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if (lstRet != null)
             {
-                Log.WriteLine("Loaded collection", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Collection loaded");
 
                 lstRet = lstRet.Where(c => HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
             }
             else
             {
-                Log.WriteLine("Couldn't load collection!", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, "Couldn't load collection!");
             }
 
             return lstRet;
@@ -127,7 +127,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Deck> lstRet = null;
 
-            Log.WriteLine("Loading decks...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Loading decks...");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -140,11 +140,11 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if (lstRet != null)
             {
-                Log.WriteLine("Loaded decks", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Loaded decks");
             }
             else
             {
-                Log.WriteLine("Couldn't load decks!", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, "Couldn't load decks!");
             }
 
             return lstRet;
@@ -201,7 +201,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             {
                 m_preferences.Save(this);
 
-                Log.WriteLine($"Saved preferences for {AccountString}", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"Saved preferences for {AccountString}");
             }
             else { }
         }
@@ -279,7 +279,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 }
                 catch (Exception ex)
                 {
-                    Log.WriteLine($"Couldn't retrieve currently logged in account: {ex}", LogType.Error);
+                    Logger.Default.Log(LogLevel.Error, $"Couldn't retrieve currently logged in account: {ex}");
                 }
             }
             else { }

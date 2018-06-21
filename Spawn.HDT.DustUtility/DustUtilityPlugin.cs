@@ -4,11 +4,11 @@ using GalaSoft.MvvmLight.Ioc;
 using Hearthstone_Deck_Tracker.API;
 using Hearthstone_Deck_Tracker.Plugins;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Hearthstone_Deck_Tracker.Utility.Toasts;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
 using Spawn.HDT.DustUtility.UI.Controls.Toasts;
 using Spawn.HDT.DustUtility.UI.Dialogs;
@@ -267,7 +267,7 @@ namespace Spawn.HDT.DustUtility
                 {
                     MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                    Log.WriteLine("Hearthstone isn't running", LogType.Warning);
+                    Logger.Default.Log(LogLevel.Warning, "Hearthstone isn't running");
                 }
                 else { }
             }
@@ -283,7 +283,7 @@ namespace Spawn.HDT.DustUtility
 
                 MessageBox.Show(strMessage, Name, MessageBoxButton.OK, MessageBoxImage.Information);
 
-                Log.WriteLine("Plugin is not initialized", LogType.Info);
+                Logger.Default.Log(LogLevel.Warning, "Plugin is not initialized");
             }
         }
         #endregion
@@ -291,6 +291,8 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
+            Logger.Default.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
+
             if (IsOffline && Cache.TimerEnabled)
             {
                 Cache.StopTimer();
@@ -361,7 +363,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowSettingsDialog
         private async void ShowSettingsDialog()
         {
-            Log.WriteLine("Opening settings dialog", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Opening settings dialog");
 
             SettingsDialog = new SettingsDialogView()
             {
@@ -399,7 +401,7 @@ namespace Spawn.HDT.DustUtility
         #region UpdatePluginFiles
         private void UpdatePluginFiles()
         {
-            Log.WriteLine("Updating plugin files", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Updating plugin files");
 
             if (Config.Version == 1)
             {
@@ -411,11 +413,11 @@ namespace Spawn.HDT.DustUtility
 
                 Config.Version = 2;
 
-                Log.WriteLine("Finished updating plugin files", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Finished updating plugin files");
             }
             else
             {
-                Log.WriteLine("No file update required", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "No file update required");
             }
         }
         #endregion
@@ -561,7 +563,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowMainWindowAsync
         private static async Task ShowMainWindowAsync()
         {
-            Log.WriteLine($"Opening main window for {CurrentAccount.AccountString}", LogType.Info);
+            Logger.Default.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.AccountString}");
 
             MainWindow?.Show();
 
@@ -619,17 +621,17 @@ namespace Spawn.HDT.DustUtility
                         + Environment.NewLine + Environment.NewLine +
                         "Collection and decks have to be stored locally for an account to be available.", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                    Log.WriteLine("No accounts available", LogType.Info);
+                    Logger.Default.Log(LogLevel.Warning, "No accounts available");
                 }
             }
 
             if (retVal != null)
             {
-                Log.WriteLine($"Account: {retVal.AccountString}", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"Account: {retVal.AccountString}");
             }
             else
             {
-                Log.WriteLine($"No account selected", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"No account selected");
             }
 
             return retVal;
@@ -677,7 +679,7 @@ namespace Spawn.HDT.DustUtility
 
             if (MainWindow != null)
             {
-                Log.WriteLine("Switching account...", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Switching account...");
 
                 IAccount oldAcc = CurrentAccount;
 
@@ -699,7 +701,7 @@ namespace Spawn.HDT.DustUtility
 
                 ShowMainWindowAsync().Forget();
 
-                Log.WriteLine($"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}");
             }
             else { }
 

@@ -1,7 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
 using HearthDb.Enums;
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 #endregion
@@ -132,7 +132,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardSet.HOF
                 };
 
-                Log.WriteLine("Loaded default parameters", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Loaded default parameters");
             }
 
             Rarities.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Rarities));

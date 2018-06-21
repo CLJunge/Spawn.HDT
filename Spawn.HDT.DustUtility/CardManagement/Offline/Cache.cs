@@ -2,8 +2,8 @@
 using CommonServiceLocator;
 using HearthMirror;
 using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -140,7 +140,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             catch (System.Exception ex)
             {
-                Log.WriteLine($"Exception occured while loading collection: {ex}", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Exception occured while loading collection: {ex}");
             }
 
             return lstRet;
@@ -204,7 +204,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             catch (System.Exception ex)
             {
-                Log.WriteLine($"Exception occured while loading decks: {ex}", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Exception occured while loading decks: {ex}");
             }
 
             return lstRet;
@@ -222,7 +222,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
             s_timer = new Timer(OnTick, null, 0, 1000 * DustUtilityPlugin.Config.SaveInterval);
 
-            Log.WriteLine($"Started cache timer (Interval={DustUtilityPlugin.Config.SaveInterval}s)", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Started cache timer (Interval={DustUtilityPlugin.Config.SaveInterval}s)");
         }
         #endregion
 
@@ -232,7 +232,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             s_timer.Dispose();
             s_timer = null;
 
-            Log.WriteLine("Stopped cache timer", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Stopped cache timer");
         }
         #endregion
 
@@ -250,7 +250,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region OnTick
         private static async void OnTick(object state)
         {
-            Log.WriteLine("Saving collection and decks...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Saving collection and decks...");
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
@@ -266,21 +266,21 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 HistoryManager.CheckCollection(account);
 
-                Log.WriteLine("Saving collection...", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Saving collection...");
 
                 if (SaveCollection(account))
                 {
-                    Log.WriteLine("Saved collection successfuly", LogType.Info);
+                    Logger.Default.Log(LogLevel.Info, "Saved collection successfuly");
 
                     DustUtilityPlugin.ShowToastNotification("Saved Collection!");
                 }
                 else { }
 
-                Log.WriteLine("Saving decks...", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Saving decks...");
 
                 if (SaveDecks(account))
                 {
-                    Log.WriteLine("Saved decks successfuly", LogType.Info);
+                    Logger.Default.Log(LogLevel.Info, "Saved decks successfuly");
 
                     DustUtilityPlugin.ShowToastNotification("Saved Decks!");
                 }
@@ -288,7 +288,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             else
             {
-                Log.WriteLine("Couldn't retrieve account!", LogType.Debug);
+                Logger.Default.Log(LogLevel.Warning, "Couldn't retrieve account!");
             }
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = false;

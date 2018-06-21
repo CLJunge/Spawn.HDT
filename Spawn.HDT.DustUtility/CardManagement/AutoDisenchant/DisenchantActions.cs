@@ -3,6 +3,7 @@ using HearthMirror;
 using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -56,7 +57,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         #region DisenchantCards
         public async Task<bool> DisenchantCards()
         {
-            Log.WriteLine("Disenchanting...", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, "Disenchanting...");
 
             int nTotalCount = m_lstCards.Sum(c => c.Count);
 
@@ -135,7 +136,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             }
             catch (Exception ex)
             {
-                Log.WriteLine($"Exception occured while disenchanting \"{wrapper.Card.Name}\": {ex}", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Exception occured while disenchanting \"{wrapper?.Card?.Name}\": {ex}");
             }
 
             return nRet;
@@ -201,7 +202,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         {
             if (Reflection.GetCurrentManaFilter() != -1)
             {
-                Log.WriteLine("Clearing mana filter", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Clearing mana filter");
 
                 await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
 
@@ -215,7 +216,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             }
             else
             {
-                Log.WriteLine("No mana filter set", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "No mana filter set");
             }
         }
         #endregion

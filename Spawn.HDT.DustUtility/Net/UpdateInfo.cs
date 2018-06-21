@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region
+using System;
+#endregion
 
 namespace Spawn.HDT.DustUtility.Net
 {

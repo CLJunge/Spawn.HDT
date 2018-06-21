@@ -1,8 +1,8 @@
 ﻿#region Using
 using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 s_blnCheckInProgress = true;
 
-                Log.WriteLine($"Checking for changes for \"{account.AccountString}\"...", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"Checking for changes for \"{account.AccountString}\"...");
 
                 List<Card> lstOldCollection = account.GetCollection();
 
@@ -45,7 +45,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     //disenchanted cards
                     nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstHistory, lstOld);
 
-                    Log.WriteLine($"Found {nChanges} changes", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"Found {nChanges} changes");
 
                     SaveHistory(account, lstHistory);
                 }
@@ -148,7 +148,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region LoadHistory
         private static List<CachedHistoryCard> LoadHistory(IAccount account)
         {
-            Log.WriteLine($"Loading history for \"{account.AccountString}\"", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Loading history for \"{account.AccountString}\"");
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
@@ -163,7 +163,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             if (!(account is MockAccount))
             {
 #endif
-                Log.WriteLine($"Saving history for \"{account.AccountString}\"", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, $"Saving history for \"{account.AccountString}\"");
 
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
@@ -207,14 +207,14 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             SaveHistory(account, new List<CachedHistoryCard>());
 
-            Log.WriteLine($"Cleared history for \"{account.AccountString}\"", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Cleared history for \"{account.AccountString}\"");
         }
         #endregion
 
         #region RemoveItemAt
         public static void RemoveItemAt(IAccount account, int nIndex)
         {
-            Log.WriteLine($"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"", LogType.Debug);
+            Logger.Default.Log(LogLevel.Debug, $"Removing item at index \"{nIndex}\" for \"{account.AccountString}\"");
 
             List<CachedHistoryCard> lstHistory = account.GetHistory();
 

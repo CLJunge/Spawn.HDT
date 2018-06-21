@@ -1,5 +1,5 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -26,7 +26,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                Log.WriteLine($"Passed invalid value: \"{value}\"!", LogType.Error);
+                Logger.Default.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"!");
             }
 
             return strRet;

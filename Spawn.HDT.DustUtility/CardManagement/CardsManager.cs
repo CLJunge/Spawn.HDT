@@ -1,10 +1,10 @@
 ﻿#region Using
 using HearthDb.Enums;
 using HearthMirror.Objects;
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,14 +35,14 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             if (parameters != null)
             {
-                Log.WriteLine("Collecting cards...", LogType.Debug);
-                Log.WriteLine("Parameters:", LogType.Debug);
-                Log.WriteLine($"QueryString={parameters.QueryString}", LogType.Debug);
-                Log.WriteLine($"IncludeGoldenCards={parameters.IncludeGoldenCards}", LogType.Debug);
-                Log.WriteLine($"UnusedCardsOnly={parameters.UnusedCardsOnly}", LogType.Debug);
-                Log.WriteLine($"Rarities={string.Join(",", parameters.Rarities)}", LogType.Debug);
-                Log.WriteLine($"Classes={string.Join(",", parameters.Classes)}", LogType.Debug);
-                Log.WriteLine($"Sets={string.Join(",", parameters.Sets)}", LogType.Debug);
+                Logger.Default.Log(LogLevel.Debug, "Collecting cards...");
+                Logger.Default.Log(LogLevel.Debug, "Parameters:");
+                Logger.Default.Log(LogLevel.Debug, $"QueryString={parameters.QueryString}");
+                Logger.Default.Log(LogLevel.Debug, $"IncludeGoldenCards={parameters.IncludeGoldenCards}");
+                Logger.Default.Log(LogLevel.Debug, $"UnusedCardsOnly={parameters.UnusedCardsOnly}");
+                Logger.Default.Log(LogLevel.Debug, $"Rarities={string.Join(",", parameters.Rarities)}");
+                Logger.Default.Log(LogLevel.Debug, $"Classes={string.Join(",", parameters.Classes)}");
+                Logger.Default.Log(LogLevel.Debug, $"Sets={string.Join(",", parameters.Sets)}");
 
                 List<Card> lstCollection = account.GetCollection();
 
@@ -70,7 +70,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                         GetCardsByQueryString(parameters, lstCards);
                     }
 
-                    Log.WriteLine($"Found {lstCards.Count} cards", LogType.Debug);
+                    Logger.Default.Log(LogLevel.Debug, $"Found {lstCards.Count} cards");
 
                     retVal = SearchResult.Create(lstCards);
                 }
@@ -102,11 +102,11 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             for (int i = 0; i < parameters.Rarities.Count && !blnDone; i++)
             {
-                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
+                List<CardWrapper> lstChunk = FilterByRarity(parameters.Rarities[i], parameters);
 
-                lstChunk = FilterForClasses(lstChunk, parameters.Classes.ToList());
+                lstChunk = FilterByClasses(lstChunk, parameters.Classes.ToList());
 
-                lstChunk = FilterForSets(lstChunk, parameters.Sets.ToList());
+                lstChunk = FilterBySets(lstChunk, parameters.Sets.ToList());
 
                 lstChunk = new List<CardWrapper>(lstChunk.OrderBy(c => c.DustValue));
 
@@ -192,11 +192,11 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             for (int i = 0; i < parameters.Rarities.Count && !blnDone; i++)
             {
-                List<CardWrapper> lstChunk = GetCardsForRarity(parameters.Rarities[i], parameters);
+                List<CardWrapper> lstChunk = FilterByRarity(parameters.Rarities[i], parameters);
 
-                lstChunk = FilterForClasses(lstChunk, parameters.Classes.ToList());
+                lstChunk = FilterByClasses(lstChunk, parameters.Classes.ToList());
 
-                lstChunk = FilterForSets(lstChunk, parameters.Sets.ToList());
+                lstChunk = FilterBySets(lstChunk, parameters.Sets.ToList());
 
                 for (int j = 0; j < lstChunk.Count; j++)
                 {
@@ -278,10 +278,12 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region FilterForClasses
-        private static List<CardWrapper> FilterForClasses(List<CardWrapper> lstCards, List<CardClass> lstClasses)
+        #region FilterByClasses
+        private static List<CardWrapper> FilterByClasses(List<CardWrapper> lstCards, List<CardClass> lstClasses)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
+
+            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by classes... [{string.Join(",", lstClasses)}]");
 
             for (int i = 0; i < lstClasses.Count; i++)
             {
@@ -294,10 +296,12 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region FilterForSets
-        private static List<CardWrapper> FilterForSets(List<CardWrapper> lstCards, List<CardSet> lstSets)
+        #region FilterBySets
+        private static List<CardWrapper> FilterBySets(List<CardWrapper> lstCards, List<CardSet> lstSets)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
+
+            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by sets... [{string.Join(",", lstSets)}]");
 
             for (int i = 0; i < lstSets.Count; i++)
             {
@@ -310,10 +314,12 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region GetCardsForRarity
-        private static List<CardWrapper> GetCardsForRarity(Rarity rarity, SearchParameters parameters)
+        #region FilterByRarity
+        private static List<CardWrapper> FilterByRarity(Rarity rarity, SearchParameters parameters)
         {
             List<CardWrapper> lstRet = new List<CardWrapper>();
+
+            Logger.Default.Log(LogLevel.Debug, $"Filtering cards by rarity... ({rarity})");
 
             if (parameters.IncludeGoldenCards)
             {
@@ -341,6 +347,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
             int nRet = 0;
 
             List<Card> lstCards = account.GetCollection();
+
+            Logger.Default.Log(LogLevel.Debug, "Calculating total collection value");
 
             for (int i = 0; i < lstCards.Count; i++)
             {

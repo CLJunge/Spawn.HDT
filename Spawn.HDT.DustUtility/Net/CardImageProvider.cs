@@ -1,7 +1,7 @@
 ﻿#region Using
-using Hearthstone_Deck_Tracker.Utility.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Spawn.HDT.DustUtility.Logging;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -77,7 +77,7 @@ namespace Spawn.HDT.DustUtility.Net
                 }
                 catch
                 {
-                    Log.WriteLine("Couldn't load card image!", LogType.Warning);
+                    Logger.Default.Log(LogLevel.Warning, "Couldn't load card image!");
                 }
             }
             else { }
