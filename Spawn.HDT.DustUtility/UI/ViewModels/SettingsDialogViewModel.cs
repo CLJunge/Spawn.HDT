@@ -247,14 +247,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     break;
 
                 case nameof(LogLevel):
-                    if (e.IsDirty)
+                    if (e.IsDirty && !LogLevelLabelText.EndsWith(IsDirtySuffix))
                     {
                         LogLevelLabelText = $"{LogLevelLabelText}{IsDirtySuffix}";
                     }
-                    else
+                    else if (!e.IsDirty)
                     {
                         LogLevelLabelText = LogLevelLabelText.Substring(0, LogLevelLabelText.Length - IsDirtySuffix.Length);
                     }
+                    else { }
                     break;
             }
         }
