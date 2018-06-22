@@ -29,6 +29,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strShowNotificationsLabelText;
         private LogLevel m_logLevel;
         private string m_strLogLevelLabelText;
+        private ViewMode m_viewMode;
+        private string m_strViewModeLabelText;
         #endregion
 
         #region Properties
@@ -160,6 +162,26 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public IList<LogLevel> LogLevels => Enum.GetValues(typeof(LogLevel)).Cast<LogLevel>().ToList();
         #endregion
 
+        #region ViewMode
+        public ViewMode ViewMode
+        {
+            get => m_viewMode;
+            set => Set(ref m_viewMode, value);
+        }
+        #endregion
+
+        #region ViewModeLabelText
+        public string ViewModeLabelText
+        {
+            get => m_strViewModeLabelText;
+            set => Set(ref m_strViewModeLabelText, value);
+        }
+        #endregion
+
+        #region ViewModes
+        public IList<ViewMode> ViewModes => Enum.GetValues(typeof(ViewMode)).Cast<ViewMode>().ToList();
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -256,6 +278,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         LogLevelLabelText = LogLevelLabelText.Substring(0, LogLevelLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+                case nameof(ViewMode):
+                    if (e.IsDirty)
+                    {
+                        ViewModeLabelText = $"{ViewModeLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        ViewModeLabelText = ViewModeLabelText.Substring(0, ViewModeLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
             }
         }
         #endregion
@@ -275,6 +308,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             RememberQueryString = DustUtilityPlugin.Config.RememberQueryString;
             ShowNotifications = DustUtilityPlugin.Config.ShowNotifications;
             LogLevel = DustUtilityPlugin.Config.LogLevel;
+            ViewMode = DustUtilityPlugin.Config.ViewMode;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(CheckForUpdates), CheckForUpdates);
@@ -283,6 +317,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(RememberQueryString), RememberQueryString);
             SetInitialPropertyValue(nameof(ShowNotifications), ShowNotifications);
             SetInitialPropertyValue(nameof(LogLevel), LogLevel);
+            SetInitialPropertyValue(nameof(ViewMode), ViewMode);
         }
         #endregion
 
@@ -296,6 +331,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.RememberQueryString = RememberQueryString;
             DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
             DustUtilityPlugin.Config.LogLevel = LogLevel;
+            DustUtilityPlugin.Config.ViewMode = ViewMode;
         }
         #endregion
 
@@ -309,6 +345,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             RememberQueryStringLabelText = "Remember Search Term";
             ShowNotificationsLabelText = "Show Notifications";
             LogLevelLabelText = "Log Level";
+            ViewModeLabelText = "View Mode";
         }
         #endregion
     }
