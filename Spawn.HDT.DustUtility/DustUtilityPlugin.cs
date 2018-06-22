@@ -198,7 +198,7 @@ namespace Spawn.HDT.DustUtility
 
             GameEvents.OnModeChanged.Add(OnModeChanged);
 
-            Task.Run(() => UpdatePluginFiles()).ContinueWith(t =>
+            Task.Run(() => UpdateDataFiles()).ContinueWith(t =>
             {
                 s_blnInitialized = true;
             });
@@ -383,10 +383,10 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region UpdatePluginFiles
-        private void UpdatePluginFiles()
+        #region UpdateDataFiles
+        private void UpdateDataFiles()
         {
-            Logger.Log(LogLevel.Debug, "Updating plugin files");
+            Logger.Log(LogLevel.Debug, "Updating data files");
 
             if (Config.Version == 1)
             {
@@ -398,7 +398,7 @@ namespace Spawn.HDT.DustUtility
 
                 Config.Version = 2;
 
-                Logger.Log(LogLevel.Debug, "Finished updating plugin files");
+                Logger.Log(LogLevel.Debug, "Update finished");
             }
             else
             {
