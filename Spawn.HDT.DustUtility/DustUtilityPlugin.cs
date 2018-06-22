@@ -41,6 +41,7 @@ namespace Spawn.HDT.DustUtility
         private static bool s_blnInitialized;
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
+        private static DateTime s_dtLastSaveTimestamp = DateTime.Now;
 #if DEBUG
         private static readonly IAccount s_mockAcc;
 #endif
@@ -335,12 +336,13 @@ namespace Spawn.HDT.DustUtility
         {
             switch (mode)
             {
-                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
-                    if (Config.OfflineMode)
+                    if (Config.OfflineMode && (DateTime.Now - s_dtLastSaveTimestamp).Minutes >= 1)
                     {
                         await Cache.SaveAll(CurrentAccount);
+
+                        s_dtLastSaveTimestamp = DateTime.Now;
                     }
                     else { }
                     break;
