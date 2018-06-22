@@ -162,6 +162,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccountManagement\Account.cs" />
+    <Compile Include="UI\ViewMode.cs" />
     <Compile Include="UI\Components\Converters\CardSetCardCountConverter.cs" />
     <Compile Include="UI\Components\NumericValidationRule.cs" />
     <Compile Include="UI\Controls\CardCountDialog.xaml.cs">
