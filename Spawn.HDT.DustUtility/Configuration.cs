@@ -1,6 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.UI;
 using System.ComponentModel;
 using System.IO;
 #endregion
@@ -19,6 +20,7 @@ namespace Spawn.HDT.DustUtility
         private bool m_blnRememberQueryString;
         private bool m_blnShowNotifications;
         private LogLevel m_logLevel;
+        private ViewMode m_viewMode;
         private int m_nVersion;
         #endregion
 
@@ -104,6 +106,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region ViewMode
+        [DefaultValue(ViewMode.Default)]
+        public ViewMode ViewMode
+        {
+            get => m_viewMode;
+            set => Set(ref m_viewMode, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -126,6 +137,7 @@ namespace Spawn.HDT.DustUtility
             RememberQueryString = false;
             ShowNotifications = true;
             LogLevel = LogLevel.Info;
+            ViewMode = ViewMode.Default;
             Version = 1;
 
             //PropertyChanged += (s, e) => Save();
