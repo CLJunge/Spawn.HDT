@@ -23,7 +23,7 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    <GroupBox Header="Info">
+    <GroupBox Header="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
