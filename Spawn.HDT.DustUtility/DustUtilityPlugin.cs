@@ -327,14 +327,7 @@ namespace Spawn.HDT.DustUtility
                 await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
 
-            if (IsOffline)
-            {
-                ShowToastNotification("Current Mode: Offline");
-            }
-            else
-            {
-                ShowToastNotification("Current Mode: Online");
-            }
+            ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
         }
         #endregion
 
