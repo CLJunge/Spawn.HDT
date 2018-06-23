@@ -304,7 +304,7 @@ namespace Spawn.HDT.DustUtility
 
             IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
 
-            if (loggedInAcc != null)
+            if (loggedInAcc?.IsValid ?? false)
             {
                 if (!IsOffline)
                 {
