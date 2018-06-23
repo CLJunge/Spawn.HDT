@@ -2,10 +2,11 @@
 using CommonServiceLocator;
 using HearthDb.Enums;
 using HearthMirror;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
-using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Controls;
 using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.ViewModels;
@@ -17,7 +18,7 @@ using System.Threading.Tasks;
 using System.Windows;
 #endregion
 
-namespace Spawn.HDT.DustUtility.CardManagement
+namespace Spawn.HDT.DustUtility.UI
 {
     public class CardSelectionManager : ViewModelBase
     {
@@ -125,8 +126,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             if (!m_blnDisenchantingConfirmation)
             {
-                MessageDialogResult result = await ServiceLocator.Current.GetInstance<MainViewModel>()
-                        .SelectionWindow.ShowMessageAsync(string.Empty, "Open your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
+                MessageDialogResult result = await GetCurrentWindow().ShowMessageAsync(string.Empty, "Open your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
 
                 m_blnDisenchantingConfirmation = result == MessageDialogResult.Affirmative;
 
@@ -209,8 +209,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             retVal.CancelButton.Click += async (s, e) =>
             {
-                await ServiceLocator.Current.GetInstance<MainViewModel>()
-                .SelectionWindow.HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+                await GetCurrentWindow().HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
             };
 
             retVal.AcceptButton.Click += async (s, e) =>
@@ -231,8 +230,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 }
                 else { }
 
-                await ServiceLocator.Current.GetInstance<MainViewModel>()
-                .SelectionWindow.HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+                await GetCurrentWindow().HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
 
                 m_currentItem = null;
             };
@@ -294,8 +292,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 {
                     (m_cardCountDialog.Content as CardCountDialog).Initialize(e.Item.Name, nCount);
 
-                    await ServiceLocator.Current.GetInstance<MainViewModel>()
-                        .SelectionWindow.ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
+                    await GetCurrentWindow().ShowMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
                 }
                 else if (nCount == 1)
                 {
@@ -347,6 +344,26 @@ namespace Spawn.HDT.DustUtility.CardManagement
             else { }
 
             return blnRet;
+        }
+        #endregion
+
+        #region GetCurrentWindow
+        private MetroWindow GetCurrentWindow()
+        {
+            MetroWindow retVal = null;
+
+            switch (DustUtilityPlugin.Config.ViewMode)
+            {
+                case ViewMode.Default:
+                    retVal = ServiceLocator.Current.GetInstance<MainViewModel>().SelectionWindow;
+                    break;
+
+                case ViewMode.Split:
+                    retVal = DustUtilityPlugin.MainWindow;
+                    break;
+            }
+
+            return retVal;
         }
         #endregion
     }
