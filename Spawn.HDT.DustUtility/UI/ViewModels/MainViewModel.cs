@@ -273,6 +273,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (DustUtilityPlugin.IsOffline)
             {
                 DecksButtonEnabled = true;
+                System.Windows.Controls.ToolTipService.SetIsEnabled(DustUtilityPlugin.MainWindow.DecksButton, false);
             }
             else { }
 
