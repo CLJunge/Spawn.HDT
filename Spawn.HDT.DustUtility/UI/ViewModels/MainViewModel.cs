@@ -272,6 +272,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     SplitViewVisibility = Visibility.Visible;
 
                     CloseSelectionWindow();
+
+                    await CardSelection.InitializeAsync();
                     break;
             }
 
@@ -396,7 +398,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region UpdateCardItemsSortOrderAsync
         public async Task UpdateCardItemsSortOrderAsync()
         {
-            await Task.Delay(1); //return to ui thread
+            await Task.Delay(1);
 
             List<CardItemModel> lstItems = OrderItems(CardItems).ToList();
 
@@ -429,6 +431,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
+            await CardSelection.InitializeAsync();
         }
         #endregion
 
