@@ -42,6 +42,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private bool m_blnIsSyncing;
         private Visibility m_defaultViewVisibility;
         private Visibility m_splitViewVisibility;
+        private bool m_blnDecksButtonEnabled;
         #endregion
 
         #region Properties
@@ -159,6 +160,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             set => Set(ref m_splitViewVisibility, value);
         }
         #endregion
+
+        #region DecksButtonEnabled
+        public bool DecksButtonEnabled
+        {
+            get => m_blnDecksButtonEnabled;
+            set => Set(ref m_blnDecksButtonEnabled, value);
+        }
+        #endregion
         #endregion
 
         #region Static Ctor
@@ -260,6 +269,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ClearControls();
 
             ReloadFlyouts();
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                DecksButtonEnabled = true;
+            }
+            else { }
 
             switch (DustUtilityPlugin.Config.ViewMode)
             {

@@ -83,7 +83,7 @@
                     <TextBlock Text="HISTORY" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=DecksFlyout}">
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=DecksFlyout}" IsEnabled="{Binding DecksButtonEnabled}">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>

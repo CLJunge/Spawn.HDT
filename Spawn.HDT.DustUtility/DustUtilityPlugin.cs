@@ -327,6 +327,12 @@ namespace Spawn.HDT.DustUtility
                 await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
 
+            if (!IsOffline)
+            {
+                ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = false;
+            }
+            else { }
+
             ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
         }
         #endregion
@@ -343,6 +349,12 @@ namespace Spawn.HDT.DustUtility
                         await Cache.SaveAll(CurrentAccount);
 
                         s_dtLastSaveTimestamp = DateTime.Now;
+                    }
+                    else { }
+
+                    if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
+                    {
+                        ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = true;
                     }
                     else { }
                     break;
