@@ -140,7 +140,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 case CardSet.EXPERT1:
                 case CardSet.HOF:
-                case CardSet.GILNEAS:
                     strSource = $"{ResourceBasePath}hearthstone_logo.png";
                     break;
 
@@ -170,6 +169,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 case CardSet.LOOTAPALOOZA:
                     strSource = $"{ResourceBasePath}kobolds_logo.png";
+                    break;
+
+                case CardSet.GILNEAS:
+                    strSource = $"{ResourceBasePath}witchwood_logo.png";
                     break;
 
                 case CardSet.NAXX:
