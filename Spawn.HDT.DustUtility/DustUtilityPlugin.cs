@@ -737,11 +737,11 @@ namespace Spawn.HDT.DustUtility
 
             if (!account.IsEmpty)
             {
-                strRet = Path.Combine(DataDirectory, "Accounts", $"{account.AccountString}_{strType}.xml");
+                strRet = Path.Combine(AccountsDirectory, $"{account.AccountString}_{strType}.xml");
             }
             else
             {
-                strRet = Path.Combine(DataDirectory, "Accounts", $"{strType}.xml");
+                strRet = Path.Combine(AccountsDirectory, $"{strType}.xml");
             }
 
             return strRet;
