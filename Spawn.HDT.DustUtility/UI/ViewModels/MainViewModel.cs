@@ -2,6 +2,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using HearthMirror;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
@@ -38,8 +39,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private Visibility m_switchAccountButtonVisibility;
         private string m_strSearchQuery;
         private bool m_blnIsSyncing;
-
-        private CardSelectionWindow m_selectionWindow;
+        private Visibility m_defaultViewVisibility;
+        private Visibility m_splitViewVisibility;
         #endregion
 
         #region Properties
@@ -120,7 +121,42 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SelectionWindow
-        public CardSelectionWindow SelectionWindow => m_selectionWindow;
+        public CardSelectionWindow SelectionWindow { get; private set; }
+        #endregion
+
+        #region CardSelection
+        public CardSelectionManager CardSelection => ServiceLocator.Current.GetInstance<CardSelectionManager>();
+        #endregion
+
+        #region ClearSelectionCommand
+        public ICommand ClearSelectionCommand => new RelayCommand(CardSelection.Clear, () => CardSelection.CardItems.Count > 0);
+        #endregion
+
+        #region ImportLatestPackCommand
+        public ICommand ImportLatestPackCommand => new RelayCommand(CardSelection.ImportLatestPack, () => Reflection.GetPackCards()?.Count > 0);
+        #endregion
+
+        #region DisenchantSelectionCommand
+        public ICommand DisenchantSelectionCommand => new RelayCommand(CardSelection.DisenchantSelection, () =>
+        {
+            return DustUtilityPlugin.Config.AutoDisenchanting && CardSelection.CardItems.Count > 0 && !DustUtilityPlugin.IsOffline;
+        });
+        #endregion
+
+        #region DefaultViewVisibility
+        public Visibility DefaultViewVisibility
+        {
+            get => m_defaultViewVisibility;
+            set => Set(ref m_defaultViewVisibility, value);
+        }
+        #endregion
+
+        #region SplitViewVisibility
+        public Visibility SplitViewVisibility
+        {
+            get => m_splitViewVisibility;
+            set => Set(ref m_splitViewVisibility, value);
+        }
         #endregion
         #endregion
 
@@ -224,6 +260,19 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             ReloadFlyouts();
 
+            switch (DustUtilityPlugin.Config.ViewMode)
+            {
+                case ViewMode.Default:
+                    DefaultViewVisibility = Visibility.Visible;
+                    SplitViewVisibility = Visibility.Hidden;
+                    break;
+
+                case ViewMode.Split:
+                    DefaultViewVisibility = Visibility.Hidden;
+                    SplitViewVisibility = Visibility.Visible;
+                    break;
+            }
+
             if (DustUtilityPlugin.Config.RememberQueryString
                 && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
             {
@@ -248,8 +297,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (await DustUtilityPlugin.SwitchAccount())
             {
-                m_selectionWindow?.Close();
-                m_selectionWindow = null;
+                SelectionWindow?.Close();
+                SelectionWindow = null;
             }
             else { }
         }
@@ -361,20 +410,20 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OpenCardSelectionWindow
         public async void OpenCardSelectionWindow()
         {
-            if (m_selectionWindow == null)
+            if (SelectionWindow == null)
             {
-                m_selectionWindow = new CardSelectionWindow()
+                SelectionWindow = new CardSelectionWindow()
                 {
                     Owner = DustUtilityPlugin.MainWindow
                 };
 
-                m_selectionWindow.Closed += (s, e) => m_selectionWindow = null;
+                SelectionWindow.Closed += (s, e) => SelectionWindow = null;
 
-                m_selectionWindow.Show();
+                SelectionWindow.Show();
             }
             else
             {
-                DustUtilityPlugin.BringWindowToFront(m_selectionWindow);
+                DustUtilityPlugin.BringWindowToFront(SelectionWindow);
             }
 
             await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
@@ -384,8 +433,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            m_selectionWindow?.Close();
-            m_selectionWindow = null;
+            SelectionWindow?.Close();
+            SelectionWindow = null;
 
             if (DustUtilityPlugin.HideMainWindowOnClose)
             {

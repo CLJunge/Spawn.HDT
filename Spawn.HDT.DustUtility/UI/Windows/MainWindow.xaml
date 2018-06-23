@@ -18,6 +18,39 @@
             <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
                 <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
             </Style>
+            <Style x:Key="GridSplitterPreviewStyle" >
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Fill="{DynamicResource AccentColorBrush}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="CustomGridSplitterStyle" TargetType="{x:Type GridSplitter}">
+                <Setter Property="Background"
+                        Value="{DynamicResource AccentColorBrush}"/>
+                <Setter Property="PreviewStyle" Value="{StaticResource GridSplitterPreviewStyle}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GridSplitter}">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="2">
+                                <Canvas RenderOptions.EdgeMode="Aliased" UseLayoutRounding="True"
+                                        Width="75" Height="5" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <Line X1="0" X2="75" Y1="0" Y2="0" Stroke="{DynamicResource HighlightBrush}" StrokeThickness="1"/>
+                                    <Line X1="0" X2="75" Y1="1" Y2="1" Stroke="{DynamicResource AccentBaseColorBrush}" StrokeThickness="1"/>
+
+                                    <Line X1="0" X2="75" Y1="4" Y2="4" Stroke="{DynamicResource AccentBaseColorBrush}" StrokeThickness="1"/>
+                                    <Line X1="0" X2="75" Y1="5" Y2="5" Stroke="{DynamicResource HighlightBrush}" StrokeThickness="1"/>
+                                </Canvas>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -122,14 +155,43 @@
                 Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=SortOrderFlyout}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,15,0" Width="150" Height="28"/>
 
-        <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="15,43,175,15">
-            <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
-        </Border>
+        <Grid Margin="15,43,175,15" Visibility="{Binding DefaultViewVisibility}">
+            <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+                <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
+            </Border>
+        </Grid>
+        <Grid Margin="15,43,175,15" Visibility="{Binding SplitViewVisibility}">
+            <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <uicontrols:CardsContainer Grid.Row="0" ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
+                    <GridSplitter Style="{DynamicResource CustomGridSplitterStyle}" Grid.Row="1" ResizeDirection="Rows" Background="{DynamicResource AccentColorBrush}" HorizontalAlignment="Stretch"/>
+                    <uicontrols:CardsContainer Grid.Row="2" ItemsSource="{Binding Path=CardSelection.CardItems}" AllowDrop="True" AllowDrag="False" ContextMenuEnabled="True" ItemDropped="OnItemDropped" RemoveCardItem="OnRemoveCardItem"/>
+                </Grid>
+            </Border>
+        </Grid>
 
-        <uicontrols:CardsInfoView DataContext="{Binding CardsInfo}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,71,10,0"/>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,71,10,0" Visibility="{Binding DefaultViewVisibility}">
+            <uicontrols:CardsInfoView DataContext="{Binding CardsInfo}" Title="Info"/>
+        </Grid>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,71,10,0" Visibility="{Binding SplitViewVisibility}">
+            <uicontrols:CardsInfoView DataContext="{Binding Path=CardSelection.CardsInfo}" Title="Selection"/>
+        </Grid>
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Selection"
                 Command="{Binding OpenCardSelectionWindowCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Margin="0,0,15,15" Width="150" Height="28"/>
+                Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding DefaultViewVisibility}"/>
+
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,336,15,0" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28" Visibility="{Binding Path=CardSelection.DisenchantButtonVisibility}"/>
+
+        <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear Selection" Command="{Binding ClearSelectionCommand}"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
     </Grid>
 </controls:MetroWindow>
