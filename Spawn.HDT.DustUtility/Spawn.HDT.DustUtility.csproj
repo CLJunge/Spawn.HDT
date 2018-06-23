@@ -130,6 +130,7 @@
     <Compile Include="CardManagement\AutoDisenchant\Helper.cs" />
     <Compile Include="CardManagement\AutoDisenchant\HearthstoneInfo.cs" />
     <Compile Include="CardManagement\AutoDisenchant\MouseActions.cs" />
+    <Compile Include="CardManagement\CardSelectionManager.cs" />
     <Compile Include="CardManagement\CardsManager.cs" />
     <Compile Include="CardManagement\SearchResult.cs" />
     <Compile Include="Hearthstone\CardWrapper.cs" />

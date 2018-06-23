@@ -17,16 +17,16 @@
     </Window.Resources>
     <Grid>
         <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Margin="10,10,175,10">
-            <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="True" AllowDrag="False" ContextMenuEnabled="True" ItemDropped="OnItemDropped" RemoveCardItem="OnRemoveCardItem"/>
+            <uicontrols:CardsContainer ItemsSource="{Binding Path=CardSelection.CardItems}" AllowDrop="True" AllowDrag="False" ContextMenuEnabled="True" ItemDropped="OnItemDropped" RemoveCardItem="OnRemoveCardItem"/>
         </Border>
-        
-        <uicontrols:CardsInfoView DataContext="{Binding CardsInfo}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"/>
+
+        <uicontrols:CardsInfoView DataContext="{Binding Path=CardSelection.CardsInfo}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,10,0"/>
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,265,15,0" Width="150" Height="28"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,298,15,0" Width="150" Height="28" Visibility="{Binding DisenchantButtonVisibility}"/>
-        
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,298,15,0" Width="150" Height="28" Visibility="{Binding Path=CardSelection.DisenchantButtonVisibility}"/>
+
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,10" Width="150" Height="28"/>
     </Grid>

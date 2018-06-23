@@ -7,6 +7,7 @@ using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Hearthstone_Deck_Tracker.Utility.Toasts;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
+using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
@@ -99,6 +100,10 @@ namespace Spawn.HDT.DustUtility
 
         #region Config
         public static Configuration Config => ServiceLocator.Current.GetInstance<Configuration>();
+        #endregion
+
+        #region CardSelection
+        public static CardSelectionManager CardSelection => ServiceLocator.Current.GetInstance<CardSelectionManager>();
         #endregion
 
         #region NumericRegex
@@ -527,6 +532,7 @@ namespace Spawn.HDT.DustUtility
                 }
 
                 SimpleIoc.Default.Register(() => Configuration.Load());
+                SimpleIoc.Default.Register(() => new CardSelectionManager());
 
                 SimpleIoc.Default.Register<MainViewModel>();
                 SimpleIoc.Default.Register<CardSelectionWindowViewModel>();
