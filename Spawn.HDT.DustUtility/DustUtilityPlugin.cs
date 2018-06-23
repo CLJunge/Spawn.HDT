@@ -39,6 +39,8 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Static Fields
+        private static Configuration s_config;
+        private static CardSelectionManager s_cardSelection;
         private static bool s_blnInitialized;
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
@@ -99,11 +101,11 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Config
-        public static Configuration Config => ServiceLocator.Current.GetInstance<Configuration>();
+        public static Configuration Config => s_config ?? (s_config = Configuration.Load());
         #endregion
 
         #region CardSelection
-        public static CardSelectionManager CardSelection => ServiceLocator.Current.GetInstance<CardSelectionManager>();
+        public static CardSelectionManager CardSelection => s_cardSelection ?? (s_cardSelection = new CardSelectionManager());
         #endregion
 
         #region NumericRegex
@@ -534,9 +536,6 @@ namespace Spawn.HDT.DustUtility
                     SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
 #endif
                 }
-
-                SimpleIoc.Default.Register(() => Configuration.Load());
-                SimpleIoc.Default.Register(() => new CardSelectionManager());
 
                 SimpleIoc.Default.Register<MainViewModel>();
                 SimpleIoc.Default.Register<CardSelectionWindowViewModel>();

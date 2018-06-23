@@ -125,7 +125,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region CardSelection
-        public CardSelectionManager CardSelection => ServiceLocator.Current.GetInstance<CardSelectionManager>();
+        public CardSelectionManager CardSelection => DustUtilityPlugin.CardSelection;
         #endregion
 
         #region ClearSelectionCommand

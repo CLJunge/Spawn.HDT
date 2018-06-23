@@ -14,7 +14,9 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         {
             Visibility retVal = Visibility.Hidden;
 
-            if (values.Length == 2 && (Visibility)values[0] == Visibility.Visible && (Visibility)values[1] == Visibility.Visible)
+            if (values.Length == 2
+                && (values[0] is Visibility v1 && values[1] is Visibility v2)
+                && (v1 == Visibility.Visible && v2 == Visibility.Visible))
             {
                 retVal = Visibility.Visible;
             }
