@@ -270,6 +270,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 case ViewMode.Split:
                     DefaultViewVisibility = Visibility.Hidden;
                     SplitViewVisibility = Visibility.Visible;
+
+                    CloseSelectionWindow();
                     break;
             }
 
@@ -433,8 +435,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SelectionWindow?.Close();
-            SelectionWindow = null;
+            CloseSelectionWindow();
 
             if (DustUtilityPlugin.HideMainWindowOnClose)
             {
@@ -489,6 +490,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             CardItems.Clear();
             CardsInfo.Clear();
+        }
+        #endregion
+
+        #region CloseSelectionWindow
+        private void CloseSelectionWindow()
+        {
+            SelectionWindow?.Close();
+            SelectionWindow = null;
         }
         #endregion
     }

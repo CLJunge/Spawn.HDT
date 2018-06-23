@@ -386,7 +386,11 @@ namespace Spawn.HDT.DustUtility
 
             await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
 
-            SettingsDialog.ShowDialog();
+            if (SettingsDialog.ShowDialog().Value)
+            {
+                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+            }
+            else { }
         }
         #endregion
 
