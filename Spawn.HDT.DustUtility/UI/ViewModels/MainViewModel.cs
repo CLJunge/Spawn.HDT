@@ -3,6 +3,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using HearthMirror;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
@@ -30,7 +31,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Static Fields
-        private static string s_strSearchHelpText;
+        private static readonly string s_strSearchHelpText;
         #endregion
 
         #region Member Variables
@@ -315,9 +316,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (flyout.Content is Flyouts.CollectionInfoFlyout && viewModel.ReloadRequired)
             {
-                int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
+                flyout.Header = $"Collection Info";
 
-                flyout.Header = $"Collection Info ({nCollectionValue} Dust)";
+                Task.Run(() =>
+                {
+                    int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
+
+                    flyout.Dispatcher.Invoke(() => flyout.Header = $"Collection Info ({nCollectionValue} Dust)");
+                }).Forget();
             }
             else { }
 
