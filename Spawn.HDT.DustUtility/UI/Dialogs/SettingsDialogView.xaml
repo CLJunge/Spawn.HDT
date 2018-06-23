@@ -40,7 +40,7 @@
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         
-        <DockPanel Height="30" ToolTip="Display a selection view below the main view instead of opening an additional window." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Use an extra window for the card selection or display a selection view below the main view." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding ViewModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <ComboBox ItemsSource="{Binding ViewModes}" SelectedItem="{Binding ViewMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </DockPanel>
