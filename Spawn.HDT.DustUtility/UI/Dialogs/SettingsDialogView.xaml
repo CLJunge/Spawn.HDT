@@ -24,20 +24,20 @@
             <CheckBox Name="cbOfflineMode" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <DockPanel Height="30" ToolTip="Save the search term for the current account when closing the main window." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Save search term for the current account when closing the main window." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding RememberQueryStringLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding RememberQueryString, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="!!! USE AT YOUR OWN RISK !!!&#x0a;Enable the option to let the plugin disenchant the current card selection automatically.&#x0a;(Works like the old HDT export feature)" ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="!!! USE AT YOUR OWN RISK !!!&#x0a;Enable automatic disenchanting of the current card selection.&#x0a;(Works like the old HDT export feature)" ToolTipService.ShowDuration="8000">
             <Label Content="{Binding AutoDisenchantingLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="AutoDisenchantingCheckBox" IsChecked="{Binding AutoDisenchanting, Mode=OneWayToSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Checked="OnAutoDisenchantingCheckBoxChecked"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="Use colored labels for the card items." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Use colored labels for card items." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding ColoredCardLabelsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding ColoredCardLabels, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
-        <DockPanel Height="30" ToolTip="Check and display a notification wether a new release is available after opening the main window." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Check and display a notification wether a new release is available." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding CheckForUpdatesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
@@ -45,7 +45,7 @@
             <Label Content="{Binding ShowNotificationsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding ShowNotifications, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="Only log messages with the specified log level or have a log level below the specified one." ToolTipService.ShowDuration="8000">
+        <DockPanel Height="30" ToolTip="Only log messages with or below the specified log level." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding LogLevelLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <ComboBox ItemsSource="{Binding LogLevels}" SelectedItem="{Binding LogLevel}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </DockPanel>
