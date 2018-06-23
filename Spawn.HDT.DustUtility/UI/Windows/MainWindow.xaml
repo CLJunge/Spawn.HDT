@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
         xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
         mc:Ignorable="d" ResizeMode="CanResize" BorderBrush="{DynamicResource AccentColorBrush}"
         Height="550" Width="1100" MinHeight="550" MinWidth="1100" WindowStartupLocation="CenterScreen"
         Title="{Binding WindowTitle}" WindowButtonCommandsOverlayBehavior="Never"
@@ -51,6 +52,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <converters:DisenchantButtonVisibilityConverter x:Key="DisenchantButtonVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/Icons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -189,8 +191,14 @@
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,336,15,0" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28" Visibility="{Binding Path=CardSelection.DisenchantButtonVisibility}"/>
-
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28">
+            <Button.Visibility>
+                <MultiBinding Converter="{StaticResource DisenchantButtonVisibilityConverter}">
+                    <Binding Path="CardSelection.DisenchantButtonVisibility"/>
+                    <Binding Path="SplitViewVisibility"/>
+                </MultiBinding>
+            </Button.Visibility>
+        </Button>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear Selection" Command="{Binding ClearSelectionCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
     </Grid>
