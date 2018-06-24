@@ -33,6 +33,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 FileManager.Write(strPath, lstCollection.ToCachedCards());
 
                 blnRet = true;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Saved collection for {account.DisplayString}");
             }
             else { }
 
@@ -65,6 +67,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 FileManager.Write(strPath, lstDecks.ToCachedDecks());
 
                 blnRet = true;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Saved decks for {account.DisplayString}");
             }
             else { }
 
@@ -91,6 +95,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 lstRet = InternalLoadCollection(account);
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Loaded collection for {account.DisplayString}");
 
             return lstRet;
         }
@@ -142,6 +148,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 lstRet = InternalLoadDecks(account);
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Loaded decks for {account.DisplayString}");
 
             return lstRet;
         }
@@ -195,6 +203,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
             m_lstCachedDecks?.Clear();
             m_lstCachedDecks = null;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Cleared cache");
         }
         #endregion
 
