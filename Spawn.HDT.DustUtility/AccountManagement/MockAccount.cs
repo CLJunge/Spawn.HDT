@@ -2,6 +2,7 @@
 using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Enums;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Collections.Generic;
 #endregion
@@ -131,10 +132,12 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 new CachedHistoryCard { Id = "AT_037", Count = 2, IsGolden = true, Date = DateTime.Now },
             };
 
-            BattleTag = new BattleTag { Name = "Test123", Number = 12345 };
+            BattleTag = new BattleTag { Name = "MockAccount", Number = 12345 };
             AccountString = $"{BattleTag.Name}_{BattleTag.Number}_{Region}";
             DisplayString = $"{BattleTag.Name}#{BattleTag.Number} ({Region})";
             Preferences = new AccountPreferences();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'MockAccount' instance");
         }
         #endregion
 
@@ -144,8 +147,29 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             if (!IsDeckExcludedFromSearch(nDeckId))
             {
                 Preferences.ExcludedDecks.Add(nDeckId);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Excluded deck (Id={nDeckId})");
             }
-            else { }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already excluded (Id={nDeckId})");
+            }
+        }
+        #endregion
+
+        #region IncludeDeckInSearch
+        public void IncludeDeckInSearch(long nDeckId)
+        {
+            if (IsDeckExcludedFromSearch(nDeckId))
+            {
+                Preferences.ExcludedDecks.Remove(nDeckId);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Included deck (Id={nDeckId})");
+            }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already included (Id={nDeckId})");
+            }
         }
         #endregion
 
@@ -161,17 +185,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public List<CachedHistoryCard> GetHistory() => m_lstHistory;
         #endregion
 
-        #region IncludeDeckInSearch
-        public void IncludeDeckInSearch(long nDeckId)
-        {
-            if (IsDeckExcludedFromSearch(nDeckId))
-            {
-                Preferences.ExcludedDecks.Add(nDeckId);
-            }
-            else { }
-        }
-        #endregion
-
         #region IsDeckExcludedFromSearch
         public bool IsDeckExcludedFromSearch(long nDeckId) => Preferences.ExcludedDecks.Contains(nDeckId);
         #endregion
@@ -179,6 +192,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region SavePreferences
         public void SavePreferences()
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Called 'SavePreferences' in mock account");
         }
         #endregion
     }
