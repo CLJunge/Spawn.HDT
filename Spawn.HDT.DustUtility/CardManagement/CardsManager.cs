@@ -84,6 +84,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #region GetCardsForDustAmount
         private static void GetCardsForDustAmount(SearchParameters parameters, List<CardWrapper> lstCards)
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Getting cards for {parameters.QueryString} dust...");
+
             int nDustAmount = 0;
 
             try
@@ -180,6 +182,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 else { }
             }
             else { }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Removed redundant cards");
         }
         #endregion
 
@@ -187,6 +191,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         private static void GetCardsByQueryString(SearchParameters parameters, List<CardWrapper> lstCards)
         {
             bool blnDone = false;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Getting cards by query string: {parameters.QueryString}...");
 
             string strQueryString = parameters.QueryString.ToLowerInvariant();
 
@@ -216,7 +222,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         private static bool IsCardMatch(CardWrapper cardWrapper, string strKeyString)
         {
             bool blnRet = false;
-
+            
             blnRet |= cardWrapper.DbCard.Name.ToLowerInvariant().Contains(strKeyString);
 
             blnRet |= cardWrapper.DbCard.Race.ToString().Equals(strKeyString.ToUpperInvariant());
@@ -226,6 +232,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
             blnRet |= CardSets.AllFullName[cardWrapper.DbCard.Set].ToLowerInvariant().Contains(strKeyString);
 
             blnRet |= cardWrapper.DbCard.Type.ToString().ToLowerInvariant().Equals(strKeyString) || (strKeyString.Equals("spell") && cardWrapper.DbCard.Type.ToString().ToLowerInvariant().Equals("ability"));
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"IsCardMatch: Name={cardWrapper.Card.Name} Key={strKeyString} > Result={blnRet}");
 
             return blnRet;
         }
@@ -268,6 +276,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     }
                     else { }
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {s_lstUnusedCards.Count} unused cards");
             }
             else if (!DustUtilityPlugin.IsOffline)
             {
@@ -348,7 +358,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             List<Card> lstCards = account.GetCollection();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Calculating total collection value");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Calculating total collection value... ({account.DisplayString})");
 
             for (int i = 0; i < lstCards.Count; i++)
             {
