@@ -21,6 +21,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                 if (!BackupExists(account, date))
                 {
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Creating backup for {account.DisplayString}...");
+
                     string strAccDir = GetAccountBackupDirectory(account);
 
                     if (!Directory.Exists(strAccDir))
@@ -63,7 +65,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                         DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while creating backup \"{strFileName}\": {ex}");
                     }
                 }
-                else { }
+                else
+                {
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Backup for today already exists ({account.DisplayString})");
+                }
             }
             else { }
 
@@ -78,6 +83,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
             if ((!account.IsEmpty && account.IsValid) && BackupExists(account, date))
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restoring backup from the {date.ToLongDateString()} for {account.DisplayString}");
+
                 string strFileName = GetBackupFileName(account, date);
 
                 try
@@ -112,7 +119,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while restoring backup \"{strFileName}\": {ex}");
                 }
             }
-            else { }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"No backup from the {date.ToLongDateString()} for {account.DisplayString} exists!");
+            }
 
             return blnRet;
         }
@@ -137,6 +147,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     }
                     else { }
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Deleted backups which are older than one month for {account.DisplayString}");
             }
             else { }
         }
