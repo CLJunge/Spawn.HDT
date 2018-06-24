@@ -21,7 +21,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             {
                 try
                 {
-                    DustUtilityPlugin.Logger.Log(LogLevel.Info, $"Disenchanting current card selection...");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Disenchanting current card selection...");
 
                     HearthstoneInfo info = new HearthstoneInfo();
 
@@ -45,7 +45,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                         blnRet &= await actions.DisenchantCards();
                         //await actions.ClearSearchBox();
 
-                        DustUtilityPlugin.Logger.Log(LogLevel.Info, $"Sucessfully disenchanted {lstCards?.Count} card(s)");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Sucessfully disenchanted {lstCards?.Count} card(s)");
                     }
                     else { }
                 }
