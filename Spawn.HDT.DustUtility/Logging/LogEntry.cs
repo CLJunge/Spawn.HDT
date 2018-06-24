@@ -23,32 +23,19 @@ namespace Spawn.HDT.DustUtility.Logging
         public string Message { get; }
         #endregion
 
-        #region LogMessage
-        public string LogMessage { get; }
-        #endregion
-
-        #region CallingMember
-        public string CallingMember { get; }
+        #region AssembledMessage
+        public string AssembledMessage { get; }
         #endregion
         #endregion
 
         #region Ctor
-        public LogEntry(DateTime logTime, LogLevel level, string channel, string message, string callingMember)
+        public LogEntry(DateTime logTime, LogLevel level, string channel, string message, string assembledMessage)
         {
             Timestamp = logTime;
             Level = level;
             Channel = channel;
             Message = message;
-            CallingMember = callingMember;
-
-            if (!string.IsNullOrEmpty(Channel))
-            {
-                LogMessage = string.Format("{0} [{1}::{2}::{3}] {4}", Timestamp.ToString("hh:mm:ss.fff tt"), Channel, Level, CallingMember, Message);
-            }
-            else
-            {
-                LogMessage = string.Format("{0} [{1}::{2}] {3}", Timestamp.ToString("hh:mm:ss.fff tt"), Level, CallingMember, Message);
-            }
+            AssembledMessage = assembledMessage;
         }
         #endregion
     }

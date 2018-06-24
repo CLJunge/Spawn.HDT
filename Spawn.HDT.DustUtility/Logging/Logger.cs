@@ -45,6 +45,10 @@ namespace Spawn.HDT.DustUtility.Logging
         public bool WriteToFile { get; set; } = true;
         #endregion
 
+        #region FormatString
+        public string FormatString { get; set; }
+        #endregion
+
         #region [STATIC] Default
         private static Logger s_default = null;
 
@@ -94,6 +98,8 @@ namespace Spawn.HDT.DustUtility.Logging
             {
                 throw new ArgumentException("The directory doesn't exist!", "FilePath");
             }
+
+            FormatString = "%t [%l::%c] %m";
         }
         #endregion
 
@@ -105,7 +111,7 @@ namespace Spawn.HDT.DustUtility.Logging
 
         public LogEntry Log(LogLevel level, string strChannel, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "")
         {
-            LogEntry retEntry = new LogEntry();
+            LogEntry retVal = new LogEntry();
 
             lock (s_objLock)
             {
@@ -115,17 +121,21 @@ namespace Spawn.HDT.DustUtility.Logging
 
                     try
                     {
-                        retEntry = new LogEntry(DateTime.Now, level, strChannel, strMessage, GetCallingMember(strMemberName, strFilePath));
+                        DateTime dtTimestamp = DateTime.Now;
+
+                        string strAssembledMessage = AssembleMessage(dtTimestamp, strChannel, level, GetCallingMember(strMemberName, strFilePath), strMessage);
+
+                        retVal = new LogEntry(dtTimestamp, level, strChannel, strMessage, strAssembledMessage);
 
                         if (WriteToConsole)
                         {
-                            LogToConsole(retEntry);
+                            LogToConsole(retVal);
                         }
                         else { }
 
                         if (IsDebugMode)
                         {
-                            System.Diagnostics.Debug.WriteLine(retEntry.LogMessage);
+                            System.Diagnostics.Debug.WriteLine(strAssembledMessage);
                         }
                         else { }
 
@@ -133,13 +143,13 @@ namespace Spawn.HDT.DustUtility.Logging
                         {
                             using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
                             {
-                                writer.WriteLine(retEntry.LogMessage);
+                                writer.WriteLine(strAssembledMessage);
                                 writer.Flush();
                             }
                         }
                         else { }
-
-                        OnLogging(retEntry);
+                        
+                        OnLogging(retVal);
                     }
                     catch (IOException ex)
                     {
@@ -148,7 +158,19 @@ namespace Spawn.HDT.DustUtility.Logging
                 }
             }
 
-            return retEntry;
+            return retVal;
+        }
+        #endregion
+
+        #region AssembleMessage
+        private string AssembleMessage(DateTime dtTimestamp, string strChannel, LogLevel level, string strCallingMember, string strMessage)
+        {
+            return FormatString
+                .Replace("%t", dtTimestamp.ToString("hh:mm:ss.fff tt"))
+                .Replace("%c", strCallingMember)
+                .Replace("%l", level.ToString())
+                .Replace("%s", strCallingMember)
+                .Replace("%m", strMessage);
         }
         #endregion
 
@@ -174,7 +196,7 @@ namespace Spawn.HDT.DustUtility.Logging
                     break;
             }
 
-            Console.WriteLine(retEntry.LogMessage);
+            Console.WriteLine(retEntry.AssembledMessage);
 
             Console.ForegroundColor = ConsoleColor.Gray;
         }
