@@ -49,9 +49,9 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     }
                     else { }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting card selection: {e}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting card selection: {ex}");
 
                     blnRet = false;
                 }
