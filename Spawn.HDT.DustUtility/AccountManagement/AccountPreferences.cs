@@ -1,6 +1,7 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Logging;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -33,6 +34,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             ExcludedDecks = new ObservableCollection<long>();
             CardSelection = new ObservableCollection<CachedCard>();
             SearchParameters = new SearchParameters(true);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'AccountPreferences' instance");
         }
         #endregion
 
@@ -40,12 +43,16 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         public void Save(IAccount account)
         {
             FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {account.DisplayString}");
         }
         #endregion
 
         #region [STATIC] Load
         public static AccountPreferences Load(IAccount account)
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading preferences for {account.DisplayString}...");
+
             return FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
         }
         #endregion
