@@ -262,17 +262,28 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region Parse
         public static Account Parse(string strAccountString)
         {
+            Account retVal = null;
+
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Parsing account string... ({strAccountString})");
 
-            string[] vTemp = strAccountString.Split('_');
-
-            BattleTag battleTag = new BattleTag()
+            try
             {
-                Name = vTemp[0],
-                Number = Convert.ToInt32(vTemp[1])
-            };
+                string[] vTemp = strAccountString.Split('_');
 
-            return new Account(battleTag, (Region)Enum.Parse(typeof(Region), vTemp[2]));
+                BattleTag battleTag = new BattleTag()
+                {
+                    Name = vTemp[0],
+                    Number = Convert.ToInt32(vTemp[1])
+                };
+
+                retVal = new Account(battleTag, (Region)Enum.Parse(typeof(Region), vTemp[2]));
+            }
+            catch (Exception ex)
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't parse account string: {ex}");
+            }
+
+            return retVal;
         }
         #endregion
 
