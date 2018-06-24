@@ -157,8 +157,8 @@ namespace Spawn.HDT.DustUtility.Logging
         {
             switch (retEntry.Level)
             {
-                case LogLevel.Info:
-                    Console.ForegroundColor = ConsoleColor.Green;
+                case LogLevel.Debug:
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     break;
 
                 case LogLevel.Error:

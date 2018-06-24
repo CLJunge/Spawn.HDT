@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Logger.Default.Log(LogLevel.Info, "Checking GitHub for updates...");
+                    Logger.Default.Log(LogLevel.Trace, "Checking GitHub for updates...");
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
@@ -101,11 +101,11 @@ namespace Spawn.HDT.DustUtility.Net
                                     }
                                     else { }
 
-                                    Logger.Default.Log(LogLevel.Info, "Update available");
+                                    Logger.Default.Log(LogLevel.Trace, "Update available");
                                 }
                                 else
                                 {
-                                    Logger.Default.Log(LogLevel.Info, "No update available");
+                                    Logger.Default.Log(LogLevel.Trace, "No update available");
                                 }
                             }
                             else { }

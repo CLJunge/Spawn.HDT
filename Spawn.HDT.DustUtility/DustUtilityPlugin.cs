@@ -566,7 +566,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowMainWindowAsync
         private static async Task ShowMainWindowAsync()
         {
-            Logger.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.DisplayString}");
+            Logger.Log(LogLevel.Trace, $"Opening main window for {CurrentAccount.DisplayString}");
 
             MainWindow?.Show();
 

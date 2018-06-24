@@ -136,7 +136,7 @@ namespace Spawn.HDT.DustUtility
             AutoDisenchanting = false;
             RememberQueryString = false;
             ShowNotifications = true;
-            LogLevel = LogLevel.Info;
+            LogLevel = LogLevel.Trace;
             ViewMode = ViewMode.Default;
             Version = 1;
 
