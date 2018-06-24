@@ -114,8 +114,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             await Task.Delay(500);
             if (User32.IsHearthstoneInForeground())
                 return new HearthstoneInfo();
-            await DustUtilityPlugin.MainWindow.ShowMessageAsync("Exporting error", "Can't find Hearthstone window.");
-            Log.Error("Can't find Hearthstone window.");
+            await DustUtilityPlugin.MainWindow.ShowMessageAsync("Auto Disenchanting", "Can't find Hearthstone window!");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Error, "Can't find Hearthstone window!");
             return null;
         }
         #endregion
