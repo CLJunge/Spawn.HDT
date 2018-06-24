@@ -23,6 +23,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             m_info = info;
             m_onUnexpectedMousePos = onUnexpectedMousePos;
             m_previousCursorPos = Point.Empty;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'MouseActions' instance");
         }
         #endregion
 
@@ -33,15 +35,15 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 (Math.Abs(m_previousCursorPos.X - Cursor.Position.X) > 10 || Math.Abs(m_previousCursorPos.Y - Cursor.Position.Y) > 10)))
             {
                 if (!(m_onUnexpectedMousePos == null || await m_onUnexpectedMousePos()))
-                    throw new Exception("Export interrupted, not continuing");
+                    throw new Exception("Auto disenchanting interrupted, not continuing");
                 if ((m_info = await Helper.EnsureHearthstoneInForeground(m_info)) == null)
-                    throw new Exception("Export interrupted - could not re-focus hearthstone");
+                    throw new Exception("Auto disenchanting interrupted - could not re-focus hearthstone");
                 await Task.Delay(500);
             }
 
             User32.ClientToScreen(m_info.HsHandle, ref clientPoint);
             Cursor.Position = m_previousCursorPos = new Point(clientPoint.X, clientPoint.Y);
-            Log.Debug("Clicking " + Cursor.Position);
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Clicking " + Cursor.Position);
 
             //mouse down
             if (SystemInformation.MouseButtonsSwapped || blnUseRightMouseButton)
