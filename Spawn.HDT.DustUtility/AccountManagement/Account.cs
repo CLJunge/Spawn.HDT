@@ -98,7 +98,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Card> lstRet = null;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loading collection...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading collection... ({DisplayString})");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -129,7 +129,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             List<Deck> lstRet = null;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loading decks...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading decks... ({DisplayString})");
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -163,6 +163,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             if (!IsDeckExcludedFromSearch(nDeckId))
             {
                 Preferences.ExcludedDecks.Add(nDeckId);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Excluded deck (Id={nDeckId})");
             }
             else { }
         }
@@ -174,6 +176,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             if (IsDeckExcludedFromSearch(nDeckId))
             {
                 Preferences.ExcludedDecks.Remove(nDeckId);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Included deck (Id={nDeckId})");
             }
             else { }
         }
@@ -186,12 +190,14 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region LoadPreferences
         private AccountPreferences LoadPreferences()
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading preferences... ({DisplayString})");
+
             AccountPreferences retVal = AccountPreferences.Load(this);
 
             //retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
             //retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
             //retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
-
+            
             return retVal;
         }
         #endregion
@@ -256,6 +262,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region Parse
         public static Account Parse(string strAccountString)
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Parsing account string... ({strAccountString})");
+
             string[] vTemp = strAccountString.Split('_');
 
             BattleTag battleTag = new BattleTag()
@@ -278,6 +286,8 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 try
                 {
                     retVal = new Account(Reflection.GetBattleTag(), await Hearthstone_Deck_Tracker.Helper.GetCurrentRegion());
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Retrieved logged in account ({retVal.DisplayString})");
                 }
                 catch (Exception ex)
                 {
