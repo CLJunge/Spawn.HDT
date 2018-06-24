@@ -86,10 +86,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             {
                 AccountString = null;
 
-                DisplayString = null;
+                DisplayString = "Empty";
             }
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new account instance ({(DisplayString ?? "Empty")})");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new account instance ({DisplayString})");
         }
         #endregion
 
