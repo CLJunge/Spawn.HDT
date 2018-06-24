@@ -566,7 +566,7 @@ namespace Spawn.HDT.DustUtility
         #region ShowMainWindowAsync
         private static async Task ShowMainWindowAsync()
         {
-            Logger.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.AccountString}");
+            Logger.Log(LogLevel.Info, $"Opening main window for {CurrentAccount.DisplayString}");
 
             MainWindow?.Show();
 
@@ -630,7 +630,7 @@ namespace Spawn.HDT.DustUtility
 
             if (retVal != null)
             {
-                Logger.Log(LogLevel.Debug, $"Account: {retVal.AccountString}");
+                Logger.Log(LogLevel.Debug, $"Account: {retVal.DisplayString}");
             }
             else
             {
@@ -704,7 +704,7 @@ namespace Spawn.HDT.DustUtility
 
                 ShowMainWindowAsync().Forget();
 
-                Logger.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.AccountString} New={selectedAcc.AccountString}");
+                Logger.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.DisplayString} New={selectedAcc.DisplayString}");
             }
             else { }
 

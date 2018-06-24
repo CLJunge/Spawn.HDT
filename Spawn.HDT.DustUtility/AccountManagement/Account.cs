@@ -84,10 +84,12 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             }
             else
             {
-                AccountString = string.Empty;
+                AccountString = null;
 
-                DisplayString = string.Empty;
+                DisplayString = null;
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new account instance ({(DisplayString ?? "Empty")})");
         }
         #endregion
 
@@ -201,7 +203,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             {
                 m_preferences.Save(this);
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {AccountString}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {DisplayString}");
             }
             else { }
         }

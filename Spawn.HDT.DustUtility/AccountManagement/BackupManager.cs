@@ -33,7 +33,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                     try
                     {
-                        string[] vFiles = Directory.GetFiles(DustUtilityPlugin.AccountsDirectory, $"{account.AccountString}*");
+                        string[] vFiles = Directory.GetFiles(DustUtilityPlugin.AccountsDirectory, $"{account.DisplayString}*");
 
                         if (vFiles.Length > 0)
                         {
@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                             Directory.Delete(strDir, true);
 
-                            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created backup for {account.AccountString}");
+                            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created backup for {account.DisplayString}");
 
                             blnRet = File.Exists(strFileName);
                         }
@@ -103,7 +103,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                     Directory.Delete(strDir);
 
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored backup for {account.AccountString}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored backup for {account.DisplayString}");
 
                     blnRet = true;
                 }
