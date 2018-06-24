@@ -51,13 +51,15 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             m_setFilterAllPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.AllSetsButtonX), GetYPos(DisenchantConfig.Instance.StandardSetButtonY));
             m_disenchantButtonPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.DisenchantButtonX), GetYPos(DisenchantConfig.Instance.DisenchantButtonY));
             m_dialogAcceptButtonPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.DialogAcceptButtonX), GetYPos(DisenchantConfig.Instance.DialogAcceptButtonY));
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'DisenchantActions' instance");
         }
         #endregion
 
         #region DisenchantCards
         public async Task<bool> DisenchantCards()
         {
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Disenchanting...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Disenchanting cards...");
 
             int nTotalCount = m_lstCards.Sum(c => c.Count);
 
@@ -76,6 +78,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         private async Task<int> DisenchantCard(CardWrapper wrapper)
         {
             int nRet = 0;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Disenchanting {wrapper.Count}x {wrapper.Card.Name}...");
 
             try
             {
@@ -133,6 +137,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 await m_mouseActions.ClickOnPoint(m_dialogAcceptButtonPoint);
 
                 await Task.Delay(DisenchantConfig.Instance.Delay * 5);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Should have disenchanted {wrapper.Count} copies of {wrapper.Card.Name}...");
             }
             catch (Exception ex)
             {
@@ -167,6 +173,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 else { }
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"IsCardInDecks: Name={wrapper.Card.Name} > Result={blnRet}");
+
             return blnRet;
         }
         #endregion
@@ -174,6 +182,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         #region ClickOnCard
         private async Task ClickOnCard(CardPosition pos, bool blnUseRightMouseButton = false)
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"ClickOnCard: Pos={pos} RightMouseButton={blnUseRightMouseButton}");
+
             if (pos == CardPosition.Left)
             {
                 await m_mouseActions.ClickOnPoint(m_card1Point, blnUseRightMouseButton);
@@ -192,6 +202,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             {
                 await ClearManaFilter();
                 await ClearSetsFilter();
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared filters");
             }
             else { }
         }
@@ -202,8 +214,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         {
             if (Reflection.GetCurrentManaFilter() != -1)
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Clearing mana filter");
-
                 await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
 
                 await Task.Delay(500);
@@ -213,6 +223,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
                 }
                 else { }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared mana filter");
             }
             else
             {
@@ -228,8 +240,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
             if (!setFilter.IsAllStandard && !setFilter.IsWild)
             {
-                Log.Info("Clearing set filter...");
-
                 await m_mouseActions.ClickOnPoint(m_setFilterMenuPoint);
 
                 await Task.Delay(500);
@@ -239,6 +249,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 await Task.Delay(500);
 
                 await m_mouseActions.ClickOnPoint(m_setFilterMenuPoint);
+
+                Log.Info("Cleared sets filter");
             }
             else { }
         }
@@ -257,6 +269,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             SendKeys.SendWait("{ENTER}");
 
             await Task.Delay(DisenchantConfig.Instance.Delay * 2);
+
+            Log.Info("Cleared search box");
         }
         #endregion
 
