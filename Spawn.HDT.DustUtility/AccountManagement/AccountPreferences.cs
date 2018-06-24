@@ -40,21 +40,11 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region Save
-        public void Save(IAccount account)
-        {
-            FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
-
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {account.DisplayString}");
-        }
+        public void Save(IAccount account) => FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
         #endregion
 
         #region [STATIC] Load
-        public static AccountPreferences Load(IAccount account)
-        {
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading preferences for {account.DisplayString}...");
-
-            return FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
-        }
+        public static AccountPreferences Load(IAccount account) => FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
         #endregion
     }
 }
