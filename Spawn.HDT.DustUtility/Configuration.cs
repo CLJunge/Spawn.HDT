@@ -98,7 +98,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region LogLevel
-        [DefaultValue(LogLevel.Info)]
+        [DefaultValue(LogLevel.Trace)]
         public LogLevel LogLevel
         {
             get => m_logLevel;
