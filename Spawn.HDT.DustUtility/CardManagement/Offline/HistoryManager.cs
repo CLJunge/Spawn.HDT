@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
     public static class HistoryManager
     {
         #region Static Fields
-        private static CardComparer s_cardComparer = new CardComparer();
+        private static readonly CardComparer s_cardComparer = new CardComparer();
         private static bool s_blnCheckInProgress;
         #endregion
 
