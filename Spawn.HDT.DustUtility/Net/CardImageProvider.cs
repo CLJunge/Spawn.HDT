@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Properties;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -14,10 +15,13 @@ namespace Spawn.HDT.DustUtility.Net
     {
         #region Constants
         private const string BaseUrl = "https://omgvamp-hearthstone-v1.p.mashape.com";
+        #endregion
+
+        #region Static Properties
 #if DEBUG
-        private const string ApiKey = "173Yf6tNdOmshMfwiuPj0ryQf4nop1qOsQEjsnXRxBWd4Eu04C";
+        private static string ApiKey => Settings.Default.TestingApiKey;
 #else
-        private const string ApiKey = "GHVSRXWrl5mshGjkuxK3TGDhP0ppp1bJJSKjsnRdaQpM3O8T2E";
+        private static string ApiKey => Settings.Default.ProductionApiKey;
 #endif
         #endregion
 

@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Spawn.HDT.DustUtility.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TestingApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">173Yf6tNdOmshMfwiuPj0ryQf4nop1qOsQEjsnXRxBWd4Eu04C</Value>
+    </Setting>
+    <Setting Name="ProductionApiKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">GHVSRXWrl5mshGjkuxK3TGDhP0ppp1bJJSKjsnRdaQpM3O8T2E</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

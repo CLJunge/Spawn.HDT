@@ -130,6 +130,11 @@
     <Compile Include="CardManagement\AutoDisenchant\Helper.cs" />
     <Compile Include="CardManagement\AutoDisenchant\HearthstoneInfo.cs" />
     <Compile Include="CardManagement\AutoDisenchant\MouseActions.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="UI\CardSelectionManager.cs" />
     <Compile Include="CardManagement\CardsManager.cs" />
     <Compile Include="CardManagement\SearchResult.cs" />
@@ -259,6 +264,7 @@
     <Compile Include="UI\ViewModels\ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <Compile Include="UI\Controls\CardsContainer.DragAndDrop.cs">
       <DependentUpon>CardsContainer.xaml</DependentUpon>
@@ -285,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\MockResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
