@@ -406,10 +406,10 @@ namespace Spawn.HDT.DustUtility
         #region UpdateDataFiles
         private void UpdateDataFiles()
         {
-            Logger.Log(LogLevel.Debug, "Updating data files");
-
             if (Config.Version == 1)
             {
+                Logger.Log(LogLevel.Debug, "Updating data files");
+
                 MoveAccountFiles();
 
                 UpdateHistoryFiles();
