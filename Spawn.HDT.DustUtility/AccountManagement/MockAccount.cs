@@ -12,9 +12,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
     public class MockAccount : IAccount
     {
         #region Member Variables
-        private List<Card> m_lstCollection;
-        private List<Deck> m_lstDecks;
-        private List<CachedHistoryCard> m_lstHistory;
+        private readonly List<Card> m_lstCollection;
+        private readonly List<Deck> m_lstDecks;
+        private readonly List<CachedHistoryCard> m_lstHistory;
         #endregion
 
         #region Properties
