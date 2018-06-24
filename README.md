@@ -38,14 +38,6 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 ![Overlay](https://i.imgur.com/nwJvA25.png)
 
 
-## Settings
-* Offline Mode: While Hearthstone is running, the plugin stores collection and decks (Decks can only be saved when you are in the "Play" menu) locally.
-* Save Interval: The interval for storing collection and decks.
-* Check For Updates: Checks if there is a new release available on GitHub after opening the main window.
-
-![Overlay](https://i.imgur.com/Pw0HJ76.png)
-
-
 
 ## Used Resources
 * Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
