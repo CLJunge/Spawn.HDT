@@ -20,7 +20,6 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             {
                 retVal = Visibility.Visible;
             }
-            else { }
 
             return retVal;
         }
