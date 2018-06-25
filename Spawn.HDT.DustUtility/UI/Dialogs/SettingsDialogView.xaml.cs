@@ -28,7 +28,6 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
             {
                 AutoDisenchantingCheckBox.IsChecked = false;
             }
-            else { }
         }
         #endregion
         #endregion
