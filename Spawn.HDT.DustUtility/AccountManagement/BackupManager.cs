@@ -29,7 +29,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     {
                         Directory.CreateDirectory(strAccDir);
                     }
-                    else { }
 
                     string strFileName = GetBackupFileName(account, date);
 
@@ -58,7 +57,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                             blnRet = File.Exists(strFileName);
                         }
-                        else { }
                     }
                     catch (Exception ex)
                     {
@@ -70,7 +68,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Backup for today already exists ({account.DisplayString})");
                 }
             }
-            else { }
 
             return blnRet;
         }
@@ -103,7 +100,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                         {
                             File.Delete(strTemp);
                         }
-                        else { }
 
                         File.Move(vFiles[i], strTemp);
                     }
@@ -145,12 +141,10 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     {
                         fileInfo.Delete();
                     }
-                    else { }
                 }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Deleted backups which are older than one month for {account.DisplayString}");
             }
-            else { }
         }
         #endregion
 
