@@ -60,9 +60,7 @@ namespace Spawn.HDT.DustUtility
                             break;
                     }
                 }
-                else { }
             }
-            else { }
 
             return nRet;
         }
@@ -187,7 +185,6 @@ namespace Spawn.HDT.DustUtility
             {
                 strMethod = "ThenBy";
             }
-            else { }
 
             MethodCallExpression resultExp = Expression.Call(typeof(Queryable), strMethod, new System.Type[] { type, property.PropertyType }, source.Expression, Expression.Quote(expr));
 
@@ -262,9 +259,7 @@ namespace Spawn.HDT.DustUtility
                             break;
                     }
                 }
-                else { }
             }
-            else { }
 
             return nRet;
         }
