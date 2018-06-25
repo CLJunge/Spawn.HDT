@@ -42,14 +42,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     InitializeAsync().Forget();
                 }
-                else { }
             };
 
             if (IsInDesignMode)
             {
                 Deck = DustUtilityPlugin.CurrentAccount.GetDecks()[0];
             }
-            else { }
         }
         #endregion
 
@@ -73,7 +71,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                     Cards.Add(card);
                 }
-                else { }
             }
 
             DustUtilityPlugin.MainWindow.DeckListFlyout.Header = Deck?.Name ?? "Deck List";
