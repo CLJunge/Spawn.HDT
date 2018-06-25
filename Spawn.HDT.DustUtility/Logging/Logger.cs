@@ -121,7 +121,12 @@ namespace Spawn.HDT.DustUtility.Logging
                     {
                         DateTime dtTimestamp = DateTime.Now;
 
-                        string strAssembledMessage = AssembleMessage(dtTimestamp, strChannel, level, GetCallingMember(strMemberName, strFilePath), strMessage);
+                        string strAssembledMessage = FormatString
+                            .Replace("%t", dtTimestamp.ToString("hh:mm:ss.fff tt"))
+                            .Replace("%c", strChannel)
+                            .Replace("%l", level.ToString())
+                            .Replace("%s", GetCallingMember(strMemberName, strFilePath))
+                            .Replace("%m", strMessage);
 
                         retVal = new LogEntry(dtTimestamp, level, strChannel, strMessage, strAssembledMessage);
 
@@ -157,18 +162,6 @@ namespace Spawn.HDT.DustUtility.Logging
             }
 
             return retVal;
-        }
-        #endregion
-
-        #region AssembleMessage
-        private string AssembleMessage(DateTime dtTimestamp, string strChannel, LogLevel level, string strCallingMember, string strMessage)
-        {
-            return FormatString
-                .Replace("%t", dtTimestamp.ToString("hh:mm:ss.fff tt"))
-                .Replace("%c", strCallingMember)
-                .Replace("%l", level.ToString())
-                .Replace("%s", strCallingMember)
-                .Replace("%m", strMessage);
         }
         #endregion
 
