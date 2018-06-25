@@ -74,7 +74,6 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             {
                 nRet *= nCount;
             }
-            else { }
 
             return nRet;
         }
