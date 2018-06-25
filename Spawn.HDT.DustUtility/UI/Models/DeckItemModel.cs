@@ -75,14 +75,12 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(CraftingCost));
                     RaisePropertyChanged(nameof(HeroImage));
                 }
-                else { }
             };
 #if DEBUG
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 m_deck = new Deck() { Id = 4342323, Hero = "HERO_01", Name = "Test Deck", Cards = new List<Card>() { new Card("", 0, false) } };
             }
-            else { }
 #endif
         }
 
@@ -147,9 +145,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
                     s_dImageCache.Add(strHero, retVal);
                 }
-                else { }
             }
-            else { }
 
             return retVal;
         }
