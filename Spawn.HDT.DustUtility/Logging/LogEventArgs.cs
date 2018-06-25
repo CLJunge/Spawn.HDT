@@ -4,7 +4,7 @@ using System;
 
 namespace Spawn.HDT.DustUtility.Logging
 {
-    public class LogEvent : EventArgs
+    public class LogEventArgs : EventArgs
     {
         #region Properties
         #region Log
@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region Ctor
-        public LogEvent(LogEntry entry)
+        public LogEventArgs(LogEntry entry)
         {
             Log = entry;
         }

@@ -150,7 +150,7 @@
     <Compile Include="AccountManagement\IAccount.cs" />
     <Compile Include="Logging\FileAccessException.cs" />
     <Compile Include="Logging\LogEntry.cs" />
-    <Compile Include="Logging\LogEvent.cs" />
+    <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Messaging\CMOpeningMessage.cs" />

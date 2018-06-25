@@ -63,9 +63,9 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region Events
-        public event EventHandler<LogEvent> Logging;
+        public event EventHandler<LogEventArgs> Logging;
 
-        private void OnLogging(LogEntry entry) => Logging?.Invoke(this, new LogEvent(entry));
+        private void OnLogging(LogEntry entry) => Logging?.Invoke(this, new LogEventArgs(entry));
         #endregion
 
         #region Ctor
