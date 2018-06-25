@@ -593,7 +593,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     IncludeGoldenCardsOnly = false;
                 }
-                else { }
             };
 
             NotifyDirtyStatus += OnNotifyDirtyStatus;
@@ -603,7 +602,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 InitializeAsync().Forget();
             }
-            else { }
 #endif
         }
         #endregion
@@ -1048,169 +1046,141 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.EXPERT1);
             }
-            else { }
 
             if (GoblinsSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GVG);
             }
-            else { }
 
             if (TournamentSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.TGT);
             }
-            else { }
 
             if (OldGodsSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.OG);
             }
-            else { }
 
             if (GadgetzanSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GANGS);
             }
-            else { }
 
             if (UngoroSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.UNGORO);
             }
-            else { }
 
             if (FrozenThroneSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.ICECROWN);
             }
-            else { }
 
             if (KoboldsSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOOTAPALOOZA);
             }
-            else { }
 
             if (WitchwoodSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GILNEAS);
             }
-            else { }
 
             if (NaxxSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
             }
-            else { }
 
             if (MountainSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BRM);
             }
-            else { }
 
             if (LeagueSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOE);
             }
-            else { }
 
             if (KarazhanSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.KARA);
             }
-            else { }
 
             if (HallSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.HOF);
             }
-            else { }
 
             if (CommonRarityEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.COMMON);
             }
-            else { }
 
             if (RareRarityEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.RARE);
             }
-            else { }
 
             if (EpicRarityEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.EPIC);
             }
-            else { }
 
             if (LegendaryRarityEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.LEGENDARY);
             }
-            else { }
 
             if (DruidClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.DRUID);
             }
-            else { }
 
             if (HunterClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.HUNTER);
             }
-            else { }
 
             if (MageClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.MAGE);
             }
-            else { }
 
             if (PaladinClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PALADIN);
             }
-            else { }
 
             if (PriestClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PRIEST);
             }
-            else { }
 
             if (RogueClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.ROGUE);
             }
-            else { }
 
             if (ShamanClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.SHAMAN);
             }
-            else { }
 
             if (WarlockClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARLOCK);
             }
-            else { }
 
             if (WarriorClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARRIOR);
             }
-            else { }
 
             if (NeutralClassEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.NEUTRAL);
             }
-            else { }
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.IncludeGoldenCards = IncludeGoldenCards;
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.GoldenCardsOnly = IncludeGoldenCardsOnly;
