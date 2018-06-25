@@ -62,7 +62,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     }
                     else
                     {
-                        //NameTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
                         NameTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
                     }
 
@@ -76,13 +75,9 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                         {
                             CountTextBlock.Foreground = Brushes.Red;
                         }
-                        else { }
                     }
-                    else { }
                 }
-                else { }
             }
-            else { }
         }
         #endregion
         #endregion
