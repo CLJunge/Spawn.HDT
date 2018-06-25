@@ -17,20 +17,19 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
     public class DisenchantActions
     {
         #region Member Variables
-        private IAccount m_account;
+        private readonly IAccount m_account;
 
-        private HearthstoneInfo m_info;
-        private List<CardWrapper> m_lstCards;
-        private MouseActions m_mouseActions;
+        private readonly HearthstoneInfo m_info;
+        private readonly List<CardWrapper> m_lstCards;
+        private readonly MouseActions m_mouseActions;
 
-        private Point m_clearCardPoint;
-        private Point m_card1Point;
-        private Point m_card2Point;
-        private Point m_zeroManaCrystalPoint;
-        private Point m_setFilterMenuPoint;
-        private Point m_setFilterAllPoint;
-        private Point m_disenchantButtonPoint;
-        private Point m_dialogAcceptButtonPoint;
+        private readonly Point m_card1Point;
+        private readonly Point m_card2Point;
+        private readonly Point m_zeroManaCrystalPoint;
+        private readonly Point m_setFilterMenuPoint;
+        private readonly Point m_setFilterAllPoint;
+        private readonly Point m_disenchantButtonPoint;
+        private readonly Point m_dialogAcceptButtonPoint;
 
         private const int CardPosOffset = 50;
         #endregion
@@ -43,7 +42,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             m_lstCards = cards;
             m_mouseActions = new MouseActions(m_info, onInterrupt);
 
-            m_clearCardPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.ClearX), GetYPos(DisenchantConfig.Instance.ClearY));
             m_card1Point = new Point((int)m_info.CardPosX + CardPosOffset, (int)m_info.CardPosY + CardPosOffset);
             m_card2Point = new Point((int)m_info.Card2PosX + CardPosOffset, (int)m_info.CardPosY + CardPosOffset);
             m_zeroManaCrystalPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.ZeroButtonX), GetYPos(DisenchantConfig.Instance.ZeroButtonY));
@@ -93,7 +91,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 {
                     await ClearSearchBox();
                 }
-                else { }
 
                 await m_mouseActions.ClickOnPoint(m_info.SearchBoxPos);
 
@@ -130,7 +127,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                         await m_mouseActions.ClickOnPoint(m_dialogAcceptButtonPoint);
                     }
                 }
-                else { }
 
                 await Task.Delay(DisenchantConfig.Instance.Delay * 20);
 
@@ -168,9 +164,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     {
                         wrapper.MaxCountInDecks = nCountInDecks;
                     }
-                    else { }
                 }
-                else { }
             }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"IsCardInDecks: Name={wrapper.Card.Name} > Result={blnRet}");
@@ -205,7 +199,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared filters");
             }
-            else { }
         }
         #endregion
 
@@ -222,7 +215,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 {
                     await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
                 }
-                else { }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared mana filter");
             }
@@ -252,7 +244,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                 Log.Info("Cleared sets filter");
             }
-            else { }
         }
         #endregion
 
