@@ -125,6 +125,7 @@
     <Compile Include="AccountManagement\AccountPreferences.cs" />
     <Compile Include="AccountManagement\MockAccount.cs" />
     <Compile Include="CardManagement\AutoDisenchant\AutoDisenchanter.cs" />
+    <Compile Include="CardManagement\AutoDisenchant\AutoDisenchantingException.cs" />
     <Compile Include="CardManagement\AutoDisenchant\DisenchantConfig.cs" />
     <Compile Include="CardManagement\AutoDisenchant\DisenchantActions.cs" />
     <Compile Include="CardManagement\AutoDisenchant\Helper.cs" />
