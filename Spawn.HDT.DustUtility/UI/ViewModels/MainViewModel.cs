@@ -207,7 +207,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
                     }
                 }
-                else { }
             };
         }
         #endregion
@@ -235,7 +234,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 WindowTitle = $"{WindowTitle} [OFFLINE]";
             }
-            else { }
 
 #if DEBUG
             if (IsInDesignMode)
@@ -275,7 +273,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 DecksButtonEnabled = true;
                 System.Windows.Controls.ToolTipService.SetIsEnabled(DustUtilityPlugin.MainWindow.DecksButton, false);
             }
-            else { }
 
             switch (DustUtilityPlugin.Config.ViewMode)
             {
@@ -312,7 +309,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SwitchAccount
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void SwitchAccount()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
 
@@ -321,12 +320,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SelectionWindow?.Close();
                 SelectionWindow = null;
             }
-            else { }
         }
         #endregion
 
         #region OpenFlyout
+#pragma warning disable S3168 // "async" methods should not return "void"
         public async void OpenFlyout(Flyout flyout)
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             ViewModelBase viewModel = (((FrameworkElement)flyout.Content).DataContext as ViewModelBase);
 
@@ -341,20 +341,20 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     flyout.Dispatcher.Invoke(() => flyout.Header = $"Collection Info ({nCollectionValue} Dust)");
                 }).Forget();
             }
-            else { }
 
             if (!flyout.IsOpen)
             {
                 flyout.IsOpen = true;
             }
-            else { }
 
             await viewModel.InitializeAsync();
         }
         #endregion
 
         #region Search
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void Search()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             ClearControls();
 
@@ -375,17 +375,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         CardItems.Add(result.CardItems[i]);
                     }
                 }
-                else { }
             }
-            else { }
         }
         #endregion
 
         #region ShowSearchHelp
-        private async void ShowSearchHelp()
-        {
-            await DustUtilityPlugin.MainWindow.ShowMessageAsync("Help", s_strSearchHelpText);
-        }
+#pragma warning disable S3168 // "async" methods should not return "void"
+        private async void ShowSearchHelp() => await DustUtilityPlugin.MainWindow.ShowMessageAsync("Help", s_strSearchHelpText);
+#pragma warning restore S3168 // "async" methods should not return "void"
         #endregion
 
         #region Clear
@@ -409,7 +406,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
                 DustUtilityPlugin.MainWindow.SortOrderFlyout.IsOpen = false;
             }
-            else { }
 
             ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
             ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
@@ -434,7 +430,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OpenCardSelectionWindow
+#pragma warning disable S3168 // "async" methods should not return "void"
         public async void OpenCardSelectionWindow()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             if (SelectionWindow == null)
             {
@@ -468,7 +466,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 (sender as Window).Hide();
             }
-            else { }
 
             Messenger.Default.Send(new PopupMessage(true));
 
