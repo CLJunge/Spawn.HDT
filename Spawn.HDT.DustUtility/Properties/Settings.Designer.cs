@@ -40,5 +40,14 @@ namespace Spawn.HDT.DustUtility.Properties {
                 return ((string)(this["ProductionApiKey"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://omgvamp-hearthstone-v1.p.mashape.com")]
+        public string ApiBaseUrl {
+            get {
+                return ((string)(this["ApiBaseUrl"]));
+            }
+        }
     }
 }

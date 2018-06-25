@@ -8,5 +8,8 @@
     <Setting Name="ProductionApiKey" Type="System.String" Scope="Application">
       <Value Profile="(Default)">GHVSRXWrl5mshGjkuxK3TGDhP0ppp1bJJSKjsnRdaQpM3O8T2E</Value>
     </Setting>
+    <Setting Name="ApiBaseUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://omgvamp-hearthstone-v1.p.mashape.com</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -13,10 +13,6 @@ namespace Spawn.HDT.DustUtility.Net
 {
     public static class CardImageProvider
     {
-        #region Constants
-        private const string BaseUrl = "https://omgvamp-hearthstone-v1.p.mashape.com";
-        #endregion
-
         #region Static Properties
 #if DEBUG
         private static string ApiKey => Settings.Default.TestingApiKey;
@@ -34,20 +30,28 @@ namespace Spawn.HDT.DustUtility.Net
             {
                 try
                 {
-                    HttpWebRequest request = CreateCardDataRequest(strCardId);
+                    HttpWebRequest cardDatarequest = CreateCardDataRequest(strCardId);
 
-                    HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
+                    HttpWebResponse cardDataResponse = await cardDatarequest.GetResponseAsync() as HttpWebResponse;
 
-                    if (response.StatusCode == HttpStatusCode.OK)
+                    if (cardDataResponse.StatusCode == HttpStatusCode.OK)
                     {
-                        string strJson;
+                        string strJson = string.Empty;
 
-                        using (Stream responseStream = response.GetResponseStream())
+                        Stream cardDataResponseStream = null;
+
+                        try
                         {
-                            using (StreamReader reader = new StreamReader(responseStream))
+                            cardDataResponseStream = cardDataResponse.GetResponseStream();
+
+                            using (StreamReader reader = new StreamReader(cardDataResponseStream))
                             {
                                 strJson = await reader.ReadToEndAsync();
                             }
+                        }
+                        finally
+                        {
+                            cardDataResponseStream?.Dispose();
                         }
 
                         if (!string.IsNullOrEmpty(strJson))
@@ -60,7 +64,6 @@ namespace Spawn.HDT.DustUtility.Net
                             {
                                 strUrl = cardData.Value<string>("imgGold");
                             }
-                            else { }
 
                             HttpWebRequest imageRequest = CreateImageRequest(strUrl);
 
@@ -77,18 +80,14 @@ namespace Spawn.HDT.DustUtility.Net
 
                                 retVal.Position = 0;
                             }
-                            else { }
                         }
-                        else { }
                     }
-                    else { }
                 }
                 catch
                 {
                     Logger.Default.Log(LogLevel.Warning, "Couldn't load card image!");
                 }
             }
-            else { }
 
             return retVal;
         }
@@ -112,17 +111,10 @@ namespace Spawn.HDT.DustUtility.Net
         }
         #endregion
 
-        #region CreateCardBackImageDataRequest
-        private static HttpWebRequest CreateCardBackImageDataRequest()
-        {
-            return CreateJsonDataRequest("/cardbacks");
-        }
-        #endregion
-
         #region CreateJsonDataRequest
         private static HttpWebRequest CreateJsonDataRequest(string strUrl)
         {
-            HttpWebRequest retVal = WebRequest.CreateHttp($"{BaseUrl}{strUrl}");
+            HttpWebRequest retVal = WebRequest.CreateHttp($"{Settings.Default.ApiBaseUrl}{strUrl}");
 
             retVal.Accept = "application/json";
 
