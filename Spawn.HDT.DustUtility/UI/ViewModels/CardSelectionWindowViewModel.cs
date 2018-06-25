@@ -1,7 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using HearthMirror;
-using Spawn.HDT.DustUtility.CardManagement;
 using System.Windows.Input;
 #endregion
 

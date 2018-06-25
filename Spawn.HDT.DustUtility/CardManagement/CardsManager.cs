@@ -222,7 +222,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         private static bool IsCardMatch(CardWrapper cardWrapper, string strKeyString)
         {
             bool blnRet = false;
-            
+
             blnRet |= cardWrapper.DbCard.Name.ToLowerInvariant().Contains(strKeyString);
 
             blnRet |= cardWrapper.DbCard.Race.ToString().Equals(strKeyString.ToUpperInvariant());

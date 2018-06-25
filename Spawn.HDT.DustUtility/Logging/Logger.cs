@@ -151,7 +151,7 @@ namespace Spawn.HDT.DustUtility.Logging
                             }
                         }
                         else { }
-                        
+
                         OnLogging(retVal);
                     }
                     catch (IOException ex)

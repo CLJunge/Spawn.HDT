@@ -1,6 +1,5 @@
 ﻿#region Using
 using Hearthstone_Deck_Tracker.Utility.Toasts;
-using System.Windows.Controls;
 using System.Windows.Input;
 #endregion
 

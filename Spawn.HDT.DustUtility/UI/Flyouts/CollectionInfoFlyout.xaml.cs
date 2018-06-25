@@ -2,11 +2,11 @@
 {
     public partial class CollectionInfoFlyout
     {
-		#region Ctor
+        #region Ctor
         public CollectionInfoFlyout()
         {
             InitializeComponent();
         }
-		#endregion
+        #endregion
     }
 }

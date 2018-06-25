@@ -203,7 +203,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             //retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
             //retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
             //retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
-            
+
             return retVal;
         }
         #endregion
