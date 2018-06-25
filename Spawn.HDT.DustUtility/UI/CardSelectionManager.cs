@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.UI
 
         private CardItemModel m_currentItem;
         private MetroDialogSettings m_dialogSettings;
-        private CustomDialog m_cardCountDialog;
+        private readonly CustomDialog m_cardCountDialog;
         #endregion
 
         #region Properties
@@ -91,7 +91,6 @@ namespace Spawn.HDT.DustUtility.UI
                     CardItems.Add(result.CardItems[i]);
                 }
             }
-            else { }
 
             m_blnDisenchantingConfirmation = false;
         }
@@ -117,26 +116,22 @@ namespace Spawn.HDT.DustUtility.UI
                     AddOrUpdateCardItem(new CardItemModel(new CardWrapper(lstCards[i])));
                 }
             }
-            else { }
         }
         #endregion
 
         #region DisenchantSelection
+#pragma warning disable S3168 // "async" methods should not return "void"
         public async void DisenchantSelection()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             if (!m_blnDisenchantingConfirmation)
             {
                 MessageDialogResult result = await GetCurrentWindow().ShowMessageAsync(string.Empty, "Open your collection and leave the collection screen open. Click 'Disenchant' and do not move your mouse or type until done.", MessageDialogStyle.AffirmativeAndNegative);
 
                 m_blnDisenchantingConfirmation = result == MessageDialogResult.Affirmative;
-
-                //if (m_blnDisenchantingConfirmation)
-                //{
-                //    DisenchantSelection();
-                //}
-                //else { }
             }
-            else
+
+            if (m_blnDisenchantingConfirmation)
             {
                 List<CardWrapper> lstCards = CardItems.Select(m => m.Wrapper).ToList();
 
@@ -148,11 +143,9 @@ namespace Spawn.HDT.DustUtility.UI
                     {
                         Cache.SaveCollection(DustUtilityPlugin.CurrentAccount);
                     }
-                    else { }
 
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
                 }
-                else { }
             }
         }
         #endregion
@@ -214,21 +207,17 @@ namespace Spawn.HDT.DustUtility.UI
 
             retVal.AcceptButton.Click += async (s, e) =>
             {
-                if (m_currentItem != null && m_cardCountDialog.Content is CardCountDialog countControl)
+                if (m_currentItem != null && m_cardCountDialog.Content is CardCountDialog countControl
+                && (countControl.NumericUpDownCtrl.Value.HasValue
+                && countControl.NumericUpDownCtrl.Value > 0))
                 {
-                    if (countControl.NumericUpDownCtrl.Value.HasValue
-                    && countControl.NumericUpDownCtrl.Value > 0)
-                    {
-                        int nNewCount = (int)countControl.NumericUpDownCtrl.Value;
+                    int nNewCount = (int)countControl.NumericUpDownCtrl.Value;
 
-                        m_currentItem.Count = nNewCount;
-                        m_currentItem.Dust = m_currentItem.Wrapper.GetDustValue(nNewCount);
+                    m_currentItem.Count = nNewCount;
+                    m_currentItem.Dust = m_currentItem.Wrapper.GetDustValue(nNewCount);
 
-                        AddOrUpdateCardItem(m_currentItem);
-                    }
-                    else { }
+                    AddOrUpdateCardItem(m_currentItem);
                 }
-                else { }
 
                 await GetCurrentWindow().HideMetroDialogAsync(m_cardCountDialog, m_dialogSettings);
 
@@ -267,7 +256,6 @@ namespace Spawn.HDT.DustUtility.UI
 
                 CardsInfo.DustAmount -= e.Item.Dust;
             }
-            else { }
         }
         #endregion
 
@@ -286,7 +274,6 @@ namespace Spawn.HDT.DustUtility.UI
                 {
                     nCount = nCount - cardItem.Count;
                 }
-                else { }
 
                 if (nCount > 1 && m_cardCountDialog != null)
                 {
@@ -303,9 +290,7 @@ namespace Spawn.HDT.DustUtility.UI
 
                     m_currentItem = null;
                 }
-                else { }
             }
-            else { }
         }
         #endregion
 
@@ -341,7 +326,6 @@ namespace Spawn.HDT.DustUtility.UI
                     blnRet = true;
                 }
             }
-            else { }
 
             return blnRet;
         }
