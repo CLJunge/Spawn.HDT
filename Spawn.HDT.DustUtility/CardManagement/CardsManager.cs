@@ -74,7 +74,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                     retVal = SearchResult.Create(lstCards);
                 }
-                else { }
             }
 
             return retVal;
@@ -130,7 +129,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
             {
                 RemoveRedundantCards(lstCards, parameters, nDustAmount, nTotalAmount);
             }
-            else { }
         }
         #endregion
 
@@ -179,9 +177,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                         }
                     }
                 }
-                else { }
             }
-            else { }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Removed redundant cards");
         }
@@ -190,13 +186,11 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #region GetCardsByQueryString
         private static void GetCardsByQueryString(SearchParameters parameters, List<CardWrapper> lstCards)
         {
-            bool blnDone = false;
-
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Getting cards by query string: {parameters.QueryString}...");
 
             string strQueryString = parameters.QueryString.ToLowerInvariant();
 
-            for (int i = 0; i < parameters.Rarities.Count && !blnDone; i++)
+            for (int i = 0; i < parameters.Rarities.Count; i++)
             {
                 List<CardWrapper> lstChunk = FilterByRarity(parameters.Rarities[i], parameters);
 
@@ -212,7 +206,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     {
                         lstCards.Add(cardWrapper);
                     }
-                    else { }
                 }
             }
         }
@@ -265,16 +258,13 @@ namespace Spawn.HDT.DustUtility.CardManagement
                             {
                                 cardWrapper.MaxCountInDecks = cardInDeck.Count;
                             }
-                            else { }
                         }
-                        else { }
                     }
 
                     if (cardWrapper.MaxCountInDecks < 2 && cardWrapper.RawCard.Count > cardWrapper.MaxCountInDecks && !(cardWrapper.DbCard.Rarity == Rarity.LEGENDARY && cardWrapper.MaxCountInDecks == 1))
                     {
                         s_lstUnusedCards.Add(cardWrapper);
                     }
-                    else { }
                 }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {s_lstUnusedCards.Count} unused cards");
@@ -282,9 +272,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             else if (!DustUtilityPlugin.IsOffline)
             {
                 await DustUtilityPlugin.MainWindow.ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
-                //MessageBox.Show("Navigate to the \"Play\" page first!", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else { }
         }
         #endregion
 
@@ -327,7 +315,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         #region FilterByRarity
         private static List<CardWrapper> FilterByRarity(Rarity rarity, SearchParameters parameters)
         {
-            List<CardWrapper> lstRet = new List<CardWrapper>();
+            List<CardWrapper> lstRet = null;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by rarity... ({rarity})");
 
@@ -384,7 +372,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                 blnRet = await AutoDisenchant.AutoDisenchanter.Disenchant(account, lstCards, null);
             }
-            else { }
 
             return blnRet;
         }
