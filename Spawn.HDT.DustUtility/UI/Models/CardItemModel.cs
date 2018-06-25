@@ -40,7 +40,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 {
                     Set(ref m_strId, value);
                 }
-                else { }
             }
         }
         #endregion
@@ -51,16 +50,11 @@ namespace Spawn.HDT.DustUtility.UI.Models
             get => (Wrapper?.Count ?? 0);
             set
             {
-                if (Wrapper != null && Wrapper.RawCard != null)
+                if (Wrapper?.RawCard?.Count != value)
                 {
-                    if (Wrapper.RawCard.Count != value)
-                    {
-                        Wrapper.RawCard.Count = value;
-                        RaisePropertyChanged(nameof(Wrapper));
-                    }
-                    else { }
+                    Wrapper.RawCard.Count = value;
+                    RaisePropertyChanged(nameof(Wrapper));
                 }
-                else { }
             }
         }
         #endregion
@@ -84,7 +78,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     Wrapper.DustValue = value;
                     RaisePropertyChanged(nameof(Wrapper));
                 }
-                else { }
             }
         }
         #endregion
@@ -172,7 +165,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(Date));
                     RaisePropertyChanged(nameof(CardImage));
                 }
-                else { }
             };
         }
 
@@ -198,7 +190,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
                 image = new CroppedBitmap((BitmapSource)image, new Int32Rect(nCropAmount, 0, (int)image.Width - nCropAmount, (int)image.Height));
             }
-            else { }
 
             return image;
         }
