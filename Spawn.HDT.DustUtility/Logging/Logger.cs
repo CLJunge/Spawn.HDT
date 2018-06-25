@@ -10,23 +10,22 @@ namespace Spawn.HDT.DustUtility.Logging
     public class Logger
     {
         #region Static Fields
-        private static int s_nGlobalLoggerCount;
+        private static readonly object s_objLock = new object();
         #endregion
 
         #region Member Variables
-        private DirectoryInfo m_logDirectory = null;
+        private readonly DirectoryInfo m_logDirectory = null;
         private string m_strFilePath = string.Empty;
         private FileInfo m_logFile = null;
-        private static object s_objLock = null;
         #endregion
 
         #region Properties
         #region Name
-        public string Name { get; } = $"Logger_{s_nGlobalLoggerCount++}";
+        public string Name { get; }
         #endregion
 
-        #region LogFileDirectory
-        public string LogFileDirectory => m_logDirectory.FullName;
+        #region LogDirectory
+        public string LogDirectory => m_logDirectory.FullName;
         #endregion
 
         #region LogFileName
@@ -71,33 +70,23 @@ namespace Spawn.HDT.DustUtility.Logging
         #region Ctor
         public Logger(string name, string logDirectory = null)
         {
-            if (Directory.Exists(Environment.CurrentDirectory))
+            Name = name;
+
+            if (!string.IsNullOrEmpty(logDirectory))
             {
-                s_objLock = new object();
-
-                Name = name;
-
-                if (!string.IsNullOrEmpty(logDirectory))
-                {
-                    m_logDirectory = new DirectoryInfo(logDirectory);
-                }
-                else
-                {
-                    m_logDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
-                }
-
-                if (!m_logDirectory.Exists)
-                {
-                    m_logDirectory.Create();
-                }
-                else { }
-
-                SetLogFileName();
+                m_logDirectory = new DirectoryInfo(logDirectory);
             }
             else
             {
-                throw new ArgumentException("The directory doesn't exist!", "FilePath");
+                m_logDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
             }
+
+            if (!m_logDirectory.Exists)
+            {
+                m_logDirectory.Create();
+            }
+
+            SetLogFileName();
         }
         #endregion
 
@@ -134,13 +123,11 @@ namespace Spawn.HDT.DustUtility.Logging
                         {
                             LogToConsole(retVal);
                         }
-                        else { }
 
                         if (IsDebugMode)
                         {
                             System.Diagnostics.Debug.WriteLine(strAssembledMessage);
                         }
-                        else { }
 
                         if (WriteToFile)
                         {
@@ -150,7 +137,6 @@ namespace Spawn.HDT.DustUtility.Logging
                                 writer.Flush();
                             }
                         }
-                        else { }
 
                         OnLogging(retVal);
                     }
@@ -202,9 +188,8 @@ namespace Spawn.HDT.DustUtility.Logging
 
             if (!m_logFile.Exists)
             {
-                using (m_logFile.Create()) { }
+                using (m_logFile.Create()) { /* Do nothing */ }
             }
-            else { }
 
             m_logFile.Refresh();
         }
@@ -225,13 +210,11 @@ namespace Spawn.HDT.DustUtility.Logging
 
                     strRet = $"{strTemp}.{strMemberName.TrimStart('.')}";
                 }
-                else { }
             }
             else if (!string.IsNullOrEmpty(strMemberName))
             {
                 strRet = strMemberName;
             }
-            else { }
 
             return strRet;
         }
