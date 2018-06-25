@@ -198,13 +198,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         {
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading preferences... ({DisplayString})");
 
-            AccountPreferences retVal = AccountPreferences.Load(this);
-
-            //retVal.CardSelection.CollectionChanged += (s, e) => SavePreferences();
-            //retVal.ExcludedDecks.CollectionChanged += (s, e) => SavePreferences();
-            //retVal.SearchParameters.PropertyChanged += (s, e) => SavePreferences();
-
-            return retVal;
+            return AccountPreferences.Load(this);
         }
         #endregion
 
@@ -217,7 +211,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved preferences for {DisplayString}");
             }
-            else { }
         }
         #endregion
 
@@ -240,7 +233,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
 
                             blnRet &= acc.BattleTag.Number == BattleTag.Number;
                         }
-                        else { }
 
                         blnRet &= acc.Region == Region;
                     }
@@ -251,17 +243,16 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 }
                 else
                 {
-                    blnRet = base.Equals(obj);
+                    blnRet = Equals(obj);
                 }
             }
-            else { }
 
             return blnRet;
         }
         #endregion
 
         #region GetHashCode
-        public override int GetHashCode() => base.GetHashCode();
+        public override int GetHashCode() => DisplayString.GetHashCode();
         #endregion
 
         #region Static Methods
@@ -311,7 +302,6 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't retrieve currently logged in account: {ex}");
                 }
             }
-            else { }
 
             return retVal;
         }

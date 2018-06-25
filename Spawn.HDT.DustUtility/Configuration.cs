@@ -139,8 +139,6 @@ namespace Spawn.HDT.DustUtility
             LogLevel = LogLevel.Trace;
             ViewMode = ViewMode.Default;
             Version = 1;
-
-            //PropertyChanged += (s, e) => Save();
         }
         #endregion
 
