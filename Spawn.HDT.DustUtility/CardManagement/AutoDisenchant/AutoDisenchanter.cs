@@ -43,11 +43,10 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
                         await actions.ClearFilters();
                         blnRet &= await actions.DisenchantCards();
-                        //await actions.ClearSearchBox();
+                        await actions.ClearSearchBox();
 
                         DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Sucessfully disenchanted {lstCards?.Count} card(s)");
                     }
-                    else { }
                 }
                 catch (Exception ex)
                 {
@@ -56,7 +55,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     blnRet = false;
                 }
             }
-            else { }
 
             return blnRet;
         }
