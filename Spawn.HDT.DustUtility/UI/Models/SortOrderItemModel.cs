@@ -35,7 +35,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 {
                     RaisePropertyChanged(nameof(Name));
                 }
-                else { }
             };
         }
 
