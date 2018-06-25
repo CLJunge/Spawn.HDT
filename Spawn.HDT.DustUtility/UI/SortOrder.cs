@@ -9,7 +9,7 @@ namespace Spawn.HDT.DustUtility.UI
     public class SortOrder
     {
         #region Member Variables
-        private List<SortOrderItemModel> m_lstItems;
+        private readonly List<SortOrderItemModel> m_lstItems;
         #endregion
 
         #region Properties
@@ -52,7 +52,6 @@ namespace Spawn.HDT.DustUtility.UI
                     retVal.m_lstItems.Add(new SortOrderItemModel(item));
                 }
             }
-            else { }
 
             return retVal;
         }
