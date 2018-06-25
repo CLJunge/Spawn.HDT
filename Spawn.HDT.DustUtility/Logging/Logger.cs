@@ -46,7 +46,7 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region FormatString
-        public string FormatString { get; set; }
+        public string FormatString { get; set; } = "%t [%l::%c] %m";
         #endregion
 
         #region [STATIC] Default
@@ -98,8 +98,6 @@ namespace Spawn.HDT.DustUtility.Logging
             {
                 throw new ArgumentException("The directory doesn't exist!", "FilePath");
             }
-
-            FormatString = "%t [%l::%c] %m";
         }
         #endregion
 
