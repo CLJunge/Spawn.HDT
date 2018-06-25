@@ -6,6 +6,7 @@ using System.Windows.Media;
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {
+    //Copied from HDT since I am not able to get it to work by using the control from the referenced HDT executable.
     public partial class StatusIndicator : INotifyPropertyChanged
     {
         public static readonly DependencyProperty SuccessProperty = DependencyProperty.Register(
