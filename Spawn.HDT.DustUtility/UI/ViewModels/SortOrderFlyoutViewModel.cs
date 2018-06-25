@@ -94,7 +94,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 InitializeAsync().Forget();
             }
-            else { }
 #endif
         }
         #endregion
@@ -120,7 +119,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region AddItem
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void AddItem()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             List<SortOrderItemModel> lstUnusedItems = GetUnusedSortOrderItems();
 
@@ -148,7 +149,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 UpdateSortOrderString();
             }
-            else { }
         }
         #endregion
 
@@ -188,7 +188,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region SaveSortOrder
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void SaveSortOrder()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             DustUtilityPlugin.Config.SortOrder = CreateSortOrderString();
 
@@ -215,7 +217,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     lstRet.Add(model);
                 }
-                else { }
             }
 
             return lstRet;
@@ -236,7 +237,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     strRet = $"{strRet};{SortOrderItems[i].Value}";
                 }
             }
-            else { }
 
             return strRet;
         }
