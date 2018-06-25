@@ -10,6 +10,7 @@ using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
+using Spawn.HDT.DustUtility.Properties;
 using Spawn.HDT.DustUtility.UI;
 using Spawn.HDT.DustUtility.UI.Controls.Toasts;
 using Spawn.HDT.DustUtility.UI.Dialogs;
@@ -41,13 +42,16 @@ namespace Spawn.HDT.DustUtility
         #region Static Fields
         private static Configuration s_config;
         private static CardSelectionManager s_cardSelection;
-        private static bool s_blnInitialized;
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
-        private static DateTime s_dtLastSaveTimestamp = DateTime.Now;
 #if DEBUG
         private static readonly IAccount s_mockAcc;
 #endif
+        #endregion
+
+        #region Member Variables
+        private bool m_blnInitialized;
+        private DateTime m_dtLastSaveTimestamp = DateTime.Now;
         #endregion
 
         #region Static Properties
@@ -79,7 +83,6 @@ namespace Spawn.HDT.DustUtility
 
                     IsOfflineChanged?.Invoke(null, EventArgs.Empty);
                 }
-                else { }
             }
         }
         #endregion
@@ -155,13 +158,10 @@ namespace Spawn.HDT.DustUtility
                 //Common
                 { 1, new SolidColorBrush(Color.FromRgb(38, 168, 16)) },
                 //Rare
-                //s_dColors.Add(3, new SolidColorBrush(Color.FromRgb(18, 92, 204)));
                 { 3, new SolidColorBrush(Color.FromRgb(30, 113, 255)) },
                 //Epic
-                //s_dColors.Add(4, new SolidColorBrush(Color.FromRgb(135, 14, 186)));
                 { 4, new SolidColorBrush(Color.FromRgb(163, 58, 234)) },
                 //Legendary
-                //s_dColors.Add(5, new SolidColorBrush(Color.FromRgb(226, 119, 24)));
                 { 5, new SolidColorBrush(Color.FromRgb(255, 153, 0)) }
             };
 
@@ -171,7 +171,6 @@ namespace Spawn.HDT.DustUtility
                 {
                     s_blnCheckedForUpdates = !Config.CheckForUpdates;
                 }
-                else { }
             };
 
 #if DEBUG
@@ -190,7 +189,7 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            s_blnInitialized = false;
+            m_blnInitialized = false;
 
             HideMainWindowOnClose = true;
 
@@ -202,13 +201,12 @@ namespace Spawn.HDT.DustUtility
             {
                 MainWindow = new MainWindow();
             }
-            else { }
 
             GameEvents.OnModeChanged.Add(OnModeChanged);
 
             Task.Run(() => UpdateDataFiles()).ContinueWith(t =>
             {
-                s_blnInitialized = true;
+                m_blnInitialized = true;
             });
         }
         #endregion
@@ -250,7 +248,7 @@ namespace Spawn.HDT.DustUtility
         #region OnMenuItemClick
         private async void OnMenuItemClick(object sender, RoutedEventArgs e)
         {
-            if (s_blnInitialized)
+            if (m_blnInitialized)
             {
                 if (!IsOffline || Config.OfflineMode)
                 {
@@ -262,15 +260,12 @@ namespace Spawn.HDT.DustUtility
                         {
                             UpdatedAccountInstance(selectedAcc);
                         }
-                        else { }
                     }
-                    else { }
 
                     if (CurrentAccount.IsValid)
                     {
                         await ShowMainWindowAsync();
                     }
-                    else { }
                 }
                 else if (!Config.OfflineMode)
                 {
@@ -278,7 +273,6 @@ namespace Spawn.HDT.DustUtility
 
                     Logger.Log(LogLevel.Warning, "Hearthstone isn't running");
                 }
-                else { }
             }
             else
             {
@@ -288,7 +282,6 @@ namespace Spawn.HDT.DustUtility
                 {
                     strMessage = $"{strMessage} (Updating account files to new format)";
                 }
-                else { }
 
                 MessageBox.Show(strMessage, Name, MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -312,7 +305,6 @@ namespace Spawn.HDT.DustUtility
 
                     Cache.ClearCache();
                 }
-                else { }
 
                 await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
             }
@@ -332,33 +324,32 @@ namespace Spawn.HDT.DustUtility
                 ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = false;
                 ToolTipService.SetIsEnabled(MainWindow.DecksButton, true);
             }
-            else { }
 
             ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
         }
         #endregion
 
         #region OnModeChanged
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void OnModeChanged(Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode mode)
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             switch (mode)
             {
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
-                    if (Config.OfflineMode && (DateTime.Now - s_dtLastSaveTimestamp).Minutes >= 1)
+                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Minutes >= 1)
                     {
                         await Cache.SaveAll(CurrentAccount);
 
-                        s_dtLastSaveTimestamp = DateTime.Now;
+                        m_dtLastSaveTimestamp = DateTime.Now;
                     }
-                    else { }
 
                     if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
                     {
                         ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = true;
                         ToolTipService.SetIsEnabled(MainWindow.DecksButton, false);
                     }
-                    else { }
                     break;
             }
         }
@@ -373,7 +364,7 @@ namespace Spawn.HDT.DustUtility
                 Header = Name,
                 Icon = new Image()
                 {
-                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri("/Spawn.HDT.DustUtility;component/Resources/icon.png", UriKind.Relative))
+                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(Settings.Default.IconPath, UriKind.Relative))
                 }
             };
 
@@ -384,7 +375,9 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ShowSettingsDialog
+#pragma warning disable S3168 // "async" methods should not return "void"
         private async void ShowSettingsDialog()
+#pragma warning restore S3168 // "async" methods should not return "void"
         {
             Logger.Log(LogLevel.Debug, "Opening settings dialog");
 
@@ -397,9 +390,8 @@ namespace Spawn.HDT.DustUtility
 
             if (SettingsDialog.ShowDialog().Value)
             {
-                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync().Forget();
             }
-            else { }
         }
         #endregion
 
@@ -456,13 +448,11 @@ namespace Spawn.HDT.DustUtility
                         {
                             File.Delete(strTargetPath);
                         }
-                        else { }
 
                         fileInfo.MoveTo(strTargetPath);
                     }
                 }
             }
-            else { }
         }
         #endregion
 
@@ -500,7 +490,6 @@ namespace Spawn.HDT.DustUtility
 
                         lstHistory.Add(card);
                     }
-                    else { }
                 }
 
                 FileManager.Write(vFiles[i], lstHistory);
@@ -517,7 +506,6 @@ namespace Spawn.HDT.DustUtility
             {
                 Directory.Move(strOldDir, Path.Combine(DataDirectory, "Backups"));
             }
-            else { }
         }
         #endregion
 
@@ -529,20 +517,11 @@ namespace Spawn.HDT.DustUtility
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-                if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-                {
 #if DEBUG
-                    SimpleIoc.Default.Register(() => s_mockAcc);
-#endif
-                }
-                else
-                {
-#if DEBUG
-                    SimpleIoc.Default.Register(() => s_mockAcc);
+                SimpleIoc.Default.Register(() => s_mockAcc);
 #else
-                    SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
+                SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
 #endif
-                }
 
                 SimpleIoc.Default.Register<MainViewModel>();
                 SimpleIoc.Default.Register<CardSelectionWindowViewModel>();
@@ -559,7 +538,6 @@ namespace Spawn.HDT.DustUtility
                 SimpleIoc.Default.Register<SettingsDialogViewModel>();
                 SimpleIoc.Default.Register<SortOrderItemSelectorDialogViewModel>();
             }
-            else { }
         }
         #endregion
 
@@ -601,7 +579,6 @@ namespace Spawn.HDT.DustUtility
                     {
                         owner = Core.MainWindow;
                     }
-                    else { }
 
                     await ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().InitializeAsync();
 
@@ -616,7 +593,6 @@ namespace Spawn.HDT.DustUtility
 
                         Config.LastSelectedAccount = retVal.AccountString;
                     }
-                    else { }
                 }
                 else
                 {
@@ -666,10 +642,8 @@ namespace Spawn.HDT.DustUtility
 
                         lstRet.Add(Account.Parse(strAccountString));
                     }
-                    else { }
                 }
             }
-            else { }
 
             return lstRet.ToArray();
         }
@@ -692,7 +666,6 @@ namespace Spawn.HDT.DustUtility
                 {
                     selectedAcc = oldAcc;
                 }
-                else { }
 
                 if (!selectedAcc.Equals(oldAcc))
                 {
@@ -700,13 +673,11 @@ namespace Spawn.HDT.DustUtility
 
                     blnRet = true;
                 }
-                else { }
 
                 ShowMainWindowAsync().Forget();
 
                 Logger.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.DisplayString} New={selectedAcc.DisplayString}");
             }
-            else { }
 
             return blnRet;
         }
@@ -734,7 +705,6 @@ namespace Spawn.HDT.DustUtility
             {
                 Directory.CreateDirectory(strRet);
             }
-            else { }
 
             return strRet;
         }
@@ -768,7 +738,6 @@ namespace Spawn.HDT.DustUtility
                 window.Topmost = false;
                 window.Focus();
             }
-            else { }
         }
         #endregion
 
@@ -781,7 +750,6 @@ namespace Spawn.HDT.DustUtility
             {
                 lstRet = HearthMirror.Reflection.GetCollection()?.Where(c => c.Count > 0).ToList();
             }
-            else { }
 
             return lstRet;
         }
@@ -799,7 +767,6 @@ namespace Spawn.HDT.DustUtility
                         ToastManager.ShowCustomToast(toast);
                     });
             }
-            else { }
         }
         #endregion
 
@@ -819,13 +786,10 @@ namespace Spawn.HDT.DustUtility
                     {
                         ShowToastNotification("New Update Available!");
                     }
-                    else { }
                 }
-                else { }
 
                 s_blnCheckedForUpdates = true;
             }
-            else { }
         }
         #endregion
         #endregion

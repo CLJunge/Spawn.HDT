@@ -14,5 +14,8 @@
     <Setting Name="ResourcesBasePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/Spawn.HDT.DustUtility;component/Resources/Images/</Value>
     </Setting>
+    <Setting Name="IconPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Spawn.HDT.DustUtility;component/Resources/icon.png</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

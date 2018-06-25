@@ -58,5 +58,14 @@ namespace Spawn.HDT.DustUtility.Properties {
                 return ((string)(this["ResourcesBasePath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Spawn.HDT.DustUtility;component/Resources/icon.png")]
+        public string IconPath {
+            get {
+                return ((string)(this["IconPath"]));
+            }
+        }
     }
 }
