@@ -17,14 +17,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region Custom Events
         public event EventHandler<CardItemEventArgs> ItemDropped;
 
-        private void OnItemDropped(CardItemModel item)
-        {
-            if (ItemDropped != null)
-            {
-                ItemDropped(this, new CardItemEventArgs(item, -1));
-            }
-            else { }
-        }
+        private void OnItemDropped(CardItemModel item) => ItemDropped?.Invoke(this, new CardItemEventArgs(item, -1));
         #endregion
 
         #region Events
@@ -33,13 +26,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             ItemsContainer.ReleaseMouseCapture();
 
-            if (AllowDrag && (m_startPosition != null && m_startPosition.HasValue))
+            if (AllowDrag && m_startPosition != null)
             {
                 if (m_draggedItem == null && ItemsContainer.SelectedIndex > -1)
                 {
                     m_draggedItem = ItemsContainer.SelectedItem as CardItemModel;
                 }
-                else { }
 
                 Point position = e.GetPosition(null);
 
@@ -58,21 +50,18 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     m_startPosition = null;
                     m_draggedItem = null;
                 }
-                else { }
             }
-            else { }
         }
         #endregion
 
         #region OnListViewPreviewMouseLeftButtonDown
         private void OnListViewPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //handles scrollbar
+            //Handles scrollbar
             if (!(e.OriginalSource is System.Windows.Shapes.Rectangle))
             {
                 m_startPosition = e.GetPosition(null);
             }
-            else { }
         }
         #endregion
 
@@ -83,7 +72,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 e.Effects = DragDropEffects.None;
             }
-            else { }
 
             e.Handled = true;
         }
@@ -94,11 +82,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (e.Data.GetDataPresent("item") && e.Data.GetData("item") is CardItemModel item)
             {
-                //System.Diagnostics.Debug.WriteLine($"Dropped {item.Name}");
-
                 OnItemDropped(item);
             }
-            else { }
         }
         #endregion
         #endregion
