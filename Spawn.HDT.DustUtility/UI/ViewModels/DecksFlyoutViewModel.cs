@@ -75,7 +75,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     ServiceLocator.Current.GetInstance<DeckListFlyoutViewModel>().Deck = SelectedDeckItem.Deck;
                 }
-                else { }
             };
 
 #if DEBUG
@@ -83,7 +82,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 InitializeAsync().Forget();
             }
-            else { }
 #endif
 
             Messenger.Default.Register<CMOpeningMessage>(this, OnContextMenuOpening);
@@ -114,7 +112,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         item.Opacity = .5;
                     }
-                    else { }
 
                     DeckItems.Add(item);
                 }
@@ -123,7 +120,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 ReloadRequired = false;
             }
-            else { }
         }
         #endregion
 
@@ -172,9 +168,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         ToggleDeckMenuItemHeader = ExcludeHeaderText;
                     }
                 }
-                else { }
             }
-            else { }
         }
         #endregion
 
@@ -185,7 +179,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 ShowDeckList();
             }
-            else { }
         }
         #endregion
     }
