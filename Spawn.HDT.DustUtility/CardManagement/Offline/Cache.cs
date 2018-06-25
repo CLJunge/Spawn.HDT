@@ -36,7 +36,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Saved collection for {account.DisplayString}");
             }
-            else { }
 
             return blnRet;
         }
@@ -61,7 +60,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     {
                         lstDecks.Add(lstAllDecks[i]);
                     }
-                    else { }
                 }
 
                 FileManager.Write(strPath, lstDecks.ToCachedDecks());
@@ -70,7 +68,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Trace, $"Saved decks for {account.DisplayString}");
             }
-            else { }
 
             return blnRet;
         }
@@ -79,7 +76,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region LoadCollection
         public static List<Card> LoadCollection(IAccount account)
         {
-            List<Card> lstRet = new List<Card>();
+            List<Card> lstRet = null;
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -87,7 +84,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 {
                     m_lstCachedCollection = InternalLoadCollection(account);
                 }
-                else { }
 
                 lstRet = m_lstCachedCollection.Select(c => c.Clone()).ToList();
             }
@@ -132,7 +128,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region LoadDecks
         public static List<Deck> LoadDecks(IAccount account)
         {
-            List<Deck> lstRet = new List<Deck>();
+            List<Deck> lstRet = null;
 
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
@@ -140,7 +136,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 {
                     m_lstCachedDecks = InternalLoadDecks(account);
                 }
-                else { }
 
                 lstRet = m_lstCachedDecks.Select(d => d.Clone()).ToList();
             }
@@ -217,7 +212,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 account = await Account.GetLoggedInAccountAsync();
             }
-            else { }
 
             if ((!account?.IsEmpty ?? false) && (account?.IsValid ?? false))
             {
@@ -242,7 +236,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     DustUtilityPlugin.ShowToastNotification("Saved Decks!");
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved decks successfuly");
                 }
-                else { }
             }
             else
             {
