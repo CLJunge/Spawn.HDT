@@ -61,7 +61,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             Logger.Default.Log(LogLevel.Debug, $"Creating search result for {lstCards?.Count} card(s)...");
 
-            for (int i = 0; i < lstCards.Count; i++)
+            for (int i = 0; i < lstCards?.Count; i++)
             {
                 CardWrapper wrapper = lstCards[i];
 
