@@ -159,7 +159,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region LogLevels
+#pragma warning disable S2365 // Properties should not make collection or array copies
         public IList<LogLevel> LogLevels => Enum.GetValues(typeof(LogLevel)).Cast<LogLevel>().ToList();
+#pragma warning restore S2365 // Properties should not make collection or array copies
         #endregion
 
         #region ViewMode
@@ -179,7 +181,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region ViewModes
+#pragma warning disable S2365 // Properties should not make collection or array copies
         public IList<ViewMode> ViewModes => Enum.GetValues(typeof(ViewMode)).Cast<ViewMode>().ToList();
+#pragma warning restore S2365 // Properties should not make collection or array copies
         #endregion
 
         #region SaveSettingsCommand
@@ -277,7 +281,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         LogLevelLabelText = LogLevelLabelText.Substring(0, LogLevelLabelText.Length - IsDirtySuffix.Length);
                     }
-                    else { }
                     break;
 
                 case nameof(ViewMode):
