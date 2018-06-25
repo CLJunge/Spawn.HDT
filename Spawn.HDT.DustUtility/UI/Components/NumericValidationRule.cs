@@ -31,7 +31,6 @@ namespace Spawn.HDT.DustUtility.UI.Components
                     {
                         retVal = new ValidationResult(false, ErrorMessage);
                     }
-                    else { }
                 }
                 catch
                 {
