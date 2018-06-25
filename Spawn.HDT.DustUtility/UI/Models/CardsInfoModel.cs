@@ -74,7 +74,6 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 {
                     RaisePropertyChanged(nameof(TotalCount));
                 }
-                else { }
             };
         }
         #endregion
