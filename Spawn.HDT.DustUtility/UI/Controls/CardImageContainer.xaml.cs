@@ -49,9 +49,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     m_currentImageStream.Dispose();
                     m_currentImageStream = null;
                 }
-                else { }
 
-                if (m_wrapper != null && Visibility == Visibility.Visible)
+                if (Visibility == Visibility.Visible)
                 {
                     Logger.Default.Log(LogLevel.Debug, $"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})");
 
@@ -76,11 +75,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                         SetMargin();
                     }
-                    else { }
                 }
-                else { }
             }
-            else { }
         }
         #endregion
 
