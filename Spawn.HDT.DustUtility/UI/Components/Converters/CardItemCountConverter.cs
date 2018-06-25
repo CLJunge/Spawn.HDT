@@ -22,7 +22,6 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"+{strRet}";
                 }
-                else { }
             }
             catch
             {
