@@ -243,7 +243,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 }
                 else
                 {
-                    blnRet = Equals(obj);
+#pragma warning disable S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
+                    blnRet = base.Equals(obj);
+#pragma warning restore S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
                 }
             }
 
