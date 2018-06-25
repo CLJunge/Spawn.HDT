@@ -100,7 +100,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 UpdateMessage = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod" + Environment.NewLine + Environment.NewLine + "tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo" + Environment.NewLine + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy" + Environment.NewLine + "eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." + Environment.NewLine + Environment.NewLine + "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
             }
-            else { }
 #endif
         }
         #endregion
@@ -127,7 +126,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 .Append(UpdateManager.Info.ReleaseNotes)
                 .Append(Environment.NewLine + Environment.NewLine);
             }
-            else { }
 
             sb.Append("Would you like to download it?");
 
@@ -191,7 +189,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 Directory.CreateDirectory(strTargetDir);
             }
-            else { }
 
             ZipFile.ExtractToDirectory(strPath, strTargetDir);
 
