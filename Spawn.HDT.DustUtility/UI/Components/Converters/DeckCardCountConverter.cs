@@ -36,13 +36,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"{Prefix} {strRet}";
                 }
-                else { }
 
                 if (!string.IsNullOrEmpty(Suffix))
                 {
                     strRet = $"{strRet} {Suffix}";
                 }
-                else { }
             }
             else
             {
