@@ -39,7 +39,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region Ctor
-        public ViewModelBase()
+        protected ViewModelBase()
         {
             if (CanNotifyDirtyStatus)
             {
@@ -48,7 +48,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 PropertyChanged += OnPropertyChanged;
             }
-            else { }
         }
         #endregion
 
@@ -72,13 +71,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     DirtyProperties.Remove(e.PropertyName);
                 }
-                else { }
 
                 IsDirty = DirtyProperties?.Count > 0;
 
                 NotifyDirtyStatus?.Invoke(sender, new NotifyDirtyStatusEventArgs(e.PropertyName, blnIsDirty));
             }
-            else { }
         }
         #endregion
         #endregion
@@ -96,7 +93,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 DirtyProperties?.Clear();
             }
-            else { }
         }
         #endregion
 
@@ -107,7 +103,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 m_dInitialPropertyValues[strPropertyName] = objValue;
             }
-            else { }
         }
         #endregion
 
