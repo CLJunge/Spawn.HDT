@@ -5,6 +5,7 @@ using HearthMirror.Objects;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Properties;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class CollectionInfoFlyoutViewModel : ViewModelBase
     {
-        #region Constants
-        private const string ResourceBasePath = "/Spawn.HDT.DustUtility;component/Resources/Images/";
-        #endregion
-
         #region Properties
         #region CanNotifyDirtyStatus
         public override bool CanNotifyDirtyStatus => false;
@@ -43,7 +40,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 InitializeAsync().Forget();
             }
-            else { }
 #endif
         }
         #endregion
@@ -69,12 +65,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         CardSetItems.Add(CreateCardSetItem(lstCollection, cardSet));
                     }
-                    else { }
                 }
 
                 ReloadRequired = false;
             }
-            else { }
         }
         #endregion
 
@@ -97,7 +91,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                 }) != null;
             }
-            else { }
 
             return blnRet;
         }
@@ -134,61 +127,60 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region GetLogo
         private BitmapImage GetLogo(CardSet cardSet)
         {
-            string strSource = string.Empty;
+            string strSource = Settings.Default.ResourcesBasePath;
 
             switch (cardSet)
             {
-                case CardSet.EXPERT1:
-                case CardSet.HOF:
-                    strSource = $"{ResourceBasePath}hearthstone_logo.png";
-                    break;
-
                 case CardSet.GVG:
-                    strSource = $"{ResourceBasePath}goblins_logo.png";
+                    strSource = $"{strSource}goblins_logo.png";
                     break;
 
                 case CardSet.TGT:
-                    strSource = $"{ResourceBasePath}tournament_logo.png";
+                    strSource = $"{strSource}tournament_logo.png";
                     break;
 
                 case CardSet.OG:
-                    strSource = $"{ResourceBasePath}oldgods_logo.png";
+                    strSource = $"{strSource}oldgods_logo.png";
                     break;
 
                 case CardSet.GANGS:
-                    strSource = $"{ResourceBasePath}gadgetzan_logo.png";
+                    strSource = $"{strSource}gadgetzan_logo.png";
                     break;
 
                 case CardSet.UNGORO:
-                    strSource = $"{ResourceBasePath}ungoro_logo.png";
+                    strSource = $"{strSource}ungoro_logo.png";
                     break;
 
                 case CardSet.ICECROWN:
-                    strSource = $"{ResourceBasePath}frozenthrone_logo.png";
+                    strSource = $"{strSource}frozenthrone_logo.png";
                     break;
 
                 case CardSet.LOOTAPALOOZA:
-                    strSource = $"{ResourceBasePath}kobolds_logo.png";
+                    strSource = $"{strSource}kobolds_logo.png";
                     break;
 
                 case CardSet.GILNEAS:
-                    strSource = $"{ResourceBasePath}witchwood_logo.png";
+                    strSource = $"{strSource}witchwood_logo.png";
                     break;
 
                 case CardSet.NAXX:
-                    strSource = $"{ResourceBasePath}naxx_logo.png";
+                    strSource = $"{strSource}naxx_logo.png";
                     break;
 
                 case CardSet.BRM:
-                    strSource = $"{ResourceBasePath}mountain_logo.png";
+                    strSource = $"{strSource}mountain_logo.png";
                     break;
 
                 case CardSet.LOE:
-                    strSource = $"{ResourceBasePath}league_logo.png";
+                    strSource = $"{strSource}league_logo.png";
                     break;
 
                 case CardSet.KARA:
-                    strSource = $"{ResourceBasePath}karazhan_logo.png";
+                    strSource = $"{strSource}karazhan_logo.png";
+                    break;
+
+                default:
+                    strSource = $"{strSource}hearthstone_logo.png";
                     break;
             }
 
@@ -199,58 +191,56 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region GetBanner
         private BitmapImage GetBanner(CardSet cardSet)
         {
-            string strSource = string.Empty;
+            string strSource = Settings.Default.ResourcesBasePath;
 
             switch (cardSet)
             {
-                case CardSet.EXPERT1:
-                case CardSet.HOF:
-                case CardSet.GILNEAS:
-                    strSource = $"{ResourceBasePath}hearthstone_banner.jpg";
-                    break;
-
                 case CardSet.GVG:
-                    strSource = $"{ResourceBasePath}goblins_banner.jpg";
+                    strSource = $"{strSource}goblins_banner.jpg";
                     break;
 
                 case CardSet.TGT:
-                    strSource = $"{ResourceBasePath}tournament_banner.jpg";
+                    strSource = $"{strSource}tournament_banner.jpg";
                     break;
 
                 case CardSet.OG:
-                    strSource = $"{ResourceBasePath}oldgods_banner.jpg";
+                    strSource = $"{strSource}oldgods_banner.jpg";
                     break;
 
                 case CardSet.GANGS:
-                    strSource = $"{ResourceBasePath}gadgetzan_banner.jpg";
+                    strSource = $"{strSource}gadgetzan_banner.jpg";
                     break;
 
                 case CardSet.UNGORO:
-                    strSource = $"{ResourceBasePath}ungoro_banner.jpg";
+                    strSource = $"{strSource}ungoro_banner.jpg";
                     break;
 
                 case CardSet.ICECROWN:
-                    strSource = $"{ResourceBasePath}frozenthrone_banner.jpg";
+                    strSource = $"{strSource}frozenthrone_banner.jpg";
                     break;
 
                 case CardSet.LOOTAPALOOZA:
-                    strSource = $"{ResourceBasePath}kobolds_banner.jpg";
+                    strSource = $"{strSource}kobolds_banner.jpg";
                     break;
 
                 case CardSet.NAXX:
-                    strSource = $"{ResourceBasePath}naxx_banner.jpg";
+                    strSource = $"{strSource}naxx_banner.jpg";
                     break;
 
                 case CardSet.BRM:
-                    strSource = $"{ResourceBasePath}mountain_banner.jpg";
+                    strSource = $"{strSource}mountain_banner.jpg";
                     break;
 
                 case CardSet.LOE:
-                    strSource = $"{ResourceBasePath}league_banner.jpg";
+                    strSource = $"{strSource}league_banner.jpg";
                     break;
 
                 case CardSet.KARA:
-                    strSource = $"{ResourceBasePath}karazhan_banner.jpg";
+                    strSource = $"{strSource}karazhan_banner.jpg";
+                    break;
+
+                default:
+                    strSource = $"{strSource}hearthstone_banner.jpg";
                     break;
             }
 
@@ -262,8 +252,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private int GetCountForRarity(List<Card> lstCollection, CardSet cardSet, Rarity rarity, bool blnIsGolden)
         {
             int nRet = 0;
-
-            //System.Diagnostics.Debug.WriteLine($"{cardSet.ToString()} - {rarity.ToString()}");
 
             List<Card> lstChunk = lstCollection.FindAll(c =>
             {
@@ -285,16 +273,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 nMaxCount = 1;
             }
-            else { }
 
             for (int i = 0; i < lstChunk.Count; i++)
             {
                 nRet += Math.Min(lstChunk[i].Count, nMaxCount);
-
-                //System.Diagnostics.Debug.WriteLine($"{Cards.All[lstChunk[i].Id].Name}: {lstChunk[i].Count}");
             }
-
-            //System.Diagnostics.Debug.WriteLine(string.Empty);
 
             return nRet;
         }
@@ -357,9 +340,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         }
                     });
                 }
-                else { }
             }
-            else { }
 
             for (int i = 0; i < lstChunk.Count; i++)
             {

@@ -49,5 +49,14 @@ namespace Spawn.HDT.DustUtility.Properties {
                 return ((string)(this["ApiBaseUrl"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Spawn.HDT.DustUtility;component/Resources/Images/")]
+        public string ResourcesBasePath {
+            get {
+                return ((string)(this["ResourcesBasePath"]));
+            }
+        }
     }
 }
