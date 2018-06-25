@@ -17,7 +17,6 @@ namespace Spawn.HDT.DustUtility
                 {
                     File.Delete(strPath);
                 }
-                else { }
 
                 using (StreamWriter writer = new StreamWriter(strPath))
                 {
@@ -49,7 +48,6 @@ namespace Spawn.HDT.DustUtility
                         retVal = (T)serializer.Deserialize(reader);
                     }
                 }
-                else { }
             }
             catch (System.Exception ex)
             {
@@ -60,7 +58,6 @@ namespace Spawn.HDT.DustUtility
             {
                 retVal = new T();
             }
-            else { }
 
             return retVal;
         }
