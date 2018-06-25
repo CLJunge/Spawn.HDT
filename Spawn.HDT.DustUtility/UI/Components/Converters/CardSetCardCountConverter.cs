@@ -32,14 +32,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"{Prefix} {strRet}";
                 }
-                else { }
 
                 if (!string.IsNullOrEmpty(Suffix))
                 {
-                    //strRet = $"{strRet} {Suffix}";
                     strRet = $"{strRet} ({(int)((System.Convert.ToSingle(values[0]) / (int)values[1]) * 100)}%)";
                 }
-                else { }
             }
             else
             {
