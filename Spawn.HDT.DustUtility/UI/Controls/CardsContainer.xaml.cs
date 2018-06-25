@@ -46,7 +46,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region Ctor
         public CardsContainer()
         {
-            InitializeComponent(); //TODO add more logging to this class
+            InitializeComponent();
 
             Messenger.Default.Register<PopupMessage>(this, OnPopupMessage);
         }
@@ -66,7 +66,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 await OpenPopupAsync();
             }
-            else { }
         }
         #endregion
 
@@ -77,7 +76,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 ClosePopup();
             }
-            else { }
 
             m_blnDblClick = false;
         }
@@ -121,7 +119,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 ClosePopup();
             }
-            else { }
         }
         #endregion
         #endregion
@@ -135,7 +132,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 await CardImageContainer.UpdateCardWrapperAsync(selectedItem.Wrapper);
             }
-            else { }
         }
         #endregion
 
@@ -146,7 +142,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 CardImagePopup.IsOpen = false;
             }
-            else { }
         }
         #endregion
     }
