@@ -43,7 +43,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 InitializeAsync().Forget();
             }
-            else { }
 #endif
 
             Messenger.Default.Register<RemoveCardItemMessage>(this, RemoveCardItem);
@@ -78,7 +77,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         cardItem.Dust = wrapper.RawCard.GetCraftingCost();
                     }
-                    else { }
 
                     CardItems.Add(cardItem);
                 }
@@ -110,7 +108,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 HistoryManager.RemoveItemAt(DustUtilityPlugin.CurrentAccount, message.EventArgs.RowIndex);
             }
-            else { }
         }
         #endregion
 
