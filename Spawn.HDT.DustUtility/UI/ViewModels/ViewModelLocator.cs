@@ -36,9 +36,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     ((FrameworkElement)d).DataContext = ServiceLocator.Current.GetInstance(viewModelType);
                 }
-                else { }
             }
-            else { }
         }
         #endregion
         #endregion
@@ -57,7 +55,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CreateContainer();
             }
-            else { }
         }
 #endif
         #endregion
