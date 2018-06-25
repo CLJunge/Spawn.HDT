@@ -49,11 +49,9 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
                     SaveHistory(account, lstHistory);
                 }
-                else { }
 
                 s_blnCheckInProgress = false;
             }
-            else { }
         }
         #endregion
 
@@ -74,7 +72,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 {
                     dbCardA = HearthDb.Cards.Collectible[cardA.Id];
                 }
-                else { }
 
                 if (dbCardA != null && (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null))
                 {
@@ -86,7 +83,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     {
                         nCount = cardA.Count - cardB.Count;
                     }
-                    else { }
 
                     lstHistory.Add(new CachedHistoryCard
                     {
@@ -98,7 +94,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
                     nRet += 1;
                 }
-                else { }
             }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nRet} new card(s)");
@@ -130,7 +125,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     {
                         nCount = cardB.Count - cardA.Count;
                     }
-                    else { }
 
                     nCount *= -1;
 
@@ -144,7 +138,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
                     nRet += 1;
                 }
-                else { }
             }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nRet} disenchanted cards...");
@@ -171,7 +164,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             if (!(account is MockAccount))
             {
 #endif
-
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
                 FileManager.Write(strPath, lstHistory);
@@ -179,7 +171,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved history for {account.DisplayString}");
 #if DEBUG
             }
-            else { }
 #endif
         }
         #endregion
@@ -187,29 +178,13 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region GetHistory
         public static List<CachedHistoryCard> GetHistory(IAccount account)
         {
-            List<CachedHistoryCard> lstHistory = LoadHistory(account);
+            List<CachedHistoryCard> lstRet = LoadHistory(account);
 
-            //List<IGrouping<string, Card>> lstGroupedById = lstHistory.GroupBy(c => c.Id).ToList();
-
-            //lstHistory.Clear();
-
-            //for (int i = 0; i < lstGroupedById.Count; i++)
-            //{
-            //    List<IGrouping<bool, Card>> lstGroupedByPremium = lstGroupedById[i].GroupBy(c => c.Premium).ToList();
-
-            //    for (int j = 0; j < lstGroupedByPremium.Count; j++)
-            //    {
-            //        IGrouping<bool, Card> grouping = lstGroupedByPremium[j];
-
-            //        lstHistory.Add(grouping.Aggregate((a, b) => new Card(a.Id, a.Count + b.Count, a.Premium)));
-            //    }
-            //}
-
-            lstHistory.Reverse();
+            lstRet.Reverse();
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Retrieved history for {account.DisplayString}");
 
-            return lstHistory;
+            return lstRet;
         }
         #endregion
 
