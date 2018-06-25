@@ -69,53 +69,86 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
         #region GetArtistSearchString
         public static string GetArtistSearchString(string strArtist)
         {
+            string strRet = string.Empty;
+
             if (ArtistDict.TryGetValue(Config.Instance.SelectedLanguage, out string artistStr))
-                return $" {artistStr}:{strArtist.Split(' ').LastOrDefault()}";
-            return "";
+            {
+                strRet = $" {artistStr}:{strArtist.Split(' ').LastOrDefault()}";
+            }
+
+            return strRet;
         }
         #endregion
 
         #region GetManaSearchString
         public static string GetManaSearchString(int nCost)
         {
+            string strRet = string.Empty;
+
             if (ManaDict.TryGetValue(Config.Instance.SelectedLanguage, out string manaStr))
-                return $" {manaStr}:{nCost}";
-            return "";
+            {
+                strRet = $" {manaStr}:{nCost}";
+            }
+            return strRet;
         }
         #endregion
 
         #region GetAttackSearchString
         public static string GetAttackSearchString(int nAttack)
         {
+            string strRet = string.Empty;
+
             if (AttackDict.TryGetValue(Config.Instance.SelectedLanguage, out string atkStr))
-                return $" {atkStr}:{nAttack}";
-            return "";
+            {
+                strRet = $" {atkStr}:{nAttack}";
+            }
+
+            return strRet;
         }
         #endregion
 
         #region GetSearchString
         public static string GetSearchString(Card card)
         {
-            string searchString = $"{card.LocalizedName}{GetArtistSearchString(card.Artist)} {GetManaSearchString(card.Cost)}".ToLowerInvariant();
+            string strRet = $"{card.LocalizedName}{GetArtistSearchString(card.Artist)} {GetManaSearchString(card.Cost)}".ToLowerInvariant();
+
             if (card.Id == HearthDb.CardIds.Collectible.Neutral.Feugen || card.Id == HearthDb.CardIds.Collectible.Neutral.Stalagg)
-                searchString += GetAttackSearchString(card.Attack);
-            return searchString;
+            {
+                strRet += GetAttackSearchString(card.Attack);
+            }
+
+            return strRet;
         }
         #endregion
 
         #region EnsureHearthstoneInForeground
         public static async Task<HearthstoneInfo> EnsureHearthstoneInForeground(HearthstoneInfo info)
         {
+            HearthstoneInfo retVal = null;
+
             if (User32.IsHearthstoneInForeground())
-                return info;
-            User32.ShowWindow(info.HsHandle, User32.GetHearthstoneWindowState() == WindowState.Minimized ? User32.SwRestore : User32.SwShow);
-            User32.SetForegroundWindow(info.HsHandle);
-            await Task.Delay(500);
-            if (User32.IsHearthstoneInForeground())
-                return new HearthstoneInfo();
-            await DustUtilityPlugin.MainWindow.ShowMessageAsync("Auto Disenchanting", "Can't find Hearthstone window!");
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Error, "Can't find Hearthstone window!");
-            return null;
+            {
+                retVal = info;
+            }
+            else
+            {
+                User32.ShowWindow(info.HsHandle, User32.GetHearthstoneWindowState() == WindowState.Minimized ? User32.SwRestore : User32.SwShow);
+                User32.SetForegroundWindow(info.HsHandle);
+
+                await Task.Delay(500);
+
+                if (User32.IsHearthstoneInForeground())
+                {
+                    retVal = new HearthstoneInfo();
+                }
+                else
+                {
+                    await DustUtilityPlugin.MainWindow.ShowMessageAsync("Auto Disenchanting", "Can't find Hearthstone window!");
+                    DustUtilityPlugin.Logger.Log(Logging.LogLevel.Error, "Can't find Hearthstone window!");
+                }
+            }
+
+            return retVal;
         }
         #endregion
     }
