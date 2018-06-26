@@ -40,6 +40,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         private SearchResult()
         {
             CardItems = new List<CardItemModel>();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'SearchResult' instance");
         }
         #endregion
 
@@ -51,6 +53,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
             info.RaresCount = RaresCount;
             info.EpicsCount = EpicsCount;
             info.LegendariesCount = LegendariesCount;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Copied result to CardsInfoModel");
         }
         #endregion
 
@@ -58,8 +62,6 @@ namespace Spawn.HDT.DustUtility.CardManagement
         public static SearchResult Create(List<CardWrapper> lstCards)
         {
             SearchResult retVal = new SearchResult();
-
-            Logger.Default.Log(LogLevel.Debug, $"Creating search result for {lstCards?.Count} card(s)...");
 
             for (int i = 0; i < lstCards?.Count; i++)
             {
@@ -90,6 +92,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                 retVal.CardItems.Add(item);
             }
+
+            Logger.Default.Log(LogLevel.Debug, $"Created search result for {lstCards?.Count} card(s)");
 
             return retVal;
         }
