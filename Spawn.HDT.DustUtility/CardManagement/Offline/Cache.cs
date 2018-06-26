@@ -239,7 +239,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Warning, "Couldn't retrieve account!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, "Couldn't load account!");
             }
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = false;

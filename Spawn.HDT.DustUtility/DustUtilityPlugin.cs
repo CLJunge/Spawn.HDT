@@ -320,7 +320,7 @@ namespace Spawn.HDT.DustUtility
             }
             else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
             {
-                await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't retrieve the currently logged in account! Closing window...");
+                await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't get the currently logged in account! Closing window...");
 
                 MainWindow?.Close();
             }

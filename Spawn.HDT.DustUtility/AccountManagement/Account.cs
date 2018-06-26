@@ -297,11 +297,11 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 {
                     retVal = new Account(Reflection.GetBattleTag(), await Hearthstone_Deck_Tracker.Helper.GetCurrentRegion());
 
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Retrieved logged in account ({retVal.DisplayString})");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Got logged in account ({retVal.DisplayString})");
                 }
                 catch (Exception ex)
                 {
-                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't retrieve currently logged in account: {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't get currently logged in account: {ex}");
                 }
             }
 
