@@ -184,6 +184,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 .Append("- Card type (e.g. Minion, Weapon, etc.)").Append(Environment.NewLine);
 
             s_strSearchHelpText = sb.ToString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'MainViewModel'");
         }
         #endregion
 
@@ -208,6 +210,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                 }
             };
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'MainViewModel' instance");
         }
         #endregion
 
@@ -255,13 +259,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 HistoryButtonVisibility = Visibility.Visible;
 
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing history button");
+
                 if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.GetAccounts().Length > 1)
                 {
                     SwitchAccountButtonVisibility = Visibility.Visible;
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing switch accounts button");
                 }
-                else { }
             }
-            else { }
 #endif
 
             ClearControls();
@@ -291,10 +297,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     break;
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current view mode: '{DustUtilityPlugin.Config.ViewMode}'");
+
             if (DustUtilityPlugin.Config.RememberQueryString
                 && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
             {
                 SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored last search query ('{SearchQuery}')");
             }
             else
             {
@@ -305,6 +315,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 .ContinueWith(t => BackupManager.DeleteOldBackups(account));
 
             await DustUtilityPlugin.PerformUpdateCheckAsync();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -347,6 +359,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 flyout.IsOpen = true;
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Opened '{flyout.Name}'");
+
             await viewModel.InitializeAsync();
         }
         #endregion
@@ -374,6 +388,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         CardItems.Add(result.CardItems[i]);
                     }
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Got search result");
+                }
+                else
+                {
+                    DustUtilityPlugin.Logger.Log(LogLevel.Warning, "No search result available!");
                 }
             }
         }
@@ -391,6 +411,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SearchQuery = string.Empty;
 
             ClearControls();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared query and controls");
         }
         #endregion
 
@@ -410,6 +432,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ServiceLocator.Current.GetInstance<HistoryFlyoutViewModel>().ReloadRequired = true;
             ServiceLocator.Current.GetInstance<DecksFlyoutViewModel>().ReloadRequired = true;
             ServiceLocator.Current.GetInstance<CollectionInfoFlyoutViewModel>().ReloadRequired = true;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Reload flyouts");
         }
         #endregion
 
@@ -426,6 +450,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 CardItems.Add(lstItems[i]);
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Updated card items");
         }
         #endregion
 
@@ -452,6 +478,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             await ServiceLocator.Current.GetInstance<CardSelectionWindowViewModel>().InitializeAsync();
             await CardSelection.InitializeAsync();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Opened selection window");
         }
         #endregion
 
@@ -465,6 +493,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 e.Cancel = true;
 
                 (sender as Window).Hide();
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Hiding main window");
             }
 
             Messenger.Default.Send(new PopupMessage(true));
@@ -503,6 +533,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 retVal = items;
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Ordered card items");
+
             return retVal;
         }
         #endregion
@@ -520,6 +552,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             SelectionWindow?.Close();
             SelectionWindow = null;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed selection window");
         }
         #endregion
     }
