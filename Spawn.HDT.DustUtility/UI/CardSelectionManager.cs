@@ -294,6 +294,8 @@ namespace Spawn.HDT.DustUtility.UI
             {
                 int nCount = m_currentItem.Count;
 
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Adding '{m_currentItem.Name}' after drop...");
+
                 CardItemModel cardItem = CardItems.FirstOrDefault(i => i.Id.Equals(m_currentItem.Id) && i.Golden == m_currentItem.Golden);
 
                 if (cardItem != null)
@@ -316,8 +318,6 @@ namespace Spawn.HDT.DustUtility.UI
 
                     m_currentItem = null;
                 }
-
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added '{m_currentItem.Name}' after drop");
             }
             else
             {
