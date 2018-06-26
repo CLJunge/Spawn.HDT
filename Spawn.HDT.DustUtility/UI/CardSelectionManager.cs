@@ -372,12 +372,12 @@ namespace Spawn.HDT.DustUtility.UI
 
             switch (DustUtilityPlugin.Config.ViewMode)
             {
-                case ViewMode.Default:
-                    retVal = ServiceLocator.Current.GetInstance<MainViewModel>().SelectionWindow;
-                    break;
-
                 case ViewMode.Split:
                     retVal = DustUtilityPlugin.MainWindow;
+                    break;
+
+                default:
+                    retVal = ServiceLocator.Current.GetInstance<MainViewModel>().SelectionWindow;
                     break;
             }
 
