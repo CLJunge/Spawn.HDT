@@ -21,6 +21,8 @@ namespace Spawn.HDT.DustUtility.Messaging
         {
             FlyoutName = flyoutName;
             EventArgs = eventArgs;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'RemoveCardItemMessage' instance");
         }
         #endregion
     }

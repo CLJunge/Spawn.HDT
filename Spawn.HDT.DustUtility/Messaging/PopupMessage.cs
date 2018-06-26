@@ -12,6 +12,8 @@
         public PopupMessage(bool closeRequest)
         {
             CloseRequest = closeRequest;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Initialized new 'PopupMessage' instance");
         }
         #endregion
     }

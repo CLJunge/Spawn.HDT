@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using System.Windows.Input;
 #endregion
 
@@ -21,6 +22,8 @@ namespace Spawn.HDT.DustUtility.Messaging
         {
             FlyoutName = flyoutName;
             EventArgs = eventArgs;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'LVMouseDblClickMessage' instance");
         }
         #endregion
     }
