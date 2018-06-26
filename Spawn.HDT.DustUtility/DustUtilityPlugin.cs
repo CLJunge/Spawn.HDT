@@ -16,6 +16,7 @@ using Spawn.HDT.DustUtility.UI.Controls.Toasts;
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using Spawn.HDT.DustUtility.UI.Windows;
+using Spawn.HDT.DustUtility.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -507,7 +508,7 @@ namespace Spawn.HDT.DustUtility
                     }
                 }
 
-                FileManager.Write(vFiles[i], lstHistory);
+                FileHelper.Write(vFiles[i], lstHistory);
             });
 
             Logger.Log(LogLevel.Debug, "Updated history files");

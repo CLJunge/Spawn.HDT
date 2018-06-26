@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI;
+using Spawn.HDT.DustUtility.Util;
 using System.ComponentModel;
 using System.IO;
 #endregion
@@ -145,14 +146,14 @@ namespace Spawn.HDT.DustUtility
         #region Save
         public void Save(string strFileName = "config.xml")
         {
-            FileManager.Write(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName), this);
+            FileHelper.Write(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName), this);
         }
         #endregion
 
         #region [STATIC] Load
         public static Configuration Load(string strFileName = "config.xml")
         {
-            return FileManager.Load<Configuration>(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName));
+            return FileHelper.Load<Configuration>(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName));
         }
         #endregion
     }

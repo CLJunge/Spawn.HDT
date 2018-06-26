@@ -4,9 +4,9 @@ using System.Windows;
 using System.Xml.Serialization;
 #endregion
 
-namespace Spawn.HDT.DustUtility
+namespace Spawn.HDT.DustUtility.Util
 {
-    public static class FileManager
+    public static class FileHelper
     {
         #region Write
         public static void Write<T>(string strPath, T value) where T : class, new()

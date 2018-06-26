@@ -5,6 +5,7 @@ using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.ViewModels;
+using Spawn.HDT.DustUtility.Util;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
 
-                FileManager.Write(strPath, lstCollection.ToCachedCards());
+                FileHelper.Write(strPath, lstCollection.ToCachedCards());
 
                 blnRet = true;
 
@@ -62,7 +63,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     }
                 }
 
-                FileManager.Write(strPath, lstDecks.ToCachedDecks());
+                FileHelper.Write(strPath, lstDecks.ToCachedDecks());
 
                 blnRet = true;
 
@@ -107,7 +108,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.CollectionString);
 
-                List<CachedCard> lstCachedCards = FileManager.Load<List<CachedCard>>(strPath);
+                List<CachedCard> lstCachedCards = FileHelper.Load<List<CachedCard>>(strPath);
 
                 for (int i = 0; i < lstCachedCards.Count; i++)
                 {
@@ -159,7 +160,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             {
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
 
-                List<CachedDeck> lstCachedDecks = FileManager.Load<List<CachedDeck>>(strPath);
+                List<CachedDeck> lstCachedDecks = FileHelper.Load<List<CachedDeck>>(strPath);
 
                 for (int i = 0; i < lstCachedDecks.Count; i++)
                 {

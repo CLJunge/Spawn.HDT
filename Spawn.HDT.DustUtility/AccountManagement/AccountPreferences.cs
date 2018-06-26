@@ -2,6 +2,7 @@
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Util;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -40,11 +41,11 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region Save
-        public void Save(IAccount account) => FileManager.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
+        public void Save(IAccount account) => FileHelper.Write(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString), this);
         #endregion
 
         #region [STATIC] Load
-        public static AccountPreferences Load(IAccount account) => FileManager.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
+        public static AccountPreferences Load(IAccount account) => FileHelper.Load<AccountPreferences>(DustUtilityPlugin.GetFullFileName(account, Account.PreferencesString));
         #endregion
     }
 }

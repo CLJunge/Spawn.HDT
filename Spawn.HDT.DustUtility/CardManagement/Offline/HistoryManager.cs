@@ -3,6 +3,7 @@ using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -157,7 +158,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
             string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
-            return FileManager.Load<List<CachedHistoryCard>>(strPath);
+            return FileHelper.Load<List<CachedHistoryCard>>(strPath);
         }
         #endregion
 
@@ -170,7 +171,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 #endif
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
-                FileManager.Write(strPath, lstHistory);
+                FileHelper.Write(strPath, lstHistory);
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved history for {account.DisplayString}");
 #if DEBUG
