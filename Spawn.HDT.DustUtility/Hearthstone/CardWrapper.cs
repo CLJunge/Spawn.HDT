@@ -1,6 +1,7 @@
 ﻿#region Using
 using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Diagnostics;
 #endregion
@@ -49,7 +50,12 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         #endregion
 
         #region Ctor
-        public CardWrapper(Card card) => RawCard = card;
+        public CardWrapper(Card card)
+        {
+            RawCard = card;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'CardWrapper' instance ({Count}x {DbCard.Name})");
+        }
 
         public CardWrapper(CachedCard cachedCard)
             : this(new Card(cachedCard.Id, cachedCard.Count, cachedCard.IsGolden)) { }
