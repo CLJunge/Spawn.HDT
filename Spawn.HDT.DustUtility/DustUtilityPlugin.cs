@@ -178,6 +178,8 @@ namespace Spawn.HDT.DustUtility
 #if DEBUG
             s_mockAcc = new MockAccount();
 #endif
+
+            Logger.Log(LogLevel.Debug, "Initialized 'DustUtilityPlugin'");
         }
         #endregion
 
@@ -240,7 +242,7 @@ namespace Spawn.HDT.DustUtility
 
             SimpleIoc.Default.Reset();
 
-            Logger.Log(LogLevel.Trace, "Unloaded plugin...");
+            Logger.Log(LogLevel.Trace, "Unloaded plugin");
         }
         #endregion
 
