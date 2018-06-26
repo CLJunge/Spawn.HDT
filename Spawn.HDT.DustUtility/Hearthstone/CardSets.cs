@@ -1,5 +1,6 @@
 ﻿#region Using
 using HearthDb.Enums;
+using Spawn.HDT.DustUtility.Logging;
 using System.Collections.Generic;
 using static HearthDb.CardIds.Collectible;
 #endregion
@@ -130,6 +131,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Neutral.BeckonerOfEvil,
                 Neutral.MarinTheFox
             };
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized 'CardSets'");
         }
         #endregion
 
@@ -202,6 +205,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.LOE, League },
                     { CardSet.KARA, Karazhan }
                 };
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized 'CardSets.Info'");
             }
             #endregion
 
@@ -222,6 +227,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     MaxRaresCount = maxRaresCount;
                     MaxEpicsCount = maxEpicsCount;
                     MaxLegendariesCount = maxLegendariesCount;
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'CardSets.Info.InfoItem' instance");
                 }
                 #endregion
             }
