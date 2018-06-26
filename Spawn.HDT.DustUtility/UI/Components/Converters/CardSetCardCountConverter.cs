@@ -37,10 +37,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"{strRet} ({(int)((System.Convert.ToSingle(values[0]) / (int)values[1]) * 100)}%)";
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{strRet}' (Prefix={Prefix}, Suffix={Suffix})");
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"! (Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;

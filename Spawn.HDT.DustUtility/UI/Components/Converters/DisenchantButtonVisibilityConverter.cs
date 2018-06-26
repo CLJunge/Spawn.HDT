@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Globalization;
 using System.Windows;
@@ -19,6 +20,8 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 && (v1 == Visibility.Visible && v2 == Visibility.Visible))
             {
                 retVal = Visibility.Visible;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{retVal}'");
             }
 
             return retVal;

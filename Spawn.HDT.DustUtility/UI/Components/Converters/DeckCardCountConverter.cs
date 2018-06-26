@@ -41,10 +41,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"{strRet} {Suffix}";
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted '{value}' to '{strRet}' (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"! (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;

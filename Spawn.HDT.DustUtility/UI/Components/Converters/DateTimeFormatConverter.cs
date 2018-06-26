@@ -23,10 +23,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             if (value is DateTime date)
             {
                 strRet = date.ToString(FormatString, CultureInfo.InvariantCulture);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted '{value}' to '{strRet}' (FormatString={FormatString})");
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"! (FormatString={FormatString})");
             }
 
             return strRet;

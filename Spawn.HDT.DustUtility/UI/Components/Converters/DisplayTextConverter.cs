@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Globalization;
 using System.Windows.Data;
@@ -36,6 +37,8 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                     strRet = $"{strRet} {Suffix}";
                 }
                 else { }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted '{value}' to '{strRet}' (Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;
