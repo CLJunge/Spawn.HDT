@@ -166,6 +166,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(CardImage));
                 }
             };
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardItemModel' instance");
         }
 
         public CardItemModel(CardWrapper wrapper)
@@ -175,6 +177,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region CreateCopy
         public CardItemModel CreateCopy()
         {
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"{Wrapper.Count}x {Wrapper.Card.Name}");
+
             return new CardItemModel(Wrapper);
         }
         #endregion
@@ -182,6 +186,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region GetCardImage
         private ImageSource GetCardImage()
         {
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, Wrapper.Card.Name);
+
             ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.Collectible[Id]));
 
             if (image != null)

@@ -75,6 +75,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(TotalCount));
                 }
             };
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardsInfoModel' instance");
         }
         #endregion
 
@@ -86,6 +88,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
             RaresCount = 0;
             EpicsCount = 0;
             LegendariesCount = 0;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Cleared info model");
         }
         #endregion
     }

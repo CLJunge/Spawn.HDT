@@ -82,6 +82,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 m_deck = new Deck() { Id = 4342323, Hero = "HERO_01", Name = "Test Deck", Cards = new List<Card>() { new Card("", 0, false) } };
             }
 #endif
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'DeckItemModel' instance");
         }
 
         public DeckItemModel(Deck deck)
@@ -146,6 +148,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     s_dImageCache.Add(strHero, retVal);
                 }
             }
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, strHero);
 
             return retVal;
         }

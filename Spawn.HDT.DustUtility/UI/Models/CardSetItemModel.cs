@@ -215,6 +215,8 @@ namespace Spawn.HDT.DustUtility.UI.Models
                     RaisePropertyChanged(nameof(MaxTotalCount));
                 }
             };
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardSetItemModel' instance");
         }
         #endregion
     }
