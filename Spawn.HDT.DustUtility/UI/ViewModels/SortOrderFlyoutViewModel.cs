@@ -4,7 +4,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.Logging;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
-using Spawn.HDT.DustUtility.Logging;
 #endif
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Models;
