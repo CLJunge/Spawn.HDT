@@ -22,28 +22,28 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         {
             List<Card> lstCurrentCollection = DustUtilityPlugin.GetCollectionWrapper();
 
-            if (!s_blnCheckInProgress && account != null && (lstCurrentCollection != null && lstCurrentCollection.Count > 0))
+            if (!s_blnCheckInProgress && account != null && lstCurrentCollection?.Count > 0)
             {
                 s_blnCheckInProgress = true;
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking for any changes... ({account.DisplayString})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking collection for any changes... ({account.DisplayString})");
 
-                List<Card> lstOldCollection = account.GetCollection();
+                List<Card> lstLocalCollection = Cache.LoadCollection(account);
 
                 List<CachedHistoryCard> lstHistory = LoadHistory(account);
 
-                if (lstOldCollection != null && lstOldCollection.Count > 0)
+                if (lstLocalCollection?.Count > 0)
                 {
-                    List<Card> lstCurrent = lstCurrentCollection.Except(lstOldCollection, s_cardComparer).ToList();
-                    List<Card> lstOld = lstOldCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
+                    List<Card> lstCurrentExceptLocal = lstCurrentCollection.Except(lstLocalCollection, s_cardComparer).ToList();
+                    List<Card> lstLocalExceptCurrent = lstLocalCollection.Except(lstCurrentCollection, s_cardComparer).ToList();
 
                     int nChanges = 0;
 
                     //new cards
-                    nChanges += CheckForNewCards(lstOldCollection, lstHistory, lstCurrent, lstOld);
+                    nChanges += CheckForNewCards(lstLocalCollection, lstHistory, lstCurrentExceptLocal, lstLocalExceptCurrent);
 
                     //disenchanted cards
-                    nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstHistory, lstOld);
+                    nChanges += CheckForDisenchantedCards(lstCurrentCollection, lstHistory, lstLocalExceptCurrent);
 
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nChanges} changes");
 
@@ -56,85 +56,89 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region CheckForNewCards
-        private static int CheckForNewCards(List<Card> lstOldCollection, List<CachedHistoryCard> lstHistory, List<Card> lstCurrent, List<Card> lstOld)
+        private static int CheckForNewCards(List<Card> lstLocalCollection, List<CachedHistoryCard> lstHistory, List<Card> lstCurrentExceptLocal, List<Card> lstLocalExceptCurrent)
         {
             int nRet = 0;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking for new cards...");
 
-            for (int i = 0; i < lstCurrent.Count; i++)
+            for (int i = 0; i < lstCurrentExceptLocal.Count; i++)
             {
-                Card cardA = lstCurrent[i];
+                Card a = lstCurrentExceptLocal[i];
 
-                HearthDb.Card dbCardA = null;
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current: Name={HearthDb.Cards.All[a.Id].Name}, Count={a.Count}, Premium={a.Premium}");
 
-                if (HearthDb.Cards.Collectible.ContainsKey(cardA.Id))
+                if ((HearthDb.Cards.Collectible.ContainsKey(a.Id)
+                    && CardSets.All.ContainsKey(HearthDb.Cards.Collectible[a.Id].Set))
+                    && lstLocalExceptCurrent.Find(c => c.Id.Equals(a.Id) && c.Premium == a.Premium) == null)
                 {
-                    dbCardA = HearthDb.Cards.Collectible[cardA.Id];
-                }
+                    int nCount = a.Count;
 
-                if (dbCardA != null && (CardSets.All.ContainsKey(dbCardA.Set) && lstOld.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium) == null))
-                {
-                    Card cardB = lstOldCollection.Find(c => c.Id.Equals(cardA.Id) && c.Premium == cardA.Premium);
+                    Card b = lstLocalCollection.Find(c => c.Id.Equals(a.Id) && c.Premium == a.Premium);
 
-                    int nCount = cardA.Count;
-
-                    if (cardB != null)
+                    if (b != null)
                     {
-                        nCount = cardA.Count - cardB.Count;
+                        nCount = a.Count - b.Count;
+
+                        DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found equivalent in the local collection (Count={b.Count})");
                     }
 
                     lstHistory.Add(new CachedHistoryCard
                     {
-                        Id = cardA.Id,
+                        Id = a.Id,
                         Count = nCount,
-                        IsGolden = cardA.Premium,
+                        IsGolden = a.Premium,
                         Date = DateTime.Now
                     });
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added {nCount}x '{HearthDb.Cards.Collectible[a.Id].Name}' (Premium={a.Premium}) to history");
 
                     nRet += 1;
                 }
             }
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nRet} new card(s)");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added {nRet} new entry(-ies)");
 
             return nRet;
         }
         #endregion
 
         #region CheckForDisenchantedCards
-        private static int CheckForDisenchantedCards(List<Card> lstCurrentCollection, List<CachedHistoryCard> lstHistory, List<Card> lstOld)
+        private static int CheckForDisenchantedCards(List<Card> lstCurrentCollection, List<CachedHistoryCard> lstHistory, List<Card> lstLocalExceptCurrent)
         {
             int nRet = 0;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking for disenchanted cards...");
 
-            for (int i = 0; i < lstOld.Count; i++)
+            for (int i = 0; i < lstLocalExceptCurrent.Count; i++)
             {
-                Card cardB = lstOld[i];
+                Card a = lstLocalExceptCurrent[i];
 
-                HearthDb.Card dbCardB = HearthDb.Cards.Collectible[cardB.Id];
-
-                if (CardSets.All.ContainsKey(dbCardB.Set))
+                if (HearthDb.Cards.Collectible.ContainsKey(a.Id)
+                    && CardSets.All.ContainsKey(HearthDb.Cards.Collectible[a.Id].Set))
                 {
-                    Card cardA = lstCurrentCollection.Find(c => c.Id.Equals(cardB.Id) && c.Premium == cardB.Premium);
+                    int nCount = a.Count;
 
-                    int nCount = cardB.Count;
+                    Card b = lstCurrentCollection.Find(c => c.Id.Equals(a.Id) && c.Premium == a.Premium);
 
-                    if (cardA != null)
+                    if (b != null)
                     {
-                        nCount = cardB.Count - cardA.Count;
+                        nCount = a.Count - b.Count;
+
+                        DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found equivalent in the current collection (Count={b.Count})");
                     }
 
                     nCount *= -1;
 
                     lstHistory.Add(new CachedHistoryCard
                     {
-                        Id = cardB.Id,
+                        Id = a.Id,
                         Count = nCount,
-                        IsGolden = cardB.Premium,
+                        IsGolden = a.Premium,
                         Date = DateTime.Now
                     });
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added {nCount}x '{HearthDb.Cards.Collectible[a.Id].Name}' (Premium={a.Premium}) to history");
 
                     nRet += 1;
                 }
