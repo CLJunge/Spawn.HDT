@@ -6,6 +6,8 @@
         public UpdateFlyoutView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'UpdateFlyoutView' instance");
         }
         #endregion
     }

@@ -6,6 +6,8 @@
         public SortOrderFlyoutView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'SortOrderFlyoutView' instance");
         }
         #endregion
     }

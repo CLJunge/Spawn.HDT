@@ -1,5 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.Messaging;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Messaging;
 #endregion
 
@@ -11,6 +12,8 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         public DecksFlyoutView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'DecksFlyoutView' instance");
         }
         #endregion
 

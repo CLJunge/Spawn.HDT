@@ -6,6 +6,8 @@
         public SearchParametersFlyoutView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'SearchParametersFlyoutView' instance");
         }
         #endregion
     }

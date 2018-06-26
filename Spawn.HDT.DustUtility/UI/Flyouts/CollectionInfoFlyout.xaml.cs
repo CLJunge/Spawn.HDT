@@ -6,6 +6,8 @@
         public CollectionInfoFlyout()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CollectionInfoFlyout' instance");
         }
         #endregion
     }

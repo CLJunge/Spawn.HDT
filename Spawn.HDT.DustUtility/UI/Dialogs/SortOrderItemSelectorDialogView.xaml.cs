@@ -6,6 +6,8 @@
         public SortOrderItemSelectorDialogView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'SortOrderItemSelectorDialogView' instance");
         }
         #endregion
 
