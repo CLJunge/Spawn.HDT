@@ -43,6 +43,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public AccountSelectorDialogViewModel()
         {
             WindowTitle = "Dust Utility - Select account...";
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'AccountSelectorDialogViewModel' instance");
         }
         #endregion
 
@@ -61,6 +63,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 SelectedAccountString = Accounts[0].AccountString;
             }
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Finished initializing");
         }
         #endregion
     }
