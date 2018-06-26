@@ -17,17 +17,11 @@ namespace Spawn.HDT.DustUtility
     public static class Extensions
     {
         #region ContainsCard
-        public static bool ContainsCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium)
-        {
-            return GetCard(deck, strId, blnPremium) != null;
-        }
+        public static bool ContainsCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium) => GetCard(deck, strId, blnPremium) != null;
         #endregion
 
         #region GetCard
-        public static HearthMirror.Objects.Card GetCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium)
-        {
-            return deck.Cards.Find(delegate (HearthMirror.Objects.Card c) { return string.CompareOrdinal(c.Id, strId) == 0 && c.Premium == blnPremium; });
-        }
+        public static HearthMirror.Objects.Card GetCard(this HearthMirror.Objects.Deck deck, string strId, bool blnPremium) => deck.Cards.Find(delegate (HearthMirror.Objects.Card c) { return string.CompareOrdinal(c.Id, strId) == 0 && c.Premium == blnPremium; });
         #endregion
 
         #region GetDustValue
@@ -71,7 +65,7 @@ namespace Spawn.HDT.DustUtility
         {
             List<CachedCard> lstRet = new List<CachedCard>();
 
-            for (int i = 0; i < lstCards.Count; i++)
+            for (int i = 0; i < lstCards?.Count; i++)
             {
                 HearthMirror.Objects.Card card = lstCards[i];
 
@@ -94,7 +88,7 @@ namespace Spawn.HDT.DustUtility
         {
             List<CachedDeck> lstRet = new List<CachedDeck>();
 
-            for (int i = 0; i < lstDecks.Count; i++)
+            for (int i = 0; i < lstDecks?.Count; i++)
             {
                 HearthMirror.Objects.Deck deck = lstDecks[i];
 
@@ -123,7 +117,7 @@ namespace Spawn.HDT.DustUtility
         {
             List<HearthMirror.Objects.Card> lstRet = new List<HearthMirror.Objects.Card>();
 
-            for (int i = 0; i < lstCachedCards.Count; i++)
+            for (int i = 0; i < lstCachedCards?.Count; i++)
             {
                 CachedCard cachedCard = lstCachedCards[i];
 
@@ -135,34 +129,15 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region GetString
-        public static string GetString(this CardSet cardSet)
-        {
-            return CardSets.All[cardSet];
-        }
+        public static string GetString(this CardSet cardSet) => CardSets.All[cardSet];
 
-        public static string GetDisplayString(this CardSet cardSet)
-        {
-            return CardSets.AllDisplayName[cardSet];
-        }
+        public static string GetDisplayString(this CardSet cardSet) => CardSets.AllDisplayName[cardSet];
 
-        public static string GetShortString(this CardSet cardSet)
-        {
-            return CardSets.AllShortName[cardSet];
-        }
+        public static string GetShortString(this CardSet cardSet) => CardSets.AllShortName[cardSet];
 
-        public static string GetString(this Rarity rarity)
-        {
-            TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+        public static string GetString(this Rarity rarity) => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(rarity.ToString().ToLowerInvariant());
 
-            return textInfo.ToTitleCase(rarity.ToString().ToLowerInvariant());
-        }
-
-        public static string GetString(this CardClass cardClass)
-        {
-            TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
-
-            return textInfo.ToTitleCase(cardClass.ToString().ToLowerInvariant());
-        }
+        public static string GetString(this CardClass cardClass) => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(cardClass.ToString().ToLowerInvariant());
         #endregion
 
         #region OrderBy
@@ -220,7 +195,7 @@ namespace Spawn.HDT.DustUtility
         {
             int nRet = 0;
 
-            for (int i = 0; i < deck.Cards.Count; i++)
+            for (int i = 0; i < deck?.Cards.Count; i++)
             {
                 int nCost = deck.Cards[i].GetCraftingCost();
 
@@ -270,7 +245,7 @@ namespace Spawn.HDT.DustUtility
         {
             int nRet = 0;
 
-            for (int i = 0; i < deck.Cards.Count; i++)
+            for (int i = 0; i < deck?.Cards.Count; i++)
             {
                 nRet += deck.Cards[i].Count;
             }
@@ -281,30 +256,24 @@ namespace Spawn.HDT.DustUtility
 
         #region Clone
         #region HearthMirror.Objects.Card
-        public static HearthMirror.Objects.Card Clone(this HearthMirror.Objects.Card card)
-        {
-            return new HearthMirror.Objects.Card(card.Id, card.Count, card.Premium);
-        }
+        public static HearthMirror.Objects.Card Clone(this HearthMirror.Objects.Card card) => new HearthMirror.Objects.Card(card.Id, card.Count, card.Premium);
         #endregion
 
         #region HearthMirror.Objects.Deck
-        public static HearthMirror.Objects.Deck Clone(this HearthMirror.Objects.Deck deck)
+        public static HearthMirror.Objects.Deck Clone(this HearthMirror.Objects.Deck deck) => new HearthMirror.Objects.Deck()
         {
-            return new HearthMirror.Objects.Deck()
-            {
-                Id = deck.Id,
-                Name = deck.Name,
-                Hero = deck.Hero,
-                IsWild = deck.IsWild,
-                Type = deck.Type,
-                SeasonId = deck.SeasonId,
-                CardBackId = deck.CardBackId,
-                HeroPremium = deck.HeroPremium,
-                SourceType = deck.SourceType,
-                CreateDate = deck.CreateDate,
-                Cards = deck.Cards.Select(c => c.Clone()).ToList()
-            };
-        }
+            Id = deck.Id,
+            Name = deck.Name,
+            Hero = deck.Hero,
+            IsWild = deck.IsWild,
+            Type = deck.Type,
+            SeasonId = deck.SeasonId,
+            CardBackId = deck.CardBackId,
+            HeroPremium = deck.HeroPremium,
+            SourceType = deck.SourceType,
+            CreateDate = deck.CreateDate,
+            Cards = deck.Cards.Select(c => c.Clone()).ToList()
+        };
 
         #endregion
         #endregion

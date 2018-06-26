@@ -139,6 +139,8 @@ namespace Spawn.HDT.DustUtility
             LogLevel = LogLevel.Trace;
             ViewMode = ViewMode.Default;
             Version = 1;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'Configuration' instance");
         }
         #endregion
 
@@ -146,12 +148,16 @@ namespace Spawn.HDT.DustUtility
         public void Save(string strFileName = "config.xml")
         {
             FileManager.Write(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName), this);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved configuration ('{strFileName}')");
         }
         #endregion
 
         #region [STATIC] Load
         public static Configuration Load(string strFileName = "config.xml")
         {
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading new configuration... ('{strFileName}')");
+
             return FileManager.Load<Configuration>(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName));
         }
         #endregion
