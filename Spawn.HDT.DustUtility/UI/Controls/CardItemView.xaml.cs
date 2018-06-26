@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         public CardItemView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardItemView' instance");
         }
         #endregion
 
@@ -22,6 +25,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (e.NewValue is CardItemModel cardItem)
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Updating data context to '{cardItem.Name}...");
+
                 if (cardItem.Date.HasValue)
                 {
                     DateTextBlock.Visibility = Visibility.Visible;

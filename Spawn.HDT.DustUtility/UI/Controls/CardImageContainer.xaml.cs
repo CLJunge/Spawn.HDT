@@ -27,6 +27,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
             m_defaultImageSource = image.Source;
             m_defaultImageMargin = image.Margin;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardImageContainer' instance");
         }
         #endregion
 

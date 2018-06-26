@@ -1,5 +1,6 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.Messaging;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
@@ -53,6 +54,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             InitializeComponent();
 
             Messenger.Default.Register<PopupMessage>(this, OnPopupMessage);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardsContainer' instance");
         }
         #endregion
 
@@ -84,6 +87,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 {
                     s_openedPopup.IsOpen = false;
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
             }
 
             m_blnDblClick = false;
@@ -109,7 +114,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region OnPopupMouseDown
-        private void OnPopupMouseDown(object sender, MouseButtonEventArgs e) => CardImagePopup.IsOpen = false;
+        private void OnPopupMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CardImagePopup.IsOpen = false;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
+        }
         #endregion
 
         #region OnPopupMessage
@@ -123,6 +133,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 {
                     s_openedPopup.IsOpen = false;
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
             }
         }
         #endregion
@@ -145,6 +157,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 #pragma warning restore S2696 // Instance members should not write to "static" fields
 
                 await CardImageContainer.UpdateCardWrapperAsync(selectedItem.Wrapper);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Opened popup for '{selectedItem.Name}'");
             }
         }
         #endregion

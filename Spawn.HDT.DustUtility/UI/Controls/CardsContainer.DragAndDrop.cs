@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Windows;
@@ -45,6 +46,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                     DataObject data = new DataObject("item", m_draggedItem.CreateCopy());
 
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Dragging '{m_draggedItem.Name}'...");
+
                     DragDrop.DoDragDrop(ItemsContainer, data, DragDropEffects.Copy);
 
                     m_startPosition = null;
@@ -83,6 +86,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             if (e.Data.GetDataPresent("item") && e.Data.GetData("item") is CardItemModel item)
             {
                 OnItemDropped(item);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Dropped '{item.Name}'");
             }
         }
         #endregion

@@ -1,5 +1,6 @@
 ﻿#region Using
 using Hearthstone_Deck_Tracker.Utility.Toasts;
+using Spawn.HDT.DustUtility.Logging;
 using System.Windows.Input;
 #endregion
 
@@ -17,6 +18,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
             : this()
         {
             MessageTextBox.Text = message;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'NotificationToast' instance (Message={MessageTextBox.Text})");
         }
         #endregion
 
@@ -25,6 +28,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             ToastManager.ForceCloseToast(this);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed toast (Message={MessageTextBox.Text})");
         }
         #endregion
 

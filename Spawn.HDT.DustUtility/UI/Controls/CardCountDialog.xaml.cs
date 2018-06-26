@@ -1,4 +1,6 @@
-﻿namespace Spawn.HDT.DustUtility.UI.Controls
+﻿using Spawn.HDT.DustUtility.Logging;
+
+namespace Spawn.HDT.DustUtility.UI.Controls
 {
     public partial class CardCountDialog
     {
@@ -6,6 +8,8 @@
         public CardCountDialog()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardCountDialog' instance");
         }
         #endregion
 
@@ -16,6 +20,8 @@
             NumericUpDownCtrl.Maximum = nCardCount;
 
             HeaderLabel.Content = $"How many copies of \"{strCardName}\"? ({nCardCount} max.)";
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Set content: CardName={strCardName}, CardCount={nCardCount}");
         }
         #endregion
     }
