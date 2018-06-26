@@ -24,6 +24,8 @@ namespace Spawn.HDT.DustUtility
 
                     serializer.Serialize(writer, value);
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Wrote '{value.GetType()}' to '{strPath}'");
             }
             catch (System.Exception ex)
             {
@@ -47,6 +49,12 @@ namespace Spawn.HDT.DustUtility
 
                         retVal = (T)serializer.Deserialize(reader);
                     }
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded '{retVal.GetType()}' from '{strPath}'");
+                }
+                else
+                {
+                    DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Coudln't load '{typeof(T)}'! File '{strPath}' doesn't exist.");
                 }
             }
             catch (System.Exception ex)
