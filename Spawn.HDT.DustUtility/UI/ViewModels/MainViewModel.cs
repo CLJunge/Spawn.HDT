@@ -277,7 +277,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (DustUtilityPlugin.IsOffline)
             {
                 DecksButtonEnabled = true;
-                System.Windows.Controls.ToolTipService.SetIsEnabled(DustUtilityPlugin.MainWindow.DecksButton, false);
+                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
             }
 
             switch (DustUtilityPlugin.Config.ViewMode)

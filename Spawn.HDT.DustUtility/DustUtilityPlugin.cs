@@ -332,7 +332,7 @@ namespace Spawn.HDT.DustUtility
             if (!IsOffline)
             {
                 ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = false;
-                ToolTipService.SetIsEnabled(MainWindow.DecksButton, true);
+                MainWindow.DecksButton.ToolTip = "Visit the 'Play' menu in order to load your decks.";
             }
 
             ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
@@ -358,7 +358,7 @@ namespace Spawn.HDT.DustUtility
                     if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
                     {
                         ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = true;
-                        ToolTipService.SetIsEnabled(MainWindow.DecksButton, false);
+                        MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
                     }
                     break;
             }

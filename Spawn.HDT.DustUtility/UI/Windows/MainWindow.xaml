@@ -64,7 +64,8 @@
     </Window.DataContext>
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Command="{Binding SwitchAccountCommand}" Visibility="{Binding SwitchAccountButtonVisibility}">
+            <Button Command="{Binding SwitchAccountCommand}" Visibility="{Binding SwitchAccountButtonVisibility}"
+                    ToolTip="Switch the current account and access its collection and decks." ToolTipService.ShowDuration="8000">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -74,7 +75,8 @@
                     <TextBlock Text="SWITCH ACCOUNT..." VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}">
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=HistoryFlyout}" Visibility="{Binding HistoryButtonVisibility}"
+                    ToolTip="View a list of all cards that were added to the collection or disenchanted." ToolTipService.ShowDuration="8000">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
@@ -85,7 +87,7 @@
                 </StackPanel>
             </Button>
             <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=DecksFlyout}" IsEnabled="{Binding DecksButtonEnabled}"
-                    Name="DecksButton" ToolTip="Visit the 'Play' menu in order to load your decks." ToolTipService.ShowDuration="8000" ToolTipService.IsEnabled="False" ToolTipService.ShowOnDisabled="True">
+                    Name="DecksButton" ToolTip="View a list of your current decks in Hearthstone." ToolTipService.ShowDuration="8000" ToolTipService.ShowOnDisabled="True">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="20" Height="20">
                         <Rectangle.Fill>
@@ -95,7 +97,8 @@
                     <TextBlock Text="DECKS" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </StackPanel>
             </Button>
-            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=CollectionInfoFlyout}">
+            <Button Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=CollectionInfoFlyout}"
+                    ToolTip="View information about each expansion in your collection." ToolTipService.ShowDuration="8000">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="18" Height="18">
                         <Rectangle.Fill>
