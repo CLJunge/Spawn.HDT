@@ -88,7 +88,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     s_openedPopup.IsOpen = false;
                 }
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed popup");
             }
 
             m_blnDblClick = false;
@@ -118,7 +118,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             CardImagePopup.IsOpen = false;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed popup");
         }
         #endregion
 
@@ -134,7 +134,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     s_openedPopup.IsOpen = false;
                 }
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed popup");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed popup");
             }
         }
         #endregion

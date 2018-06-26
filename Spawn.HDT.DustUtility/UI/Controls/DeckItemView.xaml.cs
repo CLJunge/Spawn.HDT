@@ -6,6 +6,8 @@
         public DeckItemView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'DeckItemView' instance");
         }
         #endregion
     }

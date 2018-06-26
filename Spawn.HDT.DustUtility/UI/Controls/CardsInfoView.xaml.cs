@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using System.Windows;
 #endregion
 
@@ -22,6 +23,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         public CardsInfoView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardsInfoView' instance");
         }
         #endregion
     }

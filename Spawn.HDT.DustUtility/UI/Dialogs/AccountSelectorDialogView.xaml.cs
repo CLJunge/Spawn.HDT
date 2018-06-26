@@ -6,6 +6,8 @@
         public AccountSelectorDialogView()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'AccountSelectorDialogView' instance");
         }
         #endregion
 

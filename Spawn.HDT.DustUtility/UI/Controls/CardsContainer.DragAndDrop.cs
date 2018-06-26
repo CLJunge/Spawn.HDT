@@ -42,11 +42,9 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                     && (Math.Abs(diff.X) > (SystemParameters.MinimumHorizontalDragDistance / 3)
                     && Math.Abs(diff.Y) > (SystemParameters.MinimumVerticalDragDistance / 3)))
                 {
-                    System.Diagnostics.Debug.WriteLine($"dragging {m_draggedItem.Name}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Dragging '{m_draggedItem.Name}'...");
 
                     DataObject data = new DataObject("item", m_draggedItem.CreateCopy());
-
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Dragging '{m_draggedItem.Name}'...");
 
                     DragDrop.DoDragDrop(ItemsContainer, data, DragDropEffects.Copy);
 
