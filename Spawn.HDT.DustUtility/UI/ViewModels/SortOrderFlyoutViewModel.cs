@@ -3,6 +3,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
+using Spawn.HDT.DustUtility.Logging;
 #endif
 using Spawn.HDT.DustUtility.UI.Dialogs;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -95,6 +96,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 InitializeAsync().Forget();
             }
 #endif
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SortOrderFlyoutViewModel' instance");
         }
         #endregion
 
@@ -115,6 +118,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.OrderItem)).Length;
 
             SetInitialPropertyValue(nameof(SortOrderString), DustUtilityPlugin.Config.SortOrder);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -148,6 +153,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SortOrderItems.Add(new SortOrderItemModel(orderItem));
 
                 UpdateSortOrderString();
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added new item ('{orderItem}')");
             }
         }
         #endregion
@@ -162,6 +169,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SelectedSortOrderItemIndex = (nIndex > 0 ? nIndex - 1 : 0);
 
             UpdateSortOrderString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Removed item at index '{nIndex}'");
         }
         #endregion
 
@@ -173,6 +182,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SortOrderItems.Move(nIndex, nIndex - 1);
 
             UpdateSortOrderString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Moved item up (Old={nIndex}, New={nIndex - 1})");
         }
         #endregion
 
@@ -184,6 +195,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SortOrderItems.Move(nIndex, nIndex + 1);
 
             UpdateSortOrderString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Moved item up (Old={nIndex}, New={nIndex + 1})");
         }
         #endregion
 
@@ -197,6 +210,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.MainWindow.SortOrderFlyout.IsOpen = false;
 
             await ServiceLocator.Current.GetInstance<MainViewModel>().UpdateCardItemsSortOrderAsync();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved sort order ({DustUtilityPlugin.Config.SortOrder})");
         }
         #endregion
 
@@ -219,6 +234,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {lstRet.Count} unused items");
+
             return lstRet;
         }
         #endregion
@@ -238,6 +255,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }
             }
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created new sort order string ({strRet})");
+
             return strRet;
         }
         #endregion
@@ -246,6 +265,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void UpdateSortOrderString()
         {
             SortOrderString = CreateSortOrderString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Updated current sort order string to '{SortOrderString}'");
         }
         #endregion
     }

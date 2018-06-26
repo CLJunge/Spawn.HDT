@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using HearthMirror.Objects;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
+using Spawn.HDT.DustUtility.Logging;
 #endif
 using Spawn.HDT.DustUtility.Messaging;
 using Spawn.HDT.DustUtility.UI.Models;
@@ -86,6 +87,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             Messenger.Default.Register<CMOpeningMessage>(this, OnContextMenuOpening);
             Messenger.Default.Register<LVMouseDblClickMessage>(this, OnListViewMouseDoubleClick);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'DecksFlyoutViewModel' instance");
         }
         #endregion
 
@@ -120,6 +123,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 ReloadRequired = false;
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -127,6 +132,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void ShowDeckList()
         {
             ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyout(DustUtilityPlugin.MainWindow.DeckListFlyout);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Showing list for '{SelectedDeckItem.Name}'");
         }
         #endregion
 
@@ -145,6 +152,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 SelectedDeckItem.Opacity = .5;
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Toggled '{SelectedDeckItem.Name}'");
         }
         #endregion
 

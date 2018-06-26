@@ -46,6 +46,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 #endif
 
             Messenger.Default.Register<RemoveCardItemMessage>(this, RemoveCardItem);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'HistoryFlyoutViewModel' instance");
         }
         #endregion
 
@@ -92,10 +94,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 ReloadRequired = false;
             }
-            else
-            {
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"No reload required");
-            }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -117,6 +117,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             CardItems.Clear();
 
             HistoryManager.ClearHistory(DustUtilityPlugin.CurrentAccount);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared view model");
         }
         #endregion
     }

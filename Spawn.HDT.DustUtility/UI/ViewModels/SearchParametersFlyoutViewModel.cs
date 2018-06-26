@@ -5,6 +5,7 @@ using HearthDb.Enums;
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
 using Spawn.HDT.DustUtility.CardManagement;
+using Spawn.HDT.DustUtility.Logging;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
@@ -603,6 +604,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 InitializeAsync().Forget();
             }
 #endif
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SearchParametersFlyoutViewModel' instance");
         }
         #endregion
 
@@ -1032,6 +1035,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(IncludeGoldenCards), IncludeGoldenCards);
             SetInitialPropertyValue(nameof(IncludeGoldenCardsOnly), IncludeGoldenCardsOnly);
             SetInitialPropertyValue(nameof(IncludeUnusedCardsOnly), IncludeUnusedCardsOnly);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -1187,6 +1192,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.UnusedCardsOnly = IncludeUnusedCardsOnly;
 
             DustUtilityPlugin.MainWindow.SearchParametersFlyout.IsOpen = false;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved search parameters");
         }
         #endregion
 
@@ -1224,6 +1231,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             IncludeGoldenCardsLabelText = "Incl. Golden Cards";
             IncludeGoldenCardsOnlyLabelText = "Golden Cards Only";
             IncludeUnusedCardsOnlyLabelText = "Unused Cards Only";
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
         }
         #endregion
     }

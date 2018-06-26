@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -54,6 +55,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             WindowTitle = "Dust Utility - Add new item...";
 
             SortOrderItems = new ObservableCollection<SortOrderItemModel>();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SortOrderItemSelectorDialogViewModel' instance");
         }
         #endregion
 
@@ -63,6 +66,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             await base.InitializeAsync();
 
             SelectedSortOrderItemIndex = 0;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
     }

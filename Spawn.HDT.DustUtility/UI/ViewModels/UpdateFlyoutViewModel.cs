@@ -101,6 +101,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 UpdateMessage = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod" + Environment.NewLine + Environment.NewLine + "tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo" + Environment.NewLine + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy" + Environment.NewLine + "eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." + Environment.NewLine + Environment.NewLine + "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
             }
 #endif
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'UpdatedFlyoutViewModel' instance");
         }
         #endregion
 
@@ -130,6 +132,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             sb.Append("Would you like to download it?");
 
             UpdateMessage = sb.ToString();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -143,6 +147,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             UpdateManager.DownloadCompleted += OnDownloadCompleted;
 
             UpdateManager.Download(UpdateManager.Info.Version);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Started download... (Version={UpdateManager.Info.Version.ToString(3)})");
         }
         #endregion
 
@@ -150,6 +156,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void CloseFlyout()
         {
             DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen = false;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed flyout");
         }
         #endregion
 
@@ -162,6 +170,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             UpdateManager.DownloadCompleted -= OnDownloadCompleted;
 
             CloseFlyout();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Canceled current download");
         }
         #endregion
 
@@ -210,8 +220,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region DeleteOldPluginVersions
         private void DeleteOldPluginVersions()
         {
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Deleting old plugin versions");
-
             string strHdtPluginDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins");
 
             string strSearchPattern = "*DustUtility*";
@@ -229,6 +237,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 Directory.Delete(vOldPluginDirs[i], true);
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Deleted old plugin versions");
         }
         #endregion
     }

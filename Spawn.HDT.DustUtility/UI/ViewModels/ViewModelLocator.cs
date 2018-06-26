@@ -1,5 +1,6 @@
 ﻿#region Using
 using CommonServiceLocator;
+using Spawn.HDT.DustUtility.Logging;
 using System;
 using System.Windows;
 #endregion
@@ -35,6 +36,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 if (viewModelType != null)
                 {
                     ((FrameworkElement)d).DataContext = ServiceLocator.Current.GetInstance(viewModelType);
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Set data context for '{strViewModelName}'");
                 }
             }
         }
@@ -55,6 +58,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 DustUtilityPlugin.CreateContainer();
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'ViewModelLocator'");
         }
 #endif
         #endregion

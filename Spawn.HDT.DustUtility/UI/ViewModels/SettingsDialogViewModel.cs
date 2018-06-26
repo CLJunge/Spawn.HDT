@@ -197,6 +197,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             WindowTitle = "Dust Utility - Settings";
 
             NotifyDirtyStatus += OnNotifyDirtyStatus;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'SettingsDialogViewModel' instance");
         }
         #endregion
 
@@ -322,6 +324,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(ShowNotifications), ShowNotifications);
             SetInitialPropertyValue(nameof(LogLevel), LogLevel);
             SetInitialPropertyValue(nameof(ViewMode), ViewMode);
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -336,6 +340,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
             DustUtilityPlugin.Config.LogLevel = LogLevel;
             DustUtilityPlugin.Config.ViewMode = ViewMode;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved settings");
         }
         #endregion
 
@@ -350,6 +356,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ShowNotificationsLabelText = "Show Notifications";
             LogLevelLabelText = "Log Level";
             ViewModeLabelText = "View Mode";
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
         }
         #endregion
     }
