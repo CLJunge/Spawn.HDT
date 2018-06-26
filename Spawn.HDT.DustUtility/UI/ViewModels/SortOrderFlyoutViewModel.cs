@@ -1,6 +1,7 @@
 ﻿#region Using
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
+using Spawn.HDT.DustUtility.Logging;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.Logging;

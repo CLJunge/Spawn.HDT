@@ -3,6 +3,7 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using HearthMirror.Objects;
+using Spawn.HDT.DustUtility.Logging;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 using Spawn.HDT.DustUtility.Logging;
