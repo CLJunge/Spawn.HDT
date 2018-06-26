@@ -151,6 +151,8 @@ namespace Spawn.HDT.DustUtility
         {
             Logger = new Logger("dustutility", Path.Combine(DataDirectory, "Logs"));
 
+            Logger.Log(LogLevel.All, $"---- Dust Utility {Assembly.GetExecutingAssembly().GetName().Version.ToString(3)} ----");
+
             CreateContainer();
 
             RarityBrushes = new Dictionary<int, SolidColorBrush>
@@ -189,6 +191,8 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
+            Logger.Log(LogLevel.Trace, "Loading plugin...");
+
             m_blnInitialized = false;
 
             HideMainWindowOnClose = true;
@@ -207,6 +211,8 @@ namespace Spawn.HDT.DustUtility
             Task.Run(() => UpdateDataFiles()).ContinueWith(t =>
             {
                 m_blnInitialized = true;
+
+                Logger.Log(LogLevel.Trace, "Plugin loaded sucessfully");
             });
         }
         #endregion
@@ -233,6 +239,8 @@ namespace Spawn.HDT.DustUtility
             ServiceLocator.SetLocatorProvider(null);
 
             SimpleIoc.Default.Reset();
+
+            Logger.Log(LogLevel.Trace, "Unloaded plugin...");
         }
         #endregion
 
@@ -370,6 +378,8 @@ namespace Spawn.HDT.DustUtility
 
             retVal.Click += OnMenuItemClick;
 
+            Logger.Log(LogLevel.Debug, "Created menu item");
+
             return retVal;
         }
         #endregion
@@ -452,6 +462,8 @@ namespace Spawn.HDT.DustUtility
                         fileInfo.MoveTo(strTargetPath);
                     }
                 }
+
+                Logger.Log(LogLevel.Debug, "Moved account files to new directory");
             }
         }
         #endregion
@@ -494,6 +506,8 @@ namespace Spawn.HDT.DustUtility
 
                 FileManager.Write(vFiles[i], lstHistory);
             });
+
+            Logger.Log(LogLevel.Debug, "Updated history files");
         }
         #endregion
 
@@ -505,6 +519,8 @@ namespace Spawn.HDT.DustUtility
             if (Directory.Exists(strOldDir))
             {
                 Directory.Move(strOldDir, Path.Combine(DataDirectory, "Backups"));
+
+                Logger.Log(LogLevel.Debug, "Moved backups to new directory");
             }
         }
         #endregion
@@ -537,6 +553,8 @@ namespace Spawn.HDT.DustUtility
                 SimpleIoc.Default.Register<AccountSelectorDialogViewModel>();
                 SimpleIoc.Default.Register<SettingsDialogViewModel>();
                 SimpleIoc.Default.Register<SortOrderItemSelectorDialogViewModel>();
+
+                Logger.Log(LogLevel.Debug, "Created IOC container");
             }
         }
         #endregion
@@ -699,6 +717,8 @@ namespace Spawn.HDT.DustUtility
 
             //And readd it
             SimpleIoc.Default.Register(() => account);
+
+            Logger.Log(LogLevel.Debug, "Updated account instance");
         }
         #endregion
 
@@ -767,11 +787,13 @@ namespace Spawn.HDT.DustUtility
             if (Config.ShowNotifications)
             {
                 Hearthstone_Deck_Tracker.Core.MainWindow?.Dispatcher.Invoke(() =>
-                    {
-                        NotificationToast toast = new NotificationToast(strMessage);
+                {
+                    NotificationToast toast = new NotificationToast(strMessage);
 
-                        ToastManager.ShowCustomToast(toast);
-                    });
+                    ToastManager.ShowCustomToast(toast);
+                });
+
+                Logger.Log(LogLevel.Debug, $"Display toast notification ('{strMessage}')");
             }
         }
         #endregion
@@ -795,6 +817,10 @@ namespace Spawn.HDT.DustUtility
                 }
 
                 s_blnCheckedForUpdates = true;
+            }
+            else
+            {
+                Logger.Log(LogLevel.Trace, "Already checked for updates");
             }
         }
         #endregion

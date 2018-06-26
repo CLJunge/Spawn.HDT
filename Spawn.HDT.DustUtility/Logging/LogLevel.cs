@@ -5,6 +5,7 @@
         Debug,
         Trace,
         Warning,
-        Error
+        Error,
+        All
     }
 }
