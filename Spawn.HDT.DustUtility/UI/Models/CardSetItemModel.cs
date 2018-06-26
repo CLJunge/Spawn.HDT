@@ -216,7 +216,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 }
             };
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardSetItemModel' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CardSetItemModel' instance");
         }
         #endregion
     }

@@ -1,4 +1,6 @@
-﻿using Spawn.HDT.DustUtility.Logging;
+﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
+#endregion
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {
@@ -9,7 +11,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardCountDialog' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardCountDialog' instance");
         }
         #endregion
 

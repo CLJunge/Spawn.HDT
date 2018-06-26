@@ -7,7 +7,7 @@
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'DeckListFlyoutView' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckListFlyoutView' instance");
         }
         #endregion
     }

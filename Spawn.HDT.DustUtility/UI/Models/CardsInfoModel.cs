@@ -76,7 +76,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 }
             };
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardsInfoModel' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CardsInfoModel' instance");
         }
         #endregion
 

@@ -50,7 +50,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             m_disenchantButtonPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.DisenchantButtonX), GetYPos(DisenchantConfig.Instance.DisenchantButtonY));
             m_dialogAcceptButtonPoint = new Point(GetScaledXPos(DisenchantConfig.Instance.DialogAcceptButtonX), GetYPos(DisenchantConfig.Instance.DialogAcceptButtonY));
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'DisenchantActions' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'DisenchantActions' instance");
         }
         #endregion
 

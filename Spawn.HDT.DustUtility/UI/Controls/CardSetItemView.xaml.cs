@@ -7,7 +7,7 @@
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'CardSetItemView' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CardSetItemView' instance");
         }
         #endregion
     }

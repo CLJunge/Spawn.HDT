@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             m_onUnexpectedMousePos = onUnexpectedMousePos;
             m_previousCursorPos = Point.Empty;
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'MouseActions' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'MouseActions' instance");
         }
         #endregion
 

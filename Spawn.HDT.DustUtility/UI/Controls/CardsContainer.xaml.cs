@@ -55,7 +55,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
             Messenger.Default.Register<PopupMessage>(this, OnPopupMessage);
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardsContainer' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardsContainer' instance");
         }
         #endregion
 

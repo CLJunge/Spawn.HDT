@@ -7,7 +7,7 @@
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'DeckItemView' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckItemView' instance");
         }
         #endregion
     }

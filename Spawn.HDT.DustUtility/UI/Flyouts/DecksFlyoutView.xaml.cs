@@ -13,7 +13,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'DecksFlyoutView' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'DecksFlyoutView' instance");
         }
         #endregion
 

@@ -35,7 +35,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             CardSelection = new ObservableCollection<CachedCard>();
             SearchParameters = new SearchParameters(true);
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'AccountPreferences' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'AccountPreferences' instance");
         }
         #endregion
 

@@ -24,7 +24,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardsInfoView' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardsInfoView' instance");
         }
         #endregion
     }

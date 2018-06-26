@@ -13,7 +13,7 @@
         {
             CloseRequest = closeRequest;
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Initialized new 'PopupMessage' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Created new 'PopupMessage' instance");
         }
         #endregion
     }

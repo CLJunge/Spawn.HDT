@@ -11,7 +11,7 @@ namespace Spawn.HDT.DustUtility.UI.Dialogs
         {
             InitializeComponent();
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'SettingsDialogView' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'SettingsDialogView' instance");
         }
         #endregion
 

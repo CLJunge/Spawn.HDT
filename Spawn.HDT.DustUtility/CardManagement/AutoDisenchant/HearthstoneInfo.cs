@@ -29,7 +29,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             Card2PosX = Hearthstone_Deck_Tracker.Helper.GetScaledXPos(DisenchantConfig.Instance.Card2X, HsRect.Width, Ratio);
             CardPosY = DisenchantConfig.Instance.CardsY * HsRect.Height;
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'HearthstoneInfo' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'HearthstoneInfo' instance");
         }
         #endregion
     }

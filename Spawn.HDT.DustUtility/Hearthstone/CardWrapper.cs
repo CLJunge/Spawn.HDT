@@ -54,7 +54,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         {
             RawCard = card;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'CardWrapper' instance ({Count}x {DbCard.Name})");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created new 'CardWrapper' instance ({Count}x {DbCard.Name})");
         }
 
         public CardWrapper(CachedCard cachedCard)

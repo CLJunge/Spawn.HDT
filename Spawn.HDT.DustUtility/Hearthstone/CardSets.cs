@@ -228,7 +228,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     MaxEpicsCount = maxEpicsCount;
                     MaxLegendariesCount = maxLegendariesCount;
 
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardSets.Info.InfoItem' instance");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardSets.Info.InfoItem' instance");
                 }
                 #endregion
             }

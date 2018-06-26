@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                 }
             };
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'SortOrderItemModel' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'SortOrderItemModel' instance");
         }
 
         public SortOrderItemModel(SortOrder.OrderItem item)

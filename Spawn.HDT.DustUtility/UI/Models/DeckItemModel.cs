@@ -83,7 +83,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             }
 #endif
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Initialized new 'DeckItemModel' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckItemModel' instance");
         }
 
         public DeckItemModel(Deck deck)

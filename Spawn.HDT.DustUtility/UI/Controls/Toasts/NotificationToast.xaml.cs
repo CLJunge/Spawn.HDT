@@ -19,7 +19,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
         {
             MessageTextBox.Text = message;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'NotificationToast' instance (Message={MessageTextBox.Text})");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created new 'NotificationToast' instance (Message={MessageTextBox.Text})");
         }
         #endregion
 

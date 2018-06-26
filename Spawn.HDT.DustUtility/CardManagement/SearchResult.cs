@@ -41,7 +41,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             CardItems = new List<CardItemModel>();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'SearchResult' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SearchResult' instance");
         }
         #endregion
 

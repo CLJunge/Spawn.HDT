@@ -137,7 +137,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
             DisplayString = $"{BattleTag.Name}#{BattleTag.Number} ({Region})";
             Preferences = new AccountPreferences();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'MockAccount' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'MockAccount' instance");
         }
         #endregion
 
