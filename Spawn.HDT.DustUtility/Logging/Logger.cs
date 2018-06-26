@@ -171,7 +171,14 @@ namespace Spawn.HDT.DustUtility.Logging
         #region SetLogFileName
         private void SetLogFileName()
         {
-            m_strFilePath = Path.Combine(m_logDirectory.FullName, string.Format("{0}_{1}.txt", Name, DateTime.Now.ToString("yyyyMMdd")));
+            if (!string.IsNullOrEmpty(Name))
+            {
+                m_strFilePath = Path.Combine(m_logDirectory.FullName, $"{Name}_{DateTime.Now.ToString("yyyyMMdd")}.txt");
+            }
+            else
+            {
+                m_strFilePath = Path.Combine(m_logDirectory.FullName, $"{DateTime.Now.ToString("yyyyMMdd")}.txt");
+            }
 
             m_logFile = new FileInfo(m_strFilePath);
 
