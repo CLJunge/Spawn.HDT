@@ -346,11 +346,12 @@ namespace Spawn.HDT.DustUtility
         {
             switch (mode)
             {
-                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
+                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
-                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Minutes >= 1)
+                case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
+                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Minutes >= 5)
                     {
-                        await Cache.SaveAll(CurrentAccount);
+                        await Cache.SaveAllAsync(CurrentAccount);
 
                         m_dtLastSaveTimestamp = DateTime.Now;
                     }

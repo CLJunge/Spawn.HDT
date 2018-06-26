@@ -20,7 +20,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveCollection
-        public static bool SaveCollection(IAccount account)
+        private static bool SaveCollection(IAccount account)
         {
             bool blnRet = false;
 
@@ -42,7 +42,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveDecks
-        public static bool SaveDecks(IAccount account)
+        private static bool SaveDecks(IAccount account)
         {
             bool blnRet = false;
 
@@ -203,8 +203,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         }
         #endregion
 
-        #region SaveAll
-        public static async Task SaveAll(IAccount account)
+        #region SaveAllAsync
+        public static async Task SaveAllAsync(IAccount account, bool blnUpdateHistory = true)
         {
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
@@ -215,7 +215,12 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
             if ((!account?.IsEmpty ?? false) && (account?.IsValid ?? false))
             {
-                HistoryManager.CheckCollection(account);
+                if (blnUpdateHistory)
+                {
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Updating history...");
+
+                    HistoryManager.CheckCollection(account);
+                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saving collection and decks...");
 

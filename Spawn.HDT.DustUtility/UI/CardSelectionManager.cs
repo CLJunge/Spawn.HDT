@@ -2,6 +2,7 @@
 using CommonServiceLocator;
 using HearthDb.Enums;
 using HearthMirror;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.CardManagement;
@@ -157,7 +158,7 @@ namespace Spawn.HDT.DustUtility.UI
 
                     if (DustUtilityPlugin.Config.OfflineMode)
                     {
-                        Cache.SaveCollection(DustUtilityPlugin.CurrentAccount);
+                        Cache.SaveAllAsync(DustUtilityPlugin.CurrentAccount).Forget();
                     }
 
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
