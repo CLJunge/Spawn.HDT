@@ -342,7 +342,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             ViewModelBase viewModel = (((FrameworkElement)flyout.Content).DataContext as ViewModelBase);
 
-            if (flyout.Content is Flyouts.CollectionInfoFlyout && viewModel.ReloadRequired)
+            if (flyout.Content is Flyouts.CollectionInfoFlyoutView && viewModel.ReloadRequired)
             {
                 flyout.Header = $"Collection Info";
 

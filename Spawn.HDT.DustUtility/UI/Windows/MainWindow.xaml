@@ -128,7 +128,7 @@
                 <flyouts:SortOrderFlyoutView x:Name="SortOrderFlyoutView"/>
             </controls:Flyout>
             <controls:Flyout Name="CollectionInfoFlyout" Header="Collection Info" Position="Left">
-                <flyouts:CollectionInfoFlyout x:Name="CollectionInfoFlyoutView"/>
+                <flyouts:CollectionInfoFlyoutView x:Name="CollectionInfoFlyoutView"/>
             </controls:Flyout>
         </controls:FlyoutsControl>
     </controls:MetroWindow.Flyouts>
