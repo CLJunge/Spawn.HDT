@@ -132,7 +132,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Neutral.MarinTheFox
             };
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized 'CardSets'");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets'");
         }
         #endregion
 
@@ -206,7 +206,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.KARA, Karazhan }
                 };
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized 'CardSets.Info'");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets.Info'");
             }
             #endregion
 
@@ -228,7 +228,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     MaxEpicsCount = maxEpicsCount;
                     MaxLegendariesCount = maxLegendariesCount;
 
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'CardSets.Info.InfoItem' instance");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'CardSets.Info.InfoItem' instance");
                 }
                 #endregion
             }

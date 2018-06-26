@@ -139,7 +139,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             Classes.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Classes));
             Sets.CollectionChanged += (s, e) => RaisePropertyChanged(nameof(Sets));
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'SearchParameters' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'SearchParameters' instance");
         }
         #endregion
     }

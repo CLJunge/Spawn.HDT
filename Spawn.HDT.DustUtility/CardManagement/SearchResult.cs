@@ -41,7 +41,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             CardItems = new List<CardItemModel>();
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Initialized new 'SearchResult' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized new 'SearchResult' instance");
         }
         #endregion
 
@@ -54,7 +54,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             info.EpicsCount = EpicsCount;
             info.LegendariesCount = LegendariesCount;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Copied result to CardsInfoModel");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Copied result to CardsInfoModel");
         }
         #endregion
 
