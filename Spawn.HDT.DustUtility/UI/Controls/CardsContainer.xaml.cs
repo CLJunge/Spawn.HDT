@@ -13,6 +13,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 {
     public partial class CardsContainer
     {
+        #region Static Fields
+        private static System.Windows.Controls.Primitives.Popup s_openedPopup;
+        #endregion
+
         #region Member Variables
         private bool m_blnDblClick;
         #endregion
@@ -74,7 +78,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (!m_blnDblClick)
             {
-                ClosePopup();
+                CardImagePopup.IsOpen = false;
+
+                if (s_openedPopup != null)
+                {
+                    s_openedPopup.IsOpen = false;
+                }
             }
 
             m_blnDblClick = false;
@@ -82,17 +91,11 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region OnListViewSelectionChanged
-        private void OnListViewSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            ClosePopup();
-        }
+        private void OnListViewSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) => CardImagePopup.IsOpen = false;
         #endregion
 
         #region OnListViewContextMenuOpening
-        private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e)
-        {
-            e.Handled = !(ContextMenuEnabled && ItemsContainer.SelectedItem != null);
-        }
+        private void OnListViewContextMenuOpening(object sender, System.Windows.Controls.ContextMenuEventArgs e) => e.Handled = !(ContextMenuEnabled && ItemsContainer.SelectedItem != null);
         #endregion
 
         #region OnMenuItemRemoveClick
@@ -106,10 +109,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #endregion
 
         #region OnPopupMouseDown
-        private void OnPopupMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            ClosePopup();
-        }
+        private void OnPopupMouseDown(object sender, MouseButtonEventArgs e) => CardImagePopup.IsOpen = false;
         #endregion
 
         #region OnPopupMessage
@@ -117,7 +117,12 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             if (message.CloseRequest && CardImagePopup.IsOpen)
             {
-                ClosePopup();
+                CardImagePopup.IsOpen = false;
+
+                if (s_openedPopup != null)
+                {
+                    s_openedPopup.IsOpen = false;
+                }
             }
         }
         #endregion
@@ -126,21 +131,20 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OpenPopupAsync
         private async Task OpenPopupAsync()
         {
+            if (s_openedPopup != null)
+            {
+                s_openedPopup.IsOpen = false;
+            }
+
             if (ItemsContainer.SelectedItem is CardItemModel selectedItem)
             {
                 CardImagePopup.IsOpen = true;
 
-                await CardImageContainer.UpdateCardWrapperAsync(selectedItem.Wrapper);
-            }
-        }
-        #endregion
+#pragma warning disable S2696 // Instance members should not write to "static" fields
+                s_openedPopup = CardImagePopup;
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
-        #region ClosePopup
-        private void ClosePopup()
-        {
-            if (CardImagePopup.IsOpen)
-            {
-                CardImagePopup.IsOpen = false;
+                await CardImageContainer.UpdateCardWrapperAsync(selectedItem.Wrapper);
             }
         }
         #endregion

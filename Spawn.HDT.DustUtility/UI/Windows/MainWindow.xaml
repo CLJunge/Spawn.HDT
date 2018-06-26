@@ -164,7 +164,7 @@
                 <uicontrols:CardsContainer ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
             </Border>
         </Grid>
-        <Grid Margin="15,43,175,15" Visibility="{Binding SplitViewVisibility}">
+        <Grid Name="SplitViewGrid" Margin="15,43,175,15" Visibility="{Binding SplitViewVisibility}">
             <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -172,9 +172,9 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <uicontrols:CardsContainer Grid.Row="0" ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
+                    <uicontrols:CardsContainer x:Name="SplitViewDefaultContainer" Grid.Row="0" ItemsSource="{Binding CardItems}" AllowDrop="False" AllowDrag="True" ContextMenuEnabled="False"/>
                     <GridSplitter Style="{DynamicResource CustomGridSplitterStyle}" Grid.Row="1" ResizeDirection="Rows" Background="{DynamicResource AccentColorBrush}" HorizontalAlignment="Stretch"/>
-                    <uicontrols:CardsContainer Grid.Row="2" ItemsSource="{Binding Path=CardSelection.CardItems}" AllowDrop="True" AllowDrag="False" ContextMenuEnabled="True" ItemDropped="OnItemDropped" RemoveCardItem="OnRemoveCardItem"/>
+                    <uicontrols:CardsContainer x:Name="SplitViewSelectionContainer" Grid.Row="2" ItemsSource="{Binding Path=CardSelection.CardItems}" AllowDrop="True" AllowDrag="False" ContextMenuEnabled="True" ItemDropped="OnItemDropped" RemoveCardItem="OnRemoveCardItem"/>
                 </Grid>
             </Border>
         </Grid>

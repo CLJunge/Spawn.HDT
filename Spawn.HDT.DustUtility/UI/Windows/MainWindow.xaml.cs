@@ -11,6 +11,9 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            SplitViewDefaultContainer.CardImagePopup.PlacementTarget = SplitViewGrid;
+            SplitViewSelectionContainer.CardImagePopup.PlacementTarget = SplitViewGrid;
         }
         #endregion
 
