@@ -57,7 +57,7 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region Ctor
-        public Logger(string name, string logDirectory = null)
+        public Logger(string name = null, string logDirectory = null)
         {
             Name = name;
 
