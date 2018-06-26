@@ -169,9 +169,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             UpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
             UpdateManager.DownloadCompleted -= OnDownloadCompleted;
 
-            CloseFlyout();
-
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Canceled current download");
+
+            CloseFlyout();
         }
         #endregion
 
