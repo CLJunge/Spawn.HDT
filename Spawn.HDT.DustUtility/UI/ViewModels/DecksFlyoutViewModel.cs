@@ -131,9 +131,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ShowDeckList
         private void ShowDeckList()
         {
-            ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyout(DustUtilityPlugin.MainWindow.DeckListFlyout);
+            if (SelectedDeckItem != null)
+            {
+                ServiceLocator.Current.GetInstance<MainViewModel>().OpenFlyout(DustUtilityPlugin.MainWindow.DeckListFlyout);
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Showing list for '{SelectedDeckItem.Name}'");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Showing list for '{SelectedDeckItem.Name}'");
+            }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "No deck selected, closing flyout");
+
+                DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen = false;
+            }
         }
         #endregion
 
