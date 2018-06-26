@@ -83,18 +83,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 if (lstHistory.Count > 0)
                 {
-                    Logger.Default.Log(LogLevel.Debug, $"Loaded history: {lstHistory.Count} entries");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded history: {lstHistory.Count} entries");
                 }
                 else
                 {
-                    Logger.Default.Log(LogLevel.Debug, $"No history available");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"No history available");
                 }
 
                 ReloadRequired = false;
             }
             else
             {
-                Logger.Default.Log(LogLevel.Debug, $"No reload required");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"No reload required");
             }
         }
         #endregion

@@ -22,10 +22,12 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"+{strRet}";
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{strRet}'");
             }
             catch
             {
-                Logger.Default.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"!");
             }
 
             return strRet;

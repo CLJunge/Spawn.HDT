@@ -93,7 +93,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 retVal.CardItems.Add(item);
             }
 
-            Logger.Default.Log(LogLevel.Debug, $"Created search result for {lstCards?.Count} card(s)");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created search result for {lstCards?.Count} card(s)");
 
             return retVal;
         }

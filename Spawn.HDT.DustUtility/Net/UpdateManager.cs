@@ -59,7 +59,7 @@ namespace Spawn.HDT.DustUtility.Net
 
                 try
                 {
-                    Logger.Default.Log(LogLevel.Trace, "Checking GitHub for updates...");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Trace, "Checking GitHub for updates...");
 
                     HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
 
@@ -99,29 +99,25 @@ namespace Spawn.HDT.DustUtility.Net
                                     {
                                         s_updateInfo.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
                                     }
-                                    else { }
 
-                                    Logger.Default.Log(LogLevel.Trace, "Update available");
+                                    DustUtilityPlugin.Logger.Log(LogLevel.Trace, "Update available");
                                 }
                                 else
                                 {
-                                    Logger.Default.Log(LogLevel.Trace, "No update available");
+                                    DustUtilityPlugin.Logger.Log(LogLevel.Trace, "No update available");
                                 }
                             }
-                            else { }
                         }
-                        else { }
                     }
                 }
                 catch (Exception ex)
                 {
                     //No internet connection or github down
-                    Logger.Default.Log(LogLevel.Error, $"Couldn't perform update check: {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't perform update check: {ex}");
                 }
 
                 s_blnIsChecking = false;
             }
-            else { }
 
             return blnRet;
         }
@@ -150,7 +146,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                     else
                     {
-                        Logger.Default.Log(LogLevel.Warning, "User canceled download");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Warning, "User canceled download");
                     }
                 };
 

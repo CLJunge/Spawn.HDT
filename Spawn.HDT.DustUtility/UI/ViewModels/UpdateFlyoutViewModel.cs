@@ -169,7 +169,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnDownloadCompleted
         private void OnDownloadCompleted(object sender, System.Net.DownloadDataCompletedEventArgs e)
         {
-            Logger.Default.Log(LogLevel.Debug, "Download finished. Extracting zip file...");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Download finished. Extracting zip file...");
 
             UpdateManager.DownloadProgressChanged -= OnDownloadProgressChanged;
             UpdateManager.DownloadCompleted -= OnDownloadCompleted;
@@ -210,7 +210,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region DeleteOldPluginVersions
         private void DeleteOldPluginVersions()
         {
-            Logger.Default.Log(LogLevel.Debug, "Deleting old plugin versions");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Deleting old plugin versions");
 
             string strHdtPluginDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins");
 

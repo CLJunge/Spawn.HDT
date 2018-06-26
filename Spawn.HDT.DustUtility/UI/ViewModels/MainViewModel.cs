@@ -218,8 +218,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             IAccount account = DustUtilityPlugin.CurrentAccount;
 
-            Logger.Default.Log(LogLevel.Debug, $"Account={account.DisplayString}");
-            Logger.Default.Log(LogLevel.Debug, $"OfflineMode={DustUtilityPlugin.IsOffline}");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Account={account.DisplayString}");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"OfflineMode={DustUtilityPlugin.IsOffline}");
 
             if (!account.IsEmpty)
             {

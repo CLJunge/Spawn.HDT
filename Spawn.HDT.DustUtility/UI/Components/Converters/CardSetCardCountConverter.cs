@@ -40,7 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                Logger.Default.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"!");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"!");
             }
 
             return strRet;

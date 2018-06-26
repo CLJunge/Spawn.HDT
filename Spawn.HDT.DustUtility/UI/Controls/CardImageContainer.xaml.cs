@@ -44,7 +44,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 if (m_currentImageStream != null)
                 {
-                    Logger.Default.Log(LogLevel.Debug, "Disposing current image...");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Disposing current image...");
 
                     m_currentImageStream.Dispose();
                     m_currentImageStream = null;
@@ -52,7 +52,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 if (Visibility == Visibility.Visible)
                 {
-                    Logger.Default.Log(LogLevel.Debug, $"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loading image for {m_wrapper.RawCard.Id} (Premium={m_wrapper.RawCard.Premium})");
 
                     m_currentImageStream = (await CardImageProvider.GetStreamAsync(m_wrapper.RawCard.Id, m_wrapper.RawCard.Premium));
 
@@ -62,13 +62,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                         if (m_wrapper.RawCard.Premium)
                         {
-                            Logger.Default.Log(LogLevel.Debug, "Setting current image as GIF");
+                            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Setting current image as GIF");
 
                             image.SetValue(XamlAnimatedGif.AnimationBehavior.SourceStreamProperty, m_currentImageStream);
                         }
                         else
                         {
-                            Logger.Default.Log(LogLevel.Debug, "Setting current image as normal bitmap");
+                            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Setting current image as normal bitmap");
 
                             image.Source = (Image.FromStream(m_currentImageStream) as Bitmap).ToBitmapImage();
                         }

@@ -27,7 +27,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                Logger.Default.Log(LogLevel.Error, $"Exception occured while writing to file \"{strPath}\": {ex}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while writing to file \"{strPath}\": {ex}");
             }
         }
         #endregion
@@ -51,7 +51,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                Logger.Default.Log(LogLevel.Error, $"Exception occured while reading from file \"{strPath}\": {ex}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while reading from file \"{strPath}\": {ex}");
             }
 
             if (retVal == null)

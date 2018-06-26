@@ -87,7 +87,7 @@ namespace Spawn.HDT.DustUtility.Net
                 }
                 catch (System.Exception ex)
                 {
-                    Logger.Default.Log(LogLevel.Error, $"Couldn't load card image: {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Couldn't load card image: {ex}");
                 }
             }
 

@@ -47,18 +47,6 @@ namespace Spawn.HDT.DustUtility.Logging
         #region FormatString
         public string FormatString { get; set; } = "%t [%l::%s] %m";
         #endregion
-
-        #region [STATIC] Default
-        private static Logger s_default = null;
-
-        public static Logger Default => s_default ?? (s_default = new Logger("Default"));
-        #endregion
-
-        #region [STATIC] Debug
-        private static Logger s_debug = null;
-
-        public static Logger Debug => s_debug ?? (s_debug = new Logger("Debug") { IsDebugMode = true });
-        #endregion
         #endregion
 
         #region Events
