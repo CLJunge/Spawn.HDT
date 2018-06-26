@@ -49,6 +49,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public CardSelectionWindowViewModel()
         {
             WindowTitle = "Dust Utility - Selection";
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CardSelectionWindowViewModel' instance");
         }
         #endregion
     }

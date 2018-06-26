@@ -48,6 +48,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 Deck = DustUtilityPlugin.CurrentAccount.GetDecks()[0];
             }
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckListFlyoutViewModel' instance");
         }
         #endregion
 
@@ -74,6 +76,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             DustUtilityPlugin.MainWindow.DeckListFlyout.Header = Deck?.Name ?? "Deck List";
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Finished initializing");
         }
         #endregion
     }

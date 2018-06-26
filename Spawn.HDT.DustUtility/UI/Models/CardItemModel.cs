@@ -186,7 +186,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #region GetCardImage
         private ImageSource GetCardImage()
         {
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, Wrapper.Card.Name);
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Getting image for '{Wrapper.Card.Name}'...");
 
             ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.Collectible[Id]));
 

@@ -41,6 +41,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 InitializeAsync().Forget();
             }
 #endif
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CollectionInfoFlyoutViewModel' instance");
         }
         #endregion
 
@@ -69,6 +71,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 ReloadRequired = false;
             }
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -92,6 +96,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 }) != null;
             }
 
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"HasCardSet: Set={cardSet.GetShortString()} > Result={blnRet}");
+
             return blnRet;
         }
         #endregion
@@ -100,6 +106,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private CardSetItemModel CreateCardSetItem(List<Card> lstCollection, CardSet cardSet)
         {
             CardSets.Info.InfoItem cardSetInfo = CardSets.Info.Dictionary[cardSet];
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Creating new card set item... ('{cardSet.GetShortString()}')");
 
             return new CardSetItemModel
             {
@@ -128,6 +136,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private BitmapImage GetLogo(CardSet cardSet)
         {
             string strSource = Settings.Default.ResourcesBasePath;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Getting logo for '{cardSet.GetShortString()}'...");
 
             switch (cardSet)
             {
@@ -192,6 +202,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private BitmapImage GetBanner(CardSet cardSet)
         {
             string strSource = Settings.Default.ResourcesBasePath;
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Getting banner for '{cardSet.GetShortString()}'...");
 
             switch (cardSet)
             {
@@ -279,6 +291,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 nRet += Math.Min(lstChunk[i].Count, nMaxCount);
             }
 
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"GetCountForRarity: CardSet={cardSet.GetShortString()}, Rarity={rarity.GetString()}, IsGolden={blnIsGolden} > Result={nRet}");
+
             return nRet;
         }
         #endregion
@@ -346,6 +360,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 nRet += lstChunk[i].GetDustValue() * lstChunk[i].Count;
             }
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"GetDustValue: CardSet={cardSet.GetShortString()}, Rarity={rarity.GetString()}, IsGolden={blnIsGolden} > Result={nRet}");
 
             return nRet;
         }
