@@ -6,6 +6,8 @@
         public CardSelectionWindow()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'CardSelectionWindow' instance");
         }
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿#region Using
 using CommonServiceLocator;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 #endregion
 
@@ -14,6 +15,8 @@ namespace Spawn.HDT.DustUtility.UI.Windows
 
             SplitViewDefaultContainer.CardImagePopup.PlacementTarget = SplitViewGrid;
             SplitViewSelectionContainer.CardImagePopup.PlacementTarget = SplitViewGrid;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'MainWindow' instance");
         }
         #endregion
 

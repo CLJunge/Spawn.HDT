@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 #endregion
@@ -23,6 +24,8 @@ namespace Spawn.HDT.DustUtility.UI
             Item = item;
 
             RowIndex = rowIndex;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardItemEventArgs' instance");
         }
         #endregion
     }

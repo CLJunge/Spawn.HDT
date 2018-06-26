@@ -7,6 +7,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Hearthstone;
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Controls;
 using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.ViewModels;
@@ -65,6 +66,8 @@ namespace Spawn.HDT.DustUtility.UI
             {
                 Content = CreateCardCountDialogContent()
             };
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'CardSelectionManager' instance");
         }
         #endregion
 
@@ -90,9 +93,13 @@ namespace Spawn.HDT.DustUtility.UI
                 {
                     CardItems.Add(result.CardItems[i]);
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded selection ({CardItems.Count} items)");
             }
 
             m_blnDisenchantingConfirmation = false;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
 
@@ -101,6 +108,8 @@ namespace Spawn.HDT.DustUtility.UI
         {
             CardItems.Clear();
             CardsInfo.Clear();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared current selection");
         }
         #endregion
 
@@ -115,6 +124,12 @@ namespace Spawn.HDT.DustUtility.UI
                 {
                     AddOrUpdateCardItem(new CardItemModel(new CardWrapper(lstCards[i])));
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Imported latest pack");
+            }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "No pack available");
             }
         }
         #endregion
@@ -132,6 +147,8 @@ namespace Spawn.HDT.DustUtility.UI
             }
             else
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Launching auto disenchanting...");
+
                 List<CardWrapper> lstCards = CardItems.Select(m => m.Wrapper).ToList();
 
                 if (await CardsManager.AutoDisenchant(DustUtilityPlugin.CurrentAccount, lstCards))
@@ -144,6 +161,8 @@ namespace Spawn.HDT.DustUtility.UI
                     }
 
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished auto disenchanting");
                 }
             }
         }
@@ -179,10 +198,14 @@ namespace Spawn.HDT.DustUtility.UI
             {
                 item.Count += cardItem.Count;
                 item.Dust = item.Wrapper.GetDustValue(item.Count);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Updated '{item.Name}'");
             }
             else
             {
                 CardItems.Add(cardItem);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added '{cardItem.Name}'");
             }
         }
         #endregion
@@ -223,6 +246,8 @@ namespace Spawn.HDT.DustUtility.UI
                 m_currentItem = null;
             };
 
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized card count dialog");
+
             return retVal;
         }
         #endregion
@@ -254,6 +279,8 @@ namespace Spawn.HDT.DustUtility.UI
                 }
 
                 CardsInfo.DustAmount -= e.Item.Dust;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Removed card item ('{e.Item.Name}')");
             }
         }
         #endregion
@@ -289,6 +316,12 @@ namespace Spawn.HDT.DustUtility.UI
 
                     m_currentItem = null;
                 }
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Added '{m_currentItem.Name}' after drop");
+            }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Cannot select '{m_currentItem.Name}', selection already contains the max. amount!");
             }
         }
         #endregion
@@ -304,6 +337,8 @@ namespace Spawn.HDT.DustUtility.UI
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Add(lstCards[i]);
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved selection in account preferences ('{DustUtilityPlugin.CurrentAccount.DisplayString}')");
         }
         #endregion
 
@@ -345,6 +380,8 @@ namespace Spawn.HDT.DustUtility.UI
                     retVal = DustUtilityPlugin.MainWindow;
                     break;
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current window: '{retVal.GetType()}'");
 
             return retVal;
         }
