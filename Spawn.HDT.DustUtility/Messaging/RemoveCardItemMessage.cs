@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI;
 #endregion
 
