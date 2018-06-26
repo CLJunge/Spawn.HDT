@@ -149,7 +149,7 @@ namespace Spawn.HDT.DustUtility
         #region Static Ctor
         static DustUtilityPlugin()
         {
-            Logger = new Logger("dustutility", Path.Combine(DataDirectory, "Logs"));
+            Logger = new Logger(string.Empty, Path.Combine(DataDirectory, "Logs"));
 
             Logger.Log(LogLevel.All, $"---- Dust Utility {Assembly.GetExecutingAssembly().GetName().Version.ToString(3)} ----");
 
