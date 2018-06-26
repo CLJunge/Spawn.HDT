@@ -148,7 +148,6 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
-    <Compile Include="Logging\FileAccessException.cs" />
     <Compile Include="Logging\LogEntry.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="Logging\Logger.cs" />

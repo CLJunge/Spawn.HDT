@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows;
 #endregion
 
 namespace Spawn.HDT.DustUtility.Logging
@@ -130,7 +131,7 @@ namespace Spawn.HDT.DustUtility.Logging
                     }
                     catch (IOException ex)
                     {
-                        throw new FileAccessException("Can't access log file!", ex);
+                        MessageBox.Show($"Can't access log file: {ex}", "Dust Utility - Logging");
                     }
                 }
             }
