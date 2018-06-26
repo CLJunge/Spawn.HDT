@@ -28,6 +28,8 @@ namespace Spawn.HDT.DustUtility.Net
 
             if (!string.IsNullOrEmpty(strCardId))
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Downloading card image... (Id={strCardId}, Premium={blnPremium})");
+
                 try
                 {
                     HttpWebRequest cardDatarequest = CreateCardDataRequest(strCardId);
@@ -83,9 +85,9 @@ namespace Spawn.HDT.DustUtility.Net
                         }
                     }
                 }
-                catch
+                catch (System.Exception ex)
                 {
-                    Logger.Default.Log(LogLevel.Warning, "Couldn't load card image!");
+                    Logger.Default.Log(LogLevel.Error, $"Couldn't load card image: {ex}");
                 }
             }
 
