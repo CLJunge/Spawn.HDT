@@ -95,7 +95,7 @@
 - Ready for The Witchwood
 
 ## 3.0.0
-- Complete rewrite
+- Plugin has been completely rewritten
 - Clean UI and improved performance
 - Added auto disenchanting feature
 - Added golden cards to collection info
