@@ -30,13 +30,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 {
                     strRet = $"{Prefix} {strRet}";
                 }
-                else { }
 
                 if (!string.IsNullOrEmpty(Suffix))
                 {
                     strRet = $"{strRet} {Suffix}";
                 }
-                else { }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted '{value}' to '{strRet}' (Prefix={Prefix}, Suffix={Suffix})");
             }
