@@ -28,10 +28,10 @@ branches:
 
 deploy:
   release: Spawn.HDT.DustUtility v$(appveyor_build_version)
-  description: 'Release description'
+  description: '<ADD DESCRIPTION>'
   provider: GitHub
   auth_token:
     secure: o8qzkmoJtqt3CjSyS2EzkSRn/d2lYpi6kqt/q7NH1EiMeuoum6Y7pT/HcwsRhd+M
   draft: true
   on:
-    appveyor_repo_tag: false
+    appveyor_repo_tag: true
