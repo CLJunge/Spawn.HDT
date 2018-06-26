@@ -151,16 +151,20 @@
             </controls:TextBoxHelper.ButtonContent>
         </TextBox>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="X" Command="{Binding ClearCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,175,0" Width="25" Height="28"/>
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,175,0" Width="25" Height="28"
+                ToolTip="Clear current search result." ToolTipService.ShowDuration="8000"/>
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="?" Command="{Binding ShowSearchHelpCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,140,0" Width="25" Height="28"/>
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,140,0" Width="25" Height="28"
+                ToolTip="Display a list of possible search terms." ToolTipService.ShowDuration="8000"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Filters"
                 Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=SearchParametersFlyout}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,15,0" Width="120" Height="28"/>
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,15,0" Width="120" Height="28"
+                ToolTip="Edit search filters." ToolTipService.ShowDuration="8000"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Sort order"
                 Command="{Binding OpenFlyoutCommand}" CommandParameter="{Binding ElementName=SortOrderFlyout}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,15,0" Width="150" Height="28"/>
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,43,15,0" Width="150" Height="28"
+                ToolTip="Edit sort order for search results." ToolTipService.ShowDuration="8000"/>
 
         <Grid Margin="15,43,175,15" Visibility="{Binding DefaultViewVisibility}">
             <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
@@ -191,12 +195,15 @@
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Open Selection"
                 Command="{Binding OpenCardSelectionWindowCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding DefaultViewVisibility}"/>
+                Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding DefaultViewVisibility}"
+                ToolTip="Open the selection window." ToolTipService.ShowDuration="8000"/>
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,336,15,0" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,336,15,0" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"
+                ToolTip="Import the latest opened pack if available." ToolTipService.ShowDuration="8000"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28">
+                HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28"
+                ToolTip="Disenchant the current selection." ToolTipService.ShowDuration="8000">
             <Button.Visibility>
                 <MultiBinding Converter="{StaticResource DisenchantButtonVisibilityConverter}">
                     <Binding Path="CardSelection.DisenchantButtonVisibility"/>
@@ -205,6 +212,7 @@
             </Button.Visibility>
         </Button>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear Selection" Command="{Binding ClearSelectionCommand}"
-                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"/>
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"
+                ToolTip="Clear the current selection." ToolTipService.ShowDuration="8000"/>
     </Grid>
 </controls:MetroWindow>
