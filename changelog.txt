@@ -96,6 +96,8 @@
 
 ## 3.0.0
 - Complete rewrite
-- Added auto disenchanting
+- Clean UI and improved performance
+- Added auto disenchanting feature
 - Added golden cards to collection info
+- Added notifications
 -----------------------------
