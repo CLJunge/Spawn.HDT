@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using System.ComponentModel;
 #endregion
 
@@ -16,6 +17,8 @@ namespace Spawn.HDT.DustUtility.UI
         public NotifyDirtyStatusEventArgs(string propertyName, bool isDirty) : base(propertyName)
         {
             IsDirty = isDirty;
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created new 'NotifyDirtyStatusEventArgs' instance (IsDirty={IsDirty})");
         }
         #endregion
     }

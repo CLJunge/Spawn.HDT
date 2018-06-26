@@ -1,4 +1,5 @@
 ﻿#region Using
+using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace Spawn.HDT.DustUtility.UI
         public SortOrder()
         {
             m_lstItems = new List<SortOrderItemModel>();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SortOrder' instance");
         }
         #endregion
 
@@ -41,6 +44,8 @@ namespace Spawn.HDT.DustUtility.UI
 
             if (!string.IsNullOrEmpty(strSortOrderString))
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Parsing '{strSortOrderString}'...");
+
                 retVal = new SortOrder();
 
                 string[] vItems = strSortOrderString.Split(';');
@@ -95,10 +100,9 @@ namespace Spawn.HDT.DustUtility.UI
                 case OrderItem.ManaCost:
                     strRet = "Mana";
                     break;
-
-                default:
-                    break;
             }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"ItemToString: OrderItem={item} > Result={strRet}");
 
             return strRet;
         }
