@@ -622,6 +622,8 @@ namespace Spawn.HDT.DustUtility
         {
             List<IAccount> lstRet = new List<IAccount>();
 
+            Logger.Log(LogLevel.Debug, "Loading accounts...");
+
 #if DEBUG
             lstRet.Add(s_mockAcc);
 #endif
@@ -644,6 +646,8 @@ namespace Spawn.HDT.DustUtility
                     }
                 }
             }
+
+            Logger.Log(LogLevel.Debug, $"Loaded {lstRet.Count} account(s)");
 
             return lstRet.ToArray();
         }
