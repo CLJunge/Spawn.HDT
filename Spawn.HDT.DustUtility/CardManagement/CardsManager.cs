@@ -3,6 +3,7 @@ using HearthDb.Enums;
 using HearthMirror.Objects;
 using MahApps.Metro.Controls.Dialogs;
 using Spawn.HDT.DustUtility.AccountManagement;
+using Spawn.HDT.DustUtility.CardManagement.AutoDisenchant;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Logging;
 using System;
@@ -23,6 +24,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         static CardsManager()
         {
             s_lstUnusedCards = new List<CardWrapper>();
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardsManager'");
         }
         #endregion
 
@@ -241,6 +244,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             if (lstDecks.Count > 0 && lstDecks[0].Cards.Count > 0)
             {
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Checking for unused cards...");
+
                 List<Card> lstCollection = account.GetCollection();
 
                 for (int i = 0; i < lstCollection.Count; i++)
@@ -359,8 +364,8 @@ namespace Spawn.HDT.DustUtility.CardManagement
         }
         #endregion
 
-        #region Disenchant
-        public static async Task<bool> Disenchant(IAccount account, List<CardWrapper> lstCards)
+        #region AutoDisenchant
+        public static async Task<bool> AutoDisenchant(IAccount account, List<CardWrapper> lstCards)
         {
             bool blnRet = false;
 
@@ -368,9 +373,13 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             if (!DustUtilityPlugin.IsOffline && (account?.Equals(loggedInAcc) ?? false))
             {
-                AutoDisenchant.DisenchantConfig.Instance.ForceClear = true;
+                DisenchantConfig.Instance.ForceClear = true;
 
-                blnRet = await AutoDisenchant.AutoDisenchanter.Disenchant(account, lstCards, null);
+                blnRet = await AutoDisenchanter.Disenchant(account, lstCards, null);
+            }
+            else
+            {
+                DustUtilityPlugin.Logger.Log(LogLevel.Warning, "Invalid function call! Plugin not in offline mode or Hearthstone isn't running!");
             }
 
             return blnRet;

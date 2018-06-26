@@ -130,12 +130,11 @@ namespace Spawn.HDT.DustUtility.UI
 
                 m_blnDisenchantingConfirmation = result == MessageDialogResult.Affirmative;
             }
-
-            if (m_blnDisenchantingConfirmation)
+            else
             {
                 List<CardWrapper> lstCards = CardItems.Select(m => m.Wrapper).ToList();
 
-                if (await CardsManager.Disenchant(DustUtilityPlugin.CurrentAccount, lstCards))
+                if (await CardsManager.AutoDisenchant(DustUtilityPlugin.CurrentAccount, lstCards))
                 {
                     Clear();
 
