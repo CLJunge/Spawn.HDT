@@ -626,6 +626,8 @@ namespace Spawn.HDT.DustUtility
 
 #if DEBUG
             lstRet.Add(s_mockAcc);
+
+            Logger.Log(LogLevel.Debug, "Added mock account");
 #endif
 
             if (Directory.Exists(DataDirectory))
