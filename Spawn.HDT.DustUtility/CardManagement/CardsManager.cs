@@ -276,7 +276,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             }
             else if (!DustUtilityPlugin.IsOffline)
             {
-                await DustUtilityPlugin.MainWindow.ShowMessageAsync("No decks available", "Navigate to the \"Play\" page first!");
+                await DustUtilityPlugin.MainWindow.ShowMessageAsync("No decks available", "Navigate to the 'Play' page first!");
             }
         }
         #endregion

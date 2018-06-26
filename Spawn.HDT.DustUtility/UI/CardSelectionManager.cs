@@ -280,7 +280,7 @@ namespace Spawn.HDT.DustUtility.UI
 
                 CardsInfo.DustAmount -= e.Item.Dust;
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Removed card item ('{e.Item.Name}')");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Removed card item ({e.Item.Name})");
             }
         }
         #endregion
@@ -338,7 +338,7 @@ namespace Spawn.HDT.DustUtility.UI
                 DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Add(lstCards[i]);
             }
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved selection in account preferences ('{DustUtilityPlugin.CurrentAccount.DisplayString}')");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved selection in account preferences ({DustUtilityPlugin.CurrentAccount.DisplayString})");
         }
         #endregion
 
@@ -381,7 +381,7 @@ namespace Spawn.HDT.DustUtility.UI
                     break;
             }
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current window: '{retVal.GetType()}'");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current window: {retVal.GetType()}");
 
             return retVal;
         }

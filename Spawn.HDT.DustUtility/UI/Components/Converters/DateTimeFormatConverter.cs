@@ -28,7 +28,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"! (FormatString={FormatString})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: '{value}'! (FormatString={FormatString})");
             }
 
             return strRet;

@@ -138,7 +138,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             }
             catch (Exception ex)
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting \"{wrapper?.Card?.Name}\": {ex}");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while disenchanting '{wrapper?.Card?.Name}': {ex}");
             }
 
             return nRet;

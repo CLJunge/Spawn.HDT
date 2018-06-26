@@ -37,7 +37,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     ((FrameworkElement)d).DataContext = ServiceLocator.Current.GetInstance(viewModelType);
 
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Set data context for '{strViewModelName}'");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Setting data context for '{strViewModelName}'");
                 }
             }
         }

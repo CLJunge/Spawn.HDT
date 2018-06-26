@@ -60,7 +60,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     }
                     catch (Exception ex)
                     {
-                        DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while creating backup \"{strFileName}\": {ex}");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while creating backup '{strFileName}': {ex}");
                     }
                 }
                 else
@@ -112,7 +112,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 }
                 catch (Exception ex)
                 {
-                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while restoring backup \"{strFileName}\": {ex}");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while restoring backup '{strFileName}': {ex}");
                 }
             }
             else

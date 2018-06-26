@@ -42,7 +42,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: \"{string.Join(", ", values)}\"! (Prefix={Prefix}, Suffix={Suffix})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: '{string.Join(", ", values)}'! (Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;

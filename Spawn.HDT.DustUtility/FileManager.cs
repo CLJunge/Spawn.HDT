@@ -27,7 +27,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Exception occured while writing to file \"{strPath}\": {ex}", "Dust Utility - Exception");
+                MessageBox.Show($"Exception occured while writing to file '{strPath}': {ex}", "Dust Utility - Exception");
             }
         }
         #endregion
@@ -51,7 +51,7 @@ namespace Spawn.HDT.DustUtility
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Exception occured while reading from file \"{strPath}\": {ex}", "Dust Utility - Exception");
+                MessageBox.Show($"Exception occured while reading from file '{strPath}': {ex}", "Dust Utility - Exception");
             }
 
             if (retVal == null)

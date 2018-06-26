@@ -46,7 +46,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: \"{value}\"! (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: '{value}'! (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;
