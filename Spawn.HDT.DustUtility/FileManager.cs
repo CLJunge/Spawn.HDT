@@ -1,6 +1,6 @@
 ﻿#region Using
-using Spawn.HDT.DustUtility.Logging;
 using System.IO;
+using System.Windows;
 using System.Xml.Serialization;
 #endregion
 
@@ -24,12 +24,10 @@ namespace Spawn.HDT.DustUtility
 
                     serializer.Serialize(writer, value);
                 }
-
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Wrote '{value.GetType()}' to '{strPath}'");
             }
             catch (System.Exception ex)
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while writing to file \"{strPath}\": {ex}");
+                MessageBox.Show($"Exception occured while writing to file \"{strPath}\": {ex}", "Dust Utility - Exception");
             }
         }
         #endregion
@@ -49,17 +47,11 @@ namespace Spawn.HDT.DustUtility
 
                         retVal = (T)serializer.Deserialize(reader);
                     }
-
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded '{retVal.GetType()}' from '{strPath}'");
-                }
-                else
-                {
-                    DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Coudln't load '{typeof(T)}'! File '{strPath}' doesn't exist.");
                 }
             }
             catch (System.Exception ex)
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Exception occured while reading from file \"{strPath}\": {ex}");
+                MessageBox.Show($"Exception occured while reading from file \"{strPath}\": {ex}", "Dust Utility - Exception");
             }
 
             if (retVal == null)
