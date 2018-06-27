@@ -33,8 +33,8 @@ namespace Spawn.HDT.DustUtility.Logging
         public string LogFileName => m_logFile.FullName;
         #endregion
 
-        #region IsDebugMode
-        public bool IsDebugMode { get; set; } = false;
+        #region DebugMode
+        public bool DebugMode { get; set; } = false;
         #endregion
 
         #region WriteToConsole
@@ -113,7 +113,7 @@ namespace Spawn.HDT.DustUtility.Logging
                             LogToConsole(retVal);
                         }
 
-                        if (IsDebugMode)
+                        if (DebugMode)
                         {
                             System.Diagnostics.Debug.WriteLine(strAssembledMessage);
                         }
