@@ -350,7 +350,7 @@ namespace Spawn.HDT.DustUtility
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
-                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Minutes >= 5)
+                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Seconds >= GetSaveDelay())
                     {
                         await Cache.SaveAllAsync(CurrentAccount);
 
@@ -826,6 +826,26 @@ namespace Spawn.HDT.DustUtility
             {
                 Logger.Log(LogLevel.Trace, "Already checked for updates");
             }
+        }
+        #endregion
+
+        #region GetSaveDelay
+        private int GetSaveDelay()
+        {
+            int nRet = 0;
+
+            switch (Config.SaveDelayUnit)
+            {
+                case TimeUnit.Seconds:
+                    nRet = Config.SaveDelay;
+                    break;
+
+                case TimeUnit.Minutes:
+                    nRet = Config.SaveDelay * 60;
+                    break;
+            }
+
+            return nRet;
         }
         #endregion
         #endregion
