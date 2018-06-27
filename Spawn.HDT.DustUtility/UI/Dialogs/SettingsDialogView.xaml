@@ -24,7 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Orientation="Vertical" Margin="5" Width="250">
+    <StackPanel Orientation="Vertical" Margin="5" Width="255">
         <DockPanel Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="OfflineModeCheckBox" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -53,6 +53,10 @@
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         
+        <DockPanel Height="30" ToolTip="Use an extra window for the card selection or display a selection view below the main view." ToolTipService.ShowDuration="10000">
+            <Label Content="{Binding ViewModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type ui:ViewMode}}}" SelectedItem="{Binding ViewMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+        </DockPanel>
         <DockPanel Height="30" ToolTip="Restore the last search term for the current account after opening the main window." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding RememberQueryStringLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding RememberQueryString, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -68,10 +72,6 @@
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         
-        <DockPanel Height="30" ToolTip="Use an extra window for the card selection or display a selection view below the main view." ToolTipService.ShowDuration="10000">
-            <Label Content="{Binding ViewModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type ui:ViewMode}}}" SelectedItem="{Binding ViewMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-        </DockPanel>
         <DockPanel Height="30" ToolTip="Check and display a notification wether a new release is available." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding CheckForUpdatesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
