@@ -24,13 +24,13 @@
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,265,15,0" Width="150" Height="28"
-                ToolTip="Import the latest opened pack if available." ToolTipService.ShowDuration="8000"/>
+                ToolTip="Import the latest opened pack if available." ToolTipService.ShowDuration="10000"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,298,15,0" Width="150" Height="28" Visibility="{Binding Path=CardSelection.DisenchantButtonVisibility}"
-                ToolTip="Disenchant the current selection." ToolTipService.ShowDuration="8000"/>
+                ToolTip="Disenchant the current selection." ToolTipService.ShowDuration="10000"/>
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Clear" Command="{Binding ClearCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,10" Width="150" Height="28"
-                ToolTip="Clear the current selection." ToolTipService.ShowDuration="8000"/>
+                ToolTip="Clear the current selection." ToolTipService.ShowDuration="10000"/>
     </Grid>
 </controls:MetroWindow>
