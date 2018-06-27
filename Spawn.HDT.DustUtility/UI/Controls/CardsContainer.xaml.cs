@@ -98,7 +98,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 CardImagePopup.IsOpen = false;
 
-                if (s_openedPopup != null)
+                if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
+                    && s_openedPopup != null)
                 {
                     s_openedPopup.IsOpen = false;
                 }
@@ -144,7 +145,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 CardImagePopup.IsOpen = false;
 
-                if (s_openedPopup != null)
+                if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
+                    && s_openedPopup != null)
                 {
                     s_openedPopup.IsOpen = false;
                 }
@@ -158,7 +160,8 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OpenPopupAsync
         private async Task OpenPopupAsync()
         {
-            if (s_openedPopup != null)
+            if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
+                && s_openedPopup != null)
             {
                 s_openedPopup.IsOpen = false;
             }
