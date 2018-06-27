@@ -291,3 +291,4 @@ __pycache__/
 # Custom
 [Ll]ogs/
 .sonarqube/
+/SONAR_SCAN.bat
