@@ -113,11 +113,6 @@ namespace Spawn.HDT.DustUtility.Logging
                             LogToConsole(retVal);
                         }
 
-                        if (DebugMode)
-                        {
-                            System.Diagnostics.Debug.WriteLine(strAssembledMessage);
-                        }
-
                         if (WriteToFile)
                         {
                             using (StreamWriter writer = new StreamWriter(m_strFilePath, File.Exists(m_strFilePath)))
@@ -134,6 +129,11 @@ namespace Spawn.HDT.DustUtility.Logging
                         MessageBox.Show($"Can't access log file: {ex}", "Dust Utility - Logging");
                     }
                 }
+            }
+
+            if (DebugMode && !string.IsNullOrEmpty(retVal.AssembledMessage))
+            {
+                System.Diagnostics.Debug.WriteLine(retVal.AssembledMessage);
             }
 
             return retVal;
