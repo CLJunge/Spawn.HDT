@@ -8,12 +8,14 @@
         xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
         xmlns:logging="clr-namespace:Spawn.HDT.DustUtility.Logging"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
+        xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
         Title="{Binding WindowTitle}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" GlowBrush="Black">
     <Window.Resources>
         <ResourceDictionary>
+            <converters:EnumDescriptionConverter x:Key="enumConverter"/>
             <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
                 <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
             </Style>
@@ -39,7 +41,13 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:TimeUnit}}}" SelectedItem="{Binding SaveDelayUnit}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:TimeUnit}}}" SelectedItem="{Binding SaveDelayUnit}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=., Converter={StaticResource enumConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </DockPanel>
         </DockPanel>
         
