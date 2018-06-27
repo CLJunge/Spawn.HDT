@@ -1,6 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         private bool m_blnOfflineMode;
         private string m_strOfflineModeLabelText;
+        private int m_nSaveDelay;
+        private TimeUnit m_saveDelayUnit;
+        private string m_strSaveDelayLabelText;
         private bool m_blnCheckForUpdates;
         private string m_strCheckForUpdatesLabelText;
         private bool m_blnColoredCardLabels;
@@ -59,6 +63,30 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strOfflineModeLabelText;
             set => Set(ref m_strOfflineModeLabelText, value);
+        }
+        #endregion
+
+        #region SaveDelay
+        public int SaveDelay
+        {
+            get => m_nSaveDelay;
+            set => Set(ref m_nSaveDelay, value);
+        }
+        #endregion
+
+        #region SaveDelayUnit
+        public TimeUnit SaveDelayUnit
+        {
+            get => m_saveDelayUnit;
+            set => Set(ref m_saveDelayUnit, value);
+        }
+        #endregion
+
+        #region SaveDelayLabelText
+        public string SaveDelayLabelText
+        {
+            get => m_strSaveDelayLabelText;
+            set => Set(ref m_strSaveDelayLabelText, value);
         }
         #endregion
 
@@ -198,7 +226,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             NotifyDirtyStatus += OnNotifyDirtyStatus;
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'SettingsDialogViewModel' instance");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SettingsDialogViewModel' instance");
         }
         #endregion
 
@@ -216,6 +244,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     else
                     {
                         OfflineModeLabelText = OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
+                case nameof(SaveDelay):
+                case nameof(SaveDelayUnit):
+                    if (e.IsDirty && !SaveDelayLabelText.EndsWith(IsDirtySuffix))
+                    {
+                        SaveDelayLabelText = $"{SaveDelayLabelText}{IsDirtySuffix}";
+                    }
+                    else if (!e.IsDirty)
+                    {
+                        SaveDelayLabelText = SaveDelayLabelText.Substring(0, SaveDelayLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
 
@@ -308,6 +348,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             LoadLabelTexts();
 
             OfflineMode = DustUtilityPlugin.Config.OfflineMode;
+            SaveDelay = DustUtilityPlugin.Config.SaveDelay;
+            SaveDelayUnit = DustUtilityPlugin.Config.SaveDelayUnit;
             CheckForUpdates = DustUtilityPlugin.Config.CheckForUpdates;
             ColoredCardLabels = DustUtilityPlugin.Config.ColoredCardLabels;
             DustUtilityPlugin.SettingsDialog.AutoDisenchantingCheckBox.IsChecked = AutoDisenchanting = DustUtilityPlugin.Config.AutoDisenchanting;
@@ -317,6 +359,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ViewMode = DustUtilityPlugin.Config.ViewMode;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
+            SetInitialPropertyValue(nameof(SaveDelay), SaveDelay);
+            SetInitialPropertyValue(nameof(SaveDelayUnit), SaveDelayUnit);
             SetInitialPropertyValue(nameof(CheckForUpdates), CheckForUpdates);
             SetInitialPropertyValue(nameof(ColoredCardLabels), ColoredCardLabels);
             SetInitialPropertyValue(nameof(AutoDisenchanting), AutoDisenchanting);
@@ -333,6 +377,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void SaveSettings()
         {
             DustUtilityPlugin.Config.OfflineMode = OfflineMode;
+            DustUtilityPlugin.Config.SaveDelay = SaveDelay;
+            DustUtilityPlugin.Config.SaveDelayUnit = SaveDelayUnit;
             DustUtilityPlugin.Config.CheckForUpdates = CheckForUpdates;
             DustUtilityPlugin.Config.ColoredCardLabels = ColoredCardLabels;
             DustUtilityPlugin.Config.AutoDisenchanting = AutoDisenchanting;
@@ -349,6 +395,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private void LoadLabelTexts()
         {
             OfflineModeLabelText = "Offline Mode";
+            SaveDelayLabelText = "Save Delay";
             CheckForUpdatesLabelText = "Check For Updates";
             ColoredCardLabelsLabelText = "Colored Card Labels";
             AutoDisenchantingLabelText = "Auto Disenchanting";
