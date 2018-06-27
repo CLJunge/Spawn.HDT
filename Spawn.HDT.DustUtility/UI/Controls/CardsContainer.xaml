@@ -15,7 +15,7 @@
                   ContextMenuOpening="OnListViewContextMenuOpening" MouseDoubleClick="OnListViewMouseDoubleClick"
                   MouseDown="OnListViewMouseDown" SelectionChanged="OnListViewSelectionChanged"
                   MouseMove="OnListViewMouseMove" PreviewMouseLeftButtonDown="OnListViewPreviewMouseLeftButtonDown"
-                  DragEnter="OnListViewDragEnter" Drop="OnListViewDrop" BorderThickness="0">
+                  DragEnter="OnListViewDragEnter" Drop="OnListViewDrop" BorderThickness="0" Background="{Binding ElementName=Container, Path=ContainerBackground}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Remove" Click="OnMenuItemRemoveClick"/>

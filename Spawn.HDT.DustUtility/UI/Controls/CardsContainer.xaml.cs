@@ -8,6 +8,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.Controls
@@ -33,6 +34,20 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         // Using a DependencyProperty as the backing store for ItemsSource.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(CardsContainer));
+        #endregion
+
+        #region ContainerBackground DP
+
+        public Brush ContainerBackground
+        {
+            get { return (Brush)GetValue(ContainerBackgroundProperty); }
+            set { SetValue(ContainerBackgroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ContainerBackground.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ContainerBackgroundProperty =
+            DependencyProperty.Register("ContainerBackground", typeof(Brush), typeof(CardsContainer), new PropertyMetadata(Brushes.Transparent));
+
         #endregion
 
         #region AllowDrag
