@@ -24,7 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Orientation="Vertical" Margin="5" Width="230">
+    <StackPanel Orientation="Vertical" Margin="5" Width="250">
         <DockPanel Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="OfflineModeCheckBox" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -53,7 +53,7 @@
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
         
-        <DockPanel Height="30" ToolTip="Remember search term for the current account after closing the main window." ToolTipService.ShowDuration="10000">
+        <DockPanel Height="30" ToolTip="Restore the last search term for the current account after opening the main window." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding RememberQueryStringLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding RememberQueryString, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
@@ -61,7 +61,7 @@
             <Label Content="{Binding AutoDisenchantingLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="AutoDisenchantingCheckBox" IsChecked="{Binding AutoDisenchanting, Mode=OneWayToSource}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Checked="OnAutoDisenchantingCheckBoxChecked"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="Use colored labels for card items." ToolTipService.ShowDuration="10000">
+        <DockPanel Height="30" ToolTip="Use colored labels for card items. (eg. Rarity)" ToolTipService.ShowDuration="10000">
             <Label Content="{Binding ColoredCardLabelsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding ColoredCardLabels, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
@@ -76,7 +76,7 @@
             <Label Content="{Binding CheckForUpdatesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding CheckForUpdates, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
-        <DockPanel Height="30" ToolTip="Display notifications using the HSReplay notification system." ToolTipService.ShowDuration="10000">
+        <DockPanel Height="30" ToolTip="Display notifications using the HDT notification system." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding ShowNotificationsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox IsChecked="{Binding ShowNotifications, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
