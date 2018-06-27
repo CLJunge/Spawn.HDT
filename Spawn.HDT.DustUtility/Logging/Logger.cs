@@ -46,7 +46,7 @@ namespace Spawn.HDT.DustUtility.Logging
         #endregion
 
         #region FormatString
-        public string FormatString { get; set; } = "%t [%l::%s] %m";
+        public string FormatString { get; set; } = "%t [%l|%s] %m";
         #endregion
         #endregion
 
