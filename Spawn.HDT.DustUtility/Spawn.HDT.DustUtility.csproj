@@ -262,6 +262,7 @@
     <Compile Include="UI\ViewModels\UpdateFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\ViewModelBase.cs" />
     <Compile Include="UI\ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Util\TimeUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -13,6 +13,8 @@ namespace Spawn.HDT.DustUtility
     {
         #region Member Variables
         private bool m_blnOfflineMode;
+        private int m_nSaveDelay;
+        private TimeUnit m_saveDelayUnit;
         private string m_strSortOrder;
         private bool m_blnCheckForUpdates;
         private string m_strLastSelectedAccount;
@@ -32,6 +34,24 @@ namespace Spawn.HDT.DustUtility
         {
             get => m_blnOfflineMode;
             set => Set(ref m_blnOfflineMode, value);
+        }
+        #endregion
+
+        #region SaveDelay
+        [DefaultValue(5)]
+        public int SaveDelay
+        {
+            get => m_nSaveDelay;
+            set => Set(ref m_nSaveDelay, value);
+        }
+        #endregion
+
+        #region SaveDelayUnit
+        [DefaultValue(TimeUnit.Minutes)]
+        public TimeUnit SaveDelayUnit
+        {
+            get => m_saveDelayUnit;
+            set => Set(ref m_saveDelayUnit, value);
         }
         #endregion
 
@@ -130,6 +150,8 @@ namespace Spawn.HDT.DustUtility
         public Configuration()
         {
             OfflineMode = false;
+            SaveDelay = 5;
+            SaveDelayUnit = TimeUnit.Minutes;
             SortOrder = "Rarity;Golden;CardClass;CardSet;Name";
             CheckForUpdates = true;
             LastSelectedAccount = null;
