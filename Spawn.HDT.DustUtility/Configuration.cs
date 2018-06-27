@@ -2,7 +2,7 @@
 using GalaSoft.MvvmLight;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI;
-using Spawn.HDT.DustUtility.Util;
+using Spawn.HDT.DustUtility.Utilities;
 using System.ComponentModel;
 using System.IO;
 #endregion

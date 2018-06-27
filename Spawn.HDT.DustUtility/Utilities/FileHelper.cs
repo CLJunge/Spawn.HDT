@@ -4,7 +4,7 @@ using System.Windows;
 using System.Xml.Serialization;
 #endregion
 
-namespace Spawn.HDT.DustUtility.Util
+namespace Spawn.HDT.DustUtility.Utilities
 {
     public static class FileHelper
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 #endregion
 
-namespace Spawn.HDT.DustUtility.Util
+namespace Spawn.HDT.DustUtility.Utilities
 {
     public enum TimeUnit
     {

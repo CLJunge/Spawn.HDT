@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Markup;
 
-namespace Spawn.HDT.DustUtility.Util
+namespace Spawn.HDT.DustUtility.Utilities
 {
     // All credits to Brian Lagunas http://brianlagunas.com/a-better-way-to-data-bind-enums-in-wpf/
     public class EnumBindingSourceExtension : MarkupExtension

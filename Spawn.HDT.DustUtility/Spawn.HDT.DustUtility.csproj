@@ -146,8 +146,8 @@
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="UI\Components\Converters\EnumDescriptionConverter.cs" />
-    <Compile Include="Util\EnumBindingSourceExtension.cs" />
-    <Compile Include="Util\FileHelper.cs" />
+    <Compile Include="Utilities\EnumBindingSourceExtension.cs" />
+    <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
     <Compile Include="AccountManagement\IAccount.cs" />
     <Compile Include="Logging\LogEntry.cs" />
@@ -264,7 +264,7 @@
     <Compile Include="UI\ViewModels\UpdateFlyoutViewModel.cs" />
     <Compile Include="UI\ViewModels\ViewModelBase.cs" />
     <Compile Include="UI\ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Util\TimeUnit.cs" />
+    <Compile Include="Utilities\TimeUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,7 +1,7 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.Logging;
-using Spawn.HDT.DustUtility.Util;
+using Spawn.HDT.DustUtility.Utilities;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion

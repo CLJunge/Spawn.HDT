@@ -3,7 +3,7 @@ using HearthMirror.Objects;
 using Spawn.HDT.DustUtility.AccountManagement;
 using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Logging;
-using Spawn.HDT.DustUtility.Util;
+using Spawn.HDT.DustUtility.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

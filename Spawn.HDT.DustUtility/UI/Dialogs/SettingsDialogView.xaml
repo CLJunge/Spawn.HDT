@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:util="clr-namespace:Spawn.HDT.DustUtility.Util"
+        xmlns:util="clr-namespace:Spawn.HDT.DustUtility.Utilities"
         xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
         xmlns:logging="clr-namespace:Spawn.HDT.DustUtility.Logging"
         xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"

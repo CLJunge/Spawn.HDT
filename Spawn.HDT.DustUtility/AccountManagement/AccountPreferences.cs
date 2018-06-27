@@ -2,7 +2,7 @@
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.CardManagement.Offline;
 using Spawn.HDT.DustUtility.Logging;
-using Spawn.HDT.DustUtility.Util;
+using Spawn.HDT.DustUtility.Utilities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
