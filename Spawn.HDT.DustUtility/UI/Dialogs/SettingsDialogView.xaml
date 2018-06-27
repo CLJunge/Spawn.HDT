@@ -32,7 +32,7 @@
         <DockPanel Height="30" ToolTip="The plugin saves collection/decks and updates the history whenever you open the main/play menu or the collection manager.&#x0a;Set a delay between each save to prevent spamming." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding SaveDelayLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <DockPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
-                <TextBox Name="SaveDelayTextBox" IsEnabled="{Binding ElementName=OfflineModeCheckBox, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" TextAlignment="Right" MaxLength="2" Margin="0,0,10,0">
+                <TextBox Name="SaveDelayTextBox" IsEnabled="{Binding ElementName=OfflineModeCheckBox, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" TextAlignment="Right" MaxLength="2" Margin="0,0,5,0">
                     <TextBox.Text>
                         <Binding Path="SaveDelay" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
