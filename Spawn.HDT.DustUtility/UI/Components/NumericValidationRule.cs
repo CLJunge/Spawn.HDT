@@ -27,25 +27,18 @@ namespace Spawn.HDT.DustUtility.UI.Components
         {
             ValidationResult retVal = ValidationResult.ValidResult;
 
-            if (!DustUtilityPlugin.NumericRegex.IsMatch(value.ToString()))
+            try
             {
-                retVal = new ValidationResult(false, ErrorMessage);
-            }
-            else
-            {
-                try
-                {
-                    int nValue = Convert.ToInt32(value.ToString());
+                int nValue = Convert.ToInt32(value.ToString());
 
-                    if (nValue < MinValue || nValue > MaxValue)
-                    {
-                        retVal = new ValidationResult(false, ErrorMessage);
-                    }
-                }
-                catch
+                if (nValue < MinValue || nValue > MaxValue)
                 {
                     retVal = new ValidationResult(false, ErrorMessage);
                 }
+            }
+            catch
+            {
+                retVal = new ValidationResult(false, ErrorMessage);
             }
 
             return retVal;
