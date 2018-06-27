@@ -153,6 +153,10 @@ namespace Spawn.HDT.DustUtility
         {
             Logger = new Logger(logDirectory: Path.Combine(DataDirectory, "Logs"));
 
+#if DEBUG
+            Logger.DebugMode = true;
+#endif
+
             Logger.Log(LogLevel.All, $"---- Dust Utility {Assembly.GetExecutingAssembly().GetName().Version.ToString(3)} ----");
 
             CreateContainer();
