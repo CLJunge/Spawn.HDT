@@ -387,7 +387,7 @@ namespace Spawn.HDT.DustUtility
                 Header = Name,
                 Icon = new Image()
                 {
-                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(Settings.Default.IconPath, UriKind.Relative))
+                    Source = new System.Windows.Media.Imaging.BitmapImage(new Uri(Settings.Default.IconResourcePath, UriKind.Relative))
                 }
             };
 

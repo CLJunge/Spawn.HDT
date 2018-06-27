@@ -53,18 +53,18 @@ namespace Spawn.HDT.DustUtility.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/Spawn.HDT.DustUtility;component/Resources/Images/")]
-        public string ResourcesBasePath {
+        public string ImageResourcesBasePath {
             get {
-                return ((string)(this["ResourcesBasePath"]));
+                return ((string)(this["ImageResourcesBasePath"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("/Spawn.HDT.DustUtility;component/Resources/icon.png")]
-        public string IconPath {
+        public string IconResourcePath {
             get {
-                return ((string)(this["IconPath"]));
+                return ((string)(this["IconResourcePath"]));
             }
         }
     }

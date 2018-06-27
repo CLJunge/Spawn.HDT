@@ -11,10 +11,10 @@
     <Setting Name="ApiBaseUrl" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://omgvamp-hearthstone-v1.p.mashape.com</Value>
     </Setting>
-    <Setting Name="ResourcesBasePath" Type="System.String" Scope="Application">
+    <Setting Name="ImageResourcesBasePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/Spawn.HDT.DustUtility;component/Resources/Images/</Value>
     </Setting>
-    <Setting Name="IconPath" Type="System.String" Scope="Application">
+    <Setting Name="IconResourcePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/Spawn.HDT.DustUtility;component/Resources/icon.png</Value>
     </Setting>
   </Settings>

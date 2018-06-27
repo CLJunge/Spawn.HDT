@@ -135,7 +135,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region GetLogo
         private BitmapImage GetLogo(CardSet cardSet)
         {
-            string strSource = Settings.Default.ResourcesBasePath;
+            string strSource = Settings.Default.ImageResourcesBasePath;
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Getting logo for '{cardSet.GetShortString()}'...");
 
@@ -201,7 +201,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region GetBanner
         private BitmapImage GetBanner(CardSet cardSet)
         {
-            string strSource = Settings.Default.ResourcesBasePath;
+            string strSource = Settings.Default.ImageResourcesBasePath;
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Getting banner for '{cardSet.GetShortString()}'...");
 
