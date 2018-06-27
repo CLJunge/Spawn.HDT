@@ -53,6 +53,7 @@ namespace Spawn.HDT.DustUtility
         #region Member Variables
         private bool m_blnInitialized;
         private DateTime m_dtLastSaveTimestamp = DateTime.Now;
+        private bool m_blnForceSave;
         #endregion
 
         #region Static Properties
@@ -334,6 +335,8 @@ namespace Spawn.HDT.DustUtility
             {
                 ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = false;
                 MainWindow.DecksButton.ToolTip = "Visit the 'Play' menu in order to load your decks.";
+
+                m_blnForceSave = true;
             }
 
             ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
@@ -350,9 +353,13 @@ namespace Spawn.HDT.DustUtility
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.HUB:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT:
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
-                    if (Config.OfflineMode && (DateTime.Now - m_dtLastSaveTimestamp).Seconds >= GetSaveDelay())
+                    if (Config.OfflineMode
+                        && ((DateTime.Now - m_dtLastSaveTimestamp).Seconds >= GetSaveDelay()
+                        || m_blnForceSave))
                     {
                         await Cache.SaveAllAsync(CurrentAccount);
+
+                        m_blnForceSave = false;
 
                         m_dtLastSaveTimestamp = DateTime.Now;
                     }
