@@ -32,6 +32,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strLogLevelLabelText;
         private ViewMode m_viewMode;
         private string m_strViewModeLabelText;
+        private bool m_blnHideBattleTagId;
+        private string m_strHideBattleTagIdLabelText;
         #endregion
 
         #region Properties
@@ -199,6 +201,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region HideBattleTagId
+        public bool HideBattleTagId
+        {
+            get => m_blnHideBattleTagId;
+            set => Set(ref m_blnHideBattleTagId, value);
+        }
+        #endregion
+
+        #region HideBattleTagIdLabelText
+        public string HideBattleTagIdLabelText
+        {
+            get => m_strHideBattleTagIdLabelText;
+            set => Set(ref m_strHideBattleTagIdLabelText, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -329,6 +347,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         ViewModeLabelText = ViewModeLabelText.Substring(0, ViewModeLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+                case nameof(HideBattleTagId):
+                    if (e.IsDirty)
+                    {
+                        HideBattleTagIdLabelText = $"{HideBattleTagIdLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        HideBattleTagIdLabelText = HideBattleTagIdLabelText.Substring(0, HideBattleTagIdLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
             }
         }
         #endregion
@@ -351,6 +380,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ShowNotifications = DustUtilityPlugin.Config.ShowNotifications;
             LogLevel = DustUtilityPlugin.Config.LogLevel;
             ViewMode = DustUtilityPlugin.Config.ViewMode;
+            HideBattleTagId = DustUtilityPlugin.Config.HideBattleTagId;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(SaveDelay), SaveDelay);
@@ -362,6 +392,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(ShowNotifications), ShowNotifications);
             SetInitialPropertyValue(nameof(LogLevel), LogLevel);
             SetInitialPropertyValue(nameof(ViewMode), ViewMode);
+            SetInitialPropertyValue(nameof(HideBattleTagId), HideBattleTagId);
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
@@ -380,6 +411,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.ShowNotifications = ShowNotifications;
             DustUtilityPlugin.Config.LogLevel = LogLevel;
             DustUtilityPlugin.Config.ViewMode = ViewMode;
+            DustUtilityPlugin.Config.HideBattleTagId = HideBattleTagId;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved settings");
         }
@@ -397,6 +429,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ShowNotificationsLabelText = "Show Notifications";
             LogLevelLabelText = "Log Level";
             ViewModeLabelText = "View Mode";
+            HideBattleTagIdLabelText = "Hide BattleTag Id";
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
         }
