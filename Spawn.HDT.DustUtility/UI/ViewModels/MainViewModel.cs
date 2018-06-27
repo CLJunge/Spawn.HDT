@@ -547,6 +547,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (!DustUtilityPlugin.CurrentAccount.IsEmpty)
             {
                 WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.DisplayString})]";
+
+                if (DustUtilityPlugin.Config.HideBattleTagId)
+                {
+                    WindowTitle = WindowTitle.Replace($"#{DustUtilityPlugin.CurrentAccount.BattleTag.Number}", string.Empty);
+                }
             }
             else
             {
