@@ -8,8 +8,18 @@ namespace Spawn.HDT.DustUtility.UI.Components
 {
     public class NumericValidationRule : ValidationRule
     {
-        #region Constants
-        private const string ErrorMessage = "Invalid value! Enter a value between 1 and 3600 (seconds).";
+        #region Properties
+        #region ErrorMessage
+        public string ErrorMessage => $"Invalid value! Enter a value between {MinValue} and {MaxValue}.";
+        #endregion
+
+        #region MinValue
+        public int MinValue { get; set; } = 1;
+        #endregion
+
+        #region MaxValue
+        public int MaxValue { get; set; } = 3600;
+        #endregion
         #endregion
 
         #region Validate
@@ -27,7 +37,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
                 {
                     int nValue = Convert.ToInt32(value.ToString());
 
-                    if (nValue < 1 || nValue > 3600)
+                    if (nValue < MinValue || nValue > MaxValue)
                     {
                         retVal = new ValidationResult(false, ErrorMessage);
                     }
