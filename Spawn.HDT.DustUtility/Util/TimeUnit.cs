@@ -6,9 +6,9 @@ namespace Spawn.HDT.DustUtility.Util
 {
     public enum TimeUnit
     {
-        [Description("s")]
+        [Description("sec.")]
         Seconds,
-        [Description("min")]
+        [Description("min.")]
         Minutes,
     }
 }
