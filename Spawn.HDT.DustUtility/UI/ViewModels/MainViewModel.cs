@@ -220,99 +220,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await base.InitializeAsync();
 
-            IAccount account = DustUtilityPlugin.CurrentAccount;
-
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Account={account.DisplayString}");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Account={DustUtilityPlugin.CurrentAccount.DisplayString}");
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"OfflineMode={DustUtilityPlugin.IsOffline}");
 
-            if (!account.IsEmpty)
-            {
-                WindowTitle = $"Dust Utility [{account.BattleTag.Name} ({account.Region})]";
-            }
-            else
-            {
-                WindowTitle = "Dust Utility";
-            }
+            await UpdateUIAsync();
 
-            if (DustUtilityPlugin.IsOffline)
-            {
-                WindowTitle = $"{WindowTitle} [OFFLINE]";
-            }
-
-#if DEBUG
-            if (IsInDesignMode)
-            {
-                WindowTitle = $"{WindowTitle} (Design)";
-            }
-            else
-            {
-                WindowTitle = $"{WindowTitle} (Debug)";
-            }
-
-            HistoryButtonVisibility = Visibility.Visible;
-            SwitchAccountButtonVisibility = Visibility.Visible;
-#else
-            HistoryButtonVisibility = Visibility.Collapsed;
-            SwitchAccountButtonVisibility = Visibility.Collapsed;
-
-            if (DustUtilityPlugin.Config.OfflineMode)
-            {
-                HistoryButtonVisibility = Visibility.Visible;
-
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing history button");
-
-                if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.GetAccounts().Length > 1)
-                {
-                    SwitchAccountButtonVisibility = Visibility.Visible;
-
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing switch accounts button");
-                }
-            }
-#endif
-
-            ClearControls();
-
-            ReloadFlyouts();
-
-            if (DustUtilityPlugin.IsOffline)
-            {
-                DecksButtonEnabled = true;
-                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
-            }
-
-            switch (DustUtilityPlugin.Config.ViewMode)
-            {
-                case ViewMode.Default:
-                    DefaultViewVisibility = Visibility.Visible;
-                    SplitViewVisibility = Visibility.Hidden;
-                    break;
-
-                case ViewMode.Split:
-                    DefaultViewVisibility = Visibility.Hidden;
-                    SplitViewVisibility = Visibility.Visible;
-
-                    CloseSelectionWindow();
-
-                    await CardSelection.InitializeAsync();
-                    break;
-            }
-
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current view mode: '{DustUtilityPlugin.Config.ViewMode}'");
-
-            if (DustUtilityPlugin.Config.RememberQueryString
-                && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
-            {
-                SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
-
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored last search query ('{SearchQuery}')");
-            }
-            else
-            {
-                SearchQuery = null;
-            }
-
-            await Task.Run(() => BackupManager.CreateBackup(account))
-                .ContinueWith(t => BackupManager.DeleteOldBackups(account));
+            await Task.Run(() => BackupManager.CreateBackup(DustUtilityPlugin.CurrentAccount))
+                .ContinueWith(t => BackupManager.DeleteOldBackups(DustUtilityPlugin.CurrentAccount));
 
             await DustUtilityPlugin.PerformUpdateCheckAsync();
 
@@ -554,6 +468,106 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SelectionWindow = null;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed selection window");
+        }
+        #endregion
+
+        #region UpdateUI
+        private async Task UpdateUIAsync()
+        {
+            SetWindowTitle();
+
+#if DEBUG
+            HistoryButtonVisibility = Visibility.Visible;
+            SwitchAccountButtonVisibility = Visibility.Visible;
+#else
+            HistoryButtonVisibility = Visibility.Collapsed;
+            SwitchAccountButtonVisibility = Visibility.Collapsed;
+
+            if (DustUtilityPlugin.Config.OfflineMode)
+            {
+                HistoryButtonVisibility = Visibility.Visible;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing history button");
+
+                if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.GetAccounts().Length > 1)
+                {
+                    SwitchAccountButtonVisibility = Visibility.Visible;
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing switch accounts button");
+                }
+            }
+#endif
+
+            ClearControls();
+
+            ReloadFlyouts();
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                DecksButtonEnabled = true;
+                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
+            }
+
+            switch (DustUtilityPlugin.Config.ViewMode)
+            {
+                case ViewMode.Default:
+                    DefaultViewVisibility = Visibility.Visible;
+                    SplitViewVisibility = Visibility.Hidden;
+                    break;
+
+                case ViewMode.Split:
+                    DefaultViewVisibility = Visibility.Hidden;
+                    SplitViewVisibility = Visibility.Visible;
+
+                    CloseSelectionWindow();
+
+                    await CardSelection.InitializeAsync();
+                    break;
+            }
+
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Current view mode: '{DustUtilityPlugin.Config.ViewMode}'");
+
+            if (DustUtilityPlugin.Config.RememberQueryString
+                && !string.IsNullOrEmpty(DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString))
+            {
+                SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored last search query ('{SearchQuery}')");
+            }
+            else
+            {
+                SearchQuery = null;
+            }
+        }
+        #endregion
+
+        #region SetWindowTitle
+        private void SetWindowTitle()
+        {
+            if (!DustUtilityPlugin.CurrentAccount.IsEmpty)
+            {
+                WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.BattleTag.Name} ({DustUtilityPlugin.CurrentAccount.Region})]";
+            }
+            else
+            {
+                WindowTitle = "Dust Utility";
+            }
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                WindowTitle = $"{WindowTitle} [OFFLINE]";
+            }
+
+#if DEBUG
+            if (IsInDesignMode)
+            {
+                WindowTitle = $"{WindowTitle} (Design)";
+            }
+            else
+            {
+                WindowTitle = $"{WindowTitle} (Debug)";
+            }
+#endif
         }
         #endregion
     }
