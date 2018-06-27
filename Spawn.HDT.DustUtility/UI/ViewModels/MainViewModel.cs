@@ -546,7 +546,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             if (!DustUtilityPlugin.CurrentAccount.IsEmpty)
             {
-                WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.BattleTag.Name} ({DustUtilityPlugin.CurrentAccount.Region})]";
+                WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.DisplayString})]";
             }
             else
             {
