@@ -212,6 +212,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             NotifyDirtyStatus += OnNotifyDirtyStatus;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SettingsDialogViewModel' instance");
+
+            PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName.Equals(nameof(OfflineMode)) && !OfflineMode)
+                {
+                    SaveDelay = DustUtilityPlugin.Config.SaveDelay;
+                    SaveDelayUnit = DustUtilityPlugin.Config.SaveDelayUnit;
+                }
+            };
         }
         #endregion
 
