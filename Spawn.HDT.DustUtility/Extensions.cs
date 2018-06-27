@@ -141,7 +141,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OrderBy
-        // All credits to Aaron Powell https://stackoverflow.com/a/307600
+        //All credits to Aaron Powell https://stackoverflow.com/a/307600
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string strProperty, int nIteration)
         {
             System.Type type = typeof(T);

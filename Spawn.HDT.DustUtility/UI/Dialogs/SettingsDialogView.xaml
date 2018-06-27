@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:util="clr-namespace:Spawn.HDT.DustUtility.Util"
+        xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
+        xmlns:logging="clr-namespace:Spawn.HDT.DustUtility.Logging"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
@@ -43,7 +46,7 @@
         
         <DockPanel Height="30" ToolTip="Use an extra window for the card selection or display a selection view below the main view." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding ViewModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <ComboBox ItemsSource="{Binding ViewModes}" SelectedItem="{Binding ViewMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type ui:ViewMode}}}" SelectedItem="{Binding ViewMode}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </DockPanel>
         <DockPanel Height="30" ToolTip="Check and display a notification wether a new release is available." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding CheckForUpdatesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -55,7 +58,7 @@
         </DockPanel>
         <DockPanel Height="30" ToolTip="Only log messages with or below the specified log level." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding LogLevelLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <ComboBox ItemsSource="{Binding LogLevels}" SelectedItem="{Binding LogLevel}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type logging:LogLevel}}}" SelectedItem="{Binding LogLevel}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </DockPanel>
 
         <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">

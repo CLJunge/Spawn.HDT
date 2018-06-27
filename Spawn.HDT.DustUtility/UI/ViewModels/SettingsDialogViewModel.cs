@@ -2,9 +2,6 @@
 using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
@@ -186,12 +183,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region LogLevels
-#pragma warning disable S2365 // Properties should not make collection or array copies
-        public IList<LogLevel> LogLevels => Enum.GetValues(typeof(LogLevel)).Cast<LogLevel>().ToList();
-#pragma warning restore S2365 // Properties should not make collection or array copies
-        #endregion
-
         #region ViewMode
         public ViewMode ViewMode
         {
@@ -206,12 +197,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             get => m_strViewModeLabelText;
             set => Set(ref m_strViewModeLabelText, value);
         }
-        #endregion
-
-        #region ViewModes
-#pragma warning disable S2365 // Properties should not make collection or array copies
-        public IList<ViewMode> ViewModes => Enum.GetValues(typeof(ViewMode)).Cast<ViewMode>().ToList();
-#pragma warning restore S2365 // Properties should not make collection or array copies
         #endregion
 
         #region SaveSettingsCommand
