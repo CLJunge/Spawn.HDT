@@ -247,7 +247,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         SaveDelayLabelText = $"{SaveDelayLabelText}{IsDirtySuffix}";
                     }
-                    else if (!e.IsDirty)
+                    else if (!e.IsDirty && SaveDelayLabelText.EndsWith(IsDirtySuffix))
                     {
                         SaveDelayLabelText = SaveDelayLabelText.Substring(0, SaveDelayLabelText.Length - IsDirtySuffix.Length);
                     }
