@@ -7,6 +7,7 @@
         xmlns:util="clr-namespace:Spawn.HDT.DustUtility.Util"
         xmlns:ui="clr-namespace:Spawn.HDT.DustUtility.UI"
         xmlns:logging="clr-namespace:Spawn.HDT.DustUtility.Logging"
+        xmlns:components="clr-namespace:Spawn.HDT.DustUtility.UI.Components"
         xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
         vm:ViewModelLocator.ViewModelName="SettingsDialogViewModel"
         mc:Ignorable="d" WindowStartupLocation="CenterOwner" BorderBrush="{DynamicResource AccentColorBrush}"
@@ -24,7 +25,22 @@
     <StackPanel Orientation="Vertical" Margin="5" Width="230">
         <DockPanel Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="8000">
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-            <CheckBox Name="cbOfflineMode" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+            <CheckBox Name="OfflineModeCheckBox" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+        </DockPanel>
+        <DockPanel Height="30" ToolTip="Set save delay" ToolTipService.ShowDuration="8000">
+            <Label Content="{Binding SaveDelayLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <DockPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                <TextBox Name="SaveDelayTextBox" IsEnabled="{Binding ElementName=OfflineModeCheckBox, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="30" TextAlignment="Right" MaxLength="2" Margin="0,0,10,0">
+                    <TextBox.Text>
+                        <Binding Path="SaveDelay" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <components:NumericValidationRule ValidatesOnTargetUpdated="True" MinValue="1" MaxValue="60"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:TimeUnit}}}" SelectedItem="{Binding SaveDelayUnit}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            </DockPanel>
         </DockPanel>
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>
@@ -62,7 +78,18 @@
         </DockPanel>
 
         <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28"/>
+            <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource CustomButtonStyle}">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=SaveDelayTextBox, Path=(Validation.HasError)}" Value="False">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Style="{DynamicResource CustomButtonStyle}" Content="_Cancel" IsCancel="True" Width="75" Height="28"/>
         </WrapPanel>
     </StackPanel>
