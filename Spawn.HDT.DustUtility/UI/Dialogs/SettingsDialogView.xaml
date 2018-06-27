@@ -41,7 +41,7 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:TimeUnit}}}" SelectedItem="{Binding SaveDelayUnit}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type util:TimeUnit}}}" SelectedItem="{Binding SaveDelayUnit}" IsEnabled="{Binding ElementName=OfflineModeCheckBox, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=., Converter={StaticResource enumConverter}}" />
