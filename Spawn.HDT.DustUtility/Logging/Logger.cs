@@ -231,11 +231,11 @@ namespace Spawn.HDT.DustUtility.Logging
         {
             bool blnRet = true;
 
-            string[] vTemp = DustUtilityPlugin.Config.LoggableSources.Split(';');
+            string[] vTemp = DustUtilityPlugin.Config.LoggableSources?.Split(';');
 
-            List<string> lstLoggableSources = vTemp.ToList();
+            List<string> lstLoggableSources = vTemp?.ToList();
 
-            if (lstLoggableSources.Count > 0)
+            if (lstLoggableSources?.Count > 0)
             {
                 blnRet = lstLoggableSources.Contains(strSource);
             }
