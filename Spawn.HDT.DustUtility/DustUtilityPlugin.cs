@@ -628,7 +628,7 @@ namespace Spawn.HDT.DustUtility
                 {
                     MessageBox.Show("No account(s) available!"
                         + Environment.NewLine + Environment.NewLine +
-                        "Collection and decks have to be stored locally for an account to be available.", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        "Collection has to be saved locally for an account to be available.", "Dust Utility", MessageBoxButton.OK, MessageBoxImage.Warning);
 
                     Logger.Log(LogLevel.Warning, "No accounts available");
                 }
