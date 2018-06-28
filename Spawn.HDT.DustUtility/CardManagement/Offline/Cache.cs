@@ -220,7 +220,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 {
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Updating history...");
 
-                    HistoryManager.Status result = HistoryManager.CheckCollection(account);
+                    HistoryManager.Status result = HistoryManager.CheckCollectionForChanges(account);
 
                     switch (result)
                     {

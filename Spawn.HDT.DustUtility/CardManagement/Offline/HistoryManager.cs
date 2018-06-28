@@ -18,8 +18,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         private static bool s_blnCheckInProgress;
         #endregion
 
-        #region CheckCollection
-        public static Status CheckCollection(IAccount account)
+        #region CheckCollectionForChanges
+        public static Status CheckCollectionForChanges(IAccount account)
         {
             Status retVal = Status.Failed;
 
