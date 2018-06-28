@@ -127,23 +127,26 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #region DeleteOldBackups
         public static void DeleteOldBackups(IAccount account)
         {
-            string strDir = GetAccountBackupDirectory(account);
-
-            if (Directory.Exists(strDir))
+            if (!account.IsEmpty && account.IsValid)
             {
-                string[] vFiles = Directory.GetFiles(strDir);
+                string strDir = GetAccountBackupDirectory(account);
 
-                for (int i = 0; i < vFiles.Length; i++)
+                if (Directory.Exists(strDir))
                 {
-                    FileInfo fileInfo = new FileInfo(vFiles[i]);
+                    string[] vFiles = Directory.GetFiles(strDir);
 
-                    if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
+                    for (int i = 0; i < vFiles.Length; i++)
                     {
-                        fileInfo.Delete();
-                    }
-                }
+                        FileInfo fileInfo = new FileInfo(vFiles[i]);
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Deleted backups which are older than one month for {account.DisplayString}");
+                        if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
+                        {
+                            fileInfo.Delete();
+                        }
+                    }
+
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Deleted backups which are older than one month for {account.DisplayString}");
+                }
             }
         }
         #endregion
