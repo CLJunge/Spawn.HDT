@@ -780,6 +780,9 @@ namespace Spawn.HDT.DustUtility
             if (!IsOffline)
             {
                 lstRet = HearthMirror.Reflection.GetCollection()?.Where(c => c.Count > 0 && c.Id != null && HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
+#if DEBUG
+                Logger.Log(LogLevel.All, $"Count: {lstRet?.Count}");
+#endif
             }
 
             return lstRet;
