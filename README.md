@@ -27,7 +27,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 - Order the result for your needs. Sortable properties: Mana Cost, Name, Dust, Class, Set, etc...
 
 #### Card History
-- Whenever the plugin stores collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted. (newest to oldest)
+- Whenever the plugin saves collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted. (newest to oldest)
 
 #### Decks Info
 - Include/exclude decks from search (Use filter option 'Unused Cards Only'). You are also able to check the current deck list for each deck.
