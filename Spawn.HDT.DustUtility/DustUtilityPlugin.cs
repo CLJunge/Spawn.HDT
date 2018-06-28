@@ -360,7 +360,7 @@ namespace Spawn.HDT.DustUtility
                     if (Config.OfflineMode
                         && ((DateTime.Now - m_dtLastSaveTimestamp).Seconds >= GetSaveDelay()
                         || m_blnForceSave)
-                        && await Cache.SaveAllAsync(CurrentAccount))
+                        && await Cache.SaveAllAsync(CurrentAccount, Config.EnableHistory))
                     {
                         m_blnForceSave = false;
 

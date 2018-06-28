@@ -485,9 +485,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (DustUtilityPlugin.Config.OfflineMode)
             {
-                HistoryButtonVisibility = Visibility.Visible;
+                if (DustUtilityPlugin.Config.EnableHistory)
+                {
+                    HistoryButtonVisibility = Visibility.Visible;
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing history button");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing history button");
+                }
 
                 if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.GetAccounts().Length > 1)
                 {
