@@ -205,8 +205,10 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveAllAsync
-        public static async Task SaveAllAsync(IAccount account, bool blnUpdateHistory = true)
+        public static async Task<bool> SaveAllAsync(IAccount account, bool blnUpdateHistory = true)
         {
+            bool blnRet = true;
+
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
             if (account == null)
@@ -220,35 +222,60 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 {
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Updating history...");
 
-                    HistoryManager.CheckCollection(account);
+                    HistoryManager.Status result = HistoryManager.CheckCollection(account);
+
+                    switch (result)
+                    {
+                        case HistoryManager.Status.Success:
+                        case HistoryManager.Status.LocalCollectionMissing:
+                            blnRet = true;
+                            break;
+
+                        case HistoryManager.Status.Failed:
+                            blnRet = false;
+                            break;
+                    }
                 }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saving collection and decks...");
 
-                bool blnSavedCollection = SaveCollection(account);
-                bool blnSavedDecks = SaveDecks(account);
+                if (blnRet)
+                {
+                    bool blnSavedCollection = SaveCollection(account);
+                    bool blnSavedDecks = SaveDecks(account);
 
-                if (blnSavedCollection && blnSavedDecks)
-                {
-                    DustUtilityPlugin.ShowToastNotification("Saved Collection & Decks!");
+                    if (blnSavedCollection && blnSavedDecks)
+                    {
+                        DustUtilityPlugin.ShowToastNotification("Saved Collection & Decks!");
+                    }
+                    else if (blnSavedCollection)
+                    {
+                        DustUtilityPlugin.ShowToastNotification("Saved Collection!");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved collection successfuly");
+                    }
+                    else if (blnSavedDecks)
+                    {
+                        DustUtilityPlugin.ShowToastNotification("Saved Decks!");
+                        DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved decks successfuly");
+                    }
+
+                    blnRet &= blnSavedCollection; //Make sure at least collection was saved
                 }
-                else if (blnSavedCollection)
+                else
                 {
-                    DustUtilityPlugin.ShowToastNotification("Saved Collection!");
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved collection successfuly");
-                }
-                else if (blnSavedDecks)
-                {
-                    DustUtilityPlugin.ShowToastNotification("Saved Decks!");
-                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved decks successfuly");
+                    DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Couldn't update history, skipped saving collection/decks...");
                 }
             }
             else
             {
                 DustUtilityPlugin.Logger.Log(LogLevel.Warning, "Couldn't load account!");
+
+                blnRet = false;
             }
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = false;
+
+            return blnRet;
         }
         #endregion
     }

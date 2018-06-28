@@ -359,10 +359,9 @@ namespace Spawn.HDT.DustUtility
                 case Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.COLLECTIONMANAGER:
                     if (Config.OfflineMode
                         && ((DateTime.Now - m_dtLastSaveTimestamp).Seconds >= GetSaveDelay()
-                        || m_blnForceSave))
+                        || m_blnForceSave)
+                        && await Cache.SaveAllAsync(CurrentAccount))
                     {
-                        await Cache.SaveAllAsync(CurrentAccount);
-
                         m_blnForceSave = false;
 
                         m_dtLastSaveTimestamp = DateTime.Now;
@@ -789,7 +788,7 @@ namespace Spawn.HDT.DustUtility
 
             if (!IsOffline)
             {
-                lstRet = HearthMirror.Reflection.GetCollection()?.Where(c => c.Count > 0).ToList();
+                lstRet = HearthMirror.Reflection.GetCollection()?.Where(c => c.Count > 0 && c.Id != null && HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
             }
 
             return lstRet;

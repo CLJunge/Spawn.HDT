@@ -19,8 +19,10 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region CheckCollection
-        public static void CheckCollection(IAccount account)
+        public static Status CheckCollection(IAccount account)
         {
+            Status retVal = Status.Failed;
+
             List<Card> lstCurrentCollection = DustUtilityPlugin.GetCollectionWrapper();
 
             if (!s_blnCheckInProgress && account != null && lstCurrentCollection?.Count > 0)
@@ -49,10 +51,18 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {nChanges} changes");
 
                     SaveHistory(account, lstHistory);
+
+                    retVal = Status.Success;
+                }
+                else
+                {
+                    retVal = Status.LocalCollectionMissing;
                 }
 
                 s_blnCheckInProgress = false;
             }
+
+            return retVal;
         }
         #endregion
 
@@ -217,6 +227,13 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         }
         #endregion
 
+        public enum Status
+        {
+            Failed,
+            Success,
+            LocalCollectionMissing
+        }
+
         private class CardComparer : IEqualityComparer<Card>
         {
             #region Equals
@@ -229,7 +246,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             #region GetHashCode
             public int GetHashCode(Card obj)
             {
-                return obj.Id.GetHashCode() + obj.Premium.GetHashCode() + obj.Count.GetHashCode();
+                return (obj != null ? (obj.Id?.GetHashCode() ?? 0) + obj.Premium.GetHashCode() + obj.Count.GetHashCode() : 0);
             }
             #endregion
         }
