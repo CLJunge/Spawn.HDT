@@ -423,11 +423,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
 #if DEBUG
                 case nameof(LoggableSources):
-                    if (e.IsDirty)
+                    if (e.IsDirty && !LoggableSourcesLabelText.EndsWith(IsDirtySuffix))
                     {
                         LoggableSourcesLabelText = $"{LoggableSourcesLabelText}{IsDirtySuffix}";
                     }
-                    else
+                    else if (!e.IsDirty)
                     {
                         LoggableSourcesLabelText = LoggableSourcesLabelText.Substring(0, LoggableSourcesLabelText.Length - IsDirtySuffix.Length);
                     }
