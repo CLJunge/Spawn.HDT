@@ -24,7 +24,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Orientation="Vertical" Margin="5" Width="255">
+    <StackPanel Orientation="Vertical" Margin="5" Width="265">
         <DockPanel Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="OfflineModeCheckBox" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
@@ -49,6 +49,10 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </DockPanel>
+        </DockPanel>
+        <DockPanel Height="30" ToolTip="The plugin compares the 'offline' collection with the 'online' one and creates a history of cards which have been disenchanted or added before saving the collection." ToolTipService.ShowDuration="10000">
+            <Label Content="{Binding EnableHistoryLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <CheckBox IsChecked="{Binding EnableHistory, Mode=TwoWay}" IsEnabled="{Binding ElementName=OfflineModeCheckBox, Path=IsChecked}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
         </DockPanel>
         
         <Separator Height="1" Background="{DynamicResource AccentColorBrush}" Margin="5"/>

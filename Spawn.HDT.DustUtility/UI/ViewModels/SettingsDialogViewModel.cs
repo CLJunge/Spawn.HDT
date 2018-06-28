@@ -34,6 +34,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strViewModeLabelText;
         private bool m_blnHideBattleTagId;
         private string m_strHideBattleTagIdLabelText;
+        private bool m_blnEnableHistory;
+        private string m_strEnableHistoryLabelText;
         #endregion
 
         #region Properties
@@ -217,6 +219,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region EnableHistory
+        public bool EnableHistory
+        {
+            get => m_blnEnableHistory;
+            set => Set(ref m_blnEnableHistory, value);
+        }
+        #endregion
+
+        #region EnableHistoryLabelText
+        public string EnableHistoryLabelText
+        {
+            get => m_strEnableHistoryLabelText;
+            set => Set(ref m_strEnableHistoryLabelText, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -237,6 +255,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     SaveDelay = DustUtilityPlugin.Config.SaveDelay;
                     SaveDelayUnit = DustUtilityPlugin.Config.SaveDelayUnit;
+                    EnableHistory = DustUtilityPlugin.Config.EnableHistory;
                 }
             };
         }
@@ -358,6 +377,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         HideBattleTagIdLabelText = HideBattleTagIdLabelText.Substring(0, HideBattleTagIdLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+                case nameof(EnableHistory):
+                    if (e.IsDirty)
+                    {
+                        EnableHistoryLabelText = $"{EnableHistoryLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        EnableHistoryLabelText = EnableHistoryLabelText.Substring(0, EnableHistoryLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
             }
         }
         #endregion
@@ -381,6 +411,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             LogLevel = DustUtilityPlugin.Config.LogLevel;
             ViewMode = DustUtilityPlugin.Config.ViewMode;
             HideBattleTagId = DustUtilityPlugin.Config.HideBattleTagId;
+            EnableHistory = DustUtilityPlugin.Config.EnableHistory;
 
             SetInitialPropertyValue(nameof(OfflineMode), OfflineMode);
             SetInitialPropertyValue(nameof(SaveDelay), SaveDelay);
@@ -393,6 +424,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(LogLevel), LogLevel);
             SetInitialPropertyValue(nameof(ViewMode), ViewMode);
             SetInitialPropertyValue(nameof(HideBattleTagId), HideBattleTagId);
+            SetInitialPropertyValue(nameof(EnableHistory), EnableHistory);
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
@@ -412,6 +444,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.LogLevel = LogLevel;
             DustUtilityPlugin.Config.ViewMode = ViewMode;
             DustUtilityPlugin.Config.HideBattleTagId = HideBattleTagId;
+            DustUtilityPlugin.Config.EnableHistory = EnableHistory;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved settings");
         }
@@ -430,6 +463,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             LogLevelLabelText = "Log Level";
             ViewModeLabelText = "View Mode";
             HideBattleTagIdLabelText = "Hide BattleTag Id";
+            EnableHistoryLabelText = "Enable History";
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
         }
