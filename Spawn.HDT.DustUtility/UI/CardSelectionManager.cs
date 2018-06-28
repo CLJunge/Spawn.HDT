@@ -158,7 +158,7 @@ namespace Spawn.HDT.DustUtility.UI
 
                     if (DustUtilityPlugin.Config.OfflineMode)
                     {
-                        Cache.SaveAllAsync(DustUtilityPlugin.CurrentAccount, DustUtilityPlugin.Config.EnableHistory).Forget();
+                        Cache.SaveAllAsync(DustUtilityPlugin.Config.EnableHistory).Forget();
                     }
 
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);

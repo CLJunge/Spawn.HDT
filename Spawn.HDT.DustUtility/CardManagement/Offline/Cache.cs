@@ -205,18 +205,16 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveAllAsync
-        public static async Task<bool> SaveAllAsync(IAccount account, bool blnUpdateHistory = true)
+        public static async Task<bool> SaveAllAsync(bool blnUpdateHistory = true)
         {
             bool blnRet = true;
 
             ServiceLocator.Current.GetInstance<MainViewModel>().IsSyncing = true;
 
-            if (account == null)
-            {
-                account = await Account.GetLoggedInAccountAsync();
-            }
+            Account account = await Account.GetLoggedInAccountAsync();
 
-            if ((!account?.IsEmpty ?? false) && (account?.IsValid ?? false))
+            if ((!account?.IsEmpty ?? false)
+                && (account?.IsValid ?? false))
             {
                 if (blnUpdateHistory)
                 {
