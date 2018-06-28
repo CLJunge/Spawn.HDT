@@ -309,40 +309,43 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
-
-            IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
-
-            if (loggedInAcc?.IsValid ?? false)
+            if (Config.OfflineMode)
             {
-                if (!IsOffline)
-                {
-                    UpdatedAccountInstance(loggedInAcc);
+                Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
 
-                    Cache.ClearCache();
+                IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
+
+                if (loggedInAcc?.IsValid ?? false)
+                {
+                    if (!IsOffline)
+                    {
+                        UpdatedAccountInstance(loggedInAcc);
+
+                        Cache.ClearCache();
+                    }
+
+                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                }
+                else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
+                {
+                    await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't get the currently logged in account! Closing window...");
+
+                    MainWindow?.Close();
+                }
+                else
+                {
+                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
                 }
 
-                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-            }
-            else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
-            {
-                await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't get the currently logged in account! Closing window...");
+                if (!IsOffline)
+                {
+                    ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(false);
 
-                MainWindow?.Close();
-            }
-            else
-            {
-                await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-            }
+                    m_blnForceSave = true;
+                }
 
-            if (!IsOffline)
-            {
-                ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(false);
-
-                m_blnForceSave = true;
+                ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
             }
-
-            ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
         }
         #endregion
 
