@@ -337,8 +337,7 @@ namespace Spawn.HDT.DustUtility
 
             if (!IsOffline)
             {
-                ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = false;
-                MainWindow.DecksButton.ToolTip = "Visit the 'Play' menu in order to load your decks.";
+                ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(false);
 
                 m_blnForceSave = true;
             }
@@ -369,8 +368,7 @@ namespace Spawn.HDT.DustUtility
 
                     if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
                     {
-                        ServiceLocator.Current.GetInstance<MainViewModel>().DecksButtonEnabled = true;
-                        MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
+                        ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(true);
                     }
                     break;
             }
@@ -668,16 +666,9 @@ namespace Spawn.HDT.DustUtility
 
                 for (int i = 0; i < vFiles.Length; i++)
                 {
-                    string strCollectionFileName = vFiles[i];
+                    string strAccountString = Path.GetFileNameWithoutExtension(vFiles[i]).Replace($"_{Account.CollectionString}", string.Empty);
 
-                    string strDecksFileName = strCollectionFileName.Replace($"_{Account.CollectionString}", $"_{Account.DecksString}");
-
-                    if (File.Exists(strDecksFileName))
-                    {
-                        string strAccountString = Path.GetFileNameWithoutExtension(strCollectionFileName).Replace($"_{Account.CollectionString}", string.Empty);
-
-                        lstRet.Add(Account.Parse(strAccountString));
-                    }
+                    lstRet.Add(Account.Parse(strAccountString));
                 }
             }
 

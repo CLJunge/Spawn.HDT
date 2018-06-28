@@ -507,8 +507,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (DustUtilityPlugin.IsOffline)
             {
-                DecksButtonEnabled = true;
-                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
+                UpdateDecksButton(true);
             }
 
             switch (DustUtilityPlugin.Config.ViewMode)
@@ -576,6 +575,30 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 WindowTitle = $"{WindowTitle} (Debug)";
             }
 #endif
+        }
+        #endregion
+
+        #region UpdateDecksButton
+        public void UpdateDecksButton(bool blnEnabled)
+        {
+            if (blnEnabled && DustUtilityPlugin.CurrentAccount.GetDecks().Count > 0)
+            {
+                DecksButtonEnabled = true;
+                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = "View a list of your current decks in Hearthstone.";
+            }
+            else
+            {
+                DecksButtonEnabled = false;
+
+                string strToolTipText = "Open Hearthstone and visit the 'Play' menu in order to load your decks.";
+
+                if (!DustUtilityPlugin.IsOffline)
+                {
+                    strToolTipText = "Visit the 'Play' menu in order to load your decks.";
+                }
+
+                DustUtilityPlugin.MainWindow.DecksButton.ToolTip = strToolTipText;
+            }
         }
         #endregion
     }
