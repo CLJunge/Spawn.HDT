@@ -51,8 +51,6 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
 
             if ((lstAllDecks?.Count > 0 && lstAllDecks?[0]?.Cards.Count > 0))
             {
-                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
-
                 List<Deck> lstDecks = new List<Deck>(lstAllDecks.Count);
 
                 for (int i = 0; i < lstAllDecks.Count; i++)
@@ -62,6 +60,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                         lstDecks.Add(lstAllDecks[i]);
                     }
                 }
+
+                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
 
                 FileHelper.Write(strPath, lstDecks.ToCachedDecks());
 
