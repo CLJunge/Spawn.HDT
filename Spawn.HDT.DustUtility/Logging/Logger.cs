@@ -1,5 +1,8 @@
 ﻿#region Using
 using System;
+#if DEBUG
+using System.Collections.Generic;
+#endif
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -91,7 +94,13 @@ namespace Spawn.HDT.DustUtility.Logging
 
             lock (s_objLock)
             {
+                string strCallingMember = GetCallingMember(strMemberName, strFilePath);
+
+#if DEBUG
+                if (level >= DustUtilityPlugin.Config.LogLevel && IsLoggableSource(strCallingMember))
+#else
                 if (level >= DustUtilityPlugin.Config.LogLevel)
+#endif
                 {
                     SetLogFileName();
 
@@ -103,7 +112,7 @@ namespace Spawn.HDT.DustUtility.Logging
                             .Replace("%t", dtTimestamp.ToString("hh:mm:ss.fff tt"))
                             .Replace("%c", strChannel)
                             .Replace("%l", level.ToString())
-                            .Replace("%s", GetCallingMember(strMemberName, strFilePath))
+                            .Replace("%s", strCallingMember)
                             .Replace("%m", strMessage);
 
                         retVal = new LogEntry(dtTimestamp, level, strChannel, strMessage, strAssembledMessage);
@@ -215,5 +224,25 @@ namespace Spawn.HDT.DustUtility.Logging
             return strRet;
         }
         #endregion
+
+#if DEBUG
+        #region IsLoggableSource
+        private bool IsLoggableSource(string strSource)
+        {
+            bool blnRet = true;
+
+            string[] vTemp = DustUtilityPlugin.Config.LoggableSources.Split(';');
+
+            List<string> lstLoggableSources = vTemp.ToList();
+
+            if (lstLoggableSources.Count > 0)
+            {
+                blnRet = lstLoggableSources.Contains(strSource);
+            }
+
+            return blnRet;
+        }
+        #endregion
+#endif
     }
 }

@@ -26,6 +26,9 @@ namespace Spawn.HDT.DustUtility
         private ViewMode m_viewMode;
         private bool m_blnHideBattleTagId;
         private bool m_blnEnableHistory;
+#if DEBUG
+        private string m_strLoggableSources;
+#endif
         private int m_nVersion;
         #endregion
 
@@ -156,6 +159,17 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+#if DEBUG
+        #region LoggableSources
+        [DefaultValue(null)]
+        public string LoggableSources
+        {
+            get => m_strLoggableSources;
+            set => Set(ref m_strLoggableSources, value);
+        }
+        #endregion
+#endif
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -183,6 +197,9 @@ namespace Spawn.HDT.DustUtility
             ViewMode = ViewMode.Default;
             HideBattleTagId = false;
             EnableHistory = true;
+#if DEBUG
+            LoggableSources = null;
+#endif
             Version = 1;
         }
         #endregion

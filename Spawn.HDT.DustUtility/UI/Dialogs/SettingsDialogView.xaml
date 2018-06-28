@@ -92,6 +92,10 @@
             <Label Content="{Binding LogLevelLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <ComboBox ItemsSource="{Binding Source={util:EnumBindingSource {x:Type logging:LogLevel}}}" SelectedItem="{Binding LogLevel}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
         </DockPanel>
+        <DockPanel Height="30" ToolTip="Only log messages from the specified sources." ToolTipService.ShowDuration="10000" Visibility="{Binding LoggableSourcesVisibility}">
+            <Label Content="{Binding LoggableSourcesLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBox Text="{Binding LoggableSources}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,0,10,0"/>
+        </DockPanel>
 
         <WrapPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,20,5,5">
             <Button Content="_Ok" IsDefault="True" Command="{Binding SaveSettingsCommand}" Click="OnOkClick" Width="75" Margin="0,0,10,0" Height="28">

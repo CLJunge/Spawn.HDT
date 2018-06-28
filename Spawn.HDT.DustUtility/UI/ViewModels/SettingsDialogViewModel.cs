@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Utilities;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 #endregion
 
@@ -36,6 +37,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strHideBattleTagIdLabelText;
         private bool m_blnEnableHistory;
         private string m_strEnableHistoryLabelText;
+#if DEBUG
+        private string m_strLoggableSources;
+        private string m_strLoggableSourcesLabelText;
+#endif
+        private Visibility m_loggableSourcesVisibility = Visibility.Collapsed;
         #endregion
 
         #region Properties
@@ -235,6 +241,32 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+#if DEBUG
+        #region LoggableSources
+        public string LoggableSources
+        {
+            get => m_strLoggableSources;
+            set => Set(ref m_strLoggableSources, value);
+        }
+        #endregion
+
+        #region LoggableSourcesLabelText
+        public string LoggableSourcesLabelText
+        {
+            get => m_strLoggableSourcesLabelText;
+            set => Set(ref m_strLoggableSourcesLabelText, value);
+        }
+        #endregion
+#endif
+
+        #region LoggableSourcesVisibility
+        public Visibility LoggableSourcesVisibility
+        {
+            get => m_loggableSourcesVisibility;
+            set => Set(ref m_loggableSourcesVisibility, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -388,6 +420,19 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         EnableHistoryLabelText = EnableHistoryLabelText.Substring(0, EnableHistoryLabelText.Length - IsDirtySuffix.Length);
                     }
                     break;
+
+#if DEBUG
+                case nameof(LoggableSources):
+                    if (e.IsDirty)
+                    {
+                        LoggableSourcesLabelText = $"{LoggableSourcesLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        LoggableSourcesLabelText = LoggableSourcesLabelText.Substring(0, LoggableSourcesLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+#endif
             }
         }
         #endregion
@@ -426,6 +471,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(HideBattleTagId), HideBattleTagId);
             SetInitialPropertyValue(nameof(EnableHistory), EnableHistory);
 
+#if DEBUG
+            LoggableSourcesVisibility = Visibility.Visible;
+            LoggableSources = DustUtilityPlugin.Config.LoggableSources;
+            SetInitialPropertyValue(nameof(LoggableSources), LoggableSources);
+#endif
+
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
         #endregion
@@ -445,6 +496,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Config.ViewMode = ViewMode;
             DustUtilityPlugin.Config.HideBattleTagId = HideBattleTagId;
             DustUtilityPlugin.Config.EnableHistory = EnableHistory;
+#if DEBUG
+            DustUtilityPlugin.Config.LoggableSources = LoggableSources;
+#endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Saved settings");
         }
@@ -464,6 +518,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ViewModeLabelText = "View Mode";
             HideBattleTagIdLabelText = "Hide BattleTag Id";
             EnableHistoryLabelText = "Enable History";
+#if DEBUG
+            LoggableSourcesLabelText = "Loggable Sources";
+#endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
         }
