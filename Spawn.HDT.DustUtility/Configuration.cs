@@ -25,6 +25,7 @@ namespace Spawn.HDT.DustUtility
         private LogLevel m_logLevel;
         private ViewMode m_viewMode;
         private bool m_blnHideBattleTagId;
+        private bool m_blnEnableHistory;
         private int m_nVersion;
         #endregion
 
@@ -146,6 +147,15 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
+        #region EnableHistory
+        [DefaultValue(true)]
+        public bool EnableHistory
+        {
+            get => m_blnEnableHistory;
+            set => Set(ref m_blnEnableHistory, value);
+        }
+        #endregion
+
         #region Version
         [DefaultValue(1)]
         public int Version
@@ -172,6 +182,7 @@ namespace Spawn.HDT.DustUtility
             LogLevel = LogLevel.Trace;
             ViewMode = ViewMode.Default;
             HideBattleTagId = false;
+            EnableHistory = true;
             Version = 1;
         }
         #endregion
