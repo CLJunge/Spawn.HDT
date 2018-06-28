@@ -205,7 +205,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #endregion
 
         #region SaveAllAsync
-        public static async Task<bool> SaveAllAsync(bool blnUpdateHistory = true)
+        public static async Task<bool> SaveAllAsync(bool blnUpdateHistory)
         {
             bool blnRet = true;
 
