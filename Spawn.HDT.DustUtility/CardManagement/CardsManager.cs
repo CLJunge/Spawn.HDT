@@ -347,7 +347,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Calculating total collection value... ({account.DisplayString})");
 
-            for (int i = 0; i < lstCards.Count; i++)
+            for (int i = 0; i < lstCards?.Count; i++)
             {
                 Card card = lstCards[i];
 
