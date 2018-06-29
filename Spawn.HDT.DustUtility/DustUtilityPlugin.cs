@@ -285,9 +285,9 @@ namespace Spawn.HDT.DustUtility
                 }
                 else if (!Config.OfflineMode)
                 {
-                    MessageBox.Show("Hearthstone isn't running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Hearthstone is not running!", Name, MessageBoxButton.OK, MessageBoxImage.Warning);
 
-                    Logger.Log(LogLevel.Warning, "Hearthstone isn't running");
+                    Logger.Log(LogLevel.Warning, "Hearthstone is not running");
                 }
             }
             else
@@ -602,7 +602,14 @@ namespace Spawn.HDT.DustUtility
 
                 if (vAccounts.Length == 1)
                 {
+#if DEBUG
+                    if (!IsOffline && vAccounts[0] is MockAccount)
+                    {
+                        retVal = await Account.GetLoggedInAccountAsync();
+                    }
+#else
                     retVal = vAccounts[0];
+#endif
                 }
                 else if (vAccounts.Length > 1)
                 {
