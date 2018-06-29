@@ -88,13 +88,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Getting cards for {parameters.QueryString} dust...");
 
-            int nDustAmount = 0;
-
-            try
-            {
-                nDustAmount = Convert.ToInt32(parameters.QueryString);
-            }
-            catch
+            if (!Int32.TryParse(parameters.QueryString, out int nDustAmount))
             {
                 //Invalid value
                 nDustAmount = Int32.MaxValue;
