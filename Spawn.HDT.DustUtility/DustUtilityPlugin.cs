@@ -346,6 +346,10 @@ namespace Spawn.HDT.DustUtility
 
                 ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
             }
+            else if (!IsOffline)
+            {
+                MainWindow?.Close();
+            }
         }
         #endregion
 
