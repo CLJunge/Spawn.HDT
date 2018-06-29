@@ -507,19 +507,19 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region LoadLabelTexts
         private void LoadLabelTexts()
         {
-            OfflineModeLabelText = "Offline Mode";
-            SaveDelayLabelText = "Save Delay";
-            CheckForUpdatesLabelText = "Check For Updates";
-            ColoredCardLabelsLabelText = "Colored Card Labels";
-            AutoDisenchantingLabelText = "Auto Disenchanting";
-            RememberQueryStringLabelText = "Remember Search Term";
-            ShowNotificationsLabelText = "Show Notifications";
-            LogLevelLabelText = "Log Level";
-            ViewModeLabelText = "View Mode";
-            HideBattleTagIdLabelText = "Hide BattleTag Id";
-            EnableHistoryLabelText = "Enable History";
+            OfflineModeLabelText = "Enable offline mode";
+            SaveDelayLabelText = "Save delay";
+            CheckForUpdatesLabelText = "Check for updates";
+            ColoredCardLabelsLabelText = "Use colored card labels";
+            AutoDisenchantingLabelText = "Enable auto disenchanting";
+            RememberQueryStringLabelText = "Remember search term";
+            ShowNotificationsLabelText = "Show notifications";
+            LogLevelLabelText = "Log level";
+            ViewModeLabelText = "View mode";
+            HideBattleTagIdLabelText = "Hide BattleTag id";
+            EnableHistoryLabelText = "Enable history";
 #if DEBUG
-            LoggableSourcesLabelText = "Loggable Sources";
+            LoggableSourcesLabelText = "Loggable sources";
 #endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Loaded label texts");
