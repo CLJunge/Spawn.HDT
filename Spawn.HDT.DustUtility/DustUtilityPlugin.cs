@@ -346,7 +346,7 @@ namespace Spawn.HDT.DustUtility
 
                 ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
             }
-            else if (!IsOffline)
+            else if (IsOffline)
             {
                 MainWindow?.Close();
             }
