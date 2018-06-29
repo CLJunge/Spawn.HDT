@@ -264,7 +264,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
 
-                    flyout.Dispatcher.Invoke(() => flyout.Header = $"Collection Info ({nCollectionValue} Dust)");
+                    if (nCollectionValue > 0)
+                    {
+                        flyout.Dispatcher.Invoke(() => flyout.Header = $"Collection Info ({nCollectionValue} Dust)");
+                    }
                 }).Forget();
             }
 
