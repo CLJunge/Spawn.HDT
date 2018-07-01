@@ -6,7 +6,7 @@
         xmlns:flyouts="clr-namespace:Spawn.HDT.DustUtility.UI.Flyouts"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
         Title="Dust Utility - New Update available">
-    <Grid Margin="15,5,15,5" >
+    <Grid Margin="20,5,20,5">
         <flyouts:UpdateFlyoutView x:Name="UpdateFlyoutView"/>
     </Grid>
 </Window>
