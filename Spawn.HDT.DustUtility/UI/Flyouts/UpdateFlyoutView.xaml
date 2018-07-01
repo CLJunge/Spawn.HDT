@@ -51,7 +51,7 @@
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="1" Text="Download finished!" FontWeight="Bold" FontSize="13" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="Download has finished!" FontWeight="Bold" FontSize="13" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
             <TextBlock Grid.Row="2" Text="Please restart HDT in order to use the new version." FontSize="13" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
     </StackPanel>

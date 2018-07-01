@@ -843,6 +843,7 @@ namespace Spawn.HDT.DustUtility
                         ShowToastNotification("New Update Available!", () =>
                         {
                             s_updateDialog = new UpdateWindow();
+                            s_updateDialog.UpdateFlyoutView.DownloadProgressBar.Margin = new Thickness();
 
                             s_updateDialog.Show();
                         });
