@@ -155,9 +155,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region CloseFlyout
         private void CloseFlyout()
         {
-            DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen = false;
+            if (DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen)
+            {
+                DustUtilityPlugin.MainWindow.UpdateFlyout.IsOpen = false;
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed flyout");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed flyout");
+            }
         }
         #endregion
 
@@ -172,6 +175,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Canceled current download");
 
             CloseFlyout();
+
+            DustUtilityPlugin.CloseUpdateDialog();
         }
         #endregion
 

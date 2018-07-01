@@ -45,6 +45,7 @@ namespace Spawn.HDT.DustUtility
         private static CardSelectionManager s_cardSelection;
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
+        private static UpdateWindow s_updateDialog;
 #if DEBUG
         private static readonly IAccount s_mockAcc;
 #endif
@@ -804,13 +805,18 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ShowToastNotification
-        public static void ShowToastNotification(string strMessage)
+        public static void ShowToastNotification(string strMessage, Action onClick = null)
         {
             if (Config.ShowNotifications)
             {
                 Hearthstone_Deck_Tracker.Core.MainWindow?.Dispatcher.Invoke(() =>
                 {
                     NotificationToast toast = new NotificationToast(strMessage);
+
+                    if (onClick != null)
+                    {
+                        toast.Click += (s, e) => onClick();
+                    }
 
                     ToastManager.ShowCustomToast(toast);
                 });
@@ -834,7 +840,12 @@ namespace Spawn.HDT.DustUtility
 
                     if (MainWindow == null || MainWindow?.Visibility != Visibility.Visible)
                     {
-                        ShowToastNotification("New Update Available!");
+                        ShowToastNotification("New Update Available!", () =>
+                        {
+                            s_updateDialog = new UpdateWindow();
+
+                            s_updateDialog.Show();
+                        });
                     }
                 }
 
@@ -864,6 +875,19 @@ namespace Spawn.HDT.DustUtility
             }
 
             return nRet;
+        }
+        #endregion
+
+        #region CloseUpdateDialog
+        public static void CloseUpdateDialog()
+        {
+            if (s_updateDialog != null)
+            {
+                s_updateDialog.Close();
+                s_updateDialog = null;
+
+                Logger.Log(LogLevel.Debug, "Closed update dialog");
+            }
         }
         #endregion
         #endregion

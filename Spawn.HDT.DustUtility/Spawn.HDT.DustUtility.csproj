@@ -146,6 +146,9 @@
     <Compile Include="DustUtilityPlugin.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="UI\Components\Converters\EnumDescriptionConverter.cs" />
+    <Compile Include="UI\Windows\UpdateWindow.xaml.cs">
+      <DependentUpon>UpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\EnumBindingSourceExtension.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="CardManagement\Offline\CachedHistoryCard.cs" />
@@ -357,6 +360,10 @@
     <Page Include="UI\Dialogs\SortOrderItemSelectorDialogView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\Windows\UpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Flyouts\CollectionInfoFlyoutView.xaml">
       <SubType>Designer</SubType>

@@ -1,6 +1,7 @@
 ﻿#region Using
 using Hearthstone_Deck_Tracker.Utility.Toasts;
 using Spawn.HDT.DustUtility.Logging;
+using System;
 using System.Windows.Input;
 #endregion
 
@@ -23,6 +24,10 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
         }
         #endregion
 
+        #region Custom Events
+        public event EventHandler<MouseButtonEventArgs> Click;
+        #endregion
+
         #region Events
         #region OnMouseLeftButtonUp
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -30,6 +35,13 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
             ToastManager.ForceCloseToast(this);
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Closed toast (Message={MessageTextBox.Text})");
+
+            if (Click != null)
+            {
+                Click(this, e);
+
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Executed 'OnClick' action");
+            }
         }
         #endregion
 
