@@ -504,7 +504,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             ReloadFlyouts();
 
-            TryUpdateDecksButton(true);
+            TryUpdateDecksButton(DustUtilityPlugin.IsOffline);
 
             switch (DustUtilityPlugin.Config.ViewMode)
             {
