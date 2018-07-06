@@ -55,7 +55,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region ShowDeckListCommand
-        public ICommand ShowDeckListCommand => new RelayCommand(ShowDeckList);
+        public ICommand ShowDeckListCommand => new RelayCommand(ShowDeckList, () => !DustUtilityPlugin.MainWindow.DeckListFlyout.IsOpen);
         #endregion
 
         #region ToggleDeckCommand
