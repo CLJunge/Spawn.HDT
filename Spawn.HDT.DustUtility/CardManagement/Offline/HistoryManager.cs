@@ -175,18 +175,11 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         #region SaveHistory
         private static void SaveHistory(IAccount account, List<CachedHistoryCard> lstHistory)
         {
-#if DEBUG
-            if (!(account is MockAccount))
-            {
-#endif
-                string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
+            string strPath = DustUtilityPlugin.GetFullFileName(account, Account.HistoryString);
 
-                FileHelper.Write(strPath, lstHistory);
+            FileHelper.Write(strPath, lstHistory);
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved history for {account.DisplayString}");
-#if DEBUG
-            }
-#endif
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved history for {account.DisplayString}");
         }
         #endregion
 

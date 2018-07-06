@@ -46,9 +46,6 @@ namespace Spawn.HDT.DustUtility
         private static bool s_blnIsOffline = true;
         private static bool s_blnCheckedForUpdates;
         private static UpdateWindow s_updateDialog;
-#if DEBUG
-        private static readonly IAccount s_mockAcc;
-#endif
         #endregion
 
         #region Member Variables
@@ -181,10 +178,6 @@ namespace Spawn.HDT.DustUtility
                     s_blnCheckedForUpdates = !Config.CheckForUpdates;
                 }
             };
-
-#if DEBUG
-            s_mockAcc = new MockAccount();
-#endif
 
             Logger.Log(LogLevel.Debug, "Initialized 'DustUtilityPlugin'");
         }
@@ -340,7 +333,7 @@ namespace Spawn.HDT.DustUtility
 
                 if (!IsOffline)
                 {
-                    ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(false);
+                    ServiceLocator.Current.GetInstance<MainViewModel>().TryUpdateDecksButton(false);
 
                     m_blnForceSave = true;
                 }
@@ -376,7 +369,7 @@ namespace Spawn.HDT.DustUtility
 
                     if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
                     {
-                        ServiceLocator.Current.GetInstance<MainViewModel>().UpdateDecksButton(true);
+                        ServiceLocator.Current.GetInstance<MainViewModel>().TryUpdateDecksButton(true);
                     }
                     break;
             }
@@ -553,11 +546,7 @@ namespace Spawn.HDT.DustUtility
             {
                 ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-#if DEBUG
-                SimpleIoc.Default.Register(() => s_mockAcc);
-#else
                 SimpleIoc.Default.Register<IAccount>(() => Account.Empty);
-#endif
 
                 SimpleIoc.Default.Register<MainViewModel>();
                 SimpleIoc.Default.Register<CardSelectionWindowViewModel>();
@@ -607,14 +596,7 @@ namespace Spawn.HDT.DustUtility
 
                 if (vAccounts.Length == 1)
                 {
-#if DEBUG
-                    if (!IsOffline && vAccounts[0] is MockAccount)
-                    {
-                        retVal = await Account.GetLoggedInAccountAsync();
-                    }
-#else
                     retVal = vAccounts[0];
-#endif
                 }
                 else if (vAccounts.Length > 1)
                 {
@@ -668,12 +650,6 @@ namespace Spawn.HDT.DustUtility
             List<IAccount> lstRet = new List<IAccount>();
 
             Logger.Log(LogLevel.Debug, "Loading accounts...");
-
-#if DEBUG
-            lstRet.Add(s_mockAcc);
-
-            Logger.Log(LogLevel.Debug, "Added mock account");
-#endif
 
             if (Directory.Exists(DataDirectory))
             {

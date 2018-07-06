@@ -470,7 +470,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region UpdateUI
+        #region UpdateUIAsync
         private async Task UpdateUIAsync()
         {
             SetWindowTitle();
@@ -504,10 +504,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             ReloadFlyouts();
 
-            if (DustUtilityPlugin.IsOffline)
-            {
-                UpdateDecksButton(true);
-            }
+            TryUpdateDecksButton(true);
 
             switch (DustUtilityPlugin.Config.ViewMode)
             {
@@ -577,8 +574,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region UpdateDecksButton
-        public void UpdateDecksButton(bool blnEnabled)
+        #region TryUpdateDecksButton
+        public void TryUpdateDecksButton(bool blnEnabled)
         {
             if (blnEnabled && DustUtilityPlugin.CurrentAccount.GetDecks().Count > 0)
             {
