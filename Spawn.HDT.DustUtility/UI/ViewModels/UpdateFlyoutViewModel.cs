@@ -161,6 +161,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed flyout");
             }
+
+            DustUtilityPlugin.CloseUpdateDialog();
         }
         #endregion
 
