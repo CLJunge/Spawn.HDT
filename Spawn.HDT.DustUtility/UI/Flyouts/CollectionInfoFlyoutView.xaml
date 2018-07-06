@@ -3,17 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:uicontrols="clr-namespace:Spawn.HDT.DustUtility.UI.Controls"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="CollectionInfoFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="1050">
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <ItemsControl ItemsSource="{Binding CardSetItems}" Margin="5">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <controls:CardSetItemView/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </ScrollViewer>
+    <UserControl.Resources>
+        <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
+            <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="5">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="0,0,0,43">
+            <ItemsControl ItemsSource="{Binding CardSetItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <uicontrols:CardSetItemView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Button Style="{StaticResource CustomButtonStyle}" Command="{Binding ReloadCommand}" Content="Reload" VerticalAlignment="Bottom" Margin="5" Height="28"/>
+    </Grid>
 </UserControl>

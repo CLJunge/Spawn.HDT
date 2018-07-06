@@ -61,6 +61,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region ToggleDeckCommand
         public ICommand ToggleDeckCommand => new RelayCommand(ToggleDeck);
         #endregion
+
+        #region ReloadCommand
+        public ICommand ReloadCommand => new RelayCommand(Reload);
+        #endregion
         #endregion
 
         #region Ctor
@@ -199,6 +203,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 ShowDeckList();
             }
+        }
+        #endregion
+
+        #region Reload
+#pragma warning disable S3168 // "async" methods should not return "void"
+        private async void Reload()
+#pragma warning restore S3168 // "async" methods should not return "void"
+        {
+            ReloadRequired = true;
+
+            await InitializeAsync();
         }
         #endregion
     }

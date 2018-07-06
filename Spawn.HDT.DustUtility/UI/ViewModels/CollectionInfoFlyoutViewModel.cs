@@ -1,4 +1,5 @@
 ﻿#region Using
+using GalaSoft.MvvmLight.CommandWpf;
 using HearthDb.Enums;
 using HearthMirror.Objects;
 #if DEBUG
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 #endregion
 
@@ -25,6 +27,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region CardSetItems
         public ObservableCollection<CardSetItemModel> CardSetItems { get; set; }
+        #endregion
+
+        #region ReloadCommand
+        public ICommand ReloadCommand => new RelayCommand(Reload);
         #endregion
         #endregion
 
@@ -364,6 +370,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"GetDustValue: CardSet={cardSet.GetShortString()}, Rarity={rarity.GetString()}, IsGolden={blnIsGolden} > Result={nRet}");
 
             return nRet;
+        }
+        #endregion
+
+        #region Reload
+#pragma warning disable S3168 // "async" methods should not return "void"
+        private async void Reload()
+#pragma warning restore S3168 // "async" methods should not return "void"
+        {
+            ReloadRequired = true;
+
+            await InitializeAsync();
         }
         #endregion
     }
