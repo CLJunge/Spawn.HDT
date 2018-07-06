@@ -121,6 +121,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 ToggleDeckMenuItemHeader = ExcludeHeaderText;
 
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded {DeckItems.Count} deck(s)");
+
                 ReloadRequired = false;
             }
 
@@ -162,7 +164,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SelectedDeckItem.Opacity = .5;
             }
 
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Toggled '{SelectedDeckItem.Name}'");
+            DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Toggled '{SelectedDeckItem.Name}' (Excluded={DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId)})");
         }
         #endregion
 
