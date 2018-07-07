@@ -399,6 +399,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (DustUtilityPlugin.Config.RememberQueryString)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
+            }
+            else
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
+            }
+
             CloseSelectionWindow();
 
             if (DustUtilityPlugin.HideMainWindowOnClose)
@@ -411,15 +420,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             Messenger.Default.Send(new PopupMessage(true));
-
-            if (DustUtilityPlugin.Config.RememberQueryString)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
-            }
-            else
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
-            }
         }
         #endregion
 
@@ -475,10 +475,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             SetWindowTitle();
 
-#if DEBUG
-            HistoryButtonVisibility = Visibility.Visible;
-            SwitchAccountButtonVisibility = Visibility.Visible;
-#else
             HistoryButtonVisibility = Visibility.Collapsed;
             SwitchAccountButtonVisibility = Visibility.Collapsed;
 
@@ -498,7 +494,6 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Showing switch accounts button");
                 }
             }
-#endif
 
             ClearControls();
 
@@ -531,10 +526,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SearchQuery = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString;
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Restored last search query ('{SearchQuery}')");
+
+                Search();
             }
             else
             {
-                SearchQuery = null;
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery = null;
             }
         }
         #endregion
