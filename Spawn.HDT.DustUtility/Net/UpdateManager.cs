@@ -1,5 +1,6 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Properties;
 using System;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -10,10 +11,6 @@ namespace Spawn.HDT.DustUtility.Net
 {
     public static class UpdateManager
     {
-        #region Constants
-        public const string BaseUrl = "https://github.com/CLJunge/Spawn.HDT.DustUtility/releases";
-        #endregion
-
         #region Static Fields
         private static Version NewVersionFormat => new Version(1, 6, 1);
 
@@ -61,7 +58,7 @@ namespace Spawn.HDT.DustUtility.Net
                 {
                     DustUtilityPlugin.Logger.Log(LogLevel.Trace, "Checking GitHub for updates...");
 
-                    HttpWebRequest request = WebRequest.CreateHttp($"{BaseUrl}/latest");
+                    HttpWebRequest request = WebRequest.CreateHttp($"{Settings.Default.GitHubBaseUrl}/latest");
 
                     using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
                     {
@@ -132,7 +129,6 @@ namespace Spawn.HDT.DustUtility.Net
             {
                 strVersionString = version.ToString(2);
             }
-            else { }
 
             using (s_webClient = new WebClient())
             {
@@ -150,7 +146,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                 };
 
-                s_webClient.DownloadDataAsync(new Uri($"{BaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
+                s_webClient.DownloadDataAsync(new Uri($"{Settings.Default.GitHubBaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
             }
         }
         #endregion

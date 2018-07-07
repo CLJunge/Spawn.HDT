@@ -67,5 +67,14 @@ namespace Spawn.HDT.DustUtility.Properties {
                 return ((string)(this["IconResourcePath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/CLJunge/Spawn.HDT.DustUtility/releases")]
+        public string GitHubBaseUrl {
+            get {
+                return ((string)(this["GitHubBaseUrl"]));
+            }
+        }
     }
 }
