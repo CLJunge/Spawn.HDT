@@ -124,6 +124,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardSet.ICECROWN,
                     CardSet.LOOTAPALOOZA,
                     CardSet.GILNEAS,
+                    CardSet.BOOMSDAY,
                     CardSet.NAXX,
                     CardSet.BRM,
                     CardSet.LOE,
