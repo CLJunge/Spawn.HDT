@@ -309,7 +309,9 @@ namespace Spawn.HDT.DustUtility
 
                 IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
 
+#pragma warning disable S2583 // Conditionally executed blocks should be reachable
                 if (loggedInAcc?.IsValid ?? false)
+#pragma warning restore S2583 // Conditionally executed blocks should be reachable
                 {
                     if (!IsOffline)
                     {
