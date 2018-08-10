@@ -33,6 +33,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strKoboldsSetEnabledLabelText;
         private bool m_blnWitchwoodSetEnabled;
         private string m_strWitchwoodSetEnabledLabelText;
+        private bool m_blnBoomsdaySetEnabled;
+        private string m_strBoomsdaySetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -225,6 +227,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strWitchwoodSetEnabledLabelText;
             set => Set(ref m_strWitchwoodSetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region BoomsdaySetEnabled
+        public bool BoomsdaySetEnabled
+        {
+            get => m_blnBoomsdaySetEnabled;
+            set => Set(ref m_blnBoomsdaySetEnabled, value);
+        }
+        #endregion
+
+        #region BoomsdaySetEnabledLabelText
+        public string BoomsdaySetEnabledLabelText
+        {
+            get => m_strBoomsdaySetEnabledLabelText;
+            set => Set(ref m_strBoomsdaySetEnabledLabelText, value);
         }
         #endregion
 
@@ -714,6 +732,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     break;
 
+                case nameof(BoomsdaySetEnabled):
+                    if (e.IsDirty)
+                    {
+                        BoomsdaySetEnabledLabelText = $"{BoomsdaySetEnabledLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        BoomsdaySetEnabledLabelText = BoomsdaySetEnabledLabelText.Substring(0, BoomsdaySetEnabledLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
                 case nameof(NaxxSetEnabled):
                     if (e.IsDirty)
                     {
@@ -978,6 +1007,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             FrozenThroneSetEnabled = parameters.Sets.Contains(CardSet.ICECROWN);
             KoboldsSetEnabled = parameters.Sets.Contains(CardSet.LOOTAPALOOZA);
             WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
+            BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
             NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -1013,6 +1043,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(FrozenThroneSetEnabled), FrozenThroneSetEnabled);
             SetInitialPropertyValue(nameof(KoboldsSetEnabled), KoboldsSetEnabled);
             SetInitialPropertyValue(nameof(WitchwoodSetEnabled), WitchwoodSetEnabled);
+            SetInitialPropertyValue(nameof(BoomsdaySetEnabled), BoomsdaySetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1090,6 +1121,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (WitchwoodSetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GILNEAS);
+            }
+
+            if (BoomsdaySetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BOOMSDAY);
             }
 
             if (NaxxSetEnabled)
@@ -1209,6 +1245,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             FrozenThroneSetEnabledLabelText = CardSet.ICECROWN.GetDisplayString();
             KoboldsSetEnabledLabelText = CardSet.LOOTAPALOOZA.GetDisplayString();
             WitchwoodSetEnabledLabelText = CardSet.GILNEAS.GetDisplayString();
+            BoomsdaySetEnabledLabelText = CardSet.BOOMSDAY.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
