@@ -98,7 +98,6 @@
 - Plugin has been completely rewritten
 - Clean UI and improved performance
 - New update logic
-- Added auto disenchanting feature
 - Added golden cards to collection info
 - Added some customization
 - Added notifications
