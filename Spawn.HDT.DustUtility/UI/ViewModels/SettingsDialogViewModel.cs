@@ -42,6 +42,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strLoggableSourcesLabelText;
 #endif
         private Visibility m_loggableSourcesVisibility = Visibility.Collapsed;
+        private Visibility m_autoDisenchantingVisibility = Visibility.Collapsed;
         #endregion
 
         #region Properties
@@ -267,6 +268,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region AutoDisenchantingVisibility
+        public Visibility AutoDisenchantingVisibility
+        {
+            get => m_autoDisenchantingVisibility;
+            set => Set(ref m_autoDisenchantingVisibility, value);
+        }
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -290,6 +299,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     EnableHistory = DustUtilityPlugin.Config.EnableHistory;
                 }
             };
+
+#if DEBUG
+            AutoDisenchantingVisibility = Visibility.Visible;
+#endif
         }
         #endregion
 
