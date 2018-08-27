@@ -693,6 +693,11 @@ namespace Spawn.HDT.DustUtility
                 {
                     UpdatedAccountInstance(selectedAcc);
 
+                    if (IsOffline)
+                    {
+                        Cache.ClearCache();
+                    }
+
                     blnRet = true;
                 }
 
