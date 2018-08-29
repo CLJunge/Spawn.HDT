@@ -30,7 +30,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 - Whenever the plugin saves collection and decks it compares the locally saved collection with your current one and detects which cards are new and which have been disenchanted. (newest to oldest)
 
 #### Decks Info
-- Include/exclude decks from search (Use filter option 'Unused Cards Only'). You are also able to check the current deck list for each deck.
+- Include/exclude decks from search (Use filter option `Unused Cards Only`). You are also able to check the current deck list for each deck.
 
 #### Collection Info
 - Check progress and possible amounts of dust for each expansion (Regular and golden cards).
