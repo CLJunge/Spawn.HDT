@@ -6,9 +6,9 @@ using System.Windows;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("Spawn.HDT.DustUtility")]
-[assembly: AssemblyDescription("A plugin for card management for the Hearthstone Deck Tracker")]
+[assembly: AssemblyDescription("A  collection management plugin for the Hearthstone Deck Tracker")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Spawn Development")]
 [assembly: AssemblyProduct("Spawn.HDT.DustUtility")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
