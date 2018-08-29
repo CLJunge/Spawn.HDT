@@ -44,3 +44,4 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 ## Used Resources
 * Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
+* Hearthstone Artwork [Blizzard Press Center](https://blizzard.gamespress.com/Hearthstone)
