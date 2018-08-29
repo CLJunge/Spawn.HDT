@@ -179,6 +179,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     strSource = $"{strSource}witchwood_logo.png";
                     break;
 
+                case CardSet.BOOMSDAY:
+                    strSource = $"{strSource}boomsday_logo.png";
+                    break;
+
                 case CardSet.NAXX:
                     strSource = $"{strSource}naxx_logo.png";
                     break;
@@ -239,6 +243,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 case CardSet.LOOTAPALOOZA:
                     strSource = $"{strSource}kobolds_banner.jpg";
+                    break;
+
+                case CardSet.GILNEAS:
+                    strSource = $"{strSource}witchwood_banner.jpg";
+                    break;
+
+                case CardSet.BOOMSDAY:
+                    strSource = $"{strSource}boomsday_banner.jpg";
                     break;
 
                 case CardSet.NAXX:
