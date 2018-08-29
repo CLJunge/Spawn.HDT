@@ -33,7 +33,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 - Include/exclude decks from search (Use filter option 'Unused Cards Only'). You are also able to check the current deck list for each deck.
 
 #### Collection Info
-- Check progress and possible amounts of dust for each expansion (Adding stats for golden cards later).
+- Check progress and possible amounts of dust for each expansion (Regular and golden cards).
 
 ![Overlay](https://i.imgur.com/nwJvA25.png)
 
