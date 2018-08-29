@@ -38,6 +38,8 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 ![Overlay](https://i.imgur.com/nwJvA25.png)
 
 
+## Known Issues
+- Some of the flyouts wont reload properly in offline mode after switching accounts
 
 ## Used Resources
 * Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
