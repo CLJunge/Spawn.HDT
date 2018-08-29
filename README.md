@@ -39,7 +39,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 
 ## Known Issues
-- Some of the flyouts wont reload properly in offline mode after switching accounts
+- Some flyouts wont reload properly in offline mode after switching accounts
 - The collection info flyout is missing some artwork
 
 ## Used Resources
