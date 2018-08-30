@@ -94,7 +94,7 @@
 ## v2.3.5
 - Ready for The Witchwood
 
-## 3.0.0
+## v3.0.0
 - Plugin has been completely rewritten
 - Clean UI and improved performance
 - New update logic
@@ -103,4 +103,9 @@
 - Added some customization
 - Added notifications
 - Added logging
+
+## v3.0.1
+- Fixed flyouts wont reload after switching accounts
+- Added missing artwork for Witchwood and Boomsday expansion
+- Improved mode change logic
 -----------------------------
