@@ -168,13 +168,13 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ToBitmapImage
-        public static BitmapImage ToBitmapImage(this System.Drawing.Bitmap bitmap)
+        public static BitmapImage ToBitmapImage(this System.Drawing.Bitmap bitmap, ImageFormat imageFormat)
         {
             BitmapImage retVal = null;
 
             using (MemoryStream ms = new MemoryStream())
             {
-                bitmap.Save(ms, ImageFormat.Png);
+                bitmap.Save(ms, imageFormat);
 
                 ms.Position = 0;
 

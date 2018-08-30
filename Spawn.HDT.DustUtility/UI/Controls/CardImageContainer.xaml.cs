@@ -3,6 +3,7 @@ using Spawn.HDT.DustUtility.Hearthstone;
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.Net;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -72,7 +73,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                         {
                             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Setting current image as normal bitmap");
 
-                            image.Source = (Image.FromStream(m_currentImageStream) as Bitmap).ToBitmapImage();
+                            image.Source = (Image.FromStream(m_currentImageStream) as Bitmap).ToBitmapImage(ImageFormat.Png);
                         }
 
                         SetMargin();
