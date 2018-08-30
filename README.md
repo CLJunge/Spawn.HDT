@@ -38,10 +38,6 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 ![Overlay](https://i.imgur.com/nwJvA25.png)
 
 
-## Known Issues
-- Some flyouts wont reload properly in offline mode after switching accounts
-- The collection info flyout is missing some artwork
-
 ## Used Resources
 * Hearthstone artwork: [Blizzard Press Center](https://blizzard.gamespress.com/Hearthstone)
 * Class and set icons: [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
