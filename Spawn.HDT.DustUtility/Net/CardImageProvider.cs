@@ -73,10 +73,10 @@ namespace Spawn.HDT.DustUtility.Net
 
                             if (imageResponse.StatusCode == HttpStatusCode.OK)
                             {
+                                retVal = new MemoryStream();
+
                                 using (Stream responseStream = imageResponse.GetResponseStream())
                                 {
-                                    retVal = new MemoryStream();
-
                                     await responseStream.CopyToAsync(retVal);
                                 }
 
