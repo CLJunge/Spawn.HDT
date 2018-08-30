@@ -43,4 +43,5 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 - The collection info flyout is missing some artwork
 
 ## Used Resources
-* Class and set icons [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
+* Hearthstone artwork: [Blizzard Press Center](https://blizzard.gamespress.com/Hearthstone)
+* Class and set icons: [HearthSim/hs-icons](https://github.com/HearthSim/hs-icons)
