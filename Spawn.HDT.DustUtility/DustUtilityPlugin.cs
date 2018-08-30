@@ -37,13 +37,16 @@ namespace Spawn.HDT.DustUtility
         #region Constants
         public const string DecksFlyoutName = "DecksFlyout";
         public const string HistoryFlyoutName = "HistoryFlyout";
-
+        private const int AccountWaitTimeout = 10;
         #endregion
 
         #region Static Fields
+#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
         private static Configuration s_config;
         private static CardSelectionManager s_cardSelection;
+#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
         private static bool s_blnIsOffline = true;
+        private bool? m_blnPreviousIsOfflineValue = true;
         private static bool s_blnCheckedForUpdates;
         private static UpdateWindow s_updateDialog;
         #endregion
@@ -147,6 +150,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Static Ctor
+#pragma warning disable S3963 // "static" fields should be initialized inline
         static DustUtilityPlugin()
         {
             Logger = new Logger(logDirectory: Path.Combine(DataDirectory, "Logs"));
@@ -181,6 +185,7 @@ namespace Spawn.HDT.DustUtility
 
             Logger.Log(LogLevel.Debug, "Initialized 'DustUtilityPlugin'");
         }
+#pragma warning restore S3963 // "static" fields should be initialized inline
         #endregion
 
         #region Custom Events
@@ -303,48 +308,64 @@ namespace Spawn.HDT.DustUtility
         #region OnIsOfflineChanged
         private async void OnIsOfflineChanged(object sender, EventArgs e)
         {
-            if (Config.OfflineMode)
+            if (IsOffline != m_blnPreviousIsOfflineValue)
             {
-                Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
+                if (Config.OfflineMode)
+                {
+                    Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
 
-                IAccount loggedInAcc = await Account.GetLoggedInAccountAsync();
+                    IAccount loggedInAcc = null;
+                    int nCounter = 0;
+
+                    do
+                    {
+                        await Task.Delay(200);
+
+                        loggedInAcc = await Account.GetLoggedInAccountAsync();
+
+                        nCounter += 1;
+                    }
+                    while (loggedInAcc == null && nCounter <= AccountWaitTimeout);
 
 #pragma warning disable S2583 // Conditionally executed blocks should be reachable
-                if (loggedInAcc?.IsValid ?? false)
+                    if (loggedInAcc?.IsValid ?? false)
 #pragma warning restore S2583 // Conditionally executed blocks should be reachable
-                {
-                    if (!IsOffline)
                     {
-                        UpdatedAccountInstance(loggedInAcc);
+                        if (!IsOffline)
+                        {
+                            UpdatedAccountInstance(loggedInAcc);
 
-                        Cache.ClearCache();
+                            Cache.ClearCache();
+                        }
+
+                        await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
+                    }
+                    else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
+                    {
+                        await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't get the currently logged in account! Closing window...");
+
+                        MainWindow?.Close();
+                    }
+                    else
+                    {
+                        await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
                     }
 
-                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-                }
-                else if (!IsOffline && MainWindow?.Visibility == Visibility.Visible)
-                {
-                    await MainWindow?.ShowMessageAsync(string.Empty, "Couldn't get the currently logged in account! Closing window...");
+                    if (!IsOffline)
+                    {
+                        ServiceLocator.Current.GetInstance<MainViewModel>().TryUpdateDecksButton(false);
 
+                        m_blnForceSave = true;
+                    }
+
+                    ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
+                }
+                else if (IsOffline)
+                {
                     MainWindow?.Close();
                 }
-                else
-                {
-                    await ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync();
-                }
 
-                if (!IsOffline)
-                {
-                    ServiceLocator.Current.GetInstance<MainViewModel>().TryUpdateDecksButton(false);
-
-                    m_blnForceSave = true;
-                }
-
-                ShowToastNotification($"Current Mode: {(IsOffline ? "Offline" : "Online")}");
-            }
-            else if (IsOffline)
-            {
-                MainWindow?.Close();
+                m_blnPreviousIsOfflineValue = IsOffline;
             }
         }
         #endregion
