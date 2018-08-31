@@ -5,7 +5,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 
 ## Known Issues
 
-- If you update the plugin automatically, HDT might not replace the old version with the new one. Just delete all files in '%LocalAppData%\HearthstoneDeckTracker\app-{HDT_VERSION}\Plugins\Spawn.HDT.DustUtility' or wherever you installed HDT and restart the tracker.
+- If you update the plugin automatically, HDT might not replace the old version with the new one. Just delete all files in '%LocalAppData%\HearthstoneDeckTracker\app-{HDT_VERSION}\Plugins\Spawn.HDT.DustUtility' or wherever you have installed HDT and restart the tracker.
 
 
 ## Features
