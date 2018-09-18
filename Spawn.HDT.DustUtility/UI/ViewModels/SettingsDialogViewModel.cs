@@ -276,6 +276,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region OpenGitHubCommand
+        public ICommand OpenGitHubCommand => new RelayCommand(OpenGitHub);
+        #endregion
+
         #region SaveSettingsCommand
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings, () => IsDirty);
         #endregion
@@ -492,6 +496,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
+        #endregion
+
+        #region OpenGitHub
+        private void OpenGitHub() => Hearthstone_Deck_Tracker.Helper.TryOpenUrl(Properties.Settings.Default.GitHubBaseUrl);
         #endregion
 
         #region SaveSettings

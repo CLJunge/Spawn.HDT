@@ -58,7 +58,7 @@ namespace Spawn.HDT.DustUtility.Net
                 {
                     DustUtilityPlugin.Logger.Log(LogLevel.Trace, "Checking GitHub for updates...");
 
-                    HttpWebRequest request = WebRequest.CreateHttp($"{Settings.Default.GitHubBaseUrl}/latest");
+                    HttpWebRequest request = WebRequest.CreateHttp($"{Settings.Default.GitHubBaseUrl}/releases/latest");
 
                     using (HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse)
                     {
@@ -146,7 +146,7 @@ namespace Spawn.HDT.DustUtility.Net
                     }
                 };
 
-                s_webClient.DownloadDataAsync(new Uri($"{Settings.Default.GitHubBaseUrl}/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
+                s_webClient.DownloadDataAsync(new Uri($"{Settings.Default.GitHubBaseUrl}/releases/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
             }
         }
         #endregion

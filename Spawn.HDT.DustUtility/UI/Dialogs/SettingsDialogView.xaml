@@ -24,7 +24,13 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <StackPanel Orientation="Vertical" Margin="5" Width="265">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Command="{Binding OpenGitHubCommand}" ToolTip="Open the GitHub project website."
+                    ToolTipService.ShowDuration="10000" Content="GITHUB"/>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+    <StackPanel Orientation="Vertical" Margin="5" Width="275">
         <DockPanel Height="30" ToolTip="Access your decks and collection while Hearthstone is not running." ToolTipService.ShowDuration="10000">
             <Label Content="{Binding OfflineModeLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
             <CheckBox Name="OfflineModeCheckBox" IsChecked="{Binding OfflineMode, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0"/>
