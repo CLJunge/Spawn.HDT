@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
 #endregion
 
 namespace Spawn.HDT.DustUtility.UI.ViewModels
@@ -27,6 +28,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region Member Variables
         private DeckItemModel m_selectedDeckItem;
         private string m_strToggleDeckMenuItemHeader;
+        private Visibility m_reloadButtonVisibility;
         #endregion
 
         #region Properties
@@ -51,6 +53,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strToggleDeckMenuItemHeader;
             set => Set(ref m_strToggleDeckMenuItemHeader, value);
+        }
+        #endregion
+
+        #region ReloadButtonVisibility
+        public Visibility ReloadButtonVisibility
+        {
+            get => m_reloadButtonVisibility;
+            set => Set(ref m_reloadButtonVisibility, value);
         }
         #endregion
 
@@ -104,6 +114,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                ReloadButtonVisibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ReloadButtonVisibility = Visibility.Visible;
+            }
 
             if (ReloadRequired)
             {
@@ -175,7 +194,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnContextMenuOpening
         private void OnContextMenuOpening(CMOpeningMessage message)
         {
+#pragma warning disable S2583 // Conditionally executed blocks should be reachable
             if (message.FlyoutName?.Equals(DustUtilityPlugin.DecksFlyoutName) ?? false)
+#pragma warning restore S2583 // Conditionally executed blocks should be reachable
             {
                 bool blnDeckSelected = SelectedDeckItem != null;
 
@@ -199,7 +220,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnListViewMouseDoubleClick
         private void OnListViewMouseDoubleClick(LVMouseDblClickMessage message)
         {
+#pragma warning disable S2589 // Boolean expressions should not be gratuitous
             if ((message.FlyoutName?.Equals(DustUtilityPlugin.DecksFlyoutName) ?? false) && message.EventArgs?.LeftButton == MouseButtonState.Pressed)
+#pragma warning restore S2589 // Boolean expressions should not be gratuitous
             {
                 ShowDeckList();
             }

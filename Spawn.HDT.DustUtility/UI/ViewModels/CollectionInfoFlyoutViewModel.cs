@@ -11,7 +11,9 @@ using Spawn.HDT.DustUtility.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 #endregion
@@ -20,6 +22,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class CollectionInfoFlyoutViewModel : ViewModelBase
     {
+        #region Member Variables
+        private Visibility m_reloadButtonVisibility;
+        #endregion
+
         #region Properties
         #region CanNotifyDirtyStatus
         public override bool CanNotifyDirtyStatus => false;
@@ -27,6 +33,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
         #region CardSetItems
         public ObservableCollection<CardSetItemModel> CardSetItems { get; set; }
+        #endregion
+
+        #region ReloadButtonVisibility
+        public Visibility ReloadButtonVisibility
+        {
+            get => m_reloadButtonVisibility;
+            set => Set(ref m_reloadButtonVisibility, value);
+        }
         #endregion
 
         #region ReloadCommand
@@ -56,6 +70,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync();
+
+            if (DustUtilityPlugin.IsOffline)
+            {
+                ReloadButtonVisibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ReloadButtonVisibility = Visibility.Visible;
+            }
 
             if (ReloadRequired)
             {
@@ -89,7 +112,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (lstCollection.Count > 0)
             {
-                blnRet = lstCollection.Find(c =>
+                blnRet = lstCollection.Any(c =>
                 {
                     if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
                     {
@@ -99,7 +122,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     {
                         return false;
                     }
-                }) != null;
+                });
             }
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"HasCardSet: Set={cardSet.GetShortString()} > Result={blnRet}");

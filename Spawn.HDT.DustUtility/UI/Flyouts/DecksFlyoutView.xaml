@@ -13,10 +13,11 @@
             <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
         </Style>
     </UserControl.Resources>
-    <Grid Margin="5">
+    <DockPanel Margin="5">
+        <Button Style="{StaticResource CustomButtonStyle}" DockPanel.Dock="Bottom" Command="{Binding ReloadCommand}" Content="Reload" VerticalAlignment="Bottom" Margin="5" Height="28" Visibility="{Binding ReloadButtonVisibility}"/>
         <ListView ItemsSource="{Binding DeckItems}" SelectedItem="{Binding SelectedDeckItem, Mode=TwoWay}" SelectionMode="Single"
               BorderThickness="0" MouseMove="OnListViewMouseMove" ContextMenuOpening="OnListViewContextMenuOpening"
-              MouseDoubleClick="OnListViewMouseDoubleClick" Margin="0,0,0,43">
+              MouseDoubleClick="OnListViewMouseDoubleClick" DockPanel.Dock="Top">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Show deck list" Command="{Binding ShowDeckListCommand}"/>
@@ -30,6 +31,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Style="{StaticResource CustomButtonStyle}" Command="{Binding ReloadCommand}" Content="Reload" VerticalAlignment="Bottom" Margin="5" Height="28"/>
-    </Grid>
+    </DockPanel>
 </UserControl>
