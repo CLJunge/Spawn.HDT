@@ -27,6 +27,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Constants
         private const string SyncingTag = " - Syncing...";
+        private const string CollectionInfoFlyoutHeader = "Collection Info";
+        private const string DecksFlyoutHeader = "Decks";
         #endregion
 
         #region Static Fields
@@ -257,14 +259,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             if (flyout.Content is Flyouts.CollectionInfoFlyoutView && viewModel.ReloadRequired)
             {
-                flyout.Header = $"Collection Info";
+                flyout.Header = CollectionInfoFlyoutHeader;
 
                 int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
 
                 if (nCollectionValue > 0)
                 {
-                    flyout.Header = $"Collection Info (Total: {nCollectionValue} Dust)";
+                    flyout.Header += $" (Total: {nCollectionValue} Dust)";
                 }
+            }
+            else if (flyout.Content is Flyouts.DecksFlyoutView && viewModel.ReloadRequired)
+            {
+                flyout.Header = $"{DecksFlyoutHeader} (Count: {DustUtilityPlugin.CurrentAccount.GetDecks().Count})";
             }
 
             if (!flyout.IsOpen)
