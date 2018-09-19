@@ -108,4 +108,10 @@
 - Fixed flyouts wont reload after switching accounts
 - Added missing artwork for Witchwood and Boomsday expansion
 - Improved mode change logic
+
+## v3.0.2
+- Only show reload buttons if plugin is in offline mode
+- Display total deck count in decks flyout
+- Implemented Whizbang deck handling
+- Other fixes and/or improvements
 -----------------------------
