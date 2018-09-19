@@ -14,6 +14,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 {
     public class SearchParametersFlyoutViewModel : ViewModelBase
     {
+        #region Constants
+        private const string UnusedCardsToolTip = "The plugin only considers cards that are not being used in a deck.";
+        private const string NoDecksTag = "[NO DECKS AVAILABLE] ";
+        #endregion
+
         #region Member Variables
         private bool m_blnExpertSetEnabled;
         private string m_strExpertSetEnabledLabelText;
@@ -79,6 +84,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strIncludeGoldenCardsOnlyLabelText;
         private bool m_blnIncludeUnusedCardsOnly;
         private string m_strIncludeUnusedCardsOnlyLabelText;
+        private bool m_blnUnusedCardsCheckBoxEnabled;
         #endregion
 
         #region Properties
@@ -598,6 +604,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region UnusedCardsCheckBoxEnabled
+        public bool UnusedCardsCheckBoxEnabled
+        {
+            get => m_blnUnusedCardsCheckBoxEnabled;
+            set => Set(ref m_blnUnusedCardsCheckBoxEnabled, value);
+        }
+        #endregion
+
         #region SaveCommand
         public ICommand SaveCommand => new RelayCommand(SaveParameters, () => IsDirty);
         #endregion
@@ -996,6 +1010,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             LoadLabelTexts();
 
+            InitializeUnusedCardsToolTip();
+
             SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
 
             ExpertSetEnabled = parameters.Sets.Contains(CardSet.EXPERT1);
@@ -1068,6 +1084,26 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(IncludeUnusedCardsOnly), IncludeUnusedCardsOnly);
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
+        }
+        #endregion
+
+        #region InitializeUnusedCardsToolTip
+        private void InitializeUnusedCardsToolTip()
+        {
+            DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = UnusedCardsToolTip;
+
+            UnusedCardsCheckBoxEnabled = DustUtilityPlugin.CurrentAccount.GetDecks().Count > 0;
+
+            if (!UnusedCardsCheckBoxEnabled)
+            {
+                IncludeUnusedCardsOnly = false;
+
+                DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = NoDecksTag + DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip;
+            }
+            else
+            {
+                DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = UnusedCardsToolTip;
+            }
         }
         #endregion
 

@@ -758,7 +758,8 @@
                 <CheckBox Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}" IsEnabled="{Binding ElementName=IncludeGoldenCardsCheckBox, Path=IsChecked}">
                     <TextBlock Text="{Binding IncludeGoldenCardsOnlyLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
-                <CheckBox Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}">
+                <CheckBox Name="IncludeUnusedCardsOnlyCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}" IsEnabled="{Binding UnusedCardsCheckBoxEnabled}"
+                          ToolTip="The plugin only considers cards that are not being used in a deck." ToolTipService.ShowDuration="10000" ToolTipService.ShowOnDisabled="True">
                     <TextBlock Text="{Binding IncludeUnusedCardsOnlyLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
             </Grid>
