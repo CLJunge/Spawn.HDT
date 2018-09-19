@@ -102,12 +102,15 @@ namespace Spawn.HDT.DustUtility.UI.Models
                         }
                     }
 
+                    ShowToolTip = Deck.GetTotalCardCount() < MaxCardCount;
+
                     RaisePropertyChanged(nameof(DeckId));
                     RaisePropertyChanged(nameof(Name));
                     RaisePropertyChanged(nameof(CardCount));
                     RaisePropertyChanged(nameof(CraftingCost));
                     RaisePropertyChanged(nameof(HeroImage));
                     RaisePropertyChanged(nameof(MaxCardCount));
+                    RaisePropertyChanged(nameof(ShowToolTip));
                 }
             };
 #if DEBUG

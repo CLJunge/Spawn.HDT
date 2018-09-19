@@ -240,8 +240,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region GetCardCount
-        public static int GetCardCount(this HearthMirror.Objects.Deck deck)
+        #region GetTotalCardCount
+        public static int GetTotalCardCount(this HearthMirror.Objects.Deck deck)
         {
             int nRet = 0;
 
