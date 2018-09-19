@@ -19,7 +19,11 @@ namespace Spawn.HDT.DustUtility.UI.Models
 
         #region Member Variables
         private Deck m_deck;
+        private int m_nMaxCardCount;
         private double m_dblOpacity;
+        private bool m_blnShowToolTip;
+
+        private bool m_blnIsWhizbangDeck;
         #endregion
 
         #region Properties
@@ -51,6 +55,14 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public BitmapImage HeroImage => GetHeroImage();
         #endregion
 
+        #region MaxCardCount
+        public int MaxCardCount
+        {
+            get => m_nMaxCardCount;
+            set => Set(ref m_nMaxCardCount, value);
+        }
+        #endregion
+
         #region Opacity
         public double Opacity
         {
@@ -58,28 +70,50 @@ namespace Spawn.HDT.DustUtility.UI.Models
             set => Set(ref m_dblOpacity, value);
         }
         #endregion
+
+        #region ShowToolTip
+        public bool ShowToolTip
+        {
+            get => m_blnShowToolTip;
+            set => Set(ref m_blnShowToolTip, value);
+        }
+        #endregion
         #endregion
 
         #region Ctor
         public DeckItemModel()
         {
+            MaxCardCount = 30;
             Opacity = 1;
 
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(Deck)))
                 {
+                    if (Deck.Cards.Count == 1)
+                    {
+                        Card card = Deck.Cards[0];
+
+                        m_blnIsWhizbangDeck = card.Id == HearthDb.CardIds.Collectible.Neutral.WhizbangTheWonderful;
+
+                        if (m_blnIsWhizbangDeck)
+                        {
+                            MaxCardCount = 1;
+                        }
+                    }
+
                     RaisePropertyChanged(nameof(DeckId));
                     RaisePropertyChanged(nameof(Name));
                     RaisePropertyChanged(nameof(CardCount));
                     RaisePropertyChanged(nameof(CraftingCost));
                     RaisePropertyChanged(nameof(HeroImage));
+                    RaisePropertyChanged(nameof(MaxCardCount));
                 }
             };
 #if DEBUG
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                m_deck = new Deck() { Id = 4342323, Hero = "HERO_01", Name = "Test Deck", Cards = new List<Card>() { new Card("", 0, false) } };
+                Deck = new Deck() { Id = 4342323, Hero = "HERO_01", Name = "Test Deck", Cards = new List<Card>() { new Card("", 0, false) } };
             }
 #endif
 
@@ -89,7 +123,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         public DeckItemModel(Deck deck)
             : this()
         {
-            m_deck = deck;
+            Deck = deck;
         }
         #endregion
 
@@ -98,47 +132,59 @@ namespace Spawn.HDT.DustUtility.UI.Models
         {
             string strHero = Deck?.Hero.Substring(0, 7);
 
+            if (m_blnIsWhizbangDeck)
+            {
+                strHero = "HERO_WHIZBANG";
+            }
+
             if (!s_dImageCache.TryGetValue(strHero, out BitmapImage retVal))
             {
                 string strSource = string.Empty;
 
-                switch (strHero)
+                if (!m_blnIsWhizbangDeck)
                 {
-                    case "HERO_01": //Warrior
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_garrosh.png";
-                        break;
+                    switch (strHero)
+                    {
+                        case "HERO_01": //Warrior
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_garrosh.png";
+                            break;
 
-                    case "HERO_02": //Shaman
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_thrall.png";
-                        break;
+                        case "HERO_02": //Shaman
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_thrall.png";
+                            break;
 
-                    case "HERO_03": //Rogue
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_valeera.png";
-                        break;
+                        case "HERO_03": //Rogue
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_valeera.png";
+                            break;
 
-                    case "HERO_04": //Paladin
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_uther.png";
-                        break;
+                        case "HERO_04": //Paladin
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_uther.png";
+                            break;
 
-                    case "HERO_05": //Hunter
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_rexxar.png";
-                        break;
+                        case "HERO_05": //Hunter
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_rexxar.png";
+                            break;
 
-                    case "HERO_06": //Druid
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_malfurion.png";
-                        break;
+                        case "HERO_06": //Druid
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_malfurion.png";
+                            break;
 
-                    case "HERO_07": //Warlock
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_guldan.png";
-                        break;
+                        case "HERO_07": //Warlock
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_guldan.png";
+                            break;
 
-                    case "HERO_08": //Mage
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_jaina.png";
-                        break;
+                        case "HERO_08": //Mage
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_jaina.png";
+                            break;
 
-                    case "HERO_09": //Priest
-                        strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_anduin.png";
-                        break;
+                        case "HERO_09": //Priest
+                            strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_anduin.png";
+                            break;
+                    }
+                }
+                else
+                {
+                    strSource = "/Spawn.HDT.DustUtility;component/Resources/Images/hero_whizbang.png";
                 }
 
                 if (!string.IsNullOrEmpty(strSource))

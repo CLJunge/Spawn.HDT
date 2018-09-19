@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
-             mc:Ignorable="d" d:DesignHeight="51" d:DesignWidth="500" Opacity="{Binding Opacity}">
+             mc:Ignorable="d" d:DesignHeight="51" d:DesignWidth="500" Opacity="{Binding Opacity}"
+             ToolTip="This deck is missing cards, visit the 'Play' menu in order to load/reload your decks."
+             ToolTipService.ShowDuration="10000" ToolTipService.IsEnabled="{Binding ShowToolTip}" Background="Transparent">
     <UserControl.Resources>
         <converters:DisplayTextConverter x:Key="DustConverter" Suffix="Dust"/>
-        <converters:DeckCardCountConverter x:Key="CardCountConverter" MaxAmount="30" Suffix="Cards"/>
+        <converters:DeckCardCountConverter x:Key="CardCountConverter" Suffix="Cards"/>
     </UserControl.Resources>
     <Grid Margin="15,0,15,0">
         <Grid.ColumnDefinitions>
@@ -19,7 +21,14 @@
 
         <Image Grid.Column="0" Source="{Binding HeroImage}" Width="39" Height="39"/>
         <TextBlock Grid.Column="1" Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Column="2" Text="{Binding CardCount, Converter={StaticResource CardCountConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock.Text>
+                <MultiBinding Converter="{StaticResource CardCountConverter}">
+                    <Binding Path="CardCount"/>
+                    <Binding Path="MaxCardCount"/>
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
         <TextBlock Grid.Column="3" Text="{Binding CraftingCost, Converter={StaticResource DustConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

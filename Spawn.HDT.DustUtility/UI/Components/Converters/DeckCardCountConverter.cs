@@ -7,13 +7,9 @@ using System.Windows.Data;
 
 namespace Spawn.HDT.DustUtility.UI.Components.Converters
 {
-    public class DeckCardCountConverter : IValueConverter
+    public class DeckCardCountConverter : IMultiValueConverter
     {
         #region Properties
-        #region MaxAmount
-        public int MaxAmount { get; set; }
-        #endregion
-
         #region Prefix
         public string Prefix { get; set; }
         #endregion
@@ -24,13 +20,13 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #endregion
 
         #region Convert
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             string strRet = string.Empty;
 
-            if (value is int)
+            if (values?.Length == 2)
             {
-                strRet = $"{value}/{MaxAmount}";
+                strRet = $"{values[0]}/{values[1]}";
 
                 if (!string.IsNullOrEmpty(Prefix))
                 {
@@ -42,11 +38,11 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                     strRet = $"{strRet} {Suffix}";
                 }
 
-                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted '{value}' to '{strRet}' (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{strRet}' (Prefix={Prefix}, Suffix={Suffix})");
             }
             else
             {
-                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid value: '{value}'! (MaxAmount={MaxAmount}, Prefix={Prefix}, Suffix={Suffix})");
+                DustUtilityPlugin.Logger.Log(LogLevel.Error, $"Passed invalid values: '{string.Join(", ", values)}'! (Prefix={Prefix}, Suffix={Suffix})");
             }
 
             return strRet;
@@ -54,7 +50,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #endregion
 
         #region ConvertBack
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();
         }
