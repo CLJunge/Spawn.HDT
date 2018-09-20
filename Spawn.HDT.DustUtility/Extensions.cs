@@ -277,5 +277,26 @@ namespace Spawn.HDT.DustUtility
 
         #endregion
         #endregion
+
+        #region FindParent
+        public static T FindParent<T>(this System.Windows.FrameworkElement element) where T : System.Windows.DependencyObject
+        {
+            T retVal = null;
+
+            if (element?.Parent != null)
+            {
+                if (element.Parent is T)
+                {
+                    retVal = (T)element.Parent;
+                }
+                else
+                {
+                    retVal = FindParent<T>(element.Parent as System.Windows.FrameworkElement);
+                }
+            }
+
+            return retVal;
+        }
+        #endregion
     }
 }

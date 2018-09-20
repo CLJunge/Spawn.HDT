@@ -85,6 +85,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private bool m_blnIncludeUnusedCardsOnly;
         private string m_strIncludeUnusedCardsOnlyLabelText;
         private bool m_blnUnusedCardsCheckBoxEnabled;
+        private bool m_blnAllSetCheckBoxesChecked;
+        private bool m_blnAllRarityCheckBoxesChecked;
+        private bool m_blnAllClassCheckBoxesChecked;
+        private bool m_blnAllMiscCheckBoxesChecked;
         #endregion
 
         #region Properties
@@ -612,6 +616,38 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region AllSetCheckBoxesChecked
+        public bool AllSetCheckBoxesChecked
+        {
+            get => m_blnAllSetCheckBoxesChecked;
+            set => Set(ref m_blnAllSetCheckBoxesChecked, value);
+        }
+        #endregion
+
+        #region AllRarityCheckBoxesChecked
+        public bool AllRarityCheckBoxesChecked
+        {
+            get => m_blnAllRarityCheckBoxesChecked;
+            set => Set(ref m_blnAllRarityCheckBoxesChecked, value);
+        }
+        #endregion
+
+        #region AllClassCheckBoxesChecked
+        public bool AllClassCheckBoxesChecked
+        {
+            get => m_blnAllClassCheckBoxesChecked;
+            set => Set(ref m_blnAllClassCheckBoxesChecked, value);
+        }
+        #endregion
+
+        #region AllMiscCheckBoxesChecked
+        public bool AllMiscCheckBoxesChecked
+        {
+            get => m_blnAllMiscCheckBoxesChecked;
+            set => Set(ref m_blnAllMiscCheckBoxesChecked, value);
+        }
+        #endregion
+
         #region SaveCommand
         public ICommand SaveCommand => new RelayCommand(SaveParameters, () => IsDirty);
         #endregion
@@ -1012,43 +1048,48 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             InitializeUnusedCardsToolTip();
 
+            AllSetCheckBoxesChecked = true;
+            AllRarityCheckBoxesChecked = true;
+            AllClassCheckBoxesChecked = true;
+            AllMiscCheckBoxesChecked = true;
+
             SearchParameters parameters = DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters;
 
-            ExpertSetEnabled = parameters.Sets.Contains(CardSet.EXPERT1);
-            GoblinsSetEnabled = parameters.Sets.Contains(CardSet.GVG);
-            TournamentSetEnabled = parameters.Sets.Contains(CardSet.TGT);
-            OldGodsSetEnabled = parameters.Sets.Contains(CardSet.OG);
-            GadgetzanSetEnabled = parameters.Sets.Contains(CardSet.GANGS);
-            UngoroSetEnabled = parameters.Sets.Contains(CardSet.UNGORO);
-            FrozenThroneSetEnabled = parameters.Sets.Contains(CardSet.ICECROWN);
-            KoboldsSetEnabled = parameters.Sets.Contains(CardSet.LOOTAPALOOZA);
-            WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
-            BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
-            NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
-            MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
-            LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
-            KarazhanSetEnabled = parameters.Sets.Contains(CardSet.KARA);
-            HallSetEnabled = parameters.Sets.Contains(CardSet.HOF);
+            AllSetCheckBoxesChecked &= ExpertSetEnabled = parameters.Sets.Contains(CardSet.EXPERT1);
+            AllSetCheckBoxesChecked &= GoblinsSetEnabled = parameters.Sets.Contains(CardSet.GVG);
+            AllSetCheckBoxesChecked &= TournamentSetEnabled = parameters.Sets.Contains(CardSet.TGT);
+            AllSetCheckBoxesChecked &= OldGodsSetEnabled = parameters.Sets.Contains(CardSet.OG);
+            AllSetCheckBoxesChecked &= GadgetzanSetEnabled = parameters.Sets.Contains(CardSet.GANGS);
+            AllSetCheckBoxesChecked &= UngoroSetEnabled = parameters.Sets.Contains(CardSet.UNGORO);
+            AllSetCheckBoxesChecked &= FrozenThroneSetEnabled = parameters.Sets.Contains(CardSet.ICECROWN);
+            AllSetCheckBoxesChecked &= KoboldsSetEnabled = parameters.Sets.Contains(CardSet.LOOTAPALOOZA);
+            AllSetCheckBoxesChecked &= WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
+            AllSetCheckBoxesChecked &= BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
+            AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
+            AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
+            AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
+            AllSetCheckBoxesChecked &= KarazhanSetEnabled = parameters.Sets.Contains(CardSet.KARA);
+            AllSetCheckBoxesChecked &= HallSetEnabled = parameters.Sets.Contains(CardSet.HOF);
 
-            CommonRarityEnabled = parameters.Rarities.Contains(Rarity.COMMON);
-            RareRarityEnabled = parameters.Rarities.Contains(Rarity.RARE);
-            EpicRarityEnabled = parameters.Rarities.Contains(Rarity.EPIC);
-            LegendaryRarityEnabled = parameters.Rarities.Contains(Rarity.LEGENDARY);
+            AllRarityCheckBoxesChecked &= CommonRarityEnabled = parameters.Rarities.Contains(Rarity.COMMON);
+            AllRarityCheckBoxesChecked &= RareRarityEnabled = parameters.Rarities.Contains(Rarity.RARE);
+            AllRarityCheckBoxesChecked &= EpicRarityEnabled = parameters.Rarities.Contains(Rarity.EPIC);
+            AllRarityCheckBoxesChecked &= LegendaryRarityEnabled = parameters.Rarities.Contains(Rarity.LEGENDARY);
 
-            DruidClassEnabled = parameters.Classes.Contains(CardClass.DRUID);
-            HunterClassEnabled = parameters.Classes.Contains(CardClass.HUNTER);
-            MageClassEnabled = parameters.Classes.Contains(CardClass.MAGE);
-            PaladinClassEnabled = parameters.Classes.Contains(CardClass.PALADIN);
-            PriestClassEnabled = parameters.Classes.Contains(CardClass.PRIEST);
-            RogueClassEnabled = parameters.Classes.Contains(CardClass.ROGUE);
-            ShamanClassEnabled = parameters.Classes.Contains(CardClass.SHAMAN);
-            WarlockClassEnabled = parameters.Classes.Contains(CardClass.WARLOCK);
-            WarriorClassEnabled = parameters.Classes.Contains(CardClass.WARRIOR);
-            NeutralClassEnabled = parameters.Classes.Contains(CardClass.NEUTRAL);
+            AllClassCheckBoxesChecked &= DruidClassEnabled = parameters.Classes.Contains(CardClass.DRUID);
+            AllClassCheckBoxesChecked &= HunterClassEnabled = parameters.Classes.Contains(CardClass.HUNTER);
+            AllClassCheckBoxesChecked &= MageClassEnabled = parameters.Classes.Contains(CardClass.MAGE);
+            AllClassCheckBoxesChecked &= PaladinClassEnabled = parameters.Classes.Contains(CardClass.PALADIN);
+            AllClassCheckBoxesChecked &= PriestClassEnabled = parameters.Classes.Contains(CardClass.PRIEST);
+            AllClassCheckBoxesChecked &= RogueClassEnabled = parameters.Classes.Contains(CardClass.ROGUE);
+            AllClassCheckBoxesChecked &= ShamanClassEnabled = parameters.Classes.Contains(CardClass.SHAMAN);
+            AllClassCheckBoxesChecked &= WarlockClassEnabled = parameters.Classes.Contains(CardClass.WARLOCK);
+            AllClassCheckBoxesChecked &= WarriorClassEnabled = parameters.Classes.Contains(CardClass.WARRIOR);
+            AllClassCheckBoxesChecked &= NeutralClassEnabled = parameters.Classes.Contains(CardClass.NEUTRAL);
 
-            IncludeGoldenCards = parameters.IncludeGoldenCards;
-            IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
-            IncludeUnusedCardsOnly = parameters.UnusedCardsOnly;
+            AllMiscCheckBoxesChecked &= IncludeGoldenCards = parameters.IncludeGoldenCards;
+            AllMiscCheckBoxesChecked &= IncludeGoldenCardsOnly = parameters.GoldenCardsOnly;
+            AllMiscCheckBoxesChecked &= IncludeUnusedCardsOnly = parameters.UnusedCardsOnly;
 
             SetInitialPropertyValue(nameof(ExpertSetEnabled), ExpertSetEnabled);
             SetInitialPropertyValue(nameof(GoblinsSetEnabled), GoblinsSetEnabled);
@@ -1301,7 +1342,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             WarlockClassEnabledLabelText = CardClass.WARLOCK.GetString();
             WarriorClassEnabledLabelText = CardClass.WARRIOR.GetString();
             NeutralClassEnabledLabelText = CardClass.NEUTRAL.GetString();
-            IncludeGoldenCardsLabelText = "Incl. Golden Cards";
+            IncludeGoldenCardsLabelText = "Include Golden Cards";
             IncludeGoldenCardsOnlyLabelText = "Golden Cards Only";
             IncludeUnusedCardsOnlyLabelText = "Unused Cards Only";
 

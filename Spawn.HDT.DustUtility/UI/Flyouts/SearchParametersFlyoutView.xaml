@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:converters="clr-namespace:Spawn.HDT.DustUtility.UI.Components.Converters"
              xmlns:vm="clr-namespace:Spawn.HDT.DustUtility.UI.ViewModels"
              vm:ViewModelLocator.ViewModelName="SearchParametersFlyoutViewModel"
              mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="900">
     <UserControl.Resources>
         <ResourceDictionary>
+            <converters:SubtractionConverter x:Key="SubtractionConverter"/>
             <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
                 <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
             </Style>
@@ -27,10 +29,22 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="625"/>
-            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="210"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Sets" Grid.Row="0" Grid.Column="0">
+        <GroupBox Name="SetsGroupBox" Grid.Row="0" Grid.Column="0">
+            <GroupBox.Header>
+                <Grid Width="{Binding ActualWidth, ElementName=SetsGroupBox, Converter={StaticResource SubtractionConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Column="0" Text="SETS" Margin="-5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding AllSetCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                </Grid>
+            </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -393,7 +407,13 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Rarities" Grid.Row="0" Grid.Column="1">
+        <GroupBox Name="RaritiesGroupBox" Grid.Row="0" Grid.Column="1">
+            <GroupBox.Header>
+                <Grid Width="{Binding ActualWidth, ElementName=RaritiesGroupBox, Converter={StaticResource SubtractionConverter}}">
+                    <TextBlock Text="RARITIES" Margin="-5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding AllRarityCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                </Grid>
+            </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -497,7 +517,19 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Classes" Grid.Row="1" Grid.Column="0">
+        <GroupBox Name="ClassesGroupBox" Grid.Row="1" Grid.Column="0">
+            <GroupBox.Header>
+                <Grid Width="{Binding ActualWidth, ElementName=ClassesGroupBox, Converter={StaticResource SubtractionConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Column="0" Text="CLASSES" Margin="-5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding AllClassCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                </Grid>
+            </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -744,7 +776,13 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Misc." Grid.Row="1" Grid.Column="1">
+        <GroupBox Name="MiscGroupBox" Grid.Row="1" Grid.Column="1">
+            <GroupBox.Header>
+                <Grid Width="{Binding ActualWidth, ElementName=MiscGroupBox, Converter={StaticResource SubtractionConverter}}">
+                    <TextBlock Text="MISC." Margin="-5,0,0,0"/>
+                    <CheckBox IsChecked="{Binding AllMiscCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                </Grid>
+            </GroupBox.Header>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
