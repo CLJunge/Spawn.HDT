@@ -109,7 +109,8 @@
 - Added missing artwork for Witchwood and Boomsday expansion
 - Improved mode change logic
 
-## v3.0.2
+## v3.1.0
+- Added 'Check/Uncheck All' options for filters.
 - Only show reload buttons if plugin is in offline mode
 - Display total deck count in decks flyout
 - Implemented Whizbang deck handling
