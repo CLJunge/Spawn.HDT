@@ -110,7 +110,8 @@
 - Improved mode change logic
 
 ## v3.1.0
-- Added 'Check/Uncheck All' options for filters.
+- Added 'Check/Uncheck All' options for filters
+- Added link to the GitHub project page (settings dialog)
 - Only show reload buttons if plugin is in online mode
 - Display total deck count in decks flyout
 - Implemented Whizbang deck handling
