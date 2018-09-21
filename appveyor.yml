@@ -24,13 +24,3 @@ artifacts:
 branches:
   only:
     - rewrite
-
-deploy:
-  release: Spawn.HDT.DustUtility v$(appveyor_build_version)
-  description: '<ADD DESCRIPTION>'
-  provider: GitHub
-  auth_token:
-    secure: 73TR09IoznLQp8Gmfn8La32AdSmU9civ/u5aXVJ4VIwUAUMzamCVUVabn1km3jnd
-  draft: true
-  on:
-    appveyor_repo_tag: true
