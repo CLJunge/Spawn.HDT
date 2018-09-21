@@ -37,6 +37,7 @@ namespace Spawn.HDT.DustUtility
         #region Constants
         public const string DecksFlyoutName = "DecksFlyout";
         public const string HistoryFlyoutName = "HistoryFlyout";
+        public const string SearchParametersFlyoutName = "SearchParametersFlyout";
         private const int AccountWaitTimeout = 10;
         #endregion
 

@@ -131,6 +131,7 @@
     <Compile Include="CardManagement\AutoDisenchant\Helper.cs" />
     <Compile Include="CardManagement\AutoDisenchant\HearthstoneInfo.cs" />
     <Compile Include="CardManagement\AutoDisenchant\MouseActions.cs" />
+    <Compile Include="Messaging\FlyoutInitializedMessage.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

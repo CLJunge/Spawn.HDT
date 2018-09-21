@@ -42,7 +42,7 @@
 
 
                     <TextBlock Grid.Column="0" Text="SETS" Margin="-5,0,0,0"/>
-                    <CheckBox IsChecked="{Binding AllSetCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                    <CheckBox Name="SetAllCheckBox" IsChecked="{Binding AllSetCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
                 </Grid>
             </GroupBox.Header>
             <Grid>
@@ -59,7 +59,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Name="ExpertSetCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding ExpertSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="ExpertSetCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding ExpertSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -82,7 +82,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding ExpertSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=ExpertSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="GoblinsSetCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding GoblinsSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="GoblinsSetCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding GoblinsSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -105,7 +105,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding GoblinsSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=GoblinsSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="TournamentSetCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding TournamentSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="TournamentSetCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding TournamentSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -128,7 +128,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding TournamentSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=TournamentSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="OldGodsSetCheckBox" Grid.Row="3" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding OldGodsSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="OldGodsSetCheckBox" Grid.Row="3" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding OldGodsSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -151,7 +151,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding OldGodsSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=OldGodsSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="GadgetzanSetCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding GadgetzanSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="GadgetzanSetCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding GadgetzanSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -174,7 +174,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding GadgetzanSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=GadgetzanSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="UngoroSetCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding UngoroSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="UngoroSetCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding UngoroSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -197,7 +197,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding UngoroSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=UngoroSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="FrozenThroneSetCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding FrozenThroneSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="FrozenThroneSetCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding FrozenThroneSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -220,7 +220,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding FrozenThroneSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=FrozenThroneSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="KoboldsSetCheckBox" Grid.Row="3" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding KoboldsSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="KoboldsSetCheckBox" Grid.Row="3" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding KoboldsSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -243,7 +243,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding KoboldsSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=KoboldsSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="WitchwoodSetCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WitchwoodSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="WitchwoodSetCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WitchwoodSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -266,7 +266,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding WitchwoodSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=WitchwoodSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="BoomsdaySetCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding BoomsdaySetEnabled, Mode=TwoWay}">
+                <CheckBox Name="BoomsdaySetCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding BoomsdaySetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -289,7 +289,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding BoomsdaySetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=BoomsdaySetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="NaxxSetCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding NaxxSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="NaxxSetCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding NaxxSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -312,7 +312,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding NaxxSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=NaxxSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="MountainSetCheckBox" Grid.Row="3" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding MountainSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="MountainSetCheckBox" Grid.Row="3" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding MountainSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -335,7 +335,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding MountainSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=MountainSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="LeagueSetCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding LeagueSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="LeagueSetCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding LeagueSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -358,7 +358,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding LeagueSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=LeagueSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="KarazhanSetCheckBox" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding KarazhanSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="KarazhanSetCheckBox" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding KarazhanSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -381,7 +381,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding KarazhanSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=KarazhanSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="HallSetCheckBox" Grid.Row="2" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding HallSetEnabled, Mode=TwoWay}">
+                <CheckBox Name="HallSetCheckBox" Grid.Row="2" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding HallSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -411,7 +411,7 @@
             <GroupBox.Header>
                 <Grid Width="{Binding ActualWidth, ElementName=RaritiesGroupBox, Converter={StaticResource SubtractionConverter}}">
                     <TextBlock Text="RARITIES" Margin="-5,0,0,0"/>
-                    <CheckBox IsChecked="{Binding AllRarityCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                    <CheckBox Name="RarityAllCheckBox" IsChecked="{Binding AllRarityCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
                 </Grid>
             </GroupBox.Header>
             <Grid>
@@ -422,7 +422,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <CheckBox Name="CommonRarityCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding CommonRarityEnabled, Mode=TwoWay}">
+                <CheckBox Name="CommonRarityCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding CommonRarityEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -445,7 +445,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding CommonRarityEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=CommonRarityCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="RareRarityCheckBox" Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding RareRarityEnabled, Mode=TwoWay}">
+                <CheckBox Name="RareRarityCheckBox" Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding RareRarityEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -468,7 +468,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding RareRarityEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=RareRarityCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="EpicRarityCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding EpicRarityEnabled, Mode=TwoWay}">
+                <CheckBox Name="EpicRarityCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding EpicRarityEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -491,7 +491,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding EpicRarityEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=EpicRarityCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="LegendaryRarityCheckBox" Grid.Row="3" Margin="5,0,0,0" IsChecked="{Binding LegendaryRarityEnabled, Mode=TwoWay}">
+                <CheckBox Name="LegendaryRarityCheckBox" Grid.Row="3" Margin="5,0,0,0" IsChecked="{Binding LegendaryRarityEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -527,7 +527,7 @@
 
 
                     <TextBlock Grid.Column="0" Text="CLASSES" Margin="-5,0,0,0"/>
-                    <CheckBox IsChecked="{Binding AllClassCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                    <CheckBox Name="ClassAllCheckBox" IsChecked="{Binding AllClassCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Grid.Column="1" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
                 </Grid>
             </GroupBox.Header>
             <Grid>
@@ -543,7 +543,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <CheckBox Name="DruidClassCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding DruidClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="DruidClassCheckBox" Grid.Row="0" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding DruidClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -566,7 +566,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding DruidClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=DruidClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="HunterClassCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding HunterClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="HunterClassCheckBox" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding HunterClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -589,7 +589,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding HunterClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=HunterClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="MageClassCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding MageClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="MageClassCheckBox" Grid.Row="2" Grid.Column="0" Margin="5,0,0,0" IsChecked="{Binding MageClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -612,7 +612,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding MageClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=MageClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="PaladingClassCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PaladinClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="PaladingClassCheckBox" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PaladinClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -635,7 +635,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding PaladinClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=PaladingClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="PriestClassCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PriestClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="PriestClassCheckBox" Grid.Row="1" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding PriestClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -658,7 +658,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding PriestClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=PriestClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="RogueClassCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding RogueClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="RogueClassCheckBox" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" IsChecked="{Binding RogueClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -681,7 +681,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding RogueClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=RogueClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="ShamanClassCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding ShamanClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="ShamanClassCheckBox" Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding ShamanClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -704,7 +704,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding ShamanClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=ShamanClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="WarlockClassCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarlockClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="WarlockClassCheckBox" Grid.Row="1" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarlockClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -727,7 +727,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding WarlockClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=WarlockClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="WarriorClassCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarriorClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="WarriorClassCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding WarriorClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -750,7 +750,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding WarriorClassEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=WarriorClassCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="NeutralClassCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding NeutralClassEnabled, Mode=TwoWay}">
+                <CheckBox Name="NeutralClassCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding NeutralClassEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -780,7 +780,7 @@
             <GroupBox.Header>
                 <Grid Width="{Binding ActualWidth, ElementName=MiscGroupBox, Converter={StaticResource SubtractionConverter}}">
                     <TextBlock Text="MISC." Margin="-5,0,0,0"/>
-                    <CheckBox IsChecked="{Binding AllMiscCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
+                    <CheckBox Name="MiscAllCheckBox" IsChecked="{Binding AllMiscCheckBoxesChecked, Mode=OneWay}" Content="Check/Uncheck all" HorizontalAlignment="Right" Checked="OnCheckBoxAllChecked" Unchecked="OnCheckBoxAllUnchecked"/>
                 </Grid>
             </GroupBox.Header>
             <Grid>
@@ -790,21 +790,21 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <CheckBox Name="IncludeGoldenCardsCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}">
+                <CheckBox Name="IncludeGoldenCardsCheckBox" Grid.Row="0" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCards, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <TextBlock Text="{Binding IncludeGoldenCardsLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
-                <CheckBox Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}" IsEnabled="{Binding ElementName=IncludeGoldenCardsCheckBox, Path=IsChecked}">
+                <CheckBox Grid.Row="1" Margin="5,0,0,0" IsChecked="{Binding IncludeGoldenCardsOnly, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked" IsEnabled="{Binding ElementName=IncludeGoldenCardsCheckBox, Path=IsChecked}">
                     <TextBlock Text="{Binding IncludeGoldenCardsOnlyLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
-                <CheckBox Name="IncludeUnusedCardsOnlyCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}" IsEnabled="{Binding UnusedCardsCheckBoxEnabled}"
+                <CheckBox Name="IncludeUnusedCardsOnlyCheckBox" Grid.Row="2" Margin="5,0,0,0" IsChecked="{Binding IncludeUnusedCardsOnly, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked" IsEnabled="{Binding UnusedCardsCheckBoxEnabled}"
                           ToolTip="The plugin only considers cards that are not being used in a deck." ToolTipService.ShowDuration="10000" ToolTipService.ShowOnDisabled="True">
                     <TextBlock Text="{Binding IncludeUnusedCardsOnlyLabelText}" VerticalAlignment="Center" Margin="5,0,0,0"/>
                 </CheckBox>
             </Grid>
         </GroupBox>
 
-        <WrapPanel x:Name="wrapPanel" Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0,10,5,5">
-            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Save" Command="{Binding SaveCommand}" Height="28" Width="{Binding ActualWidth, ElementName=wrapPanel, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <WrapPanel x:Name="WrapPanel" Grid.Row="100" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="0,10,5,5">
+            <Button Style="{DynamicResource CustomButtonStyle}" Content="_Save" Command="{Binding SaveCommand}" Height="28" Width="{Binding ActualWidth, ElementName=WrapPanel, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         </WrapPanel>
     </Grid>
 </UserControl>

@@ -1,11 +1,13 @@
 ﻿#region Using
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using HearthDb.Enums;
 #if DEBUG
 using Hearthstone_Deck_Tracker.Utility.Extensions;
 #endif
 using Spawn.HDT.DustUtility.CardManagement;
 using Spawn.HDT.DustUtility.Logging;
+using Spawn.HDT.DustUtility.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Input;
 #endregion
@@ -1123,6 +1125,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(IncludeGoldenCards), IncludeGoldenCards);
             SetInitialPropertyValue(nameof(IncludeGoldenCardsOnly), IncludeGoldenCardsOnly);
             SetInitialPropertyValue(nameof(IncludeUnusedCardsOnly), IncludeUnusedCardsOnly);
+
+            Messenger.Default.Send(new FlyoutInitializedMessage(DustUtilityPlugin.SearchParametersFlyoutName));
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
