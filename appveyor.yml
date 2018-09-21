@@ -23,7 +23,6 @@ artifacts:
 
 branches:
   only:
-    - master
     - rewrite
 
 deploy:
