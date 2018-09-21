@@ -111,7 +111,7 @@
 
 ## v3.1.0
 - Added 'Check/Uncheck All' options for filters.
-- Only show reload buttons if plugin is in offline mode
+- Only show reload buttons if plugin is in online mode
 - Display total deck count in decks flyout
 - Implemented Whizbang deck handling
 - Other fixes and/or improvements
