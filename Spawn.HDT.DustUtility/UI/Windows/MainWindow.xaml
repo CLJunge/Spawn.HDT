@@ -200,7 +200,7 @@
 
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Import latest pack" Command="{Binding ImportLatestPackCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,336,15,0" Width="150" Height="28" Visibility="{Binding SplitViewVisibility}"
-                ToolTip="Import the latest opened pack if available." ToolTipService.ShowDuration="10000"/>
+                ToolTip="Import the last opened pack if available." ToolTipService.ShowDuration="10000"/>
         <Button Style="{DynamicResource CustomButtonStyle}" Content="Disenchant Selection" Command="{Binding DisenchantSelectionCommand}"
                 HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,369,15,0" Width="150" Height="28"
                 ToolTip="Disenchant the current selection." ToolTipService.ShowDuration="10000">
