@@ -53,7 +53,7 @@ namespace Spawn.HDT.DustUtility
 
         #region Member Variables
         private bool m_blnInitialized;
-        private DateTime m_dtLastSaveTimestamp = DateTime.Now;
+        private DateTime m_dtLastSaveTimestamp = DateTime.MinValue;
         private bool m_blnForceSave;
         #endregion
 
@@ -225,10 +225,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OnButtonPress
-        public void OnButtonPress()
-        {
-            ShowSettingsDialog();
-        }
+        public void OnButtonPress() => ShowSettingsDialog();
         #endregion
 
         #region OnUnload
@@ -252,10 +249,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OnUpdate
-        public void OnUpdate()
-        {
-            IsOffline = !Core.Game.IsRunning;
-        }
+        public void OnUpdate() => IsOffline = !Core.Game.IsRunning;
         #endregion
         #endregion
 

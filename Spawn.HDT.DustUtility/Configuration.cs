@@ -205,17 +205,11 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region Save
-        public void Save(string strFileName = "config.xml")
-        {
-            FileHelper.Write(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName), this);
-        }
+        public void Save(string strFileName = "config.xml") => FileHelper.Write(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName), this);
         #endregion
 
         #region [STATIC] Load
-        public static Configuration Load(string strFileName = "config.xml")
-        {
-            return FileHelper.Load<Configuration>(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName));
-        }
+        public static Configuration Load(string strFileName = "config.xml") => FileHelper.Load<Configuration>(Path.Combine(DustUtilityPlugin.DataDirectory, strFileName));
         #endregion
     }
 }
