@@ -13,7 +13,7 @@
         {
             FlyoutName = flyoutName;
 
-            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Created new 'LVMouseDblClickMessage' instance");
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"Created new 'FlyoutInitializedMessage' instance");
         }
         #endregion
     }
