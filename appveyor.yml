@@ -30,7 +30,7 @@ deploy:
   description: '<ADD DESCRIPTION>'
   provider: GitHub
   auth_token:
-    secure: o8qzkmoJtqt3CjSyS2EzkSRn/d2lYpi6kqt/q7NH1EiMeuoum6Y7pT/HcwsRhd+M
+    secure: wGrbH+LVczZLIsL3/IFz3Yq4VvP01SjEH/O8y6H2h5wSQnejS5s7y+UQmnOHZZlC
   draft: true
   on:
     appveyor_repo_tag: true
