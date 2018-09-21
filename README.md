@@ -6,8 +6,7 @@ A utility/management tool, which can help you to obtain certain amounts of dust 
 ## Known Issues
 
 - If you update the plugin automatically, HDT might not replace the old version with the new one. Just delete all files in `%LocalAppData%\HearthstoneDeckTracker\app-{HDT_VERSION}\Plugins\Spawn.HDT.DustUtility` or wherever you have installed HDT and restart the tracker.
-- HDT does not always provide the correct data, in which case the history can get messed up and show invalid entries of disenchanted cards for example. Just delete the history file in `%AppData%\HearthstoneDeckTracker\DustUtility\Accounts` and restore an older version of the collection file from the `%AppData%\HearthstoneDeckTracker\DustUtility\Accounts\{ACCOUNT}` folder for the respective account.
-
+- HDT does not always provide the correct data, in which case the history can get messed up and show invalid entries of disenchanted cards for example. You can delete those entries manually or in order the recreate the history, delete the history file in `%AppData%\HearthstoneDeckTracker\DustUtility\Accounts` for the respective account and restore an older version of the collection file from `%AppData%\HearthstoneDeckTracker\DustUtility\Accounts\{ACCOUNT}`.
 
 ## Features
 
