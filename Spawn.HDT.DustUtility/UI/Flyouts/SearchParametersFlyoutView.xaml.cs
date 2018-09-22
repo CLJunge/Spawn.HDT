@@ -19,12 +19,12 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
 
         #region Member Variables
         private bool m_blnFlyoutInititalized;
-        private bool m_blnSkipAllActions;
+        private bool m_blnSkipAllAction;
+        private bool m_blnSkipSingleAction;
 
         private int m_mMaxSetCheckBoxes;
         private int m_mMaxRarityCheckBoxes;
         private int m_mMaxClassCheckBoxes;
-        private int m_mMaxMiscCheckBoxes;
         #endregion
 
         #region Ctor
@@ -32,12 +32,11 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         {
             InitializeComponent();
 
-            m_blnSkipAllActions = true;
+            m_blnSkipAllAction = true;
 
             m_mMaxSetCheckBoxes = (SetsGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
             m_mMaxRarityCheckBoxes = (RaritiesGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
             m_mMaxClassCheckBoxes = (ClassesGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
-            m_mMaxMiscCheckBoxes = (MiscGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
 
             Messenger.Default.Register<FlyoutInitializedMessage>(this, msg => m_blnFlyoutInititalized = msg.FlyoutName.Equals(DustUtilityPlugin.SearchParametersFlyoutName));
 
@@ -49,16 +48,23 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnCheckBoxAllChecked
         private void OnCheckBoxAllChecked(object sender, RoutedEventArgs e)
         {
-            if (m_blnFlyoutInititalized && !m_blnSkipAllActions)
+            if (m_blnFlyoutInititalized && !m_blnSkipAllAction)
             {
                 GroupBox groupBox = (sender as FrameworkElement).FindParent<GroupBox>();
 
                 if (groupBox?.Content is Grid contentGrid)
                 {
+                    m_blnSkipSingleAction = true;
+
                     foreach (CheckBox cb in contentGrid.Children.OfType<CheckBox>())
                     {
-                        cb.IsChecked = true;
+                        if (cb.IsEnabled)
+                        {
+                            cb.IsChecked = true;
+                        }
                     }
+
+                    m_blnSkipSingleAction = false;
                 }
             }
         }
@@ -67,7 +73,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnCheckBoxAllUnchecked
         private void OnCheckBoxAllUnchecked(object sender, RoutedEventArgs e)
         {
-            if (m_blnFlyoutInititalized && !m_blnSkipAllActions)
+            if (m_blnFlyoutInititalized && !m_blnSkipAllAction)
             {
                 GroupBox groupBox = (sender as FrameworkElement).FindParent<GroupBox>();
 
@@ -85,15 +91,15 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnCheckBoxChecked
         private void OnCheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            if (m_blnFlyoutInititalized)
+            if (m_blnFlyoutInititalized && !m_blnSkipSingleAction)
             {
                 GroupBox groupBox = (sender as FrameworkElement).FindParent<GroupBox>();
 
                 if (groupBox?.Content is Grid contentGrid)
                 {
-                    m_blnSkipAllActions = true;
+                    m_blnSkipAllAction = true;
 
-                    int nCheckedCount = contentGrid.Children.OfType<CheckBox>().Sum(cb => (bool)cb.IsChecked ? 1 : 0);
+                    int nCheckedCount = contentGrid.Children.OfType<CheckBox>().Where(cb => cb.IsEnabled).Sum(cb => (bool)cb.IsChecked ? 1 : 0);
 
                     switch (groupBox.Name)
                     {
@@ -110,11 +116,18 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
                             break;
 
                         case MiscGroupBoxName:
-                            MiscAllCheckBox.IsChecked = m_mMaxMiscCheckBoxes == nCheckedCount;
+                            int nTotalCount = (MiscGroupBox.Content as Grid).Children.OfType<CheckBox>().Where(cb => cb.IsEnabled).Count();
+
+                            if ((sender as FrameworkElement).Name.Equals("IncludeGoldenCardsCheckBox"))
+                            {
+                                nTotalCount += 1;
+                            }
+
+                            MiscAllCheckBox.IsChecked = nTotalCount == nCheckedCount;
                             break;
                     }
 
-                    m_blnSkipAllActions = false;
+                    m_blnSkipAllAction = false;
                 }
             }
         }
@@ -123,13 +136,13 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         #region OnCheckBoxUnchecked
         private void OnCheckBoxUnchecked(object sender, RoutedEventArgs e)
         {
-            if (m_blnFlyoutInititalized)
+            if (m_blnFlyoutInititalized && !m_blnSkipSingleAction)
             {
                 GroupBox groupBox = (sender as FrameworkElement).FindParent<GroupBox>();
 
                 if (groupBox?.Content is Grid contentGrid)
                 {
-                    m_blnSkipAllActions = true;
+                    m_blnSkipAllAction = true;
 
                     switch (groupBox.Name)
                     {
@@ -150,7 +163,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
                             break;
                     }
 
-                    m_blnSkipAllActions = false;
+                    m_blnSkipAllAction = false;
                 }
             }
         }
