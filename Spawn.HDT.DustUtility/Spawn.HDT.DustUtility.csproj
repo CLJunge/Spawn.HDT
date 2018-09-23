@@ -67,6 +67,20 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Debug + Copy Plugin\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Zip|AnyCPU'">
+    <OutputPath>bin\Release + Zip\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Zip|x86'">
+    <OutputPath>bin\x86\Release + Zip\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net45\CommonServiceLocator.dll</HintPath>
@@ -473,6 +487,16 @@
     <PostBuildEvent>if "$(ConfigurationName)" == "Debug + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
 if "$(ConfigurationName)" == "Release" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild
 if "$(ConfigurationName)" == "Release + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild
-if "$(ConfigurationName)" == "Release + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll</PostBuildEvent>
+if "$(ConfigurationName)" == "Release + Copy Plugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --exename "Hearthstone Deck Tracker" --source "$(TargetDir)\" --target "$(ProjectName)" --launch --ext *.dll
+if "$(ConfigurationName)" == "Release + Zip" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild --zipoutput --zipname DustUtility.zip</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_ConfigurationName="Debug + Copy Plugin" BuildVersion_StartDate="2000/1/1" BuildVersion_BuildAction="Build" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>
