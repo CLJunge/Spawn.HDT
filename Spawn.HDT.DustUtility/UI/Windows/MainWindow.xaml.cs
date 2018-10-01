@@ -32,7 +32,7 @@ namespace Spawn.HDT.DustUtility.UI.Windows
         #region OnClosing
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DustUtilityPlugin.CardSelection.OnClosing(sender, e);
+            DustUtilityPlugin.CardSelection.SaveSelection();
 
             ServiceLocator.Current.GetInstance<MainViewModel>().OnClosing(sender, e);
         }

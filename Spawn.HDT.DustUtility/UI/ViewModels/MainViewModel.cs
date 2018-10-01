@@ -242,6 +242,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
 
+            DustUtilityPlugin.CardSelection.SaveSelection();
+
             if (await DustUtilityPlugin.SwitchAccount())
             {
                 SelectionWindow?.Close();

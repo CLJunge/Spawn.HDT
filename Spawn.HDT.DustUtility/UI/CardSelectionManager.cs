@@ -14,7 +14,6 @@ using Spawn.HDT.DustUtility.UI.Models;
 using Spawn.HDT.DustUtility.UI.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -327,8 +326,8 @@ namespace Spawn.HDT.DustUtility.UI
         }
         #endregion
 
-        #region OnClosing
-        public void OnClosing(object sender, CancelEventArgs e)
+        #region SaveSelection
+        public void SaveSelection()
         {
             List<CachedCard> lstCards = CardItems.Select(i => new CachedCard() { Id = i.Id, Count = i.Count, IsGolden = i.Golden }).ToList();
 
