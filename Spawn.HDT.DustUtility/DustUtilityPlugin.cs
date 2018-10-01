@@ -714,10 +714,10 @@ namespace Spawn.HDT.DustUtility
                         Cache.ClearCache();
                     }
 
+                    await ShowMainWindowAsync();
+
                     blnRet = true;
                 }
-
-                ShowMainWindowAsync().Forget();
 
                 Logger.Log(LogLevel.Debug, $"Switched account: Old={oldAcc.DisplayString} New={selectedAcc.DisplayString}");
             }
