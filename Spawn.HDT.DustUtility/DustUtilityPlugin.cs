@@ -199,9 +199,32 @@ namespace Spawn.HDT.DustUtility
         #region OnLoad
         public void OnLoad()
         {
-            Logger.Log(LogLevel.Trace, "Loading plugin...");
-
             m_blnInitialized = false;
+
+            LoadPlugin();
+        }
+        #endregion
+
+        #region OnButtonPress
+        public void OnButtonPress() => ShowSettingsDialog();
+        #endregion
+
+        #region OnUnload
+        public void OnUnload()
+        {
+            UnloadPlugin();
+        }
+        #endregion
+
+        #region OnUpdate
+        public void OnUpdate() => IsOffline = !Core.Game.IsRunning;
+        #endregion
+        #endregion
+
+        #region LoadPlugin
+        private void LoadPlugin()
+        {
+            Logger.Log(LogLevel.Trace, "Loading plugin...");
 
             HideMainWindowOnClose = true;
 
@@ -225,12 +248,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region OnButtonPress
-        public void OnButtonPress() => ShowSettingsDialog();
-        #endregion
-
-        #region OnUnload
-        public void OnUnload()
+        #region UnloadPlugin
+        private void UnloadPlugin()
         {
             HideMainWindowOnClose = false;
 
@@ -247,11 +266,6 @@ namespace Spawn.HDT.DustUtility
 
             Logger.Log(LogLevel.Trace, "Unloaded plugin");
         }
-        #endregion
-
-        #region OnUpdate
-        public void OnUpdate() => IsOffline = !Core.Game.IsRunning;
-        #endregion
         #endregion
 
         #region Events
