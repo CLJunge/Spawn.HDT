@@ -58,9 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (CanNotifyDirtyStatus && (m_dInitialPropertyValues?.ContainsKey(e.PropertyName) ?? false))
             {
                 object objInitialValue = m_dInitialPropertyValues[e.PropertyName];
-
                 object objNewValue = GetType().GetProperty(e.PropertyName).GetValue(this, null);
-
                 bool blnIsDirty = !ComparePropertyValues(objInitialValue, objNewValue);
 
                 if (blnIsDirty && (!DirtyProperties?.Contains(e.PropertyName) ?? false))
@@ -96,7 +94,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
-        #region AddInitialPropertyValue
+        #region SetInitialPropertyValue
         protected void SetInitialPropertyValue(string strPropertyName, object objValue)
         {
             if (CanNotifyDirtyStatus && m_dInitialPropertyValues != null)
