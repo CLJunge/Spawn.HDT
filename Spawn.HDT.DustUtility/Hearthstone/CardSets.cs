@@ -35,6 +35,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
+                { CardSet.TROLL, "Rastakhan" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -54,6 +55,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds and Catacombs" },
                 { CardSet.GILNEAS, "The Witchwood" },
                 { CardSet.BOOMSDAY, "The Boomsday Project" },
+                { CardSet.TROLL, "Rastakhan Rumble" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -73,6 +75,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
+                { CardSet.TROLL, "Rastakhan" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "BRM" },
                 { CardSet.LOE, "LOE" },
@@ -92,6 +95,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
+                { CardSet.TROLL, "Rastakhan" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
@@ -111,6 +115,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
+                { CardSet.TROLL, "Rastakhan" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -128,7 +133,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.ICECROWN, "Frozen Throne" },
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
-                { CardSet.BOOMSDAY, "Boomsday" }
+                { CardSet.BOOMSDAY, "Boomsday" },
+                { CardSet.TROLL, "Rastakhan" }
             };
 
             NonCraftableCardIds = new List<string>
@@ -168,6 +174,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Kobolds { get; }
             public static InfoItem Witchwood { get; }
             public static InfoItem Boomsday { get; }
+            public static InfoItem Rastakhan { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -190,6 +197,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Kobolds = new InfoItem(98, 72, 54, 23);
                 Witchwood = new InfoItem(98, 72, 54, 23);
                 Boomsday = new InfoItem(98, 72, 54, 23);
+                Rastakhan = new InfoItem(98, 72, 54, 23);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -209,6 +217,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.LOOTAPALOOZA, Kobolds },
                     { CardSet.GILNEAS, Witchwood },
                     { CardSet.BOOMSDAY, Boomsday },
+                    { CardSet.TROLL, Rastakhan },
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },

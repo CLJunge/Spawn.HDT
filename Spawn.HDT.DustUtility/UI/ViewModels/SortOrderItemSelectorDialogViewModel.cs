@@ -1,6 +1,7 @@
 ﻿#region Using
 using Spawn.HDT.DustUtility.Logging;
 using Spawn.HDT.DustUtility.UI.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 #endregion
@@ -65,9 +66,23 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await base.InitializeAsync();
 
+            SortOrderItems?.Clear();
+
             SelectedSortOrderItemIndex = 0;
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
+        }
+        #endregion
+
+        #region UpdateItems
+        public void UpdateItems(List<SortOrderItemModel> lstItems)
+        {
+            SortOrderItems?.Clear();
+
+            for (int i = 0; i < lstItems?.Count; i++)
+            {
+                SortOrderItems?.Add(lstItems[i]);
+            }
         }
         #endregion
     }

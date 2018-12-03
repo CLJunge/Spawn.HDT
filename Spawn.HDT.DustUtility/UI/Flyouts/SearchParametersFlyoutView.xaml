@@ -289,7 +289,30 @@
                         <TextBlock Grid.Column="1" Text="{Binding BoomsdaySetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=BoomsdaySetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="NaxxSetCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding NaxxSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                <CheckBox Name="RastakhanSetCheckBox" Grid.Row="2" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding RastakhanSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="32"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=RastakhanSetCheckBox, Path=IsChecked}">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="{DynamicResource RastakhanIcon}" Stretch="Uniform"/>
+                            </Rectangle.Fill>
+                            <Rectangle.Style>
+                                <Style TargetType="Rectangle">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Opacity" Value="0.2"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Rectangle.Style>
+                        </Rectangle>
+                        <TextBlock Grid.Column="1" Text="{Binding RastakhanSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=RastakhanSetCheckBox, Path=IsChecked}"/>
+                    </Grid>
+                </CheckBox>
+                <CheckBox Name="NaxxSetCheckBox" Grid.Row="3" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding NaxxSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -312,7 +335,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding NaxxSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=NaxxSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="MountainSetCheckBox" Grid.Row="3" Grid.Column="2" Margin="5,0,0,0" IsChecked="{Binding MountainSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                <CheckBox Name="MountainSetCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding MountainSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -335,7 +358,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding MountainSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=MountainSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="LeagueSetCheckBox" Grid.Row="0" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding LeagueSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                <CheckBox Name="LeagueSetCheckBox" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding LeagueSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -358,7 +381,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding LeagueSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=LeagueSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="KarazhanSetCheckBox" Grid.Row="1" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding KarazhanSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                <CheckBox Name="KarazhanSetCheckBox" Grid.Row="2" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding KarazhanSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>
@@ -381,7 +404,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding KarazhanSetEnabledLabelText}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" IsEnabled="{Binding ElementName=KarazhanSetCheckBox, Path=IsChecked}"/>
                     </Grid>
                 </CheckBox>
-                <CheckBox Name="HallSetCheckBox" Grid.Row="2" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding HallSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
+                <CheckBox Name="HallSetCheckBox" Grid.Row="3" Grid.Column="3" Margin="5,0,0,0" IsChecked="{Binding HallSetEnabled, Mode=TwoWay}" Checked="OnCheckBoxChecked" Unchecked="OnCheckBoxUnchecked">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="32"/>

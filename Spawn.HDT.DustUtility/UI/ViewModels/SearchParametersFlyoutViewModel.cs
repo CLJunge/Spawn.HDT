@@ -42,6 +42,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strWitchwoodSetEnabledLabelText;
         private bool m_blnBoomsdaySetEnabled;
         private string m_strBoomsdaySetEnabledLabelText;
+        private bool m_blnRastakhanSetEnabled;
+        private string m_strRastakhanSetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -255,6 +257,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strBoomsdaySetEnabledLabelText;
             set => Set(ref m_strBoomsdaySetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region RastakhanSetEnabled
+        public bool RastakhanSetEnabled
+        {
+            get => m_blnRastakhanSetEnabled;
+            set => Set(ref m_blnRastakhanSetEnabled, value);
+        }
+        #endregion
+
+        #region RastakhanSetEnabledLabelText
+        public string RastakhanSetEnabledLabelText
+        {
+            get => m_strRastakhanSetEnabledLabelText;
+            set => Set(ref m_strRastakhanSetEnabledLabelText, value);
         }
         #endregion
 
@@ -795,6 +813,17 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     }
                     break;
 
+                case nameof(RastakhanSetEnabled):
+                    if (e.IsDirty)
+                    {
+                        RastakhanSetEnabledLabelText = $"{RastakhanSetEnabledLabelText}{IsDirtySuffix}";
+                    }
+                    else
+                    {
+                        RastakhanSetEnabledLabelText = RastakhanSetEnabledLabelText.Substring(0, RastakhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
+                    }
+                    break;
+
                 case nameof(NaxxSetEnabled):
                     if (e.IsDirty)
                     {
@@ -1067,6 +1096,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllSetCheckBoxesChecked &= KoboldsSetEnabled = parameters.Sets.Contains(CardSet.LOOTAPALOOZA);
             AllSetCheckBoxesChecked &= WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
             AllSetCheckBoxesChecked &= BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
+            AllSetCheckBoxesChecked &= RastakhanSetEnabled = parameters.Sets.Contains(CardSet.TROLL);
             AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -1103,6 +1133,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(KoboldsSetEnabled), KoboldsSetEnabled);
             SetInitialPropertyValue(nameof(WitchwoodSetEnabled), WitchwoodSetEnabled);
             SetInitialPropertyValue(nameof(BoomsdaySetEnabled), BoomsdaySetEnabled);
+            SetInitialPropertyValue(nameof(RastakhanSetEnabled), RastakhanSetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1207,6 +1238,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (BoomsdaySetEnabled)
             {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BOOMSDAY);
+            }
+
+            if (RastakhanSetEnabled)
+            {
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.TROLL);
             }
 
             if (NaxxSetEnabled)
@@ -1327,6 +1363,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             KoboldsSetEnabledLabelText = CardSet.LOOTAPALOOZA.GetDisplayString();
             WitchwoodSetEnabledLabelText = CardSet.GILNEAS.GetDisplayString();
             BoomsdaySetEnabledLabelText = CardSet.BOOMSDAY.GetDisplayString();
+            RastakhanSetEnabledLabelText = CardSet.TROLL.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();

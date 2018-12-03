@@ -128,18 +128,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private async void AddItem()
 #pragma warning restore S3168 // "async" methods should not return "void"
         {
-            List<SortOrderItemModel> lstUnusedItems = GetUnusedSortOrderItems();
-
             SortOrderItemSelectorDialogViewModel viewModel = ServiceLocator.Current.GetInstance<SortOrderItemSelectorDialogViewModel>();
-
-            viewModel.SortOrderItems.Clear();
-
-            for (int i = 0; i < lstUnusedItems.Count; i++)
-            {
-                viewModel.SortOrderItems.Add(lstUnusedItems[i]);
-            }
-
+            
             await viewModel.InitializeAsync();
+
+            viewModel.UpdateItems(GetUnusedSortOrderItems());
 
             SortOrderItemSelectorDialogView dialog = new SortOrderItemSelectorDialogView()
             {
