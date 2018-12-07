@@ -297,7 +297,7 @@
                         </Grid.ColumnDefinitions>
                         <Rectangle Grid.Column="0" Width="24" Height="24" IsEnabled="{Binding ElementName=RastakhanSetCheckBox, Path=IsChecked}">
                             <Rectangle.Fill>
-                                <ImageBrush ImageSource="{DynamicResource BasicIcon}" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="{DynamicResource RastakhanIcon}" Stretch="Uniform"/>
                             </Rectangle.Fill>
                             <Rectangle.Style>
                                 <Style TargetType="Rectangle">
