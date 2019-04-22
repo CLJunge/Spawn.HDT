@@ -87,16 +87,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(SelectedDeckItem)) && SelectedDeckItem != null)
-                {
                     ServiceLocator.Current.GetInstance<DeckListFlyoutViewModel>().Deck = SelectedDeckItem.Deck;
-                }
             };
 
 #if DEBUG
             if (IsInDesignMode)
-            {
                 InitializeAsync().Forget();
-            }
 #endif
 
             Messenger.Default.Register<CMOpeningMessage>(this, OnContextMenuOpening);
@@ -115,14 +111,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await base.InitializeAsync();
 
-            if (DustUtilityPlugin.IsOffline)
-            {
-                ReloadButtonVisibility = Visibility.Collapsed;
-            }
-            else
-            {
-                ReloadButtonVisibility = Visibility.Visible;
-            }
+            ReloadButtonVisibility = DustUtilityPlugin.IsOffline ? Visibility.Collapsed : Visibility.Visible;
 
             if (ReloadRequired)
             {
@@ -135,9 +124,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     DeckItemModel item = new DeckItemModel(lstDecks[i]);
 
                     if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(item.DeckId))
-                    {
                         item.Opacity = .5;
-                    }
 
                     DeckItems.Add(item);
                 }
@@ -203,16 +190,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 message.EventArgs.Handled = !blnDeckSelected;
 
                 if (blnDeckSelected)
-                {
-                    if (DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId))
-                    {
-                        ToggleDeckMenuItemHeader = IncludeHeaderText;
-                    }
-                    else
-                    {
-                        ToggleDeckMenuItemHeader = ExcludeHeaderText;
-                    }
-                }
+                    ToggleDeckMenuItemHeader = DustUtilityPlugin.CurrentAccount.IsDeckExcludedFromSearch(SelectedDeckItem.DeckId) ? IncludeHeaderText : ExcludeHeaderText;
             }
         }
         #endregion

@@ -1034,7 +1034,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = NoDecksTag + DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip;
             }
             else
+            {
                 DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = UnusedCardsToolTip;
+            }
         }
         #endregion
 

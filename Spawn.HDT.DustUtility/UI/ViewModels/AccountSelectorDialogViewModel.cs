@@ -55,14 +55,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             Accounts = new ObservableCollection<IAccount>(DustUtilityPlugin.GetAccounts());
 
-            if (!string.IsNullOrEmpty(DustUtilityPlugin.Config.LastSelectedAccount))
-            {
-                SelectedAccountString = DustUtilityPlugin.Config.LastSelectedAccount;
-            }
-            else
-            {
-                SelectedAccountString = Accounts[0].AccountString;
-            }
+            SelectedAccountString = !string.IsNullOrEmpty(DustUtilityPlugin.Config.LastSelectedAccount)
+                ? DustUtilityPlugin.Config.LastSelectedAccount
+                : Accounts[0].AccountString;
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Finished initializing");
         }

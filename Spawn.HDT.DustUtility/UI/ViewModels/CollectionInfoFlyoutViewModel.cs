@@ -86,9 +86,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     CardSet cardSet = lstCardSets[i];
 
                     if (HasCardSet(lstCollection, cardSet))
-                    {
                         CardSetItems.Add(CreateCardSetItem(lstCollection, cardSet));
-                    }
                 }
 
                 ReloadRequired = false;
@@ -107,14 +105,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             {
                 blnRet = lstCollection.Any(c =>
                 {
-                    if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
-                    {
-                        return HearthDb.Cards.Collectible[c.Id].Set == cardSet;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return HearthDb.Cards.Collectible.ContainsKey(c.Id) ? HearthDb.Cards.Collectible[c.Id].Set == cardSet : false;
                 });
             }
 
@@ -301,29 +292,18 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
             List<Card> lstChunk = lstCollection.FindAll(c =>
             {
-                if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
-                {
-                    HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
-
-                    return card.Set == cardSet && card.Rarity == rarity && c.Premium == blnIsGolden;
-                }
-                else
-                {
-                    return false;
-                }
+                return HearthDb.Cards.Collectible.ContainsKey(c.Id)
+                    ? HearthDb.Cards.Collectible[c.Id].Set == cardSet && HearthDb.Cards.Collectible[c.Id].Rarity == rarity && c.Premium == blnIsGolden
+                    : false;
             });
 
             int nMaxCount = 2;
 
             if (rarity == Rarity.LEGENDARY)
-            {
                 nMaxCount = 1;
-            }
 
             for (int i = 0; i < lstChunk.Count; i++)
-            {
                 nRet += Math.Min(lstChunk[i].Count, nMaxCount);
-            }
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"GetCountForRarity: CardSet={cardSet.GetShortString()}, Rarity={rarity.GetString()}, IsGolden={blnIsGolden} > Result={nRet}");
 
@@ -344,56 +324,33 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
-                        {
-                            HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
-
-                            return card.Set == cardSet && card.Rarity == rarity && c.Premium == blnIsGolden;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return HearthDb.Cards.Collectible.ContainsKey(c.Id)
+                            ? HearthDb.Cards.Collectible[c.Id].Set == cardSet && HearthDb.Cards.Collectible[c.Id].Rarity == rarity && c.Premium == blnIsGolden
+                            : false;
                     });
                 }
                 else if (cardSet != CardSet.INVALID)
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
-                        {
-                            HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
-
-                            return card.Set == cardSet && c.Premium == blnIsGolden;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return HearthDb.Cards.Collectible.ContainsKey(c.Id)
+                            ? HearthDb.Cards.Collectible[c.Id].Set == cardSet && c.Premium == blnIsGolden
+                            : false;
                     });
                 }
                 else if (rarity != Rarity.INVALID)
                 {
                     lstChunk = lstCards.FindAll(c =>
                     {
-                        if (HearthDb.Cards.Collectible.ContainsKey(c.Id))
-                        {
-                            HearthDb.Card card = HearthDb.Cards.Collectible[c.Id];
-
-                            return card.Rarity == rarity && c.Premium == blnIsGolden;
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return HearthDb.Cards.Collectible.ContainsKey(c.Id)
+                            ? HearthDb.Cards.Collectible[c.Id].Rarity == rarity && c.Premium == blnIsGolden
+                            : false;
                     });
                 }
             }
 
             for (int i = 0; i < lstChunk.Count; i++)
-            {
                 nRet += lstChunk[i].GetDustValue() * lstChunk[i].Count;
-            }
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, $"GetDustValue: CardSet={cardSet.GetShortString()}, Rarity={rarity.GetString()}, IsGolden={blnIsGolden} > Result={nRet}");
 

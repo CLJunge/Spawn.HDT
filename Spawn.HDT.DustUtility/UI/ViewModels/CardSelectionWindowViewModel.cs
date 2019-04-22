@@ -38,10 +38,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region DisenchantSelectionCommand
-        public ICommand DisenchantSelectionCommand => new RelayCommand(CardSelection.DisenchantSelection, () =>
-        {
-            return DustUtilityPlugin.Config.AutoDisenchanting && CardSelection.CardItems.Count > 0 && !DustUtilityPlugin.IsOffline;
-        });
+        public ICommand DisenchantSelectionCommand => new RelayCommand(CardSelection.DisenchantSelection, () => DustUtilityPlugin.Config.AutoDisenchanting && CardSelection.CardItems.Count > 0 && !DustUtilityPlugin.IsOffline);
         #endregion
         #endregion
 

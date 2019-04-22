@@ -97,9 +97,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
 #if DEBUG
             if (IsInDesignMode)
-            {
                 UpdateMessage = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod" + Environment.NewLine + Environment.NewLine + "tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo" + Environment.NewLine + "dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy" + Environment.NewLine + "eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum." + Environment.NewLine + Environment.NewLine + "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
-            }
 #endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'UpdatedFlyoutViewModel' instance");
@@ -194,18 +192,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             string strPath = Path.Combine(DustUtilityPlugin.DataDirectory, "update.zip");
 
             using (FileStream fs = File.Open(strPath, FileMode.Create))
-            {
                 fs.Write(e.Result, 0, e.Result.Length);
-            }
 
             DeleteOldPluginVersions();
 
             string strTargetDir = Path.Combine(Hearthstone_Deck_Tracker.Config.AppDataPath, "Plugins", "Spawn.HDT.DustUtility");
 
             if (!Directory.Exists(strTargetDir))
-            {
                 Directory.CreateDirectory(strTargetDir);
-            }
 
             ZipFile.ExtractToDirectory(strPath, strTargetDir);
 
@@ -217,10 +211,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region OnDownloadProgressChanged
-        private void OnDownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
-        {
-            DownloadProgress = e.ProgressPercentage;
-        }
+        private void OnDownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e) => DownloadProgress = e.ProgressPercentage;
         #endregion
         #endregion
 
@@ -234,16 +225,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             string[] vOldFiles = Directory.GetFiles(strHdtPluginDir, strSearchPattern);
 
             for (int i = 0; i < vOldFiles.Length; i++)
-            {
                 File.Delete(vOldFiles[i]);
-            }
 
             string[] vOldPluginDirs = Directory.GetDirectories(strHdtPluginDir, strSearchPattern);
 
             for (int i = 0; i < vOldPluginDirs.Length; i++)
-            {
                 Directory.Delete(vOldPluginDirs[i], true);
-            }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Deleted old plugin versions");
         }

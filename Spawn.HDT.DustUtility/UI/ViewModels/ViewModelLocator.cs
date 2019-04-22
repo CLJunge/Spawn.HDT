@@ -11,15 +11,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
     {
         #region Static Properties
         #region ViewModelName AP
-        public static string GetViewModelName(DependencyObject obj)
-        {
-            return (string)obj.GetValue(ViewModelNameProperty);
-        }
+        public static string GetViewModelName(DependencyObject obj) => (string)obj.GetValue(ViewModelNameProperty);
 
-        public static void SetViewModelName(DependencyObject obj, string value)
-        {
-            obj.SetValue(ViewModelNameProperty, value);
-        }
+        public static void SetViewModelName(DependencyObject obj, string value) => obj.SetValue(ViewModelNameProperty, value);
 
         // Using a DependencyProperty as the backing store for ViewModelName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ViewModelNameProperty =
@@ -55,9 +49,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         static ViewModelLocator()
         {
             if (GalaSoft.MvvmLight.ViewModelBase.IsInDesignModeStatic)
-            {
                 DustUtilityPlugin.CreateContainer();
-            }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'ViewModelLocator'");
         }

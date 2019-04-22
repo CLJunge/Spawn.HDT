@@ -62,13 +62,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 bool blnIsDirty = !ComparePropertyValues(objInitialValue, objNewValue);
 
                 if (blnIsDirty && (!DirtyProperties?.Contains(e.PropertyName) ?? false))
-                {
                     DirtyProperties.Add(e.PropertyName);
-                }
                 else if (!blnIsDirty && (DirtyProperties?.Contains(e.PropertyName) ?? false))
-                {
                     DirtyProperties.Remove(e.PropertyName);
-                }
 
                 IsDirty = DirtyProperties?.Count > 0;
 
@@ -98,17 +94,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         protected void SetInitialPropertyValue(string strPropertyName, object objValue)
         {
             if (CanNotifyDirtyStatus && m_dInitialPropertyValues != null)
-            {
                 m_dInitialPropertyValues[strPropertyName] = objValue;
-            }
         }
         #endregion
 
         #region ComparePropertyValues
-        protected virtual bool ComparePropertyValues<T>(T a, T b)
-        {
-            return EqualityComparer<T>.Default.Equals(a, b);
-        }
+        protected virtual bool ComparePropertyValues<T>(T a, T b) => EqualityComparer<T>.Default.Equals(a, b);
         #endregion
     }
 }

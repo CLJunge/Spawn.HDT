@@ -67,17 +67,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region MoveUpItemCommand
-        public ICommand MoveUpItemCommand => new RelayCommand(MoveUpItem, () =>
-        {
-            return SelectedSortOrderItem != null && SelectedSortOrderItemIndex > 0;
-        });
+        public ICommand MoveUpItemCommand => new RelayCommand(MoveUpItem, () => SelectedSortOrderItem != null && SelectedSortOrderItemIndex > 0);
         #endregion
 
         #region MoveDownItemCommand
-        public ICommand MoveDownItemCommand => new RelayCommand(MoveDownItem, () =>
-        {
-            return SelectedSortOrderItem != null && SelectedSortOrderItemIndex < (SortOrderItems.Count - 1);
-        });
+        public ICommand MoveDownItemCommand => new RelayCommand(MoveDownItem, () => SelectedSortOrderItem != null && SelectedSortOrderItemIndex < (SortOrderItems.Count - 1));
         #endregion
 
         #region SaveCommand
@@ -92,9 +86,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
 #if DEBUG
             if (IsInDesignMode)
-            {
                 InitializeAsync().Forget();
-            }
 #endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SortOrderFlyoutViewModel' instance");
@@ -111,9 +103,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SortOrder sortOrder = SortOrder.Parse(DustUtilityPlugin.Config.SortOrder);
 
             for (int i = 0; i < sortOrder?.Count; i++)
-            {
                 SortOrderItems.Add(sortOrder[i]);
-            }
 
             m_nMaxCount = Enum.GetValues(typeof(SortOrder.OrderItem)).Length;
 
@@ -129,7 +119,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 #pragma warning restore S3168 // "async" methods should not return "void"
         {
             SortOrderItemSelectorDialogViewModel viewModel = ServiceLocator.Current.GetInstance<SortOrderItemSelectorDialogViewModel>();
-            
+
             await viewModel.InitializeAsync();
 
             viewModel.UpdateItems(GetUnusedSortOrderItems());
@@ -222,9 +212,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 SortOrderItemModel model = new SortOrderItemModel(vItems[i]);
 
                 if (lstModels.Find(m => m.Value == model.Value) == null)
-                {
                     lstRet.Add(model);
-                }
             }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {lstRet.Count} unused items");
@@ -243,9 +231,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 strRet = SortOrderItems[0].Value.ToString();
 
                 for (int i = 1; i < SortOrderItems.Count; i++)
-                {
                     strRet = $"{strRet};{SortOrderItems[i].Value}";
-                }
             }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Created new sort order string ({strRet})");

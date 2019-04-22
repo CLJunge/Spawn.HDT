@@ -80,9 +80,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SortOrderItems?.Clear();
 
             for (int i = 0; i < lstItems?.Count; i++)
-            {
                 SortOrderItems?.Add(lstItems[i]);
-            }
         }
         #endregion
     }

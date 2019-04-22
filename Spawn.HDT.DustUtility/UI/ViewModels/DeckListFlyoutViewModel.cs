@@ -39,15 +39,11 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(Deck)))
-                {
                     InitializeAsync().Forget();
-                }
             };
 
             if (IsInDesignMode)
-            {
                 Deck = DustUtilityPlugin.CurrentAccount.GetDecks()[0];
-            }
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckListFlyoutViewModel' instance");
         }

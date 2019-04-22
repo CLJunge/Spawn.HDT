@@ -40,9 +40,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
 #if DEBUG
             if (IsInDesignMode)
-            {
                 InitializeAsync().Forget();
-            }
 #endif
 
             Messenger.Default.Register<RemoveCardItemMessage>(this, RemoveCardItem);
@@ -76,21 +74,15 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     };
 
                     if (cardItem.Count > 0)
-                    {
                         cardItem.Dust = wrapper.RawCard.GetCraftingCost();
-                    }
 
                     CardItems.Add(cardItem);
                 }
 
                 if (lstHistory.Count > 0)
-                {
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded history: {lstHistory.Count} entries");
-                }
                 else
-                {
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"No history available");
-                }
 
                 ReloadRequired = false;
             }

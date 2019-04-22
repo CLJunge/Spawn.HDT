@@ -140,10 +140,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #endregion
 
         #region DisenchantSelectionCommand
-        public ICommand DisenchantSelectionCommand => new RelayCommand(CardSelection.DisenchantSelection, () =>
-        {
-            return DustUtilityPlugin.Config.AutoDisenchanting && CardSelection.CardItems.Count > 0 && !DustUtilityPlugin.IsOffline;
-        });
+        public ICommand DisenchantSelectionCommand => new RelayCommand(CardSelection.DisenchantSelection, () => DustUtilityPlugin.Config.AutoDisenchanting && CardSelection.CardItems.Count > 0 && !DustUtilityPlugin.IsOffline);
         #endregion
 
         #region DefaultViewVisibility
@@ -200,16 +197,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(IsSyncing)))
-                {
-                    if (IsSyncing)
-                    {
-                        WindowTitle = $"{WindowTitle}{SyncingTag}";
-                    }
-                    else
-                    {
-                        WindowTitle = WindowTitle.Replace(SyncingTag, string.Empty);
-                    }
-                }
+                    WindowTitle = IsSyncing ? $"{WindowTitle}{SyncingTag}" : WindowTitle.Replace(SyncingTag, string.Empty);
             };
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'MainViewModel' instance");
@@ -266,9 +254,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 int nCollectionValue = CardsManager.GetTotalCollectionValue(DustUtilityPlugin.CurrentAccount);
 
                 if (nCollectionValue > 0)
-                {
                     flyout.Header += $" (Total: {nCollectionValue} Dust)";
-                }
             }
             else if (flyout.Content is Flyouts.DecksFlyoutView && viewModel.ReloadRequired)
             {
@@ -276,9 +262,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             if (!flyout.IsOpen)
-            {
                 flyout.IsOpen = true;
-            }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Opened '{flyout.Name}'");
 
@@ -306,9 +290,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     result.CopyToCardsInfoModel(CardsInfo);
 
                     for (int i = 0; i < result.CardItems.Count; i++)
-                    {
                         CardItems.Add(result.CardItems[i]);
-                    }
 
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Got search result");
                 }
@@ -368,9 +350,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             CardItems.Clear();
 
             for (int i = 0; i < lstItems.Count; i++)
-            {
                 CardItems.Add(lstItems[i]);
-            }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Updated card items");
         }
@@ -407,14 +387,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region OnClosing
         public void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (DustUtilityPlugin.Config.RememberQueryString)
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = SearchQuery;
-            }
-            else
-            {
-                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = null;
-            }
+            DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.QueryString = DustUtilityPlugin.Config.RememberQueryString ? SearchQuery : null;
 
             CloseSelectionWindow();
 
@@ -443,9 +416,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 IQueryable<CardItemModel> query = items.AsQueryable();
 
                 for (int i = 0; i < sortOrder.Count; i++)
-                {
                     query = query.OrderBy(sortOrder[i].Value.ToString(), i);
-                }
 
                 retVal = query.ToList();
             }
@@ -552,9 +523,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 WindowTitle = $"Dust Utility [{DustUtilityPlugin.CurrentAccount.DisplayString})]";
 
                 if (DustUtilityPlugin.Config.HideBattleTagId)
-                {
                     WindowTitle = WindowTitle.Replace($"#{DustUtilityPlugin.CurrentAccount.BattleTag.Number}", string.Empty);
-                }
             }
             else
             {
@@ -562,19 +531,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             }
 
             if (DustUtilityPlugin.IsOffline)
-            {
                 WindowTitle = $"{WindowTitle} [OFFLINE]";
-            }
 
 #if DEBUG
-            if (IsInDesignMode)
-            {
-                WindowTitle = $"{WindowTitle} (Design)";
-            }
-            else
-            {
-                WindowTitle = $"{WindowTitle} (Debug)";
-            }
+            WindowTitle = IsInDesignMode ? $"{WindowTitle} (Design)" : $"{WindowTitle} (Debug)";
 #endif
         }
         #endregion
@@ -594,9 +554,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 string strToolTipText = "Open Hearthstone and visit the 'Play' menu in order to load your decks.";
 
                 if (!DustUtilityPlugin.IsOffline)
-                {
                     strToolTipText = "Visit the 'Play' menu in order to load your decks.";
-                }
 
                 DustUtilityPlugin.MainWindow.DecksButton.ToolTip = strToolTipText;
             }

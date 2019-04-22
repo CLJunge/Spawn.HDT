@@ -317,14 +317,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             switch (e.PropertyName)
             {
                 case nameof(OfflineMode):
-                    if (e.IsDirty)
-                    {
-                        OfflineModeLabelText = $"{OfflineModeLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        OfflineModeLabelText = OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    OfflineModeLabelText = e.IsDirty
+                        ? $"{OfflineModeLabelText}{IsDirtySuffix}"
+                        : OfflineModeLabelText.Substring(0, OfflineModeLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(SaveDelay):
@@ -340,58 +335,33 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     break;
 
                 case nameof(CheckForUpdates):
-                    if (e.IsDirty)
-                    {
-                        CheckForUpdatesLabelText = $"{CheckForUpdatesLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        CheckForUpdatesLabelText = CheckForUpdatesLabelText.Substring(0, CheckForUpdatesLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    CheckForUpdatesLabelText = e.IsDirty
+                        ? $"{CheckForUpdatesLabelText}{IsDirtySuffix}"
+                        : CheckForUpdatesLabelText.Substring(0, CheckForUpdatesLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(ColoredCardLabels):
-                    if (e.IsDirty)
-                    {
-                        ColoredCardLabelsLabelText = $"{ColoredCardLabelsLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        ColoredCardLabelsLabelText = ColoredCardLabelsLabelText.Substring(0, ColoredCardLabelsLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    ColoredCardLabelsLabelText = e.IsDirty
+                        ? $"{ColoredCardLabelsLabelText}{IsDirtySuffix}"
+                        : ColoredCardLabelsLabelText.Substring(0, ColoredCardLabelsLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(AutoDisenchanting):
-                    if (e.IsDirty)
-                    {
-                        AutoDisenchantingLabelText = $"{AutoDisenchantingLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        AutoDisenchantingLabelText = AutoDisenchantingLabelText.Substring(0, AutoDisenchantingLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    AutoDisenchantingLabelText = e.IsDirty
+                        ? $"{AutoDisenchantingLabelText}{IsDirtySuffix}"
+                        : AutoDisenchantingLabelText.Substring(0, AutoDisenchantingLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(RememberQueryString):
-                    if (e.IsDirty)
-                    {
-                        RememberQueryStringLabelText = $"{RememberQueryStringLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        RememberQueryStringLabelText = RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    RememberQueryStringLabelText = e.IsDirty
+                        ? $"{RememberQueryStringLabelText}{IsDirtySuffix}"
+                        : RememberQueryStringLabelText.Substring(0, RememberQueryStringLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(ShowNotifications):
-                    if (e.IsDirty)
-                    {
-                        ShowNotificationsLabelText = $"{ShowNotificationsLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        ShowNotificationsLabelText = ShowNotificationsLabelText.Substring(0, ShowNotificationsLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    ShowNotificationsLabelText = e.IsDirty
+                        ? $"{ShowNotificationsLabelText}{IsDirtySuffix}"
+                        : ShowNotificationsLabelText.Substring(0, ShowNotificationsLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(LogLevel):
@@ -406,36 +376,21 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     break;
 
                 case nameof(ViewMode):
-                    if (e.IsDirty)
-                    {
-                        ViewModeLabelText = $"{ViewModeLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        ViewModeLabelText = ViewModeLabelText.Substring(0, ViewModeLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    ViewModeLabelText = e.IsDirty
+                        ? $"{ViewModeLabelText}{IsDirtySuffix}"
+                        : ViewModeLabelText.Substring(0, ViewModeLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(HideBattleTagId):
-                    if (e.IsDirty)
-                    {
-                        HideBattleTagIdLabelText = $"{HideBattleTagIdLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        HideBattleTagIdLabelText = HideBattleTagIdLabelText.Substring(0, HideBattleTagIdLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    HideBattleTagIdLabelText = e.IsDirty
+                        ? $"{HideBattleTagIdLabelText}{IsDirtySuffix}"
+                        : HideBattleTagIdLabelText.Substring(0, HideBattleTagIdLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(EnableHistory):
-                    if (e.IsDirty)
-                    {
-                        EnableHistoryLabelText = $"{EnableHistoryLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        EnableHistoryLabelText = EnableHistoryLabelText.Substring(0, EnableHistoryLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    EnableHistoryLabelText = e.IsDirty
+                        ? $"{EnableHistoryLabelText}{IsDirtySuffix}"
+                        : EnableHistoryLabelText.Substring(0, EnableHistoryLabelText.Length - IsDirtySuffix.Length);
                     break;
 
 #if DEBUG
