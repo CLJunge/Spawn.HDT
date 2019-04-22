@@ -44,6 +44,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strBoomsdaySetEnabledLabelText;
         private bool m_blnRastakhanSetEnabled;
         private string m_strRastakhanSetEnabledLabelText;
+        private bool m_blnShadowsSetEnabled;
+        private string m_strShadowsSetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -273,6 +275,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strRastakhanSetEnabledLabelText;
             set => Set(ref m_strRastakhanSetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region ShadowsSetEnabled
+        public bool ShadowsSetEnabled
+        {
+            get => m_blnShadowsSetEnabled;
+            set => Set(ref m_blnShadowsSetEnabled, value);
+        }
+        #endregion
+
+        #region ShadowsSetEnabledLabelText
+        public string ShadowsSetEnabledLabelText
+        {
+            get => m_strShadowsSetEnabledLabelText;
+            set => Set(ref m_strShadowsSetEnabledLabelText, value);
         }
         #endregion
 
@@ -679,18 +697,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(IncludeGoldenCards)) && !IncludeGoldenCards)
-                {
                     IncludeGoldenCardsOnly = false;
-                }
             };
 
             NotifyDirtyStatus += OnNotifyDirtyStatus;
 
 #if DEBUG
             if (IsInDesignMode)
-            {
                 InitializeAsync().Forget();
-            }
 #endif
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Created new 'SearchParametersFlyoutViewModel' instance");
@@ -704,366 +718,207 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             switch (e.PropertyName)
             {
                 case nameof(ExpertSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        ExpertSetEnabledLabelText = $"{ExpertSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        ExpertSetEnabledLabelText = ExpertSetEnabledLabelText.Substring(0, ExpertSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    ExpertSetEnabledLabelText = e.IsDirty
+                        ? $"{ExpertSetEnabledLabelText}{IsDirtySuffix}"
+                        : ExpertSetEnabledLabelText.Substring(0, ExpertSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(GoblinsSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        GoblinsSetEnabledLabelText = $"{GoblinsSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        GoblinsSetEnabledLabelText = GoblinsSetEnabledLabelText.Substring(0, GoblinsSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    GoblinsSetEnabledLabelText = e.IsDirty
+                        ? $"{GoblinsSetEnabledLabelText}{IsDirtySuffix}"
+                        : GoblinsSetEnabledLabelText.Substring(0, GoblinsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(TournamentSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        TournamentSetEnabledLabelText = $"{TournamentSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        TournamentSetEnabledLabelText = TournamentSetEnabledLabelText.Substring(0, TournamentSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    TournamentSetEnabledLabelText = e.IsDirty
+                        ? $"{TournamentSetEnabledLabelText}{IsDirtySuffix}"
+                        : TournamentSetEnabledLabelText.Substring(0, TournamentSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(OldGodsSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        OldGodsSetEnabledLabelText = $"{OldGodsSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        OldGodsSetEnabledLabelText = OldGodsSetEnabledLabelText.Substring(0, OldGodsSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    OldGodsSetEnabledLabelText = e.IsDirty
+                        ? $"{OldGodsSetEnabledLabelText}{IsDirtySuffix}"
+                        : OldGodsSetEnabledLabelText.Substring(0, OldGodsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(GadgetzanSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        GadgetzanSetEnabledLabelText = $"{GadgetzanSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        GadgetzanSetEnabledLabelText = GadgetzanSetEnabledLabelText.Substring(0, GadgetzanSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    GadgetzanSetEnabledLabelText = e.IsDirty
+                        ? $"{GadgetzanSetEnabledLabelText}{IsDirtySuffix}"
+                        : GadgetzanSetEnabledLabelText.Substring(0, GadgetzanSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(UngoroSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        UngoroSetEnabledLabelText = $"{UngoroSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        UngoroSetEnabledLabelText = UngoroSetEnabledLabelText.Substring(0, UngoroSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    UngoroSetEnabledLabelText = e.IsDirty
+                        ? $"{UngoroSetEnabledLabelText}{IsDirtySuffix}"
+                        : UngoroSetEnabledLabelText.Substring(0, UngoroSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(FrozenThroneSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        FrozenThroneSetEnabledLabelText = $"{FrozenThroneSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        FrozenThroneSetEnabledLabelText = FrozenThroneSetEnabledLabelText.Substring(0, FrozenThroneSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    FrozenThroneSetEnabledLabelText = e.IsDirty
+                        ? $"{FrozenThroneSetEnabledLabelText}{IsDirtySuffix}"
+                        : FrozenThroneSetEnabledLabelText.Substring(0, FrozenThroneSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(KoboldsSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        KoboldsSetEnabledLabelText = $"{KoboldsSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        KoboldsSetEnabledLabelText = KoboldsSetEnabledLabelText.Substring(0, KoboldsSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    KoboldsSetEnabledLabelText = e.IsDirty
+                        ? $"{KoboldsSetEnabledLabelText}{IsDirtySuffix}"
+                        : KoboldsSetEnabledLabelText.Substring(0, KoboldsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(WitchwoodSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        WitchwoodSetEnabledLabelText = $"{WitchwoodSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        WitchwoodSetEnabledLabelText = WitchwoodSetEnabledLabelText.Substring(0, WitchwoodSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    WitchwoodSetEnabledLabelText = e.IsDirty
+                        ? $"{WitchwoodSetEnabledLabelText}{IsDirtySuffix}"
+                        : WitchwoodSetEnabledLabelText.Substring(0, WitchwoodSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(BoomsdaySetEnabled):
-                    if (e.IsDirty)
-                    {
-                        BoomsdaySetEnabledLabelText = $"{BoomsdaySetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        BoomsdaySetEnabledLabelText = BoomsdaySetEnabledLabelText.Substring(0, BoomsdaySetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    BoomsdaySetEnabledLabelText = e.IsDirty
+                        ? $"{BoomsdaySetEnabledLabelText}{IsDirtySuffix}"
+                        : BoomsdaySetEnabledLabelText.Substring(0, BoomsdaySetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(RastakhanSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        RastakhanSetEnabledLabelText = $"{RastakhanSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        RastakhanSetEnabledLabelText = RastakhanSetEnabledLabelText.Substring(0, RastakhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    RastakhanSetEnabledLabelText = e.IsDirty
+                        ? $"{RastakhanSetEnabledLabelText}{IsDirtySuffix}"
+                        : RastakhanSetEnabledLabelText.Substring(0, RastakhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
+                    break;
+
+                case nameof(ShadowsSetEnabled):
+                    ShadowsSetEnabledLabelText = e.IsDirty
+                        ? $"{ShadowsSetEnabledLabelText}{IsDirtySuffix}"
+                        : ShadowsSetEnabledLabelText.Substring(0, ShadowsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(NaxxSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        NaxxSetEnabledLabelText = $"{NaxxSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        NaxxSetEnabledLabelText = NaxxSetEnabledLabelText.Substring(0, NaxxSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    NaxxSetEnabledLabelText = e.IsDirty
+                        ? $"{NaxxSetEnabledLabelText}{IsDirtySuffix}"
+                        : NaxxSetEnabledLabelText.Substring(0, NaxxSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(MountainSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        MountainSetEnabledLabelText = $"{MountainSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        MountainSetEnabledLabelText = MountainSetEnabledLabelText.Substring(0, MountainSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    MountainSetEnabledLabelText = e.IsDirty
+                        ? $"{MountainSetEnabledLabelText}{IsDirtySuffix}"
+                        : MountainSetEnabledLabelText.Substring(0, MountainSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(LeagueSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        LeagueSetEnabledLabelText = $"{LeagueSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        LeagueSetEnabledLabelText = LeagueSetEnabledLabelText.Substring(0, LeagueSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    LeagueSetEnabledLabelText = e.IsDirty
+                        ? $"{LeagueSetEnabledLabelText}{IsDirtySuffix}"
+                        : LeagueSetEnabledLabelText.Substring(0, LeagueSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(KarazhanSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        KarazhanSetEnabledLabelText = $"{KarazhanSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        KarazhanSetEnabledLabelText = KarazhanSetEnabledLabelText.Substring(0, KarazhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    KarazhanSetEnabledLabelText = e.IsDirty
+                        ? $"{KarazhanSetEnabledLabelText}{IsDirtySuffix}"
+                        : KarazhanSetEnabledLabelText.Substring(0, KarazhanSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(HallSetEnabled):
-                    if (e.IsDirty)
-                    {
-                        HallSetEnabledLabelText = $"{HallSetEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        HallSetEnabledLabelText = HallSetEnabledLabelText.Substring(0, HallSetEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    HallSetEnabledLabelText = e.IsDirty
+                        ? $"{HallSetEnabledLabelText}{IsDirtySuffix}"
+                        : HallSetEnabledLabelText.Substring(0, HallSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(CommonRarityEnabled):
-                    if (e.IsDirty)
-                    {
-                        CommonRarityEnabledLabelText = $"{CommonRarityEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        CommonRarityEnabledLabelText = CommonRarityEnabledLabelText.Substring(0, CommonRarityEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    CommonRarityEnabledLabelText = e.IsDirty
+                        ? $"{CommonRarityEnabledLabelText}{IsDirtySuffix}"
+                        : CommonRarityEnabledLabelText.Substring(0, CommonRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(RareRarityEnabled):
-                    if (e.IsDirty)
-                    {
-                        RareRarityEnabledLabelText = $"{RareRarityEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        RareRarityEnabledLabelText = RareRarityEnabledLabelText.Substring(0, RareRarityEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    RareRarityEnabledLabelText = e.IsDirty
+                        ? $"{RareRarityEnabledLabelText}{IsDirtySuffix}"
+                        : RareRarityEnabledLabelText.Substring(0, RareRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(EpicRarityEnabled):
-                    if (e.IsDirty)
-                    {
-                        EpicRarityEnabledLabelText = $"{EpicRarityEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        EpicRarityEnabledLabelText = EpicRarityEnabledLabelText.Substring(0, EpicRarityEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    EpicRarityEnabledLabelText = e.IsDirty
+                        ? $"{EpicRarityEnabledLabelText}{IsDirtySuffix}"
+                        : EpicRarityEnabledLabelText.Substring(0, EpicRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(LegendaryRarityEnabled):
-                    if (e.IsDirty)
-                    {
-                        LegendaryRarityEnabledLabelText = $"{LegendaryRarityEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        LegendaryRarityEnabledLabelText = LegendaryRarityEnabledLabelText.Substring(0, LegendaryRarityEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    LegendaryRarityEnabledLabelText = e.IsDirty
+                        ? $"{LegendaryRarityEnabledLabelText}{IsDirtySuffix}"
+                        : LegendaryRarityEnabledLabelText.Substring(0, LegendaryRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(DruidClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        DruidClassEnabledLabelText = $"{DruidClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        DruidClassEnabledLabelText = DruidClassEnabledLabelText.Substring(0, DruidClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    DruidClassEnabledLabelText = e.IsDirty
+                        ? $"{DruidClassEnabledLabelText}{IsDirtySuffix}"
+                        : DruidClassEnabledLabelText.Substring(0, DruidClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(HunterClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        HunterClassEnabledLabelText = $"{HunterClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        HunterClassEnabledLabelText = HunterClassEnabledLabelText.Substring(0, HunterClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    HunterClassEnabledLabelText = e.IsDirty
+                        ? $"{HunterClassEnabledLabelText}{IsDirtySuffix}"
+                        : HunterClassEnabledLabelText.Substring(0, HunterClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(MageClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        MageClassEnabledLabelText = $"{MageClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        MageClassEnabledLabelText = MageClassEnabledLabelText.Substring(0, MageClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    MageClassEnabledLabelText = e.IsDirty
+                        ? $"{MageClassEnabledLabelText}{IsDirtySuffix}"
+                        : MageClassEnabledLabelText.Substring(0, MageClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(PaladinClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        PaladinClassEnabledLabelText = $"{PaladinClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        PaladinClassEnabledLabelText = PaladinClassEnabledLabelText.Substring(0, PaladinClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    PaladinClassEnabledLabelText = e.IsDirty
+                        ? $"{PaladinClassEnabledLabelText}{IsDirtySuffix}"
+                        : PaladinClassEnabledLabelText.Substring(0, PaladinClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(PriestClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        PriestClassEnabledLabelText = $"{PriestClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        PriestClassEnabledLabelText = PriestClassEnabledLabelText.Substring(0, PriestClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    PriestClassEnabledLabelText = e.IsDirty
+                        ? $"{PriestClassEnabledLabelText}{IsDirtySuffix}"
+                        : PriestClassEnabledLabelText.Substring(0, PriestClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(RogueClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        RogueClassEnabledLabelText = $"{RogueClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        RogueClassEnabledLabelText = RogueClassEnabledLabelText.Substring(0, RogueClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    RogueClassEnabledLabelText = e.IsDirty
+                        ? $"{RogueClassEnabledLabelText}{IsDirtySuffix}"
+                        : RogueClassEnabledLabelText.Substring(0, RogueClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(ShamanClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        ShamanClassEnabledLabelText = $"{ShamanClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        ShamanClassEnabledLabelText = ShamanClassEnabledLabelText.Substring(0, ShamanClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    ShamanClassEnabledLabelText = e.IsDirty
+                        ? $"{ShamanClassEnabledLabelText}{IsDirtySuffix}"
+                        : ShamanClassEnabledLabelText.Substring(0, ShamanClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(WarlockClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        WarlockClassEnabledLabelText = $"{WarlockClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        WarlockClassEnabledLabelText = WarlockClassEnabledLabelText.Substring(0, WarlockClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    WarlockClassEnabledLabelText = e.IsDirty
+                        ? $"{WarlockClassEnabledLabelText}{IsDirtySuffix}"
+                        : WarlockClassEnabledLabelText.Substring(0, WarlockClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(WarriorClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        WarriorClassEnabledLabelText = $"{WarriorClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        WarriorClassEnabledLabelText = WarriorClassEnabledLabelText.Substring(0, WarriorClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    WarriorClassEnabledLabelText = e.IsDirty
+                        ? $"{WarriorClassEnabledLabelText}{IsDirtySuffix}"
+                        : WarriorClassEnabledLabelText.Substring(0, WarriorClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(NeutralClassEnabled):
-                    if (e.IsDirty)
-                    {
-                        NeutralClassEnabledLabelText = $"{NeutralClassEnabledLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        NeutralClassEnabledLabelText = NeutralClassEnabledLabelText.Substring(0, NeutralClassEnabledLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    NeutralClassEnabledLabelText = e.IsDirty
+                        ? $"{NeutralClassEnabledLabelText}{IsDirtySuffix}"
+                        : NeutralClassEnabledLabelText.Substring(0, NeutralClassEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(IncludeGoldenCards):
-                    if (e.IsDirty)
-                    {
-                        IncludeGoldenCardsLabelText = $"{IncludeGoldenCardsLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        IncludeGoldenCardsLabelText = IncludeGoldenCardsLabelText.Substring(0, IncludeGoldenCardsLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    IncludeGoldenCardsLabelText = e.IsDirty
+                        ? $"{IncludeGoldenCardsLabelText}{IsDirtySuffix}"
+                        : IncludeGoldenCardsLabelText.Substring(0, IncludeGoldenCardsLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(IncludeGoldenCardsOnly):
-                    if (e.IsDirty)
-                    {
-                        IncludeGoldenCardsOnlyLabelText = $"{IncludeGoldenCardsOnlyLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        IncludeGoldenCardsOnlyLabelText = IncludeGoldenCardsOnlyLabelText.Substring(0, IncludeGoldenCardsOnlyLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    IncludeGoldenCardsOnlyLabelText = e.IsDirty
+                        ? $"{IncludeGoldenCardsOnlyLabelText}{IsDirtySuffix}"
+                        : IncludeGoldenCardsOnlyLabelText.Substring(0, IncludeGoldenCardsOnlyLabelText.Length - IsDirtySuffix.Length);
                     break;
 
                 case nameof(IncludeUnusedCardsOnly):
-                    if (e.IsDirty)
-                    {
-                        IncludeUnusedCardsOnlyLabelText = $"{IncludeUnusedCardsOnlyLabelText}{IsDirtySuffix}";
-                    }
-                    else
-                    {
-                        IncludeUnusedCardsOnlyLabelText = IncludeUnusedCardsOnlyLabelText.Substring(0, IncludeUnusedCardsOnlyLabelText.Length - IsDirtySuffix.Length);
-                    }
+                    IncludeUnusedCardsOnlyLabelText = e.IsDirty
+                        ? $"{IncludeUnusedCardsOnlyLabelText}{IsDirtySuffix}"
+                        : IncludeUnusedCardsOnlyLabelText.Substring(0, IncludeUnusedCardsOnlyLabelText.Length - IsDirtySuffix.Length);
                     break;
             }
         }
@@ -1097,6 +952,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllSetCheckBoxesChecked &= WitchwoodSetEnabled = parameters.Sets.Contains(CardSet.GILNEAS);
             AllSetCheckBoxesChecked &= BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
             AllSetCheckBoxesChecked &= RastakhanSetEnabled = parameters.Sets.Contains(CardSet.TROLL);
+            AllSetCheckBoxesChecked &= ShadowsSetEnabled = parameters.Sets.Contains(CardSet.DALARAN);
             AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -1134,6 +990,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(WitchwoodSetEnabled), WitchwoodSetEnabled);
             SetInitialPropertyValue(nameof(BoomsdaySetEnabled), BoomsdaySetEnabled);
             SetInitialPropertyValue(nameof(RastakhanSetEnabled), RastakhanSetEnabled);
+            SetInitialPropertyValue(nameof(ShadowsSetEnabled), ShadowsSetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1177,9 +1034,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                 DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = NoDecksTag + DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip;
             }
             else
-            {
                 DustUtilityPlugin.MainWindow.SearchParametersFlyoutView.IncludeUnusedCardsOnlyCheckBox.ToolTip = UnusedCardsToolTip;
-            }
         }
         #endregion
 
@@ -1191,154 +1046,97 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Clear();
 
             if (ExpertSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.EXPERT1);
-            }
 
             if (GoblinsSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GVG);
-            }
 
             if (TournamentSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.TGT);
-            }
 
             if (OldGodsSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.OG);
-            }
 
             if (GadgetzanSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GANGS);
-            }
 
             if (UngoroSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.UNGORO);
-            }
 
             if (FrozenThroneSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.ICECROWN);
-            }
 
             if (KoboldsSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOOTAPALOOZA);
-            }
 
             if (WitchwoodSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.GILNEAS);
-            }
 
             if (BoomsdaySetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BOOMSDAY);
-            }
 
             if (RastakhanSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.TROLL);
-            }
+
+            if (ShadowsSetEnabled)
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.DALARAN);
 
             if (NaxxSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
-            }
 
             if (MountainSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BRM);
-            }
 
             if (LeagueSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.LOE);
-            }
 
             if (KarazhanSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.KARA);
-            }
 
             if (HallSetEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.HOF);
-            }
 
             if (CommonRarityEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.COMMON);
-            }
 
             if (RareRarityEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.RARE);
-            }
 
             if (EpicRarityEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.EPIC);
-            }
 
             if (LegendaryRarityEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.LEGENDARY);
-            }
 
             if (DruidClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.DRUID);
-            }
 
             if (HunterClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.HUNTER);
-            }
 
             if (MageClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.MAGE);
-            }
 
             if (PaladinClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PALADIN);
-            }
 
             if (PriestClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.PRIEST);
-            }
 
             if (RogueClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.ROGUE);
-            }
 
             if (ShamanClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.SHAMAN);
-            }
 
             if (WarlockClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARLOCK);
-            }
 
             if (WarriorClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.WARRIOR);
-            }
 
             if (NeutralClassEnabled)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.NEUTRAL);
-            }
 
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.IncludeGoldenCards = IncludeGoldenCards;
             DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.GoldenCardsOnly = IncludeGoldenCardsOnly;
@@ -1364,6 +1162,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             WitchwoodSetEnabledLabelText = CardSet.GILNEAS.GetDisplayString();
             BoomsdaySetEnabledLabelText = CardSet.BOOMSDAY.GetDisplayString();
             RastakhanSetEnabledLabelText = CardSet.TROLL.GetDisplayString();
+            ShadowsSetEnabledLabelText = CardSet.DALARAN.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
