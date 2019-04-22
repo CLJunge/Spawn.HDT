@@ -52,26 +52,18 @@ namespace Spawn.HDT.DustUtility.CardManagement
                 if (lstCollection.Count > 0)
                 {
                     if (parameters.UnusedCardsOnly)
-                    {
                         await CheckCollectionForUnusedCardsAsync(account);
-                    }
                     else
-                    {
                         s_lstUnusedCards = lstCollection.ConvertAll(c => new CardWrapper(c));
-                    }
 
                     List<CardWrapper> lstCards = new List<CardWrapper>();
 
                     bool blnDustMode = DustUtilityPlugin.NumericRegex.IsMatch(parameters.QueryString);
 
                     if (blnDustMode)
-                    {
                         GetCardsForDustAmount(parameters, lstCards);
-                    }
                     else
-                    {
                         GetCardsByQueryString(parameters, lstCards);
-                    }
 
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {lstCards.Count} cards");
 
@@ -88,11 +80,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
         {
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Getting cards for {parameters.QueryString} dust...");
 
+            //Check for invalid value
             if (!Int32.TryParse(parameters.QueryString, out int nDustAmount))
-            {
-                //Invalid value
                 nDustAmount = Int32.MaxValue;
-            }
 
             int nTotalAmount = 0;
 
@@ -123,9 +113,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             //Post processing
             //Remove low rarity cards if the total amount is over the targeted amount
             if (nTotalAmount > nDustAmount)
-            {
                 RemoveRedundantCards(lstCards, parameters, nDustAmount, nTotalAmount);
-            }
         }
         #endregion
 
@@ -159,13 +147,9 @@ namespace Spawn.HDT.DustUtility.CardManagement
                             if (!blnDone)
                             {
                                 if (nCurrentDifference < 0)
-                                {
                                     blnDone = true;
-                                }
                                 else
-                                {
                                     lstCards.Remove(cardWrapper);
-                                }
                             }
                             else
                             {
@@ -200,9 +184,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardWrapper cardWrapper = lstChunk[j];
 
                     if (IsCardMatch(cardWrapper, strQueryString))
-                    {
                         lstCards.Add(cardWrapper);
-                    }
                 }
             }
         }
@@ -254,16 +236,12 @@ namespace Spawn.HDT.DustUtility.CardManagement
                             Card cardInDeck = lstDecks[j].GetCard(card.Id, card.Premium);
 
                             if (cardInDeck.Count > cardWrapper.MaxCountInDecks)
-                            {
                                 cardWrapper.MaxCountInDecks = cardInDeck.Count;
-                            }
                         }
                     }
 
                     if (cardWrapper.MaxCountInDecks < 2 && cardWrapper.RawCard.Count > cardWrapper.MaxCountInDecks && !(cardWrapper.DbCard.Rarity == Rarity.LEGENDARY && cardWrapper.MaxCountInDecks == 1))
-                    {
                         s_lstUnusedCards.Add(cardWrapper);
-                    }
                 }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Found {s_lstUnusedCards.Count} unused cards");
@@ -283,11 +261,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by classes... [{string.Join(",", lstClasses)}]");
 
             for (int i = 0; i < lstClasses.Count; i++)
-            {
-                List<CardWrapper> lstChunk = lstCards.FindAll(c => c.DbCard.Class == lstClasses[i]);
-
-                lstRet.AddRange(lstChunk);
-            }
+                lstRet.AddRange(lstCards.FindAll(c => c.DbCard.Class == lstClasses[i]));
 
             return lstRet;
         }
@@ -301,11 +275,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by sets... [{string.Join(",", lstSets)}]");
 
             for (int i = 0; i < lstSets.Count; i++)
-            {
-                List<CardWrapper> lstChunk = lstCards.FindAll(c => c.DbCard.Set == lstSets[i]);
-
-                lstRet.AddRange(lstChunk);
-            }
+                lstRet.AddRange(lstCards.FindAll(c => c.DbCard.Set == lstSets[i]));
 
             return lstRet;
         }
@@ -318,21 +288,11 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Filtering cards by rarity... ({rarity})");
 
-            if (parameters.IncludeGoldenCards)
-            {
-                if (parameters.GoldenCardsOnly)
-                {
-                    lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.RawCard.Premium);
-                }
-                else
-                {
-                    lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity);
-                }
-            }
-            else
-            {
-                lstRet = s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.RawCard.Premium);
-            }
+            lstRet = parameters.IncludeGoldenCards
+                ? (parameters.GoldenCardsOnly
+                    ? s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && c.RawCard.Premium)
+                    : s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity))
+                : s_lstUnusedCards.FindAll(c => c.DbCard.Rarity == rarity && !c.RawCard.Premium);
 
             return lstRet;
         }
@@ -348,11 +308,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Calculating total collection value... ({account.DisplayString})");
 
             for (int i = 0; i < lstCards?.Count; i++)
-            {
-                Card card = lstCards[i];
-
-                nRet += card.GetDustValue() * card.Count;
-            }
+                nRet += lstCards[i].GetDustValue() * lstCards[i].Count;
 
             return nRet;
         }
