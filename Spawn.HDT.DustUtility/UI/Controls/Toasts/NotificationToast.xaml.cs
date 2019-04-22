@@ -10,10 +10,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls.Toasts
     public partial class NotificationToast
     {
         #region Ctor
-        public NotificationToast()
-        {
-            InitializeComponent();
-        }
+        public NotificationToast() => InitializeComponent();
 
         public NotificationToast(string message)
             : this()
