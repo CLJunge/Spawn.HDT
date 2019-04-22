@@ -151,9 +151,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Excluded deck (Id={nDeckId})");
             }
             else
-            {
                 DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already excluded (Id={nDeckId})");
-            }
         }
         #endregion
 
@@ -167,9 +165,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Included deck (Id={nDeckId})");
             }
             else
-            {
                 DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already included (Id={nDeckId})");
-            }
         }
         #endregion
 
@@ -190,10 +186,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region SavePreferences
-        public void SavePreferences()
-        {
-            DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Called 'SavePreferences' in mock account");
-        }
+        public void SavePreferences() => DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Called 'SavePreferences' in mock account");
         #endregion
     }
 }

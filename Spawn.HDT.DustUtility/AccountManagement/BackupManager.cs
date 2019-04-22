@@ -26,9 +26,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                     string strAccDir = GetAccountBackupDirectory(account);
 
                     if (!Directory.Exists(strAccDir))
-                    {
                         Directory.CreateDirectory(strAccDir);
-                    }
 
                     string strFileName = GetBackupFileName(account, date);
 
@@ -140,9 +138,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                         FileInfo fileInfo = new FileInfo(vFiles[i]);
 
                         if (fileInfo.CreationTime.Date < DateTime.Now.Date.AddMonths(-1))
-                        {
                             fileInfo.Delete();
-                        }
                     }
 
                     DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Deleted backups which are older than one month for {account.DisplayString}");
@@ -152,12 +148,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region BackupExists
-        public static bool BackupExists(IAccount account, DateTime date)
-        {
-            string strFileName = GetBackupFileName(account, date);
-
-            return File.Exists(strFileName);
-        }
+        public static bool BackupExists(IAccount account, DateTime date) => File.Exists(GetBackupFileName(account, date));
         #endregion
 
         #region GetAccountBackupDirectory
@@ -165,12 +156,7 @@ namespace Spawn.HDT.DustUtility.AccountManagement
         #endregion
 
         #region GetBackupFileName
-        private static string GetBackupFileName(IAccount account, DateTime date)
-        {
-            string strFileName = $"backup_{date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.zip";
-
-            return Path.Combine(GetAccountBackupDirectory(account), strFileName);
-        }
+        private static string GetBackupFileName(IAccount account, DateTime date) => Path.Combine(GetAccountBackupDirectory(account), $"backup_{date.ToString("yyyyMMdd", CultureInfo.InvariantCulture)}.zip");
         #endregion
     }
 }
