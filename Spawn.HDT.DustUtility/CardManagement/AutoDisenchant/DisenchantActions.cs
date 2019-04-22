@@ -64,9 +64,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             int nCount = 0;
 
             for (int i = 0; i < m_lstCards.Count; i++)
-            {
                 nCount += await DisenchantCard(m_lstCards[i]);
-            }
 
             return nCount == nTotalCount;
         }
@@ -88,9 +86,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     .Sum(c => c.Count);
 
                 if (DisenchantConfig.Instance.ForceClear)
-                {
                     await ClearSearchBox();
-                }
 
                 await m_mouseActions.ClickOnPoint(m_info.SearchBoxPos);
 
@@ -161,9 +157,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                     int nCountInDecks = lstDecks[i].GetCard(wrapper.RawCard.Id, wrapper.RawCard.Premium).Count;
 
                     if (nCountInDecks > wrapper.MaxCountInDecks)
-                    {
                         wrapper.MaxCountInDecks = nCountInDecks;
-                    }
                 }
             }
 
@@ -179,13 +173,9 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"ClickOnCard: Pos={pos} RightMouseButton={blnUseRightMouseButton}");
 
             if (pos == CardPosition.Left)
-            {
                 await m_mouseActions.ClickOnPoint(m_card1Point, blnUseRightMouseButton);
-            }
             else
-            {
                 await m_mouseActions.ClickOnPoint(m_card2Point, blnUseRightMouseButton);
-            }
         }
         #endregion
 
@@ -212,9 +202,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
                 await Task.Delay(500);
 
                 if (Reflection.GetCurrentManaFilter() == 0)
-                {
                     await m_mouseActions.ClickOnPoint(m_zeroManaCrystalPoint);
-                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Cleared mana filter");
             }

@@ -49,25 +49,17 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
 
             //mouse down
             if (SystemInformation.MouseButtonsSwapped || blnUseRightMouseButton)
-            {
                 User32.mouse_event((uint)User32.MouseEventFlags.RightDown, 0, 0, 0, UIntPtr.Zero);
-            }
             else
-            {
                 User32.mouse_event((uint)User32.MouseEventFlags.LeftDown, 0, 0, 0, UIntPtr.Zero);
-            }
 
             await Task.Delay(DisenchantConfig.Instance.Delay);
 
             //mouse up
             if (SystemInformation.MouseButtonsSwapped || blnUseRightMouseButton)
-            {
                 User32.mouse_event((uint)User32.MouseEventFlags.RightUp, 0, 0, 0, UIntPtr.Zero);
-            }
             else
-            {
                 User32.mouse_event((uint)User32.MouseEventFlags.LeftUp, 0, 0, 0, UIntPtr.Zero);
-            }
 
             await Task.Delay(DisenchantConfig.Instance.Delay);
         }

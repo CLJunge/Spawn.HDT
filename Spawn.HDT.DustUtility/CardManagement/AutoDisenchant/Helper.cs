@@ -72,9 +72,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             string strRet = string.Empty;
 
             if (ArtistDict.TryGetValue(Config.Instance.SelectedLanguage, out string artistStr))
-            {
                 strRet = $" {artistStr}:{strArtist.Split(' ').LastOrDefault()}";
-            }
 
             return strRet;
         }
@@ -86,9 +84,8 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             string strRet = string.Empty;
 
             if (ManaDict.TryGetValue(Config.Instance.SelectedLanguage, out string manaStr))
-            {
                 strRet = $" {manaStr}:{nCost}";
-            }
+
             return strRet;
         }
         #endregion
@@ -99,9 +96,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             string strRet = string.Empty;
 
             if (AttackDict.TryGetValue(Config.Instance.SelectedLanguage, out string atkStr))
-            {
                 strRet = $" {atkStr}:{nAttack}";
-            }
 
             return strRet;
         }
@@ -113,9 +108,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.AutoDisenchant
             string strRet = $"{card.LocalizedName}{GetArtistSearchString(card.Artist)} {GetManaSearchString(card.Cost)}".ToLowerInvariant();
 
             if (card.Id == HearthDb.CardIds.Collectible.Neutral.Feugen || card.Id == HearthDb.CardIds.Collectible.Neutral.Stalagg)
-            {
                 strRet += GetAttackSearchString(card.Attack);
-            }
 
             return strRet;
         }
