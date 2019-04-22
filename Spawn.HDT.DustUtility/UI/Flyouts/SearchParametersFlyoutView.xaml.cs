@@ -32,8 +32,6 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
         {
             InitializeComponent();
 
-            m_blnSkipAllAction = true;
-
             m_mMaxSetCheckBoxes = (SetsGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
             m_mMaxRarityCheckBoxes = (RaritiesGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
             m_mMaxClassCheckBoxes = (ClassesGroupBox.Content as Grid).Children.OfType<CheckBox>().Count();
