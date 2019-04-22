@@ -9,7 +9,7 @@ namespace Spawn.HDT.DustUtility.Utilities
         private Type _enumType;
         public Type EnumType
         {
-            get { return _enumType; }
+            get => _enumType;
             set
             {
                 if (value != _enumType)
@@ -31,10 +31,7 @@ namespace Spawn.HDT.DustUtility.Utilities
         {
         }
 
-        public EnumBindingSourceExtension(Type enumType)
-        {
-            EnumType = enumType;
-        }
+        public EnumBindingSourceExtension(Type enumType) => EnumType = enumType;
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

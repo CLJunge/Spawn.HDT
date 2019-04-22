@@ -14,16 +14,10 @@ namespace Spawn.HDT.DustUtility.Utilities
             try
             {
                 if (File.Exists(strPath))
-                {
                     File.Delete(strPath);
-                }
 
                 using (StreamWriter writer = new StreamWriter(strPath))
-                {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-                    serializer.Serialize(writer, value);
-                }
+                    new XmlSerializer(typeof(T)).Serialize(writer, value);
             }
             catch (System.Exception ex)
             {
@@ -42,11 +36,7 @@ namespace Spawn.HDT.DustUtility.Utilities
                 if (File.Exists(strPath))
                 {
                     using (StreamReader reader = new StreamReader(strPath))
-                    {
-                        XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-                        retVal = (T)serializer.Deserialize(reader);
-                    }
+                        retVal = (T)new XmlSerializer(typeof(T)).Deserialize(reader);
                 }
             }
             catch (System.Exception ex)
@@ -55,9 +45,7 @@ namespace Spawn.HDT.DustUtility.Utilities
             }
 
             if (retVal == null)
-            {
                 retVal = new T();
-            }
 
             return retVal;
         }
