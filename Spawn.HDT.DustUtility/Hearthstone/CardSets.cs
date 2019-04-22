@@ -144,8 +144,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             {
                 Neutral.Cthun,
                 Neutral.BeckonerOfEvil,
-                Neutral.MarinTheFox,
-                Neutral.ArchmageVargoth
+                Neutral.MarinTheFox
             };
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets'");
