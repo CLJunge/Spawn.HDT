@@ -57,9 +57,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
                     foreach (CheckBox cb in contentGrid.Children.OfType<CheckBox>())
                     {
                         if (cb.IsEnabled)
-                        {
                             cb.IsChecked = true;
-                        }
                     }
 
                     m_blnSkipSingleAction = false;
@@ -78,9 +76,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
                 if (groupBox?.Content is Grid contentGrid)
                 {
                     foreach (CheckBox cb in contentGrid.Children.OfType<CheckBox>())
-                    {
                         cb.IsChecked = false;
-                    }
                 }
             }
         }
@@ -117,9 +113,7 @@ namespace Spawn.HDT.DustUtility.UI.Flyouts
                             int nTotalCount = (MiscGroupBox.Content as Grid).Children.OfType<CheckBox>().Where(cb => cb.IsEnabled).Count();
 
                             if ((sender as FrameworkElement).Name.Equals("IncludeGoldenCardsCheckBox"))
-                            {
                                 nTotalCount += 1;
-                            }
 
                             MiscAllCheckBox.IsChecked = nTotalCount == nCheckedCount;
                             break;
