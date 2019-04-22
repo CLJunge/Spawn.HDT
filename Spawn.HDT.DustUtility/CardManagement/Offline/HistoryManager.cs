@@ -230,17 +230,11 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
         private class CardComparer : IEqualityComparer<Card>
         {
             #region Equals
-            public bool Equals(Card x, Card y)
-            {
-                return x.Id.Equals(y.Id) && x.Premium == y.Premium && x.Count == y.Count;
-            }
+            public bool Equals(Card x, Card y) => x.Id.Equals(y.Id) && x.Premium == y.Premium && x.Count == y.Count;
             #endregion
 
             #region GetHashCode
-            public int GetHashCode(Card obj)
-            {
-                return (obj != null ? (obj.Id?.GetHashCode() ?? 0) + obj.Premium.GetHashCode() + obj.Count.GetHashCode() : 0);
-            }
+            public int GetHashCode(Card obj) => (obj != null ? (obj.Id?.GetHashCode() ?? 0) + obj.Premium.GetHashCode() + obj.Count.GetHashCode() : 0);
             #endregion
         }
     }

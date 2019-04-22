@@ -56,9 +56,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
                 for (int i = 0; i < lstAllDecks.Count; i++)
                 {
                     if (lstAllDecks[i].Type == 1)
-                    {
                         lstDecks.Add(lstAllDecks[i]);
-                    }
                 }
 
                 string strPath = DustUtilityPlugin.GetFullFileName(account, Account.DecksString);
@@ -82,9 +80,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 if (m_lstCachedCollection == null)
-                {
                     m_lstCachedCollection = InternalLoadCollection(account);
-                }
 
                 lstRet = m_lstCachedCollection.Select(c => c.Clone()).ToList();
             }
@@ -134,9 +130,7 @@ namespace Spawn.HDT.DustUtility.CardManagement.Offline
             if (DustUtilityPlugin.IsOffline && DustUtilityPlugin.Config.OfflineMode)
             {
                 if (m_lstCachedDecks == null)
-                {
                     m_lstCachedDecks = InternalLoadDecks(account);
-                }
 
                 lstRet = m_lstCachedDecks.Select(d => d.Clone()).ToList();
             }
