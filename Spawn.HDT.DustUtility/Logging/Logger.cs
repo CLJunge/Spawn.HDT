@@ -64,29 +64,19 @@ namespace Spawn.HDT.DustUtility.Logging
         {
             Name = name;
 
-            if (!string.IsNullOrEmpty(logDirectory))
-            {
-                m_logDirectory = new DirectoryInfo(logDirectory);
-            }
-            else
-            {
-                m_logDirectory = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
-            }
+            m_logDirectory = !string.IsNullOrEmpty(logDirectory)
+                ? new DirectoryInfo(logDirectory)
+                : new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, "Logs"));
 
             if (!m_logDirectory.Exists)
-            {
                 m_logDirectory.Create();
-            }
 
             SetLogFileName();
         }
         #endregion
 
         #region Log
-        public LogEntry Log(LogLevel level, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "")
-        {
-            return Log(level, string.Empty, strMessage, strMemberName, strFilePath);
-        }
+        public LogEntry Log(LogLevel level, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "") => Log(level, string.Empty, strMessage, strMemberName, strFilePath);
 
         public LogEntry Log(LogLevel level, string strChannel, string strMessage, [CallerMemberName] string strMemberName = "", [CallerFilePath] string strFilePath = "")
         {
@@ -118,9 +108,7 @@ namespace Spawn.HDT.DustUtility.Logging
                         retVal = new LogEntry(dtTimestamp, level, strChannel, strMessage, strAssembledMessage);
 
                         if (WriteToConsole)
-                        {
                             LogToConsole(retVal);
-                        }
 
                         if (WriteToFile)
                         {
@@ -141,9 +129,7 @@ namespace Spawn.HDT.DustUtility.Logging
             }
 
             if (DebugMode && !string.IsNullOrEmpty(retVal.AssembledMessage))
-            {
                 System.Diagnostics.Debug.WriteLine(retVal.AssembledMessage);
-            }
 
             return retVal;
         }
@@ -180,21 +166,14 @@ namespace Spawn.HDT.DustUtility.Logging
         #region SetLogFileName
         private void SetLogFileName()
         {
-            if (!string.IsNullOrEmpty(Name))
-            {
-                m_strFilePath = Path.Combine(m_logDirectory.FullName, $"{Name}_{DateTime.Now.ToString("yyyyMMdd")}.txt");
-            }
-            else
-            {
-                m_strFilePath = Path.Combine(m_logDirectory.FullName, $"{DateTime.Now.ToString("yyyyMMdd")}.txt");
-            }
+            m_strFilePath = !string.IsNullOrEmpty(Name)
+                ? Path.Combine(m_logDirectory.FullName, $"{Name}_{DateTime.Now.ToString("yyyyMMdd")}.txt")
+                : Path.Combine(m_logDirectory.FullName, $"{DateTime.Now.ToString("yyyyMMdd")}.txt");
 
             m_logFile = new FileInfo(m_strFilePath);
 
             if (!m_logFile.Exists)
-            {
                 using (m_logFile.Create()) { /* Do nothing */ }
-            }
 
             m_logFile.Refresh();
         }
@@ -236,9 +215,7 @@ namespace Spawn.HDT.DustUtility.Logging
             List<string> lstLoggableSources = vTemp?.ToList();
 
             if (lstLoggableSources?.Count > 0)
-            {
                 blnRet = lstLoggableSources.Contains(strSource);
-            }
 
             return blnRet;
         }
