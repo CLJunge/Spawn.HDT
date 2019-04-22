@@ -71,14 +71,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             await base.InitializeAsync();
 
-            if (DustUtilityPlugin.IsOffline)
-            {
-                ReloadButtonVisibility = Visibility.Collapsed;
-            }
-            else
-            {
-                ReloadButtonVisibility = Visibility.Visible;
-            }
+            ReloadButtonVisibility = DustUtilityPlugin.IsOffline ? Visibility.Collapsed : Visibility.Visible;
 
             if (ReloadRequired)
             {
