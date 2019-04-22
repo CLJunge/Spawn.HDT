@@ -32,9 +32,7 @@ namespace Spawn.HDT.DustUtility.UI.Components
                 int nValue = Convert.ToInt32(value.ToString());
 
                 if (nValue < MinValue || nValue > MaxValue)
-                {
                     retVal = new ValidationResult(false, ErrorMessage);
-                }
             }
             catch
             {
