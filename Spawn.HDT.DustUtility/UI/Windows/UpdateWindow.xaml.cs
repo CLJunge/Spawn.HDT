@@ -6,6 +6,8 @@
         public UpdateWindow()
         {
             InitializeComponent();
+
+            DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'UpdateWindow' instance");
         }
         #endregion
     }
