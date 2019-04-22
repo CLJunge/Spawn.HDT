@@ -47,9 +47,7 @@ namespace Spawn.HDT.DustUtility.Net
                             cardDataResponseStream = cardDataResponse.GetResponseStream();
 
                             using (StreamReader reader = new StreamReader(cardDataResponseStream))
-                            {
                                 strJson = await reader.ReadToEndAsync();
-                            }
                         }
                         finally
                         {
@@ -63,9 +61,7 @@ namespace Spawn.HDT.DustUtility.Net
                             string strUrl = cardData.Value<string>("img");
 
                             if (blnPremium)
-                            {
                                 strUrl = cardData.Value<string>("imgGold");
-                            }
 
                             HttpWebRequest imageRequest = CreateImageRequest(strUrl);
 
@@ -76,9 +72,7 @@ namespace Spawn.HDT.DustUtility.Net
                                 retVal = new MemoryStream();
 
                                 using (Stream responseStream = imageResponse.GetResponseStream())
-                                {
                                     await responseStream.CopyToAsync(retVal);
-                                }
 
                                 retVal.Position = 0;
                             }
@@ -96,12 +90,7 @@ namespace Spawn.HDT.DustUtility.Net
         #endregion
 
         #region GetBitmapAsync
-        public static async Task<Bitmap> GetBitmapAsync(string strCardId, bool blnPremium)
-        {
-            Stream imageStream = await GetStreamAsync(strCardId, blnPremium);
-
-            return Image.FromStream(imageStream) as Bitmap;
-        }
+        public static async Task<Bitmap> GetBitmapAsync(string strCardId, bool blnPremium) => Image.FromStream(await GetStreamAsync(strCardId, blnPremium)) as Bitmap;
         #endregion
 
         #region Requests

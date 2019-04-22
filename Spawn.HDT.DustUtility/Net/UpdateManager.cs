@@ -14,18 +14,17 @@ namespace Spawn.HDT.DustUtility.Net
         #region Static Fields
         private static Version NewVersionFormat => new Version(1, 6, 1);
 
-        private static Regex s_versionRegex;
-        private static Regex s_updateTextRegex;
+        private static readonly Regex s_versionRegex;
+        private static readonly Regex s_updateTextRegex;
 
         private static WebClient s_webClient;
-        private static UpdateInfo s_updateInfo;
 
         private static bool s_blnIsChecking;
         #endregion
 
         #region Static Properties
         #region Info
-        public static UpdateInfo Info => s_updateInfo;
+        public static UpdateInfo Info { get; private set; }
         #endregion
         #endregion
 
@@ -52,7 +51,7 @@ namespace Spawn.HDT.DustUtility.Net
             {
                 s_blnIsChecking = true;
 
-                s_updateInfo = null;
+                Info = null;
 
                 try
                 {
@@ -78,14 +77,12 @@ namespace Spawn.HDT.DustUtility.Net
 
                                 if (blnRet)
                                 {
-                                    s_updateInfo = new UpdateInfo(newVersion);
+                                    Info = new UpdateInfo(newVersion);
 
                                     string strResult;
 
                                     using (WebClient webClient = new WebClient())
-                                    {
                                         strResult = await webClient.DownloadStringTaskAsync(response.ResponseUri);
-                                    }
 
                                     //prepare for regex check
                                     strResult = strResult.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty);
@@ -93,9 +90,7 @@ namespace Spawn.HDT.DustUtility.Net
                                     Match updateTextMatch = s_updateTextRegex.Match(strResult);
 
                                     if (updateTextMatch.Success)
-                                    {
-                                        s_updateInfo.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
-                                    }
+                                        Info.ReleaseNotes = updateTextMatch.Groups["Content"].Value.Replace("<br>", Environment.NewLine);
 
                                     DustUtilityPlugin.Logger.Log(LogLevel.Trace, "Update available");
                                 }
@@ -126,9 +121,7 @@ namespace Spawn.HDT.DustUtility.Net
             string strVersionString = version.ToString(3);
 
             if (version < NewVersionFormat)
-            {
                 strVersionString = version.ToString(2);
-            }
 
             using (s_webClient = new WebClient())
             {
@@ -137,13 +130,9 @@ namespace Spawn.HDT.DustUtility.Net
                 s_webClient.DownloadDataCompleted += (s, e) =>
                 {
                     if (!e.Cancelled)
-                    {
                         DownloadCompleted?.Invoke(s, e);
-                    }
                     else
-                    {
                         DustUtilityPlugin.Logger.Log(LogLevel.Warning, "User canceled download");
-                    }
                 };
 
                 s_webClient.DownloadDataAsync(new Uri($"{Settings.Default.GitHubBaseUrl}/releases/download/{strVersionString}/Spawn.HDT.DustUtility.zip"));
@@ -152,10 +141,7 @@ namespace Spawn.HDT.DustUtility.Net
         #endregion
 
         #region CancelDownload
-        public static void CancelDownload()
-        {
-            s_webClient?.CancelAsync();
-        }
+        public static void CancelDownload() => s_webClient?.CancelAsync();
         #endregion
     }
 }

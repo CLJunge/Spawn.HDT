@@ -6,22 +6,13 @@ namespace Spawn.HDT.DustUtility.Net
 {
     public class UpdateInfo
     {
-        #region Member Variables
-        private string m_strReleaseNotes;
-        private Version m_version;
-        #endregion
-
         #region Properties
-        #region ReleaseNotes
-        public string ReleaseNotes
-        {
-            get => m_strReleaseNotes;
-            set => m_strReleaseNotes = value;
-        }
+        #region Version
+        public Version Version { get; }
         #endregion
 
-        #region Version
-        public Version Version => m_version;
+        #region ReleaseNotes
+        public string ReleaseNotes { get; set; }
         #endregion
 
         #region HasReleaseNotes
@@ -32,8 +23,8 @@ namespace Spawn.HDT.DustUtility.Net
         #region Ctor
         public UpdateInfo(Version version, string releaseNotes = "")
         {
-            m_version = version;
-            m_strReleaseNotes = releaseNotes;
+            Version = version;
+            ReleaseNotes = releaseNotes;
         }
         #endregion
     }
