@@ -15,6 +15,10 @@ namespace Spawn.HDT.DustUtility.UI.Models
     [DebuggerDisplay("{Name} ({Count}x)")]
     public class CardItemModel : ObservableObject
     {
+        #region Constants
+        private const int CropAmount = 40;
+        #endregion
+
         #region Member Variables
         private CardWrapper m_wrapper;
         private string m_strId;
@@ -37,9 +41,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             set
             {
                 if (m_wrapper == null)
-                {
                     Set(ref m_strId, value);
-                }
             }
         }
         #endregion
@@ -191,11 +193,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             ImageSource image = ImageCache.GetCardImage(m_wrapper?.Card ?? new Hearthstone_Deck_Tracker.Hearthstone.Card(HearthDb.Cards.Collectible[Id]));
 
             if (image != null)
-            {
-                int nCropAmount = 40;
-
-                image = new CroppedBitmap((BitmapSource)image, new Int32Rect(nCropAmount, 0, (int)image.Width - nCropAmount, (int)image.Height));
-            }
+                image = new CroppedBitmap((BitmapSource)image, new Int32Rect(CropAmount, 0, (int)image.Width - CropAmount, (int)image.Height));
 
             return image;
         }

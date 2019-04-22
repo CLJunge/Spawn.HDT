@@ -87,10 +87,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region TotalCount
-        public int TotalCount
-        {
-            get => CommonsCount + RaresCount + EpicsCount + LegendariesCount;
-        }
+        public int TotalCount => CommonsCount + RaresCount + EpicsCount + LegendariesCount;
         #endregion
 
         #region DustAmount
@@ -134,10 +131,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region GoldenTotalCount
-        public int GoldenTotalCount
-        {
-            get => GoldenCommonsCount + GoldenRaresCount + GoldenEpicsCount + GoldenLegendariesCount;
-        }
+        public int GoldenTotalCount => GoldenCommonsCount + GoldenRaresCount + GoldenEpicsCount + GoldenLegendariesCount;
         #endregion
 
         #region GoldenDustAmount
@@ -181,10 +175,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
         #endregion
 
         #region MaxTotalCount
-        public int MaxTotalCount
-        {
-            get => MaxCommonsCount + MaxRaresCount + MaxEpicsCount + MaxLegendariesCount;
-        }
+        public int MaxTotalCount => MaxCommonsCount + MaxRaresCount + MaxEpicsCount + MaxLegendariesCount;
         #endregion
         #endregion
 

@@ -32,19 +32,13 @@ namespace Spawn.HDT.DustUtility.UI.Models
             PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(Value)))
-                {
                     RaisePropertyChanged(nameof(Name));
-                }
             };
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'SortOrderItemModel' instance");
         }
 
-        public SortOrderItemModel(SortOrder.OrderItem item)
-            : this()
-        {
-            Value = item;
-        }
+        public SortOrderItemModel(SortOrder.OrderItem item) : this() => Value = item;
         #endregion
     }
 }

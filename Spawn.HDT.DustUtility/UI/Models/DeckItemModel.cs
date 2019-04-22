@@ -97,9 +97,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
                         m_blnIsWhizbangDeck = card.Id == HearthDb.CardIds.Collectible.Neutral.WhizbangTheWonderful;
 
                         if (m_blnIsWhizbangDeck)
-                        {
                             MaxCardCount = 1;
-                        }
                     }
 
                     ShowToolTip = Deck.GetTotalCardCount() < MaxCardCount;
@@ -115,19 +113,13 @@ namespace Spawn.HDT.DustUtility.UI.Models
             };
 #if DEBUG
             if (ViewModelBase.IsInDesignModeStatic)
-            {
                 Deck = new Deck() { Id = 4342323, Hero = "HERO_01", Name = "Test Deck", Cards = new List<Card>() { new Card("", 0, false) } };
-            }
 #endif
 
             DustUtilityPlugin.Logger.Log(Logging.LogLevel.Debug, "Created new 'DeckItemModel' instance");
         }
 
-        public DeckItemModel(Deck deck)
-            : this()
-        {
-            Deck = deck;
-        }
+        public DeckItemModel(Deck deck) : this() => Deck = deck;
         #endregion
 
         #region GetHeroImage
@@ -136,9 +128,7 @@ namespace Spawn.HDT.DustUtility.UI.Models
             string strHero = Deck?.Hero.Substring(0, 7);
 
             if (m_blnIsWhizbangDeck)
-            {
                 strHero = "HERO_WHIZBANG";
-            }
 
             if (!s_dImageCache.TryGetValue(strHero, out BitmapImage retVal))
             {
