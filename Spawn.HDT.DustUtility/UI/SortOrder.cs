@@ -51,11 +51,7 @@ namespace Spawn.HDT.DustUtility.UI
                 string[] vItems = strSortOrderString.Split(';');
 
                 for (int i = 0; i < vItems.Length; i++)
-                {
-                    OrderItem item = (OrderItem)Enum.Parse(typeof(OrderItem), vItems[i]);
-
-                    retVal.m_lstItems.Add(new SortOrderItemModel(item));
-                }
+                    retVal.m_lstItems.Add(new SortOrderItemModel((OrderItem)Enum.Parse(typeof(OrderItem), vItems[i])));
             }
 
             return retVal;

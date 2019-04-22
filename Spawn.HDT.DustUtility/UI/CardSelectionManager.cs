@@ -90,9 +90,7 @@ namespace Spawn.HDT.DustUtility.UI
                 result.CopyToCardsInfoModel(CardsInfo);
 
                 for (int i = 0; i < result.CardItems.Count; i++)
-                {
                     CardItems.Add(result.CardItems[i]);
-                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Loaded selection ({CardItems.Count} items)");
             }
@@ -121,9 +119,7 @@ namespace Spawn.HDT.DustUtility.UI
             if (lstCards?.Count > 0)
             {
                 for (int i = 0; i < lstCards.Count; i++)
-                {
                     AddOrUpdateCardItem(new CardItemModel(new CardWrapper(lstCards[i])));
-                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Imported latest pack");
             }
@@ -156,9 +152,7 @@ namespace Spawn.HDT.DustUtility.UI
                     Clear();
 
                     if (DustUtilityPlugin.Config.OfflineMode)
-                    {
                         Cache.SaveAllAsync(DustUtilityPlugin.Config.EnableHistory).Forget();
-                    }
 
                     ServiceLocator.Current.GetInstance<MainViewModel>().SearchCommand.Execute(null);
 
@@ -299,9 +293,7 @@ namespace Spawn.HDT.DustUtility.UI
                 CardItemModel cardItem = CardItems.FirstOrDefault(i => i.Id.Equals(m_currentItem.Id) && i.Golden == m_currentItem.Golden);
 
                 if (cardItem != null)
-                {
-                    nCount = nCount - cardItem.Count;
-                }
+                    nCount -= cardItem.Count;
 
                 if (nCount > 1 && m_cardCountDialog != null)
                 {
@@ -334,9 +326,7 @@ namespace Spawn.HDT.DustUtility.UI
             DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Clear();
 
             for (int i = 0; i < lstCards.Count; i++)
-            {
                 DustUtilityPlugin.CurrentAccount.Preferences.CardSelection.Add(lstCards[i]);
-            }
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Saved selection in account preferences ({DustUtilityPlugin.CurrentAccount.DisplayString})");
         }
@@ -351,14 +341,7 @@ namespace Spawn.HDT.DustUtility.UI
             {
                 CardItemModel temp = CardItems.FirstOrDefault(i => i.Id.Equals(cardItem.Id) && i.Golden == cardItem.Golden);
 
-                if (temp != null)
-                {
-                    blnRet = temp.Count < cardItem.Count;
-                }
-                else
-                {
-                    blnRet = true;
-                }
+                blnRet = temp != null ? temp.Count < cardItem.Count : true;
             }
 
             return blnRet;
