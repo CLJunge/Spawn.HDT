@@ -73,23 +73,16 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             int nRet = RawCard.GetDustValue();
 
             if (nCount == -1 && MaxCountInDecks == 0)
-            {
                 nRet *= Math.Abs(RawCard.Count);
-            }
             else if (nCount > -1)
-            {
                 nRet *= nCount;
-            }
 
             return nRet;
         }
         #endregion
 
         #region Clone
-        public object Clone()
-        {
-            return new CardWrapper(RawCard.Id, RawCard.Count, RawCard.Premium, Date);
-        }
+        public object Clone() => new CardWrapper(RawCard.Id, RawCard.Count, RawCard.Premium, Date);
         #endregion
     }
 }
