@@ -29,14 +29,10 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 strRet = $"{values[0]}/{values[1]}";
 
                 if (!string.IsNullOrEmpty(Prefix))
-                {
                     strRet = $"{Prefix} {strRet}";
-                }
 
                 if (!string.IsNullOrEmpty(Suffix))
-                {
                     strRet = $"{strRet} {Suffix}";
-                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{strRet}' (Prefix={Prefix}, Suffix={Suffix})");
             }
@@ -50,10 +46,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #endregion
 
         #region ConvertBack
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotSupportedException();
         #endregion
     }
 }

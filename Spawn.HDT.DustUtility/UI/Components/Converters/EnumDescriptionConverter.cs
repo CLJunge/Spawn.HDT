@@ -16,19 +16,14 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
             object objRet = DependencyProperty.UnsetValue;
 
             if (value != null && value is Enum enumValue)
-            {
                 objRet = GetDescription(enumValue);
-            }
 
             return objRet;
         }
         #endregion
 
         #region ConvertBack
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture) => throw new NotSupportedException();
         #endregion
 
         #region [STATIC] GetDescription
@@ -44,9 +39,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 object[] attrs = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
 
                 if (attrs?.Length > 0)
-                {
                     strRet = ((DescriptionAttribute)attrs[0]).Description;
-                }
             }
             return strRet;
         }

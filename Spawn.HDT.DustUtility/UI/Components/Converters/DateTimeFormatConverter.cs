@@ -36,10 +36,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #endregion
 
         #region ConvertBack
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotSupportedException();
         #endregion
     }
 }

@@ -19,9 +19,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
                 strRet = $"{values[0]}x";
 
                 if (values.Length == 2 && (System.Convert.ToBoolean(values[1]) && System.Convert.ToInt32(values[0]) > 0))
-                {
                     strRet = $"+{strRet}";
-                }
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Converted [{string.Join(",", values)}] to '{strRet}'");
             }
@@ -35,10 +33,7 @@ namespace Spawn.HDT.DustUtility.UI.Components.Converters
         #endregion
 
         #region ConvertBack
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotSupportedException();
         #endregion
     }
 }
