@@ -179,9 +179,7 @@ namespace Spawn.HDT.DustUtility
             Config.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName.Equals(nameof(Config.CheckForUpdates)))
-                {
                     s_blnCheckedForUpdates = !Config.CheckForUpdates;
-                }
             };
 
             Logger.Log(LogLevel.Debug, "Initialized 'DustUtilityPlugin'");
@@ -210,10 +208,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OnUnload
-        public void OnUnload()
-        {
-            UnloadPlugin();
-        }
+        public void OnUnload() => UnloadPlugin();
         #endregion
 
         #region OnUpdate
@@ -233,9 +228,7 @@ namespace Spawn.HDT.DustUtility
             IsOfflineChanged += OnIsOfflineChanged;
 
             if (MainWindow == null)
-            {
                 MainWindow = new MainWindow();
-            }
 
             GameEvents.OnModeChanged.Add(OnModeChanged);
 
@@ -281,15 +274,11 @@ namespace Spawn.HDT.DustUtility
                         IAccount selectedAcc = await SelectAccountAsync(false);
 
                         if (selectedAcc != null)
-                        {
                             UpdatedAccountInstance(selectedAcc);
-                        }
                     }
 
                     if (CurrentAccount.IsValid)
-                    {
                         await ShowMainWindowAsync();
-                    }
                 }
                 else if (!Config.OfflineMode)
                 {
@@ -303,9 +292,7 @@ namespace Spawn.HDT.DustUtility
                 string strMessage = "Plugin is still initializing...";
 
                 if (Config.Version == 1)
-                {
                     strMessage = $"{strMessage} (Updating account files to new format)";
-                }
 
                 MessageBox.Show(strMessage, Name, MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -323,8 +310,8 @@ namespace Spawn.HDT.DustUtility
                 {
                     Logger.Log(LogLevel.Debug, $"Switched to {(IsOffline ? "offline" : "online")} mode");
 
-                    IAccount loggedInAcc = null;
                     int nCounter = 0;
+                    IAccount loggedInAcc;
 
                     do
                     {
@@ -400,9 +387,8 @@ namespace Spawn.HDT.DustUtility
                     }
 
                     if (mode == Hearthstone_Deck_Tracker.Enums.Hearthstone.Mode.TOURNAMENT)
-                    {
                         ServiceLocator.Current.GetInstance<MainViewModel>().TryUpdateDecksButton(true);
-                    }
+
                     break;
             }
         }
@@ -444,9 +430,7 @@ namespace Spawn.HDT.DustUtility
             await ServiceLocator.Current.GetInstance<SettingsDialogViewModel>().InitializeAsync();
 
             if (SettingsDialog.ShowDialog().Value)
-            {
                 ServiceLocator.Current.GetInstance<MainViewModel>().InitializeAsync().Forget();
-            }
         }
         #endregion
 
@@ -500,9 +484,7 @@ namespace Spawn.HDT.DustUtility
                         string strTargetPath = Path.Combine(AccountsDirectory, fileInfo.Name);
 
                         if (File.Exists(strTargetPath))
-                        {
                             File.Delete(strTargetPath);
-                        }
 
                         fileInfo.MoveTo(strTargetPath);
                     }
@@ -635,9 +617,7 @@ namespace Spawn.HDT.DustUtility
                     Window owner = MainWindow;
 
                     if (!blnIsSwitching)
-                    {
                         owner = Core.MainWindow;
-                    }
 
                     await ServiceLocator.Current.GetInstance<AccountSelectorDialogViewModel>().InitializeAsync();
 
@@ -664,13 +644,9 @@ namespace Spawn.HDT.DustUtility
             }
 
             if (retVal != null)
-            {
                 Logger.Log(LogLevel.Debug, $"Account: {retVal.DisplayString}");
-            }
             else
-            {
                 Logger.Log(LogLevel.Debug, $"No account selected");
-            }
 
             return retVal;
         }
@@ -688,11 +664,7 @@ namespace Spawn.HDT.DustUtility
                 string[] vFiles = Directory.GetFiles(AccountsDirectory, $"*_{Account.CollectionString}.xml");
 
                 for (int i = 0; i < vFiles.Length; i++)
-                {
-                    string strAccountString = Path.GetFileNameWithoutExtension(vFiles[i]).Replace($"_{Account.CollectionString}", string.Empty);
-
-                    lstRet.Add(Account.Parse(strAccountString));
-                }
+                    lstRet.Add(Account.Parse(Path.GetFileNameWithoutExtension(vFiles[i]).Replace($"_{Account.CollectionString}", string.Empty)));
             }
 
             Logger.Log(LogLevel.Debug, $"Loaded {lstRet.Count} account(s)");
@@ -715,18 +687,14 @@ namespace Spawn.HDT.DustUtility
                 IAccount selectedAcc = await SelectAccountAsync(true);
 
                 if (selectedAcc == null)
-                {
                     selectedAcc = oldAcc;
-                }
 
                 if (!selectedAcc.Equals(oldAcc))
                 {
                     UpdatedAccountInstance(selectedAcc);
 
                     if (IsOffline)
-                    {
                         Cache.ClearCache();
-                    }
 
                     await ShowMainWindowAsync();
 
@@ -761,30 +729,16 @@ namespace Spawn.HDT.DustUtility
             string strRet = Path.Combine(Hearthstone_Deck_Tracker.Config.Instance.DataDir, "DustUtility", strFolder);
 
             if (!Directory.Exists(strRet))
-            {
                 Directory.CreateDirectory(strRet);
-            }
 
             return strRet;
         }
         #endregion
 
         #region GetFullFileName
-        public static string GetFullFileName(IAccount account, string strType)
-        {
-            string strRet = string.Empty;
-
-            if (!account.IsEmpty)
-            {
-                strRet = Path.Combine(AccountsDirectory, $"{account.AccountString}_{strType}.xml");
-            }
-            else
-            {
-                strRet = Path.Combine(AccountsDirectory, $"{strType}.xml");
-            }
-
-            return strRet;
-        }
+        public static string GetFullFileName(IAccount account, string strType) => !account.IsEmpty
+                ? Path.Combine(AccountsDirectory, $"{account.AccountString}_{strType}.xml")
+                : Path.Combine(AccountsDirectory, $"{strType}.xml");
         #endregion
 
         #region BringWindowToFront
@@ -827,9 +781,7 @@ namespace Spawn.HDT.DustUtility
                     NotificationToast toast = new NotificationToast(strMessage);
 
                     if (onClick != null)
-                    {
                         toast.Click += (s, e) => onClick();
-                    }
 
                     ToastManager.ShowCustomToast(toast);
                 });
