@@ -36,6 +36,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
+                { CardSet.DALARAN, "Shadows" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -56,6 +57,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "The Witchwood" },
                 { CardSet.BOOMSDAY, "The Boomsday Project" },
                 { CardSet.TROLL, "Rastakhan Rumble" },
+                { CardSet.DALARAN, "Rise of Shadows" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -76,6 +78,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
+                { CardSet.DALARAN, "RoS" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "BRM" },
                 { CardSet.LOE, "LOE" },
@@ -96,6 +99,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
+                { CardSet.DALARAN, "Shadows" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
@@ -115,7 +119,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
-                { CardSet.TROLL, "Rastakhan" }
+                { CardSet.TROLL, "Rastakhan" },
+                { CardSet.DALARAN, "Shadows" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -129,19 +134,18 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             Standard = new Dictionary<CardSet, string>
             {
                 { CardSet.EXPERT1, "Classic" },
-                { CardSet.UNGORO, "Un'Goro" },
-                { CardSet.ICECROWN, "Frozen Throne" },
-                { CardSet.LOOTAPALOOZA, "Kobolds" },
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
-                { CardSet.TROLL, "Rastakhan" }
+                { CardSet.TROLL, "Rastakhan" },
+                { CardSet.DALARAN, "Shadows" }
             };
 
             NonCraftableCardIds = new List<string>
             {
                 Neutral.Cthun,
                 Neutral.BeckonerOfEvil,
-                Neutral.MarinTheFox
+                Neutral.MarinTheFox,
+                Neutral.ArchmageVargoth
             };
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets'");
@@ -175,6 +179,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Witchwood { get; }
             public static InfoItem Boomsday { get; }
             public static InfoItem Rastakhan { get; }
+            public static InfoItem Shadows { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -198,6 +203,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Witchwood = new InfoItem(98, 72, 54, 23);
                 Boomsday = new InfoItem(98, 72, 54, 23);
                 Rastakhan = new InfoItem(98, 72, 54, 23);
+                Shadows = new InfoItem(98, 74, 52, 23);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -218,6 +224,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.GILNEAS, Witchwood },
                     { CardSet.BOOMSDAY, Boomsday },
                     { CardSet.TROLL, Rastakhan },
+                    { CardSet.DALARAN, Shadows },
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },
