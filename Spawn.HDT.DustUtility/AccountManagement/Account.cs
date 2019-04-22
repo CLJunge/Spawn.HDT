@@ -111,7 +111,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 lstRet = lstRet.Where(c => HearthDb.Cards.Collectible.ContainsKey(c.Id)).ToList();
             }
             else
+            {
                 DustUtilityPlugin.Logger.Log(LogLevel.Error, "Couldn't load collection!");
+            }
 
             return lstRet;
         }
@@ -149,7 +151,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Excluded deck (Id={nDeckId})");
             }
             else
+            {
                 DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already excluded (Id={nDeckId})");
+            }
         }
         #endregion
 
@@ -163,7 +167,9 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Included deck (Id={nDeckId})");
             }
             else
+            {
                 DustUtilityPlugin.Logger.Log(LogLevel.Warning, $"Deck already included (Id={nDeckId})");
+            }
         }
         #endregion
 
@@ -215,12 +221,16 @@ namespace Spawn.HDT.DustUtility.AccountManagement
                         blnRet &= acc.Region == Region;
                     }
                     else
+                    {
                         blnRet = IsEmpty && acc.IsEmpty;
+                    }
                 }
                 else
+                {
 #pragma warning disable S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
                     blnRet = base.Equals(obj);
 #pragma warning restore S3249 // Classes directly extending "object" should not call "base" in "GetHashCode" or "Equals"
+                }
             }
 
             return blnRet;
