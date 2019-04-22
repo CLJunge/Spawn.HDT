@@ -30,9 +30,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             if (AllowDrag && m_startPosition != null)
             {
                 if (m_draggedItem == null && ItemsContainer.SelectedIndex > -1)
-                {
                     m_draggedItem = ItemsContainer.SelectedItem as CardItemModel;
-                }
 
                 Point position = e.GetPosition(null);
 
@@ -60,9 +58,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         {
             //Handles scrollbar
             if (!(e.OriginalSource is System.Windows.Shapes.Rectangle))
-            {
                 m_startPosition = e.GetPosition(null);
-            }
         }
         #endregion
 
@@ -70,9 +66,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         private void OnListViewDragEnter(object sender, DragEventArgs e)
         {
             if (!e.Data.GetDataPresent("item"))
-            {
                 e.Effects = DragDropEffects.None;
-            }
 
             e.Handled = true;
         }

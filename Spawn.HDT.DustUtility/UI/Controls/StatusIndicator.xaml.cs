@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Spawn.HDT.DustUtility.UI.Controls
 {
-    //Copied from HDT since I am not able to get it to work by using the control from the referenced HDT executable.
+    //Copied from HDT since I am not able getting it to work by using the control from the referenced HDT executable.
     public partial class StatusIndicator : INotifyPropertyChanged
     {
         public static readonly DependencyProperty SuccessProperty = DependencyProperty.Register(
@@ -20,10 +20,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             typeof(SolidColorBrush), typeof(StatusIndicator), new FrameworkPropertyMetadata(new SolidColorBrush(Colors.Red),
                 FrameworkPropertyMetadataOptions.AffectsRender, OnDependencyPropChanged));
 
-        public StatusIndicator()
-        {
-            InitializeComponent();
-        }
+        public StatusIndicator() => InitializeComponent();
 
         public bool Success
         {
@@ -62,9 +59,6 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         }
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

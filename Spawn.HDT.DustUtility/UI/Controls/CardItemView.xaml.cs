@@ -27,14 +27,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Updating data context to '{cardItem.Name}...");
 
-                if (cardItem.Date.HasValue)
-                {
-                    DateTextBlock.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    DateTextBlock.Visibility = Visibility.Collapsed;
-                }
+                DateTextBlock.Visibility = cardItem.Date.HasValue ? Visibility.Visible : Visibility.Collapsed;
 
                 RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
 
@@ -49,37 +42,22 @@ namespace Spawn.HDT.DustUtility.UI.Controls
                 CardSetTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
 
                 if (cardItem.Golden)
-                {
                     ControlBorder.BorderBrush = Brushes.Goldenrod;
-                }
                 else
-                {
                     ControlBorder.SetResourceReference(Border.BorderBrushProperty, "BlackBrush");
-                }
 
                 if (DustUtilityPlugin.Config.ColoredCardLabels)
                 {
                     RarityTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
 
-                    if (cardItem.Golden)
-                    {
-                        NameTextBlock.Foreground = Brushes.Goldenrod;
-                    }
-                    else
-                    {
-                        NameTextBlock.Foreground = DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
-                    }
+                    NameTextBlock.Foreground = cardItem.Golden ? Brushes.Goldenrod : DustUtilityPlugin.RarityBrushes[(int)cardItem.Wrapper.DbCard.Rarity];
 
                     if (cardItem.ColoredCount)
                     {
                         if (cardItem.Count > 0)
-                        {
                             CountTextBlock.Foreground = Brushes.Lime;
-                        }
                         else if (cardItem.Count < 0)
-                        {
                             CountTextBlock.Foreground = Brushes.Red;
-                        }
                     }
                 }
             }

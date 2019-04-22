@@ -83,11 +83,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 CardImagePopup.IsOpen = false;
 
-                if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
-                    && s_openedPopup != null)
-                {
-                    s_openedPopup.IsOpen = false;
-                }
+                ClosePopup();
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed popup");
             }
@@ -108,9 +104,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         private void OnMenuItemRemoveClick(object sender, RoutedEventArgs e)
         {
             while (ItemsContainer.SelectedItems.Count > 0)
-            {
                 RemoveCardItem.Invoke(this, new CardItemEventArgs(ItemsContainer.SelectedItems[0] as CardItemModel, ItemsContainer.SelectedIndex));
-            }
         }
         #endregion
 
@@ -130,11 +124,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
             {
                 CardImagePopup.IsOpen = false;
 
-                if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
-                    && s_openedPopup != null)
-                {
-                    s_openedPopup.IsOpen = false;
-                }
+                ClosePopup();
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Closed popup");
             }
@@ -145,11 +135,7 @@ namespace Spawn.HDT.DustUtility.UI.Controls
         #region OpenPopupAsync
         private async Task OpenPopupAsync()
         {
-            if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split
-                && s_openedPopup != null)
-            {
-                s_openedPopup.IsOpen = false;
-            }
+            ClosePopup();
 
             if (ItemsContainer.SelectedItem is CardItemModel selectedItem)
             {
@@ -163,6 +149,14 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 DustUtilityPlugin.Logger.Log(LogLevel.Debug, $"Opened popup for '{selectedItem.Name}'");
             }
+        }
+        #endregion
+
+        #region ClosePopup
+        private void ClosePopup()
+        {
+            if (DustUtilityPlugin.Config.ViewMode == ViewMode.Split && s_openedPopup != null)
+                s_openedPopup.IsOpen = false;
         }
         #endregion
     }
