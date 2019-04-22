@@ -157,9 +157,7 @@ namespace Spawn.HDT.DustUtility
             string strMethod = "OrderBy";
 
             if (nIteration > 0)
-            {
                 strMethod = "ThenBy";
-            }
 
             MethodCallExpression resultExp = Expression.Call(typeof(Queryable), strMethod, new System.Type[] { type, property.PropertyType }, source.Expression, Expression.Quote(expr));
 
@@ -196,11 +194,7 @@ namespace Spawn.HDT.DustUtility
             int nRet = 0;
 
             for (int i = 0; i < deck?.Cards.Count; i++)
-            {
-                int nCost = deck.Cards[i].GetCraftingCost();
-
-                nRet += nCost * deck.Cards[i].Count;
-            }
+                nRet += deck.Cards[i].GetCraftingCost() * deck.Cards[i].Count;
 
             return nRet;
         }
@@ -246,9 +240,7 @@ namespace Spawn.HDT.DustUtility
             int nRet = 0;
 
             for (int i = 0; i < deck?.Cards.Count; i++)
-            {
                 nRet += deck.Cards[i].Count;
-            }
 
             return nRet;
         }
@@ -284,16 +276,7 @@ namespace Spawn.HDT.DustUtility
             T retVal = null;
 
             if (element?.Parent != null)
-            {
-                if (element.Parent is T)
-                {
-                    retVal = (T)element.Parent;
-                }
-                else
-                {
-                    retVal = FindParent<T>(element.Parent as System.Windows.FrameworkElement);
-                }
-            }
+                retVal = element.Parent is T ? (T)element.Parent : FindParent<T>(element.Parent as System.Windows.FrameworkElement);
 
             return retVal;
         }
