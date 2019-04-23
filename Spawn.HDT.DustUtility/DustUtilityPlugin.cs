@@ -204,7 +204,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region OnButtonPress
-        public void OnButtonPress() => ShowSettingsDialog();
+        public void OnButtonPress() => ShowSettingsDialog().Forget();
         #endregion
 
         #region OnUnload
@@ -416,9 +416,7 @@ namespace Spawn.HDT.DustUtility
         #endregion
 
         #region ShowSettingsDialog
-#pragma warning disable S3168 // "async" methods should not return "void"
-        private async void ShowSettingsDialog()
-#pragma warning restore S3168 // "async" methods should not return "void"
+        private async Task ShowSettingsDialog()
         {
             Logger.Log(LogLevel.Debug, "Opening settings dialog");
 
@@ -791,8 +789,8 @@ namespace Spawn.HDT.DustUtility
         }
         #endregion
 
-        #region PerformUpdateCheckAsync
-        public static async Task PerformUpdateCheckAsync()
+        #region CheckForUpdatesAsync
+        public static async Task CheckForUpdatesAsync()
         {
             if (!s_blnCheckedForUpdates)
             {

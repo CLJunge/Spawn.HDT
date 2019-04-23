@@ -217,7 +217,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             await Task.Run(() => BackupManager.CreateBackup(DustUtilityPlugin.CurrentAccount))
                 .ContinueWith(t => BackupManager.DeleteOldBackups(DustUtilityPlugin.CurrentAccount));
 
-            await DustUtilityPlugin.PerformUpdateCheckAsync();
+            await DustUtilityPlugin.CheckForUpdatesAsync();
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Finished initializing");
         }
