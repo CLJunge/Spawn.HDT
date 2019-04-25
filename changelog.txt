@@ -116,4 +116,13 @@
 - Display total deck count in decks flyout
 - Implemented Whizbang deck handling
 - Other fixes and/or improvements
+
+## v3.1.1
+- Ready for Rastakhan Rumble
+
+## v3.1.2
+- Added Rastakhan set icon
+
+## v3.2.0
+- Ready for Rise of Shadows
 -----------------------------
