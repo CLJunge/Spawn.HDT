@@ -190,6 +190,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     strSource = $"{strSource}boomsday_logo.png";
                     break;
 
+                case CardSet.TROLL:
+                    strSource = $"{strSource}rastakhan_logo.png";
+                    break;
+
+                case CardSet.DALARAN:
+                    strSource = $"{strSource}shadows_logo.png";
+                    break;
+
                 case CardSet.NAXX:
                     strSource = $"{strSource}naxx_logo.png";
                     break;
@@ -258,6 +266,14 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 case CardSet.BOOMSDAY:
                     strSource = $"{strSource}boomsday_banner.jpg";
+                    break;
+
+                case CardSet.TROLL:
+                    strSource = $"{strSource}rastakhan_banner.jpg";
+                    break;
+
+                case CardSet.DALARAN:
+                    strSource = $"{strSource}shadows_banner.jpg";
                     break;
 
                 case CardSet.NAXX:
