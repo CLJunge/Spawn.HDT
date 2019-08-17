@@ -12,7 +12,7 @@
         <ResourceDictionary>
             <converters:SubtractionConverter x:Key="SubtractionConverter"/>
             <Style x:Key="CustomButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="{x:Type Button}">
-                <!--<Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>-->
+                <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
             </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Spawn.HDT.DustUtility;component/Resources/CardSetIcons.xaml"/>
