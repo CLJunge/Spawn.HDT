@@ -46,6 +46,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strRastakhanSetEnabledLabelText;
         private bool m_blnShadowsSetEnabled;
         private string m_strShadowsSetEnabledLabelText;
+        private bool m_blnSaviorsSetEnabled;
+        private string m_strSaviorsSetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -291,6 +293,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strShadowsSetEnabledLabelText;
             set => Set(ref m_strShadowsSetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region SaviorsSetEnabled
+        public bool SaviorsSetEnabled
+        {
+            get => m_blnSaviorsSetEnabled;
+            set => Set(ref m_blnSaviorsSetEnabled, value);
+        }
+        #endregion
+
+        #region SaviorsSetEnabledLabelText
+        public string SaviorsSetEnabledLabelText
+        {
+            get => m_strSaviorsSetEnabledLabelText;
+            set => Set(ref m_strSaviorsSetEnabledLabelText, value);
         }
         #endregion
 
@@ -789,6 +807,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         : ShadowsSetEnabledLabelText.Substring(0, ShadowsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
+                case nameof(SaviorsSetEnabled):
+                    SaviorsSetEnabledLabelText = e.IsDirty
+                        ? $"{SaviorsSetEnabledLabelText}{IsDirtySuffix}"
+                        : SaviorsSetEnabledLabelText.Substring(0, SaviorsSetEnabledLabelText.Length - IsDirtySuffix.Length);
+                    break;
+
                 case nameof(NaxxSetEnabled):
                     NaxxSetEnabledLabelText = e.IsDirty
                         ? $"{NaxxSetEnabledLabelText}{IsDirtySuffix}"
@@ -953,6 +977,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllSetCheckBoxesChecked &= BoomsdaySetEnabled = parameters.Sets.Contains(CardSet.BOOMSDAY);
             AllSetCheckBoxesChecked &= RastakhanSetEnabled = parameters.Sets.Contains(CardSet.TROLL);
             AllSetCheckBoxesChecked &= ShadowsSetEnabled = parameters.Sets.Contains(CardSet.DALARAN);
+            AllSetCheckBoxesChecked &= SaviorsSetEnabled = parameters.Sets.Contains(CardSet.ULDUM);
             AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -991,6 +1016,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(BoomsdaySetEnabled), BoomsdaySetEnabled);
             SetInitialPropertyValue(nameof(RastakhanSetEnabled), RastakhanSetEnabled);
             SetInitialPropertyValue(nameof(ShadowsSetEnabled), ShadowsSetEnabled);
+            SetInitialPropertyValue(nameof(SaviorsSetEnabled), SaviorsSetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1083,6 +1109,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (ShadowsSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.DALARAN);
 
+            if (SaviorsSetEnabled)
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.ULDUM);
+
             if (NaxxSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
 
@@ -1165,6 +1194,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             BoomsdaySetEnabledLabelText = CardSet.BOOMSDAY.GetDisplayString();
             RastakhanSetEnabledLabelText = CardSet.TROLL.GetDisplayString();
             ShadowsSetEnabledLabelText = CardSet.DALARAN.GetDisplayString();
+            SaviorsSetEnabledLabelText = CardSet.ULDUM.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
