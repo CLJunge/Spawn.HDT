@@ -127,6 +127,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
                     CardSet.BOOMSDAY,
                     CardSet.TROLL,
                     CardSet.DALARAN,
+                    CardSet.ULDUM,
                     CardSet.NAXX,
                     CardSet.BRM,
                     CardSet.LOE,
