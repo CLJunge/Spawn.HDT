@@ -198,6 +198,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                     strSource = $"{strSource}shadows_logo.png";
                     break;
 
+                case CardSet.ULDUM:
+                    strSource = $"{strSource}saviors_logo.png";
+                    break;
+
                 case CardSet.NAXX:
                     strSource = $"{strSource}naxx_logo.png";
                     break;
@@ -274,6 +278,10 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
 
                 case CardSet.DALARAN:
                     strSource = $"{strSource}shadows_banner.jpg";
+                    break;
+
+                case CardSet.ULDUM:
+                    strSource = $"{strSource}saviors_banner.jpg";
                     break;
 
                 case CardSet.NAXX:
