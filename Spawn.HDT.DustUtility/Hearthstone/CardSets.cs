@@ -37,6 +37,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
+                { CardSet.ULDUM, "Saviors" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -58,6 +59,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "The Boomsday Project" },
                 { CardSet.TROLL, "Rastakhan Rumble" },
                 { CardSet.DALARAN, "Rise of Shadows" },
+                { CardSet.ULDUM, "Saviors of Uldum" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -79,6 +81,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "RoS" },
+                { CardSet.ULDUM, "SoU" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "BRM" },
                 { CardSet.LOE, "LOE" },
@@ -100,6 +103,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
+                { CardSet.ULDUM, "Saviors" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
@@ -120,7 +124,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
-                { CardSet.DALARAN, "Shadows" }
+                { CardSet.DALARAN, "Shadows" },
+                { CardSet.ULDUM, "Saviors" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -137,7 +142,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.GILNEAS, "Witchwood" },
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
-                { CardSet.DALARAN, "Shadows" }
+                { CardSet.DALARAN, "Shadows" },
+                { CardSet.ULDUM, "Saviors" }
             };
 
             NonCraftableCardIds = new List<string>
@@ -179,6 +185,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Boomsday { get; }
             public static InfoItem Rastakhan { get; }
             public static InfoItem Shadows { get; }
+            public static InfoItem Uldum { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -203,6 +210,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Boomsday = new InfoItem(98, 72, 54, 23);
                 Rastakhan = new InfoItem(98, 72, 54, 23);
                 Shadows = new InfoItem(98, 74, 52, 23);
+                Uldum = new InfoItem(98, 74, 52, 23);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -224,6 +232,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.BOOMSDAY, Boomsday },
                     { CardSet.TROLL, Rastakhan },
                     { CardSet.DALARAN, Shadows },
+                    { CardSet.ULDUM, Uldum},
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },
