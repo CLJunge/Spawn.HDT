@@ -13,25 +13,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CopyPlugin|Any CPU = CopyPlugin|Any CPU
 		Debug|Any CPU = Debug|Any CPU
-		Release + Zip|Any CPU = Release + Zip|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Zip|Any CPU = Zip|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{370A3879-C10B-45C2-818E-D28B504E5EB0}.CopyPlugin|Any CPU.ActiveCfg = CopyPlugin|Any CPU
+		{370A3879-C10B-45C2-818E-D28B504E5EB0}.CopyPlugin|Any CPU.Build.0 = CopyPlugin|Any CPU
 		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Release + Zip|Any CPU.ActiveCfg = Release + Zip|Any CPU
-		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Release + Zip|Any CPU.Build.0 = Release + Zip|Any CPU
 		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Zip|Any CPU.ActiveCfg = Zip|Any CPU
+		{370A3879-C10B-45C2-818E-D28B504E5EB0}.Zip|Any CPU.Build.0 = Zip|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		BuildVersion_DetectChanges = True
-		BuildVersion_StartDate = 2000/1/1
-		SolutionGuid = {9B27C12A-B4E5-4CCE-A7FC-CADBF27500B0}
 		BuildVersion_BuildAction = Build
+		SolutionGuid = {9B27C12A-B4E5-4CCE-A7FC-CADBF27500B0}
+		BuildVersion_StartDate = 2000/1/1
+		BuildVersion_DetectChanges = True
 	EndGlobalSection
 EndGlobal

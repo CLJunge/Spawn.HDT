@@ -33,24 +33,6 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Copy Plugin|AnyCPU'">
-    <OutputPath>bin\Release + Copy Plugin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug + Copy Plugin|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug + Copy Plugin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -59,16 +41,23 @@
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Copy Plugin|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CopyPlugin|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CopyPlugin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\x86\Release + Copy Plugin\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug + Copy Plugin|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CopyPlugin|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\CopyPlugin\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\x86\Debug + Copy Plugin\</OutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Zip|AnyCPU'">
-    <OutputPath>bin\Release + Zip\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Zip|AnyCPU'">
+    <OutputPath>bin\Zip\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
@@ -76,8 +65,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release + Zip|x86'">
-    <OutputPath>bin\x86\Release + Zip\</OutputPath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Zip|x86'">
+    <OutputPath>bin\x86\Zip\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -495,7 +484,8 @@
     </ItemGroup>
   </Target>-->
   <PropertyGroup>
-    <PostBuildEvent>if "$(ConfigurationName)" == "Release + Zip" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild --zipoutput --zipname DustUtility.zip</PostBuildEvent>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Zip" "$(SolutionDir)Spawn.BuildTool.exe" buildsolution --msbuild "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\MSBuild.exe" --project "$(ProjectPath)" --config $(ConfigurationName) --output "$(SolutionDir)Releases" --outputext *.dll --nobuild --zipoutput --zipname Spawn.HDT.DustUtility.zip
+if "$(ConfigurationName)" == "CopyPlugin" "$(SolutionDir)Spawn.BuildTool.exe" copyhdtplugin --source $(TargetDir) --target Spawn.HDT.DustUtility --ext *.dll --emptytarget</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
@@ -503,7 +493,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildAction="Build" BuildVersion_StartDate="2000/1/1" BuildVersion_ConfigurationName="Any" BuildVersion_DetectChanges="True" />
+      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_ConfigurationName="Any" BuildVersion_StartDate="2000/1/1" BuildVersion_BuildAction="Build" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
