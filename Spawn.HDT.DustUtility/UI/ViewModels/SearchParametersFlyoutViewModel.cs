@@ -48,6 +48,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strShadowsSetEnabledLabelText;
         private bool m_blnSaviorsSetEnabled;
         private string m_strSaviorsSetEnabledLabelText;
+        private bool m_blnDragonsSetEnabled;
+        private string m_strDragonsSetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -309,6 +311,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strSaviorsSetEnabledLabelText;
             set => Set(ref m_strSaviorsSetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region DragonsSetEnabled
+        public bool DragonsSetEnabled
+        {
+            get => m_blnDragonsSetEnabled;
+            set => Set(ref m_blnDragonsSetEnabled, value);
+        }
+        #endregion
+
+        #region DragonsSetEnabledLabelText
+        public string DragonsSetEnabledLabelText
+        {
+            get => m_strDragonsSetEnabledLabelText;
+            set => Set(ref m_strDragonsSetEnabledLabelText, value);
         }
         #endregion
 
@@ -813,6 +831,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         : SaviorsSetEnabledLabelText.Substring(0, SaviorsSetEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
+                case nameof(DragonsSetEnabled):
+                    DragonsSetEnabledLabelText = e.IsDirty
+                        ? $"{DragonsSetEnabledLabelText}{IsDirtySuffix}"
+                        : DragonsSetEnabledLabelText.Substring(0, DragonsSetEnabledLabelText.Length - IsDirtySuffix.Length);
+                    break;
+
                 case nameof(NaxxSetEnabled):
                     NaxxSetEnabledLabelText = e.IsDirty
                         ? $"{NaxxSetEnabledLabelText}{IsDirtySuffix}"
@@ -978,6 +1002,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllSetCheckBoxesChecked &= RastakhanSetEnabled = parameters.Sets.Contains(CardSet.TROLL);
             AllSetCheckBoxesChecked &= ShadowsSetEnabled = parameters.Sets.Contains(CardSet.DALARAN);
             AllSetCheckBoxesChecked &= SaviorsSetEnabled = parameters.Sets.Contains(CardSet.ULDUM);
+            AllSetCheckBoxesChecked &= DragonsSetEnabled = parameters.Sets.Contains(CardSet.DRAGONS);
             AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -1017,6 +1042,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(RastakhanSetEnabled), RastakhanSetEnabled);
             SetInitialPropertyValue(nameof(ShadowsSetEnabled), ShadowsSetEnabled);
             SetInitialPropertyValue(nameof(SaviorsSetEnabled), SaviorsSetEnabled);
+            SetInitialPropertyValue(nameof(DragonsSetEnabled), DragonsSetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1112,6 +1138,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (SaviorsSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.ULDUM);
 
+            if (DragonsSetEnabled)
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.DRAGONS);
+
             if (NaxxSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
 
@@ -1195,6 +1224,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             RastakhanSetEnabledLabelText = CardSet.TROLL.GetDisplayString();
             ShadowsSetEnabledLabelText = CardSet.DALARAN.GetDisplayString();
             SaviorsSetEnabledLabelText = CardSet.ULDUM.GetDisplayString();
+            DragonsSetEnabledLabelText = CardSet.DRAGONS.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
