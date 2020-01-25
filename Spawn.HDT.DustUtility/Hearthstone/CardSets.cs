@@ -38,6 +38,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
                 { CardSet.ULDUM, "Saviors" },
+                { CardSet.DRAGONS, "Dragons" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -60,6 +61,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.TROLL, "Rastakhan Rumble" },
                 { CardSet.DALARAN, "Rise of Shadows" },
                 { CardSet.ULDUM, "Saviors of Uldum" },
+                { CardSet.DRAGONS, "Descent of Dragons" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -82,6 +84,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "RoS" },
                 { CardSet.ULDUM, "SoU" },
+                { CardSet.DRAGONS, "DoD" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "BRM" },
                 { CardSet.LOE, "LOE" },
@@ -104,6 +107,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
                 { CardSet.ULDUM, "Saviors" },
+                { CardSet.DRAGONS, "Dragons" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
@@ -125,7 +129,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
-                { CardSet.ULDUM, "Saviors" }
+                { CardSet.ULDUM, "Saviors" },
+                { CardSet.DRAGONS, "Dragons" }
             };
 
             Adventures = new Dictionary<CardSet, string>
@@ -143,14 +148,16 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.BOOMSDAY, "Boomsday" },
                 { CardSet.TROLL, "Rastakhan" },
                 { CardSet.DALARAN, "Shadows" },
-                { CardSet.ULDUM, "Saviors" }
+                { CardSet.ULDUM, "Saviors" },
+                { CardSet.DRAGONS, "Dragons" }
             };
 
             NonCraftableCardIds = new List<string>
             {
                 Neutral.Cthun,
                 Neutral.BeckonerOfEvil,
-                Neutral.MarinTheFox
+                Neutral.MarinTheFox,
+                Neutral.Sathrovarr
             };
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets'");
@@ -186,6 +193,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Rastakhan { get; }
             public static InfoItem Shadows { get; }
             public static InfoItem Uldum { get; }
+
+            public static InfoItem Dragons { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -198,7 +207,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             #region Ctor
             static Info()
             {
-                Expert = new InfoItem(182, 160, 74, 31);
+                Expert = new InfoItem(188, 162, 74, 33);
                 Goblins = new InfoItem(80, 74, 52, 20);
                 Tournament = new InfoItem(98, 72, 54, 20);
                 OldGods = new InfoItem(100, 72, 54, 21);
@@ -206,11 +215,12 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Ungoro = new InfoItem(98, 72, 54, 23);
                 FrozenThrone = new InfoItem(98, 72, 54, 23);
                 Kobolds = new InfoItem(98, 72, 54, 23);
-                Witchwood = new InfoItem(98, 72, 54, 23);
-                Boomsday = new InfoItem(98, 72, 54, 23);
+                Witchwood = new InfoItem(96, 70, 50, 21);
+                Boomsday = new InfoItem(98, 72, 54, 24);
                 Rastakhan = new InfoItem(98, 72, 54, 23);
-                Shadows = new InfoItem(98, 74, 52, 23);
-                Uldum = new InfoItem(98, 74, 52, 23);
+                Shadows = new InfoItem(98, 74, 52, 24);
+                Uldum = new InfoItem(98, 72, 54, 23);
+                Dragons = new InfoItem(98, 72, 54, 28);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -233,6 +243,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.TROLL, Rastakhan },
                     { CardSet.DALARAN, Shadows },
                     { CardSet.ULDUM, Uldum},
+                    { CardSet.DRAGONS, Dragons},
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },
