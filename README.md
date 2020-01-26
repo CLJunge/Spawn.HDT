@@ -1,4 +1,4 @@
-# Dust Utility v3.0
+# Dust Utility
 A utility/management tool, which can help you to obtain certain amounts of dust from your collection.
 
 ![Overlay](https://i.imgur.com/t0pmlUB.png)
