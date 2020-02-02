@@ -225,7 +225,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
                 Karazhan = new InfoItem(54, 24, 2, 5);
-                Hall = new InfoItem(6, 2, 2, 5);
+                Hall = new InfoItem(14, 10, 10, 7);
 
                 Dictionary = new Dictionary<CardSet, InfoItem>
                 {
