@@ -14,10 +14,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
         public static Dictionary<CardSet, string> AllFullName { get; }
         public static Dictionary<CardSet, string> AllDisplayName { get; }
         public static Dictionary<CardSet, string> AllShortName { get; }
-        public static Dictionary<CardSet, string> Expansions { get; }
-        public static Dictionary<CardSet, string> Adventures { get; }
-        public static Dictionary<CardSet, string> Standard { get; }
-        public static List<string> NonCraftableCardIds { get; }
+        public static List<string> NonCraftableRegularCardIds { get; }
+        public static List<string> NonCraftableGoldenCardIds { get; }
         #endregion
 
         #region Ctor
@@ -115,49 +113,28 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.HOF, "Hall" }
             };
 
-            Expansions = new Dictionary<CardSet, string>
+            NonCraftableRegularCardIds = new List<string>
             {
-                { CardSet.EXPERT1, "Classic" },
-                { CardSet.GVG, "Goblins vs Gnomes" },
-                { CardSet.TGT, "Grand Tournament" },
-                { CardSet.OG, "Old Gods" },
-                { CardSet.GANGS, "Gadgetzan" },
-                { CardSet.UNGORO, "Un'Goro" },
-                { CardSet.ICECROWN, "Frozen Throne" },
-                { CardSet.LOOTAPALOOZA, "Kobolds" },
-                { CardSet.GILNEAS, "Witchwood" },
-                { CardSet.BOOMSDAY, "Boomsday" },
-                { CardSet.TROLL, "Rastakhan" },
-                { CardSet.DALARAN, "Shadows" },
-                { CardSet.ULDUM, "Saviors" },
-                { CardSet.DRAGONS, "Dragons" }
-            };
-
-            Adventures = new Dictionary<CardSet, string>
-            {
-                { CardSet.NAXX, "Naxxramas" },
-                { CardSet.BRM, "Blackrock Mountain" },
-                { CardSet.LOE, "League of Explorers" },
-                { CardSet.KARA, "Karazhan" }
-            };
-
-            Standard = new Dictionary<CardSet, string>
-            {
-                { CardSet.EXPERT1, "Classic" },
-                { CardSet.GILNEAS, "Witchwood" },
-                { CardSet.BOOMSDAY, "Boomsday" },
-                { CardSet.TROLL, "Rastakhan" },
-                { CardSet.DALARAN, "Shadows" },
-                { CardSet.ULDUM, "Saviors" },
-                { CardSet.DRAGONS, "Dragons" }
-            };
-
-            NonCraftableCardIds = new List<string>
-            {
-                Neutral.Cthun,
                 Neutral.BeckonerOfEvil,
+                Neutral.Cthun,
+                Neutral.KaelthasSunstrider,
                 Neutral.MarinTheFox,
-                Neutral.Sathrovarr
+                Neutral.Sathrovarr,
+                Priest.GalakrondTheUnspeakable,
+                Rogue.GalakrondTheNightmare,
+                Shaman.GalakrondTheTempest,
+                Warlock.GalakrondTheWretched,
+                Warrior.GalakrondTheUnbreakable
+            };
+
+            NonCraftableGoldenCardIds = new List<string>
+            {
+                Neutral.EliteTaurenChieftain,
+                Neutral.GelbinMekkatorque,
+                Neutral.MarinTheFox,
+                Neutral.Sathrovarr,
+                Neutral.Sn1pSn4p,
+                Neutral.ZayleShadowCloak
             };
 
             DustUtilityPlugin.Logger.Log(LogLevel.Debug, "Initialized 'CardSets'");
