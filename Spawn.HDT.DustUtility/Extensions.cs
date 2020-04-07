@@ -33,25 +33,30 @@ namespace Spawn.HDT.DustUtility
             {
                 Card c = Cards.All[card.Id];
 
-                if (c.Set != CardSet.CORE && !CardSets.NonCraftableCardIds.Contains(c.Id))
+                if (c.Set != CardSet.CORE)
                 {
-                    switch (c.Rarity)
+                    bool blnIsCollectible = card.Premium ? !CardSets.NonCraftableGoldenCardIds.Contains(c.Id) : !CardSets.NonCraftableRegularCardIds.Contains(c.Id);
+
+                    if (blnIsCollectible)
                     {
-                        case Rarity.COMMON:
-                            nRet = (card.Premium ? 50 : 5);
-                            break;
+                        switch (c.Rarity)
+                        {
+                            case Rarity.COMMON:
+                                nRet = (card.Premium ? 50 : 5);
+                                break;
 
-                        case Rarity.RARE:
-                            nRet = (card.Premium ? 100 : 20);
-                            break;
+                            case Rarity.RARE:
+                                nRet = (card.Premium ? 100 : 20);
+                                break;
 
-                        case Rarity.EPIC:
-                            nRet = (card.Premium ? 400 : 100);
-                            break;
+                            case Rarity.EPIC:
+                                nRet = (card.Premium ? 400 : 100);
+                                break;
 
-                        case Rarity.LEGENDARY:
-                            nRet = (card.Premium ? 1600 : 400);
-                            break;
+                            case Rarity.LEGENDARY:
+                                nRet = (card.Premium ? 1600 : 400);
+                                break;
+                        }
                     }
                 }
             }
@@ -207,25 +212,30 @@ namespace Spawn.HDT.DustUtility
             {
                 Card c = Cards.All[card.Id];
 
-                if (c.Set != CardSet.CORE && !CardSets.NonCraftableCardIds.Contains(c.Id))
+                if (c.Set != CardSet.CORE)
                 {
-                    switch (c.Rarity)
+                    bool blnIsCollectible = card.Premium ? !CardSets.NonCraftableGoldenCardIds.Contains(c.Id) : !CardSets.NonCraftableRegularCardIds.Contains(c.Id);
+
+                    if (blnIsCollectible)
                     {
-                        case Rarity.COMMON:
-                            nRet = (card.Premium ? 400 : 40);
-                            break;
+                        switch (c.Rarity)
+                        {
+                            case Rarity.COMMON:
+                                nRet = (card.Premium ? 400 : 40);
+                                break;
 
-                        case Rarity.RARE:
-                            nRet = (card.Premium ? 800 : 100);
-                            break;
+                            case Rarity.RARE:
+                                nRet = (card.Premium ? 800 : 100);
+                                break;
 
-                        case Rarity.EPIC:
-                            nRet = (card.Premium ? 1600 : 400);
-                            break;
+                            case Rarity.EPIC:
+                                nRet = (card.Premium ? 1600 : 400);
+                                break;
 
-                        case Rarity.LEGENDARY:
-                            nRet = (card.Premium ? 3200 : 1600);
-                            break;
+                            case Rarity.LEGENDARY:
+                                nRet = (card.Premium ? 3200 : 1600);
+                                break;
+                        }
                     }
                 }
             }
