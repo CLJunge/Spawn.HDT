@@ -91,9 +91,8 @@
       <HintPath>..\lib\HearthMirror.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Hearthstone Deck Tracker">
-      <HintPath>..\lib\Hearthstone Deck Tracker.exe</HintPath>
-      <Private>False</Private>
+    <Reference Include="HearthstoneDeckTracker">
+      <HintPath>..\lib\HearthstoneDeckTracker.exe</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\lib\MahApps.Metro.dll</HintPath>
@@ -497,7 +496,7 @@ if "$(ConfigurationName)" == "CopyPlugin" "$(SolutionDir)Spawn.BuildTool.exe" co
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_DetectChanges="True" BuildVersion_ConfigurationName="Any" BuildVersion_StartDate="2000/1/1" BuildVersion_BuildAction="Build" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_BuildVersioningStyle="None.None.None.Increment" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.Increment" BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildAction="Build" BuildVersion_StartDate="2000/1/1" BuildVersion_ConfigurationName="Any" BuildVersion_DetectChanges="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
