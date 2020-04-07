@@ -50,6 +50,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strSaviorsSetEnabledLabelText;
         private bool m_blnDragonsSetEnabled;
         private string m_strDragonsSetEnabledLabelText;
+        private bool m_blnOutlandSetEnabled;
+        private string m_strOutlandSetEnabledLabelText;
         private bool m_blnNaxxSetEnabled;
         private string m_strNaxxSetEnabledLabelText;
         private bool m_blnMountainSetEnabled;
@@ -327,6 +329,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         {
             get => m_strDragonsSetEnabledLabelText;
             set => Set(ref m_strDragonsSetEnabledLabelText, value);
+        }
+        #endregion
+
+        #region OutlandSetEnabled
+        public bool OutlandSetEnabled
+        {
+            get => m_blnOutlandSetEnabled;
+            set => Set(ref m_blnOutlandSetEnabled, value);
+        }
+        #endregion
+
+        #region OutlandSetEnabledLabelText
+        public string OutlandSetEnabledLabelText
+        {
+            get => m_strOutlandSetEnabledLabelText;
+            set => Set(ref m_strOutlandSetEnabledLabelText, value);
         }
         #endregion
 
@@ -1003,6 +1021,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllSetCheckBoxesChecked &= ShadowsSetEnabled = parameters.Sets.Contains(CardSet.DALARAN);
             AllSetCheckBoxesChecked &= SaviorsSetEnabled = parameters.Sets.Contains(CardSet.ULDUM);
             AllSetCheckBoxesChecked &= DragonsSetEnabled = parameters.Sets.Contains(CardSet.DRAGONS);
+            AllSetCheckBoxesChecked &= OutlandSetEnabled = parameters.Sets.Contains(CardSet.BLACK_TEMPLE);
             AllSetCheckBoxesChecked &= NaxxSetEnabled = parameters.Sets.Contains(CardSet.NAXX);
             AllSetCheckBoxesChecked &= MountainSetEnabled = parameters.Sets.Contains(CardSet.BRM);
             AllSetCheckBoxesChecked &= LeagueSetEnabled = parameters.Sets.Contains(CardSet.LOE);
@@ -1043,6 +1062,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(ShadowsSetEnabled), ShadowsSetEnabled);
             SetInitialPropertyValue(nameof(SaviorsSetEnabled), SaviorsSetEnabled);
             SetInitialPropertyValue(nameof(DragonsSetEnabled), DragonsSetEnabled);
+            SetInitialPropertyValue(nameof(OutlandSetEnabled), OutlandSetEnabled);
             SetInitialPropertyValue(nameof(NaxxSetEnabled), NaxxSetEnabled);
             SetInitialPropertyValue(nameof(MountainSetEnabled), MountainSetEnabled);
             SetInitialPropertyValue(nameof(LeagueSetEnabled), LeagueSetEnabled);
@@ -1141,6 +1161,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (DragonsSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.DRAGONS);
 
+            if (OutlandSetEnabled)
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.BLACK_TEMPLE);
+
             if (NaxxSetEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Sets.Add(CardSet.NAXX);
 
@@ -1225,6 +1248,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             ShadowsSetEnabledLabelText = CardSet.DALARAN.GetDisplayString();
             SaviorsSetEnabledLabelText = CardSet.ULDUM.GetDisplayString();
             DragonsSetEnabledLabelText = CardSet.DRAGONS.GetDisplayString();
+            OutlandSetEnabledLabelText = CardSet.BLACK_TEMPLE.GetDisplayString();
             NaxxSetEnabledLabelText = CardSet.NAXX.GetDisplayString();
             MountainSetEnabledLabelText = CardSet.BRM.GetDisplayString();
             LeagueSetEnabledLabelText = CardSet.LOE.GetDisplayString();
