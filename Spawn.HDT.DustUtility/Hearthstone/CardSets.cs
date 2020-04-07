@@ -37,6 +37,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.DALARAN, "Shadows" },
                 { CardSet.ULDUM, "Saviors" },
                 { CardSet.DRAGONS, "Dragons" },
+                { CardSet.BLACK_TEMPLE, "Outland" },
                 { CardSet.NAXX, "Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "League of Explorers" },
@@ -60,6 +61,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.DALARAN, "Rise of Shadows" },
                 { CardSet.ULDUM, "Saviors of Uldum" },
                 { CardSet.DRAGONS, "Descent of Dragons" },
+                { CardSet.BLACK_TEMPLE, "Ashes of Outland" },
                 { CardSet.NAXX, "Curse of Naxxramas" },
                 { CardSet.BRM, "Blackrock Mountain" },
                 { CardSet.LOE, "The League of Explorers" },
@@ -83,11 +85,12 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.DALARAN, "RoS" },
                 { CardSet.ULDUM, "SoU" },
                 { CardSet.DRAGONS, "DoD" },
+                { CardSet.BLACK_TEMPLE, "AoO" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "BRM" },
                 { CardSet.LOE, "LOE" },
                 { CardSet.KARA, "Karazhan" },
-                { CardSet.HOF, "Hall Of Fame" }
+                { CardSet.HOF, "Hall of Fame" }
             };
 
             AllShortName = new Dictionary<CardSet, string>
@@ -106,11 +109,12 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 { CardSet.DALARAN, "Shadows" },
                 { CardSet.ULDUM, "Saviors" },
                 { CardSet.DRAGONS, "Dragons" },
+                { CardSet.BLACK_TEMPLE, "Outland" },
                 { CardSet.NAXX, "Naxx" },
                 { CardSet.BRM, "Mountain" },
                 { CardSet.LOE, "League" },
                 { CardSet.KARA, "Karazhan" },
-                { CardSet.HOF, "Hall" }
+                { CardSet.HOF, "HOF" }
             };
 
             NonCraftableRegularCardIds = new List<string>
