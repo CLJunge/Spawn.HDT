@@ -70,6 +70,8 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         private string m_strEpicRarityEnabledLabelText;
         private bool m_blnLegendaryRarityEnabled;
         private string m_strLegendaryRarityEnabledLabelText;
+        private bool m_blnDemonHunterClassEnabled;
+        private string m_strDemonHunterClassEnabledLabelText;
         private bool m_blnDruidClassEnabled;
         private string m_strDruidClassEnabledLabelText;
         private bool m_blnHunterClassEnabled;
@@ -492,6 +494,22 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         }
         #endregion
 
+        #region DemonHunterClassEnabled
+        public bool DemonHunterClassEnabled
+        {
+            get => m_blnDemonHunterClassEnabled;
+            set => Set(ref m_blnDemonHunterClassEnabled, value);
+        }
+        #endregion
+
+        #region DemonHunterClassEnabledLabelText
+        public string DemonHunterClassEnabledLabelText
+        {
+            get => m_strDemonHunterClassEnabledLabelText;
+            set => Set(ref m_strDemonHunterClassEnabledLabelText, value);
+        }
+        #endregion
+
         #region DruidClassEnabled
         public bool DruidClassEnabled
         {
@@ -909,6 +927,12 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
                         : LegendaryRarityEnabledLabelText.Substring(0, LegendaryRarityEnabledLabelText.Length - IsDirtySuffix.Length);
                     break;
 
+                case nameof(DemonHunterClassEnabled):
+                    DemonHunterClassEnabledLabelText = e.IsDirty
+                        ? $"{DemonHunterClassEnabledLabelText}{IsDirtySuffix}"
+                        : DemonHunterClassEnabledLabelText.Substring(0, DemonHunterClassEnabledLabelText.Length - IsDirtySuffix.Length);
+                    break;
+
                 case nameof(DruidClassEnabled):
                     DruidClassEnabledLabelText = e.IsDirty
                         ? $"{DruidClassEnabledLabelText}{IsDirtySuffix}"
@@ -1033,6 +1057,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             AllRarityCheckBoxesChecked &= EpicRarityEnabled = parameters.Rarities.Contains(Rarity.EPIC);
             AllRarityCheckBoxesChecked &= LegendaryRarityEnabled = parameters.Rarities.Contains(Rarity.LEGENDARY);
 
+            AllClassCheckBoxesChecked &= DemonHunterClassEnabled = parameters.Classes.Contains(CardClass.DEMONHUNTER);
             AllClassCheckBoxesChecked &= DruidClassEnabled = parameters.Classes.Contains(CardClass.DRUID);
             AllClassCheckBoxesChecked &= HunterClassEnabled = parameters.Classes.Contains(CardClass.HUNTER);
             AllClassCheckBoxesChecked &= MageClassEnabled = parameters.Classes.Contains(CardClass.MAGE);
@@ -1072,6 +1097,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             SetInitialPropertyValue(nameof(RareRarityEnabled), RareRarityEnabled);
             SetInitialPropertyValue(nameof(EpicRarityEnabled), EpicRarityEnabled);
             SetInitialPropertyValue(nameof(LegendaryRarityEnabled), LegendaryRarityEnabled);
+            SetInitialPropertyValue(nameof(DemonHunterClassEnabled), DemonHunterClassEnabled);
             SetInitialPropertyValue(nameof(DruidClassEnabled), DruidClassEnabled);
             SetInitialPropertyValue(nameof(HunterClassEnabled), HunterClassEnabled);
             SetInitialPropertyValue(nameof(MageClassEnabled), MageClassEnabled);
@@ -1191,6 +1217,9 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             if (LegendaryRarityEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Rarities.Add(Rarity.LEGENDARY);
 
+            if (DemonHunterClassEnabled)
+                DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.DEMONHUNTER);
+
             if (DruidClassEnabled)
                 DustUtilityPlugin.CurrentAccount.Preferences.SearchParameters.Classes.Add(CardClass.DRUID);
 
@@ -1258,6 +1287,7 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
             RareRarityEnabledLabelText = Rarity.RARE.GetString();
             EpicRarityEnabledLabelText = Rarity.EPIC.GetString();
             LegendaryRarityEnabledLabelText = Rarity.LEGENDARY.GetString();
+            DemonHunterClassEnabledLabelText = CardClass.DEMONHUNTER.GetString();
             DruidClassEnabledLabelText = CardClass.DRUID.GetString();
             HunterClassEnabledLabelText = CardClass.HUNTER.GetString();
             MageClassEnabledLabelText = CardClass.MAGE.GetString();
