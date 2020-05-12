@@ -101,6 +101,7 @@ namespace Spawn.HDT.DustUtility.CardManagement
 
                 Classes = new ObservableCollection<CardClass>
                 {
+                    CardClass.DEMONHUNTER,
                     CardClass.DRUID,
                     CardClass.HUNTER,
                     CardClass.MAGE,
