@@ -174,8 +174,8 @@ namespace Spawn.HDT.DustUtility.Hearthstone
             public static InfoItem Rastakhan { get; }
             public static InfoItem Shadows { get; }
             public static InfoItem Uldum { get; }
-
             public static InfoItem Dragons { get; }
+            public static InfoItem Outland { get; }
             public static InfoItem Naxx { get; }
             public static InfoItem Mountain { get; }
             public static InfoItem League { get; }
@@ -202,6 +202,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                 Shadows = new InfoItem(98, 74, 52, 24);
                 Uldum = new InfoItem(98, 72, 54, 23);
                 Dragons = new InfoItem(98, 72, 54, 28);
+                Outland = new InfoItem(104, 70, 46, 24);
                 Naxx = new InfoItem(36, 8, 4, 6);
                 Mountain = new InfoItem(30, 22, 0, 5);
                 League = new InfoItem(50, 26, 4, 5);
@@ -225,6 +226,7 @@ namespace Spawn.HDT.DustUtility.Hearthstone
                     { CardSet.DALARAN, Shadows },
                     { CardSet.ULDUM, Uldum},
                     { CardSet.DRAGONS, Dragons},
+                    { CardSet.BLACK_TEMPLE, Outland},
                     { CardSet.NAXX, Naxx },
                     { CardSet.BRM, Mountain },
                     { CardSet.LOE, League },
