@@ -142,7 +142,15 @@ namespace Spawn.HDT.DustUtility
 
         public static string GetString(this Rarity rarity) => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(rarity.ToString().ToLowerInvariant());
 
-        public static string GetString(this CardClass cardClass) => CultureInfo.InvariantCulture.TextInfo.ToTitleCase(cardClass.ToString().ToLowerInvariant());
+        public static string GetString(this CardClass cardClass)
+        {
+            string strRet = CultureInfo.InvariantCulture.TextInfo.ToTitleCase(cardClass.ToString().ToLowerInvariant());
+
+            if (cardClass == CardClass.DEMONHUNTER)
+                strRet = "DH";
+
+            return strRet;
+        }
         #endregion
 
         #region OrderBy
