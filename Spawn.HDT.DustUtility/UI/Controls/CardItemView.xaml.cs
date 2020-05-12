@@ -31,7 +31,11 @@ namespace Spawn.HDT.DustUtility.UI.Controls
 
                 RarityGemImage.Source = FindResource($"{cardItem.RarityString}Gem") as ImageSource;
 
-                CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
+                if (cardItem.CardClass == HearthDb.Enums.CardClass.DEMONHUNTER)
+                    CardClassImage.SetResourceReference(Image.SourceProperty, "DemonHunterClassIcon");
+                else
+                    CardClassImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardClassString}ClassIcon");
+
                 CardSetImage.SetResourceReference(Image.SourceProperty, $"{cardItem.CardSet.GetShortString()}Icon");
 
                 DateTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "TextBrush");
