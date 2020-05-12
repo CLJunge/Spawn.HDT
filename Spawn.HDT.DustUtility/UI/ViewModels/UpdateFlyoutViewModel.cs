@@ -138,6 +138,13 @@ namespace Spawn.HDT.DustUtility.UI.ViewModels
         #region StartDownload
         private void StartDownload()
         {
+            Hearthstone_Deck_Tracker.Helper.TryOpenUrl("https://github.com/CLJunge/Spawn.HDT.DustUtility/releases/latest");
+
+            CloseFlyout();
+        }
+
+        private void StartDownloadOld()
+        {
             MessagePanelVisibility = Visibility.Collapsed;
             DownloadPanelVisibility = Visibility.Visible;
 
